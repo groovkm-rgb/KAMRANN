@@ -5,8 +5,8 @@
 HEAD.digger = { lv: makeLevels(LV_BOSS, { sx: 1.0, jaw: 1.05 }), skin: '#b9875e', hair: '#2a1a12', hairHi: '#5a4030', gray: '#666', grayAmt: 0, hl: HL_FULL, browCol: '#2a1a12', browThick: 1.1, frown: 0.2, eyeOpen: 0.95, iris: '#4a3a2a', nose: 1.08, stubble: 0.3, mustache: true, mouthDown: 0.3, ear: 1, comb: false, hat: { type: 'cap', color: '#4a2c22' } };
 OUTFIT.digger = { suit: '#5a2a26', lapel: '#4a2020', shirt: '#5a2a26', tie: '#5a2a26', cuff: '#c8b89a', shoe: '#140c08', plain: true };
 const WL = {
-  dusk: mkLight({ dir: [-0.8, -0.15, 0.5], key: '#ffa850', keyAmt: 0.45, mul: '#3a1e34', rim: '#ffcf8a', rimDir: [-1, -0.3], rimW: 5, rimA: 0.85 }),
-  pit: mkLight({ dir: [-0.7, -0.35, 0.55], key: '#ffb04e', keyAmt: 0.45, mul: '#2a1428', rim: '#a99aee', rimDir: [0.3, -1], rimW: 4, rimA: 0.75 }),
+  dusk: mkLight({ dir: [0.75, -0.15, 0.55], key: '#ffa850', keyAmt: 0.45, mul: '#3a1e34', rim: '#ffcf8a', rimDir: [1, -0.3], rimW: 5, rimA: 0.85 }),
+  pit: mkLight({ dir: [0.7, 0.3, 0.6], key: '#ffb04e', keyAmt: 0.45, mul: '#2a1428', rim: '#a99aee', rimDir: [-0.3, -1], rimW: 4, rimA: 0.75 }),
   dawn: mkLight({ dir: [0.65, -0.3, 0.6], key: '#ffc070', keyAmt: 0.5, mul: '#3a2030', rim: '#ffe0a0', rimDir: [0.8, -0.6], rimW: 5, rimA: 0.85 }),
 };
 const SHAFT = { x0: 380, x1: 740, top: 640, spacing: 160 };
@@ -153,8 +153,8 @@ function wl1(ctx, t) {
   ctx.fillStyle = '#4a2a1c'; ctx.beginPath(); ctx.moveTo(860, 1600); ctx.quadraticCurveTo(980, 1600 - heapH * 2.1, 1140, 1600); ctx.closePath(); ctx.fill();
   ctx.fillStyle = rgba('#ffb060', 0.18); ctx.beginPath(); ctx.moveTo(900, 1580); ctx.quadraticCurveTo(980, 1600 - heapH * 2.0, 1020, 1560); ctx.lineTo(1010, 1570); ctx.quadraticCurveTo(980, 1610 - heapH * 1.8, 910, 1585); ctx.fill();
   // the digger, standing thigh-deep in the pit
-  const pose = digPose(t), fx = 470, fy = 1790, s = 0.44;
-  drawSideFigure(ctx, { x: fx, y: fy, s, who: 'digger', face: 1, bow: pose.bow, hand: pose.lo, handPose: 'grip', farHand: pose.up, prop: shovelProp(pose, WL.dusk), headTurn: 0.22, light: WL.dusk, t, head: { pitch: 0.18, glint: 0.6, frown: 0.3, sweat: true, sweatT: (t * 0.3) % 1 } });
+  const pose = digPose(t), fx = 470, fy = 1790, s = 0.44, o1 = {};
+  drawSideFigure(ctx, { x: fx, y: fy, s, who: 'boss', face: 1, bow: pose.bow, hand: pose.lo, handPose: 'grip', farHand: pose.up, prop: shovelProp(pose, WL.dusk), headTurn: 0.55, light: WL.dusk, t, cigar: true, out: o1, head: { cigarSide: -1, pitch: 0.12, glint: 0.6, frown: 0.3 } });
   // the near half of the ground (in front of the hole) hides his legs
   ctx.save(); ctx.beginPath(); ctx.moveTo(-600, hy); ctx.lineTo(hx - hrx, hy); ctx.ellipse(hx, hy, hrx, hry, 0, PI, 0, true); ctx.lineTo(1700, hy); ctx.lineTo(1700, 2400); ctx.lineTo(-600, 2400); ctx.closePath(); ctx.clip();
   crackedEarth(ctx, hy - 10, 2400, 33);
@@ -200,25 +200,25 @@ function wl2(ctx, t) {
   for (const x of [SHAFT.x0, SHAFT.x1]) { ctx.fillStyle = rgba('#ffcf8a', 0.12); ctx.fillRect(x - 3, SHAFT.top, 6, B - SHAFT.top); }
   ladder(ctx, 650, 714, SHAFT.top - 560, B, WL.pit);   // the ladder stands well above the rim, so hands always find a rung
   // lantern on the floor lights the pit
-  lantern(ctx, 420, B, 0.9, t);
+  lantern(ctx, 600, B, 0.9, t);
   // dropped shovel after the strike
   if (water && t > 4.5) { ctx.save(); ctx.translate(460, B); ctx.scale(0.5, 0.5); ctx.rotate(-0.05); ctx.fillStyle = '#6a4424'; ctx.fillRect(-500, -30, 700, 22); ctx.fillStyle = '#2c2a34'; ctx.beginPath(); ctx.ellipse(270, -20, 110, 40, 0, 0, TAU); ctx.fill(); ctx.restore(); }
-  // the man
-  const s = 0.5;
+  // the man (the boss)
+  const s = 0.5, o2 = {};
   if (t < 4.3) {
     const pose = digPose(t, 1.2);
-    drawSideFigure(ctx, { x: 470, y: fy, s, who: 'digger', face: 1, bow: pose.bow, hand: pose.lo, handPose: 'grip', farHand: pose.up, prop: shovelProp(pose, WL.pit), headTurn: 0.25, light: WL.pit, t, head: { pitch: 0.2, glint: 0.7, frown: 0.35, sweat: true, sweatT: (t * 0.4) % 1 } });
+    drawSideFigure(ctx, { x: 470, y: fy, s, who: 'boss', face: 1, bow: pose.bow, hand: pose.lo, handPose: 'grip', farHand: pose.up, prop: shovelProp(pose, WL.pit), headTurn: 0.55, light: WL.pit, t, cigar: true, out: o2, head: { cigarSide: -1, pitch: 0.14, glint: 0.7, frown: 0.35 } });
   } else if (t < 5.3) {
     // the strike: surprise, then both fists up in joy
     const joy = prog(t, 4.45, 4.85, Ease.outBack), pump = Math.sin((t - 4.85) * 14) * 50 * prog(t, 4.85, 5.0);
-    drawSideFigure(ctx, { x: 470, y: fy, s, who: 'digger', face: 1, lean: -0.08 * joy, hand: { x: lerp(250, 150, joy), y: lerp(-900, -1820, joy) + pump * 0.5 }, handPose: 'fist', farHand: { x: lerp(70, 30, joy), y: lerp(-1000, -1840, joy) - pump * 0.5 }, farPose: 'fist', headTurn: 0.4, light: WL.pit, t,
+    drawSideFigure(ctx, { x: 470, y: fy, s, who: 'boss', face: 1, lean: -0.08 * joy, hand: { x: lerp(250, 150, joy), y: lerp(-900, -1820, joy) + pump * 0.5 }, handPose: 'fist', farHand: { x: lerp(70, 30, joy), y: lerp(-1000, -1840, joy) - pump * 0.5 }, farPose: 'fist', headTurn: 0.55, light: WL.pit, t,
       head: { pitch: lerp(0.3, -0.35, joy), glint: 1, eyeOpen: 1.2, frown: -0.5, mouthOpen: 1.1 * joy } });
   } else {
     // climbing the ladder: hands snap rung to rung, knees lift alternately
     const ph = (fy - B) / (SHAFT.spacing * 2) * TAU, rung = y => SHAFT.top + SHAFT.spacing * Math.ceil((y - SHAFT.top) / SHAFT.spacing);
     const grab = (off) => { const tgt = fy - 620 - off; const r1 = rung(tgt), fr = (r1 - tgt) / SHAFT.spacing; return fr > 0.7 ? lerp(r1 + SHAFT.spacing, r1, Ease.inOutSine((fr - 0.7) / 0.3)) : r1; };
     const nh = { x: (676 - 520) / s, y: (grab(0) - fy) / s }, fh = { x: (664 - 520) / s, y: (grab(SHAFT.spacing) - fy) / s };
-    drawSideFigure(ctx, { x: 520, y: fy, s, who: 'digger', face: 1, climb: -ph, hand: nh, handPose: 'grip', farHand: fh, farPose: 'grip', headTurn: 0.3, light: WL.pit, t, head: { pitch: -0.3, glint: 1, frown: -0.3, mouthOpen: 0.4 } });
+    drawSideFigure(ctx, { x: 520, y: fy, s, who: 'boss', face: 1, climb: -ph, hand: nh, handPose: 'grip', farHand: fh, farPose: 'grip', headTurn: 0.45, light: WL.pit, t, cigar: true, out: o2, head: { cigarSide: -1, pitch: -0.3, glint: 1, frown: -0.3 } });
   }
   // the water: a burst, then it fills the well beneath him
   if (water) {
@@ -228,7 +228,6 @@ function wl2(ctx, t) {
     fountain(ctx, t, 600, B - 10 - wRise * 900, 70, 900 * burst + 260, 500, 0.85, 3);
     glow(ctx, 600, wTop, 300, '#9aa8ff', 0.25 + burst * 0.4);
   }
-  // splash flecks when the blade bites (before water)
   setScreen(ctx); drawHaze(ctx, t, 0, 0, W, H, '#5a3a3a', 0.05, 4, 7);
   if (t > 4.15 && t < 4.4) { setScreen(ctx); withOp(ctx, 'lighter', () => { ctx.fillStyle = rgba('#c8d0ff', (1 - (t - 4.15) / 0.25) * 0.25); ctx.fillRect(0, 0, W, H); }); }
 }
@@ -275,8 +274,8 @@ function wl3(ctx, t) {
   for (const y of [seatY - 300, seatY - 220, seatY - 140]) ctx.fillRect(cx - 132, y, 20, 20);
   ctx.fillStyle = rgba('#ffc070', 0.35); ctx.fillRect(cx - 120, seatY - 8, 230, 3); ctx.fillRect(cx - 114, seatY - 330, 3, 330);
   const pump = Math.sin(t * 9) * 55, joy = prog(t, -0.4, 0.4, Ease.outCubic);
-  drawSideFigure(ctx, { x: cx, y: fy, s, who: 'digger', face: 1, sit: 1, seatH: 330, lean: -0.12, hand: { x: lerp(260, 330, joy), y: lerp(-560, -1260, joy) + pump * 0.6 }, handPose: 'fist', farHand: { x: lerp(120, -150, joy), y: lerp(-560, -1290, joy) - pump * 0.6 }, farPose: 'fist', headTurn: 0.7, light: WL.dawn, t,
-    head: { pitch: -0.28 + Math.sin(t * 9) * 0.04, glint: 1, squint: 0.4, frown: -0.5, mouthOpen: 1.15 } });
+  drawSideFigure(ctx, { x: cx, y: fy, s, who: 'boss', face: 1, sit: 1, seatH: 330, lean: -0.12, hand: { x: lerp(260, 330, joy), y: lerp(-560, -1260, joy) + pump * 0.6 }, handPose: 'fist', farHand: { x: lerp(120, -150, joy), y: lerp(-560, -1290, joy) - pump * 0.6 }, farPose: 'fist', headTurn: 0.7, light: WL.dawn, t,
+    head: { pitch: -0.28 + Math.sin(t * 9) * 0.04, glint: 1, squint: 0.4, frown: -0.5, mouthOpen: 1.15, glasses: 'shades' } });
   // droplets catching the sun
   setCam(ctx, cam, 1.05); drawDust(ctx, t, 300, 900, 700, 700, 50, '#ffe6b0', 0.5, 6, 2);
   setScreen(ctx); drawHaze(ctx, t, 0, 800, W, 900, '#c86a3a', 0.06, 5, 11);

@@ -1020,7 +1020,7 @@ function drawHead(ctx, P, o) {
   const visOf = (x, y) => S(x, y, 0)[3];
 
   // --- cigar side & visibility
-  const cigSide = 1, cigVis = visOf(cigSide * 25, 60);
+  const cigSide = o.cigarSide || 1, cigVis = visOf(cigSide * 25, 60);   // cigarSide -1 puts it in the other mouth corner
   if (o.cigar && cigVis < 0.18) drawCigar(ctx, hs, C, L, o, cigSide);
 
   // --- ears behind (far side) are skipped; near ears drawn after skin
@@ -1113,7 +1113,7 @@ function drawHead(ctx, P, o) {
   if (o.sweat) drawSweat(ctx, hs, o);
   // ---------- rim light
   edgeFill(ctx, path, -L.rimDir[0] * L.rimW * (1 + (o.flash || 0) * 1.4), -L.rimDir[1] * L.rimW * (1 + (o.flash || 0)), L.rim, clamp(L.rimA + (o.flash || 0)));
-  if (P.glasses && fv > -0.25) drawGlasses(ctx, hs, o, L);
+  if ((P.glasses || o.glasses) && fv > -0.25) drawGlasses(ctx, hs, o, L);
   if (P.mustache && fv > -0.25) drawMustache(ctx, hs, C, L);
   if (P.hat && !o.noHat) drawHat(ctx, hs, P, L, o);
   if (o.cigar && cigVis >= 0.18) drawCigar(ctx, hs, C, L, o, cigSide);
@@ -1283,14 +1283,24 @@ function drawNose(ctx, hs, C, L, P, o) {
     const c = pt(s * 9, 26.5, 6);
     ctx.beginPath(); ctx.ellipse(c[0], c[1], 4.2 * Math.max(0.3, v), 2.2, s * 0.25, 0, TAU); ctx.fill();
   }
+  // in 3/4 views the nose is drawn with an ink contour so it reads even when it is evenly lit
+  const fvC = S(0, 10, 0)[3];
+  if (fvC < 0.85) {
+    const tipSide = R.p(0, 0, 1)[0] >= 0 ? 1 : -1;   // the side the face is turned toward
+    const edge = [ridge[0], ridge[1], ridge[2], ridge[3], ridge[4], (tipSide > 0 ? sL : sR)[4], (tipSide > 0 ? sL : sR)[3]].map(p => [p[0], p[1]]);
+    ctx.strokeStyle = rgba(C.line, 0.7 * clamp((0.85 - fvC) / 0.25)); ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.stroke(smoothPathOf(edge, false, 0.6));
+  }
   // ridge highlight on lit side
   const sd = Ld[0] <= 0 ? -1 : 1;
+  if (fvC > 0.6) {
   const hlp = [pt(sd * 2.5, -26, 4), pt(sd * 3, -2, 9.5), pt(sd * 2.8, 15, 21)];
   ctx.lineCap = 'round';
   strokePts(ctx, hlp.map(p => [p[0], p[1]]), rgba(mixc(C.skin, '#fff2dc', 0.5), 0.65), 2, false, true);
+  }
   // rim on nose silhouette (only where the nose breaks the outline: near-profile views)
   const fvN = S(0, 10, 0)[3];
-  if (fvN < 0.6) edgeFill(ctx, np, -L.rimDir[0] * L.rimW * 0.8, -L.rimDir[1] * L.rimW * 0.8, L.rim, clamp(L.rimA + (o.flash || 0)) * 0.9 * clamp((0.6 - fvN) / 0.3));
+  if (fvN < 0.3) edgeFill(ctx, np, -L.rimDir[0] * L.rimW * 0.8, -L.rimDir[1] * L.rimW * 0.8, L.rim, clamp(L.rimA + (o.flash || 0)) * 0.9 * clamp((0.3 - fvN) / 0.2));
 }
 /** lips / chin / brow volumes so the profile silhouette reads */
 function drawProfileBumps(ctx, hs, C, L, o) {
@@ -1376,18 +1386,23 @@ function drawSweat(ctx, hs, o) {
   for (let i = 0; i < 4; i++) { const a = hs.S(-30 + i * 18, -70 + (i % 2) * 6, 1), b = hs.S(-24 + i * 18, -71 + (i % 2) * 6, 1); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
 }
 function drawGlasses(ctx, hs, o, L) {
-  const S = hs.S, c = [];
+  // round wire frames by default; o.glasses === 'shades' gives dark lenses. Temple arms run to the ears.
+  const S = hs.S, R = hs.R, shades = o.glasses === 'shades', frame = shades ? '#0c0a0e' : '#1a1418';
   for (const s of [-1, 1]) {
-    const p = S(s * 39, -24, 13); c.push(p);
+    const p = S(s * 39, -24, 13);
+    if (R.n(s, 0, 0.35)[2] > -0.3) {   // temple arm on the visible side
+      const a = S(s * 58, -27, 6), b = R.p(s * 86, -24, -10);
+      ctx.strokeStyle = frame; ctx.lineWidth = shades ? 3.4 : 2.2; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+    }
     if (p[3] < -0.05) continue;
     const rx = 18 * Math.max(0.15, p[3]);
-    ctx.fillStyle = 'rgba(200,200,255,0.07)'; ctx.strokeStyle = '#1a1418'; ctx.lineWidth = 2.4;
+    ctx.fillStyle = shades ? 'rgba(14,10,20,0.92)' : 'rgba(200,200,255,0.07)'; ctx.strokeStyle = frame; ctx.lineWidth = shades ? 3.4 : 2.4;
     ctx.beginPath(); ctx.ellipse(p[0], p[1], rx, 17, 0, 0, TAU); ctx.fill(); ctx.stroke();
-    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = rgba('#fff0d8', 0.55 * (0.4 + (o.flash || 0) + (o.lensGlint || 0)));
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.strokeStyle = rgba(shades ? L.rim : '#fff0d8', (shades ? 0.7 : 0.55) * (0.4 + (o.flash || 0) + (o.lensGlint || 0) + (shades ? 0.4 : 0)));
     ctx.lineWidth = 2.2; ctx.beginPath(); ctx.ellipse(p[0], p[1], rx * 0.7, 12, 0, -2.4, -1.5); ctx.stroke(); ctx.restore();
   }
   const a = S(-21, -27, 14), b = S(21, -27, 14);
-  ctx.strokeStyle = '#1a1418'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.quadraticCurveTo((a[0] + b[0]) / 2, a[1] - 4, b[0], b[1]); ctx.stroke();
+  ctx.strokeStyle = frame; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.quadraticCurveTo((a[0] + b[0]) / 2, a[1] - 4, b[0], b[1]); ctx.stroke();
 }
 function drawMustache(ctx, hs, C, L) {
   const S = hs.S, q = [[-24, 53.5], [-6, 50], [0, 51.2], [6, 50], [24, 53.5], [14, 55], [0, 54], [-14, 55]].map(([x, y]) => { const p = S(x, y, 3); return [p[0], p[1]]; });
