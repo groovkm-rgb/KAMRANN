@@ -203,3 +203,13 @@ Before rendering a new film, run the anatomy sheet. It draws a character in ever
 ```bash
 node tools/rig-sheet.mjs rig.png boss     # or any cast key: digger, det1, staff, ltA ...
 ```
+
+---
+
+## Skill: `art-deco-noir-shorts`
+
+`skills/art-deco-noir-shorts/` packages this whole system as a reusable Claude skill, and
+`dist/art-deco-noir-shorts.skill` is the installable package. Give it a story and it produces a new
+silent 9:16 short in the same style, starring the mafia boss by default. It has its own copy of the
+engine, so it works without this repository. After changing `src/`, run `tools/sync-skill.sh` to copy
+the engine into the skill again, then repackage it.
