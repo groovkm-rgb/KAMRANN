@@ -30,7 +30,6 @@ if (files.length > 1) {
   const args = ['-y', '-loglevel', 'error'];
   files.forEach(f => args.push('-i', f));
   const inputs = files.map((_, i) => `[${i}:v]scale=360:640[v${i}]`).join(';');
-  const pad = files.length < cols * rows ? '' : '';
   args.push('-filter_complex', `${inputs};${files.map((_, i) => `[v${i}]`).join('')}xstack=inputs=${files.length}:layout=${files.map((_, i) => `${(i % cols) * 360}_${Math.floor(i / cols) * 640}`).join('|')}:fill=black[o]`, '-map', '[o]', join(out, 'sheet.png'));
-  if (files.length > 1) execFileSync('ffmpeg', args);
+  execFileSync('ffmpeg', args);
 }

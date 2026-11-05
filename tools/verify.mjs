@@ -37,7 +37,6 @@ const first = await frame(0), last = await frame(55 - 1 / 24), end = await frame
 ok(first.mean < 3, `opens from black (mean luma ${first.mean.toFixed(2)})`);
 ok(last.max <= 2 && end.max <= 2, `final frame 54.958 s and 55.000 s are complete black (max ${last.max.toFixed(1)}, ${end.max.toFixed(1)})`);
 for (const [t, name] of [[3.5, 'scene 1'], [11, 'scene 2'], [20.5, 'scene 3'], [29, 'scene 4'], [39, 'scene 5'], [48, 'scene 6']]) { const f = await frame(t); ok(f.mean > 8, `${name} has picture (mean luma ${f.mean.toFixed(1)} at ${t}s)`); }
-// distinctness: each scene's mid frame differs strongly
 // reference portrait path with a synthetic image
 await page.evaluate(() => new Promise(r => { const c = document.createElement('canvas'); c.width = 600; c.height = 800; const g = c.getContext('2d'); g.fillStyle = '#556'; g.fillRect(0, 0, 600, 800); g.fillStyle = '#c99'; g.beginPath(); g.ellipse(300, 290, 130, 170, 0, 0, 6.3); g.fill(); const im = new Image(); im.onload = () => { REF.img = im; r(); }; im.src = c.toDataURL(); }));
 for (const t of [15.9, 33, 42.5, 53]) await frame(t);
