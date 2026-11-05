@@ -6,14 +6,16 @@ const { chromium } = require('playwright');
 import { mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-const [out, ...ts] = process.argv.slice(2);
+let args = process.argv.slice(2), html = 'index.html';
+const hi = args.indexOf('--html'); if (hi >= 0) { html = args[hi + 1]; args.splice(hi, 2); }
+const [out, ...ts] = args;
 mkdirSync(out, { recursive: true });
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
 const errs = [];
 page.on('pageerror', e => errs.push(e.message));
 page.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
-await page.goto('file://' + resolve('index.html') + '?render=1');
+await page.goto('file://' + resolve(html) + '?render=1');
 await page.waitForFunction(() => window.__film);
 const files = [];
 for (const t of ts) {

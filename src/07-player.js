@@ -1,22 +1,6 @@
 /* =====================================================================
    07 · MASTER TIMELINE, RENDERER, PLAYER UI & RECORDER
    ===================================================================== */
-const SCENES = [
-  { id: 1, name: 'The Boss', start: 0, end: 7, draw: scene1 },
-  { id: 2, name: 'The Organization', start: 7, end: 16, draw: scene2 },
-  { id: 3, name: 'The Money', start: 16, end: 25, draw: scene3 },
-  { id: 4, name: 'The Dispute', start: 25, end: 34, draw: scene4 },
-  { id: 5, name: 'Loyalty', start: 34, end: 44, draw: scene5 },
-  { id: 6, name: 'The Price of Power', start: 44, end: 55, draw: scene6 },
-];
-// scene-boundary transitions (centred on the boundary, so every scene still starts exactly on time)
-const TRANS = [
-  { at: 7, type: 'dissolve', dur: 0.7 },
-  { at: 16, type: 'dip', dur: 0.6 },
-  { at: 25, type: 'dissolve', dur: 0.7 },
-  { at: 34, type: 'dip', dur: 0.7 },
-  { at: 44, type: 'dissolve', dur: 0.9 },
-];
 const sceneAt = g => { for (const s of SCENES) if (g < s.end) return s; return SCENES[SCENES.length - 1]; };
 
 const Film = { canvas: null, ctx: null, buf: null, bctx: null };
@@ -52,9 +36,9 @@ function renderFrame(g) {
     if (tr) blackFill(ctx, Ease.inOutSine(clamp(1 - Math.abs(g - tr.at) / (tr.dur / 2))));
   }
   postFX(ctx, g);
-  // open from black; fade to complete black exactly at 55.000 s
+  // open from black; fade to complete black exactly at DURATION
   const fadeIn = 1 - prog(g, 0, 1.1, Ease.inOutSine);
-  const fadeOut = prog(g, 52.8, DURATION - 1 / FPS, Ease.inQuad);   // last frame (54.958 s) is pure black
+  const fadeOut = prog(g, FILM.fadeOut, DURATION - 1 / FPS, Ease.inQuad);   // the last frame is pure black
   const a = Math.max(fadeIn, fadeOut);
   if (a > 0) { setScreen(ctx); ctx.fillStyle = 'rgba(0,0,0,' + a.toFixed(4) + ')'; ctx.fillRect(0, 0, W, H); }
 }
@@ -136,7 +120,7 @@ async function record() {
   Player.recording = false; document.body.classList.remove('recording');
   const type = (mime || 'video/webm').split(';')[0], ext = type.includes('mp4') ? 'mp4' : 'webm';
   const blob = new Blob(chunks, { type });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'what-does-a-mafia-boss-actually-do.' + ext; a.click();
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = FILM.slug + '.' + ext; a.click();
   status('Saved ' + ext.toUpperCase() + ' (' + (blob.size / 1048576).toFixed(1) + ' MB, 1080×1920, ' + FPS + ' fps, video only).' + (late > 6 ? ' Note: this device rendered ' + late + ' frames late, so motion may stutter — use tools/render-mp4.mjs for a frame-exact MP4.' : ''), false);
   if (prevRes !== 1) setupCanvas(prevRes);
   seek(DURATION);
@@ -156,6 +140,7 @@ function setRefImage(img) {
   seek(Player.t);
 }
 function tryAutoRef() {
+  if (!FILM.ref) return;
   if (!/^https?:$/.test(location.protocol)) return;   // file:// would taint the canvas
   const names = ['assets/boss.png', 'assets/boss.jpg', 'assets/boss.jpeg', 'assets/boss.webp'];
   (function next(i) {
@@ -183,6 +168,7 @@ function boot() {
     refFile: document.getElementById('refFile'), refPanel: document.getElementById('refPanel'),
   });
   ui.seek.max = DURATION; ui.seek.step = 1 / FPS;
+  if (!FILM.ref) ui.refPanel.style.display = 'none';
   ui.chips = SCENES.map(s => { const b = document.createElement('button'); b.className = 'chip'; b.dataset.id = s.id; b.title = s.start + 's–' + s.end + 's'; b.textContent = s.id + ' · ' + s.name; b.onclick = () => { seek(s.start); }; ui.chipsBox.appendChild(b); return b; });
   ui.play.onclick = () => (Player.playing ? pause() : play());
   ui.replay.onclick = replay;
@@ -201,7 +187,7 @@ function boot() {
     if (e.key === 'r' || e.key === 'R') replay();
   });
   ui.rec.title = 'Records 1080×1920 @ ' + FPS + ' fps as ' + (pickMime() || 'unsupported').split(';')[0];
-  status('Ready. Auto-playing — 55 s, no audio. Recording format in this browser: ' + ((pickMime() || 'not supported').split(';')[0]) + '.');
+  status('Ready. Auto-playing — ' + DURATION + ' s, no audio. Recording format in this browser: ' + ((pickMime() || 'not supported').split(';')[0]) + '.');
   tryAutoRef();
   seek(0); play();
 }

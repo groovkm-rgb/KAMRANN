@@ -1,3 +1,16 @@
+# Noir Shorts: Canvas animation system
+
+This repository holds two silent, vertical, 1080×1920 / 24 fps animated documentaries. Both are built on **one shared Art Deco noir animation system**: the same head rig, bodies, hands, palette, lighting, rim lights, FX, parallax camera, transitions and player. Each film is a single self-contained HTML file.
+
+| Film | File | Length | Rendered MP4 |
+|---|---|---|---|
+| What Does a Mafia Boss Actually Do? | `index.html` | 55 s | `renders/what-does-a-mafia-boss-actually-do.mp4` |
+| The Green Vault Heist · Dresden 2019 | `green-vault.html` | 40 s | `renders/green-vault-heist-dresden-2019.mp4` |
+
+The sections below document the mafia film first. The Green Vault film is covered in its own section at the end.
+
+---
+
 # What Does a Mafia Boss Actually Do?
 
 A 55-second vertical (9:16) animated documentary in a dark 1990s Gotham-inspired Art Deco style with 1940s film-noir lighting. It is rendered live in the browser with HTML, CSS, JavaScript and Canvas. Everything is in one self-contained file, `index.html`, with no libraries, network requests, audio or on-screen text.
@@ -124,13 +137,16 @@ Transitions are centred on the scene boundaries, so every scene still starts exa
 ### Project structure
 
 ```
-index.html              ← the film: single self-contained file (generated)
+index.html              ← mafia film (generated, self-contained)
+green-vault.html        ← Green Vault film (generated, self-contained)
 src/01-core.js          math, easing, keyframe tracks, noise, colour, paths, camera
 src/02-fx.js            textures, rain, glass rain, smoke, lightning, skylines, post FX
 src/03-head.js          the head rig + character presets + light presets
 src/04-body.js          bodies (seated/standing/side), hands, ring, props
 src/05-sets.js          Art-Deco windows, walls, sconces, desk, chairs, chandelier, floors
-src/06-scenes.js        the six scenes and their shot lists
+src/05b-scene-kit.js    shared scene helpers (shafts, bokeh, smoke, busts, hand passes)
+src/06-scenes.js        the mafia film: six scenes + its master timeline
+films/green-vault/      the Green Vault film: sets + scenes + timeline
 src/07-player.js        master timeline, transitions, player UI, recorder
 src/shell.html          page layout & controls (outside the video frame)
 tools/build.mjs         inlines src/ into index.html
@@ -143,4 +159,30 @@ renders/                pre-rendered MP4
 
 ### Editing
 
-Edit files in `src/`, then run `npm run build` (or `node tools/build.mjs`) to regenerate `index.html`. `npm run verify` runs the automated checks.
+Edit files in `src/` (or `films/<film>/`), then run `npm run build` (or `node tools/build.mjs`) to regenerate both HTML files. `npm run verify` runs the automated checks for the mafia film. For the Green Vault film, run `node tools/verify.mjs --html green-vault.html --duration 40 --bounds 0,6,13,21,28,34,40`.
+
+---
+
+# The Green Vault Heist · Dresden 2019
+
+`green-vault.html`, **40 seconds**. This is a restrained historical reconstruction of the November 2019 theft from the Jewel Room of the Historic Green Vault (Grünes Gewölbe) in Dresden's Royal Palace. It uses the same visual system as the mafia film and adds new sets, props and a few cast presets built on the same rig. It has no audio, music, narration, subtitles or on-screen text.
+
+The brief's scene timings run from 0 to 40 s with a fade to black at exactly 40 s, so the film is 40 s. The length is a single setting in `tools/build.mjs`.
+
+| # | Time | Scene | Shots |
+|---|---|---|---|
+| 1 | 0–6 s | Dresden at night | Pre-dawn. A slow push toward the palace façade, with its Renaissance gables, amber windows and the Hausmannsturm clock tower with its baroque helmet. The square's wet cobblestones ripple with reflections, historic street lanterns stand in the foreground, and there is light drizzle, mist and a distant baroque skyline. |
+| 2 | 6–13 s | The treasures | The baroque mirror room with gilded frames and consoles. The camera dollies from a wide shot into the lit display case, then a macro shot pans across the diamond garnitures (necklace, breast star, epaulette, sword, bow, clasp and buttons) as the jewels sparkle and light sweeps across the glass. |
+| 3 | 13–21 s | The theft | The room in darkness. Two **anonymous silhouettes** sweep torch beams over the case. In close-up, the front glass cracks and shards fall onto the velvet. Then the empty velvet imprints where jewels were, picked out by a passing torch beam before darkness returns. No tools or methods are shown. |
+| 4 | 21–28 s | Discovery | Morning light. A museum staff member walks in and stops short. In close-up he is shocked, with wide eyes and an open mouth. Two investigators then inspect the shattered case while forensic photo flashes go off. Insert: shards on the parquet with plain, unnumbered evidence markers. |
+| 5 | 28–34 s | Investigation | A noir office: photos of the palace and the stolen pieces are pinned to a board and linked with red string while an investigator points. Insert: a magnifying glass passes over a photo of the breast star. Then a symbolic courthouse exterior with a scales-of-justice relief, followed by a gavel strike to signal the convictions. No suspects are depicted. |
+| 6 | 34–40 s | Aftermath | The recovered jewellery is displayed under warm light, and some spaces stay empty as velvet imprints of items still missing. The camera pulls back to reveal the gallery behind a velvet rope. The image fades to complete black: the last frame (39.958 s) and 40.000 s are pure black. |
+
+Transitions use the same system as the mafia film: dissolves at 6, 28 and 34 s, and dips to black at 13 and 21 s.
+
+```bash
+node tools/build.mjs green-vault
+node tools/render-mp4.mjs renders/green-vault-heist-dresden-2019.mp4 --html green-vault.html
+```
+
+The film-specific code is in `films/green-vault/sets.js` (palace, skyline, cobbles, lanterns, Jewel Room, display case, jewellery, broken glass, board photos, scales) and `films/green-vault/scenes.js` (shots and timeline).

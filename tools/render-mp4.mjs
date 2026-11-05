@@ -3,7 +3,7 @@
 // Requirements: Node 18+, Playwright with Chromium, ffmpeg on PATH.
 //   npm i -D playwright && npx playwright install chromium
 // Usage:
-//   node tools/render-mp4.mjs [out.mp4] [--crf 20] [--maxrate 8M] [--from 0] [--to 55] [--png] [--ref assets/boss.png]
+//   node tools/render-mp4.mjs [out.mp4] [--html index.html] [--crf 20] [--maxrate 8M] [--from 0] [--to 55] [--png] [--ref assets/boss.png]
 // The film grain changes every frame, so an uncapped high-quality encode is huge (~580 MB);
 // --maxrate caps the bitrate (default 8M ≈ 55 MB). Use --maxrate 0 for an uncapped master.
 import { createRequire } from 'node:module';
@@ -22,7 +22,7 @@ const argv = process.argv.slice(2);
 const opt = (k, d) => { const i = argv.indexOf('--' + k); return i >= 0 ? argv[i + 1] : d; };
 const out = argv[0] && !argv[0].startsWith('--') ? argv[0] : 'what-does-a-mafia-boss-actually-do.mp4';
 const crf = opt('crf', '20'), maxrate = opt('maxrate', '8M'), png = argv.includes('--png'), ref = opt('ref', null);
-const html = resolve('index.html');
+const html = resolve(opt('html', 'index.html'));
 if (!existsSync(html)) { console.error('Run from the project root (index.html not found).'); process.exit(1); }
 
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});

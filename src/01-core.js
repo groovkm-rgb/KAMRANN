@@ -3,7 +3,7 @@
    01 · CORE — constants, math, easing, keyframe tracks, noise, colour,
    path utilities, glow sprites and the parallax camera.
    ===================================================================== */
-const W = 1080, H = 1920, FPS = 24, DURATION = 55;
+const W = 1080, H = 1920, FPS = 24, DURATION = FILM.duration;   // FILM is injected by tools/build.mjs
 const TAU = Math.PI * 2, PI = Math.PI;
 let RES = 1;                         // render scale (1 => 1080x1920 output)
 const G = { t: 0, frame: 0, shakeX: 0, shakeY: 0 };

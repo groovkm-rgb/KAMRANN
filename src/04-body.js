@@ -98,6 +98,7 @@ const HAND_POSE = {
   two: { c: [0, 0.02, 0.86, 0.88], th: -0.2, tl: 0.75 },
   hold: { c: [0.55, 0.5, 0.68, 0.74], th: -0.3, tl: 0.85 },
   grip: { c: [0.7, 0.7, 0.72, 0.76], th: 0.25, tl: 0.9 },
+  point: { c: [0, 0.86, 0.88, 0.9], th: -0.15, tl: 0.75 },
 };
 function mixPose(a, b, t) { return { c: a.c.map((v, i) => lerp(v, b.c[i], t)), th: lerp(a.th, b.th, t), tl: lerp(a.tl, b.tl, t) }; }
 function fingerPath(x0, y0, ang, len, w, curl) {
@@ -285,12 +286,15 @@ function drawStandingFront(ctx, o) {
   if (arms === 'sides') for (const s of [-1, 1]) sleeve(s, [[230, -1532], [266, -1460], [272, -1250], [264, -1000], [252, -824], [196, -824], [200, -1000], [206, -1250], [212, -1400]]);
   else for (const s of [-1, 1]) sleeve(s, [[230, -1532], [266, -1460], [270, -1250], [264, -1090], [214, -1070], [212, -1250], [212, -1400]]);
   // torso
-  const torso = pathOf([[-60, -1592], [-130, -1574 - br], [-206, -1558 - br], [-234, -1530], [-228, -1420], [-198, -1300], [-178, -1100], [-172, -900], [-186, -786], [186, -786], [172, -900], [178, -1100], [198, -1300], [228, -1420], [234, -1530], [206, -1558 - br], [130, -1574 - br], [60, -1592]].map(([x, y]) => [X(x), y]));
+  const hem = F.coat ? -540 : -786, hw = F.coat ? 222 : 186;
+  const torso = pathOf([[-60, -1592], [-130, -1574 - br], [-206, -1558 - br], [-234, -1530], [-228, -1420], [-198, -1300], [-178, -1100], [-172, -900], [-hw, hem], [hw, hem], [172, -900], [178, -1100], [198, -1300], [228, -1420], [234, -1530], [206, -1558 - br], [130, -1574 - br], [60, -1592]].map(([x, y]) => [X(x), y]));
   bodyPart(ctx, torso, F.suit, L, { flash: fl, rimK: 2.4 });
   if (F.stripe) { ctx.save(); ctx.clip(torso); ctx.strokeStyle = rgba(F.stripe, 0.3); ctx.lineWidth = 1.4; for (let x = -240; x <= 240; x += 24) { ctx.beginPath(); ctx.moveTo(X(x), -1600); ctx.lineTo(X(x * 0.82), -780); ctx.stroke(); } ctx.restore(); }
   const hd = Object.assign({ x: 0, y: -1594 - 121 * 1.12 - br * 0.5, s: 1.12, neckBot: 140, light: L, flash: fl, t: o.t }, o.head || {});
   // front details
-  if (front > 0.01) withAlpha(ctx, front, () => {
+  if (F.coat) { ctx.fillStyle = rgba('#000000', 0.35); ctx.fillRect(X(-176), -1090, X(352), 26); ctx.fillStyle = rgba(PAL.gold, 0.5); ctx.fillRect(X(-14), -1088, X(28), 22); }
+  if (F.plain && front > 0.01) withAlpha(ctx, front, () => { ctx.strokeStyle = rgba('#000000', 0.5); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(0, -1590); ctx.lineTo(0, hem); ctx.stroke(); fillPts(ctx, [[X(-70), -1600], [X(70), -1600], [X(56), -1560], [X(-56), -1560]], darken(F.suit, 0.3)); });
+  if (front > 0.01 && !F.plain) withAlpha(ctx, front, () => {
     const C = clothCols(F.shirt, L, fl);
     fillPts(ctx, [[X(-46), -1590], [X(46), -1590], [X(20), -1330], [0, -1290], [X(-20), -1330]], C.lit);
     fillPts(ctx, [[X(-12), -1580], [X(12), -1580], [X(15), -1530], [X(9), -1300], [0, -1290], [X(-9), -1300], [X(-15), -1530]], mixc(F.tie, L.key, L.keyAmt * 0.3));
@@ -393,9 +397,16 @@ function drawSideFigure(ctx, o) {
   const torso = smoothPathOf([[-96, 80], [-100, -200], [-92, -440], [-54, -530], [36, -540], [96, -470], [112, -300], [100, -120], [108, 80]], true, 0.5);
   bodyPart(ctx, torso, F.suit, Lf, { flash: fl, rimK: 2.2, split: 10 });
   // lapel / shirt sliver at the front
-  fillPts(ctx, [[46, -526], [84, -474], [96, -330], [80, -350], [56, -470]], mixc(F.shirt, Lf.key, Lf.keyAmt * 0.3));
-  fillPts(ctx, [[62, -500], [86, -462], [94, -360], [88, -300], [76, -360]], mixc(F.tie, Lf.key, 0.1));
-  strokePts(ctx, [[40, -520], [76, -420], [92, -260]], rgba(lighten(F.lapel, 0.25), 0.6), 3, false, true);
+  if (!F.plain) {
+    fillPts(ctx, [[46, -526], [84, -474], [96, -330], [80, -350], [56, -470]], mixc(F.shirt, Lf.key, Lf.keyAmt * 0.3));
+    fillPts(ctx, [[62, -500], [86, -462], [94, -360], [88, -300], [76, -360]], mixc(F.tie, Lf.key, 0.1));
+    strokePts(ctx, [[40, -520], [76, -420], [92, -260]], rgba(lighten(F.lapel, 0.25), 0.6), 3, false, true);
+  }
+  if (F.coat && sit < 0.5) {   // trench-coat skirt hanging over the thighs
+    const sk = smoothPathOf([[-98, 40], [104, 40], [128 + swing * -40, 400], [-112 + swing * -30, 410]], true, 0.4);
+    bodyPart(ctx, sk, F.suit, Lf, { flash: fl, rimK: 1.6, split: 10 });
+    ctx.fillStyle = rgba('#000000', 0.35); ctx.fillRect(-98, -200, 210, 22);
+  }
   if (who === 'boss') {
     const scC = mixc(mixc(OUTFIT.boss.scarf, Lf.key, Lf.keyAmt * 0.5), '#e8e0ff', fl * 0.3);
     const sc = smoothPathOf([[30, -540], [72, -520], [100, -400], [104, -250], [80, -250], [74, -400], [40, -500]], true, 0.6);
@@ -422,6 +433,14 @@ function drawSideFigure(ctx, o) {
   const ang = Math.atan2(wr[1] - el[1], wr[0] - el[0]) + PI / 2;
   if (o.carry === 'envelope') drawEnvelope(ctx, wr[0] + 40, wr[1] - 10, 190, 110, ang - PI / 2 + 0.1, Lf, true);
   if (o.carry === 'folder') drawFolderSide(ctx, wr[0] + 30, wr[1] - 6, ang - PI / 2, Lf);
+  if (o.carry === 'torch') {   // small flashlight held forward, along the forearm
+    const dx = wr[0] - el[0], dy = wr[1] - el[1], l = Math.hypot(dx, dy) || 1, ux = dx / l, uy = dy / l;
+    const p0 = [wr[0] - ux * 10, wr[1] - uy * 10], p1 = [wr[0] + ux * 120, wr[1] + uy * 120];
+    ctx.fillStyle = '#16141a'; ctx.fill(quad(p0[0], p0[1], p1[0], p1[1], 14, 18));
+    ctx.fillStyle = '#fff4d8'; ctx.beginPath(); ctx.arc(p1[0], p1[1], 15, 0, TAU); ctx.fill();
+    if (o.out) { o.out.torch = toScreen(ctx, p1[0], p1[1]); const q = toScreen(ctx, p1[0] + ux * 100, p1[1] + uy * 100); o.out.torchDir = Math.atan2(q.y - o.out.torch.y, q.x - o.out.torch.x); }
+  }
+  if (o.out) o.out.hand = toScreen(ctx, wr[0], wr[1]);
   drawHand(ctx, { x: wr[0], y: wr[1], rot: ang, s: 0.95, side: -1, pose: o.carry ? 'grip' : (o.handPose || 'rest'), light: Lf, flash: fl, skin: HP.skin, ring: who === 'boss', glint: o.ringGlint || 0 });
   ctx.restore();
   if (pass !== 'upper') drawLeg(legs[0], false);

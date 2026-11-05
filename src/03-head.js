@@ -451,6 +451,15 @@ function drawMouth(ctx, hs, C, L, P, o) {
   const ml = [[-28, 61 + md * 2.5], [-13, 58.4], [0, 59.2 + op * 3], [13, 58.4], [28, 61 + md * 2.5]].map(([x, y]) => pt(x, y, 2));
   ctx.lineCap = 'round';
   strokePts(ctx, ml, mixc('#160810', L.key, 0.08), 2.6, false, true);
+  if (op > 0.7) {   // open mouth (shock / surprise)
+    const h = (op - 0.5) * 26;
+    const om = [[-15, 59.2], [-7, 57.6], [0, 58], [7, 57.6], [15, 59.2], [9, 59 + h], [0, 60 + h * 1.1], [-9, 59 + h]].map(([x, y]) => pt(x, y, 2));
+    ctx.fillStyle = '#12060c'; ctx.fill(smoothPathOf(om, true, 0.8));
+    const teeth = [[-11, 59.4], [11, 59.4], [10, 62.5], [-10, 62.5]].map(([x, y]) => pt(x, y, 2.5));
+    ctx.fillStyle = rgba('#e0d8c8', 0.8); ctx.fill(pathOf(teeth));
+    const tongue = [[-8, 59 + h * 0.85], [8, 59 + h * 0.85], [0, 59 + h * 0.55]].map(([x, y]) => pt(x, y, 2));
+    ctx.fillStyle = rgba('#6a2a30', 0.6); ctx.fill(smoothPathOf(tongue));
+  }
 }
 function drawNose(ctx, hs, C, L, P, o) {
   const S = hs.S, k = P.nose;
@@ -593,6 +602,20 @@ function drawMustache(ctx, hs, C, L) {
 }
 function drawHat(ctx, hs, P, L, o) {
   const R = hs.R, hc = P.hat, pts = [], brim = [];
+  if (hc.type === 'cap') {                      // knit watch cap: no brim
+    for (const [y, r] of [[-62, 86], [-80, 90], [-104, 92], [-132, 86], [-152, 64], [-163, 30]]) for (let k = 0; k < 20; k++) {
+      const u = (k / 20) * TAU; const p = R.p(Math.cos(u) * r, y, 4 + Math.sin(u) * r * 1.04); pts.push([p[0], p[1]]);
+    }
+    const cp = pathOf(hull(pts));
+    ctx.fillStyle = mixc(hc.color, L.key, L.keyAmt * 0.12); ctx.fill(cp);
+    ctx.save(); ctx.clip(cp); ctx.strokeStyle = rgba('#000000', 0.35); ctx.lineWidth = 2;
+    for (let k = 0; k < 18; k++) { const u = PI / 2 + (k - 9) * 0.16; const a = R.p(Math.cos(u) * 90, -66, 4 + Math.sin(u) * 94), b = R.p(Math.cos(u) * 70, -150, 4 + Math.sin(u) * 70); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+    const c1 = [], c2 = []; for (let k = 0; k <= 16; k++) { const u = PI / 2 + (k - 8) * 0.19; const a = R.p(Math.cos(u) * 91, -84, 4 + Math.sin(u) * 95); c1.push([a[0], a[1]]); }
+    strokePts(ctx, c1, rgba('#000000', 0.5), 3, false, true);
+    ctx.restore();
+    edgeFill(ctx, cp, -L.rimDir[0] * L.rimW, -L.rimDir[1] * L.rimW, L.rim, L.rimA);
+    return;
+  }
   for (let k = 0; k < 28; k++) {
     const u = (k / 28) * TAU, fr = Math.sin(u), dip = fr > 0 ? fr * fr * 14 : -fr * 4;
     for (const th of [0, 9]) { const p = R.p(Math.cos(u) * 158, -94 + dip + th, 8 + fr * 160); brim.push([p[0], p[1]]); }

@@ -57,7 +57,7 @@
 </style>
 </head>
 <body>
-  <div id="stage"><canvas id="film" width="1080" height="1920" aria-label="Animated film: What does a mafia boss actually do?"></canvas></div>
+  <div id="stage"><canvas id="film" width="1080" height="1920" aria-label="Animated film: What Does a Mafia Boss Actually Do?"></canvas></div>
   <aside id="panel">
     <div>
       <h1>What Does a Mafia Boss Actually Do?</h1>
@@ -66,7 +66,7 @@
     <div class="row">
       <button id="play" class="primary">Pause</button>
       <button id="replay" title="Replay from the start (R)">Replay</button>
-      <span id="time">0:00.00 / 0:55.00</span>
+      <span id="time">0:00.00</span>
     </div>
     <input id="seek" type="range" min="0" max="55" step="0.0416667" value="0" aria-label="Timeline">
     <div id="chips"></div>
@@ -90,13 +90,14 @@
     <div class="note">Space play/pause · ← → step a frame (Shift = 1 s) · R replay. Recording runs in real time and outputs video only (no audio track).</div>
   </aside>
 <script>
-// ---- 01-core.js ----
+const FILM = {"id":"mafia","title":"What Does a Mafia Boss Actually Do?","slug":"what-does-a-mafia-boss-actually-do","duration":55,"fadeOut":52.8,"ref":true};
+// ---- src/01-core.js ----
 'use strict';
 /* =====================================================================
    01 · CORE — constants, math, easing, keyframe tracks, noise, colour,
    path utilities, glow sprites and the parallax camera.
    ===================================================================== */
-const W = 1080, H = 1920, FPS = 24, DURATION = 55;
+const W = 1080, H = 1920, FPS = 24, DURATION = FILM.duration;   // FILM is injected by tools/build.mjs
 const TAU = Math.PI * 2, PI = Math.PI;
 let RES = 1;                         // render scale (1 => 1080x1920 output)
 const G = { t: 0, frame: 0, shakeX: 0, shakeY: 0 };
@@ -309,7 +310,7 @@ function toScreen(ctx, x, y) {
   return { x: (m.a * x + m.c * y + m.e) / RES, y: (m.b * x + m.d * y + m.f) / RES, k: Math.hypot(m.a, m.b) / RES };
 }
 
-// ---- 02-fx.js ----
+// ---- src/02-fx.js ----
 /* =====================================================================
    02 · ATMOSPHERE & FX — textures, rain, rain-on-glass, smoke, dust,
    lightning, searchlights, procedural Art-Deco skylines, film post FX.
@@ -789,7 +790,7 @@ function postFX(ctx, t, o = {}) {
   ctx.fillStyle = 'rgba(0,0,0,' + clamp(fl, 0, 0.1).toFixed(3) + ')'; ctx.fillRect(0, 0, W, H);
 }
 
-// ---- 03-head.js ----
+// ---- src/03-head.js ----
 /* =====================================================================
    03 · HEAD RIG
    One reusable head model for every character. The skull is described
@@ -1243,6 +1244,13 @@ function drawMouth(ctx, hs, C, L, P, o) {
   const ml = [[-28, 61 + md * 2.5], [-13, 58.4], [0, 59.2 + op * 3], [13, 58.4], [28, 61 + md * 2.5]].map(([x, y]) => pt(x, y, 2));
   ctx.lineCap = 'round';
   strokePts(ctx, ml, mixc('#160810', L.key, 0.08), 2.6, false, true);
+  if (op > 0.7) {   // open mouth (shock / surprise)
+    const h = (op - 0.5) * 16;
+    const om = [[-15, 59.2], [-7, 57.6], [0, 58], [7, 57.6], [15, 59.2], [9, 59 + h], [0, 60 + h * 1.1], [-9, 59 + h]].map(([x, y]) => pt(x, y, 2));
+    ctx.fillStyle = '#12060c'; ctx.fill(smoothPathOf(om, true, 0.8));
+    const teeth = [[-9, 59], [9, 59], [8, 61.5], [-8, 61.5]].map(([x, y]) => pt(x, y, 2.5));
+    ctx.fillStyle = rgba('#d8cfc0', 0.55); ctx.fill(pathOf(teeth));
+  }
 }
 function drawNose(ctx, hs, C, L, P, o) {
   const S = hs.S, k = P.nose;
@@ -1385,6 +1393,20 @@ function drawMustache(ctx, hs, C, L) {
 }
 function drawHat(ctx, hs, P, L, o) {
   const R = hs.R, hc = P.hat, pts = [], brim = [];
+  if (hc.type === 'cap') {                      // knit watch cap: no brim
+    for (const [y, r] of [[-62, 86], [-80, 90], [-104, 92], [-132, 86], [-152, 64], [-163, 30]]) for (let k = 0; k < 20; k++) {
+      const u = (k / 20) * TAU; const p = R.p(Math.cos(u) * r, y, 4 + Math.sin(u) * r * 1.04); pts.push([p[0], p[1]]);
+    }
+    const cp = pathOf(hull(pts));
+    ctx.fillStyle = mixc(hc.color, L.key, L.keyAmt * 0.12); ctx.fill(cp);
+    ctx.save(); ctx.clip(cp); ctx.strokeStyle = rgba('#000000', 0.35); ctx.lineWidth = 2;
+    for (let k = 0; k < 18; k++) { const u = PI / 2 + (k - 9) * 0.16; const a = R.p(Math.cos(u) * 90, -66, 4 + Math.sin(u) * 94), b = R.p(Math.cos(u) * 70, -150, 4 + Math.sin(u) * 70); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+    const c1 = [], c2 = []; for (let k = 0; k <= 16; k++) { const u = PI / 2 + (k - 8) * 0.19; const a = R.p(Math.cos(u) * 91, -84, 4 + Math.sin(u) * 95); c1.push([a[0], a[1]]); }
+    strokePts(ctx, c1, rgba('#000000', 0.5), 3, false, true);
+    ctx.restore();
+    edgeFill(ctx, cp, -L.rimDir[0] * L.rimW, -L.rimDir[1] * L.rimW, L.rim, L.rimA);
+    return;
+  }
   for (let k = 0; k < 28; k++) {
     const u = (k / 28) * TAU, fr = Math.sin(u), dip = fr > 0 ? fr * fr * 14 : -fr * 4;
     for (const th of [0, 9]) { const p = R.p(Math.cos(u) * 158, -94 + dip + th, 8 + fr * 160); brim.push([p[0], p[1]]); }
@@ -1408,7 +1430,7 @@ function drawHat(ctx, hs, P, L, o) {
   edgeFill(ctx, bp, -L.rimDir[0] * L.rimW * 0.7, -L.rimDir[1] * L.rimW * 0.7, L.rim, L.rimA * 0.8);
 }
 
-// ---- 04-body.js ----
+// ---- src/04-body.js ----
 /* =====================================================================
    04 · BODIES, HANDS & PROPS
    Units match the head rig (head ≈ 270 units tall). Bodies are flat
@@ -1509,6 +1531,7 @@ const HAND_POSE = {
   two: { c: [0, 0.02, 0.86, 0.88], th: -0.2, tl: 0.75 },
   hold: { c: [0.55, 0.5, 0.68, 0.74], th: -0.3, tl: 0.85 },
   grip: { c: [0.7, 0.7, 0.72, 0.76], th: 0.25, tl: 0.9 },
+  point: { c: [0, 0.86, 0.88, 0.9], th: -0.15, tl: 0.75 },
 };
 function mixPose(a, b, t) { return { c: a.c.map((v, i) => lerp(v, b.c[i], t)), th: lerp(a.th, b.th, t), tl: lerp(a.tl, b.tl, t) }; }
 function fingerPath(x0, y0, ang, len, w, curl) {
@@ -1696,12 +1719,15 @@ function drawStandingFront(ctx, o) {
   if (arms === 'sides') for (const s of [-1, 1]) sleeve(s, [[230, -1532], [266, -1460], [272, -1250], [264, -1000], [252, -824], [196, -824], [200, -1000], [206, -1250], [212, -1400]]);
   else for (const s of [-1, 1]) sleeve(s, [[230, -1532], [266, -1460], [270, -1250], [264, -1090], [214, -1070], [212, -1250], [212, -1400]]);
   // torso
-  const torso = pathOf([[-60, -1592], [-130, -1574 - br], [-206, -1558 - br], [-234, -1530], [-228, -1420], [-198, -1300], [-178, -1100], [-172, -900], [-186, -786], [186, -786], [172, -900], [178, -1100], [198, -1300], [228, -1420], [234, -1530], [206, -1558 - br], [130, -1574 - br], [60, -1592]].map(([x, y]) => [X(x), y]));
+  const hem = F.coat ? -540 : -786, hw = F.coat ? 222 : 186;
+  const torso = pathOf([[-60, -1592], [-130, -1574 - br], [-206, -1558 - br], [-234, -1530], [-228, -1420], [-198, -1300], [-178, -1100], [-172, -900], [-hw, hem], [hw, hem], [172, -900], [178, -1100], [198, -1300], [228, -1420], [234, -1530], [206, -1558 - br], [130, -1574 - br], [60, -1592]].map(([x, y]) => [X(x), y]));
   bodyPart(ctx, torso, F.suit, L, { flash: fl, rimK: 2.4 });
   if (F.stripe) { ctx.save(); ctx.clip(torso); ctx.strokeStyle = rgba(F.stripe, 0.3); ctx.lineWidth = 1.4; for (let x = -240; x <= 240; x += 24) { ctx.beginPath(); ctx.moveTo(X(x), -1600); ctx.lineTo(X(x * 0.82), -780); ctx.stroke(); } ctx.restore(); }
   const hd = Object.assign({ x: 0, y: -1594 - 121 * 1.12 - br * 0.5, s: 1.12, neckBot: 140, light: L, flash: fl, t: o.t }, o.head || {});
   // front details
-  if (front > 0.01) withAlpha(ctx, front, () => {
+  if (F.coat) { ctx.fillStyle = rgba('#000000', 0.35); ctx.fillRect(X(-176), -1090, X(352), 26); ctx.fillStyle = rgba(PAL.gold, 0.5); ctx.fillRect(X(-14), -1088, X(28), 22); }
+  if (F.plain && front > 0.01) withAlpha(ctx, front, () => { ctx.strokeStyle = rgba('#000000', 0.5); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(0, -1590); ctx.lineTo(0, hem); ctx.stroke(); fillPts(ctx, [[X(-70), -1600], [X(70), -1600], [X(56), -1560], [X(-56), -1560]], darken(F.suit, 0.3)); });
+  if (front > 0.01 && !F.plain) withAlpha(ctx, front, () => {
     const C = clothCols(F.shirt, L, fl);
     fillPts(ctx, [[X(-46), -1590], [X(46), -1590], [X(20), -1330], [0, -1290], [X(-20), -1330]], C.lit);
     fillPts(ctx, [[X(-12), -1580], [X(12), -1580], [X(15), -1530], [X(9), -1300], [0, -1290], [X(-9), -1300], [X(-15), -1530]], mixc(F.tie, L.key, L.keyAmt * 0.3));
@@ -1804,9 +1830,16 @@ function drawSideFigure(ctx, o) {
   const torso = smoothPathOf([[-96, 80], [-100, -200], [-92, -440], [-54, -530], [36, -540], [96, -470], [112, -300], [100, -120], [108, 80]], true, 0.5);
   bodyPart(ctx, torso, F.suit, Lf, { flash: fl, rimK: 2.2, split: 10 });
   // lapel / shirt sliver at the front
-  fillPts(ctx, [[46, -526], [84, -474], [96, -330], [80, -350], [56, -470]], mixc(F.shirt, Lf.key, Lf.keyAmt * 0.3));
-  fillPts(ctx, [[62, -500], [86, -462], [94, -360], [88, -300], [76, -360]], mixc(F.tie, Lf.key, 0.1));
-  strokePts(ctx, [[40, -520], [76, -420], [92, -260]], rgba(lighten(F.lapel, 0.25), 0.6), 3, false, true);
+  if (!F.plain) {
+    fillPts(ctx, [[46, -526], [84, -474], [96, -330], [80, -350], [56, -470]], mixc(F.shirt, Lf.key, Lf.keyAmt * 0.3));
+    fillPts(ctx, [[62, -500], [86, -462], [94, -360], [88, -300], [76, -360]], mixc(F.tie, Lf.key, 0.1));
+    strokePts(ctx, [[40, -520], [76, -420], [92, -260]], rgba(lighten(F.lapel, 0.25), 0.6), 3, false, true);
+  }
+  if (F.coat && sit < 0.5) {   // trench-coat skirt hanging over the thighs
+    const sk = smoothPathOf([[-98, 40], [104, 40], [128 + swing * -40, 400], [-112 + swing * -30, 410]], true, 0.4);
+    bodyPart(ctx, sk, F.suit, Lf, { flash: fl, rimK: 1.6, split: 10 });
+    ctx.fillStyle = rgba('#000000', 0.35); ctx.fillRect(-98, -200, 210, 22);
+  }
   if (who === 'boss') {
     const scC = mixc(mixc(OUTFIT.boss.scarf, Lf.key, Lf.keyAmt * 0.5), '#e8e0ff', fl * 0.3);
     const sc = smoothPathOf([[30, -540], [72, -520], [100, -400], [104, -250], [80, -250], [74, -400], [40, -500]], true, 0.6);
@@ -1833,6 +1866,14 @@ function drawSideFigure(ctx, o) {
   const ang = Math.atan2(wr[1] - el[1], wr[0] - el[0]) + PI / 2;
   if (o.carry === 'envelope') drawEnvelope(ctx, wr[0] + 40, wr[1] - 10, 190, 110, ang - PI / 2 + 0.1, Lf, true);
   if (o.carry === 'folder') drawFolderSide(ctx, wr[0] + 30, wr[1] - 6, ang - PI / 2, Lf);
+  if (o.carry === 'torch') {   // small flashlight held forward, along the forearm
+    const dx = wr[0] - el[0], dy = wr[1] - el[1], l = Math.hypot(dx, dy) || 1, ux = dx / l, uy = dy / l;
+    const p0 = [wr[0] - ux * 10, wr[1] - uy * 10], p1 = [wr[0] + ux * 120, wr[1] + uy * 120];
+    ctx.fillStyle = '#16141a'; ctx.fill(quad(p0[0], p0[1], p1[0], p1[1], 14, 18));
+    ctx.fillStyle = '#fff4d8'; ctx.beginPath(); ctx.arc(p1[0], p1[1], 15, 0, TAU); ctx.fill();
+    if (o.out) { o.out.torch = toScreen(ctx, p1[0], p1[1]); const q = toScreen(ctx, p1[0] + ux * 100, p1[1] + uy * 100); o.out.torchDir = Math.atan2(q.y - o.out.torch.y, q.x - o.out.torch.x); }
+  }
+  if (o.out) o.out.hand = toScreen(ctx, wr[0], wr[1]);
   drawHand(ctx, { x: wr[0], y: wr[1], rot: ang, s: 0.95, side: -1, pose: o.carry ? 'grip' : (o.handPose || 'rest'), light: Lf, flash: fl, skin: HP.skin, ring: who === 'boss', glint: o.ringGlint || 0 });
   ctx.restore();
   if (pass !== 'upper') drawLeg(legs[0], false);
@@ -2088,7 +2129,7 @@ function drawCoffeeCup(ctx, x, y, k, L, ripple = 0) {
   ctx.restore();
 }
 
-// ---- 05-sets.js ----
+// ---- src/05-sets.js ----
 /* =====================================================================
    05 · SETS — Art-Deco architecture, furniture and set dressing.
    ===================================================================== */
@@ -2426,7 +2467,63 @@ function drawDecoDoor(ctx, x, y, w, h, open, L, t) {
   ctx.fillStyle = rgba(PAL.amb1, 0.4); ctx.fillRect(x - 50, y - 60, w + 100, 3);
 }
 
-// ---- 06-scenes.js ----
+// ---- src/05b-scene-kit.js ----
+/* =====================================================================
+   05b · SCENE KIT — helpers shared by every film (shafts, bokeh, smoke,
+   fades, busts, hands-only pass for table shots).
+   ===================================================================== */
+/* ---------- shared helpers ---------- */
+function shaft(ctx, pts, color, a) {
+  const ys = pts.map(p => p[1]), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const g = ctx.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, rgba(color, a)); g.addColorStop(1, rgba(color, 0));
+  ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g; ctx.fill(pathOf(pts)); ctx.restore();
+}
+function smokeFrom(ctx, t, out, o = {}) {
+  if (!out || !out.ember) return;
+  setScreen(ctx);
+  drawSmoke(ctx, t, out.ember.x, out.ember.y, out.ember.k * (o.k || 1), o);
+}
+function blackFill(ctx, a) { if (a <= 0) return; setScreen(ctx); ctx.fillStyle = 'rgba(4,3,6,' + clamp(a).toFixed(3) + ')'; ctx.fillRect(0, 0, W, H); }
+function bokeh(ctx, t, n, seed, cols, a, x0 = 0, y0 = 0, w = W, h = H, r0 = 30, r1 = 90) {
+  for (let i = 0; i < n; i++) {
+    const x = x0 + hash(seed + i) * w + Math.sin(t * 0.2 + i) * 6, y = y0 + hash(seed + i + 40) * h, r = lerp(r0, r1, hash(seed + i + 80));
+    glow(ctx, x, y, r, cols[i % cols.length], a * (0.5 + 0.5 * hash(seed + i + 120)));
+  }
+}
+const withL = (L, flash) => (flash > 0 ? Object.assign({}, L, { rimA: clamp(L.rimA + flash), rimW: L.rimW * (1 + flash) }) : L);
+
+/** boss forearms + hands only (used where a table must sit between body and hands) */
+function drawBossHandsOnly(ctx, base, hands) {
+  const L = base.light, F = OUTFIT.boss;
+  ctx.save(); ctx.translate(base.x, base.y); ctx.scale(base.s, base.s);
+  for (const [k, s] of [['R', -1], ['L', 1]]) { const h = hands['hand' + k]; if (!h) continue; const el = hands['elbow' + k] || [s * 226, 420]; drawForearm(ctx, el[0], el[1], h.x, h.y, 50, 40, F.suit, F.cuff, L, base.flash || 0); }
+  for (const [k] of [['R'], ['L']]) { const h = hands['hand' + k]; if (!h) continue; drawHand(ctx, { x: h.x, y: h.y, rot: h.rot ?? PI, s: h.s || 1, side: k === 'R' ? 1 : -1, pose: h.pose || 'rest', light: L, flash: base.flash || 0, ring: k === 'R', glint: h.glint || 0, det: h.det || 0, gemK: h.gemK }); }
+  ctx.restore();
+}
+/** generic bust (shoulders + collar + head) for close-ups. origin = neck base */
+function drawBust(ctx, o) {
+  const F = OUTFIT[o.who], HP = HEAD[o.who], L = o.light, back = o.view === 'back';
+  ctx.save(); ctx.translate(o.x, o.y); ctx.scale(o.s, o.s);
+  const torso = pathOf([[-60, -16], [-140, 0], [-230, 26], [-290, 90], [-310, 400], [310, 400], [290, 90], [230, 26], [140, 0], [60, -16]]);
+  bodyPart(ctx, torso, F.suit, L, { flash: o.flash || 0, rimK: 2.4 });
+  if (F.stripe) { ctx.save(); ctx.clip(torso); ctx.strokeStyle = rgba(F.stripe, 0.4); ctx.lineWidth = 1.5; for (let x = -300; x <= 300; x += 24) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x * 1.05, 400); ctx.stroke(); } ctx.restore(); }
+  const hd = Object.assign({ x: 0, y: -170, s: 1, light: L, flash: o.flash || 0, t: o.t }, o.head || {});
+  if (!back) {
+    fillPts(ctx, [[-48, -16], [48, -16], [24, 260], [0, 300], [-24, 260]], mixc(F.shirt, L.key, L.keyAmt * 0.4));
+    fillPts(ctx, [[-13, -6], [13, -6], [16, 40], [10, 280], [-10, 280], [-16, 40]], mixc(F.tie, L.key, 0.2));
+    for (const s of [-1, 1]) { const lp = pathOf([[s * 46, -16], [s * 68, -20], [s * 108, 62], [s * 164, 82], [s * 130, 116], [s * 24, 330], [s * 22, 250]]); bodyPart(ctx, lp, F.lapel, L, { rimK: 1 }); }
+    drawNeck(ctx, HP, hd, L);
+    fillPts(ctx, [[-14, -8], [14, -8], [11, 22], [-11, 22]], mixc(F.tie, L.key, 0.2));
+    for (const s of [-1, 1]) fillPts(ctx, [[s * 52, -30], [s * 6, -2], [s * 36, 46]], mixc(F.shirt, L.key, L.keyAmt * 0.4));
+  } else {
+    drawNeck(ctx, HP, hd, L);
+    bodyPart(ctx, pathOf([[-80, -36], [80, -36], [92, 20], [-92, 20]]), F.lapel, L, { rimK: 1 });
+  }
+  drawHead(ctx, HP, Object.assign(hd, { out: o.out }));
+  ctx.restore();
+}
+
+// ---- src/06-scenes.js ----
 /* =====================================================================
    06 · SCENES — six shots-lists, each a pure function of local time.
    World units = output pixels at camera zoom 1.
@@ -2457,26 +2554,6 @@ function drawRefPortrait(ctx, x, y, fhPx, o = {}) {
   return true;
 }
 function useRef() { return !!REF.img; }
-
-/* ---------- shared helpers ---------- */
-function shaft(ctx, pts, color, a) {
-  const ys = pts.map(p => p[1]), y0 = Math.min(...ys), y1 = Math.max(...ys);
-  const g = ctx.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, rgba(color, a)); g.addColorStop(1, rgba(color, 0));
-  ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g; ctx.fill(pathOf(pts)); ctx.restore();
-}
-function smokeFrom(ctx, t, out, o = {}) {
-  if (!out || !out.ember) return;
-  setScreen(ctx);
-  drawSmoke(ctx, t, out.ember.x, out.ember.y, out.ember.k * (o.k || 1), o);
-}
-function blackFill(ctx, a) { if (a <= 0) return; setScreen(ctx); ctx.fillStyle = 'rgba(4,3,6,' + clamp(a).toFixed(3) + ')'; ctx.fillRect(0, 0, W, H); }
-function bokeh(ctx, t, n, seed, cols, a, x0 = 0, y0 = 0, w = W, h = H, r0 = 30, r1 = 90) {
-  for (let i = 0; i < n; i++) {
-    const x = x0 + hash(seed + i) * w + Math.sin(t * 0.2 + i) * 6, y = y0 + hash(seed + i + 40) * h, r = lerp(r0, r1, hash(seed + i + 80));
-    glow(ctx, x, y, r, cols[i % cols.length], a * (0.5 + 0.5 * hash(seed + i + 120)));
-  }
-}
-const withL = (L, flash) => (flash > 0 ? Object.assign({}, L, { rimA: clamp(L.rimA + flash), rimW: L.rimW * (1 + flash) }) : L);
 
 /* =====================================================================
    SCENE 1 · 0–7 s · INTRODUCTION: the boss in his midnight office
@@ -2675,14 +2752,6 @@ function s2Wide(ctx, t) {
   drawChandelier(ctx, 540, 150, 0.62, t);
   setScreen(ctx); drawHaze(ctx, t, 0, 200, W, 1400, '#7a6050', 0.07, 6, 7);
   setCam(ctx, cam, 1.0); drawDust(ctx, t, 300, 300, 480, 900, 50, '#ffe0b0', 0.3, 3, 1.2);
-}
-/** boss forearms + hands only (used where a table must sit between body and hands) */
-function drawBossHandsOnly(ctx, base, hands) {
-  const L = base.light, F = OUTFIT.boss;
-  ctx.save(); ctx.translate(base.x, base.y); ctx.scale(base.s, base.s);
-  for (const [k, s] of [['R', -1], ['L', 1]]) { const h = hands['hand' + k]; if (!h) continue; const el = hands['elbow' + k] || [s * 226, 420]; drawForearm(ctx, el[0], el[1], h.x, h.y, 50, 40, F.suit, F.cuff, L, base.flash || 0); }
-  for (const [k] of [['R'], ['L']]) { const h = hands['hand' + k]; if (!h) continue; drawHand(ctx, { x: h.x, y: h.y, rot: h.rot ?? PI, s: h.s || 1, side: k === 'R' ? 1 : -1, pose: h.pose || 'rest', light: L, flash: base.flash || 0, ring: k === 'R', glint: h.glint || 0, det: h.det || 0, gemK: h.gemK }); }
-  ctx.restore();
 }
 function s2Insert(ctx, t) {
   const lt = t - 4.8;
@@ -2939,28 +3008,6 @@ function s4Rival(ctx, t) {
   drawHand(ctx, { x: 780, y: 1430 + tug * 14, rot: -0.9 - tug * 0.1, s: 2.1, side: -1, pose: 'hold', light: S4.Lrcu, skin: HEAD.rival.skin });
   setScreen(ctx); drawHaze(ctx, t, 0, 0, W, H, '#8a8a7a', 0.05, 4, 31);
 }
-/** generic bust (shoulders + collar + head) for close-ups. origin = neck base */
-function drawBust(ctx, o) {
-  const F = OUTFIT[o.who], HP = HEAD[o.who], L = o.light, back = o.view === 'back';
-  ctx.save(); ctx.translate(o.x, o.y); ctx.scale(o.s, o.s);
-  const torso = pathOf([[-60, -16], [-140, 0], [-230, 26], [-290, 90], [-310, 400], [310, 400], [290, 90], [230, 26], [140, 0], [60, -16]]);
-  bodyPart(ctx, torso, F.suit, L, { flash: o.flash || 0, rimK: 2.4 });
-  if (F.stripe) { ctx.save(); ctx.clip(torso); ctx.strokeStyle = rgba(F.stripe, 0.4); ctx.lineWidth = 1.5; for (let x = -300; x <= 300; x += 24) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x * 1.05, 400); ctx.stroke(); } ctx.restore(); }
-  const hd = Object.assign({ x: 0, y: -170, s: 1, light: L, flash: o.flash || 0, t: o.t }, o.head || {});
-  if (!back) {
-    fillPts(ctx, [[-48, -16], [48, -16], [24, 260], [0, 300], [-24, 260]], mixc(F.shirt, L.key, L.keyAmt * 0.4));
-    fillPts(ctx, [[-13, -6], [13, -6], [16, 40], [10, 280], [-10, 280], [-16, 40]], mixc(F.tie, L.key, 0.2));
-    for (const s of [-1, 1]) { const lp = pathOf([[s * 46, -16], [s * 68, -20], [s * 108, 62], [s * 164, 82], [s * 130, 116], [s * 24, 330], [s * 22, 250]]); bodyPart(ctx, lp, F.lapel, L, { rimK: 1 }); }
-    drawNeck(ctx, HP, hd, L);
-    fillPts(ctx, [[-14, -8], [14, -8], [11, 22], [-11, 22]], mixc(F.tie, L.key, 0.2));
-    for (const s of [-1, 1]) fillPts(ctx, [[s * 52, -30], [s * 6, -2], [s * 36, 46]], mixc(F.shirt, L.key, L.keyAmt * 0.4));
-  } else {
-    drawNeck(ctx, HP, hd, L);
-    bodyPart(ctx, pathOf([[-80, -36], [80, -36], [92, 20], [-92, 20]]), F.lapel, L, { rimK: 1 });
-  }
-  drawHead(ctx, HP, Object.assign(hd, { out: o.out }));
-  ctx.restore();
-}
 function s4Ots(ctx, t) {
   const lt = t - 4.4;
   const cam = { x: 540, y: lerp(1000, 960, lt / 2.4), z: lerp(1.0, 1.08, lt / 2.4) };
@@ -3214,10 +3261,7 @@ function s6Eyes(ctx, t) {
   if (fl > 0.01) { setScreen(ctx); withOp(ctx, 'lighter', () => { ctx.fillStyle = rgba('#a898ff', fl * 0.12); ctx.fillRect(0, 0, W, H); }); }
 }
 
-// ---- 07-player.js ----
-/* =====================================================================
-   07 · MASTER TIMELINE, RENDERER, PLAYER UI & RECORDER
-   ===================================================================== */
+/* ---------- master timeline for this film ---------- */
 const SCENES = [
   { id: 1, name: 'The Boss', start: 0, end: 7, draw: scene1 },
   { id: 2, name: 'The Organization', start: 7, end: 16, draw: scene2 },
@@ -3234,6 +3278,11 @@ const TRANS = [
   { at: 34, type: 'dip', dur: 0.7 },
   { at: 44, type: 'dissolve', dur: 0.9 },
 ];
+
+// ---- src/07-player.js ----
+/* =====================================================================
+   07 · MASTER TIMELINE, RENDERER, PLAYER UI & RECORDER
+   ===================================================================== */
 const sceneAt = g => { for (const s of SCENES) if (g < s.end) return s; return SCENES[SCENES.length - 1]; };
 
 const Film = { canvas: null, ctx: null, buf: null, bctx: null };
@@ -3269,9 +3318,9 @@ function renderFrame(g) {
     if (tr) blackFill(ctx, Ease.inOutSine(clamp(1 - Math.abs(g - tr.at) / (tr.dur / 2))));
   }
   postFX(ctx, g);
-  // open from black; fade to complete black exactly at 55.000 s
+  // open from black; fade to complete black exactly at DURATION
   const fadeIn = 1 - prog(g, 0, 1.1, Ease.inOutSine);
-  const fadeOut = prog(g, 52.8, DURATION - 1 / FPS, Ease.inQuad);   // last frame (54.958 s) is pure black
+  const fadeOut = prog(g, FILM.fadeOut, DURATION - 1 / FPS, Ease.inQuad);   // the last frame is pure black
   const a = Math.max(fadeIn, fadeOut);
   if (a > 0) { setScreen(ctx); ctx.fillStyle = 'rgba(0,0,0,' + a.toFixed(4) + ')'; ctx.fillRect(0, 0, W, H); }
 }
@@ -3353,7 +3402,7 @@ async function record() {
   Player.recording = false; document.body.classList.remove('recording');
   const type = (mime || 'video/webm').split(';')[0], ext = type.includes('mp4') ? 'mp4' : 'webm';
   const blob = new Blob(chunks, { type });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'what-does-a-mafia-boss-actually-do.' + ext; a.click();
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = FILM.slug + '.' + ext; a.click();
   status('Saved ' + ext.toUpperCase() + ' (' + (blob.size / 1048576).toFixed(1) + ' MB, 1080×1920, ' + FPS + ' fps, video only).' + (late > 6 ? ' Note: this device rendered ' + late + ' frames late, so motion may stutter — use tools/render-mp4.mjs for a frame-exact MP4.' : ''), false);
   if (prevRes !== 1) setupCanvas(prevRes);
   seek(DURATION);
@@ -3373,6 +3422,7 @@ function setRefImage(img) {
   seek(Player.t);
 }
 function tryAutoRef() {
+  if (!FILM.ref) return;
   if (!/^https?:$/.test(location.protocol)) return;   // file:// would taint the canvas
   const names = ['assets/boss.png', 'assets/boss.jpg', 'assets/boss.jpeg', 'assets/boss.webp'];
   (function next(i) {
@@ -3400,6 +3450,7 @@ function boot() {
     refFile: document.getElementById('refFile'), refPanel: document.getElementById('refPanel'),
   });
   ui.seek.max = DURATION; ui.seek.step = 1 / FPS;
+  if (!FILM.ref) ui.refPanel.style.display = 'none';
   ui.chips = SCENES.map(s => { const b = document.createElement('button'); b.className = 'chip'; b.dataset.id = s.id; b.title = s.start + 's–' + s.end + 's'; b.textContent = s.id + ' · ' + s.name; b.onclick = () => { seek(s.start); }; ui.chipsBox.appendChild(b); return b; });
   ui.play.onclick = () => (Player.playing ? pause() : play());
   ui.replay.onclick = replay;
@@ -3418,7 +3469,7 @@ function boot() {
     if (e.key === 'r' || e.key === 'R') replay();
   });
   ui.rec.title = 'Records 1080×1920 @ ' + FPS + ' fps as ' + (pickMime() || 'unsupported').split(';')[0];
-  status('Ready. Auto-playing — 55 s, no audio. Recording format in this browser: ' + ((pickMime() || 'not supported').split(';')[0]) + '.');
+  status('Ready. Auto-playing — ' + DURATION + ' s, no audio. Recording format in this browser: ' + ((pickMime() || 'not supported').split(';')[0]) + '.');
   tryAutoRef();
   seek(0); play();
 }
