@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+<style>
+  :root { --bg:#07080b; --panel:#111319; --line:#262a33; --ink:#e8e6e1; --dim:#9097a3; --acc:#f26a1b; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  body { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:12px; min-height:100vh; }
+  #film { display:block; background:#000; aspect-ratio:9/16; height:auto; max-width:100%;
+          width:min(calc(100vw - 24px), calc((100vh - 90px) * .5625)); box-shadow:0 20px 60px rgba(0,0,0,.6); }
+  #bar { display:flex; gap:8px; align-items:center; width:min(100%, 560px); }
+  button { font:inherit; color:var(--ink); background:#1a1d24; border:1px solid var(--line); border-radius:8px; padding:8px 12px; cursor:pointer; }
+  button:hover { border-color:var(--acc); }
+  input[type=range] { flex:1; accent-color:var(--acc); }
+  #time { font-variant-numeric:tabular-nums; color:var(--dim); min-width:88px; text-align:right; }
+  body.render { padding:0; display:block; }
+  body.render #bar { display:none; }
+  body.render #film { width:1080px; height:1920px; max-width:none; box-shadow:none; }
+</style>
+</head>
+<body>
+  <canvas id="film" width="1080" height="1920" aria-label="{{TITLE}}"></canvas>
+  <div id="bar">
+    <button id="play">Pause</button><button id="replay">Replay</button>
+    <input id="seek" type="range" min="0" max="{{DUR}}" step="0.001" value="0"><span id="time">0.00 / {{DUR}}</span>
+  </div>
+<script id="three-src" type="text/plain">/*__THREE__*/</script>
+<script type="module">
+const THREE = await import(URL.createObjectURL(new Blob([document.getElementById('three-src').textContent], { type: 'text/javascript' })));
+/*__FILM__*/
+const film = createFilm(THREE, document.getElementById('film'));
+window.__film = film;
+const render = new URLSearchParams(location.search).has('render');
+if (render) { document.body.classList.add('render'); film.renderAt(0); }
+else {
+  const $ = id => document.getElementById(id);
+  let playing = true, t = 0, last = performance.now();
+  const ui = () => { $('seek').value = t; $('time').textContent = t.toFixed(2) + ' / ' + film.DURATION; $('play').textContent = playing ? 'Pause' : 'Play'; };
+  $('play').onclick = () => { if (t >= film.DURATION) t = 0; playing = !playing; last = performance.now(); ui(); };
+  $('replay').onclick = () => { t = 0; playing = true; last = performance.now(); };
+  $('seek').oninput = e => { t = +e.target.value; film.renderAt(t); ui(); };
+  addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); $('play').click(); } if (e.key === 'r') $('replay').click(); });
+  const loop = now => { if (playing) { t += (now - last) / 1000; if (t >= film.DURATION) { t = film.DURATION; playing = false; } film.renderAt(t); ui(); } last = now; requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>

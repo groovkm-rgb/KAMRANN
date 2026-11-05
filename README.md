@@ -6,6 +6,7 @@ This repository holds two silent, vertical, 1080×1920 / 24 fps animated documen
 |---|---|---|---|
 | What Does a Mafia Boss Actually Do? | `index.html` | 55 s | `renders/what-does-a-mafia-boss-actually-do.mp4` |
 | The Green Vault Heist · Dresden 2019 | `green-vault.html` | 40 s | `renders/green-vault-heist-dresden-2019.mp4` |
+| Hapishanede Rap (3D) | `prison-rap.html` | 40 s | `renders/hapishanede-rap.mp4` |
 
 The sections below document the mafia film first. The Green Vault film is covered in its own section at the end.
 
@@ -186,3 +187,26 @@ node tools/render-mp4.mjs renders/green-vault-heist-dresden-2019.mp4 --html gree
 ```
 
 The film-specific code is in `films/green-vault/sets.js` (palace, skyline, cobbles, lanterns, Jewel Room, display case, jewellery, broken glass, board photos, scales) and `films/green-vault/scenes.js` (shots and timeline).
+
+---
+
+# Hapishanede Rap (3D)
+
+`prison-rap.html`, **40 seconds**, 1080×1920 (9:16), 24 fps, **no audio, no on-screen text**. Unlike the two Canvas films, this one is real-time **3D** (three.js r170, MIT, vendored in `films/prison-rap/vendor/` and inlined, so the HTML file needs no network). Like the other films it is a pure function of time (`window.__film.renderAt(t)`), so the MP4 export is frame-exact.
+
+A playful, stylised story with no real-world method: a pigeon delivers a tiny voice recorder to the cell window.
+
+| # | Time | Scene |
+|---|---|---|
+| 1 | 0–6 s | Prison at night: chain-link fence, razor wire, guard tower, a sweeping searchlight. The camera cranes up to one lit, barred window. |
+| 2 | 6–14 s | Inside the cell: the camera slips between the bars. A bored inmate on his cot taps a beat on his knee, then drums on the cot frame, and looks up at the moonlit window. |
+| 3 | 14–20 s | A pigeon lands on the sill carrying a little recorder and pushes it through the bars. The searchlight sweeps through the window and he ducks. Then he presses REC and the red light comes on. |
+| 4 | 20–33 s | The rap: head nods, bouncing knees, free-hand gestures and mouth syncing to a 92 BPM beat, with pulse rings leaving the recorder on every beat. The neighbours bang tin cups on their bars while the pigeon bobs along on the sill. |
+| 5 | 33–40 s | A flashlight comes down the corridor. He dives onto the cot, slips the recorder under his pillow and fakes sleep while the guard's beam passes. He opens one eye, smirks and pulls out the recorder, whose red light blinks. Fade to black. |
+
+```bash
+node tools/build-prison-rap.mjs                                   # films/prison-rap/* → prison-rap.html
+node tools/render-mp4.mjs renders/hapishanede-rap.mp4 --html prison-rap.html
+```
+
+Source: `films/prison-rap/film.js` (sets, characters, animation, camera), `films/prison-rap/shell.html` (player page).
