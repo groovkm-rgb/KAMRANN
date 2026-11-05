@@ -370,6 +370,10 @@ function drawSideFigure(ctx, o) {
     const sgn = k ? -1 : 1;
     let ta = sit * (PI / 2) * 0.98 + wa * 0.42 * Math.sin(ph) * sgn;
     let ka = sit * (PI / 2) * 0.98 + wa * (0.12 + 0.5 * Math.max(0, Math.sin(ph + (k ? PI : 0) - 0.9)));
+    if (o.climb != null) {   // ladder climbing: knees lift alternately, shins stay near vertical on the rungs
+      const u = 0.5 + 0.5 * Math.sin(o.climb + (k ? PI : 0));
+      ta = 0.1 + 0.8 * u; ka = ta + 0.42;
+    }
     const knee = [hip[0] + Math.sin(ta) * TH, hip[1] + Math.cos(ta) * TH];
     const sa = ta - ka;
     const ankle = [knee[0] + Math.sin(sa) * SH, knee[1] + Math.cos(sa) * SH];
@@ -393,7 +397,16 @@ function drawSideFigure(ctx, o) {
   const sh0 = [6, -470];
   const farEl = [sh0[0] + Math.sin(-swing) * 280, sh0[1] + Math.cos(-swing) * 280];
   const farWr = [farEl[0] + Math.sin(-swing + 0.25) * 260, farEl[1] + Math.cos(-swing + 0.25) * 260];
-  if (!o.hand) { bodyPart(ctx, limbPath(sh0[0], sh0[1], farEl[0], farEl[1], 56, 50), mixc(F.suit, '#000', 0.4), Lf, { flash: fl, rimK: 1.2 }); drawForearm(ctx, farEl[0], farEl[1], farWr[0], farWr[1], 50, 42, mixc(F.suit, '#000', 0.4), F.cuff, Lf, fl); }
+  // figure coords → torso-local coords (the frame this block draws in)
+  const toLocal = (q) => { const hx = q.x, hy = q.y + hipH, c = Math.cos(-lean), s = Math.sin(-lean); return [hx * c - hy * s, hx * s + hy * c]; };
+  // keep hand targets within arm's reach so limbs never stretch
+  const reach = (p, sx) => { const dx = p[0] - sx, dy = p[1] - sh0[1], d = Math.hypot(dx, dy), m = 530; return d > m ? [sx + dx / d * m, sh0[1] + dy / d * m] : p; };
+  if (o.farHand) {   // far arm reaching a target (two-handed grips, climbing, cheering)
+    const fw = reach(toLocal(o.farHand), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(F.suit, '#000', 0.4);
+    bodyPart(ctx, limbPath(sh0[0] - 18, sh0[1], fe[0], fe[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 });
+    drawForearm(ctx, fe[0], fe[1], fw[0], fw[1], 50, 42, dk, F.cuff, Lf, fl);
+    drawHand(ctx, { x: fw[0], y: fw[1], rot: Math.atan2(fw[1] - fe[1], fw[0] - fe[0]) + PI / 2, s: 0.95, side: 1, pose: o.farPose || 'grip', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
+  } else if (!o.hand) { bodyPart(ctx, limbPath(sh0[0], sh0[1], farEl[0], farEl[1], 56, 50), mixc(F.suit, '#000', 0.4), Lf, { flash: fl, rimK: 1.2 }); drawForearm(ctx, farEl[0], farEl[1], farWr[0], farWr[1], 50, 42, mixc(F.suit, '#000', 0.4), F.cuff, Lf, fl); }
   const torso = smoothPathOf([[-96, 80], [-100, -200], [-92, -440], [-54, -530], [36, -540], [96, -470], [112, -300], [100, -120], [108, 80]], true, 0.5);
   bodyPart(ctx, torso, F.suit, Lf, { flash: fl, rimK: 2.2, split: 10 });
   // lapel / shirt sliver at the front
@@ -420,11 +433,12 @@ function drawSideFigure(ctx, o) {
   drawNeck(ctx, HP, hd, Lf);
   fillPts(ctx, [[-46, -560], [38, -566], [60, -520], [-40, -510]], mixc(F.lapel, Lf.key, 0.1));
   drawHead(ctx, HP, Object.assign(hd, { out: o.out, cigar: o.cigar }));
+  if (o.prop) o.prop(ctx, toLocal);   // held object, drawn between the body and the near arm
   // near arm
   let wr, el;
   if (o.hand) {
     const hx = o.hand.x, hy = o.hand.y + hipH;          // figure → torso-local (approx, ignoring lean)
-    const c = Math.cos(-lean), s = Math.sin(-lean), lx = hx * c - (hy) * s, ly = hx * s + (hy) * c;
+    const c = Math.cos(-lean), s = Math.sin(-lean), [lx, ly] = reach([hx * c - (hy) * s, hx * s + (hy) * c], sh0[0]);
     el = ik2(sh0[0], sh0[1], lx, ly, 280, 270, 1);
     wr = [lx, ly];
   } else { el = [sh0[0] + Math.sin(swing) * 280, sh0[1] + Math.cos(swing) * 280]; wr = [el[0] + Math.sin(swing + 0.3) * 260, el[1] + Math.cos(swing + 0.3) * 260]; }

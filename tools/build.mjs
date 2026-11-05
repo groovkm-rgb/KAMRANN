@@ -18,6 +18,11 @@ const FILMS = {
     desc: 'A 40-second silent vertical noir animated documentary about the 2019 Green Vault jewel theft in Dresden. No audio.',
     duration: 40, fadeOut: 37.6, ref: false, modules: ['films/green-vault/sets.js', 'films/green-vault/scenes.js'],
   },
+  well: {
+    out: 'well.html', title: 'The Well', slug: 'the-well',
+    desc: 'An 18-second silent vertical Art-Deco short: a man digs until water bursts up, climbs out and celebrates. No audio.',
+    duration: 18, fadeOut: 16.6, ref: false, modules: ['films/well/scenes.js'],
+  },
 };
 const shared = ['src/01-core.js', 'src/02-fx.js', 'src/03-head.js', 'src/04-body.js', 'src/05-sets.js', 'src/05b-scene-kit.js'];
 const which = process.argv[2] ? [process.argv[2]] : Object.keys(FILMS);
