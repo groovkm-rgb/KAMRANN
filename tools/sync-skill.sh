@@ -8,4 +8,5 @@ cp films/green-vault/sets.js $SK/assets/library/museum-dresden.js
 cp films/well/scenes.js $SK/assets/examples/the-well.scenes.js
 cp films/green-vault/scenes.js $SK/assets/examples/green-vault.scenes.js
 cp src/06-scenes.js $SK/assets/examples/mafia-boss.scenes.js
-echo "skill engine synced"
+rm -rf .claude/skills/art-deco-noir-shorts && mkdir -p .claude/skills && cp -r $SK .claude/skills/
+echo "skill engine synced (skills/ and .claude/skills/)"
