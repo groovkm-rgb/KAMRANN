@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Papier bis zum Mond</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #000; color: #cfd8ea; font-family: Inter, "Helvetica Neue", Arial, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+  #film { display: block; height: calc(100vh - 70px); max-width: 100vw; aspect-ratio: 9 / 16; background: #0A1222; }
+  #ui { display: flex; gap: 10px; align-items: center; width: min(92vw, 560px); }
+  #ui button { background: #1b2740; color: #fff; border: 0; border-radius: 8px; padding: 8px 14px; font: 600 14px Inter, Arial, sans-serif; cursor: pointer; }
+  #ui input { flex: 1; }
+  #ui span { font: 500 13px Inter, Arial, sans-serif; min-width: 92px; text-align: right; font-variant-numeric: tabular-nums; }
+  body.render #ui { display: none; }
+  body.render #film { height: 1920px; width: 1080px; max-width: none; }
+</style>
+</head>
+<body>
+<canvas id="film" width="1080" height="1920"></canvas>
+<div id="ui">
+  <button id="play">Pause</button>
+  <input id="seek" type="range" min="0" max="30" step="0.0166667" value="0">
+  <span id="clock">0,00 / 30 s</span>
+</div>
+<script>
+'use strict';
+// ============================================================================
+//  "Kann ein Blatt Papier den Mond erreichen?"  – 30 s, 1080x1920, 60 fps, silent
+//  Every frame is a pure function of time: renderAt(t).
+// ============================================================================
+const W = 1080, H = 1920, FPS = 60, DURATION = 30;
+const cv = document.getElementById('film');
+const ctx = cv.getContext('2d');
+const FONT = 'Inter, "Helvetica Neue", Arial, sans-serif';
+
+const COL = {
+  yellow: '#FFD54A', white: '#FFFFFF', muted: '#9DB0D2', soft: '#C9D4E8',
+  paper: '#F6F2E8', paperSide: '#ECE6D8', paperBack: '#E2DCCD', paperLine: '#B7AE9A',
+};
+
+// ---------- math helpers ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, u) => a + (b - a) * u;
+const sstep = (e0, e1, x) => { const u = clamp((x - e0) / (e1 - e0)); return u * u * (3 - 2 * u); };
+const ease = u => { u = clamp(u); return u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+const easeOut = u => 1 - Math.pow(1 - clamp(u), 3);
+const backOut = u => { u = clamp(u); const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(u - 1, 3) + c1 * Math.pow(u - 1, 2); };
+const win = (t, a, b, fi = .3, fo = .3) => clamp((t - a) / fi) * clamp((b - t) / fo);
+function hex(c) { const v = parseInt(c.slice(1), 16); return [v >> 16 & 255, v >> 8 & 255, v & 255]; }
+function mix(a, b, u) { const A = hex(a), B = hex(b); return `rgb(${A.map((x, i) => Math.round(lerp(x, B[i], clamp(u)))).join(',')})`; }
+function mixRGB(a, b, u) { return a.map((x, i) => lerp(x, b[i], clamp(u))); }
+const rgb = a => `rgb(${a.map(Math.round).join(',')})`;
+
+// ---------- German number formatting ----------
+function de(v, d = 0) {
+  const s = v.toFixed(d); let [i, f] = s.split('.');
+  i = i.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return f ? i + ',' + f : i;
+}
+function fmtVal(v) { return v < 100 ? de(v, 1) : de(Math.round(v)); }
+function fmtThickness(mm) {
+  if (mm < 10) return de(mm, 1) + ' mm';
+  if (mm < 1000) return fmtVal(mm / 10) + ' cm';
+  if (mm < 1e6) return fmtVal(mm / 1000) + ' m';
+  return fmtVal(mm / 1e6) + ' km';
+}
+const thicknessMM = n => 0.1 * Math.pow(2, n);
+
+// ---------- text helpers ----------
+function setFont(size, weight = 700) { ctx.font = `${weight} ${size}px ${FONT}`; }
+function spacing(px) { if ('letterSpacing' in ctx) ctx.letterSpacing = px + 'px'; }
+function text(str, x, y, { size = 60, weight = 700, color = '#fff', align = 'center', maxW = 920, alpha = 1, ls = 0, shadow = true } = {}) {
+  if (alpha <= 0.001) return;
+  ctx.save();
+  ctx.globalAlpha *= alpha;
+  spacing(ls);
+  setFont(size, weight);
+  let w = ctx.measureText(str).width;
+  if (w > maxW) { size *= maxW / w; setFont(size, weight); }
+  ctx.textAlign = align; ctx.textBaseline = 'alphabetic';
+  if (shadow) { ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 4; }
+  ctx.fillStyle = color;
+  ctx.fillText(str, x, y);
+  ctx.restore();
+}
+// several coloured segments on one centred line
+function richLine(segs, cx, y, size, weight = 800, alpha = 1, maxW = 940) {
+  if (alpha <= 0.001) return;
+  ctx.save(); ctx.globalAlpha *= alpha; spacing(0);
+  setFont(size, weight);
+  let total = segs.reduce((s, g) => s + ctx.measureText(g[0]).width, 0);
+  if (total > maxW) { size *= maxW / total; setFont(size, weight); total = segs.reduce((s, g) => s + ctx.measureText(g[0]).width, 0); }
+  let x = cx - total / 2;
+  ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+  ctx.shadowColor = 'rgba(0,0,0,0.55)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 4;
+  for (const [s, c] of segs) { ctx.fillStyle = c; ctx.fillText(s, x, y); x += ctx.measureText(s).width; }
+  ctx.restore();
+}
+function rrect(x, y, w, h, r) {
+  r = Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2);
+  ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+
+// ---------- seeded stars ----------
+function mulberry(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const STARS = (() => { const r = mulberry(42), a = []; for (let i = 0; i < 260; i++) a.push({ x: r() * W, y: r() * H, s: .6 + r() * 1.9, k: 1 + Math.floor(r() * 5), p: r() * 6.283, b: .35 + r() * .65 }); return a; })();
+function drawStars(alpha, t) {
+  if (alpha <= 0.01) return;
+  ctx.save();
+  for (const s of STARS) {
+    const tw = 0.65 + 0.35 * Math.sin(6.2832 * s.k * t / DURATION * 6 + s.p); // periodic over 30 s
+    ctx.globalAlpha = alpha * s.b * tw;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.s, 0, 6.2832); ctx.fill();
+  }
+  ctx.restore();
+}
+
+// ---------- background ----------
+const BG = { lowT: hex('#0A1222'), lowB: hex('#17284A'), atmT: hex('#0C1D3D'), atmB: hex('#24477F'), spT: hex('#02040A'), spB: hex('#070C1A') };
+function drawBackground(logV) {
+  const atm = sstep(3.3, 4.4, logV) * (1 - sstep(4.9, 5.8, logV));
+  const sp = sstep(4.9, 5.8, logV);
+  let top = mixRGB(BG.lowT, BG.atmT, atm), bot = mixRGB(BG.lowB, BG.atmB, atm);
+  top = mixRGB(top, BG.spT, sp); bot = mixRGB(bot, BG.spB, sp);
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, rgb(top)); g.addColorStop(1, rgb(bot));
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  // soft vignette
+  const v = ctx.createRadialGradient(W / 2, H * .45, H * .25, W / 2, H * .45, H * .8);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.45)');
+  ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+  return sp;
+}
+
+// ---------- monotone cubic interpolation for the fold counter n(t) ----------
+function monotone(pts) {
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), N = xs.length;
+  const d = [], m = new Array(N).fill(0);
+  for (let i = 0; i < N - 1; i++) d[i] = (ys[i + 1] - ys[i]) / (xs[i + 1] - xs[i]);
+  m[0] = 0; m[N - 1] = 0;
+  for (let i = 1; i < N - 1; i++) m[i] = d[i - 1] * d[i] <= 0 ? 0 : (d[i - 1] + d[i]) / 2;
+  for (let i = 0; i < N - 1; i++) {
+    if (d[i] === 0) { m[i] = m[i + 1] = 0; continue; }
+    const a = m[i] / d[i], b = m[i + 1] / d[i], s = a * a + b * b;
+    if (s > 9) { const k = 3 / Math.sqrt(s); m[i] = k * a * d[i]; m[i + 1] = k * b * d[i]; }
+  }
+  return x => {
+    if (x <= xs[0]) return ys[0];
+    if (x >= xs[N - 1]) return ys[N - 1];
+    let i = 0; while (x > xs[i + 1]) i++;
+    const h = xs[i + 1] - xs[i], u = (x - xs[i]) / h, u2 = u * u, u3 = u2 * u;
+    return (2 * u3 - 3 * u2 + 1) * ys[i] + (u3 - 2 * u2 + u) * h * m[i] + (-2 * u3 + 3 * u2) * ys[i + 1] + (u3 - u2) * h * m[i + 1];
+  };
+}
+const T_WORLD = 6.8;     // continuous growth starts here (3 folds done)
+const nCurve = monotone([
+  [6.8, 3], [8.0, 9.38], [9.0, 9.9], [10.1, 14.5], [11.1, 15.0], [12.3, 20.3], [13.3, 20.8],
+  [14.6, 26.8], [15.8, 26.95], [16.9, 27.5], [18.2, 32.3], [19.3, 32.9], [22.3, 41.75], [23.0, 42], [24.5, 42],
+]);
+function tOfN(n) { // invert n(t) on the world phase
+  if (n <= 3) return T_WORLD;
+  let a = T_WORLD, b = 23.0;
+  if (n >= 42) return 23.0;
+  for (let i = 0; i < 40; i++) { const c = (a + b) / 2; if (nCurve(c) < n) a = c; else b = c; }
+  return (a + b) / 2;
+}
+
+// ---------- fold phase (top view) ----------
+const FOLDS = [
+  { a: 2.55, b: 3.25, set: 3.6, axis: 'h' },
+  { a: 3.6, b: 4.3, set: 4.65, axis: 'v' },
+  { a: 4.65, b: 5.35, set: 5.7, axis: 'h' },
+];
+const DIMS = [[210, 297], [210, 148.5], [105, 148.5], [105, 74.25]];
+const ZOOM = [1.75, 2.35, 3.1, 4.0];
+const SHEET_C = [540, 1100];
+const T_MORPH = [5.7, 6.8];
+
+function foldCount(t) { // HUD shows the fold in progress and its resulting thickness
+  if (t < T_WORLD) { let k = 0; for (const f of FOLDS) if (t >= f.b) k++; return k; }
+  return Math.min(42, Math.max(3, Math.ceil(nCurve(t) - 0.02)));
+}
+function lastIncTime(t) {
+  if (t < T_WORLD) { let tt = -10; for (const f of FOLDS) if (t >= f.b) tt = f.b; return tt; }
+  const k = foldCount(t); if (k <= 3) return FOLDS[2].b; return tOfN(k - 1 + 0.02);
+}
+// visible growth: each fold is a quick "doubling" step (camera still uses the smooth curve)
+function nVis(n) { const f = Math.floor(n), u = n - f; return f + 0.65 * ease(u) + 0.35 * u; }
+
+function paperRect(x, y, w, h, layers, alpha = 1) {
+  ctx.save(); ctx.globalAlpha *= alpha;
+  const th = 2 + Math.log2(layers) * 2.2; // visible edge thickness grows with layers
+  ctx.shadowColor = 'rgba(0,0,0,0.45)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 18;
+  ctx.fillStyle = COL.paperLine; ctx.fillRect(x, y + th, w, h);
+  ctx.shadowColor = 'transparent';
+  ctx.fillStyle = COL.paperSide; ctx.fillRect(x, y + th * 0.5, w, h);
+  const g = ctx.createLinearGradient(x, y, x + w, y + h);
+  g.addColorStop(0, '#FFFDF7'); g.addColorStop(1, '#ECE6D9');
+  ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+  ctx.restore();
+}
+function drawFlap(axis, cx, cy, Wp, Hp, theta) {
+  // flap = second half rotating about the fold line (simple perspective)
+  const s = Math.sin(theta), c = Math.cos(theta);
+  const front = theta < Math.PI / 2;
+  const shade = front ? 1 - 0.25 * s : 0.86 + 0.12 * (-c);
+  const base = front ? [246, 242, 232] : [226, 220, 205];
+  ctx.fillStyle = rgb(base.map(v => v * shade));
+  ctx.beginPath();
+  if (axis === 'h') {
+    const L = Hp / 2, yF = cy + L * c, hw = Wp / 2 * (1 + 0.12 * s);
+    ctx.moveTo(cx - Wp / 2, cy); ctx.lineTo(cx + Wp / 2, cy); ctx.lineTo(cx + hw, yF); ctx.lineTo(cx - hw, yF);
+  } else {
+    const L = Wp / 2, xF = cx + L * c, hh = Hp / 2 * (1 + 0.12 * s);
+    ctx.moveTo(cx, cy - Hp / 2); ctx.lineTo(cx, cy + Hp / 2); ctx.lineTo(xF, cy + hh); ctx.lineTo(xF, cy - hh);
+  }
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = 'rgba(120,110,90,0.35)'; ctx.lineWidth = 2; ctx.stroke();
+}
+function drawSheetTop(t) {
+  const [cx0, cy0] = SHEET_C;
+  if (t < FOLDS[0].a) { const [w, h] = DIMS[0].map(v => v * ZOOM[0]); paperRect(cx0 - w / 2, cy0 - h / 2, w, h, 1); return; }
+  for (let i = 0; i < 3; i++) {
+    const f = FOLDS[i];
+    if (t < f.a) continue;
+    if (t < f.b) { // folding
+      const th = Math.PI * ease((t - f.a) / (f.b - f.a));
+      const [w, h] = DIMS[i].map(v => v * ZOOM[i]);
+      const layers = 1 << i;
+      if (f.axis === 'h') paperRect(cx0 - w / 2, cy0 - h / 2, w, h / 2, layers);
+      else paperRect(cx0 - w / 2, cy0 - h / 2, w / 2, h, layers);
+      drawFlap(f.axis, cx0, cy0, w, h, th);
+      return;
+    }
+    if (t < f.set || i === 2) { // settle: recentre + zoom in
+      const e = ease((t - f.b) / (f.set - f.b));
+      const z = lerp(ZOOM[i], ZOOM[i + 1], e);
+      const [w, h] = DIMS[i + 1].map(v => v * z);
+      let cx = cx0, cy = cy0;
+      if (f.axis === 'h') cy = cy0 - lerp(DIMS[i][1] / 4 * ZOOM[i], 0, e);
+      else cx = cx0 - lerp(DIMS[i][0] / 4 * ZOOM[i], 0, e);
+      if (i < 2 && t >= f.set) continue;
+      paperRect(cx - w / 2, cy - h / 2, w, h, 2 << i);
+      return;
+    }
+  }
+}
+
+// ---------- shared pieces ----------
+function drawMoonDeco(alpha) {
+  if (alpha <= 0.01) return;
+  ctx.save(); ctx.globalAlpha *= alpha;
+  const x = 850, y = 250, r = 46;
+  const g = ctx.createRadialGradient(x, y, r * .6, x, y, r * 3.2);
+  g.addColorStop(0, 'rgba(255,240,200,0.28)'); g.addColorStop(1, 'rgba(255,240,200,0)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * 3.2, 0, 6.2832); ctx.fill();
+  drawMoonBody(x, y, r);
+  ctx.restore();
+}
+function drawMoonBody(x, y, r) {
+  const g = ctx.createRadialGradient(x - r * .35, y - r * .35, r * .1, x, y, r);
+  g.addColorStop(0, '#F3F1EA'); g.addColorStop(1, '#AEB2BC');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+  if (r > 8) {
+    ctx.fillStyle = 'rgba(120,125,140,0.35)';
+    for (const [dx, dy, rr] of [[-.3, -.2, .22], [.25, .15, .17], [-.05, .4, .12], [.35, -.35, .1]]) {
+      ctx.beginPath(); ctx.arc(x + dx * r, y + dy * r, rr * r, 0, 6.2832); ctx.fill();
+    }
+  }
+}
+function drawTitle(alpha, dy) {
+  richLine([['Kann ein Blatt', '#fff']], 540, 470 + dy, 108, 800, alpha);
+  richLine([['Papier den ', '#fff'], ['Mond', COL.yellow]], 540, 590 + dy, 108, 800, alpha);
+  richLine([['erreichen?', '#fff']], 540, 710 + dy, 108, 800, alpha);
+}
+function drawIntroFrame() {
+  drawBackground(-0.5);
+  drawMoonDeco(1);
+  drawTitle(1, 0);
+  drawSheetTop(0);
+  text('A4-Blatt · 0,1 mm dick', 540, 1440, { size: 42, weight: 600, color: COL.muted });
+}
+
+function drawHUD(t, alpha) {
+  if (alpha <= 0.01) return;
+  const k = foldCount(t);
+  const pulse = Math.exp(-Math.max(0, t - lastIncTime(t)) * 7);
+  text('FALTUNGEN', 540, 300, { size: 34, weight: 700, color: COL.muted, ls: 6, alpha });
+  ctx.save();
+  ctx.translate(540, 400); const sc = 1 + 0.12 * pulse; ctx.scale(sc, sc);
+  text(String(k), 0, 0, { size: 132, weight: 800, color: COL.yellow, alpha });
+  ctx.restore();
+  text('DICKE', 540, 472, { size: 34, weight: 700, color: COL.muted, ls: 6, alpha });
+  text(fmtThickness(thicknessMM(k)), 540, 552, { size: 78, weight: 800, color: '#fff', alpha });
+}
+function drawFormula(alpha) {
+  if (alpha <= 0.01) return;
+  text('Jede Faltung verdoppelt die Dicke.', 540, 662, { size: 46, weight: 700, color: '#fff', alpha });
+  // "Dicke = 0,1 mm × 2ⁿ" with a hand-set superscript
+  ctx.save(); ctx.globalAlpha *= alpha; spacing(0);
+  const a = 'Dicke = 0,1 mm × 2', size = 42;
+  setFont(size, 600); const wa = ctx.measureText(a).width;
+  setFont(size * .62, 700); const wn = ctx.measureText('n').width;
+  const x0 = 540 - (wa + wn + 2) / 2, y = 728;
+  ctx.textAlign = 'left'; ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = 14;
+  setFont(size, 600); ctx.fillStyle = COL.muted; ctx.fillText(a, x0, y);
+  setFont(size * .62, 700); ctx.fillStyle = COL.yellow; ctx.fillText('n', x0 + wa + 2, y - size * .42);
+  ctx.restore();
+}
+
+// ---------- world (side view) ----------
+const STACK_X = 690, GROUND_Y = 1420, S0 = 125000, FRAME_PX = 760;
+const R_EARTH = 6.371e6, R_MOON = 1.7374e6, D_MOON = 3.844e8;
+const stackWidth = n => Math.max(12, 260 * Math.pow(2, -(n - 3) / 4));
+
+const OBJ = [
+  { key: 'book', name: 'Buch', val: 'ca. 5 cm', h: 0.05 },
+  { key: 'human', name: 'Mensch', val: 'ca. 1,75 m', h: 1.75 },
+  { key: 'building', name: 'Hochhaus', val: 'ca. 100 m', h: 100 },
+  { key: 'everest', name: 'Mount Everest', val: '8.849 m', h: 8849 },
+  { key: 'plane', name: 'Flugzeug', val: 'ca. 10 km', h: 10000, orbit: true },
+  { key: 'iss', name: 'ISS', val: 'ca. 400 km', h: 400000, orbit: true },
+  { key: 'moon', name: 'Mond', val: 'ca. 384.400 km', h: D_MOON, below: true },
+];
+for (const o of OBJ) o.n = Math.log2(o.h / 1e-4);
+for (const o of OBJ) o.t0 = o.key === 'moon' ? tOfN(41.85) : tOfN(o.n + 0.415);
+OBJ.forEach((o, i) => {
+  const next = OBJ[i + 1];
+  o.t1 = o.key === 'moon' ? 23.85 : Math.min(tOfN(o.n + 3.6), next ? next.t0 - 0.05 : 99);
+});
+const T_REACH = (() => { const nm = Math.log2(D_MOON / 1e-4); for (let t = 20; t < 24; t += 1 / 600) if (nVis(nCurve(t)) >= nm) return t; return 23; })();
+
+function worldCam(t) {
+  const n = nCurve(t), h = thicknessMM(n) / 1000, hv = thicknessMM(nVis(n)) / 1000;
+  let s = Math.pow(Math.pow(S0, -3) + Math.pow(FRAME_PX / h, -3), -1 / 3);
+  const r = ease((t - 23.8) / 1.1);          // results: shrink & lower the scene
+  s *= lerp(1, 0.4625, r);
+  const gy = lerp(GROUND_Y, 1470, r);
+  return { n, h, hv, s, gy };
+}
+
+function earthGeom(cam) {
+  const Rpx = R_EARTH * cam.s;
+  const r = Math.sqrt(Rpx * Rpx + 26 * 26);  // never smaller than a readable dot
+  return { flat: Rpx > 60000, r, cy: cam.gy + r, Rpx };
+}
+function drawEarth(cam, alpha) {
+  const E = earthGeom(cam);
+  const p = sstep(4.6, 3.2, Math.log10(E.Rpx));   // 1 = clearly a planet
+  ctx.save(); ctx.globalAlpha *= alpha;
+  if (E.flat) {
+    const g = ctx.createLinearGradient(0, cam.gy, 0, H);
+    g.addColorStop(0, '#1A2338'); g.addColorStop(1, '#0B101C');
+    ctx.fillStyle = g; ctx.fillRect(0, cam.gy, W, H - cam.gy);
+    ctx.fillStyle = '#4A5878'; ctx.fillRect(0, cam.gy - 1, W, 3);
+  } else {
+    // atmosphere glow
+    const ag = ctx.createRadialGradient(STACK_X, E.cy, E.r * 0.98, STACK_X, E.cy, E.r * 1.06 + 18);
+    ag.addColorStop(0, `rgba(90,160,255,${0.55 * p + 0.15})`); ag.addColorStop(1, 'rgba(90,160,255,0)');
+    ctx.fillStyle = ag; ctx.beginPath(); ctx.arc(STACK_X, E.cy, E.r * 1.06 + 18, 0, 6.2832); ctx.fill();
+    const g = ctx.createRadialGradient(STACK_X - E.r * .3, E.cy - E.r * .5, E.r * .1, STACK_X, E.cy, E.r);
+    g.addColorStop(0, mix('#1A2338', '#4F8EE8', p)); g.addColorStop(1, mix('#0B101C', '#0E2A5C', p));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(STACK_X, E.cy, E.r, 0, 6.2832); ctx.fill();
+    ctx.strokeStyle = mix('#4A5878', '#8CC0FF', p); ctx.lineWidth = 3; ctx.stroke();
+  }
+  ctx.restore();
+}
+// y of an altitude level at screen x (curved when the Earth is small)
+function levelY(cam, alt, x) {
+  const E = earthGeom(cam);
+  if (E.flat) return cam.gy - alt * cam.s;
+  const rr = E.r + alt * cam.s;
+  const dx = x - STACK_X; if (Math.abs(dx) > rr) return null;
+  return E.cy - Math.sqrt(rr * rr - dx * dx);
+}
+function dashedLevel(cam, alt, x0, x1, alpha, color = 'rgba(255,213,74,0.85)', straightY = null) {
+  if (alpha <= 0.01) return;
+  if (straightY !== null) {
+    ctx.save(); ctx.globalAlpha *= alpha; ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.setLineDash([14, 12]);
+    ctx.beginPath(); ctx.moveTo(x0, straightY); ctx.lineTo(x1, straightY); ctx.stroke(); ctx.restore(); return;
+  }
+  ctx.save(); ctx.globalAlpha *= alpha; ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.setLineDash([14, 12]);
+  ctx.beginPath(); let started = false;
+  for (let x = x0; x <= x1; x += 12) {
+    const y = levelY(cam, alt, x); if (y === null) { started = false; continue; }
+    if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
+  }
+  ctx.stroke(); ctx.restore();
+}
+
+function popAlpha(t, o) { return clamp((t - o.t0) / 0.3); }
+function popScale(t, o) { return lerp(0.82, 1, backOut((t - o.t0) / 0.45)); }
+
+function drawBook(cam, t, o) {
+  const hp = o.h * cam.s; if (hp < 1) return;
+  const a = popAlpha(t, o) * sstep(2, 8, hp); if (a <= 0) return;
+  const sc = popScale(t, o), hh = hp * sc, ww = hh * 1.5;
+  const x1 = STACK_X - stackWidth(cam.n) / 2 - Math.max(0.018 * cam.s, 10), x0 = x1 - ww, y0 = cam.gy - hh;
+  ctx.save(); ctx.globalAlpha *= a;
+  ctx.fillStyle = '#D9583E'; rrect(x0, y0, ww, hh, hh * 0.12); ctx.fill();
+  ctx.fillStyle = '#F1EADB'; ctx.fillRect(x0 + ww * 0.1, y0 + hh * 0.1, ww * 0.88, hh * 0.8);
+  ctx.strokeStyle = 'rgba(160,145,120,0.6)'; ctx.lineWidth = Math.max(1, hh * 0.012);
+  for (let i = 1; i < 9; i++) { const y = y0 + hh * 0.1 + hh * 0.8 * i / 9; ctx.beginPath(); ctx.moveTo(x0 + ww * 0.12, y); ctx.lineTo(x0 + ww * 0.98, y); ctx.stroke(); }
+  ctx.fillStyle = '#B9432D'; rrect(x0, y0, ww * 0.12, hh, hh * 0.12); ctx.fill();
+  ctx.restore();
+}
+function drawHuman(cam, t, o) {
+  const hp = o.h * cam.s; if (hp < 1) return;
+  const a = popAlpha(t, o) * sstep(2, 8, hp); if (a <= 0) return;
+  const s = hp * popScale(t, o), cx = STACK_X + (-1.1) * cam.s, y = cam.gy;
+  ctx.save(); ctx.globalAlpha *= a; ctx.fillStyle = '#86A0D4';
+  ctx.beginPath(); ctx.arc(cx, y - s * 0.925, s * 0.07, 0, 6.2832); ctx.fill();
+  rrect(cx - s * 0.13, y - s * 0.83, s * 0.26, s * 0.4, s * 0.07); ctx.fill();            // torso
+  rrect(cx - s * 0.19, y - s * 0.81, s * 0.065, s * 0.36, s * 0.03); ctx.fill();         // arms
+  rrect(cx + s * 0.125, y - s * 0.81, s * 0.065, s * 0.36, s * 0.03); ctx.fill();
+  rrect(cx - s * 0.115, y - s * 0.47, s * 0.105, s * 0.47, s * 0.04); ctx.fill();        // legs
+  rrect(cx + s * 0.01, y - s * 0.47, s * 0.105, s * 0.47, s * 0.04); ctx.fill();
+  ctx.restore();
+}
+function drawBuildings(cam, t, o) {
+  const hp = o.h * cam.s; if (hp < 1) return;
+  const a = popAlpha(t, o) * sstep(2, 8, hp); if (a <= 0) return;
+  const sc = popScale(t, o);
+  ctx.save(); ctx.globalAlpha *= a;
+  const blds = [[-82, 58, 22, '#22304D'], [-56, 26, 64, '#26365A'], [-42, 32, 100, '#2E4170']];
+  for (const [xr, wm, hm, c] of blds) {
+    const x0 = STACK_X + (xr - 8) * cam.s, w = wm * cam.s, h = hm * cam.s * sc, y0 = cam.gy - h;
+    ctx.fillStyle = c; ctx.fillRect(x0, y0, w, h);
+    const fh = 3.3 * cam.s * sc;
+    if (fh > 5) {
+      ctx.fillStyle = 'rgba(255,213,74,0.45)';
+      const cols = Math.max(2, Math.floor(w / Math.max(fh * 1.6, 6)));
+      for (let fy = y0 + fh * 0.6; fy < cam.gy - fh; fy += fh)
+        for (let ci = 0; ci < cols; ci++) {
+          const wx = x0 + (ci + 0.25) * w / cols;
+          if (((ci * 7 + Math.floor(fy) * 3) % 5) !== 0) ctx.fillRect(wx, fy, w / cols * 0.5, fh * 0.45);
+        }
+    }
+  }
+  ctx.restore();
+}
+const MOUNTAIN = [[-70, 0], [-46, 2600], [-36, 4300], [-29, 3700], [-22, 5900], [-16.5, 5200], [-11.5, 7200], [-8.6, 6600], [-5, 8849], [-3.9, 7950], [-2.9, 6300], [-1.7, 3300], [-0.7, 0]];
+function drawEverest(cam, t, o) {
+  const hp = o.h * cam.s; if (hp < 1) return;
+  const a = popAlpha(t, o) * sstep(2, 8, hp); if (a <= 0) return;
+  const sc = popScale(t, o);
+  const P = MOUNTAIN.map(([xk, ym]) => [STACK_X + xk * 1000 * cam.s, cam.gy - ym * cam.s * sc]);
+  ctx.save(); ctx.globalAlpha *= a;
+  ctx.beginPath(); P.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath();
+  const g = ctx.createLinearGradient(0, cam.gy - hp, 0, cam.gy);
+  g.addColorStop(0, '#46557A'); g.addColorStop(1, '#1C2640');
+  ctx.fillStyle = g; ctx.fill();
+  ctx.clip();
+  const snowY = cam.gy - 6900 * cam.s * sc;
+  ctx.fillStyle = '#DCE5F3';
+  ctx.beginPath(); ctx.moveTo(0, -10);
+  for (let x = 0; x <= W; x += 40) ctx.lineTo(x, snowY + ((x / 40) % 2 ? 1 : -1) * 260 * cam.s * sc);
+  ctx.lineTo(W, -10); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+function drawPlaneIcon(x, y, s, alpha) {
+  ctx.save(); ctx.globalAlpha *= alpha; ctx.translate(x, y); ctx.scale(-s / 100, s / 100); // facing left
+  ctx.fillStyle = '#D6E1F5';
+  ctx.beginPath(); // fuselage
+  ctx.moveTo(-50, -4); ctx.quadraticCurveTo(-55, 0, -50, 5); ctx.lineTo(42, 5); ctx.quadraticCurveTo(58, 2, 52, -3); ctx.quadraticCurveTo(46, -7, 40, -6); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(-6, 0); ctx.lineTo(16, 0); ctx.lineTo(-14, 26); ctx.lineTo(-22, 26); ctx.closePath(); ctx.fill(); // wing
+  ctx.beginPath(); ctx.moveTo(-36, -3); ctx.lineTo(-44, -26); ctx.lineTo(-50, -26); ctx.lineTo(-48, -2); ctx.closePath(); ctx.fill(); // tail
+  ctx.restore();
+}
+function drawISSIcon(x, y, s, alpha) {
+  ctx.save(); ctx.globalAlpha *= alpha; ctx.translate(x, y); const k = s / 100; ctx.scale(k, k);
+  ctx.fillStyle = '#D6E1F5'; ctx.fillRect(-48, -3, 96, 6); ctx.fillRect(-8, -12, 16, 24);
+  ctx.fillStyle = '#4F86E0';
+  for (const px of [-46, -30, 18, 34]) { ctx.fillRect(px, -26, 12, 20); ctx.fillRect(px, 6, 12, 20); }
+  ctx.restore();
+}
+function drawOrbitObj(cam, t, o) {
+  const a = popAlpha(t, o); if (a <= 0) return;
+  const alt = o.h, ix = o.key === 'plane' ? 560 - (t - o.t0) * 30 : 470;
+  const y = levelY(cam, alt, ix); if (y === null) return;
+  const vis = sstep(30, 120, alt * cam.s);
+  dashedLevel(cam, alt, 0, W, a * vis * 0.55, 'rgba(200,215,240,0.9)');
+  if (o.key === 'plane') drawPlaneIcon(ix, y - 18, 120 * popScale(t, o), a * vis);
+  else drawISSIcon(ix, y, 120 * popScale(t, o), a * vis);
+}
+function moonPos(cam) {
+  const rp = Math.sqrt(Math.pow(R_MOON * cam.s, 2) + 22 * 22);
+  return { x: STACK_X - rp - 34, y: cam.gy - D_MOON * cam.s, r: rp };
+}
+function drawMoonWorld(cam, t) {
+  const M = moonPos(cam);
+  if (M.y < -200) return;
+  ctx.save();
+  const g = ctx.createRadialGradient(M.x, M.y, M.r * .5, M.x, M.y, M.r * 5);
+  g.addColorStop(0, 'rgba(255,240,200,0.35)'); g.addColorStop(1, 'rgba(255,240,200,0)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(M.x, M.y, M.r * 5, 0, 6.2832); ctx.fill();
+  drawMoonBody(M.x, M.y, M.r);
+  // "reached" flash
+  const dt = t - T_REACH;
+  if (dt > 0 && dt < 1.1) {
+    ctx.strokeStyle = `rgba(255,213,74,${0.9 * (1 - dt / 1.1)})`; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.arc(M.x, M.y, M.r + 10 + dt * 160, 0, 6.2832); ctx.stroke();
+  }
+  ctx.restore();
+}
+function drawStack(cam, t) {
+  const n = cam.n, px = cam.hv * cam.s, w = stackWidth(n);
+  const top = Math.max(cam.gy - px, -60), x0 = STACK_X - w / 2;
+  ctx.save();
+  const thin = sstep(80, 14, w);
+  ctx.shadowColor = `rgba(255,230,170,${0.25 + 0.55 * thin})`; ctx.shadowBlur = 16 + 26 * thin;
+  const g = ctx.createLinearGradient(x0, 0, x0 + w, 0);
+  g.addColorStop(0, '#FFFDF6'); g.addColorStop(1, '#E3DCCB');
+  ctx.fillStyle = g; ctx.fillRect(x0, top, w, cam.gy - top);
+  ctx.shadowColor = 'transparent';
+  // layer lines (only while individual sheets are visible)
+  const layers = Math.pow(2, Math.floor(n + 1e-6)), gap = px / layers, la = sstep(2.5, 7, gap);
+  if (la > 0.01 && layers <= 512) {
+    ctx.strokeStyle = `rgba(150,138,112,${0.75 * la})`; ctx.lineWidth = Math.min(2, gap * 0.3);
+    ctx.beginPath();
+    for (let i = 1; i < layers; i++) { const y = cam.gy - i * gap; ctx.moveTo(x0, y); ctx.lineTo(x0 + w, y); }
+    ctx.stroke();
+  }
+  // glowing tip
+  if (thin > 0.01) {
+    const tg = ctx.createRadialGradient(STACK_X, top, 0, STACK_X, top, 34);
+    tg.addColorStop(0, `rgba(255,236,170,${0.95 * thin})`); tg.addColorStop(1, 'rgba(255,236,170,0)');
+    ctx.fillStyle = tg; ctx.beginPath(); ctx.arc(STACK_X, top, 34, 0, 6.2832); ctx.fill();
+  }
+  ctx.restore();
+}
+function labelAlpha(t, o) { return win(t, o.t0, o.t1, 0.3, 0.3); }
+function drawLabel(cam, t, o) {
+  const a = labelAlpha(t, o); if (a <= 0.01) return;
+  let y, xEnd = STACK_X - stackWidth(cam.n) / 2 - 8;
+  if (o.key === 'moon') { const M = moonPos(cam); y = M.y; xEnd = M.x - M.r - 14; }
+  else y = levelY(cam, o.h, 90);
+  if (y === null) return;
+  if (!o.orbit) dashedLevel(cam, o.h, 80, xEnd, a, undefined, o.key === 'moon' ? y : null);
+  const yName = o.below ? y + 64 : y - 70, yVal = o.below ? y + 116 : y - 18;
+  const k = o.key === 'moon' ? lerp(0.9, 1, easeOut((t - o.t0) / 0.4)) : 1;
+  text(o.name, 90, yName, { size: 58 * k, weight: 800, color: '#fff', align: 'left', alpha: a, maxW: 560 });
+  text(o.val, 90, yVal, { size: 44 * k, weight: 700, color: COL.yellow, align: 'left', alpha: a, maxW: 560 });
+}
+
+function drawWorld(t) {
+  const cam = worldCam(t);
+  const logV = Math.log10(H / cam.s);
+  const sp = drawBackground(logV);
+  drawStars(sp, t);
+  drawEarth(cam, 1);
+  const O = Object.fromEntries(OBJ.map(o => [o.key, o]));
+  if (t >= O.everest.t0) drawEverest(cam, t, O.everest);
+  if (t >= O.building.t0) drawBuildings(cam, t, O.building);
+  if (t >= O.human.t0) drawHuman(cam, t, O.human);
+  if (t >= O.book.t0) drawBook(cam, t, O.book);
+  if (t >= O.plane.t0) drawOrbitObj(cam, t, O.plane);
+  if (t >= O.iss.t0) drawOrbitObj(cam, t, O.iss);
+  drawMoonWorld(cam, t);
+  drawStack(cam, t);
+  for (const o of OBJ) if (t >= o.t0 - 0.01 && t <= o.t1 + 0.01) drawLabel(cam, t, o);
+}
+
+// ---------- morph: top view -> side view ----------
+function drawMorph(t) {
+  const e = ease((t - T_MORPH[0]) / (T_MORPH[1] - T_MORPH[0]));
+  drawBackground(-0.5);
+  // ground fades in
+  ctx.save(); ctx.globalAlpha = e;
+  const g = ctx.createLinearGradient(0, GROUND_Y, 0, H); g.addColorStop(0, '#1A2338'); g.addColorStop(1, '#0B101C');
+  ctx.fillStyle = g; ctx.fillRect(0, GROUND_Y, W, H - GROUND_Y);
+  ctx.fillStyle = '#4A5878'; ctx.fillRect(0, GROUND_Y - 1, W, 3);
+  ctx.restore();
+  const [w0, h0] = DIMS[3].map(v => v * ZOOM[3]);
+  const w = lerp(w0, 260, e), cx = lerp(SHEET_C[0], STACK_X, e);
+  const frontH = lerp(0, 100, e), topH = lerp(h0, 0, e);
+  const bottom = lerp(SHEET_C[1] + h0 / 2, GROUND_Y, e);
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,0.45)'; ctx.shadowBlur = 40 * (1 - e) + 14; ctx.shadowOffsetY = 18 * (1 - e);
+  // top face
+  const tg = ctx.createLinearGradient(cx - w / 2, bottom - frontH - topH, cx + w / 2, bottom - frontH);
+  tg.addColorStop(0, '#FFFDF7'); tg.addColorStop(1, '#ECE6D9');
+  ctx.fillStyle = tg; ctx.fillRect(cx - w / 2, bottom - frontH - topH, w, topH + 1);
+  // front (side) face
+  const fg = ctx.createLinearGradient(cx - w / 2, 0, cx + w / 2, 0);
+  fg.addColorStop(0, '#FFFDF6'); fg.addColorStop(1, '#E3DCCB');
+  ctx.fillStyle = fg; ctx.fillRect(cx - w / 2, bottom - frontH, w, frontH);
+  ctx.restore();
+  if (frontH > 10) {
+    ctx.strokeStyle = `rgba(150,138,112,${0.75 * e})`; ctx.lineWidth = 2; ctx.beginPath();
+    for (let i = 1; i < 8; i++) { const y = bottom - i * frontH / 8; ctx.moveTo(cx - w / 2, y); ctx.lineTo(cx + w / 2, y); }
+    ctx.stroke();
+  }
+}
+
+// ---------- results & ending ----------
+function drawResults(t) {
+  const ov = sstep(23.8, 24.4, t);
+  if (ov <= 0) return;
+  const a1 = clamp((t - 24.0) / 0.35), s1 = lerp(0.8, 1, backOut((t - 24.0) / 0.5));
+  ctx.save(); ctx.translate(540, 470); ctx.scale(s1, s1);
+  text('42 Faltungen', 0, 0, { size: 112, weight: 800, color: '#fff', alpha: a1 });
+  ctx.restore();
+  const a2 = clamp((t - 24.35) / 0.35), s2 = lerp(0.8, 1, backOut((t - 24.35) / 0.5));
+  ctx.save(); ctx.translate(540, 600); ctx.scale(s2, s2);
+  text('= ca. 440.000 km', 0, 0, { size: 104, weight: 800, color: COL.yellow, alpha: a2, maxW: 940 });
+  ctx.restore();
+  const a3 = clamp((t - 25.3) / 0.4), dy3 = (1 - easeOut((t - 25.3) / 0.5)) * 30;
+  text('Rechnerisch reicht das', 540, 735 + dy3, { size: 66, weight: 700, color: '#fff', alpha: a3 });
+  text('bis zum Mond!', 540, 812 + dy3, { size: 66, weight: 800, color: '#fff', alpha: a3 });
+  const a4 = clamp((t - 26.1) / 0.4);
+  text('Mond: ca. 384.400 km entfernt', 540, 884, { size: 40, weight: 600, color: COL.muted, alpha: a4 });
+  // disclaimer
+  const a5 = clamp((t - 27.7) / 0.35), dy5 = (1 - easeOut((t - 27.7) / 0.5)) * 20;
+  if (a5 > 0) {
+    ctx.save(); ctx.globalAlpha = a5 * 0.85; ctx.fillStyle = 'rgba(12,18,34,0.85)';
+    ctx.strokeStyle = 'rgba(157,176,210,0.5)'; ctx.lineWidth = 2;
+    rrect(110, 930 + dy5, 860, 140, 28); ctx.fill(); ctx.stroke(); ctx.restore();
+    text('In der Praxis nicht möglich –', 540, 990 + dy5, { size: 44, weight: 700, color: COL.soft, alpha: a5 });
+    text('ein Gedankenexperiment.', 540, 1046 + dy5, { size: 44, weight: 700, color: COL.soft, alpha: a5 });
+  }
+}
+
+// ---------- master render ----------
+function renderAt(t) {
+  t = ((t % DURATION) + DURATION) % DURATION;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalAlpha = 1; ctx.shadowColor = 'transparent'; spacing(0);
+  if (t < 2.0) {
+    drawIntroFrame();
+  } else if (t < T_MORPH[0]) {
+    const k = ease((t - 2.0) / 0.32);
+    drawBackground(-0.5);
+    drawMoonDeco(1 - k);
+    drawTitle(1 - k, -70 * k);
+    drawSheetTop(t);
+    text('A4-Blatt · 0,1 mm dick', 540, 1440, { size: 42, weight: 600, color: COL.muted, alpha: 1 - k });
+  } else if (t < T_WORLD) {
+    drawMorph(t);
+  } else {
+    drawWorld(t);
+  }
+  // overlays
+  if (t >= 2.0) {
+    drawFormula(win(t, 2.6, 6.6, 0.35, 0.4));
+    drawHUD(t, win(t, 2.3, 23.95, 0.35, 0.35));
+    drawResults(t);
+  }
+  // loop: blend back into the very first frame
+  if (t > 29.2) {
+    ctx.save();
+    ctx.globalAlpha = ease((t - 29.2) / 0.4); drawBackground(-0.5);
+    ctx.globalAlpha = ease((t - 29.45) / 0.55); drawIntroFrame();
+    ctx.restore();
+  }
+}
+window.__film = { FPS, DURATION, renderAt, OBJ, T_REACH };
+
+// ---------- player ----------
+const isRender = new URLSearchParams(location.search).has('render');
+if (isRender) document.body.classList.add('render');
+else {
+  const btn = document.getElementById('play'), seek = document.getElementById('seek'), clock = document.getElementById('clock');
+  let playing = true, base = performance.now(), cur = 0;
+  const show = t => { renderAt(t); seek.value = t; clock.textContent = de(t, 2) + ' / 30 s'; };
+  const loop = now => { if (playing) { cur = ((now - base) / 1000) % DURATION; show(cur); } requestAnimationFrame(loop); };
+  btn.onclick = () => { playing = !playing; btn.textContent = playing ? 'Pause' : 'Abspielen'; if (playing) base = performance.now() - cur * 1000; };
+  seek.oninput = () => { cur = +seek.value; base = performance.now() - cur * 1000; show(cur); };
+  addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); btn.click(); } });
+  requestAnimationFrame(loop);
+}
+renderAt(0);
+</script>
+</body>
+</html>
