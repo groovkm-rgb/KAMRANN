@@ -3,7 +3,9 @@
 // Requirements: Node 18+, Playwright with Chromium, ffmpeg on PATH.
 //   npm i -D playwright && npx playwright install chromium
 // Usage:
-//   node tools/render-mp4.mjs [out.mp4] [--crf 18] [--from 0] [--to 55] [--png] [--ref assets/boss.png]
+//   node tools/render-mp4.mjs [out.mp4] [--crf 20] [--maxrate 8M] [--from 0] [--to 55] [--png] [--ref assets/boss.png]
+// The film grain changes every frame, so an uncapped high-quality encode is huge (~580 MB);
+// --maxrate caps the bitrate (default 8M ≈ 55 MB). Use --maxrate 0 for an uncapped master.
 import { createRequire } from 'node:module';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
@@ -19,7 +21,7 @@ catch { console.error('Playwright not found. Run: npm i -D playwright && npx pla
 const argv = process.argv.slice(2);
 const opt = (k, d) => { const i = argv.indexOf('--' + k); return i >= 0 ? argv[i + 1] : d; };
 const out = argv[0] && !argv[0].startsWith('--') ? argv[0] : 'what-does-a-mafia-boss-actually-do.mp4';
-const crf = opt('crf', '18'), png = argv.includes('--png'), ref = opt('ref', null);
+const crf = opt('crf', '20'), maxrate = opt('maxrate', '8M'), png = argv.includes('--png'), ref = opt('ref', null);
 const html = resolve('index.html');
 if (!existsSync(html)) { console.error('Run from the project root (index.html not found).'); process.exit(1); }
 
@@ -39,7 +41,7 @@ if (ref) {
 }
 const f0 = Math.round(+opt('from', 0) * FPS), f1 = Math.round(+opt('to', DURATION) * FPS);
 const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-c:v', png ? 'png' : 'mjpeg', '-framerate', String(FPS), '-i', '-',
-  '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', crf, '-pix_fmt', 'yuv420p', '-r', String(FPS), '-movflags', '+faststart', out], { stdio: ['pipe', 'inherit', 'inherit'] });
+  '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', crf, ...(maxrate !== '0' ? ['-maxrate', maxrate, '-bufsize', String(parseFloat(maxrate) * 2) + maxrate.replace(/[\d.]/g, '')] : []), '-pix_fmt', 'yuv420p', '-r', String(FPS), '-movflags', '+faststart', out], { stdio: ['pipe', 'inherit', 'inherit'] });
 const t0 = Date.now();
 for (let f = f0; f < f1; f++) {
   const b64 = await page.evaluate(([t, p]) => { window.__film.renderAt(t); return document.getElementById('film').toDataURL(p ? 'image/png' : 'image/jpeg', 0.96).split(',')[1]; }, [f / FPS, png]);

@@ -64,13 +64,13 @@ npx playwright install chromium
 
 npm run render                 # → renders/what-does-a-mafia-boss-actually-do.mp4
 # or with options:
-node tools/render-mp4.mjs out.mp4 --crf 16          # lower CRF = higher quality
+node tools/render-mp4.mjs out.mp4 --crf 16 --maxrate 0   # uncapped master (very large: the grain changes every frame)
 node tools/render-mp4.mjs out.mp4 --png             # lossless frames into the encoder
 node tools/render-mp4.mjs out.mp4 --from 44 --to 55 # render a section
 node tools/render-mp4.mjs out.mp4 --ref assets/boss.png --fx 0.5 --fy 0.36 --fh 0.42
 ```
 
-`renders/what-does-a-mafia-boss-actually-do.mp4` is a copy produced by exactly this script.
+`renders/what-does-a-mafia-boss-actually-do.mp4` (31 MB) was made with this script. It was first rendered as an uncapped CRF 20 master and then re-encoded in two passes at 4.5 Mbit/s so it is small enough to keep in the repository and share. It is H.264, 1080×1920, 24 fps, 1320 frames, exactly 55.000 s, with no audio stream.
 
 ---
 
