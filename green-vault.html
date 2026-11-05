@@ -1824,14 +1824,22 @@ function drawSideFigure(ctx, o) {
       const u = 0.5 + 0.5 * Math.sin(o.climb + (k ? PI : 0));
       ta = 0.1 + 0.8 * u; ka = ta + 0.42;
     }
-    const knee = [hip[0] + Math.sin(ta) * TH, hip[1] + Math.cos(ta) * TH];
+    // anatomy guard: when both legs would share one pose (sitting or standing still) the far leg
+    // is set apart so it never hides exactly behind the near one (no "one-legged" characters)
+    if (k === 1 && o.climb == null) {
+      const still = 1 - clamp(wa * 3);
+      ta += still * lerp(-0.16, 0.0, sit);        // standing: far foot clearly behind
+      ka += still * lerp(-0.06, -0.32, sit);      // seated: far shin angled forward
+    }
+    const hx0 = k === 1 ? -34 : 0;
+    const knee = [hip[0] + hx0 + Math.sin(ta) * TH, hip[1] + Math.cos(ta) * TH];
     const sa = ta - ka;
     const ankle = [knee[0] + Math.sin(sa) * SH, knee[1] + Math.cos(sa) * SH];
-    legs.push({ knee, ankle, sa, far: k === 1 });
+    legs.push({ knee, ankle, sa, far: k === 1, hx0 });
   }
   const drawLeg = (lg, dk) => {
     const C = dk ? mixc(F.suit, '#000', 0.35) : F.suit;
-    bodyPart(ctx, limbPath(hip[0], hip[1], lg.knee[0], lg.knee[1], 84, 62), C, Lf, { flash: fl, rimK: 1.4 });
+    bodyPart(ctx, limbPath(hip[0] + lg.hx0, hip[1], lg.knee[0], lg.knee[1], 84, 62), C, Lf, { flash: fl, rimK: 1.4 });
     bodyPart(ctx, limbPath(lg.knee[0], lg.knee[1], lg.ankle[0], lg.ankle[1], 62, 52), C, Lf, { flash: fl, rimK: 1.4 });
     const a = lg.ankle, ca = Math.cos(lg.sa * 0.3), sh = smoothPathOf([[a[0] - 40, a[1] - 26], [a[0] + 40, a[1] - 22], [a[0] + 104 * ca, a[1] + 6], [a[0] + 98, a[1] + 26], [a[0] - 44, a[1] + 26]], true, 0.6);
     ctx.fillStyle = F.shoe; ctx.fill(sh); edgeFill(ctx, sh, -Lf.rimDir[0] * 4, -Lf.rimDir[1] * 4, Lf.rim, 0.6);
@@ -1856,7 +1864,21 @@ function drawSideFigure(ctx, o) {
     bodyPart(ctx, limbPath(sh0[0] - 18, sh0[1], fe[0], fe[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 });
     drawForearm(ctx, fe[0], fe[1], fw[0], fw[1], 50, 42, dk, F.cuff, Lf, fl);
     drawHand(ctx, { x: fw[0], y: fw[1], rot: Math.atan2(fw[1] - fe[1], fw[0] - fe[0]) + PI / 2, s: 0.95, side: 1, pose: o.farPose || 'grip', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
-  } else if (!o.hand) { bodyPart(ctx, limbPath(sh0[0], sh0[1], farEl[0], farEl[1], 56, 50), mixc(F.suit, '#000', 0.4), Lf, { flash: fl, rimK: 1.2 }); drawForearm(ctx, farEl[0], farEl[1], farWr[0], farWr[1], 50, 42, mixc(F.suit, '#000', 0.4), F.cuff, Lf, fl); }
+  } else if (o.hand && sit > 0.5) {   // seated with the near hand placed: the far forearm rests beside it
+    const fw = reach(toLocal({ x: o.hand.x - 70, y: o.hand.y + 12 }), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(F.suit, '#000', 0.4);
+    bodyPart(ctx, limbPath(sh0[0] - 18, sh0[1], fe[0], fe[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 });
+    drawForearm(ctx, fe[0], fe[1], fw[0], fw[1], 50, 42, dk, F.cuff, Lf, fl);
+    drawHand(ctx, { x: fw[0], y: fw[1], rot: Math.atan2(fw[1] - fe[1], fw[0] - fe[0]) + PI / 2, s: 0.95, side: 1, pose: 'rest', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
+  } else if (sit > 0.5) {   // seated, hands free: the far hand rests on the thigh
+    const fw = reach(toLocal({ x: 170, y: -hipH - 40 }), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(F.suit, '#000', 0.4);
+    bodyPart(ctx, limbPath(sh0[0] - 18, sh0[1], fe[0], fe[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 });
+    drawForearm(ctx, fe[0], fe[1], fw[0], fw[1], 50, 42, dk, F.cuff, Lf, fl);
+    drawHand(ctx, { x: fw[0], y: fw[1], rot: Math.atan2(fw[1] - fe[1], fw[0] - fe[0]) + PI / 2, s: 0.95, side: 1, pose: 'rest', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
+  } else {   // otherwise the far arm hangs (or swings) at his side — it is never simply omitted
+    const dk = mixc(F.suit, '#000', 0.4);
+    bodyPart(ctx, limbPath(sh0[0], sh0[1], farEl[0], farEl[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 }); drawForearm(ctx, farEl[0], farEl[1], farWr[0], farWr[1], 50, 42, dk, F.cuff, Lf, fl);
+    drawHand(ctx, { x: farWr[0], y: farWr[1], rot: Math.atan2(farWr[1] - farEl[1], farWr[0] - farEl[0]) + PI / 2, s: 0.95, side: 1, pose: 'rest', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
+  }
   const torso = smoothPathOf([[-96, 80], [-100, -200], [-92, -440], [-54, -530], [36, -540], [96, -470], [112, -300], [100, -120], [108, 80]], true, 0.5);
   bodyPart(ctx, torso, F.suit, Lf, { flash: fl, rimK: 2.2, split: 10 });
   // lapel / shirt sliver at the front
@@ -1891,6 +1913,8 @@ function drawSideFigure(ctx, o) {
     const c = Math.cos(-lean), s = Math.sin(-lean), [lx, ly] = reach([hx * c - (hy) * s, hx * s + (hy) * c], sh0[0]);
     el = ik2(sh0[0], sh0[1], lx, ly, 280, 270, 1);
     wr = [lx, ly];
+  } else if (sit > 0.5) {   // seated, hand free: rest it on the thigh instead of hanging through the seat
+    wr = reach(toLocal({ x: 230, y: -hipH - 50 }), sh0[0]); el = ik2(sh0[0], sh0[1], wr[0], wr[1], 280, 270, 1);
   } else { el = [sh0[0] + Math.sin(swing) * 280, sh0[1] + Math.cos(swing) * 280]; wr = [el[0] + Math.sin(swing + 0.3) * 260, el[1] + Math.cos(swing + 0.3) * 260]; }
   bodyPart(ctx, limbPath(sh0[0], sh0[1], el[0], el[1], 60, 52), F.suit, Lf, { flash: fl, rimK: 1.8 });
   drawForearm(ctx, el[0], el[1], wr[0], wr[1], 52, 42, F.suit, F.cuff, Lf, fl);

@@ -186,3 +186,20 @@ node tools/render-mp4.mjs renders/green-vault-heist-dresden-2019.mp4 --html gree
 ```
 
 The film-specific code is in `films/green-vault/sets.js` (palace, skyline, cobbles, lanterns, Jewel Room, display case, jewellery, broken glass, board photos, scales) and `films/green-vault/scenes.js` (shots and timeline).
+
+---
+
+## Character anatomy rules (all films)
+
+The shared rig enforces these rules automatically, so characters never lose or stretch a limb:
+
+- **Both legs are always visible.** When a side-view character sits or stands still, the far leg is set apart from the near one: sitting, the far shin angles forward; standing, the far foot sits behind. It can never hide exactly behind the near leg, so there are no one-legged characters.
+- **Both arms are always drawn.** If a shot only directs the near hand, the far arm still appears. It rests on the table or thigh when seated, and hangs at the side when standing.
+- **Hands stay within arm's reach.** Every hand target is clamped to arm length, so arms never stretch.
+- **Hands grip their props.** Shovels, gavels and magnifiers are held with the fingers wrapped across the handle.
+
+Before rendering a new film, run the anatomy sheet. It draws a character in every core pose on one image:
+
+```bash
+node tools/rig-sheet.mjs rig.png boss     # or any cast key: digger, det1, staff, ltA ...
+```
