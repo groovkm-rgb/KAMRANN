@@ -1,0 +1,16 @@
+{
+  "name": "what-does-a-mafia-boss-actually-do",
+  "version": "1.0.0",
+  "private": true,
+  "description": "55-second vertical noir animated documentary rendered with HTML5 Canvas (no audio, no on-screen text).",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "verify": "node tools/verify.mjs",
+    "render": "node tools/render-mp4.mjs renders/what-does-a-mafia-boss-actually-do.mp4",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}

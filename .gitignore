@@ -1,0 +1,4 @@
+node_modules/
+*.webm
+/snaps/
+.DS_Store
