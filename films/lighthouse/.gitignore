@@ -4,3 +4,6 @@ stills/*/
 work/
 web/lib/
 *.wav
+mix_raw.wav
+mix.wav
+render.log
