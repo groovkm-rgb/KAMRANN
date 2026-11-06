@@ -37,6 +37,7 @@ function renderFrame(g) {
   }
   postFX(ctx, g);
   // open from black; fade to complete black exactly at DURATION
+  if (FILM.loop) return;   // seamless loop films: no fade from/to black, the last frame flows into the first
   const fadeIn = 1 - prog(g, 0, 1.1, Ease.inOutSine);
   const fadeOut = prog(g, FILM.fadeOut, DURATION - 1 / FPS, Ease.inQuad);   // the last frame is pure black
   const a = Math.max(fadeIn, fadeOut);

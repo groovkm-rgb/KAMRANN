@@ -16,9 +16,12 @@ Talk to the user in their language (they often write Turkish). Keep code comment
 
 - **9:16, 1080x1920, 24 fps, exact duration.** Shorts platforms crop anything else; the
   timeline is built on these numbers.
-- **No audio of any kind, no text in frame** (no titles, captions, signs, numbers on props,
+- **No audio unless the user asks for sound effects.** If they want SFX, keep the HTML silent,
+  synthesize a WAV offline from the same cue timeline the picture uses, and mux it with `render_mp4.mjs --audio sfx.wav`
+  (see `films/zaman-yolcusu/sfx.mjs` in the repo for a narrator-safe mix at about -22 LUFS).
+- **No text in frame** (no titles, captions, signs, numbers on props,
   watermarks). The audience reads the story from images alone, and the user explicitly wants
-  silent, text-free videos. Never call `fillText`; draw marks as shapes, never letters.
+  text-free videos. Never call `fillText`; draw marks as shapes, never letters.
 - **Same look every time.** Reuse the engine's palette (plum, charcoal, burgundy, amber),
   `mkLight` lighting, rim lights, film grain and transitions. Don't introduce new styles,
   fonts, photos or bright saturated colours.

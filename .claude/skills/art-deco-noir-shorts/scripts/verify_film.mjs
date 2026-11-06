@@ -23,8 +23,17 @@ ok(a.h === a2.h, 'same time renders identical pixels');
 await frame(1); const s1 = await frame(info.D * 0.6); await frame(info.D * 0.6 - 0.3); const s2 = await frame(info.D * 0.6);
 ok(s1.h === s2.h, 'seeking is exact (no hidden state)');
 const first = await frame(0), last = await frame(info.D - 1 / 24), end = await frame(info.D);
-ok(first.mean < 3, `opens from black (mean ${first.mean.toFixed(2)})`);
-ok(last.max <= 2 && end.max <= 2, `final frame is pure black (max ${last.max.toFixed(1)})`);
+if (cfg.loop) {   // seamless loop: no black open/close; the last frame must flow into the first
+  const diff = await p.evaluate(D => { const c = document.getElementById('film'), g = c.getContext('2d'), px = t => { window.__film.renderAt(t); return g.getImageData(0, 0, c.width, c.height).data.slice(); };
+    const d = (a, b) => { let s = 0; for (let i = 0; i < a.length; i += 4) s += Math.abs(a[i] - b[i]) + Math.abs(a[i + 1] - b[i + 1]) + Math.abs(a[i + 2] - b[i + 2]); return s / (a.length / 4) / 3; };
+    const last = px(D - 1 / 24), f0 = px(0), f1 = px(1 / 24); return [d(last, f0), d(f0, f1)]; }, info.D);
+  // the jump from the last frame to the first must be no bigger than an ordinary frame-to-frame step
+  ok(diff[0] <= diff[1] * 1.5 + 1, `loop: last frame flows into the first (wrap diff ${diff[0].toFixed(2)} vs normal step ${diff[1].toFixed(2)})`);
+  ok(first.mean > 3, `loop: first frame has picture (mean ${first.mean.toFixed(2)})`);
+} else {
+  ok(first.mean < 3, `opens from black (mean ${first.mean.toFixed(2)})`);
+  ok(last.max <= 2 && end.max <= 2, `final frame is pure black (max ${last.max.toFixed(1)})`);
+}
 for (const s of info.sc) { const f = await frame((s.start + s.end) / 2); ok(f.mean > 6, `scene ${s.id} "${s.name}" has picture (mean ${f.mean.toFixed(1)})`); }
 await p.evaluate(() => { for (let t = 0; t <= window.__film.DURATION; t += 0.5) window.__film.renderAt(t); });
 ok(errs.length === 0, 'no page errors in a full sweep' + (errs.length ? ':\n  ' + errs.join('\n  ') : ''));

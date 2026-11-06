@@ -275,14 +275,15 @@ function drawStandingFront(ctx, o) {
   // legs
   for (const s of [-1, 1]) {
     const leg = pathOf([[X(s * 168), -870], [X(s * 18), -870], [X(s * 34), -460], [X(s * 46), -70], [X(s * 114), -70], [X(s * 126), -460]]);
-    bodyPart(ctx, leg, F.suit, L, { flash: fl, rimK: 1.5 });
+    bodyPart(ctx, leg, F.pants || F.suit, L, { flash: fl, rimK: 1.5 });
     ctx.strokeStyle = rgba(lighten(F.suit, 0.12), 0.4); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(X(s * 92), -860); ctx.lineTo(X(s * 80), -80); ctx.stroke();
     const shoe = smoothPathOf([[X(s * 122), -74], [X(s * 40), -74], [X(s * 34), -30], [X(s * 46), 0], [X(s * 132), 0], [X(s * 140), -34]], true, 0.7);
     ctx.fillStyle = F.shoe; ctx.fill(shoe); edgeFill(ctx, shoe, -L.rimDir[0] * 4, -L.rimDir[1] * 4, L.rim, 0.6);
   }
   // back-view arms (behind the back) are drawn after torso; side arms before torso
   const arms = o.arms || 'sides';
-  const sleeve = (s, pts) => bodyPart(ctx, pathOf(pts.map(([x, y]) => [X(s * x), y])), F.suit, L, { flash: fl, rimK: 1.8 });
+  const SLV = F.sleeve || F.suit;
+  const sleeve = (s, pts) => bodyPart(ctx, pathOf(pts.map(([x, y]) => [X(s * x), y])), SLV, L, { flash: fl, rimK: 1.8 });
   if (arms === 'sides') for (const s of [-1, 1]) sleeve(s, [[230, -1532], [266, -1460], [272, -1250], [264, -1000], [252, -824], [196, -824], [200, -1000], [206, -1250], [212, -1400]]);
   else for (const s of [-1, 1]) sleeve(s, [[230, -1532], [266, -1460], [270, -1250], [264, -1090], [214, -1070], [212, -1250], [212, -1400]]);
   // torso
@@ -326,16 +327,24 @@ function drawStandingFront(ctx, o) {
   // arms in front / behind the back
   const sk = HP.skin;
   if (arms === 'behind' && back > 0.01) withAlpha(ctx, back, () => {
-    for (const s of [-1, 1]) drawForearm(ctx, X(s * 240), -1086, X(s * 40), -1000, 50, 40, F.suit, F.cuff, L, fl);
+    for (const s of [-1, 1]) drawForearm(ctx, X(s * 240), -1086, X(s * 40), -1000, 50, 40, SLV, F.cuff, L, fl);
     drawHand(ctx, { x: X(-24), y: -998, rot: -PI / 2 + 0.25, s: 0.95, side: -1, pose: 'grip', light: L, flash: fl, skin: sk });
     drawHand(ctx, { x: X(30), y: -1004, rot: PI / 2 - 0.15, s: 0.95, side: 1, pose: 'rest', light: L, flash: fl, ring: who === 'boss', glint: o.ringGlint || 0, skin: sk });
   });
   if (arms === 'clasped') {
-    for (const s of [-1, 1]) drawForearm(ctx, X(s * 238), -1090, X(s * 40), -940, 50, 40, F.suit, F.cuff, L, fl);
+    for (const s of [-1, 1]) drawForearm(ctx, X(s * 238), -1090, X(s * 40), -940, 50, 40, SLV, F.cuff, L, fl);
     drawHand(ctx, { x: X(-30), y: -936, rot: 0.9, s: 0.95, side: 1, pose: 'grip', light: L, flash: fl, skin: sk });
     drawHand(ctx, { x: X(30), y: -930, rot: -0.9, s: 0.95, side: -1, pose: 'rest', light: L, flash: fl, skin: sk });
   }
   if (arms === 'sides') for (const s of [-1, 1]) drawHand(ctx, { x: X(s * 224), y: -812, rot: PI + s * 0.08, s: 0.95, side: s < 0 ? 1 : -1, pose: 'rest', light: L, flash: fl, skin: sk });
+  if (arms === 'hold') {   // both forearms up, hands in front of the chest; o.prop(ctx) draws the held object between
+    const hy = o.holdY ?? -1180, hx = o.holdX ?? 96;
+    for (const s of [-1, 1]) drawForearm(ctx, X(s * 236), -1100, X(s * hx), hy + 20, 48, 38, SLV, F.cuff, L, fl);
+    if (o.prop && !o.propFront) o.prop(ctx, { x: 0, y: hy - 40 });
+    for (const s of [-1, 1]) drawHand(ctx, { x: X(s * hx), y: hy + 10, rot: -s * 0.35, s: 0.92, side: s < 0 ? -1 : 1, pose: o.propFront ? 'grip' : 'hold', light: L, flash: fl, skin: sk });
+    if (o.prop && o.propFront) o.prop(ctx, { x: 0, y: hy - 40 });   // object held in front of the hands (e.g. a photo shown to camera)
+    if (o.out) { o.out.handL = toScreen(ctx, X(hx), hy + 10); o.out.handR = toScreen(ctx, X(-hx), hy + 10); }
+  }
   if (arms === 'hat') {
     const sp = o.hatSpin || 0;
     for (const s of [-1, 1]) drawForearm(ctx, X(s * 236), -1100, X(s * 70), -1210, 48, 38, F.suit, F.cuff, L, fl);
@@ -360,10 +369,16 @@ function drawStandingFront(ctx, o) {
       headTurn (0 profile .. 1 toward camera), head:{pitch,...}, light, flash */
 function drawSideFigure(ctx, o) {
   const L = o.light, who = o.who || 'ltA', F = OUTFIT[who] || OUTFIT.ltA, HP = HEAD[o.headKey || who] || HEAD.ltA, fl = o.flash || 0;
-  const face = o.face || 1, sit = o.sit || 0, wa = o.walk || 0, ph = o.phase || 0;
+  const face = o.face || 1, sit = o.sit || 0, wa = o.walk || 0, ph = o.phase || 0, kn = o.kneel || 0;
+  const SL = F.sleeve || F.suit, PN = F.pants || F.suit;   // optional shirt sleeves / trousers (vest outfits)
   ctx.save(); ctx.translate(o.x, o.y); ctx.scale(o.s * face, o.s);
   const Lf = face > 0 ? L : Object.assign({}, L, { dir: [-L.dir[0], L.dir[1], L.dir[2]], rimDir: [-L.rimDir[0], L.rimDir[1]] });
-  const TH = 430, SH = 430, hipH = lerp(880, o.seatH || 330, sit) - wa * 10 * Math.abs(Math.cos(ph));
+  const TH = 430, SH = 430;
+  let hipH = lerp(880, o.seatH || 330, sit) - wa * 10 * Math.abs(Math.cos(ph));
+  if (kn > 0) {   // kneeling: thighs near vertical, shins flat on the ground behind; the lowest joint rests on the ground
+    const ta = 0.12 * kn, sa = ta - (ta + (PI / 2) * kn);
+    hipH = Math.cos(ta) * TH + Math.max(0, Math.cos(sa)) * SH + lerp(20, 46, kn);
+  }
   const hip = [0, -hipH];
   const legs = [];
   for (const k of [0, 1]) {
@@ -374,6 +389,7 @@ function drawSideFigure(ctx, o) {
       const u = 0.5 + 0.5 * Math.sin(o.climb + (k ? PI : 0));
       ta = 0.1 + 0.8 * u; ka = ta + 0.42;
     }
+    if (kn > 0) { ta = lerp(ta, 0.12, kn); ka = lerp(ka, 0.12 + PI / 2, kn); }
     // anatomy guard: when both legs would share one pose (sitting or standing still) the far leg
     // is set apart so it never hides exactly behind the near one (no "one-legged" characters)
     if (k === 1 && o.climb == null) {
@@ -388,9 +404,16 @@ function drawSideFigure(ctx, o) {
     legs.push({ knee, ankle, sa, far: k === 1, hx0 });
   }
   const drawLeg = (lg, dk) => {
-    const C = dk ? mixc(F.suit, '#000', 0.35) : F.suit;
+    const C = dk ? mixc(PN, '#000', 0.35) : PN;
     bodyPart(ctx, limbPath(hip[0] + lg.hx0, hip[1], lg.knee[0], lg.knee[1], 84, 62), C, Lf, { flash: fl, rimK: 1.4 });
     bodyPart(ctx, limbPath(lg.knee[0], lg.knee[1], lg.ankle[0], lg.ankle[1], 62, 52), C, Lf, { flash: fl, rimK: 1.4 });
+    if (kn > 0) {   // foot follows the shin as he kneels (toes point back, sole up)
+      const phi = Math.atan2(Math.cos(lg.sa), Math.sin(lg.sa)), fa = phi - (PI / 2) * (1 - kn);
+      ctx.save(); ctx.translate(lg.ankle[0], lg.ankle[1]); ctx.rotate(fa);
+      const shk = smoothPathOf([[-40, -26], [40, -22], [104, 6], [98, 26], [-44, 26]], true, 0.6);
+      ctx.fillStyle = F.shoe; ctx.fill(shk); edgeFill(ctx, shk, -Lf.rimDir[0] * 4, -Lf.rimDir[1] * 4, Lf.rim, 0.6);
+      ctx.restore(); return;
+    }
     const a = lg.ankle, ca = Math.cos(lg.sa * 0.3), sh = smoothPathOf([[a[0] - 40, a[1] - 26], [a[0] + 40, a[1] - 22], [a[0] + 104 * ca, a[1] + 6], [a[0] + 98, a[1] + 26], [a[0] - 44, a[1] + 26]], true, 0.6);
     ctx.fillStyle = F.shoe; ctx.fill(sh); edgeFill(ctx, sh, -Lf.rimDir[0] * 4, -Lf.rimDir[1] * 4, Lf.rim, 0.6);
   };
@@ -410,22 +433,22 @@ function drawSideFigure(ctx, o) {
   // keep hand targets within arm's reach so limbs never stretch
   const reach = (p, sx) => { const dx = p[0] - sx, dy = p[1] - sh0[1], d = Math.hypot(dx, dy), m = 530; return d > m ? [sx + dx / d * m, sh0[1] + dy / d * m] : p; };
   if (o.farHand) {   // far arm reaching a target (two-handed grips, climbing, cheering)
-    const fw = reach(toLocal(o.farHand), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(F.suit, '#000', 0.4);
+    const fw = reach(toLocal(o.farHand), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(SL, '#000', 0.4);
     bodyPart(ctx, limbPath(sh0[0] - 18, sh0[1], fe[0], fe[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 });
     drawForearm(ctx, fe[0], fe[1], fw[0], fw[1], 50, 42, dk, F.cuff, Lf, fl);
     drawHand(ctx, { x: fw[0], y: fw[1], rot: Math.atan2(fw[1] - fe[1], fw[0] - fe[0]) + PI / 2, s: 0.95, side: 1, pose: o.farPose || 'grip', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
   } else if (o.hand && sit > 0.5) {   // seated with the near hand placed: the far forearm rests beside it
-    const fw = reach(toLocal({ x: o.hand.x - 70, y: o.hand.y + 12 }), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(F.suit, '#000', 0.4);
+    const fw = reach(toLocal({ x: o.hand.x - 70, y: o.hand.y + 12 }), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(SL, '#000', 0.4);
     bodyPart(ctx, limbPath(sh0[0] - 18, sh0[1], fe[0], fe[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 });
     drawForearm(ctx, fe[0], fe[1], fw[0], fw[1], 50, 42, dk, F.cuff, Lf, fl);
     drawHand(ctx, { x: fw[0], y: fw[1], rot: Math.atan2(fw[1] - fe[1], fw[0] - fe[0]) + PI / 2, s: 0.95, side: 1, pose: 'rest', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
   } else if (sit > 0.5) {   // seated, hands free: the far hand rests on the thigh
-    const fw = reach(toLocal({ x: 170, y: -hipH - 40 }), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(F.suit, '#000', 0.4);
+    const fw = reach(toLocal({ x: 170, y: -hipH - 40 }), sh0[0] - 18), fe = ik2(sh0[0] - 18, sh0[1], fw[0], fw[1], 280, 270, 1), dk = mixc(SL, '#000', 0.4);
     bodyPart(ctx, limbPath(sh0[0] - 18, sh0[1], fe[0], fe[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 });
     drawForearm(ctx, fe[0], fe[1], fw[0], fw[1], 50, 42, dk, F.cuff, Lf, fl);
     drawHand(ctx, { x: fw[0], y: fw[1], rot: Math.atan2(fw[1] - fe[1], fw[0] - fe[0]) + PI / 2, s: 0.95, side: 1, pose: 'rest', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
   } else {   // otherwise the far arm hangs (or swings) at his side — it is never simply omitted
-    const dk = mixc(F.suit, '#000', 0.4);
+    const dk = mixc(SL, '#000', 0.4);
     bodyPart(ctx, limbPath(sh0[0], sh0[1], farEl[0], farEl[1], 56, 50), dk, Lf, { flash: fl, rimK: 1.2 }); drawForearm(ctx, farEl[0], farEl[1], farWr[0], farWr[1], 50, 42, dk, F.cuff, Lf, fl);
     drawHand(ctx, { x: farWr[0], y: farWr[1], rot: Math.atan2(farWr[1] - farEl[1], farWr[0] - farEl[0]) + PI / 2, s: 0.95, side: 1, pose: 'rest', light: Object.assign({}, Lf, { keyAmt: Lf.keyAmt * 0.5 }), flash: fl, skin: mixc(HP.skin, '#000', 0.3) });
   }
@@ -466,8 +489,8 @@ function drawSideFigure(ctx, o) {
   } else if (sit > 0.5) {   // seated, hand free: rest it on the thigh instead of hanging through the seat
     wr = reach(toLocal({ x: 230, y: -hipH - 50 }), sh0[0]); el = ik2(sh0[0], sh0[1], wr[0], wr[1], 280, 270, 1);
   } else { el = [sh0[0] + Math.sin(swing) * 280, sh0[1] + Math.cos(swing) * 280]; wr = [el[0] + Math.sin(swing + 0.3) * 260, el[1] + Math.cos(swing + 0.3) * 260]; }
-  bodyPart(ctx, limbPath(sh0[0], sh0[1], el[0], el[1], 60, 52), F.suit, Lf, { flash: fl, rimK: 1.8 });
-  drawForearm(ctx, el[0], el[1], wr[0], wr[1], 52, 42, F.suit, F.cuff, Lf, fl);
+  bodyPart(ctx, limbPath(sh0[0], sh0[1], el[0], el[1], 60, 52), SL, Lf, { flash: fl, rimK: 1.8 });
+  drawForearm(ctx, el[0], el[1], wr[0], wr[1], 52, 42, SL, F.cuff, Lf, fl);
   const ang = Math.atan2(wr[1] - el[1], wr[0] - el[0]) + PI / 2;
   if (o.carry === 'envelope') drawEnvelope(ctx, wr[0] + 40, wr[1] - 10, 190, 110, ang - PI / 2 + 0.1, Lf, true);
   if (o.carry === 'folder') drawFolderSide(ctx, wr[0] + 30, wr[1] - 6, ang - PI / 2, Lf);
@@ -478,7 +501,7 @@ function drawSideFigure(ctx, o) {
     ctx.fillStyle = '#fff4d8'; ctx.beginPath(); ctx.arc(p1[0], p1[1], 15, 0, TAU); ctx.fill();
     if (o.out) { o.out.torch = toScreen(ctx, p1[0], p1[1]); const q = toScreen(ctx, p1[0] + ux * 100, p1[1] + uy * 100); o.out.torchDir = Math.atan2(q.y - o.out.torch.y, q.x - o.out.torch.x); }
   }
-  if (o.out) o.out.hand = toScreen(ctx, wr[0], wr[1]);
+  if (o.out) { o.out.hand = toScreen(ctx, wr[0], wr[1]); o.out.elbow = toScreen(ctx, el[0], el[1]); }
   drawHand(ctx, { x: wr[0], y: wr[1], rot: ang, s: 0.95, side: -1, pose: o.carry ? 'grip' : (o.handPose || 'rest'), light: Lf, flash: fl, skin: HP.skin, ring: who === 'boss', glint: o.ringGlint || 0 });
   ctx.restore();
   if (pass !== 'upper') drawLeg(legs[0], false);

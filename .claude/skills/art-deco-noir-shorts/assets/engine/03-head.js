@@ -202,6 +202,7 @@ function headColors(P, L, flash = 0) {
 
 /* ---------- NECK (drawn by bodies before collar) ---------- */
 function drawNeck(ctx, P, o, L) {
+  if (P.longHair) drawHairBack(ctx, P, o, L);
   const R = makeRot(o.yaw || 0, (o.pitch || 0) * 0.3), pts = [];
   for (const [y, r, zc] of [[64, 50, -14], [o.neckBot ?? 175, 58, -18]]) for (let k = 0; k < 16; k++) { const u = (k / 16) * TAU; const p = R.p(Math.cos(u) * r * (P.neckW || 1), y, zc + Math.sin(u) * r); pts.push([p[0], p[1]]); }
   ctx.save(); ctx.translate(o.x, o.y); if (o.roll) ctx.rotate(o.roll); ctx.scale(o.s, o.s);
@@ -212,6 +213,71 @@ function drawNeck(ctx, P, o, L) {
   edgeFill(ctx, path, -L.dir[0] * 16, 0, mixc(C.skin, '#06040a', bk * 0.4), 0.85);
   edgeFill(ctx, path, -L.rimDir[0] * L.rimW, -L.rimDir[1] * L.rimW, L.rim, L.rimA);
   ctx.restore();
+}
+
+/* ---------- LONG HAIR (behind head & neck, down to the shoulders) ----------
+   P.longHair = { len: 0..1 (shoulder ≈ 1), wave: 0..1, col?: colour }. Drawn before the neck so the
+   face, neck and collar always sit in front of it. */
+function drawHairBack(ctx, P, o, L) {
+  const lh = P.longHair, R = makeRot(o.yaw || 0, (o.pitch || 0) * 0.5), pts = [];
+  const len = lh.len ?? 1, wave = lh.wave || 0, bot = 60 + len * 170;
+  for (const [y, r] of [[-96, 70], [-50, 90], [0, 96], [60, 98 + wave * 10], [bot * 0.75, 96 + wave * 16], [bot, 84 + wave * 20]]) {
+    for (let k = 0; k <= 16; k++) {   // back half only (u from π to 2π is behind the face)
+      const u = PI + (k / 16) * PI;
+      const p = R.p(Math.cos(u) * r, y, -10 + Math.sin(u) * r * 1.02);
+      pts.push([p[0], p[1]]);
+    }
+  }
+  ctx.save(); ctx.translate(o.x, o.y); if (o.roll) ctx.rotate(o.roll); ctx.scale(o.s, o.s);
+  const C = headColors(P, L, o.flash);
+  const hp = smoothPathOf(hull(pts), true, 0.6);
+  const col = lh.col ? mixc(mixc(lh.col, L.key, L.keyAmt * 0.3), '#06040a', clamp(-L.dir[2]) * 0.5) : C.hair;
+  ctx.fillStyle = col; ctx.fill(hp);
+  ctx.save(); ctx.clip(hp);
+  ctx.strokeStyle = rgba(mixc(col, '#ffffff', 0.22), 0.45); ctx.lineWidth = 2.4;   // strands
+  for (let i = 0; i < 14; i++) {
+    const u = PI + ((i + 0.5) / 14) * PI, a = R.p(Math.cos(u) * 98, -40, Math.sin(u) * 98), b = R.p(Math.cos(u) * (92 + wave * 14), bot - 10, Math.sin(u) * 92);
+    ctx.beginPath(); ctx.moveTo(a[0], a[1]);
+    ctx.bezierCurveTo(a[0] + wave * 22, lerp(a[1], b[1], 0.33), b[0] - wave * 22, lerp(a[1], b[1], 0.66), b[0], b[1]); ctx.stroke();
+  }
+  ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = rgba(L.mul, 0.8);
+  const sx = L.dir[0] <= 0 ? 1 : -1; ctx.fillRect(sx > 0 ? 10 : -600, -400, 590, 1000);
+  ctx.restore();
+  edgeFill(ctx, hp, -L.rimDir[0] * L.rimW * 1.4, -L.rimDir[1] * L.rimW * 1.4, L.rim, L.rimA);
+  ctx.restore();
+}
+/** full beard: cheeks, jaw and chin around the mouth (P.beard = colour) */
+function drawBeard(ctx, hs, C, L, P, inside) {
+  const S = hs.S, col = mixc(mixc(P.beard, L.key, L.keyAmt * 0.35), '#06040a', clamp(-L.dir[2]) * 0.5);
+  const pt = (x, y, dz = 4) => { const p = S(x, y, dz); return [p[0], p[1]]; };
+  if (inside) {
+    for (const s of [-1, 1]) {
+      if (S(s * 60, 60, 0)[3] < -0.2) continue;
+      if (S(s * 60, 60, 0)[3] < 0.02) continue;
+      const q = [[s * 82, 6], [s * 82, 34], [s * 78, 60], [s * 70, 86], [s * 54, 106], [s * 30, 120], [0, 126], [0, 84], [s * 14, 78], [s * 30, 70], [s * 36, 60], [s * 44, 50], [s * 56, 46], [s * 64, 36], [s * 72, 30], [s * 76, 6]].map(([x, y]) => pt(x, y));
+      const bp = smoothPathOf(q, true, 0.5);
+      ctx.fillStyle = col; ctx.fill(bp);
+      ctx.save(); ctx.clip(bp); ctx.strokeStyle = rgba(mixc(col, '#000000', 0.45), 0.55); ctx.lineWidth = 1.8;
+      for (let i = 0; i < 16; i++) { const f = i / 15, a = pt(s * lerp(80, 4, f), lerp(30, 92, f) + (i % 2) * 6), b = pt(s * lerp(74, 2, f), lerp(62, 124, f)); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+      ctx.strokeStyle = rgba(mixc(col, '#ffffff', 0.35), 0.45); ctx.lineWidth = 1.4;
+      for (let i = 0; i < 9; i++) { const f = (i + 0.5) / 9, a = pt(s * lerp(78, 8, f), lerp(40, 98, f)), b = pt(s * lerp(72, 6, f), lerp(64, 120, f)); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+      ctx.restore();
+    }
+    // moustache over the upper lip
+    const m = [[-34, 60], [-16, 49], [0, 51], [16, 49], [34, 60], [24, 62], [0, 56], [-24, 62]].map(([x, y]) => pt(x, y, 4));
+    ctx.fillStyle = col; ctx.fill(smoothPathOf(m, true, 0.7));
+    return;
+  }
+  // the beard hangs a little below the chin (breaks the silhouette)
+  const fv = S(0, 110, 0)[3]; if (fv < -0.3) return;
+  const c0 = pt(-46, 104, 2), c1 = pt(46, 104, 2), cb = pt(0, 122, 6), drop = 26 + 10 * clamp(fv);
+  const p = new Path2D(); p.moveTo(c0[0], c0[1]);
+  p.quadraticCurveTo(lerp(c0[0], cb[0], 0.4), cb[1] + drop * 0.9, cb[0], cb[1] + drop);
+  p.quadraticCurveTo(lerp(c1[0], cb[0], 0.4), cb[1] + drop * 0.9, c1[0], c1[1]);
+  p.quadraticCurveTo(cb[0], cb[1] - 6, c0[0], c0[1]); p.closePath();
+  ctx.fillStyle = col; ctx.fill(p);
+  ctx.save(); ctx.clip(p); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = rgba(L.mul, 0.55); ctx.fillRect(-300, cb[1] + drop * 0.35, 600, 200); ctx.restore();
+  edgeFill(ctx, p, -L.rimDir[0] * L.rimW, -L.rimDir[1] * L.rimW, L.rim, L.rimA * 0.8);
 }
 
 /* ---------- MAIN HEAD DRAW ----------
@@ -273,13 +339,15 @@ function drawHead(ctx, P, o) {
   // nasolabial folds, mouth
   ctx.lineCap = 'round';
   for (const s of [-1, 1]) {
-    if (visOf(s * 28, 44) < -0.1) continue;
+    if (P.soft || visOf(s * 28, 44) < -0.1) continue;
     const q = [[s * 19, 25], [s * 28, 42], [s * 33, 63]].map(([x, y]) => { const p = S(x, y, 1); return [p[0], p[1]]; });
     strokePts(ctx, q, rgba(C.line, 0.55), 2.2, false, true);
   }
   drawMouth(ctx, hs, C, L, P, o);
+  if (P.lips) { const lp = [[-22, 59], [-8, 55], [0, 56.5], [8, 55], [22, 59], [10, 67], [0, 68.5], [-10, 67]].map(([x, y]) => { const p = S(x, y, 3); return [p[0], p[1]]; }); ctx.fillStyle = rgba(P.lips, 0.75); ctx.fill(smoothPathOf(lp, true, 0.8)); }
   if (P.cleft) { const a = S(0, 99, 1), b = S(0, 108, 1); ctx.strokeStyle = rgba(C.line, 0.5); ctx.lineWidth = 1.8; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
   if (det > 0) drawFaceDetail(ctx, hs, C, L, o, det);
+  if (P.beard) drawBeard(ctx, hs, C, L, P, true);
   }
 
   // ---------- shading pass (multiply)
@@ -311,6 +379,7 @@ function drawHead(ctx, P, o) {
   ctx.globalCompositeOperation = 'source-over';
   ctx.restore(); // end clip
 
+  if (P.beard) drawBeard(ctx, hs, C, L, P, false);
   // ---------- nose (may break the silhouette in profile)
   if (fv > -0.28) { drawProfileBumps(ctx, hs, C, L, o); drawNose(ctx, hs, C, L, P, o); }
   // ---------- ears (near side)

@@ -1,0 +1,16 @@
+{
+  "title": "Zaman Yolcusu",
+  "slug": "zaman_yolcusu",
+  "duration": 55,
+  "fadeOut": 54,
+  "loop": true,
+  "audio": true,
+  "libraries": [
+    "museum-dresden"
+  ],
+  "modules": [
+    "timeline.js",
+    "sets.js",
+    "scenes.js"
+  ]
+}

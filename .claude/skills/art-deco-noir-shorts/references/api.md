@@ -14,6 +14,8 @@ which clamp).
 const SCENES = [{ id: 1, name: 'The Dig', start: 0, end: 5.5, draw: shot1 }, ...]; // must tile 0..DURATION
 const TRANS = [{ at: 5.5, type: 'dissolve', dur: 0.8 }, { at: 13, type: 'dip', dur: 0.6 }];
 ```
+`film.json` may set `"loop": true` (no fade from/to black; verify checks the last frame flows into the first) and
+`"modules": [...]` (film files built in order, e.g. a shared `timeline.js` of cue times also read by a sound script).
 Transitions are centred on boundaries, so both neighbouring shots must draw sensibly up to `dur/2`
 outside their range. The player adds fade-in from black (0–1.1 s), film grain/vignette/flicker, and
 fades to pure black at the end (`fadeOut` in film.json, default duration − 1.4 s).
@@ -58,7 +60,10 @@ dark, then a clipped band lit — see mafia `s6Eyes`).
 New person: add `HEAD.x = { lv: makeLevels(LV_BOSS, { sx, sy, jaw, chin, round }), skin, hair, hairHi,
 gray, grayAmt, hl: HL_FULL|HL_SLICK|HL_BALD, browCol, browThick, frown, eyeOpen, iris, nose, stubble,
 mouthDown, ear, comb, mustache?, glasses?, hat?: { color, band } | { type: 'cap', color } }` and
-`OUTFIT.x = { suit, lapel, shirt, tie, cuff, shoe, pocket?, stripe?, coat?, plain? }`
+`OUTFIT.x = { suit, lapel, shirt, tie, cuff, shoe, pocket?, stripe?, coat?, plain?, sleeve?, pants? }`
+(`sleeve`/`pants` give shirt sleeves and trousers their own colour, e.g. a vest over a white shirt). Extra head
+options: `beard: '#colour'` (full beard), `longHair: { len, wave, col }` (hair hanging behind to the shoulders),
+`soft: true` (no nasolabial folds) and `lips: '#colour'` for younger / female faces.
 (`coat` = trench coat to the knees; `plain` = no lapels/tie, e.g. work jacket).
 
 `drawHead(ctx, HEAD.boss, o)` — usually called by bodies through `o.head`. Options:
@@ -82,6 +87,9 @@ iris), `noHat`, `out: {}` (receives `out.ember` screen point → `smokeFrom`).
   converts figure coords), `headTurn` 0 (pure profile)..1 (toward camera), `head:{…}`, `pass: 'legs'|'upper'`
   (draw legs before a table top and the upper body after it), `out` (gets `out.hand`, `out.torch`, `out.torchDir`).
 - `drawBust(ctx, { x, y (neck base), s, who, view: 'front'|'back', light, t, head })` — close-ups.
+- `kneel` 0..1 on `drawSideFigure`: thighs vertical, shins flat behind, feet follow the shins (animate 0→1 for a fall to the knees).
+- `drawStandingFront(..., arms: 'hold', holdX, holdY, prop, propFront)`: both hands at the chest holding a prop (photo, box);
+  `propFront: true` draws the prop over the hands (shown to camera). Side figures report `out.hand` and `out.elbow` (screen) for wrist props.
 - Rig guarantees (since the anatomy fix): far leg always visible (sitting/standing still), far arm always drawn
   (on table / thigh / hanging), hand targets clamped to reach. Scale guide: `s` 0.4–0.6 full figures, 2–2.5 busts.
 
