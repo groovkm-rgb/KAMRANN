@@ -62,8 +62,22 @@ function interior(f, cam, A) {
   layer(cam, 1.25, 4, c => D.curtains(c, A));
 }
 
-window.renderFrame = function (f) {
-  f = Math.max(0, Math.min(TOTAL - 1, f | 0));
+// Variant "#orig": original voice speed. Output frame g -> authored frame via web/warp_orig.json.
+let WARP = null;
+function authored(g) {
+  if (!WARP) return g;
+  const A = WARP.anchors;
+  for (let i = 1; i < A.length; i++) if (g <= A[i][1]) {
+    const [a0, b0] = A[i - 1], [a1, b1] = A[i];
+    return Math.round(a0 + (a1 - a0) * (g - b0) / (b1 - b0));
+  }
+  return A[A.length - 1][0];
+}
+window.renderFrame = function (g) {
+  g = Math.max(0, Math.min(window.TOTAL - 1, g | 0));
+  D.setRealFrame(g);
+  let f = authored(g);
+  f = Math.max(0, Math.min(TOTAL - 1, f));
   const cam = camAt(f), A = actorsAt(f), L = lightAt(f);
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.filter = 'none';
   D.setTint(L.tint);
@@ -80,4 +94,7 @@ window.renderFrame = function (f) {
   D.post(ctx, f);
 };
 window.TOTAL = TOTAL;
-window.ready = true;
+if (location.hash === '#orig') {
+  fetch('warp_orig.json').then(r => r.json()).then(w => { WARP = w; window.TOTAL = w.total; window.ready = true; })
+    .catch(e => { window.err = String(e); });
+} else window.ready = true;

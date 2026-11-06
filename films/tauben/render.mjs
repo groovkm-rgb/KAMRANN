@@ -1,5 +1,6 @@
 // node render.mjs [outdir=frames] [frames="0-285" | "1,5,9"] [step=1]
 // Saves <outdir>/f0000.png ... ; RESUME=1 skips frames that already exist.
+// VARIANT=orig renders the original-voice-speed cut (web/warp_orig.json).
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 let chromium; try { ({ chromium } = require('playwright')); } catch { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); }
@@ -10,13 +11,13 @@ fs.mkdirSync(outdir, { recursive: true });
 const srv = http.createServer((q, s) => {
   const p = path.join(root, decodeURIComponent(q.url.split('?')[0]));
   if (!p.startsWith(root) || !fs.existsSync(p)) { s.writeHead(404); return s.end(); }
-  s.writeHead(200, { 'Content-Type': p.endsWith('.js') ? 'text/javascript' : 'text/html' }); fs.createReadStream(p).pipe(s);
+  s.writeHead(200, { 'Content-Type': p.endsWith('.js') ? 'text/javascript' : p.endsWith('.json') ? 'application/json' : 'text/html' }); fs.createReadStream(p).pipe(s);
 }).listen(0);
 await new Promise(r => srv.on('listening', r));
 const br = await chromium.launch();
 const pg = await br.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
 let err = 0; pg.on('pageerror', e => { console.log('ERR', e.message); err = 1; }); pg.on('console', m => console.log('PAGE', m.text()));
-await pg.goto(`http://localhost:${srv.address().port}/index.html`);
+await pg.goto(`http://localhost:${srv.address().port}/index.html${process.env.VARIANT ? '#' + process.env.VARIANT : ''}`);
 await pg.waitForFunction(() => window.ready || window.err, null, { timeout: 60000 }).catch(() => {});
 if (err || !(await pg.evaluate(() => !!window.ready))) { console.log('page failed'); process.exit(1); }
 const TOTAL = await pg.evaluate(() => window.TOTAL);

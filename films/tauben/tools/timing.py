@@ -11,8 +11,13 @@
    ONLY inside detected pauses (never inside a word). INSERT below lists them;
    set all to 0 to keep the original timing.
 Writes work/phrases.json and work/voice_timed.wav (48 kHz mono).
+
+ORIG=1 python3 tools/timing.py  -> original speed, no inserted silence at all:
+work/phrases_orig.json, work/voice_orig.wav and web/warp_orig.json (a piecewise-linear
+map from the authored 286-frame shot plan onto the original-speed timeline; every
+cut lands on the same pause in the original read).
 """
-import json, re, subprocess, sys
+import json, os, re, subprocess, sys
 import numpy as np
 
 SR = 48000
@@ -22,6 +27,10 @@ TAIL = 0.6
 PRE = 0.30
 # seconds of silence inserted at each pause (keyed by pause name)
 INSERT = {"c1_mid": 0.30, "c1_c2": 0.25, "c2_c3": 1.50, "c3_mid": 0.45}
+ORIG = bool(os.environ.get("ORIG"))
+SUF = "_orig" if ORIG else ""
+if ORIG:
+    PRE = 0.0; INSERT = {k: 0.0 for k in INSERT}
 
 
 def silences(d):
@@ -104,7 +113,7 @@ TOTAL = int(np.ceil(total_s * FPS))
 timed = np.concatenate([timed, np.zeros(max(0, TOTAL * SR // FPS - len(timed)), np.float32)])[:TOTAL * SR // FPS]
 
 import wave
-with wave.open("work/voice_timed.wav", "wb") as w:
+with wave.open("work/voice_orig.wav" if ORIG else "work/voice_timed.wav", "wb") as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
     w.writeframes((np.clip(timed, -1, 1) * 32767).astype(np.int16).tobytes())
 
@@ -130,5 +139,19 @@ out = {
     "phrases_timeline_frames": {k: [int(round(v[0] * FPS)), int(round(v[1] * FPS))] for k, v in tl.items()},
     "fps": FPS, "total_s": round(TOTAL / FPS, 3), "total_frames": TOTAL,
 }
-json.dump(out, open("work/phrases.json", "w"), indent=2, ensure_ascii=False)
+if ORIG:
+    # authored shot-plan frames (web/story.js) -> original-speed frames
+    def cf(t):   # of the two frame starts around t, take the quieter one (stays inside the pause/closure)
+        a, b = int(np.floor(t * FPS)), int(np.ceil(t * FPS))
+        e = lambda k: db[min(len(db) - 1, int(k / FPS * 100))]
+        return a if e(a) <= e(b) else b
+    c1, s1, s2, c12, c23, c3 = cf(c1_mid), cf(sub1), cf(sub2), cf(cuts["c1_c2"]), cf(cuts["c2_c3"]), cf(c3_mid)
+    anchors = [[0, 0], [34, c1 - 1], [35, c1], [57, s1 - 1], [58, s1], [69, s2 - 1], [70, s2],
+               [85, c12 - 1], [86, c12], [164, c23 - 17], [180, c23 - 1],   # last 16 S3 frames 1:1 (8-frame fall to night)
+               [181, c23], [215, c3 - 1], [216, c3], [285, TOTAL - 1]]
+    for (a0, b0), (a1, b1) in zip(anchors, anchors[1:]):
+        assert b1 > b0 and (a1 - a0) + 1 >= (b1 - b0), (a0, a1, b0, b1)   # at most one repeated frame per segment
+    out["warp"] = {"authored_total": 286, "total": TOTAL, "anchors": anchors}
+    json.dump(out["warp"], open("web/warp_orig.json", "w"))
+json.dump(out, open(f"work/phrases{SUF}.json", "w"), indent=2, ensure_ascii=False)
 print(json.dumps(out, indent=1, ensure_ascii=False))

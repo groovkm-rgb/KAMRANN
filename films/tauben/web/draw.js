@@ -29,6 +29,8 @@ function blob(c, shapes, fill) {
 const E = (x, y, rx, ry, rot = 0) => c => ell(c, x, y, rx, ry, rot);
 
 export function setScale(s) { SC = s; }
+let REALF = 0;               // output frame (clock ticks in real time in every variant)
+export const setRealFrame = g => { REALF = g; };
 
 // ---------------- sky & roofs ----------------
 export function sky(c, col) { c.fillStyle = col; c.fillRect(0, 0, 1080, 1920); }
@@ -154,7 +156,7 @@ export function room(c, A, f, L) {
   poly(c, [[x - 26, y - 34], [x + 26, y - 34], [x + 46, y + 30], [x - 46, y + 30]]); fs(c, lampOn ? '#f2c94c' : '#8f7f45');
   // clock
   const k = GEO.clock; circ(c, k.x, k.y, k.r); fs(c, '#fbf6ea');
-  const sec = Math.floor(f / 15);                       // ticks twice a second
+  const sec = Math.floor(REALF / 15);                       // ticks twice a second
   const hand = (a, len, w) => { c.beginPath(); c.moveTo(k.x, k.y); c.lineTo(k.x + Math.sin(a) * len, k.y - Math.cos(a) * len); ink(c, w); c.stroke(); };
   hand(-0.9 + f * 0.0006, k.r * 0.5, 1); hand(1.2 + f * 0.003, k.r * 0.75, 0.8); hand(sec * Math.PI / 30, k.r * 0.8, 0.45);
   // curtains pushed to the sides

@@ -1,0 +1,170 @@
+{
+  "source": "voice.mp3",
+  "source_duration": 6.452,
+  "silencedetect": {
+    "noise": "-35dB",
+    "d_requested": 0.25,
+    "d_used": 0.1,
+    "silences": [
+      [
+        2.097,
+        2.223
+      ],
+      [
+        3.559,
+        3.811
+      ],
+      [
+        6.124,
+        6.452
+      ]
+    ]
+  },
+  "text": {
+    "C1": "Ein alter Mann fütterte jeden Tag eine Taube.",
+    "C2": "Eines Tages kam sie nicht.",
+    "C3": "Am nächsten Morgen saßen hundert Tauben vor seinem Fenster."
+  },
+  "phrases_source_s": {
+    "C1": [
+      0.07,
+      2.097
+    ],
+    "C2": [
+      2.223,
+      3.559
+    ],
+    "C3": [
+      3.811,
+      6.124
+    ]
+  },
+  "beat_splits_source_s": {
+    "C1": 0.705,
+    "C3": 4.635
+  },
+  "inserted_silence_s": {
+    "c1_mid": [
+      0.705,
+      0.0
+    ],
+    "c1_c2": [
+      2.16,
+      0.0
+    ],
+    "c2_c3": [
+      3.685,
+      0.0
+    ],
+    "c3_mid": [
+      4.635,
+      0.0
+    ]
+  },
+  "preroll_s": 0.0,
+  "phrases_timeline_s": {
+    "C1": [
+      0.07,
+      2.097
+    ],
+    "C2": [
+      2.223,
+      3.559
+    ],
+    "C3": [
+      3.811,
+      6.124
+    ]
+  },
+  "beats_timeline_s": {
+    "C1a_end": 0.704,
+    "C1b_start": 0.706,
+    "S2_sub1": 1.335,
+    "S2_sub2": 1.755,
+    "C3a_end": 4.634,
+    "C3b_start": 4.636
+  },
+  "phrases_timeline_frames": {
+    "C1": [
+      2,
+      63
+    ],
+    "C2": [
+      67,
+      107
+    ],
+    "C3": [
+      114,
+      184
+    ]
+  },
+  "fps": 30,
+  "total_s": 6.733,
+  "total_frames": 202,
+  "warp": {
+    "authored_total": 286,
+    "total": 202,
+    "anchors": [
+      [
+        0,
+        0
+      ],
+      [
+        34,
+        20
+      ],
+      [
+        35,
+        21
+      ],
+      [
+        57,
+        39
+      ],
+      [
+        58,
+        40
+      ],
+      [
+        69,
+        51
+      ],
+      [
+        70,
+        52
+      ],
+      [
+        85,
+        63
+      ],
+      [
+        86,
+        64
+      ],
+      [
+        164,
+        94
+      ],
+      [
+        180,
+        110
+      ],
+      [
+        181,
+        111
+      ],
+      [
+        215,
+        138
+      ],
+      [
+        216,
+        139
+      ],
+      [
+        285,
+        201
+      ]
+    ]
+  }
+}

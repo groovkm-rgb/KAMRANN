@@ -5,16 +5,24 @@ Cue times follow web/story.js (30 fps):
   S1 0.000  S2a 1.167  S2b 1.933  S2c 2.333  S3 2.867  (lamp f164 5.467, night 5.50-5.73)
   S4 6.033  S5 7.200   end 9.533
 Run from the project root after tools/timing.py.
+ORIG=1: original-speed variant (work/phrases_orig.json, web/warp_orig.json,
+work/voice_orig.wav -> work/mix_raw_orig.wav); every cue is moved through the same
+authored->output frame map the picture uses.
 """
-import json, wave
+import json, os, wave
 import numpy as np
 
 SR = 48000
-PH = json.load(open("work/phrases.json"))
+ORIG = bool(os.environ.get("ORIG")); SUF = "_orig" if ORIG else ""
+PH = json.load(open(f"work/phrases{SUF}.json"))
 FPS = PH["fps"]; T = PH["total_frames"] / FPS
 N = int(round(T * SR))
 rng = np.random.default_rng(2024)
-fr = lambda f: f / FPS
+if ORIG:
+    _A = np.array(json.load(open("web/warp_orig.json"))["anchors"], float)
+    fr = lambda f: float(np.interp(f, _A[:, 0], _A[:, 1])) / FPS   # authored frame -> output seconds
+else:
+    fr = lambda f: f / FPS
 
 S1, S2a, S2b, S2c, S3, S4, S5 = 0, fr(35), fr(58), fr(70), fr(86), fr(181), fr(216)
 LAMP = fr(164)
@@ -108,7 +116,7 @@ def readwav(p):
         x = np.frombuffer(w.readframes(w.getnframes()), np.int16) / 32768.0
         if w.getnchannels() == 2: x = x.reshape(-1, 2).mean(1)
     return x
-voice = readwav("work/voice_timed.wav"); voice = np.pad(voice, (0, max(0, N - len(voice))))[:N]
+voice = readwav("work/voice_orig.wav" if ORIG else "work/voice_timed.wav"); voice = np.pad(voice, (0, max(0, N - len(voice))))[:N]
 hop = 480; rms = np.sqrt(np.convolve(voice ** 2, np.ones(hop) / hop, "same"))
 act = (rms > 10 ** (-38 / 20)).astype(float)
 k = int(0.25 * SR); act = np.convolve(act, np.ones(k) / k, "same"); act = np.clip(act * 1.6, 0, 1)
@@ -151,8 +159,8 @@ r = band(noise(S2c - S2b), 400, 9000) * 0.05      # S2b rain
 r *= env_adsr(len(r), 0.02, 0.03); put(sfx, r, S2b)
 for _ in range(40): click(S2b + rng.random() * (S2c - S2b), 4000 + 2000 * rng.random(), 0.05, 0.01)
 k = 0                                               # S3 tick-tock on the second hand (every 15 frames)
-for f in range(90, 180, 15):
-    if fr(f) < LAMP + 0.2: click(fr(f), 3100 if k % 2 == 0 else 2300, 0.32); k += 1
+for g in range(0, PH["total_frames"], 15):         # output frames, same as the drawn second hand
+    if S3 <= g / FPS < LAMP + 0.2: click(g / FPS, 3100 if k % 2 == 0 else 2300, 0.32); k += 1
 click(LAMP, 1500, 0.45, 0.03); click(LAMP + 0.035, 2600, 0.3, 0.02)   # lamp switch
 d4 = S5 - S4                                        # S4 growing rustle
 x = band(noise(d4), 300, 4000); tt = tvec(d4)
@@ -175,7 +183,7 @@ mix = voice * 1.0 + music * 0.11 + sfx * 0.9
 e = int(0.015 * SR); mix[-e:] *= np.linspace(1, 0, e)
 pan = np.stack([mix, mix], 1)
 pk = np.abs(pan).max(); pan /= max(pk, 1e-9) / 0.89
-with wave.open("work/mix_raw.wav", "wb") as w:
+with wave.open(f"work/mix_raw{SUF}.wav", "wb") as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
     w.writeframes((np.clip(pan, -1, 1) * 32767).astype(np.int16).tobytes())
-print("work/mix_raw.wav", round(N / SR, 3), "s")
+print(f"work/mix_raw{SUF}.wav", round(N / SR, 3), "s")
