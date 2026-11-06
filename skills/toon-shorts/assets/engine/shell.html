@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+<style>
+  html,body{margin:0;height:100%;background:#111;color:#ddd;font:14px system-ui,sans-serif}
+  #wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px}
+  #film{height:min(84vh,calc((100vw - 20px) * 16 / 9));aspect-ratio:9/16;background:#000;display:block}
+  .bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;width:min(100%,560px)}
+  .bar input[type=range]{flex:1;min-width:160px}
+  button{background:#333;color:#eee;border:1px solid #555;border-radius:6px;padding:6px 10px;font:inherit}
+  body.render #wrap{padding:0} body.render .bar{display:none} body.render #film{height:1920px;width:1080px}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="film" width="1080" height="1920"></canvas>
+  <div class="bar"><button id="pp">❚❚</button><button id="rs">⟲</button><input id="seek" type="range" min="0" max="{{DUR}}" step="0.001" value="0"><span id="tc">0.00</span><button id="snap">Save frame</button></div>
+  <div class="bar" id="shots"></div>
+</div>
+<script>
+/*__SCRIPT__*/
+</script>
+<script>
+(() => {
+  const F = window.__film; if (!F) return;
+  if (new URLSearchParams(location.search).has('render')) { document.body.classList.add('render'); F.renderAt(0); return; }
+  let playing = true, t0 = performance.now(), cur = 0;
+  const $ = id => document.getElementById(id), seek = $('seek');
+  const go = t => { cur = Math.max(0, Math.min(F.DURATION - 1e-3, t)); t0 = performance.now() - cur * 1000; F.renderAt(cur); seek.value = cur; $('tc').textContent = cur.toFixed(2); };
+  $('pp').onclick = () => { playing = !playing; $('pp').textContent = playing ? '❚❚' : '▶'; t0 = performance.now() - cur * 1000; };
+  $('rs').onclick = () => go(0);
+  seek.oninput = () => go(+seek.value);
+  $('snap').onclick = () => { const a = document.createElement('a'); a.download = `frame_${cur.toFixed(2)}.png`; a.href = $('film').toDataURL('image/png'); a.click(); };
+  F.scenes.forEach((s, i) => { const b = document.createElement('button'); b.textContent = i + 1; b.title = s.name; b.onclick = () => go(s.start); $('shots').appendChild(b); });
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Space') { e.preventDefault(); $('pp').onclick(); }
+    if (e.code === 'ArrowRight') { playing = false; go(cur + (e.shiftKey ? 1 : 1 / F.FPS)); }
+    if (e.code === 'ArrowLeft') { playing = false; go(cur - (e.shiftKey ? 1 : 1 / F.FPS)); }
+  });
+  (function loop(now) { if (playing) { cur = ((now - t0) / 1000) % F.DURATION; F.renderAt(cur); seek.value = cur; $('tc').textContent = cur.toFixed(2); } requestAnimationFrame(loop); })(performance.now());
+})();
+</script>
+</body>
+</html>

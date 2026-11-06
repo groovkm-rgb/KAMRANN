@@ -213,3 +213,23 @@ node tools/rig-sheet.mjs rig.png boss     # or any cast key: digger, det1, staff
 silent 9:16 short in the same style, starring the mafia boss by default. It has its own copy of the
 engine, so it works without this repository. After changing `src/`, run `tools/sync-skill.sh` to copy
 the engine into the skill again, then repackage it.
+
+---
+
+# Toon shorts (second style)
+
+A second, bright cartoon style with its own reusable skill, `skills/toon-shorts` (installed in `.claude/skills/`, packaged as `dist/toon-shorts.zip`): round heads, stick limbs, thick outlines, blurred backgrounds, 1080×1920 / 30 fps, no audio, no text. Characters, outfits, props and sets are data, so any scene can be described ("two people drink tea in a café").
+
+| Film | Folder | Length | Rendered MP4 |
+|---|---|---|---|
+| Tea at the Café | `films/cafe-tea/` | 17 s | `renders/cafe-tea.mp4` |
+| Western Duel | `films/western-duel/` (and the original standalone `western-duel.html`) | 17 s | `renders/western-duel.mp4` |
+
+```bash
+node skills/toon-shorts/scripts/new_film.mjs films/my-film --title "My Film"
+node skills/toon-shorts/scripts/build_film.mjs films/my-film      # -> films/my-film/film.html
+node skills/toon-shorts/scripts/snap.mjs films/my-film snaps       # review frames + contact sheet
+node skills/toon-shorts/scripts/verify_film.mjs films/my-film
+node skills/toon-shorts/scripts/render_mp4.mjs films/my-film renders/my-film.mp4
+tools/sync-toon-skill.sh                                           # refresh examples, .claude/skills copy and dist zip
+```
