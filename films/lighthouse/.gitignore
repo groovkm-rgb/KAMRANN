@@ -7,3 +7,4 @@ web/lib/
 mix_raw.wav
 mix.wav
 render.log
+out/*.mp4
