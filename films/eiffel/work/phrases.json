@@ -1,0 +1,294 @@
+{
+ "duration": 51.173875,
+ "frames30": 1535,
+ "source": "whisper-small (de) + silence check, hand-fixed",
+ "segments": [
+  [
+   0.0,
+   13.0756
+  ],
+  [
+   13.4667,
+   15.0975
+  ],
+  [
+   15.301,
+   17.316
+  ],
+  [
+   17.6101,
+   19.2197
+  ],
+  [
+   19.367,
+   20.8147
+  ],
+  [
+   21.1264,
+   22.6907
+  ],
+  [
+   22.9739,
+   23.7754
+  ],
+  [
+   24.0386,
+   25.5994
+  ],
+  [
+   26.0413,
+   26.8292
+  ],
+  [
+   27.1538,
+   27.7732
+  ],
+  [
+   28.069,
+   28.8049
+  ],
+  [
+   29.1541,
+   30.7096
+  ],
+  [
+   31.072,
+   32.5767
+  ],
+  [
+   32.7838,
+   33.2856
+  ],
+  [
+   33.6771,
+   34.3467
+  ],
+  [
+   34.8086,
+   35.6157
+  ],
+  [
+   35.7405,
+   37.3107
+  ],
+  [
+   37.437,
+   38.8314
+  ],
+  [
+   39.5293,
+   41.0718
+  ],
+  [
+   41.3198,
+   43.0053
+  ],
+  [
+   43.2794,
+   44.334
+  ],
+  [
+   44.5683,
+   46.0774
+  ],
+  [
+   46.3286,
+   47.9233
+  ],
+  [
+   48.2661,
+   49.5626
+  ],
+  [
+   49.7603,
+   50.826
+  ]
+ ],
+ "phrases": [
+  {
+   "n": 1,
+   "text": "Ein Mann hat den Eiffelturm verkauft.",
+   "s": 0.06,
+   "e": 1.38,
+   "f0": 2,
+   "f1": 41
+  },
+  {
+   "n": 2,
+   "text": "Als Schrott.",
+   "s": 1.58,
+   "e": 2.1,
+   "f0": 47,
+   "f1": 63
+  },
+  {
+   "n": 3,
+   "text": "Er liest in der Zeitung: Der Turm ist marode, die Reparatur kostet ein Vermögen.",
+   "s": 2.28,
+   "e": 5.66,
+   "f0": 68,
+   "f1": 170
+  },
+  {
+   "n": 4,
+   "text": "Und er hat eine Idee.",
+   "s": 5.86,
+   "e": 6.84,
+   "f0": 176,
+   "f1": 205
+  },
+  {
+   "n": 5,
+   "text": "Er fälscht Papiere vom Ministerium,",
+   "s": 6.96,
+   "e": 8.44,
+   "f0": 209,
+   "f1": 253
+  },
+  {
+   "n": 6,
+   "text": "mietet sich in ein Luxushotel ein",
+   "s": 8.74,
+   "e": 9.98,
+   "f0": 262,
+   "f1": 299
+  },
+  {
+   "n": 7,
+   "text": "und lädt die größten Schrotthändler der Stadt ein.",
+   "s": 10.02,
+   "e": 11.98,
+   "f0": 301,
+   "f1": 359
+  },
+  {
+   "n": 8,
+   "text": "Dann flüstert er: Der Staat will den Turm loswerden.",
+   "s": 12.24,
+   "e": 15.16,
+   "f0": 367,
+   "f1": 455
+  },
+  {
+   "n": 9,
+   "text": "Streng geheim.",
+   "s": 15.3,
+   "e": 16.22,
+   "f0": 459,
+   "f1": 487
+  },
+  {
+   "n": 10,
+   "text": "Einer beißt an.",
+   "s": 16.42,
+   "e": 17.32,
+   "f0": 493,
+   "f1": 520
+  },
+  {
+   "n": 11,
+   "text": "Aber der Händler wird misstrauisch.",
+   "s": 17.61,
+   "e": 19.22,
+   "f0": 528,
+   "f1": 577
+  },
+  {
+   "n": 12,
+   "text": "Und jetzt kommt der Geniestreich: Der Betrüger verlangt Schmiergeld.",
+   "s": 19.52,
+   "e": 22.69,
+   "f0": 586,
+   "f1": 681
+  },
+  {
+   "n": 13,
+   "text": "Der Händler denkt: Ein Beamter, der Schmiergeld will? Der muss echt sein.",
+   "s": 22.97,
+   "e": 26.84,
+   "f0": 689,
+   "f1": 805
+  },
+  {
+   "n": 14,
+   "text": "Er zahlt. Den Kaufpreis – und das Schmiergeld obendrauf.",
+   "s": 27.14,
+   "e": 30.72,
+   "f0": 814,
+   "f1": 922
+  },
+  {
+   "n": 15,
+   "text": "Da sitzt der Betrüger schon im Zug, weit weg.",
+   "s": 31.07,
+   "e": 33.29,
+   "f0": 932,
+   "f1": 999
+  },
+  {
+   "n": 16,
+   "text": "Und der Händler? Der schämt sich so, dass er nicht mal zur Polizei geht.",
+   "s": 33.68,
+   "e": 37.32,
+   "f0": 1010,
+   "f1": 1120
+  },
+  {
+   "n": 17,
+   "text": "Also kommt der Betrüger zurück …",
+   "s": 37.44,
+   "e": 38.83,
+   "f0": 1123,
+   "f1": 1165
+  },
+  {
+   "n": 18,
+   "text": "und zieht dieselbe Nummer nochmal ab.",
+   "s": 39.53,
+   "e": 40.98,
+   "f0": 1186,
+   "f1": 1229
+  },
+  {
+   "n": 19,
+   "text": "Diesmal geht das Opfer zur Polizei.",
+   "s": 41.32,
+   "e": 43.01,
+   "f0": 1240,
+   "f1": 1290
+  },
+  {
+   "n": 20,
+   "text": "Er haut trotzdem ab.",
+   "s": 43.28,
+   "e": 44.34,
+   "f0": 1298,
+   "f1": 1330
+  },
+  {
+   "n": 21,
+   "text": "Am Ende landet er doch hinter Gittern – im härtesten Gefängnis Amerikas.",
+   "s": 44.57,
+   "e": 47.92,
+   "f0": 1337,
+   "f1": 1438
+  },
+  {
+   "n": 22,
+   "text": "Aber nicht wegen des Eiffelturms …",
+   "s": 48.27,
+   "e": 49.5,
+   "f0": 1448,
+   "f1": 1485
+  },
+  {
+   "n": 23,
+   "text": "sondern wegen Falschgeld.",
+   "s": 49.74,
+   "e": 50.76,
+   "f0": 1492,
+   "f1": 1523
+  }
+ ],
+ "total_frames": 1550
+}

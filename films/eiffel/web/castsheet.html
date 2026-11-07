@@ -1,0 +1,10 @@
+<!doctype html><html><body style="margin:0;background:#888"><canvas id="c" width="2400" height="2000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const c=document.getElementById('c'), g=c.getContext('2d'); g.fillStyle='#d9c9a8'; g.fillRect(0,0,2400,2000);
+const L=[['con',{expr:'sly'}],['con',{expr:'wink',R:'pocket',hold:'envelope'}],['con',{expr:'whisper',R:'cup',L:'hip'}],['con',{expr:'shh',R:'shh'}],['con',{back:true}],['con',{expr:'sheepish',L:'rub',R:'rub'}],['con',{expr:'smirk',sit:true,cross:true,L:'hold',R:'hold',hold:'paper'}],['con',{expr:'grin',R:'suitcase',L:'tip'}],
+['dealer',{expr:'eager',R:'wipe'}],['dealer',{expr:'suspicious'}],['dealer',{expr:'happy',R:'show',hold:'doc'}],['dealer',{expr:'ashamed',L:'face',R:'face'}],['d2',{expr:'neutral'}],['d3',{expr:'smile'}],['d4',{expr:'frown'}],['d5',{expr:'think',R:'chin'}],
+['victim2',{expr:'angry',R:'bang'}],['gend',{expr:'whistle',R:'whistle',L:'run',run:true,step:0.25}],['gend2',{expr:'stern'}],['bell',{expr:'smile',L:'suitcase'}],['guard',{expr:'stern'}],['prisoner',{expr:'sad',R:'fig'}],['prisoner',{expr:'wink',R:'bars',L:'bars'}],['waiter',{expr:'smile'}]];
+L.forEach(([k,o],i)=>{ g.save(); g.translate((i%8)*300, Math.floor(i/8)*660+10); g.scale(0.5,0.65); const p=new T.Pen(g); T.gentFront(p,k,{seed:3+i,...o}); g.restore(); });
+window.done=1;
+</script></body></html>

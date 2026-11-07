@@ -1,0 +1,9 @@
+frames/
+stills/
+logs/
+work/words.json
+node_modules
+web/lib/
+mix_raw.wav
+mix.wav
+out/*.mp4
