@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body style="margin:0;background:#888">
+<canvas id="c" width="3000" height="2000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const c = document.getElementById('c'), g = c.getContext('2d');
+g.fillStyle = '#8a9bb0'; g.fillRect(0, 0, 3000, 2000);
+const list = JSON.parse(decodeURIComponent(location.hash.slice(1) || '[]'));
+list.forEach((it, i) => { g.save(); g.translate((i % 5) * 600, Math.floor(i / 5) * 1000); const p = new T.Pen(g); (it.fn ? T[it.fn] : T.castFront)(p, it.k, it.o || {}); g.restore(); });
+window.ready = true;
+</script></body></html>

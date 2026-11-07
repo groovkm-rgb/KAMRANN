@@ -1,0 +1,8 @@
+frames/
+node_modules
+mix.wav
+mix_raw.wav
+work/stems.npz
+work/*.log
+stills/v*/
+stills/*.png
