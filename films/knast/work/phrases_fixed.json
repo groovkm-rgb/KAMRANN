@@ -1,0 +1,161 @@
+{
+ "duration": 52.48,
+ "total_frames": 1590,
+ "source": "silence-detect + script, hand-checked against the -38 dB waveform gaps (Whisper unavailable: model hosts blocked)",
+ "phrases": [
+  {
+   "text": "Aus dem Knast ausbrechen?",
+   "s": 0.0,
+   "e": 1.18,
+   "f0": 0,
+   "f1": 35
+  },
+  {
+   "text": "In Deutschland ist das nicht mal strafbar.",
+   "s": 1.5,
+   "e": 3.0,
+   "f0": 45,
+   "f1": 90
+  },
+  {
+   "text": "Kein Witz.",
+   "s": 3.31,
+   "e": 3.83,
+   "f0": 99,
+   "f1": 115
+  },
+  {
+   "text": "Stell dir vor: Nachts. Deine Zelle.",
+   "s": 4.13,
+   "e": 6.2,
+   "f0": 124,
+   "f1": 186
+  },
+  {
+   "text": "Der Wärter hat vergessen abzuschließen.",
+   "s": 6.6,
+   "e": 8.31,
+   "f0": 198,
+   "f1": 249
+  },
+  {
+   "text": "Du rennst los – über den Hof, über die Mauer.",
+   "s": 8.67,
+   "e": 11.15,
+   "f0": 260,
+   "f1": 334
+  },
+  {
+   "text": "Frei.",
+   "s": 11.52,
+   "e": 11.88,
+   "f0": 346,
+   "f1": 356
+  },
+  {
+   "text": "Drei Tage später schnappt dich die Polizei.",
+   "s": 12.32,
+   "e": 14.18,
+   "f0": 370,
+   "f1": 425
+  },
+  {
+   "text": "Jetzt gibt's richtig Ärger, oder?",
+   "s": 14.49,
+   "e": 16.02,
+   "f0": 435,
+   "f1": 481
+  },
+  {
+   "text": "Nö.",
+   "s": 16.46,
+   "e": 16.71,
+   "f0": 494,
+   "f1": 501
+  },
+  {
+   "text": "Für die Flucht selbst kriegst du keinen einzigen Tag extra.",
+   "s": 17.13,
+   "e": 19.87,
+   "f0": 514,
+   "f1": 596
+  },
+  {
+   "text": "Denn das deutsche Recht sagt: Jeder Mensch will frei sein.",
+   "s": 20.27,
+   "e": 23.08,
+   "f0": 608,
+   "f1": 692
+  },
+  {
+   "text": "Das ist ein Urinstinkt – und dafür bestraft man niemanden.",
+   "s": 23.33,
+   "e": 26.49,
+   "f0": 700,
+   "f1": 795
+  },
+  {
+   "text": "Aber jetzt kommt der Haken.",
+   "s": 26.91,
+   "e": 28.47,
+   "f0": 807,
+   "f1": 854
+  },
+  {
+   "text": "Gitter durchgesägt? Sachbeschädigung.",
+   "s": 28.94,
+   "e": 31.16,
+   "f0": 868,
+   "f1": 935
+  },
+  {
+   "text": "Die Uniform vom Wärter mitgehen lassen? Diebstahl.",
+   "s": 31.62,
+   "e": 34.22,
+   "f0": 949,
+   "f1": 1027
+  },
+  {
+   "text": "Dein Kumpel hat das Fluchtauto gefahren? Der ist dran.",
+   "s": 34.67,
+   "e": 37.54,
+   "f0": 1040,
+   "f1": 1126
+  },
+  {
+   "text": "Ihr wart zu dritt und habt Gewalt benutzt? Gefangenenmeuterei.",
+   "s": 38.03,
+   "e": 41.29,
+   "f0": 1141,
+   "f1": 1239
+  },
+  {
+   "text": "Und deine alte Strafe? Die sitzt du natürlich trotzdem ab.",
+   "s": 41.8,
+   "e": 45.03,
+   "f0": 1254,
+   "f1": 1351
+  },
+  {
+   "text": "Ausbrechen ist also erlaubt. Du musst es nur schaffen,",
+   "s": 45.35,
+   "e": 47.86,
+   "f0": 1360,
+   "f1": 1436
+  },
+  {
+   "text": "ohne was kaputt zu machen, ohne was zu klauen…",
+   "s": 47.95,
+   "e": 50.15,
+   "f0": 1438,
+   "f1": 1504
+  },
+  {
+   "text": "und ganz allein.",
+   "s": 50.73,
+   "e": 51.91,
+   "f0": 1522,
+   "f1": 1557
+  }
+ ]
+}

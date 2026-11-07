@@ -48,7 +48,7 @@ export const SHOTS = [
 export const shotAt = (f) => SHOTS.find((s) => f >= s.a && f <= s.b) || SHOTS[SHOTS.length - 1];
 const sm = M.smooth, eo = M.easeOut;
 // stamps: word onsets of Sachbeschädigung / Diebstahl / Der ist dran / Gefangenenmeuterei
-export const STAMPS = [{ f: 905, text: 'SACHBESCHÄDIGUNG', rot: -0.12 }, { f: 1010, text: 'DIEBSTAHL', rot: 0.1 }, { f: 1101, text: 'STRAFBAR', rot: -0.1 }, { f: 1204, text: 'MEUTEREI', rot: 0.09 }];
+export const STAMPS = [{ f: 905, text: 'SACHBESCHÄDIGUNG', rot: -0.12 }, { f: 1006, text: 'DIEBSTAHL', rot: 0.1 }, { f: 1101, text: 'STRAFBAR', rot: -0.1 }, { f: 1204, text: 'MEUTEREI', rot: 0.09 }];
 const LAND = 5; // stamp hits the screen 5 frames after it starts
 
 // ---------- lights ----------

@@ -73,7 +73,7 @@ HAKEN = F(798)               # tension from "Aber jetzt kommt der Haken"
 SAD = F(1250)                # sad note on "Und deine alte Strafe?"
 TIPTOE = F(1357)             # tiptoe pizzicato for the last three lines
 STING = 51.98                # final sting after "allein"
-STAMP_HITS = [F(f + 5) for f in (905, 1010, 1101, 1204)]
+STAMP_HITS = [F(f + 5) for f in (905, 1006, 1101, 1204)]
 music = np.zeros(N, np.float32)
 hits = np.zeros(N, np.float32)
 
