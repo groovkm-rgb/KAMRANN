@@ -268,7 +268,8 @@ export function newspaper(seed = 34) {
   g.fillStyle = '#5a4a3a'; g.fillRect(px + 4, yb, pw - 8, 36);
   // coin pile picture
   const qx = 660, qy = 350, qw = 304, qh = 300; g.fillStyle = '#d6c8a6'; g.fillRect(qx, qy, qw, qh); g.strokeStyle = '#3a342c'; g.lineWidth = 4; g.strokeRect(qx, qy, qw, qh);
-  for (let i = 0; i < 18; i++) { const row = Math.floor(Math.sqrt(i * 2)), x = qx + 70 + (i % 5) * 40 + row * 6, y = qy + qh - 50 - row * 34; g.fillStyle = '#8a7650'; g.beginPath(); g.ellipse(x, y, 28, 12, 0, 0, 7); g.fill(); g.strokeStyle = '#3a2e1e'; g.lineWidth = 3; g.stroke(); g.beginPath(); g.ellipse(x, y, 14, 5, 0, 0, 7); g.stroke(); }
+  for (const [cx, n] of [[qx + 70, 7], [qx + 140, 10], [qx + 215, 6]]) { for (let k = 0; k < n; k++) { const y = qy + qh - 40 - k * 16; g.fillStyle = '#6e5c3c'; g.fillRect(cx - 30, y - 8, 60, 16); g.fillStyle = '#8a7650'; g.beginPath(); g.ellipse(cx, y - 8, 30, 9, 0, 0, 7); g.fill(); g.fillStyle = '#6e5c3c'; g.beginPath(); g.ellipse(cx, y + 8, 30, 9, 0, 0, Math.PI); g.fill(); }
+    g.fillStyle = '#a8946a'; g.beginPath(); g.ellipse(cx, qy + qh - 40 - n * 16 + 8, 30, 9, 0, 0, 7); g.fill(); }
   // text columns as grey lines
   const col = (x, y0, y1, w) => { for (let y = y0; y < y1; y += 22) { const l = w * (0.7 + 0.3 * r()); g.fillStyle = 'rgba(70,64,56,.55)'; rr(g, x, y, (y + 22 >= y1 || r() < 0.08) ? l * 0.5 : w, 7, 3); g.fill(); } };
   col(660, 680, 1330, 304); col(60, 1080, 1330, 270); col(350, 1080, 1330, 270);
