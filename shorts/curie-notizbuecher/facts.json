@@ -1,0 +1,14 @@
+{
+  "t_half": 1600.0,
+  "born": 1867,
+  "discovery": 1898,
+  "now": 2026,
+  "age": 159,
+  "elapsed": 128,
+  "hwz_fraction": 0.08,
+  "rest_now_pct": 94.60576467255959,
+  "decayed_now_pct": 5.394235327440411,
+  "half_year": 3498,
+  "ten_half_year": 17898,
+  "rest_ten_pct": 0.09765625
+}
