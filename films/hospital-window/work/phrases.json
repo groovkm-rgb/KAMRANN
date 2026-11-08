@@ -1,0 +1,319 @@
+{
+ "duration": 45.400813,
+ "frames30": 1362,
+ "source": "silence-align + manual check against RMS envelope (whisper model download blocked)",
+ "segments": [
+  [
+   0.0,
+   0.869864
+  ],
+  [
+   1.13401,
+   2.1456
+  ],
+  [
+   2.39873,
+   3.08023
+  ],
+  [
+   3.42034,
+   4.38746
+  ],
+  [
+   4.92238,
+   6.22136
+  ],
+  [
+   6.53413,
+   7.13138
+  ],
+  [
+   7.57878,
+   9.02519
+  ],
+  [
+   9.39159,
+   10.872
+  ],
+  [
+   11.2442,
+   12.271
+  ],
+  [
+   12.4146,
+   12.732
+  ],
+  [
+   13.0427,
+   13.8772
+  ],
+  [
+   14.0021,
+   14.701
+  ],
+  [
+   14.9212,
+   16.0693
+  ],
+  [
+   16.2952,
+   16.608
+  ],
+  [
+   16.9242,
+   17.7927
+  ],
+  [
+   17.9438,
+   18.5979
+  ],
+  [
+   19.0555,
+   21.2126
+  ],
+  [
+   21.5487,
+   24.4172
+  ],
+  [
+   24.6394,
+   25.1447
+  ],
+  [
+   25.3368,
+   26.194
+  ],
+  [
+   26.3218,
+   27.3781
+  ],
+  [
+   27.5569,
+   28.3832
+  ],
+  [
+   28.841,
+   30.5255
+  ],
+  [
+   30.9357,
+   32.1227
+  ],
+  [
+   32.3988,
+   34.3704
+  ],
+  [
+   34.7482,
+   36.3965
+  ],
+  [
+   36.8245,
+   39.2873
+  ],
+  [
+   39.4725,
+   41.4855
+  ],
+  [
+   41.8961,
+   42.2126
+  ],
+  [
+   42.8291,
+   45.0957
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Zwei Patienten.",
+   "s": 0.0,
+   "e": 0.87,
+   "f0": 0,
+   "f1": 26
+  },
+  {
+   "text": "Gleiche Operation.",
+   "s": 1.13,
+   "e": 2.15,
+   "f0": 34,
+   "f1": 64
+  },
+  {
+   "text": "Gleiches Zimmer.",
+   "s": 2.4,
+   "e": 3.08,
+   "f0": 72,
+   "f1": 92
+  },
+  {
+   "text": "Gleiche Krankenschwestern.",
+   "s": 3.42,
+   "e": 4.39,
+   "f0": 103,
+   "f1": 132
+  },
+  {
+   "text": "Nur eine Sache ist anders:",
+   "s": 4.92,
+   "e": 6.22,
+   "f0": 148,
+   "f1": 187
+  },
+  {
+   "text": "das Fenster.",
+   "s": 6.53,
+   "e": 7.13,
+   "f0": 196,
+   "f1": 214
+  },
+  {
+   "text": "Der eine schaut auf ein paar Bäume.",
+   "s": 7.58,
+   "e": 9.03,
+   "f0": 227,
+   "f1": 271
+  },
+  {
+   "text": "Der andere auf eine braune Ziegelmauer.",
+   "s": 9.39,
+   "e": 10.87,
+   "f0": 282,
+   "f1": 326
+  },
+  {
+   "text": "Ein Forscher wertet die Akten aus.",
+   "s": 11.24,
+   "e": 12.73,
+   "f0": 337,
+   "f1": 382
+  },
+  {
+   "text": "Aber nur von Mai bis Oktober –",
+   "s": 13.04,
+   "e": 14.7,
+   "f0": 391,
+   "f1": 441
+  },
+  {
+   "text": "dann tragen die Bäume Blätter.",
+   "s": 14.92,
+   "e": 16.07,
+   "f0": 448,
+   "f1": 482
+  },
+  {
+   "text": "Und was er findet,",
+   "s": 16.3,
+   "e": 17.79,
+   "f0": 489,
+   "f1": 534
+  },
+  {
+   "text": "ist verrückt.",
+   "s": 17.94,
+   "e": 18.6,
+   "f0": 538,
+   "f1": 558
+  },
+  {
+   "text": "Die Mauer-Patienten brauchen mehr starke Schmerzmittel.",
+   "s": 19.06,
+   "e": 21.21,
+   "f0": 572,
+   "f1": 636
+  },
+  {
+   "text": "Und die Schwestern notieren bei ihnen fast viermal so oft",
+   "s": 21.55,
+   "e": 24.38,
+   "f0": 646,
+   "f1": 731
+  },
+  {
+   "text": "Sachen wie: „weint“, „ist aufgewühlt“,",
+   "s": 24.64,
+   "e": 26.19,
+   "f0": 739,
+   "f1": 786
+  },
+  {
+   "text": "„braucht viel Zuspruch“.",
+   "s": 26.32,
+   "e": 27.36,
+   "f0": 790,
+   "f1": 821
+  },
+  {
+   "text": "Die Baum-Patienten?",
+   "s": 27.56,
+   "e": 28.38,
+   "f0": 827,
+   "f1": 851
+  },
+  {
+   "text": "Gehen fast einen Tag früher nach Hause.",
+   "s": 28.84,
+   "e": 30.53,
+   "f0": 865,
+   "f1": 916
+  },
+  {
+   "text": "Mit weniger Komplikationen.",
+   "s": 30.94,
+   "e": 32.12,
+   "f0": 928,
+   "f1": 964
+  },
+  {
+   "text": "Kein neues Medikament.",
+   "s": 32.4,
+   "e": 33.48,
+   "f0": 972,
+   "f1": 1004
+  },
+  {
+   "text": "Keine Therapie.",
+   "s": 33.6,
+   "e": 34.37,
+   "f0": 1008,
+   "f1": 1031
+  },
+  {
+   "text": "Nur ein anderer Blick aus dem Fenster.",
+   "s": 34.75,
+   "e": 36.4,
+   "f0": 1042,
+   "f1": 1092
+  },
+  {
+   "text": "Diese Entdeckung hat verändert, wie Krankenhäuser gebaut werden:",
+   "s": 36.83,
+   "e": 39.29,
+   "f0": 1105,
+   "f1": 1179
+  },
+  {
+   "text": "mit Gärten, Innenhöfen und Blick ins Grüne.",
+   "s": 39.47,
+   "e": 41.49,
+   "f0": 1184,
+   "f1": 1245
+  },
+  {
+   "text": "Also …",
+   "s": 41.9,
+   "e": 42.21,
+   "f0": 1257,
+   "f1": 1266
+  },
+  {
+   "text": "was siehst du gerade, wenn du von deinem Handy aufschaust?",
+   "s": 42.83,
+   "e": 45.1,
+   "f0": 1285,
+   "f1": 1353
+  }
+ ],
+ "total_frames": 1377
+}

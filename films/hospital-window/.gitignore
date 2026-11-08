@@ -1,0 +1,6 @@
+frames/
+stills/
+mix_raw.wav
+mix.wav
+out/*.mp4
+node_modules/
