@@ -1,0 +1,219 @@
+{
+ "duration": 45.087333,
+ "frames30": 1353,
+ "source": "silence-align (cost 2.62)",
+ "segments": [
+  [
+   0.134898,
+   1.88245
+  ],
+  [
+   2.30961,
+   3.02077
+  ],
+  [
+   3.189,
+   4.42215
+  ],
+  [
+   4.97481,
+   7.16912
+  ],
+  [
+   7.4629,
+   9.36678
+  ],
+  [
+   9.60785,
+   10.5444
+  ],
+  [
+   10.9182,
+   11.6324
+  ],
+  [
+   11.9648,
+   13.9764
+  ],
+  [
+   14.3381,
+   16.0798
+  ],
+  [
+   16.4103,
+   18.1019
+  ],
+  [
+   18.4373,
+   19.9712
+  ],
+  [
+   20.2611,
+   22.6521
+  ],
+  [
+   23.0255,
+   24.6945
+  ],
+  [
+   25.0049,
+   26.12
+  ],
+  [
+   26.3035,
+   27.088
+  ],
+  [
+   27.5354,
+   28.7373
+  ],
+  [
+   28.9525,
+   29.5555
+  ],
+  [
+   29.9985,
+   32.3828
+  ],
+  [
+   32.7511,
+   33.9422
+  ],
+  [
+   34.3708,
+   35.5686
+  ],
+  [
+   35.7887,
+   36.8244
+  ],
+  [
+   37.1722,
+   38.576
+  ],
+  [
+   38.88,
+   41.5752
+  ],
+  [
+   41.9051,
+   43.0312
+  ],
+  [
+   43.1851,
+   44.7901
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Der erfolgreichste Spion dieses Krieges \u2026 war schon tot,",
+   "s": 0.135,
+   "e": 1.882
+  },
+  {
+   "text": "bevor seine Mission begann.",
+   "s": 2.31,
+   "e": 4.422
+  },
+  {
+   "text": "Eine Armee plant einen Angriff auf eine Insel.",
+   "s": 4.975,
+   "e": 7.169
+  },
+  {
+   "text": "Der Feind darf es auf keinen Fall merken.",
+   "s": 7.463,
+   "e": 9.367
+  },
+  {
+   "text": "Also brauchen sie \u2026 eine Leiche.",
+   "s": 9.608,
+   "e": 11.632
+  },
+  {
+   "text": "Sie finden einen Toten ohne Angeh\u00f6rige.",
+   "s": 11.965,
+   "e": 13.976
+  },
+  {
+   "text": "Ziehen ihm eine Offiziersuniform an.",
+   "s": 14.338,
+   "e": 16.08
+  },
+  {
+   "text": "Und erfinden ihm ein ganzes Leben:",
+   "s": 16.41,
+   "e": 18.102
+  },
+  {
+   "text": "Liebesbriefe seiner Verlobten,",
+   "s": 18.437,
+   "e": 19.971
+  },
+  {
+   "text": "Theaterkarten, die Quittung f\u00fcr einen Verlobungsring.",
+   "s": 20.261,
+   "e": 22.652
+  },
+  {
+   "text": "Sogar einen Mahnbrief seiner Bank.",
+   "s": 23.026,
+   "e": 24.695
+  },
+  {
+   "text": "Und an ihm festgekettet:",
+   "s": 25.005,
+   "e": 26.12
+  },
+  {
+   "text": "eine Aktentasche.",
+   "s": 26.303,
+   "e": 27.088
+  },
+  {
+   "text": "Darin streng geheime Pl\u00e4ne.",
+   "s": 27.535,
+   "e": 28.737
+  },
+  {
+   "text": "Alle falsch.",
+   "s": 28.953,
+   "e": 29.555
+  },
+  {
+   "text": "Nachts l\u00e4sst ihn ein U-Boot vor einer K\u00fcste ins Meer gleiten.",
+   "s": 29.998,
+   "e": 32.383
+  },
+  {
+   "text": "Am Morgen findet ihn ein Fischer.",
+   "s": 32.751,
+   "e": 33.942
+  },
+  {
+   "text": "Die Papiere landen beim Feind.",
+   "s": 34.371,
+   "e": 35.569
+  },
+  {
+   "text": "Und der glaubt jedes Wort.",
+   "s": 35.789,
+   "e": 36.824
+  },
+  {
+   "text": "Er schickt Truppen an die falschen Orte.",
+   "s": 37.172,
+   "e": 38.576
+  },
+  {
+   "text": "Als der echte Angriff kommt, stehen viele seiner Soldaten ganz woanders. Der Mann,",
+   "s": 38.88,
+   "e": 41.575
+  },
+  {
+   "text": "der nie existierte \u2026 hat vermutlich Tausende Leben gerettet.",
+   "s": 41.905,
+   "e": 44.79
+  }
+ ]
+}

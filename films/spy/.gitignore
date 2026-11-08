@@ -1,0 +1,7 @@
+frames/
+stills/
+logs/
+node_modules
+web/lib/
+work/*.wav
+*.wav
