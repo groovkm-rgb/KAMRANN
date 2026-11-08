@@ -1,0 +1,9 @@
+frames/
+stills/
+node_modules/
+work/stem_*.wav
+mix.wav
+mix_raw.wav
+web/lib/
+web/main_kit.js
+web/cast.html

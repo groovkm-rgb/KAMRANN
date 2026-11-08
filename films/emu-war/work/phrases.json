@@ -1,0 +1,335 @@
+{
+ "duration": 41.560813,
+ "frames30": 1247,
+ "source": "silence-align + hand-fixed against waveform/spectral onsets (Whisper model download blocked)",
+ "segments": [
+  [
+   0.0,
+   0.569388
+  ],
+  [
+   0.759297,
+   2.39694
+  ],
+  [
+   2.65293,
+   3.08864
+  ],
+  [
+   3.31256,
+   3.94399
+  ],
+  [
+   4.24231,
+   5.30444
+  ],
+  [
+   5.49222,
+   6.8661
+  ],
+  [
+   7.20302,
+   8.57356
+  ],
+  [
+   8.74696,
+   9.47649
+  ],
+  [
+   9.82692,
+   12.1157
+  ],
+  [
+   12.5129,
+   13.235
+  ],
+  [
+   13.4018,
+   16.5744
+  ],
+  [
+   16.8576,
+   17.5792
+  ],
+  [
+   17.723,
+   18.3857
+  ],
+  [
+   18.5952,
+   20.397
+  ],
+  [
+   20.7033,
+   21.6344
+  ],
+  [
+   21.7769,
+   23.1778
+  ],
+  [
+   23.3508,
+   24.9484
+  ],
+  [
+   25.0813,
+   26.2222
+  ],
+  [
+   26.36,
+   28.7231
+  ],
+  [
+   29.2897,
+   30.7403
+  ],
+  [
+   30.9599,
+   31.4662
+  ],
+  [
+   31.7285,
+   32.8107
+  ],
+  [
+   33.2315,
+   34.3759
+  ],
+  [
+   34.8529,
+   36.45
+  ],
+  [
+   36.8129,
+   38.8482
+  ],
+  [
+   39.2715,
+   40.1559
+  ],
+  [
+   40.4335,
+   41.3105
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein Land schickt seine Armee in den Krieg.",
+   "s": 0.0,
+   "e": 1.92,
+   "f0": 0,
+   "f1": 58
+  },
+  {
+   "text": "Gegen …",
+   "s": 2.05,
+   "e": 2.4,
+   "f0": 61,
+   "f1": 72
+  },
+  {
+   "text": "Vögel.",
+   "s": 2.65,
+   "e": 3.09,
+   "f0": 80,
+   "f1": 93
+  },
+  {
+   "text": "Und verliert.",
+   "s": 3.31,
+   "e": 3.94,
+   "f0": 99,
+   "f1": 118
+  },
+  {
+   "text": "Zwanzigtausend Emus",
+   "s": 4.24,
+   "e": 5.3,
+   "f0": 127,
+   "f1": 159
+  },
+  {
+   "text": "fressen die Weizenfelder kahl.",
+   "s": 5.49,
+   "e": 6.87,
+   "f0": 165,
+   "f1": 206
+  },
+  {
+   "text": "Die Farmer wollen Maschinengewehre.",
+   "s": 7.2,
+   "e": 8.57,
+   "f0": 216,
+   "f1": 257
+  },
+  {
+   "text": "Sie bekommen sie.",
+   "s": 8.75,
+   "e": 9.48,
+   "f0": 262,
+   "f1": 284
+  },
+  {
+   "text": "Dazu Soldaten und zehntausend Schuss Munition.",
+   "s": 9.83,
+   "e": 12.12,
+   "f0": 295,
+   "f1": 364
+  },
+  {
+   "text": "Erster Versuch:",
+   "s": 12.51,
+   "e": 13.23,
+   "f0": 375,
+   "f1": 397
+  },
+  {
+   "text": "Die Emus teilen sich in kleine Gruppen auf",
+   "s": 13.4,
+   "e": 15.03,
+   "f0": 402,
+   "f1": 451
+  },
+  {
+   "text": "und rennen in alle Richtungen davon.",
+   "s": 15.06,
+   "e": 16.57,
+   "f0": 452,
+   "f1": 497
+  },
+  {
+   "text": "Zweiter Versuch:",
+   "s": 16.86,
+   "e": 17.58,
+   "f0": 506,
+   "f1": 527
+  },
+  {
+   "text": "ein Hinterhalt.",
+   "s": 17.72,
+   "e": 18.39,
+   "f0": 532,
+   "f1": 552
+  },
+  {
+   "text": "Über tausend Emus kommen näher.",
+   "s": 18.6,
+   "e": 19.94,
+   "f0": 558,
+   "f1": 598
+  },
+  {
+   "text": "Feuer!",
+   "s": 19.96,
+   "e": 20.4,
+   "f0": 599,
+   "f1": 612
+  },
+  {
+   "text": "Nach ein paar Vögeln:",
+   "s": 20.7,
+   "e": 21.63,
+   "f0": 621,
+   "f1": 649
+  },
+  {
+   "text": "Ladehemmung.",
+   "s": 21.78,
+   "e": 22.42,
+   "f0": 653,
+   "f1": 673
+  },
+  {
+   "text": "Dritter Versuch:",
+   "s": 22.46,
+   "e": 23.18,
+   "f0": 674,
+   "f1": 695
+  },
+  {
+   "text": "das Maschinengewehr auf einem Lastwagen.",
+   "s": 23.34,
+   "e": 24.95,
+   "f0": 700,
+   "f1": 748
+  },
+  {
+   "text": "Aber der ist zu langsam.",
+   "s": 25.08,
+   "e": 26.22,
+   "f0": 752,
+   "f1": 787
+  },
+  {
+   "text": "Und so holprig, dass der Schütze nicht mal schießen kann.",
+   "s": 26.36,
+   "e": 28.72,
+   "f0": 791,
+   "f1": 862
+  },
+  {
+   "text": "Die Armee zieht ab.",
+   "s": 29.29,
+   "e": 30.12,
+   "f0": 879,
+   "f1": 904
+  },
+  {
+   "text": "Kommt zurück.",
+   "s": 30.22,
+   "e": 30.74,
+   "f0": 907,
+   "f1": 922
+  },
+  {
+   "text": "Am Ende:",
+   "s": 30.96,
+   "e": 31.47,
+   "f0": 929,
+   "f1": 944
+  },
+  {
+   "text": "fast zehntausend Schuss.",
+   "s": 31.73,
+   "e": 32.81,
+   "f0": 952,
+   "f1": 984
+  },
+  {
+   "text": "Für knapp tausend Emus.",
+   "s": 33.23,
+   "e": 34.38,
+   "f0": 997,
+   "f1": 1031
+  },
+  {
+   "text": "Der Kommandant sagt danach sinngemäß:",
+   "s": 34.85,
+   "e": 36.45,
+   "f0": 1046,
+   "f1": 1094
+  },
+  {
+   "text": "Diese Vögel stecken Kugeln ein wie Panzer.",
+   "s": 36.81,
+   "e": 38.85,
+   "f0": 1104,
+   "f1": 1166
+  },
+  {
+   "text": "Und die Emus?",
+   "s": 39.27,
+   "e": 40.16,
+   "f0": 1178,
+   "f1": 1205
+  },
+  {
+   "text": "Haben gewonnen.",
+   "s": 40.43,
+   "e": 41.31,
+   "f0": 1213,
+   "f1": 1239
+  }
+ ],
+ "total_frames": 1262
+}
