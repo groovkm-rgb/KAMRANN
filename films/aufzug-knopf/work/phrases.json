@@ -1,0 +1,335 @@
+{
+ "duration": 44.120792,
+ "frames30": 1324,
+ "source": "silence-align + manual check against 10 ms RMS envelope (whisper model host unreachable)",
+ "segments": [
+  [
+   0.133243,
+   0.986961
+  ],
+  [
+   1.17701,
+   1.93077
+  ],
+  [
+   2.07034,
+   2.84531
+  ],
+  [
+   3.00222,
+   3.44898
+  ],
+  [
+   3.61909,
+   5.13737
+  ],
+  [
+   5.39592,
+   5.84696
+  ],
+  [
+   6.26551,
+   6.89646
+  ],
+  [
+   7.32882,
+   8.14
+  ],
+  [
+   8.57807,
+   10.0302
+  ],
+  [
+   10.2999,
+   11.7453
+  ],
+  [
+   12.1357,
+   13.6475
+  ],
+  [
+   14.1856,
+   15.9245
+  ],
+  [
+   16.134,
+   17.8562
+  ],
+  [
+   18.0965,
+   19.7208
+  ],
+  [
+   20.1338,
+   21.5174
+  ],
+  [
+   21.8472,
+   25.0767
+  ],
+  [
+   25.4831,
+   25.8694
+  ],
+  [
+   26.4095,
+   28.1936
+  ],
+  [
+   28.6198,
+   29.5198
+  ],
+  [
+   29.9514,
+   31.7641
+  ],
+  [
+   32.1282,
+   33.5394
+  ],
+  [
+   33.7158,
+   34.9448
+  ],
+  [
+   35.3098,
+   36.0435
+  ],
+  [
+   36.4147,
+   39.5431
+  ],
+  [
+   39.9448,
+   40.7971
+  ],
+  [
+   41.1363,
+   41.432
+  ],
+  [
+   41.7844,
+   43.7901
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Du stehst im Aufzug.",
+   "s": 0.13,
+   "e": 0.99,
+   "f0": 4,
+   "f1": 30
+  },
+  {
+   "text": "Du hast es eilig.",
+   "s": 1.18,
+   "e": 1.93,
+   "f0": 35,
+   "f1": 58
+  },
+  {
+   "text": "Also drückst du:",
+   "s": 2.15,
+   "e": 2.85,
+   "f0": 64,
+   "f1": 86
+  },
+  {
+   "text": "Tür zu.",
+   "s": 3.0,
+   "e": 3.45,
+   "f0": 90,
+   "f1": 104
+  },
+  {
+   "text": "Einmal.",
+   "s": 3.62,
+   "e": 4.05,
+   "f0": 109,
+   "f1": 122
+  },
+  {
+   "text": "Zweimal.",
+   "s": 4.09,
+   "e": 4.58,
+   "f0": 123,
+   "f1": 137
+  },
+  {
+   "text": "Fünfmal.",
+   "s": 4.65,
+   "e": 5.14,
+   "f0": 140,
+   "f1": 154
+  },
+  {
+   "text": "Und?",
+   "s": 5.4,
+   "e": 5.85,
+   "f0": 162,
+   "f1": 176
+  },
+  {
+   "text": "Die Tür geht zu.",
+   "s": 6.27,
+   "e": 6.9,
+   "f0": 188,
+   "f1": 207
+  },
+  {
+   "text": "Hat geklappt, oder?",
+   "s": 7.33,
+   "e": 8.14,
+   "f0": 220,
+   "f1": 244
+  },
+  {
+   "text": "In vielen amerikanischen Aufzügen …",
+   "s": 8.58,
+   "e": 10.03,
+   "f0": 257,
+   "f1": 301
+  },
+  {
+   "text": "hätte sich die Tür sowieso geschlossen.",
+   "s": 10.3,
+   "e": 11.75,
+   "f0": 309,
+   "f1": 352
+  },
+  {
+   "text": "Der Knopf macht dort oft gar nichts.",
+   "s": 12.14,
+   "e": 13.65,
+   "f0": 364,
+   "f1": 410
+  },
+  {
+   "text": "Seit einem Gesetz für Menschen mit Behinderung",
+   "s": 14.19,
+   "e": 15.94,
+   "f0": 426,
+   "f1": 478
+  },
+  {
+   "text": "müssen die Türen lange genug offen bleiben –",
+   "s": 16.13,
+   "e": 17.82,
+   "f0": 484,
+   "f1": 535
+  },
+  {
+   "text": "damit jeder in Ruhe einsteigen kann.",
+   "s": 18.09,
+   "e": 19.72,
+   "f0": 543,
+   "f1": 592
+  },
+  {
+   "text": "Kein Knopf darf das abkürzen.",
+   "s": 20.13,
+   "e": 21.52,
+   "f0": 604,
+   "f1": 646
+  },
+  {
+   "text": "Nur die Feuerwehr hat einen Schlüssel,",
+   "s": 21.84,
+   "e": 23.44,
+   "f0": 655,
+   "f1": 703
+  },
+  {
+   "text": "mit dem er wirklich funktioniert.",
+   "s": 23.51,
+   "e": 25.08,
+   "f0": 705,
+   "f1": 752
+  },
+  {
+   "text": "Aber",
+   "s": 25.48,
+   "e": 25.87,
+   "f0": 764,
+   "f1": 776
+  },
+  {
+   "text": "warum ist der Knopf dann überhaupt noch da?",
+   "s": 26.41,
+   "e": 28.19,
+   "f0": 792,
+   "f1": 846
+  },
+  {
+   "text": "Weil er dich beruhigt.",
+   "s": 28.62,
+   "e": 29.52,
+   "f0": 859,
+   "f1": 886
+  },
+  {
+   "text": "Psychologen nennen das gefühlte Kontrolle:",
+   "s": 29.95,
+   "e": 31.76,
+   "f0": 898,
+   "f1": 953
+  },
+  {
+   "text": "Wenn du glaubst, etwas tun zu können,",
+   "s": 32.13,
+   "e": 33.54,
+   "f0": 964,
+   "f1": 1006
+  },
+  {
+   "text": "bist du weniger gestresst.",
+   "s": 33.72,
+   "e": 34.95,
+   "f0": 1012,
+   "f1": 1048
+  },
+  {
+   "text": "Und in New York?",
+   "s": 35.31,
+   "e": 36.04,
+   "f0": 1059,
+   "f1": 1081
+  },
+  {
+   "text": "Waren an den Fußgängerampeln",
+   "s": 36.41,
+   "e": 37.82,
+   "f0": 1092,
+   "f1": 1135
+  },
+  {
+   "text": "über zweitausendfünfhundert Drückknöpfe …",
+   "s": 37.87,
+   "e": 39.55,
+   "f0": 1136,
+   "f1": 1186
+  },
+  {
+   "text": "nur Attrappen.",
+   "s": 39.94,
+   "e": 40.8,
+   "f0": 1198,
+   "f1": 1224
+  },
+  {
+   "text": "Also:",
+   "s": 41.13,
+   "e": 41.43,
+   "f0": 1234,
+   "f1": 1243
+  },
+  {
+   "text": "Wie viele Knöpfe hast du heute schon umsonst gedrückt?",
+   "s": 41.79,
+   "e": 43.8,
+   "f0": 1254,
+   "f1": 1314
+  }
+ ],
+ "total_frames": 1339
+}

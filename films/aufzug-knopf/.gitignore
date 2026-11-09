@@ -1,0 +1,11 @@
+frames/
+stills/
+logs/
+node_modules/
+out/*.wav
+mix.wav
+mix_raw.wav
+web/lib/
+web/toon.js
+work/db10ms.npy
+*.pyc
