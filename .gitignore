@@ -2,3 +2,14 @@ node_modules/
 *.webm
 /snaps/
 .DS_Store
+
+# beyin film build products
+films/beyin/frames/
+films/beyin/stills/
+films/beyin/logs/
+films/beyin/work/
+films/beyin/node_modules
+films/beyin/logs_*.txt
+films/beyin/out/*.wav
+films/beyin/out/*.mp4
+films/beyin/web/lib/

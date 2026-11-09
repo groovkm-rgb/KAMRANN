@@ -1,0 +1,101 @@
+SAHNE LİSTESİ — Beyin serisi (5:00, 1920x1080, 30 fps, 9000 kare)
+Zaman biçimi: dakika:saniye.salise   |   kare aralığı (0 tabanlı, dahil)
+Videoda konuşma, yazı, harf veya rakam yoktur. Müzik ve efekt seviyesi seslendirme eklenecek şekilde düşük tutulmuştur.
+
+==============================================================================
+0:00.00 – 0:15.00   GİRİŞ
+==============================================================================
+0:00.00 – 0:01.00  (kare 0000–0029, 1 sn)  Montaj 1: dev rulo gri duvarı tek hamlede pembeye boyuyor
+0:01.00 – 0:02.00  (kare 0030–0059, 1 sn)  Montaj 2: hastane penceresi, hemen karşıda tuğla duvar
+0:02.00 – 0:03.00  (kare 0060–0089, 1 sn)  Montaj 3: beyaz şaraba damlayan kırmızı boya bulutu
+0:03.00 – 0:04.00  (kare 0090–0119, 1 sn)  Montaj 4: açılan hapın içi boş, sadece ışıltı
+0:04.00 – 0:05.00  (kare 0120–0149, 1 sn)  Montaj 5: asansörde "kapat" düğmesine art arda basılıyor
+0:05.00 – 0:11.00  (kare 0150–0329, 6 sn)  Beyin zıplayarak gelir, kameraya bakıp kafasına "tok tok" vurur; arkasında onu taklit eden sinsi gölge belirir
+0:11.00 – 0:15.00  (kare 0330–0449, 4 sn)  Beyin 1 noktalı yuvarlak tabelayı gösterir ve kameraya fırlatır (Bölüm 1 geçişi)
+
+==============================================================================
+0:15.00 – 1:07.00   BÖLÜM 1 – PEMBE HÜCRE
+==============================================================================
+0:15.00 – 0:21.00  (kare 0450–0629, 6 sn)  Gri, kasvetli hücre (ranza, parmaklıklı küçük pencere). Dev boya rulosu tek hamlede duvarı sakız pembesine boyuyor
+0:21.00 – 0:27.00  (kare 0630–0809, 6 sn)  Yakın plan: beyaz boya kovasına küçük kutudan kırmızı boya dökülüyor, karıştırma çubuğuyla girdap gibi pembeye dönüyor
+0:27.00 – 0:34.00  (kare 0810–1019, 7 sn)  Gardiyan, iri ve sinirli mahkumu pembe hücreye getiriyor; kollarında çapa ve yıldız dövmeleri, kulaklarından buhar
+0:34.00 – 0:41.00  (kare 1020–1229, 7 sn)  Dışarıda gardiyan rakamsız kronometreye bakıyor; içeride mahkumun üstündeki kırmızı öfke bulutu küçülüyor, oturuyor, gözlerini kırpıştırıp sakinleşiyor
+0:41.00 – 0:47.00  (kare 1230–1409, 6 sn)  Mahkum çok zayıf bir gardiyanla bilek güreşi yapıyor ve anında kaybediyor; şaşkın yüz (vurucu an: hızlı punch-in)
+0:47.00 – 0:50.00  (kare 1410–1499, 3 sn)  Montaj: başka hapishanelerde koridor boyunca hücreler tek tek pembeye boyanıyor
+0:50.00 – 0:53.00  (kare 1500–1589, 3 sn)  Montaj: pembe spor soyunma odası; iri sporcular bankta uykulu, başları düşüyor
+0:53.00 – 1:00.00  (kare 1590–1799, 7 sn)  Ters köşe: mahkum hücrede fazla kalıyor; rakamsız duvar saati hızla dönüyor, volta atmaya başlıyor, öfke bulutu geri geliyor
+1:00.00 – 1:07.00  (kare 1800–2009, 7 sn)  Laboratuvarda bilim insanları deneyi tekrarlıyor ve omuz silkiyor; pembe boya çatlayıp grileşiyor; Beyin köşeden kafasını uzatıp omuz silkiyor
+
+==============================================================================
+1:07.00 – 1:10.00   GEÇİŞ (2 nokta)
+==============================================================================
+1:07.00 – 1:10.00  (kare 2010–2099, 3 sn)  Geçiş: Beyin 2 noktalı tabelayı gösterip fırlatır
+
+==============================================================================
+1:10.00 – 2:02.00   BÖLÜM 2 – PENCERE MANZARASI
+==============================================================================
+1:10.00 – 1:16.00  (kare 2100–2279, 6 sn)  Bölünmüş ekran: birebir aynı iki hastane odası (krem duvar, metal karyola, serum askısı, büyük pencere). İkiz gibi iki hasta aynı anda, ayna simetrisiyle yataklarında doğruluyor
+1:16.00 – 1:22.00  (kare 2280–2459, 6 sn)  Perdeler aynı anda açılıyor. Sol pencere: yeşil ağaçlar, kuşlar, güneş, odada dans eden yaprak gölgeleri. Sağ pencere: hemen karşıda kahverengi tuğla duvar, soğuk gri ışık
+1:22.00 – 1:29.00  (kare 2460–2669, 7 sn)  Arşiv odası: tavana kadar dosya dolapları, toz, yeşil abajur. Gözlüklü, hardal hırkalı araştırmacı dosyalara dalıyor; penceredeki ağaç time-lapse ile çıplaktan yapraklıya dönüyor
+1:29.00 – 1:35.00  (kare 2670–2849, 6 sn)  Araştırmacı iki dosyayı yan yana koyup karşılaştırıyor (ağaç ikonlu dosyada az ilaç, tuğla ikonlu dosyada çok ilaç); kaşları havaya kalkıyor (vurucu an)
+1:35.00 – 1:42.00  (kare 2850–3059, 7 sn)  Duvar odası: komodinde ilaç kapları birikiyor, hasta kıvrılmış ve üzgün, hemşire teselli ediyor (soğuk gri ışık)
+1:42.00 – 1:49.00  (kare 3060–3269, 7 sn)  Ağaç odası: hasta kuşlara bakıp gülümsüyor, çantasını topluyor, el sallayıp güneşli kapıdan çıkıyor
+1:49.00 – 1:56.00  (kare 3270–3479, 7 sn)  Kamera sol pencereden dışarı süzülüp ağaçların arasına uçuyor; kuşlar eşlik ediyor
+1:56.00 – 2:02.00  (kare 3480–3659, 6 sn)  Cam cepheli modern hastane: ortada yeşil iç avlu, fıskiye, banklar, güneşlenen hastalar
+
+==============================================================================
+2:02.00 – 2:05.00   GEÇİŞ (3 nokta)
+==============================================================================
+2:02.00 – 2:05.00  (kare 3660–3749, 3 sn)  Geçiş: Beyin 3 noktalı tabelayı gösterip fırlatır
+
+==============================================================================
+2:05.00 – 2:57.00   BÖLÜM 3 – BOYALI ŞARAP
+==============================================================================
+2:05.00 – 2:11.00  (kare 3750–3929, 6 sn)  Şık şarap tadım salonu: ahşap paneller, mumlar, meşe fıçılar, beyaz örtülü uzun masa, kristal kadehler. Önlüklü, papyonlu, elinde yazısız defter olan beş tadımcı oturuyor
+2:11.00 – 2:17.00  (kare 3930–4109, 6 sn)  Paravanın arkasında asistan damlalıkla beyaz şaraba kırmızı gıda boyası damlatıyor; boya bulut gibi yayılıp şarabı kırmızıya çeviriyor
+2:17.00 – 2:24.00  (kare 4110–4319, 7 sn)  Tadımcılar kırmızı kadehi çeviriyor, kokluyor, tadıyor; kafalarının üstünde düşünce balonları: ahududu, kiraz, böğürtlen
+2:24.00 – 2:30.00  (kare 4320–4499, 6 sn)  Kamera geri çekiliyor: iki kadeh de (biri kırmızı, biri beyaz) aynı beyaz şarap şişesinden doldurulmuş. Beyin köşede eliyle yüzünü kapatıyor
+2:30.00 – 2:36.00  (kare 4500–4679, 6 sn)  İkinci test: aynı sıradan şarap iki farklı şişeye dolduruluyor: biri altın folyolu, mum mühürlü, yazısız armalı gösterişli şişe; diğeri vidalı kapaklı sade ucuz şişe
+2:36.00 – 2:43.00  (kare 4680–4889, 7 sn)  Tadımcılar gösterişli şişeden içiyor: gözler kapalı, mutluluktan uçuyorlar, parmak öpücüğü, etrafta ışıltılar
+2:43.00 – 2:50.00  (kare 4890–5099, 7 sn)  Aynı tadımcılar ucuz şişeden içiyor: yüzlerini buruşturuyor, kovaya tükürüyor, başparmak aşağı (vurucu an: punch-in)
+2:50.00 – 2:57.00  (kare 5100–5309, 7 sn)  Metafor: tadımcının dili küçük bir bantla "kapalı", gözleri ise kocaman ve parlıyor. Beyin, kadehleri gözlük gibi gözüne takmış
+
+==============================================================================
+2:57.00 – 3:00.00   GEÇİŞ (4 nokta)
+==============================================================================
+2:57.00 – 3:00.00  (kare 5310–5399, 3 sn)  Geçiş: Beyin 4 noktalı tabelayı gösterip fırlatır
+
+==============================================================================
+3:00.00 – 3:52.00   BÖLÜM 4 – PAHALI PLASEBO
+==============================================================================
+3:00.00 – 3:06.00  (kare 5400–5579, 6 sn)  Aydınlık, sevimli laboratuvar. Gönüllü sandalyede, bileğinde küçük elektrot bandı; minik çizgi film kıvılcımı ve komik "ay!" yüzü (vurucu an)
+3:06.00 – 3:12.00  (kare 5580–5759, 6 sn)  Araştırmacı birebir aynı beyaz hapları dağıtıyor. Yanında iki broşür: parlak şık olanın üstünde altın para destesi ikonu (pahalı); sade olanın üstünde kırmızı indirim etiketi ikonu ve tek madeni para (ucuz). Yazı yok
+3:12.00 – 3:19.00  (kare 5760–5969, 7 sn)  Bölünmüş görüntü: solda A grubu parlak broşürü okuyup etkileniyor; sağda B grubu indirimli broşüre şüpheyle kaşını kaldırarak bakıyor
+3:19.00 – 3:25.00  (kare 5970–6149, 6 sn)  Bekleme: kum saati akıyor, gönüllüler hapları yutuyor
+3:25.00 – 3:32.00  (kare 6150–6359, 7 sn)  İkinci kıvılcım turu: A grubu gönüllüsü gülümsüyor, neredeyse hissetmiyor; B grubu gönüllüsü hâlâ yüzünü buruşturuyor
+3:32.00 – 3:39.00  (kare 6360–6569, 7 sn)  Sonuç görseli: iki sıra gülen yüz ikonu; A grubunun (altın para) sırası belirgin şekilde daha uzun, B grubunun (indirim etiketi) sırası kısa. Rakam yok
+3:39.00 – 3:45.00  (kare 6570–6749, 6 sn)  Ters köşe: hap ikiye kırılıyor, içinden sadece ışıltılı şeker tozu çıkıyor; araştırmacı göz kırpıyor ("ta-da")
+3:45.00 – 3:52.00  (kare 6750–6959, 7 sn)  Beyin elinde dev bir fiyat etiketi tutuyor; etiketi pahalı yüzüne çevirdikçe yanındaki ağrı göstergesi kırmızıdan yeşile iniyor (rakamsız)
+
+==============================================================================
+3:52.00 – 3:55.00   GEÇİŞ (5 nokta)
+==============================================================================
+3:52.00 – 3:55.00  (kare 6960–7049, 3 sn)  Geçiş: Beyin 5 noktalı tabelayı gösterip fırlatır
+
+==============================================================================
+3:55.00 – 4:47.00   BÖLÜM 5 – ASANSÖR DÜĞMESİ
+==============================================================================
+3:55.00 – 4:01.00  (kare 7050–7229, 6 sn)  Mermer ofis lobisi. Elinde ağzına kadar dolu kahve olan aceleci adam, kapanmakta olan asansöre dalıyor
+4:01.00 – 4:07.00  (kare 7230–7409, 6 sn)  Adam "kapat" düğmesine (▶|◀ ikonlu) art arda basıyor; her basışta hızlı punch-in, gittikçe çılgınca
+4:07.00 – 4:13.00  (kare 7410–7589, 6 sn)  Kapılar yavaşça kapanıyor; adam gururla parmağının ucunu üflüyor
+4:13.00 – 4:20.00  (kare 7590–7799, 7 sn)  Mavi teknik çizim (blueprint) kesiti: "kapat" düğmesinin kablosu kopuk, boşlukta sallanıyor; kapıyı ayrı bir kum saati ve dişliler yönetiyor
+4:20.00 – 4:27.00  (kare 7800–8009, 7 sn)  Tekerlekli sandalyedeki kadın ve bastonlu yaşlı kadın gülümseyerek giriyor; kapılar sabırla açık bekliyor
+4:27.00 – 4:33.00  (kare 8010–8189, 6 sn)  İtfaiyeci (kırmızı kask, arma/numara yok) anahtarı deliğe sokup çeviriyor; kapılar anında "zack" diye kapanıyor; adamın ağzı açık kalıyor (vurucu an)
+4:33.00 – 4:40.00  (kare 8190–8399, 7 sn)  Beyin elinde oyuncak araba direksiyonu, heyecanla çeviriyor (sahte kontrol metaforu); adamın kafasındaki stres bulutu dağılıyor
+4:40.00 – 4:47.00  (kare 8400–8609, 7 sn)  New York benzeri kavşak (yazısız sarı taksiler, buhar): yayalar butona basıyor; kesitte kopuk kablo; kamera geri çekiliyor ve yüzlerce butonlu direk (sarı noktalar) görünüyor
+
+==============================================================================
+4:47.00 – 5:00.00   KAPANIŞ
+==============================================================================
+4:47.00 – 4:53.00  (kare 8610–8789, 6 sn)  Kapanış: Beyin koltuğa yayılmış, etrafında beş bölümün objeleri; kameraya bakıp kaşını kaldırır
+4:53.00 – 5:00.00  (kare 8790–8999, 7 sn)  Kapanış: Beyin el sallar, arka plan sade tek renkli yumuşak gradyana döner (sol ve sağ boş: bitiş ekranı alanı)

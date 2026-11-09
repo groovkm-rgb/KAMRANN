@@ -1,0 +1,9 @@
+<!doctype html><html><body style="margin:0;background:#9ab"><canvas id="c" width="3000" height="2000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const g = document.getElementById('c').getContext('2d'); g.fillStyle='#bcd'; g.fillRect(0,0,3000,2000);
+const items = window.ITEMS || [];
+const list = (await import('./castlist.js')).default(T);
+list.forEach((fn, i) => { const x = (i % 10) * 300, y = Math.floor(i / 10) * 500; g.save(); g.translate(x, y); g.scale(0.5, 0.5); g.strokeStyle='#0002'; g.strokeRect(0,0,600,1000); const p = new T.Pen(g); fn(p, 600, 1000); g.restore(); });
+window.ready = true;
+</script></body></html>
