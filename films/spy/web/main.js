@@ -490,7 +490,9 @@ const inkScene = fs(new THREE.ShaderMaterial({ uniforms: inkU, vertexShader: `va
     vec3 sep = vec3(l*1.07+.02, l*.98+.01, l*.82); c = mix(c, sep, tone);
     c = c*gain + lift;
     vec2 q = vUv-.5; c *= 1. - vig*dot(q*vec2(1.,.75), q*vec2(1.,.75))*2.2;
-    c += (hash(vUv*res + seed) - .5) * grain;
+    vec2 gp = vUv*res/1.9 + vec2(seed*13.7, seed*7.3); vec2 gi = floor(gp), gf = fract(gp); gf = gf*gf*(3.-2.*gf);
+    float gn = mix(mix(hash(gi), hash(gi+vec2(1.,0.)), gf.x), mix(hash(gi+vec2(0.,1.)), hash(gi+vec2(1.,1.)), gf.x), gf.y);
+    c += (gn - .5) * grain * (.3 + .7*smoothstep(.04, .45, l));   // soft fine grain, weaker in the shadows
     c = mix(c, vec3(1.), flash); c = mix(c, vec3(0.), fade);
     gl_FragColor = vec4(max(c, 0.),1.); }` }));
 const dofU = { src: { value: rtInk.texture }, nd: { value: rtNd.texture }, res: { value: new THREE.Vector2(W, H) }, focus: { value: 5 }, cinf: { value: 0 }, near: { value: 1 } };
@@ -518,7 +520,7 @@ function applyLight(L) {
   sun.color.set(L.sun); sun.intensity = L.sunI;
   scene.fog.color.set(L.fog); scene.fog.near = L.fogNear; scene.fog.far = L.fogFar;
   skyU.top.value.set(L.skyTop); skyU.hor.value.set(L.skyHor); skyU.sunCol.value.set(L.sunDisc || '#000'); skyU.sunSize.value = L.sunSize || 0; skyU.glow.value = L.sunGlow ?? 0.35; skyU.gpow.value = L.glowPow ?? 18;
-  inkU.sat.value = L.sat ?? 1; inkU.gain.value.set(L.gain || '#ffffff'); inkU.lift.value.set(L.lift || '#000000'); inkU.tone.value = L.tone ?? 0.15; inkU.grain.value = L.grain ?? 0.045;
+  inkU.sat.value = L.sat ?? 1; inkU.gain.value.set(L.gain || '#ffffff'); inkU.lift.value.set(L.lift || '#000000'); inkU.tone.value = L.tone ?? 0.15; inkU.grain.value = L.grain ?? 0.018;
   if (L.waterDeep) { seaU.deep.value.set(L.waterDeep); seaU.shal.value.set(L.waterShal); seaU.glint.value.set(L.glint); }
   lamp.intensity = L.lampI || 0; if (L.lampCol) lamp.color.set(L.lampCol); lamp.distance = L.lampDist || 9;
 }

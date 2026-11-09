@@ -49,7 +49,7 @@ const smooth = E.smooth;
 export const LIGHTS = {
   night: { az: -50, el: 22, sky: '#5a72a0', ground: '#182234', hemi: 1.35, sun: '#c4d6f4', sunI: 1.7, fog: '#2a3a58', fogNear: 30, fogFar: 300,
     skyTop: '#0a1430', skyHor: '#3a5078', sunDisc: '#f6f2de', sunSize: 0.0006, sunGlow: 0.4, glowPow: 160, sat: 0.95, waterDeep: '#0e2040', waterShal: '#2a4a78', glint: '#d4e2f6',
-    vig: 0.36, tone: 0.06, grain: 0.05, shadowExt: 16 },
+    vig: 0.36, tone: 0.06, grain: 0.015, shadowExt: 16 },
   room: { az: 60, el: 78, sky: '#8a7660', ground: '#2a2018', hemi: 0.8, sun: '#ffd9a0', sunI: 1.25, fog: '#2a2018', fogNear: 8, fogFar: 30, skyTop: '#1a1410', skyHor: '#1a1410',
     lampI: 3.2, lampCol: '#ffcf8a', lampDist: 8, sat: 1.0, tone: 0.24, vig: 0.42, gain: '#fff4e6', shadowExt: 4.5 },
   cold: { az: 30, el: 80, sky: '#d4e6f6', ground: '#7a8a9a', hemi: 1.2, sun: '#e6f2ff', sunI: 1.1, fog: '#a8bccc', fogNear: 10, fogFar: 40, skyTop: '#9fb2bf', skyHor: '#9fb2bf',
