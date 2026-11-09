@@ -1,0 +1,35 @@
+<!doctype html><html><body style="margin:0;background:#888"><canvas id="c" width="2400" height="2000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const c = document.getElementById('c'), g = c.getContext('2d');
+g.fillStyle = '#d9d4c8'; g.fillRect(0, 0, 2400, 2000);
+const cell = (i, fn) => { const x = (i % 8) * 300, y = Math.floor(i / 8) * 500; g.save(); g.translate(x, y); g.scale(0.5, 0.5); fn(new T.Pen(g)); g.restore(); };
+const L = [
+  p => T.castFront(p, 'hurry', { expr: 'hurry', L: 'case', R: 'cup', slosh: 0.6, drop: 0.5, step: 0.2 }),
+  p => T.castFront(p, 'hurry', { expr: 'impatient', L: 'watch', R: 'cup', lookY: 1, tap: 1 }),
+  p => T.castFront(p, 'hurry', { expr: 'proud', L: 'case', R: 'gun' }),
+  p => T.castFront(p, 'hurry', { expr: 'confused', L: 'scratch', R: 'cup' }),
+  p => T.castFront(p, 'hurry', { expr: 'shock', L: 'case', R: 'press', reach: 1 }),
+  p => T.castFront(p, 'wheel', { expr: 'kind', L: 'rim', R: 'rim', wheelRot: 0.3 }),
+  p => T.castFront(p, 'granny', { expr: 'happy', L: 'hang', R: 'cane' }),
+  p => T.castFront(p, 'fire', { expr: 'focus', L: 'hang', R: 'keyUp' }),
+  p => T.castFront(p, 'psych', { expr: 'smile', L: 'clip', R: 'pen' }),
+  p => T.castFront(p, 'ped', { expr: 'neutral', L: 'strap', R: 'press' }),
+  p => T.castFront(p, 'hurry', { expr: 'sly', L: 'case', R: 'pressUp' }),
+  p => T.castFront(p, 'hurry', { expr: 'relaxed', L: 'case', R: 'cup' }),
+  p => T.brainCard(p, { wheel: 0.6 }),
+  p => T.handCard(p, {}),
+  p => T.handCard(p, { sleeve: '#d8c08e', stripe: true, key: true, keyTurn: 0.6, cuff: '#2a2a2a' }),
+  p => T.fxThought(p, 1),
+  p => T.fxStress(p, 0),
+  p => T.fxXray(p, 'hourglass', 0.5, 0.3),
+  p => T.fxXray(p, 'wire', 0.5),
+  p => T.fxXray(p, 'ok'),
+  p => T.castFront(p, T.crowdOutfit(1), { expr: 'impatient', R: 'press' }),
+  p => T.castFront(p, T.crowdOutfit(2), { expr: 'neutral', R: 'press' }),
+  p => T.castFront(p, T.crowdOutfit(3), { expr: 'worried', R: 'press' }),
+  p => T.fxSpark(p, 0.5),
+];
+L.forEach((fn, i) => cell(i, fn));
+window.ready = true;
+</script></body></html>
