@@ -267,57 +267,39 @@ export const crowdOutfit = (v) => {
   return { ...CAST.ped, shirt: tops[v % 6], skin: skins[v % 4], hair: hairs[(v >> 1) % 4], hairStyle: styles[v % 4], headphones: v % 3 ? null : "#ff5f7a", backpack: ["#f08a3c", "#3b6fb6", "#d6453a"][v % 3] };
 };
 
+// expressions for the modern cast, using the kit's standard eye kinds (dot / lid / small / happy / squeeze / shock)
 const FX2 = {
-  neutral: { eye: "big", brow: [[0, 0], [0, 0]], mouth: "dash" },
-  smile: { eye: "big", brow: [[-1, -2], [-1, -2]], mouth: "smile" },
-  kind: { eye: "big", brow: [[-2, -2], [-2, -2]], mouth: "smileWide", blush: 1 },
-  happy: { eye: "happy", brow: [[-3, -3], [-3, -3]], mouth: "smileWide", blush: 1 },
-  grin: { eye: "big", brow: [[-2, -4], [-2, -4]], mouth: "grin" },
-  proud: { eye: "happy", brow: [[-4, -6], [-4, -6]], mouth: "grin", blush: 1 },
-  sly: { eye: "half", brow: [[3, -2], [-3, -5]], mouth: "smirk" },
-  impatient: { eye: "half", brow: [[6, -2], [6, -2]], mouth: "frown" },
-  hurry: { eye: "big", brow: [[-5, 3], [-5, 3]], mouth: "wave" },
-  worried: { eye: "big", brow: [[-6, 2], [-6, 2]], mouth: "wave" },
-  shock: { eye: "wide", brow: [[-8, -8], [-8, -8]], mouth: "O" },
-  confused: { eye: "big", brow: [[-7, -9], [4, 1]], mouth: "wave" },
-  relaxed: { eye: "happy", brow: [[-2, -1], [-2, -1]], mouth: "smile", blush: 1 },
-  focus: { eye: "half", brow: [[4, -1], [4, -1]], mouth: "smirk" },
-  excited: { eye: "wide", brow: [[-6, -8], [-6, -8]], mouth: "laugh", blush: 1 },
-  hopeful: { eye: "big", brow: [[-6, -2], [-6, -2]], mouth: "smile" },
+  neutral: { eye: "lid", brow: [[0, -1], [0, -1]], mouth: "dash" },
+  smile: { eye: "dot", brow: [[0, -1], [0, -1]], mouth: "smile" },
+  kind: { eye: "dot", brow: [[-1, -2], [-1, -2]], mouth: "smileWide", blush: 1 },
+  happy: { eye: "happy", brow: [[-2, 1], [-2, 1]], mouth: "smileWide", blush: 1 },
+  grin: { eye: "dot", brow: [[-2, -3], [-2, -3]], mouth: "grin" },
+  proud: { eye: "happy", brow: [[-3, -3], [-3, -3]], mouth: "grin", blush: 1 },
+  sly: { eye: "lid", brow: [[2, -3], [-1, -4]], mouth: "smirk" },
+  impatient: { eye: "lid", brow: [[3, -2], [3, -2]], mouth: "frown" },
+  hurry: { eye: "small", brow: [[-3, 2], [-3, 2]], mouth: "wave" },
+  worried: { eye: "small", brow: [[-3, 2], [-3, 2]], mouth: "wave" },
+  shock: { eye: "shock", brow: [[-7, -6], [-7, -6]], mouth: "O" },
+  confused: { eye: "dot", brow: [[-5, -7], [3, 1]], mouth: "wave" },
+  relaxed: { eye: "happy", brow: [[-2, 1], [-2, 1]], mouth: "smile", blush: 1 },
+  focus: { eye: "lid", brow: [[3, -1], [3, -1]], mouth: "smirk" },
+  excited: { eye: "dot", brow: [[-4, -4], [-4, -4]], mouth: "laugh", blush: 1 },
+  hopeful: { eye: "dot", brow: [[-3, 1], [-3, 1]], mouth: "smile" },
 };
-
-const eyeM = (p, kind, x, y, u, look, lookY, side, skin) => {
-  const px = x + look * 3.4 * u, py = y + 1 * u + lookY * 3.2 * u;
-  switch (kind) {
-    case "big": case "half": case "wide": {
-      const rx = (kind === "wide" ? 10 : 8.6) * u, ry = (kind === "wide" ? 12.6 : 10.6) * u, pr = (kind === "wide" ? 3.6 : 4.9) * u;
-      p.ell(x, y, rx, ry, "#ffffff", 0);
-      p.clip(ellPts(x, y, rx, ry), () => {
-        p.dot(px, py, pr, INK); p.dot(px - 1.7 * u, py - 1.9 * u, 1.7 * u, "#ffffff");
-        if (kind === "half") { p.poly([[x - rx - 2 * u, y - ry - 2 * u], [x + rx + 2 * u, y - ry - 2 * u], [x + rx + 2 * u, y - 0.5 * u], [x - rx - 2 * u, y - 0.5 * u]], skin, 0); p.stroke([[x - rx, y - 0.5 * u], [x + rx, y - 0.5 * u]], 2.8 * u); }
-      });
-      p.ell(x, y, rx, ry, null, 2.4 * u);
-      break;
-    }
-    case "happy": p.arc(x, y + 4 * u, 8 * u, 6.5 * u, 200, 340, 3.6 * u); break;
-    default: p.stroke([[x - 8.5 * u, y + 1 * u], [x + 8.5 * u, y + 1 * u]], 3.4 * u);
-  }
-};
-/** face for the modern cast: big friendly eyes, brows, tiny nose, mouth */
+/** face for the modern cast — same eyes, brows and mouths as the kit's faceFront */
 const faceM = (p, cx, cy, W, expr, look = 0, lookY = 0, lid = 0, O = {}) => {
-  const u = W / 100, F = FX2[expr] || FX2.neutral, ex = 15.5 * u, ey = cy - 3 * u;
-  if (F.blush) for (const s of [-1, 1]) p.ell(cx + s * 27 * u, cy + 9 * u, 7 * u, 4 * u, "#ff8a8a55", 0);
+  const u = W / 100, F = FX2[expr] || FX2.neutral, ex = (F.eye === "shock" ? 12 : 13) * u, ey = cy;
+  if (F.blush) for (const s of [-1, 1]) p.ell(cx + s * 26 * u, cy + 9 * u, 7 * u, 4 * u, "#ff8a8a55", 0);
   for (const side of [-1, 1]) {
-    const x = cx + side * ex;
-    let kind = F.eye;
-    if (lid >= 1) kind = "dash"; else if (lid > 0 && kind !== "happy") kind = "half";
-    eyeM(p, kind, x, ey, u, look, lookY, side, O.skin || SKIN);
-    const [bi, bo] = F.brow[side < 0 ? 0 : 1], by = ey - (kind === "wide" ? 20 : 17) * u;
-    taper(p, [x - side * 8.5 * u, by + bi * u], [x + side * 8.5 * u, by + bo * u], 5 * u, 2.6 * u, O.browCol || INK);
+    const x = cx + side * ex, kind = eyeKind(F.eye, lid);
+    eye(p, kind, x, ey, u, side, look, O.skin || SKIN);
+    const [dI, dO] = F.brow[side < 0 ? 0 : 1], by = ey - (O.brim ? 16 : 20) * u;
+    if (kind === "shock" || kind === "shockHalf") p.arc(x, by - 6 * u, 9 * u, 3 * u, 200, 340, 4 * u, O.browCol || INK);
+    else taper(p, [x - side * 8.5 * u, by + dI * u], [x + side * 8.5 * u, by + dO * u], 5 * u, 2.5 * u, O.browCol || INK);
   }
-  p.arc(cx + 1 * u, cy + 7 * u, 3.4 * u, 3 * u, 20, 160, 2.6 * u);
-  if (O.moustache) for (const s of [-1, 1]) taper(p, [cx + s * 1 * u, cy + 13.5 * u], [cx + s * 16 * u, cy + 17 * u], 7 * u, 2.4 * u, O.moustache);
-  mouth(p, F.mouth, cx, cy + 21 * u, u);
+  const mx = cx, my = cy + 20 * u;
+  if (O.moustache) for (const s of [-1, 1]) taper(p, [mx + s * 1.5 * u, cy + 12.5 * u], [mx + s * 15 * u, cy + 15 * u], 4.5 * u, 1.6 * u, O.moustache);
+  mouth(p, F.mouth, mx, my, u);
 };
 
 /** inverse clip helper: draw fn everywhere except inside pts (respects p.rot) */
@@ -331,7 +313,7 @@ const hairlineOf = (style, H, cx, hc, u, seed) => {
   for (let i = 0; i <= 40; i++) {
     const t = i / 40, x = cx - 1.35 * H.a + 2.7 * H.a * t, d = Math.abs(x - cx) / H.a;
     let y;
-    if (style === "messy") y = hc - 0.36 * H.b + (i % 4 < 2 ? 0 : 1) * 9 * u * (d < 0.9 ? 1 : 0) - (i % 4 === 1 ? 6 * u : 0) + 0.3 * H.b * Math.max(0, d - 0.75) * 3;
+    if (style === "messy") y = hc - 0.6 * H.b + (i % 4 < 2 ? 0 : 1) * 7 * u * (d < 0.9 ? 1 : 0) - (i % 4 === 1 ? 5 * u : 0) + 0.45 * H.b * Math.max(0, d - 0.72) * 3;
     else if (style === "curly") y = hc - 0.5 * H.b + 0.62 * H.b * Math.min(1, Math.max(0, (d - 0.5) / 0.4)) + 4 * u * Math.abs(Math.sin(t * 24));
     else if (style === "pony") y = hc - 0.5 * H.b + 0.16 * H.b * Math.pow((x - cx - 0.35 * H.a) / H.a, 2) + 0.25 * H.b * Math.max(0, d - 0.85) * 3;
     else y = hc - 0.5 * H.b + 0.12 * H.b * Math.pow((x - cx) / H.a, 2) + 0.2 * H.b * Math.max(0, d - 0.85) * 3; // bun
@@ -372,11 +354,11 @@ const hairFront = (p, O, H, cx, hc, u, light, thick, seed) => {
     p.inkRing(out, 4.6 * u, thick);
   });
   p.clip(out, () => p.stroke(line, 3 * u));
-  if (st === "messy") for (const [a, l] of [[-0.35, 1], [0.15, 0.8]]) p.stroke(curve([cx + a * H.a, hc - 0.4 * H.b], [cx + (a + 0.08) * H.a, hc - 0.2 * H.b], [cx + (a + 0.02) * H.a, hc - 0.1 * H.b * l]), 3.4 * u, col);
+  if (st === "messy") for (const [a, l] of [[-0.35, 1], [0.15, 0.8]]) p.stroke(curve([cx + a * H.a, hc - 0.68 * H.b], [cx + (a + 0.08) * H.a, hc - 0.52 * H.b], [cx + (a + 0.02) * H.a, hc - 0.46 * H.b * l]), 3.4 * u, col);
   if (st === "curly") for (let i = 0; i < 9; i++) { const a = rad(200 + i * 17.5); p.arc(cx + 0.82 * H.a * Math.cos(a), hc + 0.82 * H.b * Math.sin(a), 6 * u, 6 * u, 0, 260, 1.8 * u, sh); }
 };
 const helmetOn = (p, O, H, cx, hc, u, light, thick) => {
-  const col = O.helmet, sh = mul(col, [0.66, 0.6, 0.66]), base = hc - 0.42 * H.b;
+  const col = O.helmet, sh = mul(col, [0.66, 0.6, 0.66]), base = hc - 0.6 * H.b;
   const dome = ellPts(cx, base, 1.13 * H.a, 0.82 * H.b, 180, 360, 0, 40);
   const brim = ellPts(cx, base, 1.42 * H.a, 0.17 * H.b, 0, 360, 0, 48);
   p.shadedFill(brim, mul(col, [0.85, 0.8, 0.82]), sh, light, 1.4 * H.a, 0.3); p.inkRing(brim, 4.4 * u, thick);
@@ -387,9 +369,9 @@ const helmetOn = (p, O, H, cx, hc, u, light, thick) => {
   p.band([[cx - 1.1 * H.a, base + 0.02 * H.b], [cx + 1.1 * H.a, base + 0.02 * H.b]], mul(col, [0.7, 0.62, 0.66]), 4 * u, 1.4 * u);
 };
 const glassesOn = (p, O, cx, ey, u, H) => {
-  const col = O.glasses, r = O.round ? 12.5 * u : 13.5 * u, ry = O.round ? 12.5 * u : 11 * u;
+  const col = O.glasses, r = O.round ? 10.5 * u : 11.2 * u, ry = O.round ? 10.5 * u : 9.2 * u;
   for (const s of [-1, 1]) {
-    const x = cx + s * 15.5 * u;
+    const x = cx + s * 13 * u;
     p.ell(x, ey, r, ry, null, (O.round ? 2.6 : 4.4) * u + 2 * u);
     p.ell(x, ey, r, ry, null, 0);
     p.stroke(ellPts(x, ey, r, ry), (O.round ? 2.2 : 3.6) * u, col);
@@ -611,8 +593,8 @@ export const castFront = (p, key, opts = {}) => {
   p.inkRing(hp, ow, thick);
   hairFront(p, O, H, cx, hc, u, light, thick, seed);
   if (O.beard) beardOn(p, O, H, cx, hc, u, light, thick, seed);
-  faceM(p, cx, hc, W, expr, look, lookY, lid, { skin, moustache: O.moustache, browCol: O.hairStyle === "bald" ? "#6d6d6d" : O.hairStyle === "bun" ? "#9a9088" : INK });
-  if (O.glasses) glassesOn(p, O, cx, hc - 3 * u, u, H);
+  faceM(p, cx, hc, W, expr, look, lookY, lid, { skin, brim: !!O.helmet, moustache: O.moustache, browCol: O.hairStyle === "bald" ? "#6d6d6d" : O.hairStyle === "bun" ? "#9a9088" : INK });
+  if (O.glasses) glassesOn(p, O, cx, hc, u, H);
   if (O.headphones) headphonesOn(p, O, H, cx, hc, u, light, thick);
   if (O.helmet) helmetOn(p, O, H, cx, hc, u, light, thick);
   p.rot = tilt ? [rad(tilt), cx, hipY] : null;
