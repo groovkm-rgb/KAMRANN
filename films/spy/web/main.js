@@ -447,13 +447,111 @@ class Card {
     this.blob.rotation.x = -Math.PI / 2; this.blob.userData.ndSkip = true; this.blob.renderOrder = 1;
     scene.add(this.mesh); scene.add(this.blob); this.key = ''; this.mesh.visible = this.blob.visible = false;
   }
-  draw(key, fn) {
-    if (key === this.key) return; this.key = key;
+  draw(key, fn, inflate, centred) {
+    const k2 = key + (inflate ? '|i' + (centred ? 'c' : 's') : '');
+    if (k2 === this.key) return false; this.key = k2;
     const g = this.g; g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, CW, CH); g.setTransform(CW / 600, 0, 0, CH / 1000, 0, 0);
     const p = new T.Pen(g); fn(p); this.t.needsUpdate = true;
+    if (this.igeo) { this.igeo.dispose(); this.igeo = null; }
+    if (inflate) this.igeo = inflateGeo(this.c, centred, inflate.d ?? 0.11, inflate.cap ?? 5);
+    return true;
   }
 }
 const cards = []; const getCard = (i) => cards[i] || (cards[i] = new Card());
+
+// ---------- 3D round heads (head3d, extended: ears, hair caps, 3D hats) ----------
+const FPX = 1024, HPX = CM / 1000;
+const headGrad = (() => { const d = new Uint8Array([170, 170, 170, 255, 255, 255, 255, 255]); const t = new THREE.DataTexture(d, 2, 1); t.minFilter = t.magFilter = THREE.NearestFilter; t.needsUpdate = true; return t; })();
+// heads are unlit like the body cards: a painted toon matcap (light top-left, soft shadow crescent bottom-right, warm rim)
+const matcapTex = (() => { const [c, g] = cv(256, 256); g.fillStyle = '#000'; g.fillRect(0, 0, 256, 256);
+  g.save(); g.beginPath(); g.arc(128, 128, 127, 0, 7); g.clip();
+  g.fillStyle = '#ffffff'; g.fillRect(0, 0, 256, 256);
+  g.fillStyle = '#c9c0c8'; g.beginPath(); g.arc(128, 128, 128, 0, 7); g.arc(100, 100, 132, 0, 7, true); g.fill('evenodd');
+  const gr = g.createRadialGradient(128, 128, 96, 128, 128, 128); gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(120,100,110,.45)'); g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+  g.fillStyle = 'rgba(255,255,255,.55)'; g.beginPath(); g.ellipse(82, 70, 26, 14, -0.6, 0, 7); g.fill(); g.restore();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+const htoon = (o) => { const { gradientMap, emissive, ...r } = o; return new THREE.MeshMatcapMaterial({ matcap: matcapTex, ...r }); };
+const headGeo = new THREE.SphereGeometry(1, 48, 32);
+const faceGeo = (() => { const g = new THREE.SphereGeometry(1, 48, 32, 0, Math.PI), p = g.attributes.position, uv = g.attributes.uv;
+  for (let i = 0; i < p.count; i++) uv.setXY(i, 0.5 + p.getX(i) / 2.4, 0.5 + p.getY(i) / 2.4);
+  return g; })();
+const hairGeo = new THREE.SphereGeometry(1, 48, 24, 0, Math.PI * 2, 0, Math.PI * 0.44);
+const earGeo = new THREE.SphereGeometry(1, 16, 12);
+class Head3D {
+  constructor() {
+    [this.c, this.g] = cv(FPX, FPX);
+    this.t = new THREE.CanvasTexture(this.c); this.t.colorSpace = THREE.SRGBColorSpace; this.t.anisotropy = 4;
+    this.grp = new THREE.Group(); this.grp.rotation.order = 'YXZ'; scene.add(this.grp);
+    this.skinM = htoon({ color: '#ffffff' }); this.hairM = htoon({ color: '#3b2a20', side: THREE.DoubleSide });
+    this.hatM = htoon({ color: '#ffffff' }); this.bandM = htoon({ color: '#333333' }); this.visorM = htoon({ color: '#1d1a1e' }); this.cordM = htoon({ color: '#d9b55a' });
+    this.skin = add(headGeo, this.skinM, 0, 0, 0, this.grp);
+    this.face = add(faceGeo, new THREE.MeshMatcapMaterial({ matcap: matcapTex, map: this.t, transparent: true, alphaTest: 0.35, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }), 0, 0, 0, this.grp, { cast: false });
+    this.face.scale.setScalar(1.004); this.face.userData.ndSkip = true;
+    this.ears = [-1, 1].map((s) => { const e = add(earGeo, this.skinM, s * 0.97, 0.02, -0.05, this.grp); e.scale.set(0.16, 0.26, 0.12); return e; });
+    this.hair = add(hairGeo, this.hairM, 0, 0, 0, this.grp); this.hair.scale.setScalar(1.06);
+    // hats (unit-sphere space; the group is scaled to the head size)
+    this.hats = {};
+    { const h = new THREE.Group(); this.grp.add(h);
+      add(cyl(1.16, 1.0, 0.34, 32), this.hatM, 0, 0.98, -0.06, h); add(cyl(1.03, 1.03, 0.26, 32), this.bandM, 0, 0.72, -0.04, h);
+      const v = add(new THREE.CylinderGeometry(0.82, 0.82, 0.05, 24, 1, false, -Math.PI / 2, Math.PI), this.visorM, 0, 0.58, 0.36, h); v.rotation.x = 0.28;
+      h.cord = add(new THREE.TorusGeometry(1.04, 0.035, 6, 40), this.cordM, 0, 0.8, -0.04, h); h.cord.rotation.x = Math.PI / 2;
+      h.btn = add(sph(0.08, 10, 8), this.cordM, 0, 0.74, 1.02, h); h.rotation.x = -0.12; this.hats.peak = h; }
+    { const h = new THREE.Group(); this.grp.add(h);
+      add(cyl(1.85, 1.85, 0.05, 40), this.hatM, 0, 0.6, 0, h); add(cyl(0.86, 0.95, 0.52, 32), this.hatM, 0, 0.88, 0, h); add(cyl(0.97, 0.97, 0.14, 32), this.bandM, 0, 0.7, 0, h);
+      h.rotation.x = -0.1; this.hats.straw = h; }
+    { const h = new THREE.Group(); this.grp.add(h); const k = add(new THREE.SphereGeometry(1, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.5), this.hatM, 0, 0.12, 0, h); k.scale.set(1.08, 1.0, 1.08);
+      add(new THREE.TorusGeometry(1.03, 0.12, 8, 32), this.bandM, 0, 0.16, 0, h).rotation.x = Math.PI / 2; h.rotation.x = -0.15; this.hats.knit = h; }
+    this.key = ''; this.grp.visible = false;
+  }
+  draw(key, fn, a, b) {
+    if (key === this.key) return; this.key = key;
+    const g = this.g, sx = FPX / (2.4 * a), sy = FPX / (2.4 * b);
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, FPX, FPX);
+    g.setTransform(sx, 0, 0, sy, -(300 - 1.2 * a) * sx, -(500 - 1.2 * b) * sy);
+    fn(new T.Pen(g)); this.t.needsUpdate = true;
+  }
+}
+const heads = []; const getHead = (i) => heads[i] || (heads[i] = new Head3D());
+const tintC = new THREE.Color(), tmpC = new THREE.Color();
+const setCol = (mat, col, tint, k = 1) => { mat.color.set(col).multiply(tint).multiplyScalar(k); };
+const placeHead = (hd, a, cardYaw, s) => {
+  const h = a.head3d, fl = a.flip ? -1 : 1;
+  hd.draw(h.key, h.draw, h.a, h.b);
+  const lx = h.x * HPX * s * fl, ly = (CM * 0.975 - h.y * HPX) * s;
+  hd.grp.position.set(a.x + Math.cos(cardYaw) * lx, a.y + ly, a.z - Math.sin(cardYaw) * lx);
+  hd.grp.rotation.set(h.pitch || 0, h.fixed ?? cardYaw + (h.yaw || 0), -(h.roll || 0) * fl);
+  hd.grp.scale.set(h.a * HPX * s, h.b * HPX * s, h.a * HPX * s * (h.depth ?? 0.92));
+  tintC.set(a.tint || '#ffffff');
+  setCol(hd.skinM, h.skin, tintC, 1.0); hd.face.material.color.copy(tintC);
+  hd.hair.visible = !!h.hair; if (h.hair) setCol(hd.hairM, h.hair, tintC); hd.hair.rotation.x = -0.32; hd.hair.scale.set(h.wavy ? 1.09 : 1.06, h.wavy ? 1.1 : 1.05, h.wavy ? 1.09 : 1.06);
+  const hk = h.hat === 'captain' ? 'peak' : h.hat;
+  for (const k in hd.hats) hd.hats[k].visible = k === hk;
+  if (hk) { setCol(hd.hatM, h.hatCol || '#888888', tintC); setCol(hd.bandM, h.hat === 'straw' ? '#6b4a2e' : h.hat === 'knit' ? h.hatCol : h.band, tintC, h.hat === 'knit' ? 0.85 : 1); setCol(hd.visorM, '#1d1a1e', tintC); setCol(hd.cordM, h.hat === 'captain' ? '#d9b55a' : (h.cord || h.button), tintC);
+    if (hd.hats.peak.cord) hd.hats.peak.cord.visible = h.hat === 'captain' || !!h.cord; }
+  hd.grp.visible = a.alpha !== 0;
+};
+
+// ---------- inflated card bodies: the card silhouette becomes a rounded shell with thickness ----------
+const GX = 48, GY = 80;
+const inflateGeo = (canvasEl, centred, maxD = 0.11, cap = 5) => {
+  const g = canvasEl.getContext('2d'), W_ = canvasEl.width, H_ = canvasEl.height, img = g.getImageData(0, 0, W_, H_).data;
+  const inside = new Float32Array(GX * GY);
+  for (let j = 0; j < GY; j++) for (let i = 0; i < GX; i++) { let n = 0; for (const [dx, dy] of [[0.3, 0.3], [0.7, 0.3], [0.3, 0.7], [0.7, 0.7], [0.5, 0.5]]) { const x = ((i + dx) / GX * W_) | 0, y = ((j + dy) / GY * H_) | 0; if (img[(y * W_ + x) * 4 + 3] > 128) n++; } inside[j * GX + i] = n >= 2 ? 1 : 0; }
+  const d = new Float32Array(GX * GY); const BIG = 1e3;
+  for (let k = 0; k < d.length; k++) d[k] = inside[k] ? BIG : 0;
+  const at = (i, j) => (i < 0 || j < 0 || i >= GX || j >= GY ? 0 : d[j * GX + i]);
+  for (let j = 0; j < GY; j++) for (let i = 0; i < GX; i++) if (d[j * GX + i]) d[j * GX + i] = Math.min(d[j * GX + i], at(i - 1, j) + 1, at(i, j - 1) + 1, at(i - 1, j - 1) + 1.414, at(i + 1, j - 1) + 1.414);
+  for (let j = GY - 1; j >= 0; j--) for (let i = GX - 1; i >= 0; i--) if (d[j * GX + i]) d[j * GX + i] = Math.min(d[j * GX + i], at(i + 1, j) + 1, at(i, j + 1) + 1, at(i + 1, j + 1) + 1.414, at(i - 1, j + 1) + 1.414);
+  const vd = (i, j) => { let s = 0, n = 0; for (const [a, b] of [[i - 1, j - 1], [i, j - 1], [i - 1, j], [i, j]]) { s += a < 0 || b < 0 || a >= GX || b >= GY ? 0 : Math.max(0, d[b * GX + a] - 0.5); n++; } const v = s / n; return maxD * Math.sqrt(Math.min(v, cap) / cap); };
+  const pos = [], uv = [], idx = [], wv = CM * 0.6, oy = centred ? -CM / 2 : -CM * 0.025;
+  for (const side of [1, -1]) {
+    const base = pos.length / 3;
+    for (let j = 0; j <= GY; j++) for (let i = 0; i <= GX; i++) { const u_ = i / GX, v_ = 1 - j / GY; pos.push(-wv / 2 + u_ * wv, oy + v_ * CM, side * vd(i, j)); uv.push(u_, v_); }
+    for (let j = 0; j < GY; j++) for (let i = 0; i < GX; i++) { const a_ = base + j * (GX + 1) + i, b_ = a_ + 1, c_ = a_ + GX + 1, e_ = c_ + 1; if (side > 0) idx.push(a_, c_, b_, b_, c_, e_); else idx.push(a_, b_, c_, b_, e_, c_); }
+  }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2)); geo.setIndex(idx); geo.computeVertexNormals();
+  return geo;
+};
 
 // ---------- render targets & post ----------
 const rtColor = new THREE.WebGLRenderTarget(W, H, { samples: 4, type: THREE.HalfFloatType });
@@ -553,19 +651,25 @@ function worldState(Wd, f) {
 
 function drawActors(list, cam) {
   cards.forEach((c) => { c.mesh.visible = c.blob.visible = false; });
+  heads.forEach((h) => { h.grp.visible = false; });
+  let hi = 0;
   list.forEach((a, i) => {
     const c = getCard(i);
-    c.draw(a.key, a.draw);
+    c.draw(a.key, a.draw, a.inflate, !!a.flat);
     c.mesh.visible = true; c.mesh.position.set(a.x, a.y, a.z);
-    const s = a.s || 1;
-    c.mesh.geometry = a.flat ? flatGeo : cardGeo;
+    let s = a.s || 1;
+    if (a.towardCam) { // slide the card toward the camera along the view rays and shrink it: same picture on screen, but in front of the 3D head
+      const d0 = cam.position.distanceTo(scratch.set(a.x, a.y + 1.5 * s, a.z)), k = Math.max(0.2, (d0 - a.towardCam) / d0);
+      c.mesh.position.set(a.x, a.y, a.z).sub(cam.position).multiplyScalar(k).add(cam.position); s *= k; }
+    c.mesh.geometry = c.igeo || (a.flat ? flatGeo : cardGeo);
     if (a.flat) { c.mesh.rotation.order = 'YXZ'; c.mesh.rotation.set(-Math.PI / 2 + (a.tiltX || 0), a.spin || 0, a.roll || 0); c.mesh.scale.set(s * (a.flip ? -1 : 1), s, s); }
-    else { c.mesh.rotation.order = 'XYZ'; c.mesh.scale.set(s * (a.flip ? -1 : 1), s * (a.sy || 1), s); c.mesh.rotation.set(0, a.fixedYaw ?? (Math.atan2(cam.position.x - a.x, cam.position.z - a.z) + (a.yaw || 0)), a.roll || 0); }
+    else { c.mesh.rotation.order = 'XYZ'; c.mesh.scale.set(s * (a.flip ? -1 : 1), s * (a.sy || 1), s); c.mesh.rotation.set(0, a.fixedYaw ?? (Math.atan2(cam.position.x - c.mesh.position.x, cam.position.z - c.mesh.position.z) + (a.yaw || 0)), a.roll || 0); }
     c.mat.color.set(a.tint || '#ffffff'); c.mat.opacity = a.alpha ?? 1; c.mat.transparent = true;
     c.mat.blending = a.add ? THREE.AdditiveBlending : THREE.NormalBlending; c.mat.depthWrite = !a.add; c.mat.fog = a.fog !== false;
     c.mesh.userData.ndSkip = !!a.add || !!a.noInk;
     c.mesh.castShadow = a.shadow !== false && !a.add;
     c.mesh.renderOrder = a.order || 2;
+    if (a.head3d) placeHead(getHead(hi++), a, c.mesh.rotation.y, s);
     if (a.blob !== false && !a.flat && a.ground !== undefined) { c.blob.visible = true; c.blob.position.set(a.x, a.ground + 0.012, a.z); c.blob.scale.set(0.95 * s, 0.6 * s, 1); }
   });
 }
@@ -586,11 +690,15 @@ const swapForNd = (on) => {
 function renderInto(f, target) {
   const S = ST.shotAt(f), L = ST.lightFor(S, f), C = ST.camAt(f);
   applyLight(L);
-  camera.position.set(...C.pos); camera.up.set(0, 1, 0); camera.lookAt(...C.look); camera.rotateZ(rx(C.roll || 0));
+  camera.position.set(...C.pos);
+  const billboardFrom = { position: camera.position.clone() };
+  const ORB = parseFloat(((typeof location !== 'undefined' && location.hash.match(/orbit=(-?\d+)/)) || [])[1] || 0); // debug: look from the side while the cast keeps facing the shot camera
+  if (ORB) { const L0 = new THREE.Vector3(...C.look), d = camera.position.clone().sub(L0); d.applyAxisAngle(new THREE.Vector3(0, 1, 0), rx(ORB)); camera.position.copy(L0).add(d); }
+  camera.up.set(0, 1, 0); camera.lookAt(...C.look); camera.rotateZ(rx(C.roll || 0));
   camera.fov = C.fov; camera.updateProjectionMatrix(); camera.updateMatrixWorld();
   const Wd = ST.worldAt(f); worldState(Wd, f);
   placeSun(L, new THREE.Vector3(...(C.shadowAt || C.look)));
-  drawActors([...ST.actorsAt(f, T), ...ST.fxAt(f, T)], camera);
+  drawActors([...ST.actorsAt(f, T), ...ST.fxAt(f, T)], ORB ? billboardFrom : camera);
   sky.position.copy(camera.position);
   renderer.setRenderTarget(rtColor); renderer.setClearColor(0x000000, 1); renderer.clear(); renderer.render(scene, camera);
   const fog = scene.fog; scene.fog = null; const sm = renderer.shadowMap.enabled; renderer.shadowMap.enabled = false; renderer.shadowMap.autoUpdate = false;

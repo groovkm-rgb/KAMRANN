@@ -299,6 +299,7 @@ export const SPY = {
   sentry: { jacket: OLIVE, pants: OLIVE_D, shoes: "#231c1a", skin: "#f1cba8", hairStyle: "none", hat: "peak", hatCol: OLIVE, band: "#3b3226",
     buttons: "#b9a56c", epaul: "#4a4230", belt: "#3a2a1e", collar: true, shirt: "#d9d2bf", pack: true },
 };
+const NULLG = new Proxy(function () {}, { get: (t, k) => (k === "canvas" ? null : NULLG), apply: () => NULLG, set: () => true });
 const skinHand = (p, x, y, r, skin, fist = false) => { p.dot(x, y, r + 2.4, INK); p.dot(x, y, r, skin); if (fist) p.arc(x - r * 0.25, y - r * 0.1, r * 0.45, r * 0.35, 200, 340, r * 0.16); };
 const closedEyes = (p, cx, hc, u, facing = 0) => { for (const s of [-1, 1]) p.arc(cx + 7 * u * facing + s * 13 * u, hc - 1 * u, 8 * u, 5 * u, 20, 160, 3.8 * u); };
 /** wavy lines that read as handwriting / typing but contain no letters */
@@ -358,6 +359,10 @@ export const spyFront = (p, key, opts = {}) => {
   const torsoL = O.stout ? 1.1 : 1.06, legsL = O.tall ? 1.5 : O.stout ? 1.22 : 1.36, sole = 975;
   const torsoBot = sole - legsL * 222 - bob * 222, chin = torsoBot - torsoL * 222, hc = chin - H.b, hipY = torsoBot - 0.12 * 222;
   const thick = thickAngle(light), ow = 5 * u, cx = 300, Hh = 222;
+  // layers: "all" (2D card), "body" (no head, no near-face hands), "face" (face features only, centred on (300,500) for the 3D head), "after" (hands near the face only)
+  const LAY = opts.layer || "all", realG = p.g, mute = (on) => { p.g = on ? NULLG : realG; };
+  if (LAY === "face") realG.translate(0, 500 - hc);
+  mute(!(LAY === "all" || LAY === "body"));
   const sleeve = O.rolled ? O.shirt : O.tank ? skin : (O.sweater || O.jacket);
   p.rot = null;
   // ---- legs ----
@@ -522,9 +527,10 @@ export const spyFront = (p, key, opts = {}) => {
   // ---- head ----
   const [cpx, cpy] = rotAbout([cx, chin], rad(tilt), [cx, hipY]);
   const Ah = tilt + headTilt;
-  p.rot = Ah ? [rad(Ah), cx, chin, cpx - cx, cpy - chin] : null;
+  p.rot = Ah && LAY !== "face" ? [rad(Ah), cx, chin, cpx - cx, cpy - chin] : null;
   // neck
   p.line([[cx, chin - 10 * u], [cx, chin + 6 * u]], skin, 14 * u);
+  mute(LAY !== "all");
   const hp = blobPts(cx, hc, H);
   const hatKind = hatOff ? null : O.hat;
   if (O.hair && O.hairStyle === "wavy" && !hatKind) { const hb = blobPts(cx, hc - 0.04 * HH, { ...H, a: H.a * 1.06, b: H.b * 1.06 }); p.poly(hb, O.hair, 0); }
@@ -545,6 +551,7 @@ export const spyFront = (p, key, opts = {}) => {
     p.stroke(ellPts(cx - 24 * u, hc - 0.62 * H.b, 0.28 * H.a, 0.14 * H.b, 200, 300, 0, 12), 5 * u, "#ffffff70");
     for (const s of [-1, 1]) p.ell(cx + s * 0.93 * H.a, hc - 0.05 * H.b, 0.14 * H.a, 0.28 * H.b, O.fringe, 2 * u);
   }
+  mute(!(LAY === "all" || LAY === "face"));
   if (O.beard) {
     const bd = blobPts(cx + 6 * u * facing, hc + 0.72 * H.b, { a: 0.8 * H.a, b: 0.6 * H.b, nTop: 2.6, nBot: 1.7, egg: -0.3, asym: 0, rot: 0, noise: 0.02, seed: seed + 4 });
     p.shadedFill(bd, O.beard, mul(O.beard, [0.8, 0.8, 0.86]), light, 0.7 * H.a, 0.3);
@@ -573,8 +580,10 @@ export const spyFront = (p, key, opts = {}) => {
     p.band([[mx, my], [mx + 26 * u, my + 10 * u]], "#3a2618", 3.4 * u, 1 * u, "round");
     const bw = rrect(mx + 22 * u, my - 4 * u, mx + 38 * u, my + 18 * u, 5 * u); p.poly(bw, "#6a3e22", 2 * u); p.ell(mx + 30 * u, my - 3 * u, 7 * u, 2.4 * u, "#2a1a12", 1 * u);
   }
+  mute(LAY !== "all");
   if (hatKind) hatShape(p, back && hatKind === "peak" ? "peakBack" : hatKind, O, cx + 4 * u * facing, hc - H.b - 0.16 * HH, H.a * 0.98, u, light, thick, ow);
   p.rot = null;
+  mute(!(LAY === "all" || LAY === "after"));
   // after-head arms (hands near the face)
   for (const [i, a] of arms.entries()) if (a.after) {
     const side = i ? 1 : -1; drawArm(a, side);
@@ -593,6 +602,27 @@ export const spyFront = (p, key, opts = {}) => {
     if (a.holder && pr === "hat") { hatShape(p, O.hat, O, hx, hy - 0.2 * HH, H.a * 0.85, u, light, thick, ow); skinHand(p, hx, hy, handR, skin); }
     if (a.holder && pr === "doc") propAt(a, side);
   }
+  p.g = realG;
+};
+/** does this pose draw anything in front of the face? (then the 3D-head actor also needs an "after" overlay card) */
+const AFTER = ["cheek", "shh", "mouth", "chin", "lens", "scratch", "hatoff"];
+export const hasAfter = (opts) => AFTER.includes(opts.L) || AFTER.includes(opts.R);
+/** data for a real 3D head on a spyFront card (main.js draws it): face texture + placement in design px */
+export const spyHead3d = (key, opts = {}, h = {}) => {
+  const O = typeof key === "string" ? SPY[key] : key;
+  const { seed = 3, tilt = 0, headTilt = 0, bob = 0, facing = 0, hatOff = false } = opts;
+  const H = headBlob(seed, O.thin ? 106 : O.stout ? 122 : 116, facing); if (O.thin) H.b *= 1.07;
+  const legsL = O.tall ? 1.5 : O.stout ? 1.22 : 1.36, torsoL = O.stout ? 1.1 : 1.06;
+  const torsoBot = 975 - legsL * 222 - bob * 222, chin = torsoBot - torsoL * 222, hipY = torsoBot - 0.12 * 222;
+  const [cpx, cpy] = rotAbout([300, chin], rad(tilt), [300, hipY]), ang = rad(tilt + headTilt);
+  const hat = hatOff ? null : O.hat || null;
+  return {
+    key: "s3" + key + JSON.stringify(opts),
+    draw: (p) => spyFront(p, key, { ...opts, layer: "face", tilt: 0, headTilt: 0 }),
+    a: H.a, b: H.b, x: cpx + H.b * Math.sin(ang) - 300, y: cpy - H.b * Math.cos(ang), roll: ang,
+    skin: O.skin ?? SKIN, hair: !hat && (O.hairStyle === "wavy" || O.hairStyle === "slick") ? O.hair : null, wavy: O.hairStyle === "wavy",
+    hat, hatCol: O.hatCol, band: O.band || NAVY_D, cord: O.cord || null, button: O.buttons || "#b8b0a0", ...h,
+  };
 };
 /** lying figure as seen from above: same drawing, eyes closed, used on flat cards */
 export const sleeper = (p, key, opts = {}) => spyFront(p, key, { expr: "sleep", blink: 0, seed: 5, ...opts });

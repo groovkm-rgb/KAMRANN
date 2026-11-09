@@ -253,10 +253,18 @@ export const worldAt = (f) => {
 };
 
 // ---------- actors ----------
+// 3D characters: inflated body card + real round head (+ a thin card in front of the face for hands near the face)
+const R3 = (T, who, o, pos, extra = {}) => {
+  const body = { key: who + 'B' + JSON.stringify(o), draw: (p) => T.spyFront(p, who, { ...o, layer: 'body' }), x: pos[0], y: pos[1], z: pos[2], ground: pos[1],
+    inflate: { d: 0.11 }, head3d: T.spyHead3d(who, o), ...extra };
+  if (!T.hasAfter(o)) return [body];
+  return [body, { key: who + 'A' + JSON.stringify(o), draw: (p) => T.spyFront(p, who, { ...o, layer: 'after' }), x: pos[0], y: pos[1], z: pos[2], blob: false, shadow: false,
+    towardCam: 0.3 * (extra.s || 1), s: extra.s, tint: extra.tint, alpha: extra.alpha, order: (extra.order || 2) + 1 }];
+};
 const R = (T, who, o, pos, extra = {}) => ({ key: who + JSON.stringify(o), draw: (p) => T.spyFront(p, who, o), x: pos[0], y: pos[1], z: pos[2], ground: pos[1], ...extra });
-const FLAT = (T, who, o, pos, spin, extra = {}) => ({ key: 'F' + who + JSON.stringify(o), draw: (p) => T.spyFront(p, who, o), x: pos[0], y: pos[1], z: pos[2], flat: true, spin, blob: false, ...extra });
+const FLAT = (T, who, o, pos, spin, extra = {}) => ({ key: 'F' + who + JSON.stringify(o), draw: (p) => T.spyFront(p, who, o), x: pos[0], y: pos[1], z: pos[2], flat: true, spin, blob: false, inflate: { d: 0.1 }, ...extra });
 const HEADONLY = (T, who, o, pos, spin, tilt, extra = {}) => ({ key: 'H' + who + JSON.stringify(o), draw: (p) => { p.g.save(); p.g.beginPath(); p.g.rect(0, 0, 600, 452); p.g.clip(); T.spyFront(p, who, o); p.g.restore(); },
-  x: pos[0], y: pos[1], z: pos[2], flat: true, spin, tiltX: tilt, blob: false, shadow: false, ...extra });
+  x: pos[0], y: pos[1], z: pos[2], flat: true, spin, tiltX: tilt, blob: false, shadow: false, inflate: { d: 0.1 }, ...extra });
 const SLEEP = { expr: 'sleep', seed: 5 };
 const GLOW = (T, pos, s, col = '220,232,255', a = 0.55, flat = true, extra = {}) => ({ key: 'glow' + col + a, draw: (p) => T.fxGlow(p, col, a), x: pos[0], y: pos[1], z: pos[2], s, flat, spin: 0, add: true, blob: false, shadow: false, order: 1, ...extra });
 const walkTo = (f, f0, f1, a, b) => { const t = clamp((f - f0) / (f1 - f0)); return { pos: lerp3(a, b, E.smooth(t)), moving: t > 0 && t < 1, ph: q(((f - f0) / 16) % 1, 2) }; };
@@ -267,7 +275,7 @@ export const actorsAt = (f, T) => {
   switch (id) {
     case 's01': {
       const t = E.easeOut((f + 14) / 52), subY = lerp(-3.4, -0.5, t), rise = E.back(ramp(f, 34, 48), 1.6);
-      if (f >= 34) for (const [x, z, sd] of [[1.0, -0.3, 61], [2.2, 0.35, 62]]) out.push(R(T, 'crew', { seed: sd, expr: 'stern', blink: B(sd), L: sd === 61 ? 'point' : 'hang' }, [x, subY + 2.2 + 2.95 + 0.06 - (1 - rise) * 1.0, z], { tint: '#6a7a9c', blob: false }));
+      if (f >= 34) for (const [x, z, sd] of [[1.0, -0.3, 61], [2.2, 0.35, 62]]) out.push(...R3(T, 'crew', { seed: sd, expr: 'stern', blink: B(sd), L: sd === 61 ? 'point' : 'hang' }, [x, subY + 2.2 + 2.95 + 0.06 - (1 - rise) * 1.0, z], { tint: '#6a7a9c', blob: false }));
       break;
     }
     case 's02': {
@@ -281,33 +289,33 @@ export const actorsAt = (f, T) => {
       if (f < 952) out.push(FLAT(T, 'agent', { ...SLEEP }, [AG.sea15[0], y, z], Math.PI / 2, { tint: '#d8e2fa', tiltX: -fall * 0.35, alpha: f > 946 ? 1 - (f - 946) / 6 : 1 }));
       if (f < 940) out.push(GLOW(T, [AG.sea15[0] - 0.2, deckAt(f) - 0.008, z], 1.4));
       const push = f < 938;
-      out.push(R(T, 'crew', { seed: 61, expr: 'stern', L: push ? 'push' : 'hang', R: push ? 'push' : 'hang', blink: B(61), ...I(61) }, [-4.3, DECK, -0.95], { tint: '#56648a', blob: false }));
-      out.push(R(T, 'crew', { seed: 62, expr: 'stern', L: push ? 'push' : 'hang', blink: B(62), ...I(62) }, [-6.3, DECK, -0.9], { tint: '#56648a', blob: false }));
+      out.push(...R3(T, 'crew', { seed: 61, expr: 'stern', L: push ? 'push' : 'hang', R: push ? 'push' : 'hang', blink: B(61), ...I(61) }, [-4.3, DECK, -0.95], { tint: '#56648a', blob: false }));
+      out.push(...R3(T, 'crew', { seed: 62, expr: 'stern', L: push ? 'push' : 'hang', blink: B(62), ...I(62) }, [-6.3, DECK, -0.9], { tint: '#56648a', blob: false }));
       const off = f >= 944;
-      out.push(R(T, 'captain', { seed: 63, expr: off ? 'stern' : 'neutral', R: off ? 'hatoff' : 'hang', prop: off ? 'hat' : undefined, hatOff: off, look: 0.3, blink: B(63), ...I(63) }, [-2.5, DECK, -0.7], { tint: '#9cb0d4', blob: false }));
+      out.push(...R3(T, 'captain', { seed: 63, expr: off ? 'stern' : 'neutral', R: off ? 'hatoff' : 'hang', prop: off ? 'hat' : undefined, hatOff: off, look: 0.3, blink: B(63), ...I(63) }, [-2.5, DECK, -0.7], { tint: '#9cb0d4', blob: false }));
       break;
     }
     case 's03': {
-      out.push(R(T, 'plan1', { seed: 11, expr: 'sly', R: f < 206 ? 'push' : 'hip', pipe: true, blink: B(11), look: -0.3, ...I(11) }, P1));
-      out.push(R(T, 'plan2', { seed: 12, expr: f < 190 ? 'curious' : 'grin', L: 'rub', R: 'rub', pipe: true, blink: B(12), look: 0.4, ...I(12) }, P2));
+      out.push(...R3(T, 'plan1', { seed: 11, expr: 'sly', R: f < 206 ? 'push' : 'hip', pipe: true, blink: B(11), look: -0.3, ...I(11) }, P1));
+      out.push(...R3(T, 'plan2', { seed: 12, expr: f < 190 ? 'curious' : 'grin', L: 'rub', R: 'rub', pipe: true, blink: B(12), look: 0.4, ...I(12) }, P2));
       break;
     }
     case 's04': {
-      out.push(R(T, 'plan1', { seed: 11, expr: 'shh', L: f > 226 ? 'shh' : 'hang', blink: B(11), look: 0, ...I(11), headTilt: q(-4 + 2 * Math.sin(f * 0.1), 1) }, P1));
+      out.push(...R3(T, 'plan1', { seed: 11, expr: 'shh', L: f > 226 ? 'shh' : 'hang', blink: B(11), look: 0, ...I(11), headTilt: q(-4 + 2 * Math.sin(f * 0.1), 1) }, P1));
       break;
     }
     case 's05': {
       const drop = f >= 328;
-      out.push(R(T, 'plan1', { seed: 11, expr: f < 330 ? 'sly' : 'grin', R: f < 330 ? 'chin' : 'hip', L: 'hang', blink: B(11), look: -0.4, ...I(11) }, P1));
-      out.push(R(T, 'plan2', { seed: 12, expr: drop ? 'shock' : 'curious', L: drop ? 'cheek' : 'rub', R: drop ? 'cheek' : 'rub', pipe: !drop, blink: drop ? 0 : B(12), look: 0.4, ...I(12), bob: drop ? q(0.012 * Math.sin((f - 328) * 0.9) * Math.max(0, 1 - (f - 328) / 20), 3) : I(12).bob }, P2));
+      out.push(...R3(T, 'plan1', { seed: 11, expr: f < 330 ? 'sly' : 'grin', R: f < 330 ? 'chin' : 'hip', L: 'hang', blink: B(11), look: -0.4, ...I(11) }, P1));
+      out.push(...R3(T, 'plan2', { seed: 12, expr: drop ? 'shock' : 'curious', L: drop ? 'cheek' : 'rub', R: drop ? 'cheek' : 'rub', pipe: !drop, blink: drop ? 0 : B(12), look: 0.4, ...I(12), bob: drop ? q(0.012 * Math.sin((f - 328) * 0.9) * Math.max(0, 1 - (f - 328) / 20), 3) : I(12).bob }, P2));
       break;
     }
     case 's06': {
       out.push(GLOW(T, [-0.78, 0.97, 0], 0.7, '230,240,255', 0.5, false, { order: 1 }));
       out.push(HEADONLY(T, 'agentShirt', SLEEP, [-0.42, 0.80, 0], Math.PI / 2, 0.5, { tint: '#f4f8ff' }));
       const a = walkTo(f, 354, 398, [-2.6, 0, -2.4], [-1.5, 0, -0.32]), b = walkTo(f, 358, 404, [-3.2, 0, -1.6], [-1.45, 0, 0.42]);
-      out.push(R(T, 'plan1', { seed: 11, expr: 'determined', step: a.moving ? a.ph : 0, L: a.moving ? 'swing' : 'hang', R: a.moving ? 'swing' : 'hold', swing: a.moving ? q(Math.sin(a.ph * 6.283), 2) : 0, blink: B(11), look: -0.5 }, a.pos));
-      out.push(R(T, 'plan2', { seed: 12, expr: 'determined', step: b.moving ? b.ph : 0, L: b.moving ? 'swing' : 'rub', R: b.moving ? 'swing' : 'rub', swing: b.moving ? q(Math.sin(b.ph * 6.283), 2) : 0, blink: B(12), look: -0.3 }, b.pos));
+      out.push(...R3(T, 'plan1', { seed: 11, expr: 'determined', step: a.moving ? a.ph : 0, L: a.moving ? 'swing' : 'hang', R: a.moving ? 'swing' : 'hold', swing: a.moving ? q(Math.sin(a.ph * 6.283), 2) : 0, blink: B(11), look: -0.5 }, a.pos));
+      out.push(...R3(T, 'plan2', { seed: 12, expr: 'determined', step: b.moving ? b.ph : 0, L: b.moving ? 'swing' : 'rub', R: b.moving ? 'swing' : 'rub', swing: b.moving ? q(Math.sin(b.ph * 6.283), 2) : 0, blink: B(12), look: -0.3 }, b.pos));
       break;
     }
     case 's07': {
@@ -328,8 +336,8 @@ export const actorsAt = (f, T) => {
       item('receipt', (p) => T.propReceipt(p), [0.19, 0.782, 0.38], 0.11, -0.4, 676);
       if (id !== 's12') item('bank', (p) => T.propBank(p), [0.45, 0.781, 0.2], 0.17, 0.2);
       const laugh = id === 's12' && f > 700;
-      out.push(R(T, 'plan1', { seed: 11, expr: id === 's12' ? (f > 722 ? 'pleased' : 'sly') : 'sly', R: id === 's12' && f < 726 ? 'hold' : 'rub', L: id === 's12' ? 'hang' : 'rub', prop: id === 's12' && f < 726 ? 'bank' : undefined, blink: B(11), look: 0.3, ...I(11) }, [0.32, 0, -0.85], { tint }));
-      out.push(R(T, 'plan2', { seed: 12, expr: laugh ? 'laugh' : 'pleased', L: laugh ? 'belly' : 'rub', R: laugh ? 'belly' : 'rub', blink: laugh ? 0 : B(12), look: -0.3, ...I(12), bob: laugh ? q(Math.abs(Math.sin(f * 0.55)) * 0.02, 3) : I(12).bob, tilt: laugh ? q(4 * Math.sin(f * 0.5), 1) : I(12).tilt }, [-0.34, 0, -0.95], { tint }));
+      out.push(...R3(T, 'plan1', { seed: 11, expr: id === 's12' ? (f > 722 ? 'pleased' : 'sly') : 'sly', R: id === 's12' && f < 726 ? 'hold' : 'rub', L: id === 's12' ? 'hang' : 'rub', prop: id === 's12' && f < 726 ? 'bank' : undefined, blink: B(11), look: 0.3, ...I(11) }, [0.32, 0, -0.85], { tint }));
+      out.push(...R3(T, 'plan2', { seed: 12, expr: laugh ? 'laugh' : 'pleased', L: laugh ? 'belly' : 'rub', R: laugh ? 'belly' : 'rub', blink: laugh ? 0 : B(12), look: -0.3, ...I(12), bob: laugh ? q(Math.abs(Math.sin(f * 0.55)) * 0.02, 3) : I(12).bob, tilt: laugh ? q(4 * Math.sin(f * 0.5), 1) : I(12).tilt }, [-0.34, 0, -0.95], { tint }));
       if (id === 's12' && f >= 726) { const h = hop(726, [0.55, 1.15, -0.7], POCKET); if (h.a) out.push({ key: 'bankfly', draw: (p) => T.propBank(p), x: h.p[0], y: h.p[1], z: h.p[2], s: 0.17 * h.s, flat: true, spin: 0.3, tiltX: 0.8 * (1 - (f - 726) / 12), blob: false, tint, order: 4 }); }
       break;
     }
@@ -350,23 +358,23 @@ export const actorsAt = (f, T) => {
       out.push(FLAT(T, 'agent', SLEEP, AG.shore, -Math.PI / 2 + 0.35, { tint: '#fff4e4', tiltX: 0.06 }));
       const seen = f >= 995, off = f >= 1003;
       const fp = [-0.5, shoreY(0.8), 0.8];
-      out.push(R(T, 'fisher', { seed: 71, expr: seen ? 'shock' : 'neutral', L: seen ? 'hang' : 'net', R: off ? 'hatoff' : seen ? 'hang' : 'net', prop: off ? 'hat' : seen ? undefined : 'net', hatOff: off, look: seen ? 0.6 : 0, facing: 0, blink: seen ? 0 : B(71),
+      out.push(...R3(T, 'fisher', { seed: 71, expr: seen ? 'shock' : 'neutral', L: seen ? 'hang' : 'net', R: off ? 'hatoff' : seen ? 'hang' : 'net', prop: off ? 'hat' : seen ? undefined : 'net', hatOff: off, look: seen ? 0.6 : 0, facing: 0, blink: seen ? 0 : B(71),
         bob: q(seen ? 0 : 0.01 * Math.sin(f * 0.3), 3), tilt: seen ? 0 : q(3 * Math.sin(f * 0.15), 1), headTilt: off ? 4 : 0 }, fp, { tint: '#fff2e0' }));
       break;
     }
     case 's17': {
       const a = f < 1036, iHas = f >= 1046 && f < 1054, gHas = f >= 1062;
-      out.push(R(T, 'enemy', { seed: 81, expr: 'stern', R: a ? 'give' : 'hang', prop: a ? 'doc' : undefined, blink: B(81), look: 0.5, ...I(81) }, HQ.A));
-      out.push(R(T, 'inspector', { seed: 82, expr: iHas ? 'curious' : 'neutral', R: iHas ? 'give' : 'hang', L: 'hang', prop: iHas ? 'doc' : undefined, blink: B(82), look: f < 1046 ? -0.5 : 0.5, ...I(82) }, HQ.I));
-      out.push(R(T, 'general', { seed: 83, expr: gHas ? 'stern' : 'neutral', L: gHas ? 'hold' : 'hang', prop: gHas ? 'doc' : undefined, blink: B(83), look: -0.5, ...I(83) }, HQ.G));
+      out.push(...R3(T, 'enemy', { seed: 81, expr: 'stern', R: a ? 'give' : 'hang', prop: a ? 'doc' : undefined, blink: B(81), look: 0.5, ...I(81) }, HQ.A));
+      out.push(...R3(T, 'inspector', { seed: 82, expr: iHas ? 'curious' : 'neutral', R: iHas ? 'give' : 'hang', L: 'hang', prop: iHas ? 'doc' : undefined, blink: B(82), look: f < 1046 ? -0.5 : 0.5, ...I(82) }, HQ.I));
+      out.push(...R3(T, 'general', { seed: 83, expr: gHas ? 'stern' : 'neutral', L: gHas ? 'hold' : 'hang', prop: gHas ? 'doc' : undefined, blink: B(83), look: -0.5, ...I(83) }, HQ.G));
       break;
     }
     case 's18': {
       const nod = f >= 1080 && f < 1092 ? 6 * Math.sin((f - 1080) / 12 * Math.PI * 2) : 0;
-      out.push(R(T, 'inspector', { seed: 82, expr: f < 1080 ? 'curious' : 'pleased', R: 'lens', prop: 'magnifier', L: 'hold', blink: 0, look: 0, ...I(82), headTilt: q(nod, 1), bob: q(nod * 0.001, 3) }, HQ.I));
+      out.push(...R3(T, 'inspector', { seed: 82, expr: f < 1080 ? 'curious' : 'pleased', R: 'lens', prop: 'magnifier', L: 'hold', blink: 0, look: 0, ...I(82), headTilt: q(nod, 1), bob: q(nod * 0.001, 3) }, HQ.I));
       const slam = f >= 1100, up = f >= 1093 && f < 1100;
-      out.push(R(T, 'general', { seed: 83, expr: slam || up ? 'angry' : 'stern', R: slam ? 'slam' : up ? 'fist' : 'hang', L: 'hold', prop: 'doc', blink: B(83), look: 0, ...I(83), bob: slam && f < 1104 ? -0.01 : 0 }, HQ.G));
-      out.push(R(T, 'enemy', { seed: 81, expr: f >= 1100 ? 'shock' : 'neutral', blink: B(81), ...I(81) }, HQ.A));
+      out.push(...R3(T, 'general', { seed: 83, expr: slam || up ? 'angry' : 'stern', R: slam ? 'slam' : up ? 'fist' : 'hang', L: 'hold', prop: 'doc', blink: B(83), look: 0, ...I(83), bob: slam && f < 1104 ? -0.01 : 0 }, HQ.G));
+      out.push(...R3(T, 'enemy', { seed: 81, expr: f >= 1100 ? 'shock' : 'neutral', blink: B(81), ...I(81) }, HQ.A));
       break;
     }
     case 's19': {
@@ -381,16 +389,16 @@ export const actorsAt = (f, T) => {
     case 's19b': {
       for (let i = 0; i < 16; i++) {
         const row = Math.floor(i / 2), side = i % 2 ? 0.55 : -0.55, z = -2 - row * 1.6 - (f - 1129) * 0.05, ph = q(((f + row * 5) / 15) % 1, 2);
-        out.push(R(T, 'sentry', { seed: 90 + i, back: true, step: ph, L: 'swing', R: 'swing', swing: q(Math.sin(ph * 6.283), 2) }, [side, 0, z], { s: 0.78 }));
+        out.push(R(T, 'sentry', { seed: 90 + i, back: true, step: ph, L: 'swing', R: 'swing', swing: q(Math.sin(ph * 6.283), 2) }, [side, 0, z], { s: 0.78, inflate: { d: 0.09 } }));
       }
       break;
     }
     case 's20': break;
     case 's20b': {
       const lookA = q(Math.sin(f * 0.13) * 0.8, 1);
-      out.push(R(T, 'sentry', { seed: 91, expr: 'shock', L: 'cheek', R: 'cheek', blink: 0, look: lookA, ...I(91) }, SENT[0]));
-      out.push(R(T, 'sentry', { seed: 92, expr: f < 1215 ? 'shock' : 'blow', R: f < 1215 ? 'point' : 'mouth', prop: f < 1215 ? undefined : 'whistle', blink: 0, look: 0.3, ...I(92) }, SENT[1]));
-      out.push(R(T, 'sentry', { seed: 93, expr: 'nervous', R: 'scratch', blink: B(93), look: -lookA, ...I(93) }, SENT[2]));
+      out.push(...R3(T, 'sentry', { seed: 91, expr: 'shock', L: 'cheek', R: 'cheek', blink: 0, look: lookA, ...I(91) }, SENT[0]));
+      out.push(...R3(T, 'sentry', { seed: 92, expr: f < 1215 ? 'shock' : 'blow', R: f < 1215 ? 'point' : 'mouth', prop: f < 1215 ? undefined : 'whistle', blink: 0, look: 0.3, ...I(92) }, SENT[1]));
+      out.push(...R3(T, 'sentry', { seed: 93, expr: 'nervous', R: 'scratch', blink: B(93), look: -lookA, ...I(93) }, SENT[2]));
       break;
     }
     case 's21': case 's21b': {
