@@ -289,10 +289,14 @@ place(sfx, rustle(1.0) * 0.6, 42.6, 0.25); place(sfx, rustle(1.0) * 0.6, 44.2, 0
 
 # ---------------- mix ----------------
 voice = load_voice()
-k = int(0.03 * SR); ve = np.sqrt(np.convolve(voice ** 2, np.ones(k) / k, "same"))
+def movavg(x, n):   # centred moving average in O(N) (np.convolve with long windows is O(N*n))
+    c = np.concatenate([[0.0], np.cumsum(x, dtype=np.float64)]); h = n // 2
+    i0 = np.clip(np.arange(len(x)) - h, 0, len(x)); i1 = np.clip(np.arange(len(x)) - h + n, 0, len(x))
+    return ((c[i1] - c[i0]) / n).astype(np.float32)
+ve = np.sqrt(movavg(voice ** 2, int(0.03 * SR)))
 speech = (ve > 0.02).astype(np.float32)
-hold = int(0.25 * SR); speech = np.convolve(speech, np.ones(hold) / hold, "same") > 0.01
-sm = int(0.12 * SR); env = np.convolve(speech.astype(np.float32), np.ones(sm) / sm, "same")   # 0..1 talking envelope
+speech = movavg(speech, int(0.25 * SR)) > 0.01
+env = movavg(speech.astype(np.float32), int(0.12 * SR))   # 0..1 talking envelope
 def rms(x, m=None): x = x if m is None else x[m]; return float(np.sqrt(np.mean(x ** 2)) + 1e-9)
 v_rms = rms(voice, speech)
 duck = 1 - 0.45 * env                                    # about -5 dB under speech
