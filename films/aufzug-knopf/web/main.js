@@ -603,11 +603,11 @@ function worldState(S, f, cam) {
 
 function drawActors(list, cam) {
   cards.forEach((c) => { c.mesh.visible = c.blob.visible = false; });
-  list.forEach((a, i) => {
+  list.filter((a) => (a.s ?? 1) > 1e-3).forEach((a, i) => {
     const c = getCard(i);
     c.draw(a.key, a.draw);
     c.mesh.visible = true; c.mesh.position.set(a.x, a.y, a.z);
-    const s = a.s || 1; c.mesh.scale.set(s * (a.flip ? -1 : 1), s, s);
+    const s = a.s ?? 1; c.mesh.scale.set(s * (a.flip ? -1 : 1), s, s);
     const yaw = a.fixYaw ?? Math.atan2(cam.position.x - a.x, cam.position.z - a.z);
     c.mesh.rotation.set(a.pitch || 0, yaw + (a.yaw || 0), a.roll || 0, 'YXZ');
     c.mat.color.set(a.tint || '#ffffff'); c.mat.opacity = a.alpha ?? 1; c.mat.transparent = true;

@@ -13,7 +13,7 @@ the bottom 300 px and right 150 px stay free of key action.
 | Shots | 22, every cut in a pause between phrases, none longer than 3.0 s |
 | Timing | `work/phrases.json` (silence alignment + manual check against the RMS envelope; Whisper model host was unreachable) |
 | Audio | `audio.py` → `mix_raw.wav`; music ~21.6 dB under speech, ducked wherever the voice is active |
-| Output | `out/Der-Tuer-zu-Knopf.mp4` (-14 LUFS, H.264) + `out/qa_sheet.jpg` |
+| Output | `out/Der-Tuer-zu-Knopf.mp4` (copy in `renders/der-tuer-zu-knopf.mp4`; -14.0 LUFS two-pass, H.264) + `out/qa_sheet.jpg` (2 fps, whole film) |
 
 Rebuild:
 ```bash

@@ -9,3 +9,4 @@ web/lib/
 web/toon.js
 work/db10ms.npy
 *.pyc
+out/*.mp4
