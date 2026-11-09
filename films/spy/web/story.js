@@ -47,9 +47,9 @@ const smooth = E.smooth;
 
 // ---------- lights ----------
 export const LIGHTS = {
-  night: { az: -50, el: 22, sky: '#5a72a0', ground: '#182234', hemi: 1.35, sun: '#c4d6f4', sunI: 1.7, fog: '#2a3a58', fogNear: 30, fogFar: 300,
+  night: { az: -150, el: 22, sky: '#5a72a0', ground: '#182234', hemi: 1.35, sun: '#c4d6f4', sunI: 1.7, fog: '#2a3a58', fogNear: 30, fogFar: 300,
     skyTop: '#0a1430', skyHor: '#3a5078', sunDisc: '#f6f2de', sunSize: 0.0006, sunGlow: 0.4, glowPow: 160, sat: 0.95, waterDeep: '#0e2040', waterShal: '#2a4a78', glint: '#d4e2f6',
-    vig: 0.36, tone: 0.06, grain: 0.015, shadowExt: 16 },
+    vig: 0.34, tone: 0.06, grain: 0.015, shadowExt: 16, fillI: 1.1, fillCol: '#8aa2d8', fillAz: 120, fillEl: 25 },
   room: { az: 60, el: 78, sky: '#8a7660', ground: '#2a2018', hemi: 0.8, sun: '#ffd9a0', sunI: 1.25, fog: '#2a2018', fogNear: 8, fogFar: 30, skyTop: '#1a1410', skyHor: '#1a1410',
     lampI: 3.2, lampCol: '#ffcf8a', lampDist: 8, sat: 1.0, tone: 0.24, vig: 0.42, gain: '#fff4e6', shadowExt: 4.5 },
   cold: { az: 30, el: 80, sky: '#d4e6f6', ground: '#7a8a9a', hemi: 1.2, sun: '#e6f2ff', sunI: 1.1, fog: '#a8bccc', fogNear: 10, fogFar: 40, skyTop: '#9fb2bf', skyHor: '#9fb2bf',
@@ -98,7 +98,7 @@ const SENT = [[-0.6, 0, 13.4], [0.25, 0, 12.6], [1.05, 0, 14.2]].map(([x, y, z])
 // ---------- cameras ----------
 const K = (f, pos, look, fov, roll = 0, ease) => ({ f, pos, look, fov, roll, ease });
 const CAMS = {
-  s01: [K(0, [-11.5, 0.9, 9.5], [0, 2.6, 0], 48, 5), K(62, [-7.8, 2.3, 6.6], [0.5, 3.5, 0], 42, -1, 'easeOut')],
+  s01: [K(0, [24, 0.7, 9.5], [6, 2.6, 0], 50, -7), K(62, [17.5, 3.0, 7.0], [3, 3.6, 0], 44, 1, 'easeOut')],
   s02: [K(63, [-5, 5.0, 0.55], [-5, DECK, -0.3], 42, 6), K(140, [-5, 3.05, -0.52], [-5, DECK, -0.76], 34, -3)],
   s03: [K(141, [0.1, 2.95, 3.3], [0.05, 1.45, -0.95], 46, -3), K(218, [0.05, 2.8, 2.5], [0.05, 1.5, -0.85], 43, 2)],
   s04: [K(219, [0.65, 1.62, 0.05], [0.43, 1.44, -1.55], 34, 2), K(284, [0.52, 1.56, -0.28], [0.44, 1.46, -1.55], 32, -2)],
@@ -118,7 +118,7 @@ const CAMS = {
   s18: [K(1070, [0.06, 1.62, -0.35], [0.0, 1.57, -1.7], 32, 0), K(1091, [0.04, 1.6, -0.45], [0.0, 1.56, -1.7], 30, -2), K(1097, [1.25, 1.55, 0.8], [1.15, 1.5, -1.55], 40, 3, 'easeOut'), K(1109, [1.25, 1.53, 0.65], [1.15, 1.5, -1.55], 39, 0)],
   s19: [K(1110, [0.35, 4.1, 0.0], [0, 0.83, 0], 56, 0), K(1139, [0.3, 3.5, 0.0], [0, 0.83, 0], 53, -8)],
   s19b: [K(1129, [2.4, 3.6, 7], [0, 1.0, -14], 42, -3), K(1161, [2.0, 3.2, 4], [0, 1.0, -20], 40, 1)],
-  s20: [K(1162, [1, 6.5, -150], [1, 1.0, -20], 42, -2), K(1194, [1, 6.0, -138], [1, 1.0, -15], 40, 1)],
+  s20: [K(1162, [1, 10.5, -158], [1, 0.5, -40], 44, -2), K(1194, [1, 9.5, -146], [1, 0.5, -34], 42, 1)],
   s20b: [K(1195, [0.25, 1.6, 6.0], [0.25, 1.2, 16], 44, 2), K(1251, [0.3, 1.55, 6.6], [0.28, 1.2, 16], 42, -2)],
   s21: [K(1252, [0.9, 0.95, 2.9], [0, 0.55, 0], 38, -2), K(1292, [0.7, 0.9, 2.5], [0, 0.55, 0], 36, 1)],
   s21b: [K(1293, [0.75, 1.0, 2.6], [0, 0.6, 0], 38, 0), K(1367, [5.0, 4.0, 11.5], [0, 1.0, -6], 46, -2)],
@@ -181,7 +181,9 @@ export const worldAt = (f) => {
   switch (id) {
     case 's01': case 's02': case 's15': {
       W.set = 'sea'; W.sea = { y: 0, amp: id === 's01' ? 0.38 : 0.3 };
-      if (id === 's01') { const t = E.easeOut((f + 14) / 52); W.dyn.sub = { p: [0, lerp(-3.4, -0.5, t), 0], r: [0.02 * Math.sin(f * 0.2), 0, 0.09 * (1 - t)] }; }
+      if (id === 's01') { const t = E.easeOut((f + 10) / 46), settle = E.spring(Math.max(0, f - 26) / 30, 1.2, 4);
+        W.dyn.sub = { p: [0, lerp(-3.6, -0.5, t), 0], r: [0.02 * Math.sin(f * 0.2), 0, 0.2 * (1 - t) - 0.04 * Math.sin(Math.min(1, settle) * Math.PI) * (f > 26 ? 1 : 0)] };
+        W.foamRing = clamp(1 - Math.max(0, f - 12) / 60) * 0.95; W.sig = f >= 44 && ((f - 44) % 10) < 5; }
       else W.dyn.sub = { p: [0, subY(f), 0], r: [0.008 * Math.sin(f * 0.1), 0, 0.006 * Math.sin(f * 0.08)] };
       break;
     }
@@ -415,7 +417,9 @@ const FX = (key, draw, pos, s, extra = {}) => ({ key, draw, x: pos[0], y: pos[1]
 export const fxAt = (f, T) => {
   const S = shotAt(f), id = S.id, out = [];
   if (id === 's01') { // breach spray
-    for (let i = 0; i < 7; i++) { const t = q(clamp((f + 18 - i * 3) / 42), 2); if (t < 1) out.push(FX('spl' + t, (p) => T.fxDust(p, t, '#e8f0ff'), [-12 + i * 4, 0.1 + t * 0.9, (i % 2 ? 2.7 : -2.7)], 1.3 + (i % 3) * 0.3, { tint: '#c8d6ee', alpha: 0.85 })); }
+    for (let i = 0; i < 9; i++) { const t = q(clamp((f + 18 - i * 2.5) / 42), 2); if (t < 1) out.push(FX('spl' + i + t, (p) => T.fxSpray(p, t, i), [13 - i * 3.2, -0.6, (i % 2 ? 2.4 : -2.4)], (i < 2 ? 4.2 : 2.6), { tint: '#d6e2f6', noInk: true, shadow: false })); }
+    for (let i = 0; i < 8; i++) { const t = q(clamp((f - 8 - i * 2) / 34), 2); if (t > 0 && t < 1) out.push(FX('pour' + i + t, (p) => T.fxPour(p, t, i), [-8 + i * 2.6, -0.5, 2.3], 1.3, { tint: '#c6d4ee', noInk: true, order: 4 })); }
+    if (f >= 44) { const on = ((f - 44) % 10) < 5; if (on) out.push(FX('sigGlow', (p) => T.fxGlow(p, '255,230,160', 0.9), [3.6, 4.0, 1.2], 0.9, { add: true, order: 6 })); }
   }
   if (id === 's15' && f >= 948) { const t = q(clamp((f - 948) / 24), 2); out.push(FX('splash' + t, (p) => T.fxDust(p, t, '#eef4ff'), [AG.sea15[0], -0.1 + t * 0.4, 2.35], 1.1, { tint: '#c8d6ee', alpha: 0.8 })); }
   if (id === 's03' || id === 's05') { // pipe smoke

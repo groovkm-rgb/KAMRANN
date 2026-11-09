@@ -734,3 +734,19 @@ export const fxSmoke = (p, k, seed = 1) => { const g = p.g; g.save(); g.globalAl
 export const fxGlow = (p, col = "255,240,200", a = 0.8) => { const g = p.g, gr = g.createRadialGradient(300, 500, 0, 300, 500, 300); gr.addColorStop(0, `rgba(${col},${a})`); gr.addColorStop(1, `rgba(${col},0)`); g.fillStyle = gr; g.fillRect(0, 0, 600, 1000); };
 export const fxSpark = (p, t) => { const g = p.g; g.save(); g.globalAlpha = Math.max(0, 1 - t); const r = 60 + t * 200; for (let i = 0; i < 4; i++) { const a = i * Math.PI / 2 + t; p.poly([[300, 500], [300 + Math.cos(a + 0.12) * r * 0.25, 500 + Math.sin(a + 0.12) * r * 0.25], [300 + Math.cos(a) * r, 500 + Math.sin(a) * r], [300 + Math.cos(a - 0.12) * r * 0.25, 500 + Math.sin(a - 0.12) * r * 0.25]], "#fffbe0", 0); } p.ell(300, 500, 30 * (1 - t) + 6, 30 * (1 - t) + 6, "#ffffff", 0); g.restore(); };
 export const fxHeart = (p, a = 1) => { p.g.save(); p.g.globalAlpha = a; heart(p, 300, 500, 14, "#e04a6a", 8); p.g.restore(); };
+/** soft sea spray burst (k 0..1): no ink, soft blobs + flying droplets */
+export const fxSpray = (p, k, seed = 1) => { const g = p.g, rr = (i) => { const x = Math.sin(i * 127.1 + seed * 311.7) * 43758.5453; return x - Math.floor(x); };
+  g.save(); const fade = Math.max(0, 1 - k) ** 1.2;
+  for (let i = 0; i < 14; i++) { const a = -Math.PI * (0.1 + 0.8 * rr(i)), d = (80 + 260 * rr(i + 50)) * (0.3 + k), x = 300 + Math.cos(a) * d, y = 820 + Math.sin(a) * d * 1.3 + k * k * 260, r0 = 60 + 90 * rr(i + 9) * (0.5 + k);
+    const gr = g.createRadialGradient(x, y, 0, x, y, r0); gr.addColorStop(0, `rgba(240,246,255,${0.55 * fade})`); gr.addColorStop(1, "rgba(240,246,255,0)"); g.fillStyle = gr; g.fillRect(x - r0, y - r0, 2 * r0, 2 * r0); }
+  for (let i = 0; i < 60; i++) { const a = -Math.PI * (0.05 + 0.9 * rr(i + 99)), v = 300 + 420 * rr(i + 7), x = 300 + Math.cos(a) * v * k, y = 820 + Math.sin(a) * v * k * 1.4 + 900 * k * k, r0 = 3 + 7 * rr(i + 3);
+    g.fillStyle = `rgba(250,252,255,${0.9 * fade})`; g.beginPath(); g.ellipse(x, y, r0, r0 * 1.5, 0, 0, 7); g.fill(); }
+  g.restore(); };
+/** water sheeting off the hull (k 0..1): soft translucent falling bands */
+export const fxPour = (p, k, seed = 0) => { const g = p.g; g.save(); const fade = Math.max(0, 1 - k);
+  for (let i = 0; i < 6; i++) { const x0 = 90 + i * 85 + Math.sin(seed * 3 + i) * 25, w = 30 + 20 * Math.sin(i * 2.3 + seed), y1 = 130 + 760 * Math.min(1, 0.35 + k);
+    const gr = g.createLinearGradient(0, 130, 0, y1); gr.addColorStop(0, `rgba(235,244,255,${0.55 * fade})`); gr.addColorStop(1, `rgba(235,244,255,${0.05 * fade})`);
+    g.fillStyle = gr; g.beginPath(); for (let j = 0; j <= 16; j++) { const t = j / 16; g.lineTo(x0 + Math.sin(t * 5 + i + seed) * 8 - w / 2 * (1 - t * 0.4), 130 + t * (y1 - 130)); }
+    for (let j = 16; j >= 0; j--) { const t = j / 16; g.lineTo(x0 + Math.sin(t * 5 + i + seed) * 8 + w / 2 * (1 - t * 0.4), 130 + t * (y1 - 130)); } g.closePath(); g.fill();
+    g.fillStyle = `rgba(255,255,255,${0.5 * fade})`; g.beginPath(); g.ellipse(x0, y1, w * 0.9, 9, 0, 0, 7); g.fill(); }
+  g.restore(); };

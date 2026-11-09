@@ -55,6 +55,15 @@ const mapTex = (enemy = false) => {
   return c;
 };
 
+const foamRingTex = () => { const [c, g] = cv(512, 256); const r = P.rng(41);
+  for (let i = 0; i < 900; i++) { const a = r() * Math.PI * 2, k = 0.62 + r() * 0.38, x = 256 + Math.cos(a) * 240 * k, y = 128 + Math.sin(a) * 112 * k, rr = 4 + r() * 14;
+    const gr = g.createRadialGradient(x, y, 0, x, y, rr); gr.addColorStop(0, 'rgba(255,255,255,.55)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(x - rr, y - rr, 2 * rr, 2 * rr); }
+  return c; };
+const wakeTex = () => { const [c, g] = cv(256, 512); const r = P.rng(43);
+  for (let i = 0; i < 700; i++) { const t = r(), side = r() < 0.5 ? -1 : 1, spread = 20 + t * 110, x = 128 + side * spread * (0.85 + r() * 0.3) * (r() < 0.25 ? r() : 1), y = 20 + t * 480, rr = 3 + r() * 9 * (0.4 + t);
+    const gr = g.createRadialGradient(x, y, 0, x, y, rr); gr.addColorStop(0, `rgba(255,255,255,${0.6 * (1 - t)})`); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(x - rr, y - rr, 2 * rr, 2 * rr); }
+  return c; };
+
 // ---------- materials ----------
 const grad = (() => { const d = new Uint8Array([90, 90, 90, 255, 255, 255, 255, 255]); const t = new THREE.DataTexture(d, 2, 1); t.minFilter = t.magFilter = THREE.NearestFilter; t.needsUpdate = true; return t; })();
 const toon = (opts) => new THREE.MeshToonMaterial({ gradientMap: grad, ...opts });
@@ -132,6 +141,7 @@ const sun = new THREE.DirectionalLight('#ffffff', 2); sun.castShadow = true;
 sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.02; sun.shadow.radius = 2;
 scene.add(sun); scene.add(sun.target);
 const lamp = new THREE.PointLight('#ffd08a', 0, 9, 1.6); scene.add(lamp);
+const fill = new THREE.DirectionalLight('#ffffff', 0); scene.add(fill); scene.add(fill.target); // soft fill from the camera side (night shots)
 scene.fog = new THREE.Fog('#ffffff', 40, 600);
 
 // ---------- sea (shared by several sets) ----------
@@ -188,6 +198,10 @@ const SETS = {}; const set = (id) => (SETS[id] = grp(scene));
   add(cyl(0.45, 0.45, 0.22, 16), M.hullDark, -9, 2.3, 0, sub); add(cyl(0.45, 0.45, 0.22, 16), M.hullDark, 7.5, 2.3, 0, sub);
   for (let i = 0; i < 12; i++) for (const z of [-1.2, 1.2]) add(cyl(0.025, 0.025, 0.7, 5), M.metalDark, -12 + i * 2.2, 2.55, z, sub);
   for (const z of [-1.2, 1.2]) { const w = add(cyl(0.015, 0.015, 26, 4), M.metalDark, -0.5, 2.85, z, sub); w.rotation.z = Math.PI / 2; }
+  const fr = add(new THREE.PlaneGeometry(40, 9), new THREE.MeshBasicMaterial({ map: P.tex(foamRingTex()), transparent: true, depthWrite: false, opacity: 0, fog: true }), -0.5, 0.12, 0, S, { cast: false });
+  fr.rotation.x = -Math.PI / 2; fr.userData.ndSkip = true; DYN.foamRingMesh = fr;
+  const sig = add(sph(0.16, 12, 8), glowMat('#3a3020'), 2.0, 2.3, 1.0, tw, { cast: false }); sig.userData.ndSkip = true; DYN.sigLamp = sig;
+  add(cyl(0.2, 0.2, 0.25, 12), M.hullDark, 2.0, 2.3, 0.88, tw).rotation.x = Math.PI / 2;
   // the night shore with a few warm windows
   const shore = grp(S, 0, 0, 0);
   const rh = P.rng(17);
@@ -404,8 +418,16 @@ const bY = (z, y0, y1, z0, d) => y0 + (y1 - y0) * Math.pow(Math.min(1, Math.max(
   // the fleet: many navy-grey landing craft (no markings)
   const fleet = dyn('fleet', grp(S, 0, 0, 0));
   const craft = (x, z, s = 1) => { const c = grp(fleet, x, 0, z); c.scale.setScalar(s);
-    add(box(3.2, 1.2, 7.5), M.shipGrey, 0, 0.35, 0, c); const ramp = add(box(3.2, 1.6, 0.25), M.shipGreyD, 0, 0.7, 3.8, c); ramp.rotation.x = -0.12;
-    add(box(1.6, 1.6, 1.6), M.shipGreyD, 0, 1.6, -2.6, c); add(cyl(0.05, 0.05, 1.8, 6), M.metalDark, 0, 3.1, -2.6, c); return c; };
+    add(box(3.4, 0.9, 7.2), M.shipGreyD, 0, 0.2, -0.1, c);                                  // hull
+    for (const sx of [-1, 1]) add(box(0.22, 1.1, 6.6), M.shipGrey, sx * 1.6, 0.95, -0.3, c);  // high sides of the well deck
+    add(box(3.0, 0.1, 6.0), M.black, 0, 0.62, -0.2, c);                                      // dark open well
+    const ramp = add(box(3.4, 1.7, 0.25), M.shipGrey, 0, 0.95, 3.5, c); ramp.rotation.x = -0.18;
+    add(box(3.4, 1.4, 1.4), M.shipGrey, 0, 1.25, -3.3, c); add(box(1.4, 0.9, 1.0), M.shipGreyD, 0, 2.3, -3.3, c);
+    add(cyl(0.05, 0.05, 1.8, 6), M.metalDark, 0, 3.4, -3.4, c);
+    const wk = add(new THREE.PlaneGeometry(6, 16), new THREE.MeshBasicMaterial({ map: P.tex(wakeTex()), transparent: true, depthWrite: false, fog: true }), 0, 0.14, -11.5, c, { cast: false });
+    wk.rotation.x = -Math.PI / 2; wk.rotation.z = Math.PI; wk.userData.ndSkip = true;
+    const bw = add(new THREE.PlaneGeometry(4.6, 3), new THREE.MeshBasicMaterial({ map: P.tex(foamRingTex()), transparent: true, depthWrite: false, opacity: 0.9, fog: true }), 0, 0.15, 3.6, c, { cast: false });
+    bw.rotation.x = -Math.PI / 2; bw.userData.ndSkip = true; return c; };
   const rr = P.rng(19);
   for (let row = 0; row < 7; row++) for (let i = 0; i < 11; i++) { const cx_ = -55 + i * 11 + (row % 2) * 5.5; if (Math.abs(cx_ - 1) < 4) continue; craft(cx_ + rr() * 2, -40 - row * 26 - rr() * 6, 1 + row * 0.05); }
   for (let i = 0; i < 7; i++) { const s = grp(fleet, (i % 2 ? 1 : -1) * (75 + i * 18), 0, -120 - i * 30); add(box(9, 4, 60), M.shipGreyD, 0, 2, 0, s); add(box(6, 8, 10), M.shipGreyD, 0, 7, -6, s); add(box(3, 6, 4), M.shipGreyD, 0, 12, -6, s); add(cyl(0.6, 0.6, 9, 8), M.shipGreyD, 0, 9, 10, s); }
@@ -620,12 +642,14 @@ function applyLight(L) {
   skyU.top.value.set(L.skyTop); skyU.hor.value.set(L.skyHor); skyU.sunCol.value.set(L.sunDisc || '#000'); skyU.sunSize.value = L.sunSize || 0; skyU.glow.value = L.sunGlow ?? 0.35; skyU.gpow.value = L.glowPow ?? 18;
   inkU.sat.value = L.sat ?? 1; inkU.gain.value.set(L.gain || '#ffffff'); inkU.lift.value.set(L.lift || '#000000'); inkU.tone.value = L.tone ?? 0.15; inkU.grain.value = L.grain ?? 0.018;
   if (L.waterDeep) { seaU.deep.value.set(L.waterDeep); seaU.shal.value.set(L.waterShal); seaU.glint.value.set(L.glint); }
+  fill.intensity = L.fillI || 0; if (L.fillCol) fill.color.set(L.fillCol);
   lamp.intensity = L.lampI || 0; if (L.lampCol) lamp.color.set(L.lampCol); lamp.distance = L.lampDist || 9;
 }
 function placeSun(L, focus) {
   const az = rx(L.az), el = rx(L.el); tmpV.set(Math.cos(el) * Math.cos(az), Math.sin(el), Math.cos(el) * Math.sin(az));
   skyU.sunDir.value.copy(tmpV); seaU.glintDir.value.set(tmpV.x, tmpV.z).normalize();
   sun.position.copy(focus).addScaledVector(tmpV, 60); sun.target.position.copy(focus);
+  if (L.fillI) { const fa = rx(L.fillAz ?? 135), fe = rx(L.fillEl ?? 20); fill.position.copy(focus).add(scratch.set(Math.cos(fe) * Math.cos(fa), Math.sin(fe), Math.cos(fe) * Math.sin(fa)).multiplyScalar(50)); fill.target.position.copy(focus); }
   const ext = L.shadowExt || 10, sc = sun.shadow.camera; sc.left = -ext; sc.right = ext; sc.top = ext; sc.bottom = -ext; sc.near = 1; sc.far = 160; sc.updateProjectionMatrix();
 }
 const scratch = new THREE.Vector3();
@@ -640,6 +664,8 @@ function worldState(Wd, f) {
   // lamp follows the bulb of the hanging/desk lamp
   if (Wd.lampAt) { const b = DYN[Wd.lampAt]; b.updateWorldMatrix(true, false); b.getWorldPosition(lamp.position); if (Wd.lampOffset) lamp.position.add(scratch.set(...Wd.lampOffset)); }
   if (Wd.bulbOn !== undefined) { for (const n of ['bulbR', 'bulbD']) if (DYN[n]) DYN[n].material.color.set(Wd.bulbOn ? '#fff3c8' : '#5a5040'); }
+  if (DYN.foamRingMesh) { DYN.foamRingMesh.material.opacity = Wd.foamRing || 0; DYN.foamRingMesh.visible = !!Wd.foamRing; }
+  if (DYN.sigLamp) DYN.sigLamp.material.color.set(Wd.sig ? '#ffe9a8' : '#3a3020');
   // pointer stick between two points
   if (Wd.stick) { const st = DYN.stick, A = new THREE.Vector3(...Wd.stick.a), B = new THREE.Vector3(...Wd.stick.b), d = B.clone().sub(A), L = d.length();
     st.visible = true; st.position.copy(A).addScaledVector(d, 0.5); st.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()); st.scale.set(1, L / 1.5, 1); }
