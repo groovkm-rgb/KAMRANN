@@ -3016,7 +3016,7 @@ export const spyFront = (p, key, opts = {}) => {
   } else if (!back) faceFront(p, cx, hc, W, expr, facing, look, lid, false, skin, O.thinMou || O.walrus ? null : O.moustache, !!O.stout);
   if (!back && O.walrus) { const uu = W / 100, mx = cx + 8 * uu * facing;
     const wp = [[mx, hc + 9 * uu], [mx + 16 * uu, hc + 8 * uu], [mx + 30 * uu, hc + 22 * uu], [mx + 22 * uu, hc + 26 * uu], [mx + 10 * uu, hc + 18 * uu], [mx, hc + 20 * uu], [mx - 10 * uu, hc + 18 * uu], [mx - 22 * uu, hc + 26 * uu], [mx - 30 * uu, hc + 22 * uu], [mx - 16 * uu, hc + 8 * uu]];
-    p.poly(wp, O.moustache, 2.6 * uu); for (const s of [-1, 1]) p.ell(cx + s * 0.9 * H.a, hc - 0.05 * H.b, 0.12 * H.a, 0.3 * H.b, O.sideburns, 2 * u); }
+    p.poly(wp, O.moustache, 2.6 * uu); if (LAY !== "face") for (const s of [-1, 1]) p.ell(cx + s * 0.9 * H.a, hc - 0.05 * H.b, 0.12 * H.a, 0.3 * H.b, O.sideburns, 2 * u); }
   if (!back && O.thinMou) for (const s of [-1, 1]) taper(p, [cx + 8 * W / 100 * facing + s * 1.5 * u, hc + 13 * u], [cx + 8 * W / 100 * facing + s * 13 * u, hc + 14.5 * u], 2.8 * u, 1 * u, O.moustache);
   if (!back && O.brows) { const F = FACE[expr] || FACE.neutral, [dI, dO] = F.brow, uu = W / 100;
     for (const s of [-1, 1]) taper(p, [cx + 7 * uu * facing + s * 4 * uu, hc - 21 * uu + dI * uu * 1.3], [cx + 7 * uu * facing + s * 24 * uu, hc - 21 * uu + dO * uu * 1.3], 9 * uu, 6 * uu, O.brows); }

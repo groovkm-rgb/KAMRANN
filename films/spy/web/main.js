@@ -460,7 +460,7 @@ const flatGeo = new THREE.PlaneGeometry(CM * 0.6, CM);
 const blobTex = P.tex(P.radial('20,14,30', 0.6));
 class Card {
   constructor() {
-    [this.c, this.g] = cv(CW, CH);
+    this.c = document.createElement('canvas'); this.c.width = CW; this.c.height = CH; this.g = this.c.getContext('2d', { willReadFrequently: true }); // inflation reads the alpha back
     this.t = new THREE.CanvasTexture(this.c); this.t.colorSpace = THREE.SRGBColorSpace; this.t.anisotropy = 4;
     this.mat = new THREE.MeshBasicMaterial({ map: this.t, transparent: true, alphaTest: 0.02, side: THREE.DoubleSide, fog: true });
     this.mesh = new THREE.Mesh(cardGeo, this.mat); this.mesh.userData.nd = cardNd(this.t); this.mesh.castShadow = true;
@@ -505,7 +505,7 @@ class Head3D {
     this.t = new THREE.CanvasTexture(this.c); this.t.colorSpace = THREE.SRGBColorSpace; this.t.anisotropy = 4;
     this.grp = new THREE.Group(); this.grp.rotation.order = 'YXZ'; scene.add(this.grp);
     this.skinM = htoon({ color: '#ffffff' }); this.hairM = htoon({ color: '#3b2a20', side: THREE.DoubleSide });
-    this.hatM = htoon({ color: '#ffffff' }); this.bandM = htoon({ color: '#333333' }); this.visorM = htoon({ color: '#1d1a1e' }); this.cordM = htoon({ color: '#d9b55a' });
+    this.hatM = htoon({ color: '#ffffff' }); this.bandM = htoon({ color: '#333333', side: THREE.DoubleSide }); this.visorM = htoon({ color: '#1d1a1e' }); this.cordM = htoon({ color: '#d9b55a' });
     this.skin = add(headGeo, this.skinM, 0, 0, 0, this.grp);
     this.face = add(faceGeo, new THREE.MeshMatcapMaterial({ matcap: matcapTex, map: this.t, transparent: true, alphaTest: 0.35, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }), 0, 0, 0, this.grp, { cast: false });
     this.face.scale.setScalar(1.004); this.face.userData.ndSkip = true;
@@ -514,8 +514,10 @@ class Head3D {
     // hats (unit-sphere space; the group is scaled to the head size)
     this.hats = {};
     { const h = new THREE.Group(); this.grp.add(h);
-      add(cyl(1.16, 1.0, 0.34, 32), this.hatM, 0, 0.98, -0.06, h); add(cyl(1.03, 1.03, 0.26, 32), this.bandM, 0, 0.72, -0.04, h);
-      const v = add(new THREE.CylinderGeometry(0.82, 0.82, 0.05, 24, 1, false, -Math.PI / 2, Math.PI), this.visorM, 0, 0.58, 0.36, h); v.rotation.x = 0.28;
+      add(cyl(1.18, 1.0, 0.32, 32), this.hatM, 0, 1.0, -0.06, h);
+      const bandG = new THREE.CylinderGeometry(1.0, 0.86, 0.3, 32, 1, true); add(bandG, this.bandM, 0, 0.72, -0.04, h);   // snug cone band, open below
+      add(new THREE.CircleGeometry(0.86, 32).rotateX(Math.PI / 2), this.bandM, 0, 0.575, -0.04, h);                   // dark inside, hidden by the head
+      const v = add(new THREE.CylinderGeometry(0.8, 0.8, 0.05, 24, 1, false, -Math.PI / 2, Math.PI), this.visorM, 0, 0.6, 0.42, h); v.rotation.x = 0.3;
       h.cord = add(new THREE.TorusGeometry(1.04, 0.035, 6, 40), this.cordM, 0, 0.8, -0.04, h); h.cord.rotation.x = Math.PI / 2;
       h.btn = add(sph(0.08, 10, 8), this.cordM, 0, 0.74, 1.02, h); h.rotation.x = -0.12; this.hats.peak = h; }
     { const h = new THREE.Group(); this.grp.add(h);
