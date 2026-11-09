@@ -409,7 +409,7 @@ export const fxAt = (f, T) => {
   if (id === 's01') { // breach spray
     for (let i = 0; i < 7; i++) { const t = q(clamp((f + 18 - i * 3) / 42), 2); if (t < 1) out.push(FX('spl' + t, (p) => T.fxDust(p, t, '#e8f0ff'), [-12 + i * 4, 0.1 + t * 0.9, (i % 2 ? 2.7 : -2.7)], 1.3 + (i % 3) * 0.3, { tint: '#c8d6ee', alpha: 0.85 })); }
   }
-  if (id === 's15' && f >= 948) { const t = q(clamp((f - 948) / 24), 2); out.push(FX('splash' + t, (p) => T.fxSplash(p, t), [AG.sea15[0], -0.2, 2.35], 2.6, { tint: '#d0dcf2' })); }
+  if (id === 's15' && f >= 948) { const t = q(clamp((f - 948) / 24), 2); out.push(FX('splash' + t, (p) => T.fxDust(p, t, '#eef4ff'), [AG.sea15[0], -0.1 + t * 0.4, 2.35], 1.1, { tint: '#c8d6ee', alpha: 0.8 })); }
   if (id === 's03' || id === 's05') { // pipe smoke
     for (let i = 0; i < 3; i++) { const k = q(((f * 0.012) + i / 3) % 1, 2); out.push(FX('smk' + k + i, (p) => T.fxSmoke(p, k, i), [P1[0] + 0.15, 1.75 + k * 0.8, P1[2] + 0.1], 0.5, { alpha: 0.8 })); }
   }
@@ -429,7 +429,7 @@ export const fxAt = (f, T) => {
     if (f >= 1036 && f < 1046) out.push(FX('docfly1', (p) => T.propDoc(p, 1), arc(1036, [-0.7, 1.25, -1.45], [-0.25, 1.25, -1.5]), 0.2, { roll: q(Math.sin(f) * 0.3, 1), order: 6 }));
     if (f >= 1054 && f < 1062) out.push(FX('docfly2', (p) => T.propDoc(p, 1), arc(1054, [0.35, 1.25, -1.55], [0.8, 1.2, -1.45]), 0.2, { roll: q(Math.cos(f) * 0.3, 1), order: 6 }));
   }
-  if (id === 's18' && f >= 1100 && f < 1112) { const t = q((f - 1100) / 12, 2); out.push(FX('bang' + t, (p) => T.fxBurst(p, t, '#fff3b0'), [1.45, 0.35, -1.3], 0.6)); }
+  if (id === 's18' && f >= 1100 && f < 1112) { const t = q((f - 1100) / 12, 2); out.push(FX('bang' + t, (p) => T.fxBurst(p, t, '#fff3b0'), [1.55, -0.05, -1.25], 0.55)); }
   if (id === 's19b') { // dust behind the trucks + steam
     for (let i = 0; i < 4; i++) { const k = q(((f * 0.05) + i * 0.27) % 1, 2); out.push(FX('dust' + i + k, (p) => T.fxDust(p, k, '#d8c8a0'), [1.0, 0.4, -10 - i * 12 - (f - 1129) * 0.22 + 4.5], 2.0, { alpha: 0.6 })); }
     for (let i = 0; i < 3; i++) { const k = q(((f * 0.04) + i / 3) % 1, 2); out.push(FX('steam' + i + k, (p) => T.fxDust(p, k, '#efeae0'), [-38, 4.5 + k * 3, -63 - (f - 1129) * 0.35 + k * 6], 4, { alpha: 0.85 })); }
