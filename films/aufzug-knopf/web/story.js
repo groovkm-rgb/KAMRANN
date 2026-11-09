@@ -391,7 +391,7 @@ export const fxAt = (f, T) => {
   if (S.id === 's01' && f < 14) out.push(FX('speed' + (f % 6), (p) => T.fxSpeed(p, (f % 6) / 6), [0.0, 0.25, runZ(f) + 0.25], 1.0, { alpha: 0.9 }));
   if (S.id === 's07' && f >= 349 && f < 360) { const t = q((f - 349) / 10, 2); out.push(FX('bang' + t, (p) => T.fxBang(p, t), [-0.02, -0.95, 0.05], 0.4)); }
   if (S.id === 's08') { for (const h of [370, 393]) if (f >= h && f < h + 8) { const t = q((f - h) / 8, 2); out.push(FX('spk' + t, (p) => T.fxSpark(p, t), [0.13, 0.9, -0.05], 0.1)); } }
-  if (S.id === 's12') { const t = q(E.back(ramp(f, 600, 608)), 2); out.push(PIN('xh' + t + q((f % 30) / 30, 2), (p) => T.fxXray(p, 'hourglass', 0.65 - 0.002 * (f - 599), f / 30), [0.95, 1.6, -0.4], 300, 500, 0.27 * t)); }
+  if (S.id === 's12') { const t = q(E.back(ramp(f, 600, 608)), 2); out.push(PIN('xh' + t + q((f % 30) / 30, 2), (p) => T.fxXray(p, 'hourglass', 0.65 - 0.002 * (f - 599), f / 30), [0.86, 1.36, -0.42], 300, 500, 0.32 * t)); }
   if (S.id === 's13' && f >= 664 && f < 680) { const t = q((f - 664) / 16, 2); out.push(FX('glint' + t, (p) => T.fxSpark(p, t), [-0.22, 1.42, -0.9], 0.14)); }
   if (S.id === 's14' && f >= 716 && f < 728) { const t = q((f - 716) / 12, 2); out.push(FX('bang' + t, (p) => T.fxBang(p, t), [0.0, 0.35, -0.12], 0.75)); }
   if (S.id === 's15' && f >= 786) { const t = q(ramp(f, 786, 798), 2); out.push(PIN('thought' + t, (p) => T.fxThought(p, t), [-0.2, 1.68, -0.95], 300, 430, 0.36, { roll: q(0.03 * Math.sin(f * 0.1), 3) })); }
