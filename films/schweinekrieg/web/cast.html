@@ -1,0 +1,9 @@
+<!doctype html><html><body style="margin:0;background:#9cc"><canvas id="c" width="2400" height="1000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const c=document.getElementById('c'), g=c.getContext('2d');
+const list = window.CAST || [];
+window.draw = (items) => { g.clearRect(0,0,c.width,c.height); g.fillStyle='#bcd8d0'; g.fillRect(0,0,c.width,c.height);
+  items.forEach((it,i)=>{ g.save(); g.translate(i*600*it.k,0); g.scale(it.k||0.66,it.k||0.66); const p=new T.Pen(g); (new Function('T','p',it.code))(T,p); g.restore(); }); return true; };
+window.ready=true;
+</script></body></html>

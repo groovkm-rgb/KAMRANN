@@ -1,0 +1,9 @@
+frames/
+stills/
+node_modules
+web/lib/
+web/toonbase.js
+work/*.wav
+mix.wav
+mix_raw.wav
+*.log

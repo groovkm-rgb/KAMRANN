@@ -1,0 +1,289 @@
+{
+ "duration": 47.725708,
+ "frames30": 1432,
+ "source": "silence-align, then hand-fixed against silencedetect at -30/-38 dB (whisper model download blocked)",
+ "segments": [
+  [
+   0.13542,
+   1.74914
+  ],
+  [
+   1.9468,
+   3.60465
+  ],
+  [
+   3.94927,
+   4.98966
+  ],
+  [
+   5.10975,
+   5.27098
+  ],
+  [
+   5.62467,
+   6.48755
+  ],
+  [
+   6.7602,
+   8.86147
+  ],
+  [
+   9.16825,
+   11.8074
+  ],
+  [
+   12.0786,
+   13.0117
+  ],
+  [
+   13.4072,
+   14.6232
+  ],
+  [
+   14.829,
+   15.6736
+  ],
+  [
+   16.0602,
+   16.6527
+  ],
+  [
+   17.0558,
+   17.9739
+  ],
+  [
+   18.2096,
+   19.0234
+  ],
+  [
+   19.3831,
+   20.2722
+  ],
+  [
+   20.6383,
+   21.603
+  ],
+  [
+   21.8018,
+   23.1096
+  ],
+  [
+   23.4297,
+   24.6039
+  ],
+  [
+   24.9477,
+   25.8179
+  ],
+  [
+   26.0839,
+   26.7005
+  ],
+  [
+   26.9979,
+   28.5447
+  ],
+  [
+   28.8099,
+   29.981
+  ],
+  [
+   30.5073,
+   32.3582
+  ],
+  [
+   32.7075,
+   34.7248
+  ],
+  [
+   34.9794,
+   35.9427
+  ],
+  [
+   36.4265,
+   38.0648
+  ],
+  [
+   38.2949,
+   39.1681
+  ],
+  [
+   39.432,
+   40.853
+  ],
+  [
+   41.2503,
+   43.5305
+  ],
+  [
+   43.9616,
+   44.8636
+  ],
+  [
+   45.0931,
+   46.0438
+  ],
+  [
+   46.282,
+   47.3779
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Dieser Krieg hatte genau ein Opfer.",
+   "s": 0.14,
+   "e": 1.74
+  },
+  {
+   "text": "Ein Schwein.",
+   "s": 1.96,
+   "e": 2.56
+  },
+  {
+   "text": "Eine kleine Insel.",
+   "s": 2.68,
+   "e": 3.59
+  },
+  {
+   "text": "Zwei Großmächte behaupten:",
+   "s": 3.95,
+   "e": 5.23
+  },
+  {
+   "text": "Die gehört uns.",
+   "s": 5.63,
+   "e": 6.47
+  },
+  {
+   "text": "Und auf der Insel leben Siedler von beiden Seiten.",
+   "s": 6.76,
+   "e": 8.86
+  },
+  {
+   "text": "Eines Tages steht ein Schwein im Kartoffelacker eines Farmers.",
+   "s": 9.17,
+   "e": 11.8
+  },
+  {
+   "text": "Nicht zum ersten Mal.",
+   "s": 12.08,
+   "e": 13.0
+  },
+  {
+   "text": "Der Farmer verliert die Geduld –",
+   "s": 13.41,
+   "e": 14.62
+  },
+  {
+   "text": "und erschießt es.",
+   "s": 14.83,
+   "e": 15.67
+  },
+  {
+   "text": "Das Problem:",
+   "s": 16.06,
+   "e": 16.65
+  },
+  {
+   "text": "Das Schwein gehört …",
+   "s": 17.06,
+   "e": 17.96
+  },
+  {
+   "text": "der anderen Seite.",
+   "s": 18.21,
+   "e": 19.02
+  },
+  {
+   "text": "Der Farmer will zahlen.",
+   "s": 19.38,
+   "e": 20.26
+  },
+  {
+   "text": "Der Besitzer lehnt ab.",
+   "s": 20.64,
+   "e": 21.58
+  },
+  {
+   "text": "Man droht, ihn zu verhaften.",
+   "s": 21.88,
+   "e": 23.11
+  },
+  {
+   "text": "Die Siedler rufen die Armee.",
+   "s": 23.43,
+   "e": 24.6
+  },
+  {
+   "text": "Es kommen Soldaten.",
+   "s": 24.95,
+   "e": 25.81
+  },
+  {
+   "text": "Dann Kanonen.",
+   "s": 26.09,
+   "e": 26.69
+  },
+  {
+   "text": "Die andere Seite schickt Kriegsschiffe.",
+   "s": 27.0,
+   "e": 28.54
+  },
+  {
+   "text": "Mit über zweitausend Mann.",
+   "s": 28.81,
+   "e": 29.96
+  },
+  {
+   "text": "Doch der Admiral weigert sich anzugreifen.",
+   "s": 30.51,
+   "e": 32.34
+  },
+  {
+   "text": "Er will keinen Krieg zwischen zwei großen Nationen …",
+   "s": 32.71,
+   "e": 34.72
+  },
+  {
+   "text": "wegen eines Schweins.",
+   "s": 34.99,
+   "e": 35.94
+  },
+  {
+   "text": "Also teilen sich beide Armeen die Insel.",
+   "s": 36.43,
+   "e": 38.06
+  },
+  {
+   "text": "Zwölf Jahre lang.",
+   "s": 38.3,
+   "e": 39.17
+  },
+  {
+   "text": "Ohne einen einzigen Schuss.",
+   "s": 39.43,
+   "e": 40.85
+  },
+  {
+   "text": "Und wer entscheidet am Ende, wem die Insel gehört?",
+   "s": 41.25,
+   "e": 43.52
+  },
+  {
+   "text": "Ein deutscher Kaiser.",
+   "s": 43.96,
+   "e": 44.86
+  },
+  {
+   "text": "Bilanz des Krieges:",
+   "s": 45.09,
+   "e": 46.03
+  },
+  {
+   "text": "ein totes Schwein.",
+   "s": 46.28,
+   "e": 47.37
+  }
+ ],
+ "total_frames": 1447
+}
