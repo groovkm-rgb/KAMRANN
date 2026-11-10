@@ -13,3 +13,4 @@ films/beyin/logs_*.txt
 films/beyin/out/*.wav
 films/beyin/out/*.mp4
 films/beyin/web/lib/
+films/beyin/out/*.jpg
