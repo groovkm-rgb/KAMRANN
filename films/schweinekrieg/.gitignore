@@ -7,3 +7,4 @@ work/*.wav
 mix.wav
 mix_raw.wav
 *.log
+out/*.mp4
