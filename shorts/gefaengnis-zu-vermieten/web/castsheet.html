@@ -1,0 +1,16 @@
+<!doctype html><html><body style="margin:0;background:#9ec3e6"><canvas id="c" width="2400" height="2000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const c = document.getElementById('c'), g = c.getContext('2d');
+const items = [
+ ['warden', {expr:'smile', R:'forward', hold:{R:'key'}}], ['warden', {expr:'stern', R:'finger'}],
+ ['guardFat', {expr:'yawn', L:'yawn', R:'hold', hold:{R:'cards'}, blink:0}], ['guardThin', {expr:'nervous', L:'hold', hold:{L:'clipboard'}}],
+ ['conBeard', {expr:'laugh', L:'wave', R:'hug', hold:{R:'chicken'}}], ['conGlasses', {expr:'joy', L:'cheer', R:'cheer'}],
+ ['conTall', {expr:'grin', R:'carry', hold:{R:'can'}}], ['conBald', {expr:'innocent', L:'hold', hold:{L:'form'}, toe:0.25}],
+ ['north', {expr:'grin', R:'drag', hold:{R:'bagDrag', big:1.3}}], ['north', {expr:'smile', R:'shake'}],
+ ['driver', {expr:'laugh', R:'wave', wv:1}], ['conBald', {expr:'grin', R:'carry', hold:{R:'suitcase'}}],
+];
+items.forEach(([k, o], i) => { g.save(); g.translate((i % 6) * 400, Math.floor(i / 6) * 1000); g.scale(400/600, 1); const p = new T.Pen(g); T.castFront(p, k, o); g.restore(); });
+g.save(); g.translate(0, 2000); g.restore();
+window.done = true;
+</script></body></html>

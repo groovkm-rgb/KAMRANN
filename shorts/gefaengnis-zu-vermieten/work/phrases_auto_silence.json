@@ -1,0 +1,184 @@
+{
+ "duration": 47.830167,
+ "frames30": 1435,
+ "source": "silence-align (cost 2.66)",
+ "segments": [
+  [
+   0.0,
+   2.16009
+  ],
+  [
+   2.41179,
+   3.71807
+  ],
+  [
+   4.06345,
+   5.09912
+  ],
+  [
+   5.33825,
+   6.54129
+  ],
+  [
+   6.77989,
+   9.59376
+  ],
+  [
+   9.75662,
+   11.7007
+  ],
+  [
+   12.0349,
+   13.7172
+  ],
+  [
+   13.865,
+   15.7142
+  ],
+  [
+   16.0398,
+   17.5924
+  ],
+  [
+   17.9437,
+   21.2977
+  ],
+  [
+   21.6117,
+   25.3424
+  ],
+  [
+   25.6526,
+   27.0562
+  ],
+  [
+   27.6199,
+   30.3905
+  ],
+  [
+   30.7163,
+   32.2041
+  ],
+  [
+   32.5329,
+   35.3692
+  ],
+  [
+   35.7357,
+   37.1262
+  ],
+  [
+   37.3473,
+   40.7757
+  ],
+  [
+   41.2076,
+   44.4234
+  ],
+  [
+   44.8313,
+   45.9173
+  ],
+  [
+   46.5412,
+   47.3931
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein Land in Europa hat ein seltsames Problem:",
+   "s": 0.0,
+   "e": 2.16
+  },
+  {
+   "text": "Es hat zu wenige Verbrecher.",
+   "s": 2.412,
+   "e": 3.718
+  },
+  {
+   "text": "Die Strafen werden k\u00fcrzer,",
+   "s": 4.063,
+   "e": 5.099
+  },
+  {
+   "text": "die Kriminalit\u00e4t sinkt.",
+   "s": 5.338,
+   "e": 6.541
+  },
+  {
+   "text": "In zehn Jahren schrumpft die Zahl der H\u00e4ftlinge fast um die H\u00e4lfte.",
+   "s": 6.78,
+   "e": 9.594
+  },
+  {
+   "text": "\u00dcber zwanzig Gef\u00e4ngnisse machen dicht.",
+   "s": 9.757,
+   "e": 11.701
+  },
+  {
+   "text": "Aber was macht man mit den leeren Zellen?",
+   "s": 12.035,
+   "e": 13.717
+  },
+  {
+   "text": "Und mit den W\u00e4rtern, die ihren Job verlieren?",
+   "s": 13.865,
+   "e": 15.714
+  },
+  {
+   "text": "Die L\u00f6sung: Man vermietet sie.",
+   "s": 16.04,
+   "e": 17.592
+  },
+  {
+   "text": "Ein Nachbarland schickt rund f\u00fcnfhundert seiner H\u00e4ftlinge \u00fcber die Grenze.",
+   "s": 17.944,
+   "e": 21.298
+  },
+  {
+   "text": "Ein Land im hohen Norden zahlt jedes Jahr rund f\u00fcnfundzwanzig Millionen Euro \u2013 f\u00fcr ein ganzes Gef\u00e4ngnis.",
+   "s": 21.612,
+   "e": 25.342
+  },
+  {
+   "text": "Die H\u00e4ftlinge z\u00fcchten dort H\u00fchner und bauen Gem\u00fcse an.",
+   "s": 25.653,
+   "e": 27.056
+  },
+  {
+   "text": "Viele kommen sogar freiwillig \u2013 unter anderem,",
+   "s": 27.62,
+   "e": 32.204
+  },
+  {
+   "text": "weil Tabak und Lebensmittel dort billiger sind.",
+   "s": 32.533,
+   "e": 35.369
+  },
+  {
+   "text": "Nur eine Regel gibt's:",
+   "s": 35.736,
+   "e": 37.126
+  },
+  {
+   "text": "Sp\u00e4testens zwei Monate vor der Entlassung m\u00fcssen sie zur\u00fcck nach Hause.",
+   "s": 37.347,
+   "e": 40.776
+  },
+  {
+   "text": "Damit keiner auf die Idee kommt \u2026 dort Asyl zu beantragen.",
+   "s": 41.208,
+   "e": 44.423
+  },
+  {
+   "text": "Und welches Land ist das?",
+   "s": 44.831,
+   "e": 45.917
+  },
+  {
+   "text": "Die Niederlande.",
+   "s": 46.541,
+   "e": 47.393
+  }
+ ]
+}

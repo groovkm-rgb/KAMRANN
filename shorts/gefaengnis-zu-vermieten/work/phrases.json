@@ -1,0 +1,346 @@
+{
+ "duration": 47.830167,
+ "frames30": 1435,
+ "source": "hand-fixed: energy envelope + Parakeet TDT v3 word times (whisper weights unreachable)",
+ "segments": [
+  [
+   0.0,
+   2.16009
+  ],
+  [
+   2.41179,
+   3.71807
+  ],
+  [
+   4.06345,
+   5.09912
+  ],
+  [
+   5.33825,
+   6.54129
+  ],
+  [
+   6.77989,
+   9.59376
+  ],
+  [
+   9.75662,
+   11.7007
+  ],
+  [
+   12.0349,
+   13.7172
+  ],
+  [
+   13.865,
+   15.7142
+  ],
+  [
+   16.0398,
+   17.5924
+  ],
+  [
+   17.9437,
+   21.2977
+  ],
+  [
+   21.6117,
+   25.3424
+  ],
+  [
+   25.6526,
+   27.0562
+  ],
+  [
+   27.6199,
+   30.3905
+  ],
+  [
+   30.7163,
+   32.2041
+  ],
+  [
+   32.5329,
+   35.3692
+  ],
+  [
+   35.7357,
+   37.1262
+  ],
+  [
+   37.3473,
+   40.7757
+  ],
+  [
+   41.2076,
+   44.4234
+  ],
+  [
+   44.8313,
+   45.9173
+  ],
+  [
+   46.5412,
+   47.3931
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein Land in Europa hat ein seltsames Problem:",
+   "s": 0.0,
+   "e": 2.15
+  },
+  {
+   "text": "Es hat zu wenige Verbrecher.",
+   "s": 2.41,
+   "e": 3.72
+  },
+  {
+   "text": "Die Strafen werden kürzer, die Kriminalität sinkt.",
+   "s": 4.06,
+   "e": 6.52
+  },
+  {
+   "text": "In zehn Jahren schrumpft die Zahl der Häftlinge fast um die Hälfte.",
+   "s": 6.78,
+   "e": 9.59
+  },
+  {
+   "text": "Über zwanzig Gefängnisse machen dicht.",
+   "s": 9.96,
+   "e": 11.7
+  },
+  {
+   "text": "Aber was macht man mit den leeren Zellen?",
+   "s": 12.03,
+   "e": 13.72
+  },
+  {
+   "text": "Und mit den Wärtern, die ihren Job verlieren?",
+   "s": 13.99,
+   "e": 15.69
+  },
+  {
+   "text": "Die Lösung: Man vermietet sie.",
+   "s": 16.04,
+   "e": 17.59
+  },
+  {
+   "text": "Ein Nachbarland schickt rund fünfhundert seiner Häftlinge über die Grenze.",
+   "s": 17.94,
+   "e": 21.29
+  },
+  {
+   "text": "Ein Land im hohen Norden zahlt jedes Jahr rund fünfundzwanzig Millionen Euro – für ein ganzes Gefängnis.",
+   "s": 21.61,
+   "e": 27.04
+  },
+  {
+   "text": "Die Häftlinge züchten dort Hühner und bauen Gemüse an.",
+   "s": 27.62,
+   "e": 30.39
+  },
+  {
+   "text": "Viele kommen sogar freiwillig – unter anderem, weil Tabak und Lebensmittel dort billiger sind.",
+   "s": 30.77,
+   "e": 35.36
+  },
+  {
+   "text": "Nur eine Regel gibt's:",
+   "s": 35.73,
+   "e": 37.11
+  },
+  {
+   "text": "Spätestens zwei Monate vor der Entlassung müssen sie zurück nach Hause.",
+   "s": 37.35,
+   "e": 40.77
+  },
+  {
+   "text": "Damit keiner auf die Idee kommt … dort Asyl zu beantragen.",
+   "s": 41.2,
+   "e": 44.42
+  },
+  {
+   "text": "Und welches Land ist das?",
+   "s": 44.83,
+   "e": 45.9
+  },
+  {
+   "text": "Die Niederlande.",
+   "s": 46.54,
+   "e": 47.39
+  }
+ ],
+ "total_frames": 1450,
+ "total_sec": 48.333333333333336,
+ "shots": [
+  {
+   "id": "hook",
+   "a": 0,
+   "b": 68,
+   "note": "1",
+   "sec": 2.3
+  },
+  {
+   "id": "guard",
+   "a": 69,
+   "b": 116,
+   "note": "2",
+   "sec": 1.6
+  },
+  {
+   "id": "board",
+   "a": 117,
+   "b": 197,
+   "note": "3",
+   "sec": 2.7
+  },
+  {
+   "id": "pop",
+   "a": 198,
+   "b": 287,
+   "note": "4",
+   "sec": 3.0
+  },
+  {
+   "id": "lights",
+   "a": 288,
+   "b": 355,
+   "note": "5",
+   "sec": 2.27
+  },
+  {
+   "id": "corridor",
+   "a": 356,
+   "b": 415,
+   "note": "6",
+   "sec": 2.0
+  },
+  {
+   "id": "guardroom",
+   "a": 416,
+   "b": 475,
+   "note": "7",
+   "sec": 2.0
+  },
+  {
+   "id": "idea",
+   "a": 476,
+   "b": 532,
+   "note": "8",
+   "sec": 1.9
+  },
+  {
+   "id": "barrier",
+   "a": 533,
+   "b": 569,
+   "note": "9a Ein Nachbarland schickt",
+   "sec": 1.23
+  },
+  {
+   "id": "buses",
+   "a": 570,
+   "b": 643,
+   "note": "9b rund fünfhundert ... Grenze",
+   "sec": 2.47
+  },
+  {
+   "id": "fjord",
+   "a": 644,
+   "b": 682,
+   "note": "10a Ein Land im hohen Norden",
+   "sec": 1.3
+  },
+  {
+   "id": "ferry",
+   "a": 683,
+   "b": 764,
+   "note": "10b zahlt ... Euro",
+   "sec": 2.73
+  },
+  {
+   "id": "handshake",
+   "a": 765,
+   "b": 823,
+   "note": "10c für ein ganzes Gefängnis",
+   "sec": 1.97
+  },
+  {
+   "id": "chickens",
+   "a": 824,
+   "b": 883,
+   "note": "11a ... Hühner",
+   "sec": 2.0
+  },
+  {
+   "id": "veggies",
+   "a": 884,
+   "b": 916,
+   "note": "11b und bauen Gemüse an",
+   "sec": 1.1
+  },
+  {
+   "id": "market",
+   "a": 917,
+   "b": 990,
+   "note": "12a Viele kommen sogar freiwillig, unter anderem",
+   "sec": 2.47
+  },
+  {
+   "id": "pricetag",
+   "a": 991,
+   "b": 1066,
+   "note": "12b weil Tabak und Lebensmittel ...",
+   "sec": 2.53
+  },
+  {
+   "id": "rule",
+   "a": 1067,
+   "b": 1116,
+   "note": "13",
+   "sec": 1.67
+  },
+  {
+   "id": "calendar",
+   "a": 1117,
+   "b": 1186,
+   "note": "14a Spätestens ... Entlassung",
+   "sec": 2.33
+  },
+  {
+   "id": "busleave",
+   "a": 1187,
+   "b": 1229,
+   "note": "14b müssen sie zurück nach Hause",
+   "sec": 1.43
+  },
+  {
+   "id": "tiptoe",
+   "a": 1230,
+   "b": 1287,
+   "note": "15a Damit keiner auf die Idee kommt",
+   "sec": 1.93
+  },
+  {
+   "id": "caught",
+   "a": 1288,
+   "b": 1337,
+   "note": "15b dort Asyl zu beantragen",
+   "sec": 1.67
+  },
+  {
+   "id": "rise",
+   "a": 1338,
+   "b": 1388,
+   "note": "16",
+   "sec": 1.7
+  },
+  {
+   "id": "reveal",
+   "a": 1389,
+   "b": 1449,
+   "note": "17",
+   "sec": 2.03
+  }
+ ]
+}

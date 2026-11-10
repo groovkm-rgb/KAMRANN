@@ -1,0 +1,10 @@
+frames/
+stills/v*/
+stills/cast.png
+stills/check*.jpg
+node_modules/
+mix.wav
+mix_raw.wav
+work/db10ms.npy
+work/render*.log
+stills/full_*/
