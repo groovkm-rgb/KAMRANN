@@ -4,7 +4,7 @@ import * as P from './paint.js';
 import * as SC from './scene.js'; // generic-world-patch
 import { SHOTS, TOTAL, shotAt, camAt, dofAt, LIGHTS, lightFor, actorsAt, worldAt, fxAt } from './story.js';
 
-const W = 1080, H = 1920;
+const W = 1920, H = 1080;
 const canvas = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, preserveDrawingBuffer: true });
 renderer.setPixelRatio(1); renderer.setSize(W, H, false);
@@ -175,7 +175,7 @@ const inkScene = fs(new THREE.ShaderMaterial({ uniforms: inkU, vertexShader: `va
     if (flash < -0.5) c = vec3(e);
     float l = dot(c, vec3(.299,.587,.114)); c = mix(vec3(l), c, sat);
     c = c*gain + lift;
-    vec2 q = vUv-.5; c *= 1. - vig*dot(q*vec2(1.,.75), q*vec2(1.,.75))*2.2;
+    vec2 q = vUv-.5; c *= 1. - vig*dot(q*vec2(1.,.6), q*vec2(1.,.6))*2.2;
     c = mix(c, vec3(1.), flash);
     gl_FragColor = vec4(c,1.); }` }));
 const dofU = { src: { value: rtInk.texture }, nd: { value: rtNd.texture }, res: { value: new THREE.Vector2(W, H) }, focus: { value: 5 }, cinf: { value: 0 }, near: { value: 1 } };

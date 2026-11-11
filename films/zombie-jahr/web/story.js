@@ -4,6 +4,8 @@
 import { dayAt, heroSpec, SCHMIDT, GUENTHER, GUENTHER_POSE, ZOMBIES, ZOMBIE_POSE, POSTMAN, KID, VANMAN } from './chars.js';
 import * as FX from './fx.js';
 export const FPS = 30, TOTAL = 9178;
+// 16:9 landscape (1920x1080). Every camera key is zoomed by ZOOM so the portrait-era framing sizes become landscape framing.
+export const ASPECT = 16 / 9; const ZOOM = 0.78;
 
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 export const smooth = (t) => { t = clamp(t); return t * t * t * (t * (t * 6 - 15) + 10); };
@@ -48,6 +50,9 @@ const screenCard = (C, key, draw, d = 0.6, ex = {}) => {
   const viewH = 2 * d * Math.tan(C.fov * Math.PI / 360), s = viewH / 2.25 * 1.02, ctr = C.pos.map((v, i) => v + n[i] * d);
   return CARD(key, draw, [ctr[0], ctr[1] - 1.06875 * s, ctr[2]], s, { order: 9, ...ex });
 };
+const screenRow = (C, key, draw, d = 1.2) => { const dir = C.look.map((v, i) => v - C.pos[i]), L = Math.hypot(...dir), n = dir.map((v) => v / L), r = [-n[2], 0, n[0]], rl = Math.hypot(r[0], r[2]) || 1;
+  const viewH = 2 * d * Math.tan(C.fov * Math.PI / 360), cw = viewH / 2.25 * 1.35;
+  return [-1, 0, 1].map((k) => { const c = screenCard(C, key + 'r' + k, draw, d); c.x -= r[0] / rl * k * cw * 0.98; c.z -= r[2] / rl * k * cw * 0.98; return c; }); };
 const FXC = (key, draw, pos, s = 0.35, ex = {}) => CARD(key, draw, pos, s, { order: 6, ...ex });
 const notes = (f, base, n = 3, s = 0.22) => Array.from({ length: n }, (_, i) => { const t = ((f * 0.02 + i / n) % 1); return FXC('note' + i, (p) => T_.fxNote(p, i % 2, ['#e83a5a', '#3a78c8', '#f2a030'][i % 3]), [base[0] + Math.sin(t * 6 + i) * 0.25, base[1] + t * 0.8, base[2]], s * (0.7 + 0.3 * Math.sin(t * Math.PI))); });
 const burst = (f, f0, pos, s = 0.7, col = '#fff3b0', d = 12) => (f >= f0 && f < f0 + d ? [FXC('burst' + q((f - f0) / d), (p) => T_.fxBurst(p, (f - f0) / d, col, 10, 30, 170), pos, s)] : []);
@@ -229,7 +234,7 @@ shot('tomaten', 5037, 5158, 'summer', [[5037, ...F([-0.1, -0.35, -6.0], 10, 'MCU
   (f, T) => [HERO(T, f, { expr: f < 5100 ? 'happy' : 'cry', tear: f > 5100 ? q(((f - 5100) % 30) / 30, 1) : 0, legs: 'crouch', L: 'chin', R: 'reach', turn: -0.4, look: -0.5 }, [0.25, -0.35, -6.0])],
   { dof: [[-0.5, 0.75, -6.0], 13], w: { paper: 1, power: 0, sofa: 1, wardrobe: 2, garden: 0.85, tomBig: 0.45, paperK: 0.35 } });
 shot('regen', 5158, 5214, 'rain', [[5158, ...F([5.2, 0, -1.6], 200, 'FS', { fov: 46 })], [5214, ...F([5.2, 0, -1.6], 200, 'FS', { fov: 46, k: 0.93 }), 'lin']],
-  (f, T, C) => [HERO(T, f, { expr: 'happy', L: 'up', R: 'up', turn: 0.3, look: 0.6 }, [4.4, 0, -1.0]), screenCard(C, 'rain' + (f % 20), (p) => FX.weather(p, 'rain', f), 1.2)],
+  (f, T, C) => [HERO(T, f, { expr: 'happy', L: 'up', R: 'up', turn: 0.3, look: 0.6 }, [4.4, 0, -1.0]), ...screenRow(C, 'rain' + (f % 20), (p) => FX.weather(p, 'rain', f), 1.2)],
   { dof: [[5.4, 0.6, -1.6], 3], flash: true, w: (f) => ({ paper: 1, power: 0, sofa: 1, wardrobe: 2, garden: 0.9, rainLvl: 0.4 + 0.5 * ramp(f, 5158, 5214), paperK: 0.35 }) });
 shot('grill', 5214, 5287, 'summer', [[5214, ...F([-4.3, 0, -1.1], 200, 'MS', { fov: 44 })], [5287, ...F([-4.3, 0, -1.1], 200, 'MS', { fov: 44, k: 0.92 }), 'lin']],
   (f, T) => [HERO(T, f, { expr: 'proud', R: { x: 140, y: 560, b: 0.4 }, holdR: 'spoon', L: 'hip', turn: -0.4, look: -0.8 }, [-4.0, 0, -0.9]), FXC('smk' + q((f % 24) / 24, 1), (p) => T_.fxPuff(p, (f % 24) / 24), [-4.6, 1.0 + (f % 24) * 0.02, -1.4], 0.5)],
@@ -241,7 +246,7 @@ shot('bauer', 5287, 5441, 'summer', [[5287, ...F([0, 0, -6.0], 0, 'FS', { fov: 4
 // ===== 5 · MONAT 6–11 =====
 const WINTER = { paper: 1, power: 0, sofa: 1, snow: 1, paperK: 0.35, garden: 0 };
 shot('winter', 5441, 5533, 'winter', [[5441, [-1.0, 1.4, 19.5], [-1.0, 2.5, 8.0], 46], [5533, [-1.0, 1.4, 18.5], [-1.0, 2.4, 8.0], 42, 'lin']],
-  (f, T, C) => [screenCard(C, 'snow' + (f % 60), (p) => FX.weather(p, 'snow', f), 1.5)], { dof: [[-1, 2, 9], 2], flash: true, w: WINTER });
+  (f, T, C) => screenRow(C, 'snow' + (f % 60), (p) => FX.weather(p, 'snow', f), 1.5), { dof: [[-1, 2, 9], 2], flash: true, w: WINTER });
 shot('heizen', 5533, 5804, 'fire', [[5533, ...F([-5.6, 0, 1.6], 50, 'FS', { fov: 46 })], [5620, ...F([-5.6, 0, 1.6], 50, 'FS', { fov: 46, k: 0.95 }), 'lin'], [5632, ...F([-5.6, 0, 1.7], 50, 'MS', { fov: 46, dy: -0.15 }), 'out'], [5770, ...F([-5.6, 0, 1.7], 50, 'MS', { fov: 46, dy: -0.15, k: 0.94 }), 'lin'], [5780, ...F([-5.3, 0, 1.9], 50, 'MS', { fov: 46 }), 'out'], [5804, ...F([-5.3, 0, 1.9], 50, 'MS', { fov: 46, k: 0.96 }), 'lin']],
   (f, T) => { const plank = f >= 5625 && f < 5722, leg = f >= 5722 && f < 5774, salute = f >= 5774;
     return [HERO(T, f, { expr: salute ? 'proud' : 'determined', blanket: true, legs: salute ? 'stand' : 'crouch', R: salute ? { x: 420, y: 120, b: 1 } : { x: 120, y: 560, b: 0.4 }, holdR: plank ? 'plank' : leg ? 'broom' : null, L: 'hang', turn: salute ? 0 : -0.5, look: salute ? 0 : -1 }, [-5.3, salute ? 0 : -0.35, 1.9]),
@@ -372,6 +377,7 @@ export const camAt = (f) => {
     c = { pos: lerp3(a.pos, b.pos, t), look: lerp3(a.look, b.look, t), fov: lerp(a.fov, b.fov, t), roll: lerp(a.roll, b.roll, t) }; break;
   }
   c = { ...c, pos: [...c.pos], look: [...c.look] };
+  c.fov = 2 * Math.atan(Math.tan(c.fov * Math.PI / 360) * ZOOM) * 180 / Math.PI;
   c.flash = S.flash && f - S.a < 4 ? (1 - (f - S.a) / 4) * 0.85 : 0;
   c.shadowAt = c.look;
   return c;
