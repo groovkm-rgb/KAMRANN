@@ -5,3 +5,4 @@ work/*.log
 mix_raw.wav
 mix.wav
 web/lib/
+out/
