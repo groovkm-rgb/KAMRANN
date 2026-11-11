@@ -1,0 +1,7 @@
+frames/
+stills/
+node_modules/
+work/*.log
+mix_raw.wav
+mix.wav
+web/lib/

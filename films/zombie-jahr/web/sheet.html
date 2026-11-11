@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body style="margin:0;background:#222">
+<canvas id="c" width="2400" height="3000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+import { heroSpec, SCHMIDT, GUENTHER, GUENTHER_POSE, ZOMBIES, POSTMAN, KID, ZOMBIE_POSE } from './chars.js';
+const c = document.getElementById('c'), g = c.getContext('2d');
+g.fillStyle = '#f6efe0'; g.fillRect(0, 0, c.width, c.height);
+const label = (t, x, y, s = 44) => { g.font = `bold ${s}px "DejaVu Sans", Arial`; g.textAlign = 'center'; g.fillStyle = '#2a2024'; g.fillText(t, x, y); };
+const fig = (spec, o, x, y, k = 0.62, flip = false) => { g.save(); g.translate(x, y); if (flip) g.scale(-1, 1); g.scale(k, k); g.translate(-300, -975); T.toonChar(new T.Pen(g), spec, o); g.restore(); };
+const line = (y) => { g.fillStyle = '#c8b898'; g.fillRect(60, y, c.width - 120, 4); };
+label('Figurenblatt – „Ein Jahr drinnen“', 1200, 90, 64);
+label('Hauptfigur · Tag 1', 1200, 170, 46);
+const d1 = heroSpec(1);
+fig(d1, { expr: 'neutral' }, 360, 880, 0.72); label('vorne', 360, 940);
+fig(d1, { expr: 'neutral', turn: 0.55, look: 0.6 }, 900, 880, 0.72); label('3/4', 900, 940);
+fig(d1, { expr: 'neutral', turn: 1, look: 1, L: 'hang', R: 'hang' }, 1440, 880, 0.72); label('Seite', 1440, 940);
+fig(d1, { back: true }, 1980, 880, 0.72); label('hinten', 1980, 940);
+line(990);
+label('Veränderung über das Jahr (nur Bart, Haare, Kleidung, Figur)', 1200, 1070, 46);
+const st = [[1, 'Tag 1', {}], [75, 'Monat 3', {}], [240, 'Monat 8 (Winter)', { blanket: true }], [365, 'Tag 365', { holdR: 'pan', holdL: 'gisela', R: 'reach', L: 'reach' }]];
+st.forEach(([d, t, o], i) => { fig(heroSpec(d), { expr: i === 3 ? 'smug' : 'neutral', ...o }, 330 + i * 580, 1800, 0.72); label(t, 330 + i * 580, 1860); });
+line(1910);
+label('Nebenfiguren (fest)', 1200, 1990, 46);
+fig(SCHMIDT, { expr: 'happy', holdL: 'shopbag', holdR: 'shopbag', L: 'hang', R: 'hang' }, 300, 2760, 0.6); label('Frau Schmidt', 300, 2820, 40);
+fig(GUENTHER, { ...GUENTHER_POSE }, 760, 2760, 0.6); label('Günther', 760, 2820, 40);
+fig(ZOMBIES[0], { ...ZOMBIE_POSE(0, 0), legs: 'stand' }, 1180, 2760, 0.6); label('Zombie', 1180, 2820, 40);
+fig(ZOMBIES[2], { ...ZOMBIE_POSE(0, 1), legs: 'stand', tilt: 0 }, 1560, 2760, 0.6); label('Zombie', 1560, 2820, 40);
+g.save(); T.drawGisela(g, 1960, 2700, 1.3, 0); g.restore(); label('Gisela', 1960, 2820, 40);
+fig(POSTMAN, { expr: 'happy' }, 2230, 2760, 0.42); label('Postbote', 2230, 2820, 32);
+window.ready = true;
+</script></body></html>

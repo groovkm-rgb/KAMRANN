@@ -1,0 +1,1705 @@
+{
+ "duration": 305.946083,
+ "frames30": 9178,
+ "source": "silence-align (cost 26.19)",
+ "segments": [
+  [
+   0.0,
+   1.42234
+  ],
+  [
+   1.63295,
+   3.45433
+  ],
+  [
+   3.85721,
+   6.99653
+  ],
+  [
+   7.31531,
+   8.72234
+  ],
+  [
+   9.20222,
+   10.3746
+  ],
+  [
+   10.5364,
+   12.5802
+  ],
+  [
+   12.9751,
+   14.2222
+  ],
+  [
+   14.5505,
+   16.4984
+  ],
+  [
+   16.7829,
+   18.04
+  ],
+  [
+   18.3799,
+   19.2098
+  ],
+  [
+   19.4812,
+   20.6619
+  ],
+  [
+   21.0141,
+   21.5198
+  ],
+  [
+   21.8818,
+   22.8327
+  ],
+  [
+   23.2307,
+   25.5162
+  ],
+  [
+   25.9138,
+   26.9341
+  ],
+  [
+   27.081,
+   27.6507
+  ],
+  [
+   28.0085,
+   28.7347
+  ],
+  [
+   29.0965,
+   29.7129
+  ],
+  [
+   29.9741,
+   30.6406
+  ],
+  [
+   30.9654,
+   31.6921
+  ],
+  [
+   32.0342,
+   33.0388
+  ],
+  [
+   33.4182,
+   34.7727
+  ],
+  [
+   35.2244,
+   36.2592
+  ],
+  [
+   36.655,
+   37.218
+  ],
+  [
+   37.6227,
+   38.6737
+  ],
+  [
+   39.3274,
+   40.3905
+  ],
+  [
+   40.6643,
+   42.6891
+  ],
+  [
+   43.0233,
+   44.0839
+  ],
+  [
+   44.2978,
+   46.8626
+  ],
+  [
+   47.1243,
+   48.4914
+  ],
+  [
+   48.7965,
+   51.0576
+  ],
+  [
+   51.221,
+   52.5144
+  ],
+  [
+   52.7385,
+   53.7882
+  ],
+  [
+   54.0444,
+   55.4175
+  ],
+  [
+   55.6763,
+   56.7104
+  ],
+  [
+   57.0098,
+   57.5997
+  ],
+  [
+   57.8867,
+   59.5225
+  ],
+  [
+   59.8663,
+   61.1738
+  ],
+  [
+   61.3816,
+   63.3818
+  ],
+  [
+   63.5717,
+   65.4132
+  ],
+  [
+   65.5421,
+   66.2249
+  ],
+  [
+   66.4312,
+   68.137
+  ],
+  [
+   68.5704,
+   69.7689
+  ],
+  [
+   70.1447,
+   71.6887
+  ],
+  [
+   71.8869,
+   72.969
+  ],
+  [
+   73.112,
+   74.6025
+  ],
+  [
+   74.751,
+   76.7712
+  ],
+  [
+   77.0037,
+   78.1947
+  ],
+  [
+   78.5169,
+   79.4103
+  ],
+  [
+   79.7315,
+   80.7898
+  ],
+  [
+   81.0628,
+   82.1989
+  ],
+  [
+   82.5169,
+   83.1746
+  ],
+  [
+   83.5285,
+   84.972
+  ],
+  [
+   85.3105,
+   86.099
+  ],
+  [
+   86.425,
+   88.051
+  ],
+  [
+   88.5323,
+   89.3016
+  ],
+  [
+   89.6586,
+   90.657
+  ],
+  [
+   90.9112,
+   92.0619
+  ],
+  [
+   92.2366,
+   95.1932
+  ],
+  [
+   95.488,
+   97.8143
+  ],
+  [
+   98.0902,
+   99.349
+  ],
+  [
+   99.5082,
+   100.742
+  ],
+  [
+   100.884,
+   101.311
+  ],
+  [
+   101.473,
+   102.615
+  ],
+  [
+   102.878,
+   104.175
+  ],
+  [
+   104.433,
+   105.421
+  ],
+  [
+   105.568,
+   106.247
+  ],
+  [
+   106.602,
+   107.713
+  ],
+  [
+   107.935,
+   108.548
+  ],
+  [
+   108.764,
+   109.437
+  ],
+  [
+   109.661,
+   111.8
+  ],
+  [
+   112.055,
+   112.838
+  ],
+  [
+   113.274,
+   114.25
+  ],
+  [
+   114.576,
+   116.062
+  ],
+  [
+   116.192,
+   116.463
+  ],
+  [
+   116.665,
+   117.308
+  ],
+  [
+   117.558,
+   117.902
+  ],
+  [
+   118.15,
+   122.59
+  ],
+  [
+   122.808,
+   123.643
+  ],
+  [
+   124.024,
+   125.336
+  ],
+  [
+   125.552,
+   126.005
+  ],
+  [
+   126.291,
+   126.752
+  ],
+  [
+   127.188,
+   129.307
+  ],
+  [
+   129.497,
+   130.542
+  ],
+  [
+   131.15,
+   132.483
+  ],
+  [
+   132.786,
+   133.162
+  ],
+  [
+   133.551,
+   133.927
+  ],
+  [
+   134.07,
+   134.728
+  ],
+  [
+   134.969,
+   135.475
+  ],
+  [
+   136.015,
+   136.766
+  ],
+  [
+   137.025,
+   137.844
+  ],
+  [
+   138.15,
+   139.608
+  ],
+  [
+   140.019,
+   140.615
+  ],
+  [
+   140.819,
+   141.264
+  ],
+  [
+   141.608,
+   142.488
+  ],
+  [
+   142.951,
+   144.007
+  ],
+  [
+   144.465,
+   145.903
+  ],
+  [
+   146.219,
+   148.832
+  ],
+  [
+   149.159,
+   150.059
+  ],
+  [
+   150.235,
+   151.233
+  ],
+  [
+   151.559,
+   152.593
+  ],
+  [
+   152.906,
+   153.684
+  ],
+  [
+   153.985,
+   154.895
+  ],
+  [
+   155.346,
+   156.421
+  ],
+  [
+   156.604,
+   157.682
+  ],
+  [
+   157.867,
+   158.588
+  ],
+  [
+   158.926,
+   161.178
+  ],
+  [
+   161.413,
+   162.107
+  ],
+  [
+   162.36,
+   163.198
+  ],
+  [
+   163.485,
+   165.546
+  ],
+  [
+   165.992,
+   167.657
+  ],
+  [
+   167.936,
+   169.604
+  ],
+  [
+   170.006,
+   171.844
+  ],
+  [
+   171.982,
+   173.487
+  ],
+  [
+   173.855,
+   175.904
+  ],
+  [
+   176.267,
+   177.184
+  ],
+  [
+   177.363,
+   177.638
+  ],
+  [
+   177.858,
+   181.075
+  ],
+  [
+   181.407,
+   182.113
+  ],
+  [
+   182.346,
+   183.288
+  ],
+  [
+   183.526,
+   184.194
+  ],
+  [
+   184.472,
+   187.193
+  ],
+  [
+   187.489,
+   190.447
+  ],
+  [
+   190.749,
+   192.091
+  ],
+  [
+   192.459,
+   193.15
+  ],
+  [
+   193.515,
+   196.811
+  ],
+  [
+   197.155,
+   198.818
+  ],
+  [
+   199.093,
+   200.496
+  ],
+  [
+   200.883,
+   202.366
+  ],
+  [
+   202.621,
+   204.67
+  ],
+  [
+   204.858,
+   206.577
+  ],
+  [
+   207.034,
+   207.698
+  ],
+  [
+   207.969,
+   209.171
+  ],
+  [
+   209.501,
+   210.737
+  ],
+  [
+   211.088,
+   212.232
+  ],
+  [
+   212.712,
+   213.716
+  ],
+  [
+   214.082,
+   214.742
+  ],
+  [
+   214.928,
+   215.241
+  ],
+  [
+   215.609,
+   216.781
+  ],
+  [
+   216.951,
+   218.738
+  ],
+  [
+   219.057,
+   219.914
+  ],
+  [
+   220.104,
+   221.504
+  ],
+  [
+   221.627,
+   222.595
+  ],
+  [
+   222.843,
+   224.426
+  ],
+  [
+   224.723,
+   226.179
+  ],
+  [
+   226.536,
+   226.989
+  ],
+  [
+   227.444,
+   228.258
+  ],
+  [
+   228.6,
+   229.735
+  ],
+  [
+   230.006,
+   232.698
+  ],
+  [
+   233.176,
+   234.673
+  ],
+  [
+   234.977,
+   235.359
+  ],
+  [
+   235.646,
+   237.066
+  ],
+  [
+   237.415,
+   240.773
+  ],
+  [
+   241.043,
+   241.749
+  ],
+  [
+   242.237,
+   243.535
+  ],
+  [
+   243.795,
+   244.753
+  ],
+  [
+   245.033,
+   246.32
+  ],
+  [
+   246.682,
+   248.656
+  ],
+  [
+   248.912,
+   249.267
+  ],
+  [
+   249.62,
+   250.092
+  ],
+  [
+   250.385,
+   250.786
+  ],
+  [
+   251.071,
+   256.395
+  ],
+  [
+   256.828,
+   257.042
+  ],
+  [
+   257.177,
+   257.487
+  ],
+  [
+   257.909,
+   260.278
+  ],
+  [
+   260.453,
+   260.988
+  ],
+  [
+   261.372,
+   261.695
+  ],
+  [
+   262.247,
+   262.959
+  ],
+  [
+   263.386,
+   263.932
+  ],
+  [
+   264.521,
+   265.952
+  ],
+  [
+   266.342,
+   267.386
+  ],
+  [
+   267.584,
+   268.739
+  ],
+  [
+   269.181,
+   269.481
+  ],
+  [
+   269.901,
+   270.441
+  ],
+  [
+   270.898,
+   272.498
+  ],
+  [
+   273.088,
+   274.931
+  ],
+  [
+   275.289,
+   275.422
+  ],
+  [
+   275.89,
+   276.665
+  ],
+  [
+   277.095,
+   278.294
+  ],
+  [
+   278.593,
+   279.756
+  ],
+  [
+   280.097,
+   280.978
+  ],
+  [
+   281.222,
+   284.71
+  ],
+  [
+   285.001,
+   285.406
+  ],
+  [
+   285.674,
+   286.669
+  ],
+  [
+   286.912,
+   287.266
+  ],
+  [
+   287.716,
+   288.879
+  ],
+  [
+   289.187,
+   289.871
+  ],
+  [
+   290.14,
+   290.889
+  ],
+  [
+   291.275,
+   291.63
+  ],
+  [
+   291.791,
+   292.128
+  ],
+  [
+   292.363,
+   292.97
+  ],
+  [
+   293.379,
+   294.418
+  ],
+  [
+   294.639,
+   295.399
+  ],
+  [
+   295.783,
+   296.479
+  ],
+  [
+   296.921,
+   298.463
+  ],
+  [
+   299.089,
+   300.018
+  ],
+  [
+   300.473,
+   302.558
+  ],
+  [
+   302.824,
+   304.083
+  ],
+  [
+   304.372,
+   305.626
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Stell dir vor, du wachst auf.",
+   "s": 0.0,
+   "e": 1.422
+  },
+  {
+   "text": "Kopfh\u00f6rer noch drin, Musik auf voll.",
+   "s": 1.633,
+   "e": 3.454
+  },
+  {
+   "text": "Du schlurfst in die K\u00fcche, machst dir 'nen Kaffee und guckst aus'm Fenster.",
+   "s": 3.857,
+   "e": 6.997
+  },
+  {
+   "text": "Da bei\u00dft grad einer den Postboten.",
+   "s": 7.315,
+   "e": 8.722
+  },
+  {
+   "text": "Du denkst dir: Okay.",
+   "s": 9.202,
+   "e": 10.375
+  },
+  {
+   "text": "Komischer Montag. Und trinkst erstmal weiter.",
+   "s": 10.536,
+   "e": 12.58
+  },
+  {
+   "text": "Dann guckst du aufs Handy.",
+   "s": 12.975,
+   "e": 14.222
+  },
+  {
+   "text": "47 verpasste Anrufe von Mama.",
+   "s": 14.55,
+   "e": 16.498
+  },
+  {
+   "text": "Und \u00fcberall dieselbe Meldung:",
+   "s": 16.783,
+   "e": 18.04
+  },
+  {
+   "text": "\u201eBleiben Sie zu Hause.",
+   "s": 18.38,
+   "e": 19.21
+  },
+  {
+   "text": "\u00d6ffnen Sie niemandem die T\u00fcr.",
+   "s": 19.481,
+   "e": 20.662
+  },
+  {
+   "text": "\u201c Zombies.",
+   "s": 21.014,
+   "e": 21.52
+  },
+  {
+   "text": "Echte Zombies.",
+   "s": 21.882,
+   "e": 22.833
+  },
+  {
+   "text": "Nicht im Fernsehen, sondern hier, bei dir in der Stra\u00dfe.",
+   "s": 23.231,
+   "e": 25.516
+  },
+  {
+   "text": "Du rufst Mama zur\u00fcck.",
+   "s": 25.914,
+   "e": 26.934
+  },
+  {
+   "text": "Besetzt.",
+   "s": 27.081,
+   "e": 27.651
+  },
+  {
+   "text": "Du schreibst ihr:",
+   "s": 28.009,
+   "e": 28.735
+  },
+  {
+   "text": "\u201eMir geht's gut.",
+   "s": 29.096,
+   "e": 29.713
+  },
+  {
+   "text": "Ich bleib drin.",
+   "s": 29.974,
+   "e": 30.641
+  },
+  {
+   "text": "\u201c Sie schreibt zur\u00fcck:",
+   "s": 30.965,
+   "e": 31.692
+  },
+  {
+   "text": "\u201eHast du genug zu essen?",
+   "s": 32.034,
+   "e": 33.039
+  },
+  {
+   "text": "\u201c Und genau da f\u00e4ngt dein Problem an.",
+   "s": 33.418,
+   "e": 34.773
+  },
+  {
+   "text": "Tag 2 bis 7 \u2013 Inventur Du machst Inventur.",
+   "s": 35.224,
+   "e": 37.218
+  },
+  {
+   "text": "Drei Packungen Nudeln.",
+   "s": 37.623,
+   "e": 38.674
+  },
+  {
+   "text": "Ein halbes Brot,",
+   "s": 39.327,
+   "e": 40.391
+  },
+  {
+   "text": "das schon so 'n bisschen gr\u00fcn ist.",
+   "s": 40.664,
+   "e": 42.689
+  },
+  {
+   "text": "Eine Flasche Ketchup.",
+   "s": 43.023,
+   "e": 44.084
+  },
+  {
+   "text": "Eine Dose Mais, von der du echt nicht wei\u00dft, wann du die gekauft hast.",
+   "s": 44.298,
+   "e": 46.863
+  },
+  {
+   "text": "Und 'ne T\u00fcte Gummib\u00e4rchen.",
+   "s": 47.124,
+   "e": 48.491
+  },
+  {
+   "text": "Die Gummib\u00e4rchen isst du sofort. Stress halt.",
+   "s": 48.797,
+   "e": 51.058
+  },
+  {
+   "text": "Dann geht's ans Verbarrikadieren.",
+   "s": 51.221,
+   "e": 52.514
+  },
+  {
+   "text": "Sofa vor die Haust\u00fcr.",
+   "s": 52.739,
+   "e": 53.788
+  },
+  {
+   "text": "Kleiderschrank vor die Hintert\u00fcr.",
+   "s": 54.044,
+   "e": 55.417
+  },
+  {
+   "text": "Zeitung an die Fenster.",
+   "s": 55.676,
+   "e": 56.71
+  },
+  {
+   "text": "Deine Waffen:",
+   "s": 57.01,
+   "e": 57.6
+  },
+  {
+   "text": "eine Bratpfanne und ein Besen.",
+   "s": 57.887,
+   "e": 59.523
+  },
+  {
+   "text": "Du f\u00fchlst dich wie Rambo.",
+   "s": 59.866,
+   "e": 61.174
+  },
+  {
+   "text": "Nur halt in Jogginghose und Hausschuhen.",
+   "s": 61.382,
+   "e": 63.382
+  },
+  {
+   "text": "Am sechsten Tag geht der Strom weg.",
+   "s": 63.572,
+   "e": 65.413
+  },
+  {
+   "text": "Am siebten das Internet.",
+   "s": 65.542,
+   "e": 66.225
+  },
+  {
+   "text": "Kein WLAN, kein Netflix, nix.",
+   "s": 66.431,
+   "e": 68.137
+  },
+  {
+   "text": "Und du merkst: Das hier,",
+   "s": 68.57,
+   "e": 69.769
+  },
+  {
+   "text": "das ist die eigentliche Apokalypse.",
+   "s": 70.145,
+   "e": 71.689
+  },
+  {
+   "text": "Du f\u00fcllst die Badewanne mit dem letzten Wasser aus der Leitung.",
+   "s": 71.887,
+   "e": 74.603
+  },
+  {
+   "text": "Und du f\u00e4ngst an, Striche an die Wand zu malen.",
+   "s": 74.751,
+   "e": 76.771
+  },
+  {
+   "text": "Einen f\u00fcr jeden Tag.",
+   "s": 77.004,
+   "e": 78.195
+  },
+  {
+   "text": "Sieben Striche.",
+   "s": 78.517,
+   "e": 79.41
+  },
+  {
+   "text": "Klingt noch nach wenig.",
+   "s": 79.731,
+   "e": 80.79
+  },
+  {
+   "text": "Woche 2 bis 4 \u2013 Die Mission Nach drei Wochen sind die Nudeln weg.",
+   "s": 81.063,
+   "e": 84.972
+  },
+  {
+   "text": "Der Mais auch.",
+   "s": 85.311,
+   "e": 86.099
+  },
+  {
+   "text": "Du hast sogar das gr\u00fcne Brot gegessen.",
+   "s": 86.425,
+   "e": 88.051
+  },
+  {
+   "text": "Du bereust es.",
+   "s": 88.532,
+   "e": 89.302
+  },
+  {
+   "text": "Du musst raus.",
+   "s": 89.659,
+   "e": 90.657
+  },
+  {
+   "text": "Gegen\u00fcber wohnt Frau Schmidt.",
+   "s": 90.911,
+   "e": 92.062
+  },
+  {
+   "text": "Die hat immer eingekauft, als w\u00fcrde morgen die Welt untergehen.",
+   "s": 92.237,
+   "e": 95.193
+  },
+  {
+   "text": "Seit Tag 1 ist bei ihr kein Licht mehr an.",
+   "s": 95.488,
+   "e": 97.814
+  },
+  {
+   "text": "Du wartest bis nachts.",
+   "s": 98.09,
+   "e": 99.349
+  },
+  {
+   "text": "Bratpfanne in der Hand,",
+   "s": 99.508,
+   "e": 101.311
+  },
+  {
+   "text": "Herz auf 180.",
+   "s": 101.473,
+   "e": 102.615
+  },
+  {
+   "text": "Du kletterst \u00fcber den Gartenzaun.",
+   "s": 102.878,
+   "e": 104.175
+  },
+  {
+   "text": "Bleibst mit der Hose h\u00e4ngen.",
+   "s": 104.433,
+   "e": 105.421
+  },
+  {
+   "text": "Nat\u00fcrlich.",
+   "s": 105.568,
+   "e": 106.247
+  },
+  {
+   "text": "Auf der Stra\u00dfe steht einer.",
+   "s": 106.602,
+   "e": 107.713
+  },
+  {
+   "text": "Er schwankt.",
+   "s": 107.935,
+   "e": 108.548
+  },
+  {
+   "text": "Er st\u00f6hnt.",
+   "s": 108.764,
+   "e": 109.437
+  },
+  {
+   "text": "Du legst dich flach in die Hecke und h\u00e4ltst die Luft an.",
+   "s": 109.661,
+   "e": 111.8
+  },
+  {
+   "text": "Zehn Minuten.",
+   "s": 112.055,
+   "e": 112.838
+  },
+  {
+   "text": "Dann schlurft er weiter.",
+   "s": 113.274,
+   "e": 114.25
+  },
+  {
+   "text": "Bei Frau Schmidt ist die Hintert\u00fcr offen.",
+   "s": 114.576,
+   "e": 116.463
+  },
+  {
+   "text": "Und ihr Keller?",
+   "s": 116.665,
+   "e": 117.308
+  },
+  {
+   "text": "Alter.",
+   "s": 117.558,
+   "e": 117.902
+  },
+  {
+   "text": "Konserven bis an die Decke. Ravioli, Linsensuppe, Pfirsiche.",
+   "s": 118.15,
+   "e": 122.59
+  },
+  {
+   "text": "Und Klopapier.",
+   "s": 122.808,
+   "e": 123.643
+  },
+  {
+   "text": "Sechzehn Rollen. Du schleppst alles r\u00fcber,",
+   "s": 124.024,
+   "e": 125.336
+  },
+  {
+   "text": "zweimal,",
+   "s": 125.552,
+   "e": 126.005
+  },
+  {
+   "text": "dreimal.",
+   "s": 126.291,
+   "e": 126.752
+  },
+  {
+   "text": "Als du wieder drin bist,",
+   "s": 127.188,
+   "e": 129.307
+  },
+  {
+   "text": "sitzt du auf dem Boden und lachst wie bekloppt.",
+   "s": 129.497,
+   "e": 130.542
+  },
+  {
+   "text": "Bester Tag deines Lebens.",
+   "s": 131.15,
+   "e": 132.483
+  },
+  {
+   "text": "Ehrlich.",
+   "s": 132.786,
+   "e": 133.162
+  },
+  {
+   "text": "Monat 2 bis 5 \u2013 Routine Jetzt hast du Zeit.",
+   "s": 133.551,
+   "e": 135.475
+  },
+  {
+   "text": "Sehr viel Zeit.",
+   "s": 136.015,
+   "e": 136.766
+  },
+  {
+   "text": "Du redest mit deiner Zimmerpflanze.",
+   "s": 137.025,
+   "e": 139.608
+  },
+  {
+   "text": "Du nennst sie Gisela.",
+   "s": 140.019,
+   "e": 141.264
+  },
+  {
+   "text": "Gisela h\u00f6rt gut zu.",
+   "s": 141.608,
+   "e": 142.488
+  },
+  {
+   "text": "Gisela widerspricht nie.",
+   "s": 142.951,
+   "e": 144.007
+  },
+  {
+   "text": "Und dann ist da der Typ drau\u00dfen.",
+   "s": 144.465,
+   "e": 145.903
+  },
+  {
+   "text": "Jeden Morgen um sieben schlurft er an deinem Fenster vorbei.",
+   "s": 146.219,
+   "e": 148.832
+  },
+  {
+   "text": "Langsam, krumm,",
+   "s": 149.159,
+   "e": 150.059
+  },
+  {
+   "text": "mit so 'nem St\u00f6hnen.",
+   "s": 150.235,
+   "e": 151.233
+  },
+  {
+   "text": "Immer dieselbe Strecke.",
+   "s": 151.559,
+   "e": 152.593
+  },
+  {
+   "text": "Immer p\u00fcnktlich.",
+   "s": 152.906,
+   "e": 153.684
+  },
+  {
+   "text": "Du nennst ihn G\u00fcnther.",
+   "s": 153.985,
+   "e": 154.895
+  },
+  {
+   "text": "Irgendwann winkst du ihm.",
+   "s": 155.346,
+   "e": 156.421
+  },
+  {
+   "text": "G\u00fcnther winkt nicht zur\u00fcck.",
+   "s": 156.604,
+   "e": 157.682
+  },
+  {
+   "text": "Typisch G\u00fcnther.",
+   "s": 157.867,
+   "e": 158.588
+  },
+  {
+   "text": "Im Sommer f\u00e4ngst du an, im Garten was anzubauen.",
+   "s": 158.926,
+   "e": 161.178
+  },
+  {
+   "text": "Hinterm Zaun,",
+   "s": 161.413,
+   "e": 162.107
+  },
+  {
+   "text": "wo keiner guckt.",
+   "s": 162.36,
+   "e": 163.198
+  },
+  {
+   "text": "Tomaten aus Frau Schmidts Sament\u00fctchen.",
+   "s": 163.485,
+   "e": 165.546
+  },
+  {
+   "text": "Kartoffeln aus 'ner alten Knolle.",
+   "s": 165.992,
+   "e": 167.657
+  },
+  {
+   "text": "Die ersten Tomaten sind winzig und schief.",
+   "s": 167.936,
+   "e": 169.604
+  },
+  {
+   "text": "Du heulst trotzdem fast, so stolz bist du.",
+   "s": 170.006,
+   "e": 171.844
+  },
+  {
+   "text": "Regenwasser sammelst du in Eimern.",
+   "s": 171.982,
+   "e": 173.487
+  },
+  {
+   "text": "Du kochst auf 'nem kleinen Grill auf der Terrasse.",
+   "s": 173.855,
+   "e": 175.904
+  },
+  {
+   "text": "Du bist jetzt quasi Bauer.",
+   "s": 176.267,
+   "e": 177.638
+  },
+  {
+   "text": "Survival-Profi. Nur halt ohne Zuschauer.",
+   "s": 177.858,
+   "e": 181.075
+  },
+  {
+   "text": "Monat 6 bis 11 \u2013 Der Winter Dann kommt der Winter.",
+   "s": 181.407,
+   "e": 183.288
+  },
+  {
+   "text": "Und der ist hart.",
+   "s": 183.526,
+   "e": 184.194
+  },
+  {
+   "text": "Es ist so kalt, dass du anf\u00e4ngst, M\u00f6bel zu verheizen.",
+   "s": 184.472,
+   "e": 187.193
+  },
+  {
+   "text": "Das Billy-Regal hat dich drei Abende warm gehalten.",
+   "s": 187.489,
+   "e": 190.447
+  },
+  {
+   "text": "Der Esstisch 'ne ganze Woche.",
+   "s": 190.749,
+   "e": 192.091
+  },
+  {
+   "text": "Danke, IKEA.",
+   "s": 192.459,
+   "e": 193.15
+  },
+  {
+   "text": "Dein Bart ist inzwischen so lang, dass da theoretisch 'n Vogel drin wohnen k\u00f6nnte.",
+   "s": 193.515,
+   "e": 196.811
+  },
+  {
+   "text": "Abends machst du Talkshows f\u00fcr dich selbst.",
+   "s": 197.155,
+   "e": 198.818
+  },
+  {
+   "text": "Gisela ist Co-Moderatorin.",
+   "s": 199.093,
+   "e": 200.496
+  },
+  {
+   "text": "Im Dezember hast du Geburtstag.",
+   "s": 200.883,
+   "e": 202.366
+  },
+  {
+   "text": "Du steckst 'ne Kerze in 'ne Dose Ravioli und singst dir selber \u201eHappy Birthday\u201c.",
+   "s": 202.621,
+   "e": 206.577
+  },
+  {
+   "text": "Ganz leise,",
+   "s": 207.034,
+   "e": 207.698
+  },
+  {
+   "text": "damit drau\u00dfen keiner was h\u00f6rt.",
+   "s": 207.969,
+   "e": 209.171
+  },
+  {
+   "text": "Und dann denkst du an Mama.",
+   "s": 209.501,
+   "e": 210.737
+  },
+  {
+   "text": "An ihre letzte Nachricht.",
+   "s": 211.088,
+   "e": 212.232
+  },
+  {
+   "text": "\u201eHast du genug zu essen?",
+   "s": 212.712,
+   "e": 213.716
+  },
+  {
+   "text": "\u201c Ja, Mama.",
+   "s": 214.082,
+   "e": 214.742
+  },
+  {
+   "text": "Hab ich.",
+   "s": 214.928,
+   "e": 215.241
+  },
+  {
+   "text": "Aber sonst hab ich gar nix.",
+   "s": 215.609,
+   "e": 216.781
+  },
+  {
+   "text": "Das ist der Moment, wo's richtig wehtut.",
+   "s": 216.951,
+   "e": 218.738
+  },
+  {
+   "text": "Aber du machst weiter.",
+   "s": 219.057,
+   "e": 219.914
+  },
+  {
+   "text": "Liegest\u00fctze jeden Morgen.",
+   "s": 220.104,
+   "e": 221.504
+  },
+  {
+   "text": "Striche an der Wand.",
+   "s": 221.627,
+   "e": 222.595
+  },
+  {
+   "text": "Im Fr\u00fchling bl\u00fcht der Garten wieder.",
+   "s": 222.843,
+   "e": 224.426
+  },
+  {
+   "text": "Du bist st\u00e4rker als je zuvor.",
+   "s": 224.723,
+   "e": 226.179
+  },
+  {
+   "text": "Und G\u00fcnther?",
+   "s": 226.536,
+   "e": 226.989
+  },
+  {
+   "text": "Der kommt immer noch.",
+   "s": 227.444,
+   "e": 228.258
+  },
+  {
+   "text": "Jeden Morgen um sieben.",
+   "s": 228.6,
+   "e": 229.735
+  },
+  {
+   "text": "Wenn er mal f\u00fcnf Minuten zu sp\u00e4t ist,",
+   "s": 230.006,
+   "e": 232.698
+  },
+  {
+   "text": "machst du dir richtig Sorgen.",
+   "s": 233.176,
+   "e": 234.673
+  },
+  {
+   "text": "Tag 365 \u2013 Die T\u00fcr Du malst den letzten Strich.",
+   "s": 234.977,
+   "e": 237.066
+  },
+  {
+   "text": "Dreihundertf\u00fcnfundsechzig. Ein ganzes Jahr. Du sagst: Es reicht.",
+   "s": 237.415,
+   "e": 240.773
+  },
+  {
+   "text": "Rucksack auf.",
+   "s": 241.043,
+   "e": 241.749
+  },
+  {
+   "text": "Bratpfanne in die rechte Hand,",
+   "s": 242.237,
+   "e": 243.535
+  },
+  {
+   "text": "Gisela in die linke.",
+   "s": 243.795,
+   "e": 244.753
+  },
+  {
+   "text": "Du schiebst das Sofa weg.",
+   "s": 245.033,
+   "e": 246.32
+  },
+  {
+   "text": "Zum ersten Mal seit einem Jahr machst du die T\u00fcr auf.",
+   "s": 246.682,
+   "e": 248.656
+  },
+  {
+   "text": "Sonne. V\u00f6gel.",
+   "s": 248.912,
+   "e": 249.267
+  },
+  {
+   "text": "Stille.",
+   "s": 249.62,
+   "e": 250.092
+  },
+  {
+   "text": "Und dann:",
+   "s": 250.385,
+   "e": 250.786
+  },
+  {
+   "text": "ein Kind auf 'nem Roller. Ein Eiswagen mit Musik. Und Frau Schmidt, mit zwei vollen Einkaufst\u00fcten.",
+   "s": 251.071,
+   "e": 256.395
+  },
+  {
+   "text": "Sie guckt dich an.",
+   "s": 256.828,
+   "e": 257.487
+  },
+  {
+   "text": "\u201eAch, Sie gibt's ja noch! Wir dachten, Sie sind ausgewandert.",
+   "s": 257.909,
+   "e": 260.278
+  },
+  {
+   "text": "\u201c Du stammelst:",
+   "s": 260.453,
+   "e": 261.695
+  },
+  {
+   "text": "\u201eDie \u2026 die Zombies?",
+   "s": 262.247,
+   "e": 262.959
+  },
+  {
+   "text": "\u201c \u201eAch, das!",
+   "s": 263.386,
+   "e": 263.932
+  },
+  {
+   "text": "Das war nach drei Wochen vorbei.",
+   "s": 264.521,
+   "e": 265.952
+  },
+  {
+   "text": "Gab doch 'n Gegenmittel.",
+   "s": 266.342,
+   "e": 267.386
+  },
+  {
+   "text": "Kam \u00fcberall im Radio.",
+   "s": 267.584,
+   "e": 268.739
+  },
+  {
+   "text": "\u201c \u201eUnd \u2026 mein Strom?",
+   "s": 269.181,
+   "e": 270.441
+  },
+  {
+   "text": "\u201c \u201eDen hat der Versorger abgestellt.",
+   "s": 270.898,
+   "e": 272.498
+  },
+  {
+   "text": "Sie haben ja 'n Jahr lang nicht bezahlt.",
+   "s": 273.088,
+   "e": 274.931
+  },
+  {
+   "text": "Und sagen Sie mal \u2013 wo ist eigentlich mein Keller hin?",
+   "s": 275.289,
+   "e": 278.294
+  },
+  {
+   "text": "\u201c Du sagst nix.",
+   "s": 278.593,
+   "e": 279.756
+  },
+  {
+   "text": "Du stehst da.",
+   "s": 280.097,
+   "e": 280.978
+  },
+  {
+   "text": "Bart bis zum Bauch, Bratpfanne in der Hand, Pflanze im Arm. Und dann kommt er um die Ecke.",
+   "s": 281.222,
+   "e": 284.71
+  },
+  {
+   "text": "Langsam.",
+   "s": 285.001,
+   "e": 285.406
+  },
+  {
+   "text": "Krumm. St\u00f6hnend.",
+   "s": 285.674,
+   "e": 286.669
+  },
+  {
+   "text": "G\u00fcnther.",
+   "s": 286.912,
+   "e": 287.266
+  },
+  {
+   "text": "Du hebst die Bratpfanne.",
+   "s": 287.716,
+   "e": 288.879
+  },
+  {
+   "text": "Er bleibt stehen,",
+   "s": 289.187,
+   "e": 289.871
+  },
+  {
+   "text": "h\u00e4lt sich den R\u00fccken.",
+   "s": 290.14,
+   "e": 290.889
+  },
+  {
+   "text": "\u201eMorgen\u201c,",
+   "s": 291.275,
+   "e": 291.63
+  },
+  {
+   "text": "sagt er.",
+   "s": 291.791,
+   "e": 292.128
+  },
+  {
+   "text": "\u201eBandscheibe.",
+   "s": 292.363,
+   "e": 292.97
+  },
+  {
+   "text": "Jeden Tag zum B\u00e4cker,",
+   "s": 293.379,
+   "e": 294.418
+  },
+  {
+   "text": "echt 'ne Qual.",
+   "s": 294.639,
+   "e": 295.399
+  },
+  {
+   "text": "\u201c Frau Schmidt nickt.",
+   "s": 295.783,
+   "e": 296.479
+  },
+  {
+   "text": "\u201eDas ist Herr G\u00fcnther von Nummer zw\u00f6lf.",
+   "s": 296.921,
+   "e": 298.463
+  },
+  {
+   "text": "\u201c Er hei\u00dft wirklich G\u00fcnther.",
+   "s": 299.089,
+   "e": 300.018
+  },
+  {
+   "text": "Du drehst dich um. Gehst rein. Machst die T\u00fcr zu.",
+   "s": 300.473,
+   "e": 302.558
+  },
+  {
+   "text": "Schiebst das Sofa wieder davor.",
+   "s": 302.824,
+   "e": 304.083
+  },
+  {
+   "text": "Noch ein Jahr. Mindestens.",
+   "s": 304.372,
+   "e": 305.626
+  }
+ ]
+}
