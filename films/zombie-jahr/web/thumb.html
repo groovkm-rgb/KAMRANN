@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body style="margin:0">
+<canvas id="c" width="1280" height="720"></canvas>
+<script type="module">
+import * as T from './toon.js';
+import { heroSpec, ZOMBIES, ZOMBIE_POSE } from './chars.js';
+const c = document.getElementById('c'), g = c.getContext('2d');
+const bg = new Image(); bg.src = 'thumb_bg.jpg'; await bg.decode(); g.drawImage(bg, 0, 0, 1280, 720);
+// vignette + warm/cold split
+let gr = g.createLinearGradient(0, 0, 1280, 0); gr.addColorStop(0, 'rgba(40,60,140,.35)'); gr.addColorStop(0.5, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(255,150,40,.3)'); g.fillStyle = gr; g.fillRect(0, 0, 1280, 720);
+const rg = g.createRadialGradient(640, 380, 250, 640, 380, 820); rg.addColorStop(0, 'rgba(0,0,0,0)'); rg.addColorStop(1, 'rgba(0,0,0,.55)'); g.fillStyle = rg; g.fillRect(0, 0, 1280, 720);
+const fig = (spec, o, x, y, k, flip = false) => { g.save(); g.translate(x, y); if (flip) g.scale(-1, 1); g.scale(k, k); g.translate(-300, -975); T.toonChar(new T.Pen(g), spec, o); g.restore(); };
+// zombie peeking bottom-left
+fig(ZOMBIES[0], { ...ZOMBIE_POSE(0, 0), legs: 'stand', tilt: -8 }, 95, 900, 0.62);
+// Tag 1 (left) and Tag 365 (right)
+fig(heroSpec(1), { expr: 'shock', phones: true, R: { x: 470, y: 470, b: 0.5 }, holdR: 'phone', L: 'chin' }, 330, 1010, 0.86);
+fig(heroSpec(365), { expr: 'smug', backpack: true, R: 'up', holdR: 'panUp', L: 'reach', holdL: 'gisela' }, 950, 1010, 0.86);
+// arrow
+g.save(); g.translate(585, 470); g.scale(0.9, 0.9); g.fillStyle = '#ffd23a'; g.strokeStyle = '#1a1416'; g.lineWidth = 12; g.lineJoin = 'round';
+g.beginPath(); g.moveTo(-80, -28); g.lineTo(20, -28); g.lineTo(20, -70); g.lineTo(100, 0); g.lineTo(20, 70); g.lineTo(20, 28); g.lineTo(-80, 28); g.closePath(); g.stroke(); g.fill(); g.restore();
+const txt = (s, x, y, size, fill, rot = 0) => { g.save(); g.translate(x, y); g.rotate(rot); g.font = `900 ${size}px "DejaVu Sans", Arial`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.lineJoin = 'round'; g.lineWidth = size * 0.22; g.strokeStyle = '#1a1416'; g.strokeText(s, 0, 0); g.fillStyle = fill; g.fillText(s, 0, 0); g.restore(); };
+const tag = (s, x, y, bgc, rot) => { g.save(); g.translate(x, y); g.rotate(rot); g.fillStyle = bgc; g.strokeStyle = '#1a1416'; g.lineWidth = 8; g.beginPath(); g.roundRect(-130, -42, 260, 84, 18); g.fill(); g.stroke(); g.restore(); txt(s, x, y + 2, 54, '#ffffff', rot); };
+tag('TAG 1', 300, 652, '#3a78c8', -0.04); tag('TAG 365', 975, 652, '#e8573a', 0.04);
+txt('1 JAHR DRINNEN', 640, 90, 104, '#ffd23a', -0.02);
+window.ready = true;
+</script></body></html>
