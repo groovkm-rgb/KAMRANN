@@ -1,0 +1,6 @@
+frames/
+stills/
+node_modules/
+mix.wav
+mix_raw.wav
+work/words.json

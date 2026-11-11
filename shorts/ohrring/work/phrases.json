@@ -1,0 +1,437 @@
+{
+ "duration": 56.372208,
+ "frames30": 1691,
+ "source": "silence-align (cost 5.41)",
+ "segments": [
+  [
+   0.0,
+   0.964059
+  ],
+  [
+   1.4439,
+   3.09478
+  ],
+  [
+   3.26429,
+   3.75297
+  ],
+  [
+   3.87971,
+   4.11179
+  ],
+  [
+   4.36989,
+   5.80018
+  ],
+  [
+   6.11642,
+   6.65161
+  ],
+  [
+   6.77787,
+   8.50755
+  ],
+  [
+   8.78878,
+   9.45002
+  ],
+  [
+   9.67247,
+   11.305
+  ],
+  [
+   11.5393,
+   12.8515
+  ],
+  [
+   13.1618,
+   14.9649
+  ],
+  [
+   15.3413,
+   17.866
+  ],
+  [
+   18.078,
+   21.141
+  ],
+  [
+   21.4436,
+   21.8982
+  ],
+  [
+   22.0186,
+   23.0578
+  ],
+  [
+   23.3773,
+   28.2718
+  ],
+  [
+   28.5709,
+   28.9175
+  ],
+  [
+   29.3373,
+   30.9697
+  ],
+  [
+   31.2726,
+   33.2279
+  ],
+  [
+   33.6998,
+   34.786
+  ],
+  [
+   35.0754,
+   35.7892
+  ],
+  [
+   36.1302,
+   37.115
+  ],
+  [
+   37.4486,
+   37.8037
+  ],
+  [
+   38.1697,
+   38.8953
+  ],
+  [
+   39.377,
+   40.44
+  ],
+  [
+   40.5644,
+   42.8211
+  ],
+  [
+   43.2197,
+   44.1224
+  ],
+  [
+   44.5784,
+   46.4913
+  ],
+  [
+   46.7763,
+   47.7079
+  ],
+  [
+   48.0345,
+   49.8106
+  ],
+  [
+   50.0417,
+   51.4193
+  ],
+  [
+   51.5783,
+   52.4973
+  ],
+  [
+   52.8685,
+   54.8631
+  ],
+  [
+   55.0409,
+   56.1099
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein goldener Ohrring – für Seeleute angeblich 'ne Versicherung.",
+   "s": 0.0,
+   "e": 3.095
+  },
+  {
+   "text": "Und zwar … für den Fall,",
+   "s": 3.264,
+   "e": 4.112
+  },
+  {
+   "text": "dass sie draufgehen.",
+   "s": 4.37,
+   "e": 5.8
+  },
+  {
+   "text": "Stell dir vor:",
+   "s": 6.116,
+   "e": 6.652
+  },
+  {
+   "text": "Ein Seemann überlebt 'nen Sturm nicht.",
+   "s": 6.778,
+   "e": 8.508
+  },
+  {
+   "text": "Irgendwann wird er an einen fremden Strand gespült.",
+   "s": 8.789,
+   "e": 11.305
+  },
+  {
+   "text": "Und wer ihn findet, sieht:",
+   "s": 11.539,
+   "e": 12.851
+  },
+  {
+   "text": "Da hängt ein goldener Ohrring.",
+   "s": 13.162,
+   "e": 14.965
+  },
+  {
+   "text": "Genug Kohle für 'ne ordentliche Beerdigung.",
+   "s": 15.341,
+   "e": 17.866
+  },
+  {
+   "text": "Manche haben angeblich sogar ihren Heimathafen reingeritzt.",
+   "s": 18.078,
+   "e": 21.141
+  },
+  {
+   "text": "Und das ist noch lange nicht alles.",
+   "s": 21.444,
+   "e": 23.058
+  },
+  {
+   "text": "Einen Ohrring gab's angeblich, wenn du zum ersten Mal über den Äquator gesegelt bist.",
+   "s": 23.377,
+   "e": 28.272
+  },
+  {
+   "text": "Oder wenn du's ums Kap Hoorn geschafft hast – eine der krassesten Ecken auf dem Meer.",
+   "s": 28.571,
+   "e": 33.228
+  },
+  {
+   "text": "Manche dachten sogar:",
+   "s": 33.7,
+   "e": 34.786
+  },
+  {
+   "text": "Gold im Ohr – und du ertrinkst nicht.",
+   "s": 35.075,
+   "e": 37.115
+  },
+  {
+   "text": "Oder du siehst besser.",
+   "s": 37.449,
+   "e": 38.895
+  },
+  {
+   "text": "Und die Jungs an den Kanonen haben angeblich Wachs an ihre Ohrringe gehängt.",
+   "s": 39.377,
+   "e": 42.821
+  },
+  {
+   "text": "Als Ohrstöpsel.",
+   "s": 43.22,
+   "e": 44.122
+  },
+  {
+   "text": "Weil's da unten ordentlich geknallt hat.",
+   "s": 44.578,
+   "e": 46.491
+  },
+  {
+   "text": "Der Haken an der Sache:",
+   "s": 46.776,
+   "e": 47.708
+  },
+  {
+   "text": "Für das meiste davon gibt's kaum Beweise.",
+   "s": 48.035,
+   "e": 49.811
+  },
+  {
+   "text": "Klar, Seeleute hatten echt Ohrringe.",
+   "s": 50.042,
+   "e": 51.419
+  },
+  {
+   "text": "Aber warum genau?",
+   "s": 51.578,
+   "e": 52.497
+  },
+  {
+   "text": "Vielleicht war so'n Ohrring manchmal … einfach nur ein Ohrring.",
+   "s": 52.868,
+   "e": 56.11
+  }
+ ],
+ "shots": [
+  {
+   "f": 0,
+   "text": "Ein goldener Ohrring –",
+   "s": 0.0,
+   "e": 0.96
+  },
+  {
+   "f": 43,
+   "text": "für Seeleute angeblich 'ne Versicherung.",
+   "s": 1.44,
+   "e": 3.09
+  },
+  {
+   "f": 98,
+   "text": "Und zwar … für den Fall, dass sie draufgehen.",
+   "s": 3.26,
+   "e": 5.8
+  },
+  {
+   "f": 183,
+   "text": "Stell dir vor: Ein Seemann überlebt 'nen Sturm nicht.",
+   "s": 6.12,
+   "e": 8.51
+  },
+  {
+   "f": 264,
+   "text": "Irgendwann wird er an einen fremden Strand gespült.",
+   "s": 8.79,
+   "e": 11.3
+  },
+  {
+   "f": 346,
+   "text": "Und wer ihn findet, sieht:",
+   "s": 11.54,
+   "e": 12.85
+  },
+  {
+   "f": 394,
+   "text": "Da hängt ein goldener Ohrring.",
+   "s": 13.16,
+   "e": 14.96
+  },
+  {
+   "f": 460,
+   "text": "Genug Kohle für 'ne ordentliche Beerdigung.",
+   "s": 15.34,
+   "e": 17.87
+  },
+  {
+   "f": 542,
+   "text": "Manche haben angeblich",
+   "s": 18.08,
+   "e": 19.3
+  },
+  {
+   "f": 580,
+   "text": "sogar ihren Heimathafen reingeritzt.",
+   "s": 19.38,
+   "e": 21.14
+  },
+  {
+   "f": 643,
+   "text": "Und das ist noch lange nicht alles.",
+   "s": 21.44,
+   "e": 23.06
+  },
+  {
+   "f": 701,
+   "text": "Einen Ohrring gab's angeblich,",
+   "s": 23.38,
+   "e": 25.71
+  },
+  {
+   "f": 772,
+   "text": "wenn du zum ersten Mal über den Äquator gesegelt bist.",
+   "s": 25.79,
+   "e": 28.27
+  },
+  {
+   "f": 857,
+   "text": "Oder wenn du's ums Kap Hoorn geschafft hast –",
+   "s": 28.57,
+   "e": 30.97
+  },
+  {
+   "f": 938,
+   "text": "eine der krassesten Ecken auf dem Meer.",
+   "s": 31.27,
+   "e": 33.23
+  },
+  {
+   "f": 1010,
+   "text": "Manche dachten sogar:",
+   "s": 33.7,
+   "e": 34.79
+  },
+  {
+   "f": 1051,
+   "text": "Gold im Ohr – und du ertrinkst nicht.",
+   "s": 35.08,
+   "e": 37.12
+  },
+  {
+   "f": 1123,
+   "text": "Oder du siehst besser.",
+   "s": 37.45,
+   "e": 38.9
+  },
+  {
+   "f": 1181,
+   "text": "Und die Jungs an den Kanonen haben angeblich",
+   "s": 39.38,
+   "e": 41.52
+  },
+  {
+   "f": 1246,
+   "text": "Wachs an ihre Ohrringe gehängt.",
+   "s": 41.59,
+   "e": 42.82
+  },
+  {
+   "f": 1296,
+   "text": "Als Ohrstöpsel.",
+   "s": 43.22,
+   "e": 44.12
+  },
+  {
+   "f": 1337,
+   "text": "Weil's da unten ordentlich geknallt hat.",
+   "s": 44.58,
+   "e": 46.49
+  },
+  {
+   "f": 1403,
+   "text": "Der Haken an der Sache:",
+   "s": 46.78,
+   "e": 47.71
+  },
+  {
+   "f": 1440,
+   "text": "Für das meiste davon gibt's kaum Beweise.",
+   "s": 48.03,
+   "e": 49.81
+  },
+  {
+   "f": 1500,
+   "text": "Klar, Seeleute hatten echt Ohrringe.",
+   "s": 50.04,
+   "e": 51.42
+  },
+  {
+   "f": 1547,
+   "text": "Aber warum genau?",
+   "s": 51.58,
+   "e": 52.5
+  },
+  {
+   "f": 1585,
+   "text": "Vielleicht war so'n Ohrring manchmal …",
+   "s": 52.87,
+   "e": 54.86
+  },
+  {
+   "f": 1650,
+   "text": "einfach nur ein Ohrring.",
+   "s": 55.04,
+   "e": 56.11
+  }
+ ],
+ "total_frames": 1706,
+ "note": "Hand-checked against waveform + syllable nuclei (no Whisper model reachable). Sentence phrases from silence-align are correct; long sentences split at in-sentence silence gaps (19.30-19.38, 25.71-25.79, 30.97-31.27, 41.52-41.59, 54.87-55.00)."
+}
