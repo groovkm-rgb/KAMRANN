@@ -1,0 +1,331 @@
+source=silence-align (cost 70.17) duration=647.31s frames=19419
+  0.00-  3.62  f   0- 108  Gestern gab's auf der Welt noch vier Milliarden Männer.
+  3.99-  5.43  f 119- 163  Heute gibt's nur noch einen.
+  5.69-  7.01  f 170- 210  Und der bist du.
+  7.43-  9.05  f 222- 271  Aber fangen wir von vorne an.
+  9.59- 14.84  f 287- 445  Du heißt Jonas, bist 27 und arbeitest im Dönerladen von Ali.
+ 15.24- 16.14  f 457- 484  Nachtschicht.
+ 16.41- 17.53  f 492- 525  Nichts Besonderes.
+ 18.11- 20.59  f 543- 617  Dein größtes Problem bis gestern?
+ 21.29- 27.85  f 638- 835  Dass dein Kumpel Murat dir seit drei Monaten zwanzig Euro schuldet. In der Nacht ist es ruhig im Laden. Du bist müde.
+ 28.23- 32.23  f 847- 966  Und weil's draußen so heiß ist, legst du dich für 'n Power-Nap in den Kühlraum.
+ 32.58- 34.23  f 977-1026  Zwischen die Fleischspieße.
+ 34.62- 36.06  f1038-1081  Ja, ich weiß.
+ 36.39- 37.55  f1091-1126  Eklig.
+ 38.17- 39.83  f1145-1194  Aber angenehm kühl.
+ 40.18- 44.62  f1205-1338  Um genau 3 Uhr 14 geht draußen ein grünes Licht über die ganze Welt.
+ 44.90- 45.33  f1346-1359  Ganz kurz.
+ 45.71- 46.58  f1371-1397  Kein Geräusch.
+ 46.98- 48.59  f1409-1457  Nur grün.
+ 48.88- 50.70  f1466-1520  Du kriegst davon nix mit.
+ 50.85- 52.11  f1525-1563  Du schläfst.
+ 52.27- 54.42  f1568-1632  Hinter einer dicken Stahltür.
+ 54.60- 55.29  f1637-1658  Und das,
+ 55.44- 56.71  f1663-1701  mein Freund,
+ 57.25- 58.23  f1717-1746  rettet dir das Leben.
+ 58.50- 60.01  f1755-1800  Tag 1 – Die Welt ohne Männer.
+ 60.38- 62.16  f1811-1864  Als du morgens aus dem Kühlraum kommst,
+ 62.28- 63.35  f1868-1900  ist der Laden leer.
+ 63.90- 65.62  f1916-1968  Alis Schürze liegt auf dem Boden.
+ 65.97- 67.11  f1979-2013  Seine Brille daneben.
+ 67.45- 69.19  f2023-2075  Der Dönerspieß dreht sich noch.
+ 69.52- 70.71  f2085-2121  Aber Ali ist weg.
+ 70.97- 71.48  f2129-2144  Du rufst:
+ 71.85- 72.26  f2155-2167  „Ali?
+ 72.47- 72.85  f2174-2185  Chef?"
+ 73.32- 73.70  f2199-2211  Nix.
+ 74.10- 76.96  f2223-2308  Du gehst raus auf die Straße. Und da siehst du's.
+ 77.42- 81.10  f2322-2433  Überall stehen Autos mitten auf der Kreuzung.
+ 81.48- 82.70  f2444-2481  Türen offen.
+ 83.23- 83.82  f2497-2514  Fahrersitze leer.
+ 84.05- 85.93  f2521-2577  Ein Bus steht schräg auf dem Bürgersteig.
+ 86.58- 90.04  f2597-2701  Frauen laufen rum, weinen, telefonieren, schreien Namen.
+ 90.51- 91.09  f2715-2732  „Thomas!"
+ 91.53- 91.98  f2745-2759  „Papa!"
+ 92.47- 93.42  f2774-2802  „Marco, wo bist du?"
+ 94.30- 95.72  f2829-2871  Du holst dein Handy raus.
+ 95.95- 98.44  f2878-2953  Jede App, jeder Sender, dieselbe Meldung:
+ 99.08-101.36  f2972-3040  „Alle Männer weltweit spurlos verschwunden."
+101.67-102.00  f3050-3059  Alle.
+102.27-103.03  f3068-3090  Wirklich alle.
+103.39-104.04  f3101-3121  Dein Vater.
+104.21-104.78  f3126-3143  Dein Bruder.
+105.01-105.64  f3150-3169  Murat.
+105.98-107.33  f3179-3219  Mit deinen zwanzig Euro.
+107.75-108.54  f3232-3256  Du stehst da,
+108.96-110.06  f3268-3301  mitten auf der Straße,
+110.40-111.88  f3311-3356  mit 'nem Dönermesser in der Hand.
+112.30-114.26  f3369-3427  Und dann dreht sich eine Frau zu dir um.
+114.61-115.47  f3438-3464  Sie starrt dich an.
+115.83-116.56  f3474-3496  Dann noch eine.
+116.93-117.67  f3507-3530  Und noch eine.
+118.13-119.59  f3543-3587  Es wird ganz still.
+120.05-124.42  f3601-3732  Eine ältere Dame lässt ihre Einkaufstüte fallen und flüstert:
+125.46-126.25  f3763-3787  „Da… da ist einer."
+127.69-130.76  f3830-3922  Zehn Sekunden später hat jeder sein Handy auf dich gerichtet.
+130.91-135.27  f3927-4058  Zwanzig Minuten später bist du in jeder Nachrichtensendung der Welt.
+135.63-140.36  f4068-4210  Und eine Stunde später landet ein Hubschrauber vor dem Dönerladen.
+140.72-142.53  f4221-4275  Woche 1 – Der wichtigste Mensch der Welt.
+143.01-144.90  f4290-4346  Der Hubschrauber bringt dich nach Berlin.
+145.34-146.11  f4360-4383  In ein Labor,
+146.44-147.71  f4393-4431  tief unter der Erde.
+148.00-148.74  f4439-4462  Weiße Wände,
+149.04-149.92  f4471-4497  grelles Licht,
+150.21-153.01  f4506-4590  überall Wissenschaftlerinnen in Schutzanzügen.
+153.48-154.91  f4604-4647  Die Chefin heißt Dr.
+155.31-156.03  f4659-4680  Weber.
+156.21-157.58  f4686-4727  Strenger Blick, Brille,
+158.01-158.41  f4740-4752  Klemmbrett.
+158.55-160.89  f4756-4826  Sie guckt dich an, als wärst du ein seltenes Tier im Zoo.
+161.48-163.72  f4844-4911  „Herr Jonas, wo waren Sie um 3 Uhr 14?"
+164.22-164.92  f4926-4947  „Ähm… im Kühlraum.
+165.23-166.28  f4956-4988  Zwischen den Dönerspießen."
+166.94-168.19  f5008-5045  Sie schreibt das auf.
+168.90-169.63  f5067-5088  Ganz ernst.
+170.06-170.64  f5101-5119  „Dönerspieße.
+171.08-172.43  f5132-5172  Verstehe."
+173.04-173.76  f5191-5212  Dann fängt's an.
+174.37-175.00  f5231-5249  Blut abnehmen.
+175.31-176.14  f5259-5284  Haare abschneiden.
+176.44-177.34  f5293-5320  Speichelprobe.
+177.77-179.13  f5333-5373  Ganzkörperscan.
+179.69-180.69  f5390-5420  Blut abnehmen.
+181.25-182.90  f5437-5486  Nochmal Blut abnehmen.
+183.50-184.35  f5505-5530  Du hast das Gefühl,
+184.63-187.35  f5538-5620  du hast mehr Blut abgegeben, als du überhaupt hast.
+187.83-188.57  f5634-5657  Und draußen?
+189.18-190.75  f5675-5722  Da wirst du zum Superstar.
+191.24-192.86  f5737-5785  Dein Gesicht ist auf jedem Bildschirm.
+193.28-194.13  f5798-5823  Auf Plakaten.
+194.63-197.20  f5839-5916  Auf T-Shirts mit der Aufschrift „Der Letzte".
+198.21-201.88  f5946-6056  In Japan gibt's schon 'ne Actionfigur von dir.
+202.21-203.03  f6066-6090  Mit Dönermesser.
+204.00-205.40  f6120-6161  Du kriegst sechs Bodyguards.
+205.53-206.19  f6165-6185  Sechs!
+206.44-208.17  f6193-6245  Du darfst nicht mal alleine aufs Klo.
+208.69-209.57  f6260-6287  Wenn du niest,
+209.74-211.32  f6292-6339  rennt ein Ärzteteam rein.
+211.77-213.05  f6353-6391  Die Kanzlerin ruft an.
+213.47-214.82  f6404-6444  Die UNO ruft an.
+215.25-218.25  f6457-6547  Sogar deine Grundschullehrerin ruft an und sagt:
+218.70-219.80  f6561-6593  „Ich hab immer gewusst,
+219.92-221.08  f6597-6632  aus dir wird mal was."
+221.79-222.45  f6653-6673  Du denkst:
+223.07-223.58  f6692-6707  Komisch.
+224.28-226.59  f6728-6797  Dafür musste nur die halbe Menschheit verschwinden.
+227.06-229.31  f6811-6879  Monat 1 bis 3 – Der Preis.
+230.27-233.03  f6908-6990  Am Anfang ist das alles irgendwie witzig.
+233.51-235.02  f7005-7050  Aber nach ein paar Wochen merkst du:
+235.44-237.45  f7063-7123  Ruhm ist mega anstrengend.
+237.69-239.69  f7130-7190  Du kannst nicht mehr einfach rausgehen.
+240.15-241.00  f7204-7229  Wenn du's versuchst,
+241.33-243.18  f7239-7295  stehen sofort hundert Leute da.
+243.73-245.35  f7311-7360  Die einen wollen ein Selfie.
+245.68-246.74  f7370-7402  Die anderen schreien,
+247.01-248.99  f7410-7469  dass du an allem schuld bist.
+249.25-253.44  f7477-7603  Im Internet gibt's Theorien, dass du das grüne Licht selbst gemacht hast.
+254.02-254.72  f7620-7641  Mit 'nem Dönergrill.
+254.86-255.85  f7645-7675  Klar. Und die Welt?
+255.98-258.85  f7679-7765  Die läuft weiter. Langsamer, aber sie läuft.
+259.34-260.49  f7780-7814  Busse fahren wieder.
+260.87-265.31  f7826-7959  Baustellen gehen weiter. Die Leute halten zusammen,
+265.66-266.32  f7969-7989  packen an,
+266.64-267.27  f7999-8018  helfen sich.
+267.89-270.41  f8036-8112  Du siehst das alles nur durchs Fenster vom Labor.
+270.79-272.14  f8123-8164  Und dann kommt die Einsamkeit.
+272.72-275.27  f8181-8258  Du hast niemanden mehr,
+275.71-277.41  f8271-8322  mit dem du Fußball gucken kannst.
+277.90-278.35  f8336-8350  Niemanden,
+278.55-280.49  f8356-8414  der dich anruft und fragt:
+280.63-281.18  f8418-8435  „Alter,
+281.32-281.76  f8439-8452  was geht?"
+282.36-284.56  f8470-8536  Du schreibst Murat jeden Abend 'ne Nachricht.
+285.06-286.34  f8551-8590  Sie kommt nie an.
+286.48-288.07  f8594-8642  Nur ein grauer Haken.
+288.72-291.43  f8661-8742  Eines Nachts schleichst du dich an deinen Bodyguards vorbei.
+291.79-293.83  f8753-8814  Du fährst zum Haus deiner Eltern.
+293.98-295.73  f8819-8871  Deine Mutter macht die Tür auf und umarmt dich so fest,
+297.07-297.93  f8912-8937  dass du kaum Luft kriegst.
+298.12-299.51  f8943-8985  Im Wohnzimmer steht Papas Sessel.
+299.91-300.30  f8997-9008  Leer.
+300.77-303.47  f9023-9104  Daneben seine Lesebrille und die Fernbedienung,
+303.62-305.38  f9108-9161  die keiner anfassen durfte.
+306.08-307.43  f9182-9222  Du setzt dich nicht drauf.
+307.70-309.67  f9230-9290  Du stehst nur da und guckst.
+310.16-311.94  f9304-9358  Und zum ersten Mal seit dem grünen Licht heulst du.
+312.06-312.93  f9361-9387  Richtig.
+313.22-314.55  f9396-9436  Deine Mutter sagt leise:
+315.16-316.14  f9454-9484  „Du bist nicht der Letzte,
+316.28-316.76  f9488-9502  Jonas.
+317.14-318.57  f9514-9557  Du bist nur der Erste,
+319.15-320.36  f9574-9610  der noch hier ist."
+321.38-323.07  f9641-9692  Du verstehst nicht,
+324.00-325.96  f9720-9778  was sie damit meint.
+326.08-326.59  f9782-9797  Noch nicht.
+326.76-328.46  f9802-9853  Tag 99 – Die Entdeckung.
+328.83-329.50  f9864-9885  Am Tag 99 reißt Dr.
+329.85-333.95  f9895-10018  Weber um vier Uhr morgens deine Tür auf.
+334.25-336.50  f10027-10094  Ihre Haare stehen in alle Richtungen.
+336.84-338.66  f10105-10159  Sie hat seit Tagen nicht geschlafen.
+338.99-339.66  f10169-10189  „Jonas.
+339.93-340.92  f10197-10227  Sie sind nicht tot."
+341.29-341.68  f10238-10250  „Wer?"
+342.04-342.58  f10261-10277  „Die Männer.
+342.70-344.35  f10280-10330  Alle. Sie sind nicht tot."
+344.87-347.47  f10346-10424  Sie zeigt dir ein Video von einer Überwachungskamera.
+347.85-349.79  f10435-10493  Ein leerer Bahnhof, mitten in der Nacht.
+350.11-352.88  f10503-10586  Und für eine halbe Sekunde siehst du da Schatten.
+353.30-353.96  f10599-10618  Hunderte.
+354.31-356.05  f10629-10681  Ganz blass, wie durch Milchglas.
+356.35-357.58  f10690-10727  Leute, die rumlaufen.
+357.82-358.47  f10734-10754  Die suchen.
+358.84-361.31  f10765-10839  „Das grüne Licht hat sie nicht ausgelöscht", sagt sie.
+361.73-362.80  f10851-10884  „Es hat sie verschoben.
+363.10-364.51  f10892-10935  In so 'ne Art Zwischenraum.
+364.75-365.71  f10942-10971  Sie sind noch da.
+366.12-367.89  f10983-11036  Sie finden nur den Weg nicht zurück."
+368.45-369.63  f11053-11088  Dann kommt das Nächste.
+370.00-371.16  f11100-11134  Das Licht kommt wieder.
+371.56-373.00  f11146-11189  Alle 100 Tage.
+373.39-374.55  f11201-11236  Und Tag 100,
+374.70-375.47  f11241-11264  das ist morgen.
+375.85-376.99  f11275-11309  Um 3 Uhr 14.
+377.64-379.00  f11329-11369  „Und warum bin ich noch hier?",
+379.18-379.76  f11375-11392  fragst du.
+380.15-381.13  f11404-11433  „Wegen dem Kühlraum.
+381.36-382.23  f11440-11466  Dicker Stahl.
+382.59-384.29  f11477-11528  Das Licht kommt da nicht durch."
+384.45-385.58  f11533-11567  Sie macht eine Pause.
+386.11-388.17  f11583-11645  „Aber morgen sucht es Sie.
+388.63-390.84  f11658-11725  Sie sind der Einzige, den es noch nicht hat."
+391.50-394.11  f11745-11823  Ihr Plan ist simpel. Und völlig verrückt.
+394.61-396.58  f11838-11897  Du sollst morgen nicht in den Kühlraum.
+397.05-398.14  f11911-11944  Du sollst rausgehen.
+398.36-399.30  f11950-11978  Ins Licht.
+399.63-401.30  f11988-12039  Mit einem Stahlseil um den Bauch,
+401.42-403.21  f12042-12096  das am Kühlraum festgemacht ist.
+403.45-405.37  f12103-12161  Das Seil ist der Weg zurück.
+405.68-406.49  f12170-12194  Du gehst rein,
+406.69-407.52  f12200-12225  findest die Männer,
+407.90-409.82  f12236-12294  und alle folgen dem Seil nach Hause.
+410.36-411.60  f12310-12348  „Und wenn's nicht klappt?"
+412.11-412.89  f12363-12386  Sie guckt weg.
+413.35-415.54  f12400-12466  „Dann gibt's keinen Mann mehr auf der Welt."
+416.02-417.87  f12480-12536  Du denkst an Papas Sessel.
+418.19-419.07  f12545-12572  An Murat.
+419.39-422.46  f12581-12673  An Ali und seinen Dönerspieß. Und du sagst:
+422.85-423.40  f12685-12701  „Okay.
+423.64-424.26  f12709-12727  Ich mach's."
+424.97-426.08  f12749-12782  Tag 100 – Das Licht.
+426.37-428.17  f12791-12845  Zurück im Dönerladen.
+428.33-429.89  f12849-12896  Wo alles angefangen hat.
+430.24-431.62  f12907-12948  Es ist 3 Uhr 10.
+431.95-433.22  f12958-12996  Draußen stehen Panzer,
+433.51-436.37  f13005-13091  Kamerateams und tausende Frauen mit Kerzen.
+436.80-438.45  f13103-13153  Deine Mutter steht ganz vorne.
+438.77-441.74  f13163-13252  Das Stahlseil ist um deinen Bauch geknotet.
+442.15-444.33  f13264-13329  Das andere Ende hängt am Kühlraum.
+444.46-444.54  f13333-13336  Dr.
+444.69-447.10  f13340-13413  Weber prüft den Knoten zum dritten Mal.
+447.43-449.65  f13422-13489  „Nicht loslassen. Egal, was passiert."
+450.18-451.33  f13505-13540  3 Uhr 13.
+451.83-455.20  f13554-13655  Dein Herz schlägt so laut, dass du denkst, alle können's hören.
+455.56-456.55  f13666-13696  3 Uhr 14.
+456.82-457.72  f13704-13731  Alles wird grün.
+458.01-459.12  f13740-13773  Und dann ist da nix mehr.
+459.37-461.76  f13781-13852  Kein Laden, keine Straße, keine Menschen.
+462.08-466.38  f13862-13991  Nur ein riesiger, weißer Raum. Ohne Boden, ohne Decke,
+466.98-468.18  f14009-14045  ohne Ende. Und es ist totenstill.
+468.33-469.13  f14049-14073  Du läufst los.
+469.60-473.76  f14088-14212  Das Seil zieht sich hinter dir her wie ein silberner Faden.
+473.98-474.42  f14219-14232  Du rufst:
+474.66-475.30  f14239-14259  „Hallo?
+475.89-476.51  f14276-14295  Ist hier wer?"
+476.76-477.78  f14302-14333  Erst nix.
+478.16-478.88  f14344-14366  Dann ein Echo.
+479.22-479.81  f14376-14394  Dann Schritte.
+480.04-480.74  f14401-14422  Und dann siehst du sie.
+481.18-481.95  f14435-14458  Tausende.
+482.16-482.55  f14464-14476  Nein,
+482.68-483.47  f14480-14504  Millionen.
+483.64-485.43  f14509-14562  Männer, so weit du gucken kannst.
+485.74-487.00  f14572-14609  Busfahrer in Uniform.
+487.13-488.41  f14613-14652  Opas in Hausschuhen.
+488.66-491.28  f14659-14738  Ein Typ im Bademantel mit Zahnbürste im Mund.
+491.73-492.69  f14751-14780  Alle verwirrt.
+493.15-494.18  f14794-14825  Alle verloren.
+494.55-497.95  f14836-14938  Für sie ist es, als wären nur ein paar Minuten vergangen.
+498.58-499.68  f14957-14990  Und mittendrin:
+500.25-500.75  f15007-15022  Murat.
+501.29-501.98  f15038-15059  „Jonas?
+502.41-503.46  f15072-15103  Alter, wo sind wir?
+503.77-505.50  f15113-15165  Ich wollte nur kurz Chips holen!"
+505.98-508.65  f15179-15259  Neben ihm steht Ali, mit dem Dönermesser in der Hand.
+508.96-510.38  f15268-15311  Und ein Stück weiter hinten,
+510.62-512.48  f15318-15374  mit seiner Lesebrille auf der Nase:
+512.96-513.81  f15388-15414  dein Vater.
+514.41-515.49  f15432-15464  Du kannst nicht reden.
+515.83-518.11  f15474-15543  Du hebst nur das Seil hoch und sagst:
+518.52-519.24  f15555-15577  „Folgt mir.
+519.38-520.84  f15581-15625  Ich weiß den Weg nach Hause."
+521.23-522.34  f15636-15670  Und sie folgen dir.
+522.77-524.02  f15683-15720  Einer nach dem anderen.
+524.30-526.60  f15729-15798  Eine Schlange aus Millionen Menschen,
+526.93-530.36  f15807-15910  die sich an einem einzigen Stahlseil festhalten.
+530.53-532.74  f15915-15982  Irgendwann wird das Seil schwer.
+533.38-535.25  f16001-16057  Deine Hände brennen.
+535.43-537.07  f16062-16112  Du willst loslassen.
+537.43-541.45  f16122-16243  Aber dann hörst du hinter dir deinen Vater:
+541.61-543.33  f16248-16299  „Weiter, Junge. Ich bin direkt hinter dir."
+543.77-544.83  f16313-16344  Du ziehst.
+545.11-545.71  f16353-16371  Und ziehst.
+546.04-548.10  f16381-16442  Bis vor dir eine Stahltür auftaucht.
+548.57-551.29  f16457-16538  Die Tür vom Kühlraum. Du machst sie auf.
+551.62-553.17  f16548-16595  Danach – Die Rückkehr.
+553.51-554.93  f16605-16647  Du stolperst raus.
+555.28-556.51  f16658-16695  In den Dönerladen.
+556.91-557.96  f16707-16738  Und hinter dir kommen sie.
+558.21-558.76  f16746-16762  Murat.
+559.07-560.18  f16772-16805  Ali. Dein Vater.
+560.49-561.00  f16814-16830  Und dann,
+561.15-563.10  f16834-16893  überall auf der Welt gleichzeitig:
+563.33-564.29  f16899-16928  Grüne Blitze,
+564.64-566.89  f16939-17006  und plötzlich stehen sie wieder da.
+567.31-569.65  f17019-17089  Der Busfahrer sitzt wieder hinterm Steuer.
+569.87-575.65  f17096-17269  Der Opa steht wieder in seiner Küche. Der Typ im Bademantel putzt sich weiter die Zähne,
+576.17-577.25  f17284-17317  als wäre nix gewesen.
+577.40-580.17  f17322-17405  Draußen vor dem Laden explodiert der Jubel.
+580.44-581.90  f17413-17456  Frauen rennen los,
+582.05-583.17  f17461-17495  Männer rennen los,
+583.36-587.20  f17500-17615  alle fallen sich in die Arme. Deine Mutter drückt deinen Vater so fest,
+587.57-588.78  f17627-17663  dass seine Brille runterfällt.
+588.96-591.21  f17668-17736  Und dann gucken alle zu dir.
+591.47-592.47  f17743-17774  Tausende Menschen.
+592.61-593.15  f17778-17794  Ganz still.
+593.28-595.08  f17798-17852  Und dann klatschen sie. Und klatschen.
+595.38-596.49  f17861-17894  Und hören nicht mehr auf.
+596.95-600.35  f17908-18010  Eine Woche später kriegst du einen Orden vom Bundespräsidenten.
+600.74-603.65  f18022-18109  In Japan gibt's jetzt eine neue Actionfigur.
+604.12-605.51  f18123-18165  Diesmal mit Stahlseil.
+605.89-606.78  f18176-18203  Aber das Beste?
+606.94-609.02  f18208-18270  Du sitzt wieder im Dönerladen.
+609.51-610.41  f18285-18312  Nachtschicht.
+610.58-612.45  f18317-18373  Ali hat über die Kühlraumtür ein Schild gehängt:
+612.73-613.79  f18381-18413  „Hier schläft ein Held."
+614.18-615.25  f18425-18457  Murat kommt rein,
+615.72-617.65  f18471-18529  setzt sich an den Tresen und fragt:
+617.77-618.11  f18533-18543  „Und?
+618.66-619.87  f18559-18596  Was hab ich verpasst?"
+620.38-621.23  f18611-18636  Du grinst.
+621.56-622.82  f18646-18684  „Lange Geschichte.
+623.02-626.22  f18690-18786  Und du schuldest mir immer noch zwanzig Euro."
+626.91-628.57  f18807-18857  Er lacht,
+628.92-631.30  f18867-18939  und ihr guckt zusammen auf den kleinen Fernseher über der Theke.
+631.44-633.08  f18943-18992  Und da läuft gerade 'ne Eilmeldung:
+633.45-635.62  f19003-19068  „Grünes Licht über Australien gesichtet.
+636.01-638.36  f19080-19150  Alle Kängurus weltweit verschwunden."
+638.54-639.58  f19156-19187  Murat guckt dich an.
+639.95-641.09  f19198-19232  Du guckst Murat an.
+641.52-644.13  f19245-19323  Du seufzt und nimmst das Stahlseil vom Haken.
+644.65-645.08  f19339-19352  „Ali?
+645.45-646.87  f19363-19406  Ich brauch morgen frei."

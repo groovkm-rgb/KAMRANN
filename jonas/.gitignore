@@ -1,0 +1,9 @@
+frames/
+seq/
+stills/
+work/r*.log
+node_modules
+*.wav
+voice.mp3
+out/*.mp4
+web/lib/
