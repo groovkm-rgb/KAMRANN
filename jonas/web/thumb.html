@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0}</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+import * as T from './toon.js'; import * as C from './chars.js';
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+const img = new Image(); img.src = 'thumb_bg.jpg'; await img.decode();
+g.filter = 'blur(5px) brightness(0.75) saturate(1.2)'; g.fillStyle = '#20263a'; g.fillRect(0, 0, 1920, 1080); g.drawImage(img, -60, -40, 2040, 1160); g.filter = 'none';
+// green light from the sky
+let r = g.createRadialGradient(1300, -100, 50, 1300, -100, 1300); r.addColorStop(0, 'rgba(90,255,130,0.85)'); r.addColorStop(0.45, 'rgba(60,230,110,0.35)'); r.addColorStop(1, 'rgba(40,200,90,0)'); g.fillStyle = r; g.fillRect(0, 0, 1920, 1080);
+for (let i = 0; i < 9; i++) { g.save(); g.translate(1300, -100); g.rotate(-0.55 + i * 0.14); const lg = g.createLinearGradient(0, 0, 0, 1300); lg.addColorStop(0, 'rgba(180,255,190,0.35)'); lg.addColorStop(1, 'rgba(180,255,190,0)'); g.fillStyle = lg; g.beginPath(); g.moveTo(-14, 0); g.lineTo(14, 0); g.lineTo(70, 1300); g.lineTo(-70, 1300); g.fill(); g.restore(); }
+// left darkening for the text
+let lg = g.createLinearGradient(0, 0, 1000, 0); lg.addColorStop(0, 'rgba(10,10,30,0.8)'); lg.addColorStop(1, 'rgba(10,10,30,0)'); g.fillStyle = lg; g.fillRect(0, 0, 1000, 1080);
+// Jonas big, with a white glow outline
+const draw = (gg) => { gg.save(); gg.translate(1030, -150); gg.scale(1.42, 1.42); T.toonChar(new T.Pen(gg), C.JONAS, { expr: 'shock', sweat: true, R: { x: 520, y: 600 }, holdR: 'knife', L: { x: 120, y: 420 }, turn: -0.15, look: -0.4 }); gg.restore(); };
+const off = document.createElement('canvas'); off.width = 1920; off.height = 1080; draw(off.getContext('2d'));
+g.save(); g.shadowColor = 'rgba(255,255,255,0.95)'; g.shadowBlur = 40; g.drawImage(off, 0, 0); g.shadowColor = 'rgba(120,255,150,0.9)'; g.shadowBlur = 80; g.drawImage(off, 0, 0); g.restore(); g.drawImage(off, 0, 0);
+// text (German)
+const txt = (s, x, y, size, fill, rot = 0, stroke = 22) => { g.save(); g.translate(x, y); g.rotate(rot); g.font = `900 ${size}px "DejaVu Sans", sans-serif`; g.textAlign = 'left'; g.textBaseline = 'alphabetic'; g.lineJoin = 'round';
+  g.lineWidth = stroke + 14; g.strokeStyle = 'rgba(0,0,0,0.5)'; g.strokeText(s, 8, 10); g.lineWidth = stroke; g.strokeStyle = '#120c14'; g.strokeText(s, 0, 0); g.fillStyle = fill; g.fillText(s, 0, 0); g.restore(); };
+txt('DER', 70, 250, 190, '#ffffff', -0.04);
+txt('LETZTE', 60, 470, 230, '#ffd23a', -0.04, 26);
+txt('MANN', 70, 680, 210, '#ffffff', -0.04);
+// badge
+g.save(); g.translate(330, 870); g.rotate(-0.06); g.fillStyle = '#e8202a'; g.strokeStyle = '#120c14'; g.lineWidth = 12; g.beginPath(); g.roundRect(-300, -95, 620, 170, 34); g.fill(); g.stroke();
+g.fillStyle = '#fff'; g.font = '900 80px "DejaVu Sans"'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('1 von 4 Mrd.', 10, -5); g.restore();
+// red arrow toward Jonas
+g.save(); g.translate(830, 760); g.rotate(-0.3); g.fillStyle = '#e8202a'; g.strokeStyle = '#120c14'; g.lineWidth = 12; g.beginPath(); g.moveTo(0, -30); g.lineTo(150, -30); g.lineTo(150, -75); g.lineTo(250, 0); g.lineTo(150, 75); g.lineTo(150, 30); g.lineTo(0, 30); g.closePath(); g.fill(); g.stroke(); g.restore();
+// vignette
+r = g.createRadialGradient(960, 540, 500, 960, 540, 1150); r.addColorStop(0, 'rgba(0,0,0,0)'); r.addColorStop(1, 'rgba(0,0,0,0.45)'); g.fillStyle = r; g.fillRect(0, 0, 1920, 1080);
+window.ok = 1;
+</script></body></html>
