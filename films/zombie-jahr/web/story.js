@@ -187,7 +187,7 @@ shot('strasse', 3196, 3288, 'night', [[3196, [5.2, 0.95, 11.4], [-0.5, 1.3, 15.6
   { dof: [[-0.5, 1.4, 15.6], 6], w: { paper: 1, power: 0, sofa: 1 } });
 shot('hecke', 3288, 3436, 'night', [[3288, ...F([2.8, -0.15, 10.4], 0, 'FS', { fov: 40 })], [3360, ...F([2.8, -0.15, 10.4], 0, 'FS', { fov: 40, k: 0.92 }), 'lin'], [3372, ...F([3.2, -0.15, 10.35], 0, 'MCU', { fov: 36 }), 'out'], [3436, ...F([3.2, -0.15, 10.35], 0, 'MCU', { fov: 36, k: 0.93 }), 'lin']],
   (f, T) => { const zx = f < 3398 ? 1.2 : 1.2 - (f - 3398) * 0.03;
-    return [HERO(T, f, { expr: f < 3330 ? 'scared' : 'chew', L: 'hang', R: 'hang' }, [3.2, 0.02, 10.3], { blob: false }, f > 3362 ? { headCol: '#cfe0ff' } : {}),
+    return [HERO(T, f, { expr: f < 3330 ? 'scared' : 'chew', L: 'hang', R: 'hang' }, [3.2, 0.25, 10.3], { blob: false }, f > 3362 ? { headCol: '#cfe0ff' } : {}),
       ACT(T, ZOMBIES[1], { ...ZOMBIE_POSE(f, 1), legs: f > 3398 ? 'walk' : 'stand', tilt: q(6 * Math.sin(f * 0.12), 1) }, [zx, 0, 12.6], { flip: true }), ...(f < 3398 ? moanFx(f, [zx + 0.3, 2.1, 12.6], 0.28) : [])]; },
   { dof: [[3.2, 1.2, 10.35], 9], w: { paper: 1, power: 0, sofa: 1 } });
 shot('hintertuer', 3436, 3495, 'night', [[3436, [9.0, 1.5, 23.6], [6.0, 1.2, 25.8], 44], [3495, [8.7, 1.5, 24.0], [6.0, 1.2, 25.8], 40, 'lin']],
@@ -258,11 +258,10 @@ shot('bart', 5804, 5914, 'fire', [[5804, ...F([-5.3, 0, 1.9], 50, 'CU')], [5914,
   { dof: [[-5.3, 1.3, 1.9], 13], w: { ...WINTER, fire: 1, billy: false, table: false } });
 shot('talkshow', 5914, 6025, 'fire', [[5914, ...F([-4.4, 0, 2.8], 30, 'MS', { fov: 44 })], [6025, ...F([-4.4, 0, 2.8], 30, 'MS', { fov: 44, k: 0.92 }), 'lin']],
   (f, T) => [CARD('desk', (p) => FX.item(p, 'deskbox'), [-4.3, 0, 2.95], 0.6, { blob: true, shadow: true, order: 3 }), GIS([-3.8, 0.66, 3.0], 0.35, Math.sin(f * 0.2)),
-    HERO(T, f, { expr: f % 46 < 23 ? 'laugh' : 'sly', blanket: true, R: { x: 420, y: 380, b: 0.6 }, holdR: 'spoon', L: f % 30 < 15 ? 'wave' : 'hip', turn: 0.3, look: 0.6 }, [-4.6, 0, 2.6]),
-    FXC('spot', (p) => T_.fxGlow(p, '255,220,150', 0.6), [-4.5, 0.6, 2.4], 1.4, { order: 1 })],
+    HERO(T, f, { expr: f % 46 < 23 ? 'laugh' : 'sly', blanket: true, R: { x: 420, y: 380, b: 0.6 }, holdR: 'spoon', L: f % 30 < 15 ? 'wave' : 'hip', turn: 0.3, look: 0.6 }, [-4.6, 0, 2.6])],
   { dof: [[-4.3, 1.3, 2.8], 9], w: { ...WINTER, fire: 1, billy: false, table: false } });
 shot('geburtstag', 6025, 6284, 'fire', [[6025, ...F([-3.5, -0.6, 5.0], 60, 'MS', { fov: 44 })], [6200, ...F([-3.5, -0.6, 5.0], 60, 'MS', { fov: 44, k: 0.88 }), 'lin'], [6284, ...F([-3.5, -0.6, 5.0], 60, 'MS', { fov: 44, k: 0.8 }), 'lin']],
-  (f, T) => [CARD('cake' + (f % 12), (p) => FX.item(p, 'cakecan', { t: f / 30 }), [-3.3, 0, 5.35], 0.3, { blob: true, order: 3 }), FXC('cglow', (p) => T_.fxGlow(p, '255,200,120', 0.8), [-3.3, -0.35, 5.4], 1.0, { order: 2 }),
+  (f, T) => [CARD('cake' + (f % 12), (p) => FX.item(p, 'cakecan', { t: f / 30 }), [-3.3, 0, 5.35], 0.3, { blob: true, order: 3 }), FXC('cglow', (p) => T_.fxGlow(p, '255,200,120', 0.8), [-3.3, 0.0, 5.45], 0.3, { order: 2 }),
     HERO(T, f, { expr: f < 6211 ? 'sing' : 'sad', blanket: true, legs: 'sit', L: f >= 6211 ? { x: 300, y: 330, b: 1 } : 'hang', R: 'hang' }, [-3.7, -0.6, 4.8], { blob: false }),
     ...(f < 6211 ? notes(f, [-3.5, 1.4, 4.9], 2, 0.1) : [])],
   { dof: [[-3.4, 0.8, 5.2], 11], flash: true, w: { ...WINTER, billy: false, table: false } });
