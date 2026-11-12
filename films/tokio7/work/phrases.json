@@ -1,0 +1,211 @@
+{
+ "duration": 43.075917,
+ "frames30": 1292,
+ "source": "silence-align (cost 4.25)",
+ "segments": [
+  [
+   0.0,
+   3.41848
+  ],
+  [
+   3.57413,
+   5.91599
+  ],
+  [
+   6.1249,
+   6.9141
+  ],
+  [
+   7.18297,
+   10.9384
+  ],
+  [
+   11.2207,
+   12.8226
+  ],
+  [
+   12.9737,
+   14.4557
+  ],
+  [
+   14.7783,
+   15.7995
+  ],
+  [
+   15.9424,
+   16.3404
+  ],
+  [
+   16.6317,
+   17.5071
+  ],
+  [
+   17.6879,
+   21.4982
+  ],
+  [
+   21.6325,
+   22.9364
+  ],
+  [
+   23.1872,
+   24.1279
+  ],
+  [
+   24.327,
+   24.675
+  ],
+  [
+   24.8981,
+   26.2271
+  ],
+  [
+   26.6731,
+   27.7555
+  ],
+  [
+   27.9758,
+   30.225
+  ],
+  [
+   30.5366,
+   33.3259
+  ],
+  [
+   33.6829,
+   35.0493
+  ],
+  [
+   35.4828,
+   36.3775
+  ],
+  [
+   36.7052,
+   37.0468
+  ],
+  [
+   37.3183,
+   39.5652
+  ],
+  [
+   39.8937,
+   41.273
+  ],
+  [
+   41.4701,
+   42.7847
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein Schnellzug rollt in Tokio ein. Gleich steigen Hunderte Leute aus.",
+   "s": 0.0,
+   "e": 3.418
+  },
+  {
+   "text": "Und Hunderte neue wollen rein. Dazwischen:",
+   "s": 3.574,
+   "e": 5.916
+  },
+  {
+   "text": "sieben Minuten.",
+   "s": 6.125,
+   "e": 6.914
+  },
+  {
+   "text": "Auf dem Bahnsteig wartet ein Team in Reih und Glied. Der Zug h\u00e4lt \u2013 und sie verbeugen sich.",
+   "s": 7.183,
+   "e": 10.938
+  },
+  {
+   "text": "Vor dem Zug. Dann geht's los.",
+   "s": 11.221,
+   "e": 12.823
+  },
+  {
+   "text": "Jede Person bekommt einen Wagen.",
+   "s": 12.974,
+   "e": 14.456
+  },
+  {
+   "text": "Rund hundert Sitze.",
+   "s": 14.778,
+   "e": 15.8
+  },
+  {
+   "text": "Allein.",
+   "s": 15.942,
+   "e": 16.34
+  },
+  {
+   "text": "Anderthalb Minuten:",
+   "s": 16.632,
+   "e": 17.507
+  },
+  {
+   "text": "M\u00fcll einsammeln, Gep\u00e4ckablagen checken. Drei\u00dfig Sekunden: alle Sitze umdrehen,",
+   "s": 17.688,
+   "e": 21.498
+  },
+  {
+   "text": "damit sie in Fahrtrichtung zeigen.",
+   "s": 21.633,
+   "e": 22.936
+  },
+  {
+   "text": "Vier Minuten:",
+   "s": 23.187,
+   "e": 24.128
+  },
+  {
+   "text": "putzen,",
+   "s": 24.327,
+   "e": 24.675
+  },
+  {
+   "text": "wischen, Kopfst\u00fctzenbez\u00fcge wechseln.",
+   "s": 24.898,
+   "e": 26.227
+  },
+  {
+   "text": "Eine Minute: Kontrolle.",
+   "s": 26.673,
+   "e": 27.756
+  },
+  {
+   "text": "Raus. Aufstellen. Verbeugen. Fertig.",
+   "s": 27.976,
+   "e": 30.225
+  },
+  {
+   "text": "In Japan nennen sie das das \u201eSieben-Minuten-Theater\".",
+   "s": 30.537,
+   "e": 33.326
+  },
+  {
+   "text": "Sogar in Harvard wird das studiert.",
+   "s": 33.683,
+   "e": 35.049
+  },
+  {
+   "text": "Und das Krasseste?",
+   "s": 35.483,
+   "e": 36.377
+  },
+  {
+   "text": "Fr\u00fcher hatte genau dieser Job ein ziemlich mieses Image.",
+   "s": 36.705,
+   "e": 39.565
+  },
+  {
+   "text": "Ge\u00e4ndert hat sich vor allem eins:",
+   "s": 39.894,
+   "e": 41.273
+  },
+  {
+   "text": "wie man die Leute behandelt hat.",
+   "s": 41.47,
+   "e": 42.785
+  }
+ ]
+}
