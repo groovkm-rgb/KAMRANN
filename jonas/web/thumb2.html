@@ -1,0 +1,44 @@
+<!doctype html><html><head><meta charset="utf-8"><style>@font-face{font-family:Caveat;src:url(caveat.woff2) format('woff2');font-weight:700}body{margin:0}</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+import * as T from './toon.js'; import * as C from './chars.js';
+await document.fonts.load('700 100px Caveat');
+const cv = document.getElementById('c'), g = cv.getContext('2d'), W = 1920, H = 1080;
+const ch = (spec, o, x, y, s, ctx = g) => { ctx.save(); ctx.translate(x, y); ctx.scale(s, s); T.toonChar(new T.Pen(ctx), spec, o); ctx.restore(); };
+// 1) toxic green sky with a blinding light source behind Jonas
+let r = g.createRadialGradient(1420, 330, 30, 1420, 330, 1500); r.addColorStop(0, '#f4fff0'); r.addColorStop(0.12, '#8dff9e'); r.addColorStop(0.45, '#1fa64a'); r.addColorStop(1, '#04140c'); g.fillStyle = r; g.fillRect(0, 0, W, H);
+g.save(); g.translate(1420, 330); for (let i = 0; i < 28; i++) { g.rotate(Math.PI / 14); g.fillStyle = i % 2 ? 'rgba(230,255,230,0.20)' : 'rgba(0,40,20,0.12)'; g.beginPath(); g.moveTo(0, 0); g.lineTo(-120, -1900); g.lineTo(120, -1900); g.fill(); } g.restore();
+// 2) crowd of women, all staring at him with phones (three rows, back to front)
+const rows = [[700, 0.3, 20, 0.45], [830, 0.42, 15, 0.62], [990, 0.6, 11, 0.85]];
+let n = 0;
+for (const [y, s, k, light] of rows) for (let i = 0; i < k; i++) {
+  const x = -60 + i * (1080 / k) + (n % 2) * 18; const sp = C.woman(n * 3 + 1);
+  const off = document.createElement('canvas'); off.width = 600; off.height = 1000; const o = off.getContext('2d');
+  T.toonChar(new T.Pen(o), sp, { expr: ['shock', 'awe', 'shock', 'scared'][n % 4], turn: 0.7, look: 1, R: n % 3 === 2 ? 'point' : { x: 520, y: 240 }, holdR: n % 3 === 2 ? null : 'phone', L: n % 4 === 0 ? 'chin' : 'hang' });
+  g.save(); g.filter = `brightness(${light})`; g.drawImage(off, x, y - 1000 * s * 0.62, 600 * s, 1000 * s); g.restore(); n++;
+}
+// phone flashes
+const burst = (x, y, s) => { g.save(); g.translate(x, y); const rg = g.createRadialGradient(0, 0, 0, 0, 0, 90 * s); rg.addColorStop(0, 'rgba(255,255,255,1)'); rg.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = rg; g.fillRect(-90 * s, -90 * s, 180 * s, 180 * s); g.fillStyle = '#ffffff'; g.beginPath(); for (let i = 0; i < 16; i++) { const a = i * Math.PI / 8, rr = i % 2 ? 10 * s : 60 * s; g.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); } g.fill(); g.restore(); };
+[[230, 640, 0.6], [640, 660, 0.7], [120, 800, 0.9], [900, 760, 0.9], [470, 880, 1.1], [760, 960, 1.0], [330, 1010, 0.9]].forEach(([x, y, s]) => burst(x, y, s));
+// darken bottom-left for text contrast
+let lg = g.createLinearGradient(0, 0, 0, 520); lg.addColorStop(0, 'rgba(0,15,8,0.85)'); lg.addColorStop(1, 'rgba(0,15,8,0)'); g.fillStyle = lg; g.fillRect(0, 0, 1150, 520);
+// 3) Jonas: huge, scared, red rim glow
+const off = document.createElement('canvas'); off.width = W; off.height = H; const o = off.getContext('2d');
+ch(C.JONAS, { expr: 'scared', sweat: true, L: { x: 140, y: 340 }, R: { x: 470, y: 340 }, holdR: 'knife', look: -0.6, turn: -0.2 }, 880, -260, 2.3, o);
+g.save(); g.shadowColor = '#ff2a2a'; g.shadowBlur = 60; g.drawImage(off, 0, 0); g.shadowColor = '#ffffff'; g.shadowBlur = 18; g.drawImage(off, 0, 0); g.restore(); g.drawImage(off, 0, 0);
+// sweat drops flying
+for (const [x, y, s] of [[1150, 160, 1.1], [1960, 200, 0.8], [1130, 330, 0.8]]) { g.save(); g.translate(x, y); g.scale(s, s); g.fillStyle = '#8fd0ff'; g.strokeStyle = '#120c14'; g.lineWidth = 8; g.beginPath(); g.moveTo(0, -40); g.quadraticCurveTo(30, 10, 0, 30); g.quadraticCurveTo(-30, 10, 0, -40); g.fill(); g.stroke(); g.restore(); }
+// 4) text: ALLE MÄNNER / WEG!  (German)
+const txt = (s, x, y, size, fill, rot = 0, stroke = 24) => { g.save(); g.translate(x, y); g.rotate(rot); g.font = `900 ${size}px "Inter", "DejaVu Sans", sans-serif`; g.lineJoin = 'round';
+  g.lineWidth = stroke + 18; g.strokeStyle = 'rgba(0,0,0,0.55)'; g.strokeText(s, 10, 12); g.lineWidth = stroke; g.strokeStyle = '#0c0a0e'; g.strokeText(s, 0, 0); g.fillStyle = fill; g.fillText(s, 0, 0); g.restore(); };
+txt('ALLE MÄNNER', 50, 190, 168, '#ffffff', -0.03);
+txt('WEG!', 40, 470, 320, '#ffe02a', -0.05, 30);
+// red hand-drawn circle around Jonas' head + "außer ihm" with arrow
+g.save(); g.strokeStyle = '#ff2a2a'; g.lineWidth = 18; g.lineCap = 'round'; g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 12;
+g.beginPath(); g.ellipse(1570, 380, 390, 365, -0.15, 0.3, Math.PI * 2 + 0.1); g.stroke();
+g.beginPath(); g.moveTo(980, 560); g.quadraticCurveTo(1080, 470, 1175, 450); g.stroke(); g.beginPath(); g.moveTo(1175, 450); g.lineTo(1125, 425); g.moveTo(1175, 450); g.lineTo(1135, 495); g.stroke(); g.restore();
+g.save(); g.translate(560, 640); g.rotate(-0.1); g.font = '700 170px Caveat'; g.lineJoin = 'round'; g.lineWidth = 22; g.strokeStyle = '#0c0a0e'; g.strokeText('außer ihm', 0, 0); g.fillStyle = '#ff3a3a'; g.fillText('außer ihm', 0, 0); g.restore();
+// vignette
+r = g.createRadialGradient(960, 540, 600, 960, 540, 1250); r.addColorStop(0, 'rgba(0,0,0,0)'); r.addColorStop(1, 'rgba(0,0,0,0.55)'); g.fillStyle = r; g.fillRect(0, 0, W, H);
+window.ok = 1;
+</script></body></html>
