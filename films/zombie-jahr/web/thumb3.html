@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body style="margin:0">
+<canvas id="c" width="1280" height="720"></canvas>
+<script type="module">
+import * as T from './toon.js';
+import { heroSpec, ZOMBIES, ZOMBIE_POSE } from './chars.js';
+const c = document.getElementById('c'), g = c.getContext('2d');
+const bg = new Image(); bg.src = 'thumb_bg3.jpg'; await bg.decode(); g.drawImage(bg, 0, 0, 1280, 720);
+// blood-red moon + sickly green tint
+let gr = g.createRadialGradient(640, 330, 10, 640, 330, 520); gr.addColorStop(0, 'rgba(255,70,50,.75)'); gr.addColorStop(0.18, 'rgba(255,60,40,.35)'); gr.addColorStop(1, 'rgba(120,0,30,0)'); g.fillStyle = gr; g.fillRect(0, 0, 1280, 720);
+
+g.fillStyle = 'rgba(40,120,60,.25)'; g.fillRect(0, 0, 1280, 720);
+const fig = (spec, o, x, y, k, flip = false) => { g.save(); g.translate(x, y); if (flip) g.scale(-1, 1); g.scale(k, k); g.translate(-300, -975); T.toonChar(new T.Pen(g), spec, o); g.restore(); };
+// zombie horde walking toward the house (to the right): back row small, front row big
+const Z = (i, x, y, k, expr) => fig(ZOMBIES[i % 3], { ...ZOMBIE_POSE(i * 9, i), legs: 'walk', expr, tilt: [-6, 4, -3, 6, -5, 3][i % 6] }, x, y, k);
+Z(1, 120, 560, 0.36, 'zgrin'); Z(2, 330, 545, 0.32, 'zombie'); Z(0, 520, 560, 0.34, 'zgrin');
+Z(2, 40, 760, 0.62, 'zombie'); Z(0, 300, 800, 0.72, 'zombie'); Z(1, 560, 790, 0.6, 'zgrin');
+// green fog over the feet
+for (let i = 0; i < 9; i++) { const f2 = g.createRadialGradient(i * 160, 700, 10, i * 160, 700, 220); f2.addColorStop(0, 'rgba(150,230,120,.45)'); f2.addColorStop(1, 'rgba(150,230,120,0)'); g.fillStyle = f2; g.fillRect(0, 450, 1280, 270); }
+// the hero peeking out of the barricaded door on the right
+g.save(); g.fillStyle = '#2a1a14'; g.fillRect(760, 0, 520, 720); g.restore();
+fig(heroSpec(150), { expr: 'scared', R: { x: 500, y: 330, b: 0.6 }, holdR: 'panUp', L: 'hang', turn: -0.6, look: -1 }, 1000, 300 + (975 - 276) * 1.45, 1.45);
+// door frame + boards nailed across
+g.fillStyle = '#8a5a34'; g.strokeStyle = '#1a1416'; g.lineWidth = 10;
+g.fillRect(740, 0, 70, 720); g.strokeRect(740, -10, 70, 740);
+const board = (x0, y0, x1, y1, w = 70) => { g.save(); const a = Math.atan2(y1 - y0, x1 - x0), L = Math.hypot(x1 - x0, y1 - y0); g.translate(x0, y0); g.rotate(a); g.fillStyle = '#c89a62'; g.fillRect(0, -w / 2, L, w); g.strokeRect(0, -w / 2, L, w);
+  g.fillStyle = '#1a1416'; for (const xx of [24, L - 24]) { g.beginPath(); g.arc(xx, 0, 7, 0, 7); g.fill(); } g.restore(); };
+board(700, 560, 1300, 640); board(700, 690, 1300, 600, 60);
+// sweat
+const drop = (x, y, k) => { g.save(); g.translate(x, y); g.scale(k, k); g.beginPath(); g.moveTo(0, -40); g.quadraticCurveTo(30, 10, 0, 25); g.quadraticCurveTo(-30, 10, 0, -40); g.fillStyle = '#bfe8ff'; g.fill(); g.lineWidth = 6; g.stroke(); g.restore(); };
+drop(1180, 120, 1); drop(1220, 200, 0.7);
+const txt = (s, x, y, size, fill, rot = 0) => { g.save(); g.translate(x, y); g.rotate(rot); g.font = `900 ${size}px "DejaVu Sans", Arial`; g.textAlign = 'left'; g.textBaseline = 'middle';
+  g.lineJoin = 'round'; g.lineWidth = size * 0.24; g.strokeStyle = '#1a1416'; g.strokeText(s, 0, 0); g.fillStyle = fill; g.fillText(s, 0, 0); g.restore(); };
+txt('365 TAGE', 36, 78, 104, '#ffffff', -0.04);
+txt('ZOMBIES!', 36, 196, 118, '#8cff5a', -0.04);
+window.ready = true;
+</script></body></html>
