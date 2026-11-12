@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0}</style></head><body>
+<canvas id="c" width="1600" height="1600"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const cv = document.getElementById('c'), g = cv.getContext('2d'), W = 1600, C = 800;
+// background: warm sunburst + halftone dots + soft vignette (circle-safe)
+let r = g.createRadialGradient(C, 700, 50, C, 760, 1000); r.addColorStop(0, '#ffe27a'); r.addColorStop(0.55, '#ffb43a'); r.addColorStop(1, '#f2643a'); g.fillStyle = r; g.fillRect(0, 0, W, W);
+g.save(); g.translate(C, 700); for (let i = 0; i < 24; i++) { g.rotate(Math.PI / 12); g.fillStyle = i % 2 ? 'rgba(255,255,255,0.16)' : 'rgba(255,120,40,0.10)'; g.beginPath(); g.moveTo(0, 0); g.lineTo(-90, -1300); g.lineTo(90, -1300); g.fill(); } g.restore();
+for (let y = 0; y < W; y += 40) for (let x = (y / 40) % 2 ? 20 : 0; x < W; x += 40) { const d = Math.hypot(x - C, y - 760) / 1100; g.fillStyle = `rgba(200,60,20,${0.18 * d})`; g.beginPath(); g.arc(x, y, 6 * d + 1, 0, 7); g.fill(); }
+// a few sparkles
+const star = (x, y, s, col) => { g.save(); g.translate(x, y); g.fillStyle = col; g.strokeStyle = '#1a1416'; g.lineWidth = 8; g.beginPath(); for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4, rr = i % 2 ? s * 0.35 : s; g.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); } g.closePath(); g.fill(); g.stroke(); g.restore(); };
+star(330, 420, 70, '#ffffff'); star(1290, 360, 55, '#fff3b0'); star(1330, 1040, 40, '#ffffff');
+// the mascot: white head, orange beanie, round glasses, teal hoodie, waving with a sly grin
+const HERO = { body: '#1f9d8f', bw: 250, detail: ['hoodie'], hair: '#3a2418', hairStyle: 'mop', hat: { type: 'beanie', color: '#e8403a', band: '#b82a2a' }, glasses: true, seed: 7, legs: '#2b2733' };
+const off = document.createElement('canvas'); off.width = W; off.height = W; const o = off.getContext('2d');
+o.translate(C - 300 * 2.7, -20); o.scale(2.7, 2.7); T.toonChar(new T.Pen(o), HERO, { expr: 'sly', turn: 0.15, look: 0.2, R: 'wave', L: 'hang', headTilt: -4 });
+g.save(); g.shadowColor = 'rgba(120,30,10,0.45)'; g.shadowBlur = 50; g.shadowOffsetY = 18; g.drawImage(off, 0, 0); g.restore();
+r = g.createRadialGradient(C, C, 600, C, C, 1150); r.addColorStop(0, 'rgba(0,0,0,0)'); r.addColorStop(1, 'rgba(90,20,0,0.35)'); g.fillStyle = r; g.fillRect(0, 0, W, W);
+window.ok = 1;
+</script></body></html>
