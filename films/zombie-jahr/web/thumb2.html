@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body style="margin:0">
+<canvas id="c" width="1280" height="720"></canvas>
+<script type="module">
+import * as T from './toon.js';
+import * as FX from './fx.js';
+import { heroSpec, KID, SCHMIDT } from './chars.js';
+const c = document.getElementById('c'), g = c.getContext('2d');
+const bg = new Image(); bg.src = 'thumb_bg2.jpg'; await bg.decode(); g.drawImage(bg, 0, 0, 1280, 720);
+// sunny glow from the left, darker right edge behind the hero
+let gr = g.createRadialGradient(300, 200, 50, 300, 200, 700); gr.addColorStop(0, 'rgba(255,240,170,.35)'); gr.addColorStop(1, 'rgba(255,240,170,0)'); g.fillStyle = gr; g.fillRect(0, 0, 1280, 720);
+gr = g.createLinearGradient(700, 0, 1280, 0); gr.addColorStop(0, 'rgba(10,10,30,0)'); gr.addColorStop(1, 'rgba(10,10,30,.55)'); g.fillStyle = gr; g.fillRect(0, 0, 1280, 720);
+const fig = (spec, o, x, y, k, flip = false) => { g.save(); g.translate(x, y); if (flip) g.scale(-1, 1); g.scale(k, k); g.translate(-300, -975); T.toonChar(new T.Pen(g), spec, o); g.restore(); };
+const pen = new T.Pen(g);
+// kid on scooter, happy, foreground left
+g.save(); g.translate(150, 720); g.scale(0.42, 0.42); g.translate(-300, -975); FX.scooter(pen); g.restore();
+fig(KID, { expr: 'laugh', L: { x: 420, y: 560, b: 0.3 }, R: { x: 470, y: 560, b: 0.3 } }, 150, 700, 0.4);
+// red circle around the ice-cream van
+g.save(); g.strokeStyle = '#ff2a2a'; g.lineWidth = 14; g.shadowColor = 'rgba(0,0,0,.6)'; g.shadowBlur = 10; g.beginPath(); g.ellipse(430, 360, 150, 135, -0.1, 0, Math.PI * 2); g.stroke(); g.restore();
+// burst behind the hero
+g.save(); g.beginPath(); g.rect(700, 0, 580, 720); g.clip(); g.translate(1010, 330); for (let i = 0; i < 18; i++) { g.rotate(Math.PI / 9); g.fillStyle = i % 2 ? 'rgba(255,210,60,.85)' : 'rgba(255,120,40,.8)'; g.beginPath(); g.moveTo(0, 0); g.lineTo(700, -90); g.lineTo(700, 90); g.closePath(); g.fill(); } g.restore();
+// the hero: huge shocked face, belly beard, pan raised, Gisela
+fig(heroSpec(365), { expr: 'shock', R: { x: 520, y: 330, b: 0.5 }, holdR: 'panUp', L: 'reach', holdL: 'gisela', headTilt: -6 }, 1010, 300 + (975 - 276) * 1.5, 1.5);
+// sweat drops
+g.save(); g.translate(760, 120); g.scale(0.35, 0.35); FX.drop(pen, '#bfe8ff'); g.restore();
+g.save(); g.translate(1170, 60); g.scale(0.28, 0.28); FX.drop(pen, '#bfe8ff'); g.restore();
+const txt = (s, x, y, size, fill, rot = 0, stroke = '#1a1416') => { g.save(); g.translate(x, y); g.rotate(rot); g.font = `900 ${size}px "DejaVu Sans", Arial`; g.textAlign = 'left'; g.textBaseline = 'middle';
+  g.lineJoin = 'round'; g.lineWidth = size * 0.24; g.strokeStyle = stroke; g.strokeText(s, 0, 0); g.fillStyle = fill; g.fillText(s, 0, 0); g.restore(); };
+txt('1 JAHR', 40, 85, 112, '#ffffff', -0.05);
+txt('UMSONST?!', 40, 205, 112, '#ffd23a', -0.05);
+// arrow from text to the van
+g.save(); g.strokeStyle = '#ff2a2a'; g.fillStyle = '#ff2a2a'; g.lineWidth = 16; g.lineCap = 'round'; g.beginPath(); g.moveTo(690, 210); g.quadraticCurveTo(660, 290, 600, 310); g.stroke();
+g.beginPath(); g.moveTo(578, 318); g.lineTo(616, 280); g.lineTo(626, 340); g.closePath(); g.fill(); g.restore();
+window.ready = true;
+</script></body></html>
