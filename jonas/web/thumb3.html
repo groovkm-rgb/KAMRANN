@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0}</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+import * as T from './toon.js'; import * as C from './chars.js';
+const cv = document.getElementById('c'), g = cv.getContext('2d'), W = 1920, H = 1080;
+// one clean background: bright green glow behind the face, dark edges
+let r = g.createRadialGradient(1300, 470, 80, 1300, 470, 1300); r.addColorStop(0, '#b6ffc0'); r.addColorStop(0.35, '#2fd060'); r.addColorStop(1, '#063a1a'); g.fillStyle = r; g.fillRect(0, 0, W, H);
+// one character, very big: only the head and shoulders
+const off = document.createElement('canvas'); off.width = W; off.height = H; const o = off.getContext('2d');
+o.translate(690, -330); o.scale(2.9, 2.9); T.toonChar(new T.Pen(o), C.JONAS, { expr: 'shock', look: -0.5, turn: -0.15 });
+g.save(); g.shadowColor = 'rgba(0,0,0,0.55)'; g.shadowBlur = 50; g.shadowOffsetX = -20; g.drawImage(off, 0, 0); g.restore();
+// three words, huge
+const txt = (s, x, y, size, fill) => { g.save(); g.font = `900 ${size}px "Inter", "DejaVu Sans", sans-serif`; g.lineJoin = 'round'; g.lineWidth = 34; g.strokeStyle = '#0a0a0c'; g.strokeText(s, x, y); g.fillStyle = fill; g.fillText(s, x, y); g.restore(); };
+txt('DER', 80, 420, 260, '#ffffff');
+txt('LETZTE', 70, 700, 260, '#ffe02a');
+txt('MANN', 80, 980, 260, '#ffffff');
+window.ok = 1;
+</script></body></html>
