@@ -2515,6 +2515,7 @@ const EXPR = {
   yell: { eye: 'round', pupil: 0.8, brow: 'angry', mouth: 'open' },
   pain: { eye: 'closed', brow: 'angry', mouth: 'grit' },
   awe: { eye: 'round', pupil: 0.9, brow: 'up', mouth: 'o' },
+  cool: { eye: 'lid', brow: 'flat', mouth: 'smirk' },
 };
 function drawFace(g, H, o) {
   const { cx, cy, rx, ry } = H, u = rx / 100, turn = o.turn || 0, look = o.look || 0, E = EXPR[o.expr || 'neutral'] || EXPR.neutral;
@@ -2697,6 +2698,19 @@ function drawHat(g, H, o) {
       g.save(); pth(g, [...pts, ...ellP(cx, cy + 6 * u, rx * 0.86, ry * 0.86, 20, -200, 30)]); g.fillStyle = c; g.fill('evenodd'); g.restore();
       inkFill(g, pts, null, 8 * u); inkFill(g, ellP(cx, cy + 6 * u, rx * 0.86, ry * 0.86, 0, 360, 30), null, 7 * u);
       g.save(); g.globalAlpha = 0.18; inkFill(g, ellP(cx, cy + 6 * u, rx * 0.86, ry * 0.86, 0, 360, 30), '#bfe0ff', 0); g.restore();
+      break;
+    }
+    case 'fedora': {
+      const top = cy - ry - 30 * u;
+      // pinched crown + wide, slightly curled brim (a classic dark felt hat)
+      const crown = [[cx - 74 * u, top + 30 * u], [cx - 80 * u, top - 34 * u], [cx - 62 * u, top - 70 * u], [cx - 30 * u, top - 84 * u], [cx, top - 70 * u], [cx + 30 * u, top - 84 * u], [cx + 62 * u, top - 70 * u], [cx + 80 * u, top - 34 * u], [cx + 76 * u, top + 30 * u]];
+      shaded(g, crown, c, shadeC(c, 0.6), 8 * u, [-0.12, -0.04]);
+      ln(g, [[cx - 40 * u, top - 66 * u], [cx - 18 * u, top - 40 * u]], 4 * u, mix(c, '#ffffff', 0.25)); ln(g, [[cx + 40 * u, top - 66 * u], [cx + 18 * u, top - 40 * u]], 4 * u, mix(c, '#ffffff', 0.25));
+      inkFill(g, [[cx - 78 * u, top + 2 * u], [cx + 79 * u, top + 2 * u], [cx + 77 * u, top + 26 * u], [cx - 76 * u, top + 26 * u]], b, 5 * u);
+      const brim = []; for (let i = 0; i <= 40; i++) { const a = Math.PI * 2 * i / 40; const curl = Math.abs(Math.cos(a)) ** 3 * 14 * u; brim.push([cx + 168 * u * Math.cos(a), top + 30 * u + 26 * u * Math.sin(a) - curl]); }
+      shaded(g, brim, c, shadeC(c, 0.55), 8 * u, [0, -0.25]);
+      inkFill(g, [[cx - 76 * u, top + 26 * u], [cx + 77 * u, top + 26 * u], [cx + 77 * u, top + 34 * u], [cx - 76 * u, top + 34 * u]], c, 0);
+      ln(g, ellP(cx, top + 26 * u, 160 * u, 18 * u, 200, 340, 30), 3 * u, mix(c, '#ffffff', 0.22));
       break;
     }
     case 'beanie': {

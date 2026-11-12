@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><style>@font-face{font-family:Caveat;src:url(caveat.woff2) format('woff2');font-weight:700}body{margin:0}</style></head><body>
+<canvas id="c" width="1600" height="1600"></canvas>
+<script type="module">
+import * as T from './toon.js';
+await document.fonts.load('700 100px Caveat');
+const cv = document.getElementById('c'), g = cv.getContext('2d'), W = 1600, C = 800;
+// background: warm paper + stippled (dotted) halo like the reference drawing, deep teal ring
+g.fillStyle = '#f3ecdc'; g.fillRect(0, 0, W, W);
+let r = g.createRadialGradient(C, 650, 100, C, 700, 900); r.addColorStop(0, '#fff8e8'); r.addColorStop(1, '#e8dcc0'); g.fillStyle = r; g.fillRect(0, 0, W, W);
+const rr = (n) => ((Math.sin(n * 91.7) * 43758.5) % 1 + 1) % 1;
+for (let i = 0; i < 26000; i++) { const a = rr(i) * Math.PI * 2, d = Math.sqrt(rr(i + 0.5)) * 800; const x = C + Math.cos(a) * d, y = C + Math.sin(a) * d; const k = Math.max(0, (d - 420) / 380); if (rr(i + 0.3) > k * 0.9) continue; g.fillStyle = `rgba(40,30,30,${0.35 * k})`; g.fillRect(x, y, 2.4, 2.4); }
+g.lineWidth = 26; g.strokeStyle = '#1a1416'; g.beginPath(); g.arc(C, C, 770, 0, 7); g.stroke(); g.lineWidth = 8; g.strokeStyle = '#2a5a5a'; g.beginPath(); g.arc(C, C, 735, 0, 7); g.stroke();
+// NOAH: white head, black fedora, short dark hair at the sides, strong calm brows, charcoal coat over a white shirt + dark tie
+const NOAH = { body: '#f4f2ec', bw: 255, detail: [{ t: 'suit', c: '#2e2e36' }, { t: 'tie', c: '#1a1a20' }, 'collar'], hair: '#241c1a', hairStyle: 'short', hat: { type: 'fedora', color: '#1c1a1e', band: '#2c2a30' }, seed: 9, headScale: 1.0 };
+const off = document.createElement('canvas'); off.width = W; off.height = W; const o = off.getContext('2d');
+o.translate(C - 300 * 2.55, 110); o.scale(2.55, 2.55); T.toonChar(new T.Pen(o), NOAH, { expr: 'cool', look: 0.1, turn: 0.12, L: 'hang', R: 'hang' });
+// clip to the inner circle so the coat ends cleanly
+g.save(); g.beginPath(); g.arc(C, C, 722, 0, 7); g.clip(); g.shadowColor = 'rgba(60,40,20,0.35)'; g.shadowBlur = 40; g.shadowOffsetY = 14; g.drawImage(off, 0, 0); g.restore();
+// name plate like the reference: handwritten "Noah" + underline
+g.save(); g.fillStyle = '#f8f2e2'; g.strokeStyle = '#1a1416'; g.lineWidth = 10; g.beginPath(); g.roundRect(C - 280, 1250, 560, 200, 40); g.fill(); g.stroke();
+g.fillStyle = '#1a1416'; g.font = '700 210px Caveat'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('Noah', C, 1340);
+g.lineWidth = 12; g.lineCap = 'round'; g.beginPath(); g.moveTo(C - 190, 1418); g.quadraticCurveTo(C, 1405, C + 200, 1411); g.stroke(); g.restore();
+window.ok = 1;
+</script></body></html>
