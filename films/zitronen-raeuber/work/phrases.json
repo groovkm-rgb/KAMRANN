@@ -1,0 +1,193 @@
+{
+ "duration": 43.598333,
+ "frames30": 1308,
+ "source": "silence-align (cost 1.90)",
+ "segments": [
+  [
+   0.0,
+   3.6124
+  ],
+  [
+   3.89891,
+   4.51091
+  ],
+  [
+   4.83846,
+   5.23755
+  ],
+  [
+   5.58175,
+   6.972
+  ],
+  [
+   7.28254,
+   12.3937
+  ],
+  [
+   12.5379,
+   13.865
+  ],
+  [
+   14.09,
+   16.4648
+  ],
+  [
+   16.7464,
+   17.4691
+  ],
+  [
+   17.6755,
+   18.3192
+  ],
+  [
+   18.4467,
+   19.4781
+  ],
+  [
+   19.7881,
+   22.096
+  ],
+  [
+   22.5732,
+   25.7775
+  ],
+  [
+   26.061,
+   26.6517
+  ],
+  [
+   26.8951,
+   27.7627
+  ],
+  [
+   28.0356,
+   29.4466
+  ],
+  [
+   29.7625,
+   32.0273
+  ],
+  [
+   32.4695,
+   34.1714
+  ],
+  [
+   34.5823,
+   37.4187
+  ],
+  [
+   37.6928,
+   40.9126
+  ],
+  [
+   41.0695,
+   43.3115
+  ],
+  [
+   43.5023,
+   43.598333
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein Mann reibt sich das Gesicht mit Zitronensaft ein. Dann \u00fcberf\u00e4llt er zwei Banken.",
+   "s": 0.0,
+   "e": 3.612
+  },
+  {
+   "text": "Ohne Maske.",
+   "s": 3.899,
+   "e": 4.511
+  },
+  {
+   "text": "Warum?",
+   "s": 4.838,
+   "e": 5.238
+  },
+  {
+   "text": "Weil er glaubt: Jetzt bin ich unsichtbar.",
+   "s": 5.582,
+   "e": 6.972
+  },
+  {
+   "text": "Seine Logik: Mit Zitronensaft kann man unsichtbare Schrift machen. Also muss das doch auch mit Gesichtern klappen, oder?",
+   "s": 7.283,
+   "e": 12.394
+  },
+  {
+   "text": "Er testet das sogar vorher.",
+   "s": 12.538,
+   "e": 13.865
+  },
+  {
+   "text": "Saft ins Gesicht, Sofortbildkamera, klick.",
+   "s": 14.09,
+   "e": 16.465
+  },
+  {
+   "text": "Auf dem Foto:",
+   "s": 16.746,
+   "e": 17.469
+  },
+  {
+   "text": "kein Gesicht.",
+   "s": 17.675,
+   "e": 18.319
+  },
+  {
+   "text": "Beweis erbracht!",
+   "s": 18.447,
+   "e": 19.478
+  },
+  {
+   "text": "Wahrscheinlich hat er die Kamera einfach falsch gehalten.",
+   "s": 19.788,
+   "e": 22.096
+  },
+  {
+   "text": "Am selben Abend laufen die Bilder der \u00dcberwachungskameras in den Nachrichten.",
+   "s": 22.573,
+   "e": 25.777
+  },
+  {
+   "text": "Sein Gesicht,",
+   "s": 26.061,
+   "e": 26.652
+  },
+  {
+   "text": "klar und deutlich.",
+   "s": 26.895,
+   "e": 27.763
+  },
+  {
+   "text": "Kurz darauf klopft die Polizei.",
+   "s": 28.036,
+   "e": 29.447
+  },
+  {
+   "text": "Und als sie ihm die Bilder zeigen, sagt er fassungslos:",
+   "s": 29.762,
+   "e": 32.027
+  },
+  {
+   "text": "\u201eAber ich hatte doch den Saft drauf!\"",
+   "s": 32.469,
+   "e": 34.171
+  },
+  {
+   "text": "Der Fall ist so absurd, dass zwei Psychologen anfangen zu forschen.",
+   "s": 34.582,
+   "e": 37.419
+  },
+  {
+   "text": "Ihre Erkenntnis: Wer wenig Ahnung hat, \u00fcbersch\u00e4tzt sich oft am meisten.",
+   "s": 37.693,
+   "e": 40.913
+  },
+  {
+   "text": "Heute kennt man das als Dunning-Kruger-Effekt.",
+   "s": 41.069,
+   "e": 43.598
+  }
+ ]
+}

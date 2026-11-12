@@ -1,0 +1,8 @@
+frames/
+stills/
+node_modules
+work/v.raw
+work/db.npy
+mix.wav
+mix_raw.wav
+frames_*.log
