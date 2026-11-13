@@ -1,0 +1,264 @@
+{
+ "duration": 45.453042,
+ "frames30": 1364,
+ "source": "silence-align (cost 2.61)",
+ "segments": [
+  [
+   0.140839,
+   0.744921
+  ],
+  [
+   0.886417,
+   2.55281
+  ],
+  [
+   2.67601,
+   4.72
+  ],
+  [
+   4.94413,
+   5.52249
+  ],
+  [
+   5.81605,
+   6.98537
+  ],
+  [
+   7.25222,
+   8.4563
+  ],
+  [
+   8.65488,
+   10.658
+  ],
+  [
+   10.8765,
+   11.712
+  ],
+  [
+   11.9995,
+   12.8967
+  ],
+  [
+   13.1838,
+   14.6946
+  ],
+  [
+   14.8225,
+   16.3824
+  ],
+  [
+   16.5353,
+   18.5552
+  ],
+  [
+   18.7643,
+   19.7803
+  ],
+  [
+   19.9794,
+   20.7601
+  ],
+  [
+   20.9489,
+   22.8408
+  ],
+  [
+   23.2312,
+   24.7275
+  ],
+  [
+   25.2029,
+   26.0278
+  ],
+  [
+   26.699,
+   27.8669
+  ],
+  [
+   28.3537,
+   28.6545
+  ],
+  [
+   28.9704,
+   30.3454
+  ],
+  [
+   30.7651,
+   31.7679
+  ],
+  [
+   32.0234,
+   32.3062
+  ],
+  [
+   32.4359,
+   32.7184
+  ],
+  [
+   32.9934,
+   34.1334
+  ],
+  [
+   34.6573,
+   35.6676
+  ],
+  [
+   35.977,
+   37.1581
+  ],
+  [
+   37.5976,
+   39.113
+  ],
+  [
+   39.6952,
+   41.1849
+  ],
+  [
+   41.7934,
+   43.7136
+  ],
+  [
+   44.019,
+   45.1102
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Dieser K\u00f6nig hat sich jeden Tag selbst vergiftet.",
+   "s": 0.141,
+   "e": 2.553
+  },
+  {
+   "text": "Absichtlich. Sein Vater wurde vergiftet.",
+   "s": 2.676,
+   "e": 4.72
+  },
+  {
+   "text": "Und er wei\u00df:",
+   "s": 4.944,
+   "e": 5.522
+  },
+  {
+   "text": "Er ist der N\u00e4chste auf der Liste.",
+   "s": 5.816,
+   "e": 6.985
+  },
+  {
+   "text": "Also dreht er den Spie\u00df um.",
+   "s": 7.252,
+   "e": 8.456
+  },
+  {
+   "text": "Jeden Tag nimmt er winzige Mengen Gift.",
+   "s": 8.655,
+   "e": 10.658
+  },
+  {
+   "text": "Erst ein bisschen.",
+   "s": 10.877,
+   "e": 11.712
+  },
+  {
+   "text": "Dann immer mehr.",
+   "s": 11.999,
+   "e": 12.897
+  },
+  {
+   "text": "Sein K\u00f6rper soll sich dran gew\u00f6hnen.",
+   "s": 13.184,
+   "e": 14.695
+  },
+  {
+   "text": "Dazu mixt er sich ein Gegengift.",
+   "s": 14.822,
+   "e": 16.382
+  },
+  {
+   "text": "Aus Dutzenden Zutaten.",
+   "s": 16.535,
+   "e": 18.555
+  },
+  {
+   "text": "Und es hei\u00dft:",
+   "s": 18.764,
+   "e": 19.78
+  },
+  {
+   "text": "Er prahlt sogar damit.",
+   "s": 19.979,
+   "e": 20.76
+  },
+  {
+   "text": "Seine G\u00e4ste sollen mit ihm Speisen essen, in denen Gift steckt.",
+   "s": 20.949,
+   "e": 22.841
+  },
+  {
+   "text": "Doch dann verliert er einen Krieg.",
+   "s": 23.231,
+   "e": 24.727
+  },
+  {
+   "text": "Gefangenschaft?",
+   "s": 25.203,
+   "e": 26.028
+  },
+  {
+   "text": "Kommt f\u00fcr ihn nicht in Frage.",
+   "s": 26.699,
+   "e": 27.867
+  },
+  {
+   "text": "Also greift er zu seinem eigenen Gift.",
+   "s": 28.354,
+   "e": 30.345
+  },
+  {
+   "text": "Und jetzt der Haken:",
+   "s": 30.765,
+   "e": 31.768
+  },
+  {
+   "text": "Es wirkt nicht.",
+   "s": 32.023,
+   "e": 32.718
+  },
+  {
+   "text": "Er stirbt am Ende trotzdem.",
+   "s": 32.993,
+   "e": 34.133
+  },
+  {
+   "text": "Aber nicht durch Gift.",
+   "s": 34.657,
+   "e": 35.668
+  },
+  {
+   "text": "War er wirklich immun?",
+   "s": 35.977,
+   "e": 37.158
+  },
+  {
+   "text": "Oder war die Dosis einfach zu klein?",
+   "s": 37.598,
+   "e": 39.113
+  },
+  {
+   "text": "Das wei\u00df bis heute niemand genau.",
+   "s": 39.695,
+   "e": 41.185
+  },
+  {
+   "text": "Aber sein Trick hat einen Namen bekommen:",
+   "s": 41.793,
+   "e": 43.714
+  },
+  {
+   "text": "Mithridatismus.",
+   "s": 44.019,
+   "e": 45.11
+  }
+ ]
+}
