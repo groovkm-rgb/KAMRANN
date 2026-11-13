@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kış · Blok</title>
+<title>Block Toon · Kış</title>
 <style>
 html,body{margin:0;height:100%;background:#0b0c14;color:#cfd3ea;font:14px system-ui,sans-serif}
 #wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px;box-sizing:border-box;height:100%}
@@ -12,29 +12,53 @@ body.render #bar{display:none} body.render #wrap{padding:0} body.render #film{he
 <div id="wrap"><canvas id="film" width="1080" height="1920"></canvas>
 <div id="bar"><button id="pp">❚❚</button><input id="seek" type="range" min="0" max="1000" value="0"><span id="tc">0.00</span></div></div>
 <script>
-// Winter-block toon engine — flat ink-and-fill 2D cartoon look:
-// clean black outlines, flat colours with one cel-shade tone, droopy-eyed long-necked characters,
-// post-Soviet panel blocks at night, sodium street lamps, falling snow, breath clouds.
+// Block-toon engine — flat ink-and-fill 2D cartoon look for life around post-Soviet panel blocks,
+// any season: clean black outlines, flat colours with one cel-shade tone, sleepy long-necked people.
+// Environment colours come from a THEME (winterNight, summerDay, summerEvening, …) so the same sets
+// work in snow at night or in a hot summer courtyard.
 // Everything is a pure function of time t (seconds). No Math.random, no clocks.
 'use strict';
 const W = 1080, H = 1920, FPS = 24;
 
+// Shared character / prop palette (season independent).
 const PAL = {
   ink: '#16151b',
-  skyTop: '#151d3a', skyBot: '#2a3563',
-  snow: '#e3e5f1', snowShade: '#b9bedb', snowDeep: '#99a0c7', snowNight: '#c9cde6',
-  block: '#5e716e', blockShade: '#475856', blockDark: '#36443f', blockFar: '#4b5a66', blockFarShade: '#3d4a57',
-  winWarm: '#f1c860', winWarm2: '#d79f3d', winDark: '#28344a', winFarDark: '#27324a', winFrame: '#2c3532',
-  lamp: '#d8843a', lampDark: '#a85f27', lampLight: '#ffd27d',
-  skin: '#c8a468', skinShade: '#a9874f', skinLine: '#5f4a2c', lip: '#b98b5a',
+  skin: '#c8a468', skinShade: '#a9874f', lip: '#b98b5a',
   hair: '#d98a2b', hairHi: '#e9a548', hairShade: '#b26a1b',
   hoodie: '#1c1d25', hoodieHi: '#2a2c38', piping: '#3f4fa6', zip: '#e9e6da',
   pants: '#8a95d8', pantsShade: '#6b75b8', stripe: '#f1f2fb',
-  shoe: '#1d1f2e', sole: '#ecebf1',
+  tank: '#eeeadd', tankShade: '#cfc9b6', tee: '#5a6fa8', teeShade: '#46598c',
+  shoe: '#1d1f2e', sole: '#ecebf1', shades: '#1f2230',
   eyeW: '#f2ecd8', breath: '#f1f3fb',
   shelter: '#8a5233', shelterShade: '#653a24', poster: '#d9d2bb', poster2: '#9fb0a0',
-  wall: '#5d6f86', wallShade: '#4b5b72', wallDark: '#3b4860',
+  lamp: '#d8843a', lampLight: '#ffd27d', lampOff: '#e8d9a8',
+  trunk: '#6e5a44', birch: '#ece8dc', bench: '#7c5a3c', benchShade: '#5e432c', metal: '#4d5a52',
 };
+
+// Environment themes. Set with theme('summerDay') at the top of a shot's draw().
+const THEMES = {
+  winterNight: { day: false, skyTop: '#151d3a', skyBot: '#2a3563',
+    block: '#5e716e', blockShade: '#475856', blockFar: '#4b5a66', blockFarShade: '#3d4a57',
+    winOn: '#f1c860', winOn2: '#d79f3d', winOff: '#28344a', winFarOff: '#27324a', winFrame: '#2c3532', balcony: '#53625f',
+    ground: '#c9cde6', groundShade: '#99a0c7', bank: '#e3e5f1', speck: 'rgba(22,21,27,.55)',
+    foliage: null, lampOn: true, tint: [150, 165, 230, .08, 'multiply'] },
+  summerDay: { day: true, skyTop: '#4e9ad3', skyBot: '#cfe6ec',
+    block: '#d9c8a4', blockShade: '#b8a57f', blockFar: '#b7c3c6', blockFarShade: '#9aa8ae',
+    winOn: '#8fb3cc', winOn2: '#6f93ad', winOff: '#44596c', winFarOff: '#7f95a4', winFrame: '#efeadb', balcony: '#cbb894',
+    ground: '#93b65a', groundShade: '#6f9440', bank: '#a3c466', speck: 'rgba(40,60,20,.45)',
+    asphalt: '#8e8d93', asphaltShade: '#75747b',
+    foliage: ['#5f913f', '#7cad4f', '#47702f'], lampOn: false, sun: '#ffe27a', cloud: '#fbfaf2', cloudShade: '#d3e1ea',
+    tint: [255, 236, 190, .10, 'multiply'] },
+  summerEvening: { day: true, skyTop: '#41588f', skyBot: '#f2a76a',
+    block: '#c99b7d', blockShade: '#9c7465', blockFar: '#9a8494', blockFarShade: '#7e6b80',
+    winOn: '#f6c46a', winOn2: '#e0a24c', winOff: '#4a4560', winFarOff: '#6f6380', winFrame: '#e6cdb2', balcony: '#b48a72',
+    ground: '#7f9a4c', groundShade: '#5d763a', bank: '#8eaa57', speck: 'rgba(40,40,20,.45)',
+    asphalt: '#7d7378', asphaltShade: '#675e65',
+    foliage: ['#4f7a3a', '#6b9447', '#3a5a2c'], lampOn: true, sun: '#ffcf6e', cloud: '#f7d7c0', cloudShade: '#d9a99a',
+    tint: [255, 170, 120, .14, 'multiply'] },
+};
+let TH = THEMES.winterNight;
+function theme(name) { TH = typeof name === 'string' ? THEMES[name] : name; return TH; }
 
 // ---------- math / determinism ----------
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
@@ -55,14 +79,14 @@ function hash(a, b = 0, c = 0) {
 const twos = t => Math.floor(t * 12) / 12;
 
 // ---------- ink helpers ----------
-let LW = 6; // current base line width (set per shot / per character scale)
+let LW = 6; // base line width (set per shot via shot.lw)
 function ink(ctx, build, fill, lw = LW, stroke = PAL.ink) {
   ctx.beginPath(); build(ctx);
   if (fill) { ctx.fillStyle = fill; ctx.fill(); }
   if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = stroke; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke(); }
 }
 function poly(pts, close = true) { return c => { c.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) c.lineTo(pts[i][0], pts[i][1]); if (close) c.closePath(); }; }
-// Smooth closed/open curve through points (Catmull-Rom → Bezier).
+// Smooth curve through points (Catmull-Rom → Bezier).
 function smooth(pts, close = true, k = 1) {
   return c => {
     const n = pts.length, P = i => close ? pts[(i + n) % n] : pts[clamp(i, 0, n - 1)];
@@ -77,6 +101,13 @@ function smooth(pts, close = true, k = 1) {
 }
 function stroke(ctx, build, lw = LW, col = PAL.ink) { ink(ctx, build, null, lw, col); }
 function ellipse(x, y, rx, ry, rot = 0) { return c => c.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2); }
+function rect(x, y, w, h) { return poly([[x, y], [x + w, y], [x + w, y + h], [x, y + h]]); }
+// Lumpy blob (foliage, clouds, bushes): n lobes around (x,y).
+function blob(x, y, rx, ry, n, seed, wob = .18, t = 0) {
+  const pts = [];
+  for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, r = 1 - wob + wob * 2 * hash(seed, i, 5) + Math.sin(t * 1.3 + i) * .015; pts.push([x + Math.cos(a) * rx * r, y + Math.sin(a) * ry * r]); }
+  return smooth(pts, true, 1.25);
+}
 
 // ---------- camera ----------
 // cam = {x, y, zoom}: world point (x,y) is placed at the frame centre. depth<1 = farther (moves less).
@@ -88,8 +119,8 @@ function withCam(ctx, cam, depth, fn) {
   fn(); ctx.restore();
 }
 
-// ---------- sky / atmosphere ----------
-function sky(ctx, top = PAL.skyTop, bot = PAL.skyBot, y0 = 0, y1 = H) {
+// ---------- sky / light ----------
+function sky(ctx, top = TH.skyTop, bot = TH.skyBot, y0 = 0, y1 = H) {
   const g = ctx.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, top); g.addColorStop(1, bot);
   ctx.fillStyle = g; ctx.fillRect(-W, -H, W * 3, H * 3);
 }
@@ -99,74 +130,149 @@ function glow(ctx, x, y, r, col = '255,196,120', a = .35) {
   g.addColorStop(0, `rgba(${col},${a})`); g.addColorStop(.35, `rgba(${col},${a * .4})`); g.addColorStop(1, `rgba(${col},0)`);
   ctx.fillStyle = g; ctx.fillRect(x - r, y - r, r * 2, r * 2); ctx.restore();
 }
+function sun(ctx, x, y, r, lw = LW) {
+  glow(ctx, x, y, r * 5, '255,236,170', .45);
+  ink(ctx, ellipse(x, y, r, r), TH.sun || '#ffe27a', lw * .7);
+}
+function cloud(ctx, x, y, s = 1, seed = 1, lw = LW) {
+  const sh = c => { c.moveTo(x - 160 * s, y + 30 * s);
+    c.bezierCurveTo(x - 200 * s, y - 20 * s, x - 120 * s, y - 60 * s, x - 80 * s, y - 40 * s);
+    c.bezierCurveTo(x - 60 * s, y - 110 * s, x + 40 * s, y - 120 * s, x + 60 * s, y - 50 * s);
+    c.bezierCurveTo(x + 120 * s, y - 80 * s, x + 200 * s, y - 20 * s, x + 170 * s, y + 30 * s); c.closePath(); };
+  ink(ctx, sh, TH.cloud, lw * .7);
+  ctx.save(); ctx.beginPath(); sh(ctx); ctx.clip();
+  ink(ctx, rect(x - 220 * s, y + 6 * s, 440 * s, 40 * s), TH.cloudShade, 0); ctx.restore();
+  ink(ctx, sh, null, lw * .7);
+}
 
 // ---------- panel apartment block ----------
-// o: {x, y(top), w, h, floors, cols, seed, side (+px depth to the right / -left), far, lit (0..1), t, onAt:[[col,floor,time]]}
+// o: {x, y(top), w, h, floors, cols, seed, side (+/- depth px), far, lit (0..1 share of lit / bright windows),
+//     t, onAt:[[col,floor,time]], balconies (0..1 share), dishes (0..1), laundry (bool), lw}
 function panelBlock(ctx, o) {
   const { x, y, w, h, floors, cols, seed = 1, side = 0, far = false, lit = .35, t = 0 } = o;
   const lw = o.lw ?? (far ? LW * .55 : LW * .8);
-  const face = far ? PAL.blockFar : PAL.block, shade = far ? PAL.blockFarShade : PAL.blockShade;
-  // side wall (gives volume)
+  const face = far ? TH.blockFar : TH.block, shade = far ? TH.blockFarShade : TH.blockShade;
   if (side) {
     const sx = side > 0 ? x + w : x, d = side;
     ink(ctx, poly([[sx, y], [sx + d, y + Math.abs(d) * .25], [sx + d, y + h], [sx, y + h]]), shade, lw);
   }
-  ink(ctx, poly([[x, y], [x + w, y], [x + w, y + h], [x, y + h]]), face, lw);
-  // roof parapet + antennas
+  ink(ctx, rect(x, y, w, h), face, lw);
   ink(ctx, poly([[x - 4, y - h * .012], [x + w + 4, y - h * .012], [x + w + 4, y + h * .008], [x - 4, y + h * .008]]), shade, lw * .8);
   for (let i = 0; i < 3; i++) {
     const ax = x + w * (.15 + .3 * i + hash(seed, i, 7) * .12), ah = 18 + hash(seed, i, 8) * 26;
     stroke(ctx, c => { c.moveTo(ax, y - h * .012); c.lineTo(ax, y - h * .012 - ah); c.moveTo(ax - 10, y - h * .012 - ah * .8); c.lineTo(ax + 10, y - h * .012 - ah * .8); }, lw * .6);
   }
   const fh = h / floors, cw = w / cols;
-  // panel seams
   ctx.globalAlpha = .55;
   for (let f = 1; f < floors; f++) stroke(ctx, c => { c.moveTo(x, y + f * fh); c.lineTo(x + w, y + f * fh); }, lw * .45);
   ctx.globalAlpha = 1;
-  // windows
   const ww = cw * .46, wh = fh * .52;
-  for (let f = 0; f < floors - (o.groundFloor ? 1 : 0); f++) for (let cI = 0; cI < cols; cI++) {
+  for (let f = 0; f < floors; f++) for (let cI = 0; cI < cols; cI++) {
     const wx = x + cI * cw + (cw - ww) / 2, wy = y + f * fh + fh * .22;
     let on = hash(seed, f * 97 + cI, 3) < lit;
     for (const [cc, ff, tt] of o.onAt || []) if (cc === cI && ff === f) on = t >= tt;
-    const col = on ? (hash(seed, cI, f) < .3 ? PAL.winWarm2 : PAL.winWarm) : (far ? PAL.winFarDark : PAL.winDark);
-    ink(ctx, poly([[wx, wy], [wx + ww, wy], [wx + ww, wy + wh], [wx, wy + wh]]), col, lw * .55);
-    if (!far && ww > 22) { // mullion
-      stroke(ctx, c => { c.moveTo(wx + ww * .55, wy); c.lineTo(wx + ww * .55, wy + wh); c.moveTo(wx + ww * .55, wy + wh * .38); c.lineTo(wx + ww, wy + wh * .38); }, lw * .4, PAL.winFrame);
-      if (on && hash(seed, f, cI + 40) < .4) { ctx.fillStyle = 'rgba(120,60,30,.35)'; ctx.fillRect(wx + 2, wy + 2, ww * .3, wh - 4); } // curtain
+    const col = on ? (hash(seed, cI, f) < .3 ? TH.winOn2 : TH.winOn) : (far ? TH.winFarOff : TH.winOff);
+    ink(ctx, rect(wx, wy, ww, wh), col, lw * .55);
+    if (!far && ww > 22) {
+      stroke(ctx, c => { c.moveTo(wx + ww * .55, wy); c.lineTo(wx + ww * .55, wy + wh); c.moveTo(wx + ww * .55, wy + wh * .38); c.lineTo(wx + ww, wy + wh * .38); }, lw * .4, TH.winFrame);
+      if (TH.day) { ctx.globalAlpha = .55; stroke(ctx, c => { c.moveTo(wx + ww * .12, wy + wh * .55); c.lineTo(wx + ww * .4, wy + wh * .15); }, lw * .5, '#ffffff'); ctx.globalAlpha = 1; }
+      if (on && hash(seed, f, cI + 40) < .4) { ctx.fillStyle = TH.day ? 'rgba(230,220,200,.55)' : 'rgba(120,60,30,.35)'; ctx.fillRect(wx + 2, wy + 2, ww * .3, wh - 4); }
+    }
+    // glazed balconies (protruding boxes under some windows), with laundry in summer
+    if (!far && o.balconies && f > 0 && hash(seed, cI, f + 70) < o.balconies) {
+      const bx = x + cI * cw + cw * .1, bw = cw * .8, by = wy + wh * .55, bh = fh * .42;
+      ink(ctx, rect(bx, by, bw, bh), TH.balcony, lw * .55);
+      for (let k = 1; k < 4; k++) stroke(ctx, c => { c.moveTo(bx + bw * k / 4, by); c.lineTo(bx + bw * k / 4, by + bh); }, lw * .3);
+      if (o.laundry && hash(seed, cI, f + 90) < .45) {
+        stroke(ctx, c => { c.moveTo(bx, by - 2); c.lineTo(bx + bw, by - 2); }, lw * .3);
+        const cols3 = ['#e86f5a', '#f2f0e6', '#6c8fd1', '#f0c85a'];
+        for (let k = 0; k < 3; k++) { const lx = bx + bw * (.12 + k * .3), sw = Math.sin(t * 2 + k + cI) * 2; ink(ctx, poly([[lx, by - 2], [lx + bw * .2, by - 2], [lx + bw * .2 + sw, by + bh * .55], [lx + sw, by + bh * .55]]), cols3[(k + f + cI) % 4], lw * .35); }
+      }
+    }
+    if (!far && o.dishes && hash(seed, cI, f + 120) < o.dishes) {
+      const dx = wx + ww + cw * .08, dy = wy + wh * .3, r = cw * .14;
+      ink(ctx, ellipse(dx, dy, r * .8, r, -.4), '#e7e4dc', lw * .45);
+      stroke(ctx, c => { c.moveTo(dx, dy); c.lineTo(dx - r * .9, dy - r * .2); }, lw * .35);
     }
   }
 }
 
 // ---------- street lamp (Soviet "hooked" lamp) ----------
-// base (x, y), height h, dir = +1 hooks right / -1 left
 function streetLamp(ctx, x, y, h, dir = 1, lw = LW) {
   const top = y - h, hx = x + dir * h * .16;
   ink(ctx, c => { c.moveTo(x - lw, y); c.lineTo(x - lw * .9, top + h * .1); c.quadraticCurveTo(x, top - h * .02, hx - dir * h * .03, top); c.lineTo(hx - dir * h * .03, top + lw * 1.7); c.quadraticCurveTo(x + lw * 1.6 * dir, top + h * .03, x + lw * .9, top + h * .12); c.lineTo(x + lw, y); c.closePath(); }, PAL.lamp, lw * .8);
-  // hood
   ink(ctx, c => { c.ellipse(hx, top + h * .012, h * .07, h * .028, 0, Math.PI, 0); c.closePath(); }, PAL.lamp, lw * .8);
-  ink(ctx, ellipse(hx, top + h * .014, h * .055, h * .011), PAL.lampLight, lw * .5);
+  ink(ctx, ellipse(hx, top + h * .014, h * .055, h * .011), TH.lampOn ? PAL.lampLight : PAL.lampOff, lw * .5);
   return [hx, top + h * .02];
 }
 
-// ---------- snow ground / banks ----------
-function snowBank(ctx, pts, lw = LW, fill = PAL.snow) {
-  ink(ctx, smooth(pts, true, .9), fill, lw);
-}
-function snowSpecks(ctx, x0, y0, x1, y1, n, seed, lw = LW) {
-  // little ink "o" marks sprinkled on snow surfaces (hand-drawn texture)
+// ---------- ground ----------
+// Bank / mound (snow drift in winter, grass mound in summer).
+function bank(ctx, pts, lw = LW, fill = TH.bank) { ink(ctx, smooth(pts, true, .9), fill, lw); }
+const snowBank = bank; // backwards-compatible name
+function specks(ctx, x0, y0, x1, y1, n, seed, lw = LW) {
   for (let i = 0; i < n; i++) {
     const px = lerp(x0, x1, hash(seed, i, 1)), py = lerp(y0, y1, hash(seed, i, 2)), r = 3 + hash(seed, i, 3) * 4;
-    stroke(ctx, ellipse(px, py, r * .7, r), lw * .35, 'rgba(22,21,27,.55)');
+    if (TH.day) stroke(ctx, c => { c.moveTo(px - r, py); c.lineTo(px - r * .3, py - r * 2.2); c.moveTo(px, py); c.lineTo(px + r * .4, py - r * 2.6); c.moveTo(px + r, py); c.lineTo(px + r * 1.3, py - r * 1.8); }, lw * .35, TH.speck);
+    else stroke(ctx, ellipse(px, py, r * .7, r), lw * .35, TH.speck);
   }
 }
+const snowSpecks = specks;
+// Cracked asphalt strip between y0..y1 (perspective-free, flat cartoon road / courtyard path).
+function asphalt(ctx, x0, y0, x1, y1, seed = 1, lw = LW) {
+  ink(ctx, rect(x0, y0, x1 - x0, y1 - y0), TH.asphalt, lw * .7);
+  ctx.globalAlpha = .6;
+  for (let i = 0; i < 7; i++) {
+    let px = lerp(x0, x1, hash(seed, i, 1)), py = lerp(y0, y1, hash(seed, i, 2));
+    stroke(ctx, c => { c.moveTo(px, py); for (let k = 0; k < 4; k++) { px += (hash(seed, i, k + 3) - .5) * 70; py += (hash(seed, i, k + 9) - .3) * 30; c.lineTo(px, py); } }, lw * .35);
+  }
+  for (let i = 0; i < 3; i++) { const px = lerp(x0, x1, hash(seed, i, 20)), py = lerp(y0, y1, hash(seed, i, 21)); ink(ctx, blob(px, py, 50, 14, 8, seed + i), TH.asphaltShade, 0); }
+  ctx.globalAlpha = 1;
+}
 
-// ---------- bus shelter ----------
-function busShelter(ctx, x, y, w, h, lw = LW) {
-  // posts
-  ink(ctx, poly([[x, y - h], [x + 14, y - h], [x + 14, y], [x, y]]), PAL.shelter, lw * .7);
-  ink(ctx, poly([[x + w - 14, y - h], [x + w, y - h], [x + w, y], [x + w - 14, y]]), PAL.shelter, lw * .7);
-  // back panel with torn posters (no text — shapes only)
+// ---------- trees ----------
+// kind 'poplar' (tall), 'round' (lime / maple), 'birch' (white trunk). Gentle sway with t.
+function tree(ctx, x, y, h, o = {}) {
+  const { kind = 'round', seed = 1, t = 0, lw = LW } = o;
+  const F = TH.foliage || ['#3b4a45', '#4d5d57', '#2d3935']; // bare-ish dark crowns if a theme has none
+  const sway = Math.sin(t * 1.2 + seed) * h * .006;
+  const tw = h * (kind === 'poplar' ? .045 : .055);
+  const trunkCol = kind === 'birch' ? PAL.birch : PAL.trunk;
+  ink(ctx, poly([[x - tw, y], [x - tw * .6, y - h * .55], [x + tw * .6, y - h * .55], [x + tw, y]]), trunkCol, lw * .8);
+  if (kind === 'birch') for (let i = 0; i < 6; i++) { const yy = y - h * (.05 + i * .08); ink(ctx, rect(x - tw * (.7 - i * .04) + (i % 2) * tw * .5, yy, tw * .6, h * .012), PAL.ink, 0); }
+  const crowns = kind === 'poplar'
+    ? [[0, -.62, .2, .36], [-.04, -.42, .16, .2], [.05, -.85, .13, .18]]
+    : [[0, -.66, .36, .26], [-.22, -.52, .2, .16], [.22, -.5, .22, .17], [.05, -.85, .24, .17]];
+  crowns.forEach(([cx, cy, rx, ry], i) => {
+    const X = x + cx * h + sway * (1 + i * .3), Y = y + cy * h;
+    ink(ctx, blob(X, Y, rx * h, ry * h, 11, seed * 10 + i, .14, t), F[0], lw * .8);
+    ctx.save(); ctx.beginPath(); blob(X, Y, rx * h, ry * h, 11, seed * 10 + i, .14, t)(ctx); ctx.clip();
+    ink(ctx, blob(X - rx * h * .25, Y - ry * h * .3, rx * h * .6, ry * h * .5, 9, seed * 10 + i + 50, .18, t), F[1], 0);
+    ink(ctx, blob(X + rx * h * .45, Y + ry * h * .55, rx * h * .8, ry * h * .55, 9, seed * 10 + i + 80, .18, t), F[2], 0);
+    ctx.restore();
+    ink(ctx, blob(X, Y, rx * h, ry * h, 11, seed * 10 + i, .14, t), null, lw * .8);
+    // leaf flicks
+    for (let k = 0; k < 4; k++) { const a = hash(seed, i, k) * 6.28, r = .55 + hash(seed, k, i) * .3; stroke(ctx, c => { const px = X + Math.cos(a) * rx * h * r, py = Y + Math.sin(a) * ry * h * r; c.moveTo(px, py); c.quadraticCurveTo(px + 8, py - 10, px + 16, py - 4); }, lw * .4); }
+  });
+}
+function bush(ctx, x, y, w, h, seed = 1, t = 0, lw = LW) {
+  const F = TH.foliage || ['#3b4a45', '#4d5d57', '#2d3935'];
+  ink(ctx, blob(x, y - h / 2, w / 2, h / 2, 12, seed, .15, t), F[0], lw * .8);
+  ctx.save(); ctx.beginPath(); blob(x, y - h / 2, w / 2, h / 2, 12, seed, .15, t)(ctx); ctx.clip();
+  ink(ctx, blob(x - w * .15, y - h * .7, w * .3, h * .25, 9, seed + 5), F[1], 0); ctx.restore();
+}
+
+// ---------- courtyard props ----------
+function bench(ctx, x, y, w, lw = LW) {
+  const legs = [x + w * .1, x + w * .9];
+  for (const lx of legs) ink(ctx, rect(lx - 7, y - 90, 14, 90), PAL.metal, lw * .6);
+  for (const k of [0, 1, 2]) ink(ctx, rect(x, y - 96 - k * 20, w, 14), k ? PAL.bench : PAL.benchShade, lw * .6); // seat slats
+  for (const lx of legs) ink(ctx, rect(lx - 6, y - 230, 12, 140), PAL.metal, lw * .6);
+  for (const k of [0, 1]) ink(ctx, rect(x - 6, y - 220 + k * 34, w + 12, 22), PAL.bench, lw * .6); // back slats
+}
+function busShelter(ctx, x, y, w, h, lw = LW, snow = !TH.day) {
+  ink(ctx, rect(x, y - h, 14, h), PAL.shelter, lw * .7);
+  ink(ctx, rect(x + w - 14, y - h, 14, h), PAL.shelter, lw * .7);
   ink(ctx, poly([[x + 14, y - h * .86], [x + w - 14, y - h * .86], [x + w - 14, y - h * .2], [x + 14, y - h * .2]]), PAL.shelterShade, lw * .6);
   const posters = [[.08, .78, .3, .28, PAL.poster, -.04], [.42, .74, .28, .34, PAL.poster2, .03], [.18, .44, .34, .2, PAL.poster, .05], [.62, .38, .26, .16, PAL.poster, -.06]];
   for (const [px, py, pw, ph, col, rot] of posters) {
@@ -175,13 +281,12 @@ function busShelter(ctx, x, y, w, h, lw = LW) {
     ctx.globalAlpha = .5; for (let i = 0; i < 3; i++) stroke(ctx, c => { c.moveTo(-w * pw * .35, -h * ph * .25 + i * h * ph * .2); c.lineTo(w * pw * (.1 + .2 * (i % 2)), -h * ph * .25 + i * h * ph * .2); }, lw * .5); ctx.globalAlpha = 1;
     ctx.restore();
   }
-  // roof with snow load
-  ink(ctx, poly([[x - 20, y - h - 6], [x + w + 20, y - h - 6], [x + w + 20, y - h + 14], [x - 20, y - h + 14]]), PAL.shelter, lw * .7);
-  snowBank(ctx, [[x - 34, y - h - 2], [x - 20, y - h - 30], [x + w * .3, y - h - 44], [x + w * .7, y - h - 40], [x + w + 30, y - h - 26], [x + w + 40, y - h + 4], [x + w + 26, y - h + 26], [x + w + 12, y - h + 6], [x + w * .5, y - h + 2], [x - 10, y - h + 10]], lw * .8);
+  ink(ctx, rect(x - 20, y - h - 6, w + 40, 20), PAL.shelter, lw * .7);
+  if (snow) bank(ctx, [[x - 34, y - h - 2], [x - 20, y - h - 30], [x + w * .3, y - h - 44], [x + w * .7, y - h - 40], [x + w + 30, y - h - 26], [x + w + 40, y - h + 4], [x + w + 26, y - h + 26], [x + w + 12, y - h + 6], [x + w * .5, y - h + 2], [x - 10, y - h + 10]], lw * .8, '#e3e5f1');
 }
 
-// ---------- falling snow ----------
-// Hollow, slightly tear-shaped flakes with thin ink rims (as in hand-inked winter scenes).
+// ---------- particles ----------
+// Falling snow: hollow tear-shaped flakes with thin rims.
 function snowfall(ctx, t, o = {}) {
   const { n = 120, seed = 3, speed = 120, size = 7, wind = 18, x0 = -60, x1 = W + 60, y0 = -60, y1 = H + 60, alpha = 1 } = o;
   const span = y1 - y0;
@@ -197,7 +302,6 @@ function snowfall(ctx, t, o = {}) {
   }
   ctx.restore();
 }
-// Blizzard streaks (wind-driven lines) for gusts.
 function snowStreaks(ctx, t, o = {}) {
   const { n = 40, seed = 9, len = 120, speed = 900, ang = -.35, alpha = .5 } = o;
   ctx.save(); ctx.globalAlpha = alpha; ctx.strokeStyle = PAL.breath; ctx.lineCap = 'round';
@@ -209,9 +313,28 @@ function snowStreaks(ctx, t, o = {}) {
   }
   ctx.restore();
 }
-
-// ---------- breath cloud ----------
-// Puff leaves (x,y) at t0, drifts along dir, grows and fades. Union of soft round lobes with a faint rim.
+// One poplar-fluff tuft (summer "snow"): fuzzy white puff with a tiny seed dot.
+function fluffTuft(ctx, x, y, r, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  ctx.fillStyle = 'rgba(255,255,250,.92)'; ctx.strokeStyle = 'rgba(80,80,90,.35)'; ctx.lineWidth = Math.max(1, r * .12);
+  ctx.beginPath(); for (let i = 0; i < 7; i++) { const a = i / 7 * Math.PI * 2; ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); } ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 0, r * .55, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#6b5a44'; ctx.beginPath(); ctx.arc(0, 0, r * .14, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+// Drifting poplar fluff: slow, meandering, sometimes rising.
+function fluff(ctx, t, o = {}) {
+  const { n = 40, seed = 5, speed = 40, size = 9, wind = 30, alpha = 1 } = o;
+  ctx.save(); ctx.globalAlpha = alpha;
+  for (let i = 0; i < n; i++) {
+    const r = size * (.6 + hash(seed, i, 1) * .8), sp = speed * (.4 + hash(seed, i, 2));
+    const py = ((hash(seed, i, 3) * (H + 200) + t * sp) % (H + 200)) - 100 + Math.sin(t * .9 + i * 1.7) * 40;
+    const px = (((hash(seed, i, 4) * (W + 200) + t * wind + Math.sin(t * .7 + i) * 60) % (W + 200)) + W + 200) % (W + 200) - 100;
+    fluffTuft(ctx, px, py, r, t * .5 + i);
+  }
+  ctx.restore();
+}
+// Breath cloud (cold weather): union of soft round lobes drifting from the mouth.
 function breath(ctx, t, t0, x, y, o = {}) {
   const { dir = -1, dur = 1.5, size = 60, lw = LW * .7, rise = -.18 } = o;
   const k = (t - t0) / dur; if (k < 0 || k > 1) return;
@@ -219,12 +342,23 @@ function breath(ctx, t, t0, x, y, o = {}) {
   const lobes = [];
   for (let i = 0; i < 6; i++) {
     const f = i / 5, d = g * size * 2.6 * (.25 + f * .9);
-    const tail = clamp(1 - (k - .08) * 3 + f * 1.4); if (tail <= 0) continue; // lobes near the mouth dissolve first
+    const tail = clamp(1 - (k - .08) * 3 + f * 1.4); if (tail <= 0) continue;
     lobes.push([x + dir * d, y + size * rise * (d / size) + Math.sin(i * 2.1 + k * 4) * size * .08, size * (.18 + f * .32 + g * .4) * Math.min(1, tail)]);
   }
   const shape = c => { for (const [cx, cy, r] of lobes) { c.moveTo(cx + r * 1.2, cy); c.ellipse(cx, cy, r * 1.2, r * .85, 0, 0, Math.PI * 2); } };
-  ctx.save(); ctx.globalAlpha = a * .5; ink(ctx, shape, null, lw * 1.2, PAL.snowDeep);
+  ctx.save(); ctx.globalAlpha = a * .5; ink(ctx, shape, null, lw * 1.2, '#99a0c7');
   ctx.globalAlpha = a * .9; ink(ctx, shape, PAL.breath, 0); ctx.restore();
+}
+// Heat shimmer lines (summer): wavy faint strokes rising over asphalt.
+function heatLines(ctx, t, x0, x1, y, o = {}) {
+  const { n = 6, seed = 2, alpha = .35, lw = LW * .5 } = o;
+  ctx.save(); ctx.globalAlpha = alpha;
+  for (let i = 0; i < n; i++) {
+    const x = lerp(x0, x1, hash(seed, i, 1)), k = (t * .6 + hash(seed, i, 2)) % 1;
+    ctx.globalAlpha = alpha * Math.sin(k * Math.PI);
+    stroke(ctx, c => { c.moveTo(x, y - k * 120); for (let j = 1; j <= 6; j++) c.lineTo(x + Math.sin(j * 1.6 + t * 4) * 6, y - k * 120 - j * 14); }, lw, '#ffffff');
+  }
+  ctx.restore();
 }
 
 // ---------- film finish ----------
@@ -241,15 +375,17 @@ function grain(ctx, t, a = .07) {
   ctx.save(); ctx.globalAlpha = a; ctx.globalCompositeOperation = 'overlay';
   ctx.fillStyle = ctx.createPattern(_grain[Math.floor(t * FPS) % 4], 'repeat'); ctx.fillRect(0, 0, W, H); ctx.restore();
 }
-function vignette(ctx, a = .45) {
+function vignette(ctx, a = .45, col = '10,12,30') {
   const g = ctx.createRadialGradient(W / 2, H * .48, H * .28, W / 2, H * .5, H * .78);
-  g.addColorStop(0, 'rgba(10,12,30,0)'); g.addColorStop(1, `rgba(10,12,30,${a})`);
+  g.addColorStop(0, `rgba(${col},0)`); g.addColorStop(1, `rgba(${col},${a})`);
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 }
-function coldTint(ctx, a = .08) { ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = `rgba(150,165,230,${a * 4})`; ctx.globalAlpha = .25; ctx.fillRect(0, 0, W, H); ctx.restore(); }
-function fade(ctx, a) { if (a <= 0) return; ctx.fillStyle = `rgba(8,9,18,${clamp(a)})`; ctx.fillRect(0, 0, W, H); }
+// Theme colour grade (cold blue at night, warm in summer).
+function tint(ctx) { const [r, g, b, a, mode] = TH.tint; ctx.save(); ctx.globalCompositeOperation = mode; ctx.globalAlpha = a; ctx.fillStyle = `rgb(${r},${g},${b})`; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+const coldTint = tint;
+function fade(ctx, a, col = '8,9,18') { if (a <= 0) return; ctx.fillStyle = `rgba(${col},${clamp(a)})`; ctx.fillRect(0, 0, W, H); }
 
-// Character rig for the winter-block toon look.
+// Character rig for the block-toon look (any season).
 // Long-necked, sleepy-eyed, flat-coloured people with heavy upper lids and thin ink lines.
 // Coordinates are authored at scale s=1: head ≈ 430 px tall, full figure ≈ 1790 px.
 // drawFigure(ctx, o) — o.x,o.y = ground point between the feet.
@@ -257,6 +393,7 @@ function fade(ctx, a) { if (a <= 0) return; ctx.fillStyle = `rgba(8,9,18,${clamp
 'use strict';
 
 const CAST = {
+  // Every cast can be dressed per shot: drawFigure(..., {top:'hoodie'|'tank'|'tee', bottom:'track'|'shorts', topCol, shades}).
   // The lanky lead from the reference look: orange flat-top buzz cut, black zip hoodie, blue track pants.
   lanky: { skin: PAL.skin, skinShade: PAL.skinShade, hair: PAL.hair, hairHi: PAL.hairHi, hairShade: PAL.hairShade, hairStyle: 'buzz',
     hoodie: PAL.hoodie, hoodieHi: PAL.hoodieHi, piping: PAL.piping, pants: PAL.pants, pantsShade: PAL.pantsShade, neck: 1, faceW: 1, faceL: 1 },
@@ -267,6 +404,10 @@ const CAST = {
   oldman: { skin: PAL.skin, skinShade: PAL.skinShade, hair: '#3a3f6e', hairHi: '#4a5090', hairShade: '#2a2e55', hairStyle: 'beanie', moustache: 'walrus', stubble: true,
     hoodie: '#20222e', hoodieHi: '#2c2f40', piping: '#20222e', pants: '#4a4d63', pantsShade: '#3a3c50', neck: .9, faceW: .9, faceL: 1 },
 };
+// Summer outfits of the same people.
+CAST.lankySummer = { ...CAST.lanky, top: 'tank', bottom: 'track' };
+CAST.stockySummer = { ...CAST.stocky, top: 'tee', topCol: '#e46f55', topShade: '#c4573f', bottom: 'shorts', shorts: '#3d4a7a', shades: true };
+CAST.oldmanSummer = { ...CAST.oldman, top: 'tee', topCol: '#d9d3c0', topShade: '#b8b19b', bottom: 'track' };
 
 // ---------- eyes ----------
 // lid: 0 = open, 1 = closed. Default look is sleepy (lid ≈ .45). look = -1..1 horizontal pupil.
@@ -328,8 +469,8 @@ function drawHead(ctx, o) {
   }
   // features
   const ex = tu;
-  drawEye(ctx, X(-44) + ex, Y(-234), 30 * fw, 21, o.lid ?? .45, o.look ?? 0, o.lookY ?? 0, C.skin, lw);
-  drawEye(ctx, X(42) + ex, Y(-238), 28 * fw, 20, o.lid ?? .45, o.look ?? 0, o.lookY ?? 0, C.skin, lw);
+  drawEye(ctx, X(-44) + ex, Y(-234), 30 * fw, 21, o.lid ?? .45, (o.look ?? 0) + (o.cross || 0), o.lookY ?? 0, C.skin, lw);
+  drawEye(ctx, X(42) + ex, Y(-238), 28 * fw, 20, o.lid ?? .45, (o.look ?? 0) - (o.cross || 0), o.lookY ?? 0, C.skin, lw);
   // faint brows
   ctx.globalAlpha = .7;
   stroke(ctx, c => { c.moveTo(X(-78) + ex, Y(-282)); c.quadraticCurveTo(X(-46) + ex, Y(-296), X(-16) + ex, Y(-284)); }, lw * .5);
@@ -357,28 +498,57 @@ function drawHead(ctx, o) {
   }
   // chin crease
   stroke(ctx, c => { c.moveTo(mx - 14, my + 40); c.quadraticCurveTo(mx, my + 46, mx + 14, my + 40); }, lw * .4);
+  // sunglasses (o.shades overrides the cast default)
+  if (o.shades ?? C.shades) {
+    for (const [lx, ly] of [[X(-46) + ex, Y(-232)], [X(42) + ex, Y(-236)]]) {
+      ink(ctx, c => { c.moveTo(lx - 44, ly - 22); c.lineTo(lx + 42, ly - 24); c.quadraticCurveTo(lx + 40, ly + 26, lx, ly + 28); c.quadraticCurveTo(lx - 42, ly + 26, lx - 44, ly - 22); c.closePath(); }, PAL.shades, lw * .8);
+      ctx.globalAlpha = .5; stroke(ctx, c => { c.moveTo(lx - 26, ly - 8); c.lineTo(lx - 10, ly - 16); }, lw * .7, '#9fb6e0'); ctx.globalAlpha = 1;
+    }
+    stroke(ctx, c => { c.moveTo(X(-2) + ex, Y(-254)); c.lineTo(X(0) + ex, Y(-254)); }, lw * .8);
+    stroke(ctx, c => { c.moveTo(X(84) + ex, Y(-256)); c.lineTo(X(112), Y(-252)); }, lw * .8);
+  }
   ctx.restore();
 }
 
 // ---------- full figure ----------
-// o: {x, y, s, cast, t, pose:'pockets', sway, breathe, + head opts (lid, look, mouth, smirk, turn, headTilt)}
+// Limb tube: ink outline + fill in two passes so joints stay seamless. pts in figure space.
+function tube(ctx, segs, fill, lw) {
+  for (const pass of [0, 1]) for (const [pts, wd] of segs) {
+    ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.lineWidth = pass ? wd : wd + lw * 2; ctx.strokeStyle = pass ? fill : PAL.ink; ctx.stroke();
+  }
+}
+// o: {x, y (ground point), s, cast, t, top, bottom, pose:'pockets'|'hips'|'down', topCol, topShade, sway, breathe,
+//     + head opts (lid, look, cross, lookY, mouth, smirk, turn, headTilt, shades)}
 function drawFigure(ctx, o) {
   const C = typeof o.cast === 'string' ? CAST[o.cast] : (o.cast || CAST.lanky);
   const s = o.s ?? 1, lw = (o.lw ?? LW) / s, t = o.t || 0;
   const br = Math.sin(t * 2.4) * (o.breathe ?? 1);
+  const top = o.top || C.top || 'hoodie', bottom = o.bottom || C.bottom || 'track';
+  const pose = o.pose || (top === 'hoodie' ? 'pockets' : 'hips');
+  const topCol = o.topCol || C.topCol || (top === 'hoodie' ? C.hoodie : top === 'tank' ? PAL.tank : PAL.tee);
+  const topShade = o.topShade || C.topShade || (top === 'hoodie' ? C.hoodieHi : top === 'tank' ? PAL.tankShade : PAL.teeShade);
+  const nk = 220 * (C.neck ?? 1) + 40;
   ctx.save(); ctx.translate(o.x, o.y); ctx.rotate((o.sway || 0) * Math.sin(t * 1.1) * .012); ctx.scale(s, s);
 
-  // --- legs: track pants with two white stripes, slight contrapposto ---
-  const legL = [[-150, -770], [-24, -770], [-40, -420], [-58, -64], [-130, -64], [-150, -420]];
-  const legR = [[18, -770], [152, -770], [146, -430], [124, -64], [52, -64], [40, -430]];
-  ink(ctx, poly(legR), C.pants, lw);
-  ink(ctx, poly([[118, -770], [152, -770], [146, -430], [124, -64], [96, -64], [118, -430]]), C.pantsShade, 0);
-  ink(ctx, poly(legR), null, lw);
-  ink(ctx, poly(legL), C.pants, lw);
-  for (const [a, b] of [[[-138, -760], [-120, -70]], [[-126, -760], [-108, -70]]]) stroke(ctx, c => { c.moveTo(a[0], a[1]); c.lineTo(b[0] + (a[0] < -130 ? -2 : 0), b[1]); }, lw * 1.1, PAL.stripe);
-  for (const [a, b] of [[[138, -760], [112, -70]], [[126, -760], [100, -70]]]) stroke(ctx, c => { c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); }, lw * 1.1, PAL.stripe);
-  // folds: knees + bunching at ankles
-  for (const [x0, y0, x1, y1] of [[-120, -430, -70, -410], [-110, -170, -66, -150], [-128, -120, -80, -96], [70, -440, 120, -420], [64, -170, 110, -150], [58, -118, 100, -98]]) stroke(ctx, c => { c.moveTo(x0, y0); c.quadraticCurveTo((x0 + x1) / 2, y0 - 14, x1, y1); }, lw * .5);
+  // --- legs ---
+  if (bottom === 'shorts') {
+    tube(ctx, [[[[-92, -480], [-96, -90]], 62]], C.skin, lw);
+    tube(ctx, [[[[90, -480], [88, -90]], 62]], C.skin, lw);
+    for (const x of [-96, 88]) ink(ctx, rect(x - 32, -170, 64, 100), '#f1f0ea', lw * .7); // socks
+    const sh = C.shorts || C.pants;
+    ink(ctx, poly([[-160, -790], [160, -790], [168, -470], [16, -450], [0, -560], [-16, -450], [-168, -470]]), sh, lw);
+    stroke(ctx, c => { c.moveTo(-150, -760); c.lineTo(-156, -480); c.moveTo(150, -760); c.lineTo(156, -480); }, lw * 1.1, PAL.stripe);
+  } else {
+    const legL = [[-150, -770], [-24, -770], [-40, -420], [-58, -64], [-130, -64], [-150, -420]];
+    const legR = [[18, -770], [152, -770], [146, -430], [124, -64], [52, -64], [40, -430]];
+    ink(ctx, poly(legR), C.pants, lw);
+    ink(ctx, poly([[118, -770], [152, -770], [146, -430], [124, -64], [96, -64], [118, -430]]), C.pantsShade, 0);
+    ink(ctx, poly(legR), null, lw);
+    ink(ctx, poly(legL), C.pants, lw);
+    for (const [a, b] of [[[-138, -760], [-122, -70]], [[-126, -760], [-108, -70]], [[138, -760], [112, -70]], [[126, -760], [100, -70]]]) stroke(ctx, c => { c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); }, lw * 1.1, PAL.stripe);
+    for (const [x0, y0, x1, y1] of [[-120, -430, -70, -410], [-110, -170, -66, -150], [-128, -120, -80, -96], [70, -440, 120, -420], [64, -170, 110, -150], [58, -118, 100, -98]]) stroke(ctx, c => { c.moveTo(x0, y0); c.quadraticCurveTo((x0 + x1) / 2, y0 - 14, x1, y1); }, lw * .5);
+  }
   // --- sneakers ---
   const shoe = (x, dir) => {
     ink(ctx, c => { c.moveTo(x - 46 * dir, -70); c.quadraticCurveTo(x - 60 * dir, -20, x - 56 * dir, -4); c.lineTo(x + 70 * dir, -4); c.quadraticCurveTo(x + 96 * dir, -10, x + 84 * dir, -36); c.quadraticCurveTo(x + 50 * dir, -52, x + 26 * dir, -74); c.closePath(); }, PAL.shoe, lw);
@@ -387,56 +557,86 @@ function drawFigure(ctx, o) {
   };
   shoe(-94, -1); shoe(88, 1);
 
-  // --- torso: baggy zip hoodie ---
+  // arm joints for the open poses (figure space)
+  const armPts = d => pose === 'down'
+    ? [[d * 150, -1222], [d * 182, -1000], [d * 186, -800]]
+    : [[d * 150, -1222], [d * 222, -1000], [d * 160, -770]]; // 'hips': hands in trouser pockets
+  const hand = d => { // relaxed hanging hand (pose 'down')
+    const [wx, wy] = armPts(d)[2];
+    ink(ctx, c => { c.moveTo(wx - 26, wy - 6); c.quadraticCurveTo(wx - 34, wy + 60, wx - 6, wy + 84); c.quadraticCurveTo(wx + 20, wy + 92, wx + 28, wy + 50); c.lineTo(wx + 26, wy - 6); c.closePath(); }, C.skin, lw * .8);
+    stroke(ctx, c => { c.moveTo(wx - d * 6, wy + 40); c.lineTo(wx - d * 4, wy + 76); c.moveTo(wx + d * 8, wy + 40); c.lineTo(wx + d * 10, wy + 72); }, lw * .4);
+    ink(ctx, c => { c.moveTo(wx - d * 24, wy + 10); c.quadraticCurveTo(wx - d * 44, wy + 36, wx - d * 30, wy + 56); }, null, lw * .7); // thumb
+  };
+  const pocketPatch = d => { // trouser pocket mouth drawn over the wrist so the hand reads as tucked in
+    const col = bottom === 'shorts' ? (C.shorts || C.pants) : C.pants;
+    ink(ctx, poly([[d * 118, -762], [d * 206, -778], [d * 200, -690], [d * 124, -688]]), col, 0);
+    stroke(ctx, c => { c.moveTo(d * 118, -762); c.quadraticCurveTo(d * 160, -752, d * 206, -778); }, lw * .8);
+    stroke(ctx, c => { c.moveTo(d * 200, -690); c.lineTo(d * 206, -778); }, lw * .8);
+  };
+
   ctx.save(); ctx.translate(0, -770); ctx.scale(1, 1 + br * .006); ctx.translate(0, 770);
-  const torso = [[-206, -1226], [-130, -1270], [130, -1270], [206, -1224], [234, -1150], [240, -1000], [240, -760], [-240, -760], [-240, -1000], [-234, -1150]];
-  // hood bunched behind the neck
-  ink(ctx, smooth([[-160, -1250], [-170, -1310], [-110, -1352], [0, -1362], [116, -1350], [172, -1306], [164, -1248]], false), C.hoodie, lw);
-  ink(ctx, poly(torso), C.hoodie, lw);
-  ink(ctx, poly([[110, -1260], [150, -1272], [218, -1236], [236, -1000], [238, -760], [170, -760], [190, -1000]]), C.hoodieHi, 0);
-  ink(ctx, poly(torso), null, lw);
-  // ribbed hem
-  ink(ctx, poly([[-238, -800], [238, -800], [238, -756], [-238, -756]]), C.hoodie, lw * .8);
-  // piping contour lines (the blue inner outline typical of the look)
-  stroke(ctx, c => { c.moveTo(-200, -1210); c.quadraticCurveTo(-222, -1000, -214, -830); }, lw * .55, C.piping);
-  stroke(ctx, c => { c.moveTo(196, -1206); c.quadraticCurveTo(220, -1000, 212, -830); }, lw * .55, C.piping);
-  // collar zipped up to the throat
-  ink(ctx, c => { c.moveTo(-92, -1300); c.quadraticCurveTo(0, -1250, 92, -1300); c.lineTo(84, -1236); c.quadraticCurveTo(0, -1200, -84, -1236); c.closePath(); }, C.hoodie, lw);
-  stroke(ctx, c => { c.moveTo(-80, -1280); c.quadraticCurveTo(0, -1238, 80, -1280); }, lw * .5, C.piping);
-  // zipper: white tape with teeth
-  ink(ctx, poly([[-6, -1222], [10, -1222], [12, -760], [-4, -760]]), PAL.zip, lw * .5);
-  for (let y = -1210; y < -770; y += 15) stroke(ctx, c => { c.moveTo(-2, y); c.lineTo(8, y + 6); }, lw * .35);
-  ink(ctx, poly([[-8, -1230], [12, -1230], [10, -1196], [-6, -1196]]), '#c9c6bb', lw * .5);
-  // drawstrings
-  for (const [x0, x1, y1] of [[-46, -54, -1060], [52, 62, -1040]]) {
-    stroke(ctx, c => { c.moveTo(x0, -1236); c.quadraticCurveTo(x0 - 4, -1150, x1, y1); }, lw * 1.6);
-    stroke(ctx, c => { c.moveTo(x0, -1236); c.quadraticCurveTo(x0 - 4, -1150, x1, y1); }, lw * .7, C.piping);
-    ink(ctx, poly([[x1 - 5, y1], [x1 + 5, y1], [x1 + 5, y1 + 22], [x1 - 5, y1 + 22]]), PAL.zip, lw * .5);
-  }
-  // kangaroo pocket
-  stroke(ctx, c => { c.moveTo(-150, -800); c.lineTo(-136, -936); c.quadraticCurveTo(0, -952, 138, -936); c.lineTo(152, -800); }, lw * .7);
-  // arms: sleeves hanging, hands tucked into the pocket
-  if ((o.pose || 'pockets') === 'pockets') {
-    for (const d of [-1, 1]) {
-      ink(ctx, c => { c.moveTo(d * 210, -1236); c.quadraticCurveTo(d * 262, -1150, d * 262, -1010); c.quadraticCurveTo(d * 256, -930, d * 200, -900); c.lineTo(d * 128, -906); c.lineTo(d * 134, -946); c.quadraticCurveTo(d * 190, -960, d * 196, -1020); c.quadraticCurveTo(d * 188, -1120, d * 170, -1170); c.closePath(); }, d > 0 ? C.hoodieHi : C.hoodie, lw);
-      stroke(ctx, c => { c.moveTo(d * 236, -1100); c.quadraticCurveTo(d * 246, -1040, d * 236, -980); }, lw * .5, C.piping);
-      stroke(ctx, c => { c.moveTo(d * 214, -1010); c.quadraticCurveTo(d * 230, -1000, d * 240, -1012); }, lw * .45);
-      ink(ctx, poly([[d * 150, -946], [d * 128, -906], [d * 160, -902], [d * 176, -940]]), C.hoodie, lw * .6); // cuff
+  if (top === 'hoodie') {
+    const torso = [[-206, -1226], [-130, -1270], [130, -1270], [206, -1224], [234, -1150], [240, -1000], [240, -760], [-240, -760], [-240, -1000], [-234, -1150]];
+    ink(ctx, smooth([[-160, -1250], [-170, -1310], [-110, -1352], [0, -1362], [116, -1350], [172, -1306], [164, -1248]], false), topCol, lw);
+    ink(ctx, poly(torso), topCol, lw);
+    ink(ctx, poly([[110, -1260], [150, -1272], [218, -1236], [236, -1000], [238, -760], [170, -760], [190, -1000]]), topShade, 0);
+    ink(ctx, poly(torso), null, lw);
+    ink(ctx, rect(-238, -800, 476, 44), topCol, lw * .8);
+    stroke(ctx, c => { c.moveTo(-200, -1210); c.quadraticCurveTo(-222, -1000, -214, -830); }, lw * .55, C.piping);
+    stroke(ctx, c => { c.moveTo(196, -1206); c.quadraticCurveTo(220, -1000, 212, -830); }, lw * .55, C.piping);
+    ink(ctx, rect(-6, -1222, 16, 462), PAL.zip, lw * .5);
+    for (let y = -1210; y < -770; y += 15) stroke(ctx, c => { c.moveTo(-2, y); c.lineTo(8, y + 6); }, lw * .35);
+    for (const [x0, x1, y1] of [[-46, -54, -1060], [52, 62, -1040]]) {
+      stroke(ctx, c => { c.moveTo(x0, -1236); c.quadraticCurveTo(x0 - 4, -1150, x1, y1); }, lw * 1.6);
+      stroke(ctx, c => { c.moveTo(x0, -1236); c.quadraticCurveTo(x0 - 4, -1150, x1, y1); }, lw * .7, C.piping);
+      ink(ctx, rect(x1 - 5, y1, 10, 22), PAL.zip, lw * .5);
     }
+    stroke(ctx, c => { c.moveTo(-150, -800); c.lineTo(-136, -936); c.quadraticCurveTo(0, -952, 138, -936); c.lineTo(152, -800); }, lw * .7);
+    if (pose === 'pockets') {
+      for (const d of [-1, 1]) {
+        ink(ctx, c => { c.moveTo(d * 210, -1236); c.quadraticCurveTo(d * 262, -1150, d * 262, -1010); c.quadraticCurveTo(d * 256, -930, d * 200, -900); c.lineTo(d * 128, -906); c.lineTo(d * 134, -946); c.quadraticCurveTo(d * 190, -960, d * 196, -1020); c.quadraticCurveTo(d * 188, -1120, d * 170, -1170); c.closePath(); }, d > 0 ? topShade : topCol, lw);
+        stroke(ctx, c => { c.moveTo(d * 236, -1100); c.quadraticCurveTo(d * 246, -1040, d * 236, -980); }, lw * .5, C.piping);
+        stroke(ctx, c => { c.moveTo(d * 214, -1010); c.quadraticCurveTo(d * 230, -1000, d * 240, -1012); }, lw * .45);
+        ink(ctx, poly([[d * 150, -946], [d * 128, -906], [d * 160, -902], [d * 176, -940]]), topCol, lw * .6);
+      }
+    } else {
+      for (const d of [-1, 1]) {
+        const P = armPts(d).map(([x, y], i) => [x + d * (i ? 30 : 50), y]);
+        tube(ctx, [[[P[0], P[1]], 92], [[P[1], P[2]], 84]], d > 0 ? topShade : topCol, lw);
+        if (pose === 'down') hand(d); else pocketPatch(d);
+      }
+    }
+  } else {
+    // bare arms first (behind the top), shoulders, then the top over them
+    // shoulder bar + both arms in one tube pass → rounded shoulders, no seams
+    const A = armPts(-1), B = armPts(1);
+    tube(ctx, [[[[-140, -1236], [140, -1236]], 70], [[A[0], A[1]], 56], [[A[1], A[2]], 48], [[B[0], B[1]], 56], [[B[1], B[2]], 48]], C.skin, lw);
+    ink(ctx, c => { c.moveTo(-44, -1236); c.quadraticCurveTo(-34, -1236 - nk * .5, -38, -1236 - nk - 20); c.lineTo(44, -1236 - nk - 20); c.quadraticCurveTo(40, -1236 - nk * .5, 50, -1236); c.lineTo(50, -1200); c.lineTo(-44, -1200); c.closePath(); }, C.skin, lw);
+    const body = top === 'tank'
+      ? c => { c.moveTo(-104, -1266); c.lineTo(-66, -1266); c.quadraticCurveTo(0, -1150, 66, -1266); c.lineTo(104, -1266); c.quadraticCurveTo(110, -1160, 172, -1120); c.lineTo(166, -1000); c.lineTo(176, -776); c.lineTo(-176, -776); c.lineTo(-166, -1000); c.lineTo(-172, -1120); c.quadraticCurveTo(-110, -1160, -104, -1266); c.closePath(); }
+      : c => { c.moveTo(-176, -1240); c.lineTo(-56, -1272); c.quadraticCurveTo(0, -1226, 56, -1272); c.lineTo(176, -1240); c.lineTo(170, -1000); c.lineTo(180, -770); c.lineTo(-180, -770); c.lineTo(-170, -1000); c.closePath(); };
+    ink(ctx, body, topCol, lw);
+    ctx.save(); ctx.beginPath(); body(ctx); ctx.clip();
+    ink(ctx, poly([[90, -1300], [200, -1300], [200, -760], [120, -760], [130, -1000]]), topShade, 0); ctx.restore();
+    ink(ctx, body, null, lw);
+    stroke(ctx, c => { c.moveTo(-80, -1000); c.quadraticCurveTo(-60, -960, -86, -900); c.moveTo(70, -860); c.quadraticCurveTo(96, -830, 80, -790); }, lw * .45); // fabric folds
+    if (top === 'tee') for (const d of [-1, 1]) { const P = armPts(d); const m = [lerp(P[0][0], P[1][0], .45), lerp(P[0][1], P[1][1], .45)]; tube(ctx, [[[[d * 140, -1226], m], 84]], d > 0 ? topShade : topCol, lw); }
+    for (const d of [-1, 1]) { if (pose === 'down') hand(d); else pocketPatch(d); }
   }
   ctx.restore();
 
-  // --- long neck ---
-  const nk = 220 * (C.neck ?? 1) + 40;
-  ink(ctx, c => { c.moveTo(-44, -1236); c.quadraticCurveTo(-34, -1236 - nk * .5, -38, -1236 - nk - 20); c.lineTo(44, -1236 - nk - 20); c.quadraticCurveTo(40, -1236 - nk * .5, 50, -1236); c.closePath(); }, C.skin, lw);
-  ink(ctx, c => { c.moveTo(18, -1236 - nk); c.lineTo(42, -1236 - nk); c.quadraticCurveTo(38, -1236 - nk * .5, 48, -1240); c.lineTo(22, -1240); c.closePath(); }, C.skinShade, 0);
+  // --- long neck (hoodie: drawn over the hood, then the zipped collar over it) ---
+  if (top === 'hoodie') {
+    ink(ctx, c => { c.moveTo(-44, -1236); c.quadraticCurveTo(-34, -1236 - nk * .5, -38, -1236 - nk - 20); c.lineTo(44, -1236 - nk - 20); c.quadraticCurveTo(40, -1236 - nk * .5, 50, -1236); c.closePath(); }, C.skin, lw);
+  }
+  ink(ctx, c => { c.moveTo(18, -1236 - nk); c.lineTo(42, -1236 - nk); c.quadraticCurveTo(38, -1236 - nk * .5, 46, top === 'hoodie' ? -1240 : -1262); c.lineTo(22, top === 'hoodie' ? -1240 : -1262); c.closePath(); }, C.skinShade, 0);
   stroke(ctx, c => { c.moveTo(-6, -1236 - nk * .55); c.quadraticCurveTo(4, -1236 - nk * .62, 10, -1236 - nk * .5); }, lw * .45);
-  ink(ctx, c => { c.moveTo(-92, -1300); c.quadraticCurveTo(0, -1250, 92, -1300); c.lineTo(84, -1236); c.quadraticCurveTo(0, -1200, -84, -1236); c.closePath(); }, C.hoodie, lw); // collar over neck
-  stroke(ctx, c => { c.moveTo(-80, -1280); c.quadraticCurveTo(0, -1238, 80, -1280); }, lw * .5, C.piping);
-  ink(ctx, poly([[-6, -1258], [10, -1258], [12, -1222], [-6, -1222]]), PAL.zip, lw * .5);
-
+  if (top === 'hoodie') {
+    ink(ctx, c => { c.moveTo(-92, -1300); c.quadraticCurveTo(0, -1250, 92, -1300); c.lineTo(84, -1236); c.quadraticCurveTo(0, -1200, -84, -1236); c.closePath(); }, topCol, lw);
+    stroke(ctx, c => { c.moveTo(-80, -1280); c.quadraticCurveTo(0, -1238, 80, -1280); }, lw * .5, C.piping);
+    ink(ctx, rect(-6, -1258, 16, 36), PAL.zip, lw * .5);
+  }
   ctx.restore();
-  // head drawn in world space so it can tilt independently
   const chinY = o.y + (-1236 - nk - 4) * s;
   drawHead(ctx, { ...o, x: o.x + 4 * s, y: chinY, s, lw: o.lw ?? LW, tilt: o.headTilt || 0 });
   return { chin: [o.x + 4 * s, chinY], mouth: [o.x + 0 * s, chinY - 96 * s * (C.faceL ?? 1)] };
@@ -447,6 +647,7 @@ function drawFigure(ctx, o) {
 // 2) Close-up: he exhales a cloud, his eyes slide to the camera, slow blink, faint smirk.
 
 function streetSet(ctx, t, cam) {
+  theme('winterNight');
   withCam(ctx, cam, .25, () => { sky(ctx); snowfall(ctx, t, { n: 70, seed: 21, speed: 55, size: 4, wind: 10 }); });
   withCam(ctx, cam, .45, () => {
     panelBlock(ctx, { x: -120, y: 600, w: 640, h: 700, floors: 12, cols: 11, seed: 4, far: true, lit: .3, side: 60, t });
@@ -458,7 +659,7 @@ function streetSet(ctx, t, cam) {
   });
   withCam(ctx, cam, .85, () => {
     // ground + far banks
-    ctx.fillStyle = PAL.snowNight; ctx.fillRect(-400, 1290, W + 800, 900);
+    ctx.fillStyle = TH.ground; ctx.fillRect(-400, 1290, W + 800, 900);
     snowBank(ctx, [[-300, 1340], [-100, 1250], [180, 1272], [420, 1240], [700, 1268], [960, 1236], [1300, 1290], [1300, 1400], [-300, 1400]], LW * .7);
     // tire tracks
     ctx.globalAlpha = .7;
@@ -477,6 +678,7 @@ const FILM = {
   duration: 6,
   shots: [
     { name: 'wide', start: 0, end: 2.75, lw: 6, draw(ctx, t, lt, u) {
+      theme('winterNight');
       const cam = { x: lerp(540, 520, E.inOut(u)), y: lerp(930, 1000, E.inOut(u)), zoom: lerp(1, 1.1, E.inOut(u)) };
       streetSet(ctx, t, cam);
       withCam(ctx, cam, 1, () => {
@@ -487,13 +689,14 @@ const FILM = {
         breath(ctx, t, 2.0, f.mouth[0] - 10, f.mouth[1], { size: 34, dur: 1.4, lw: 4 });
         // foreground snow bank (overlaps the shins)
         snowBank(ctx, [[-200, 1980], [-120, 1700], [120, 1640], [330, 1690], [520, 1660], [720, 1700], [900, 1650], [1250, 1720], [1250, 1980]], 7);
-        stroke(ctx, c => { c.moveTo(60, 1720); c.quadraticCurveTo(200, 1700, 300, 1730); c.moveTo(640, 1740); c.quadraticCurveTo(760, 1715, 860, 1735); }, 3, PAL.snowDeep);
+        stroke(ctx, c => { c.moveTo(60, 1720); c.quadraticCurveTo(200, 1700, 300, 1730); c.moveTo(640, 1740); c.quadraticCurveTo(760, 1715, 860, 1735); }, 3, TH.groundShade);
         snowSpecks(ctx, -50, 1720, 1100, 1900, 30, 6);
       });
       snowfall(ctx, t, { n: 90, seed: 31, speed: 140, size: 8, wind: 22 });
       snowfall(ctx, t, { n: 16, seed: 41, speed: 260, size: 15, wind: 40 });
     } },
     { name: 'close', start: 2.75, end: 6, lw: 8, draw(ctx, t, lt, u) {
+      theme('winterNight');
       const cam = { x: 540, y: lerp(960, 900, E.inOut(u)), zoom: lerp(1.0, 1.07, E.inOut(u)) };
       withCam(ctx, cam, .3, () => {
         sky(ctx, '#2d3b6e', '#4d5f97');

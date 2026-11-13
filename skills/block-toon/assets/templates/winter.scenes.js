@@ -1,8 +1,9 @@
-// Winter-block demo — 6 s, two shots.
+// Block-toon winter demo — 6 s, two shots, theme winterNight.
 // 1) Wide: panel blocks at night, snowfall, sodium lamp, bus stop; the lanky guy waits, breath puffs, a window lights up.
 // 2) Close-up: he exhales a cloud, his eyes slide to the camera, slow blink, faint smirk.
 
 function streetSet(ctx, t, cam) {
+  theme('winterNight');
   withCam(ctx, cam, .25, () => { sky(ctx); snowfall(ctx, t, { n: 70, seed: 21, speed: 55, size: 4, wind: 10 }); });
   withCam(ctx, cam, .45, () => {
     panelBlock(ctx, { x: -120, y: 600, w: 640, h: 700, floors: 12, cols: 11, seed: 4, far: true, lit: .3, side: 60, t });
@@ -14,7 +15,7 @@ function streetSet(ctx, t, cam) {
   });
   withCam(ctx, cam, .85, () => {
     // ground + far banks
-    ctx.fillStyle = PAL.snowNight; ctx.fillRect(-400, 1290, W + 800, 900);
+    ctx.fillStyle = TH.ground; ctx.fillRect(-400, 1290, W + 800, 900);
     snowBank(ctx, [[-300, 1340], [-100, 1250], [180, 1272], [420, 1240], [700, 1268], [960, 1236], [1300, 1290], [1300, 1400], [-300, 1400]], LW * .7);
     // tire tracks
     ctx.globalAlpha = .7;
@@ -33,6 +34,7 @@ const FILM = {
   duration: 6,
   shots: [
     { name: 'wide', start: 0, end: 2.75, lw: 6, draw(ctx, t, lt, u) {
+      theme('winterNight');
       const cam = { x: lerp(540, 520, E.inOut(u)), y: lerp(930, 1000, E.inOut(u)), zoom: lerp(1, 1.1, E.inOut(u)) };
       streetSet(ctx, t, cam);
       withCam(ctx, cam, 1, () => {
@@ -43,13 +45,14 @@ const FILM = {
         breath(ctx, t, 2.0, f.mouth[0] - 10, f.mouth[1], { size: 34, dur: 1.4, lw: 4 });
         // foreground snow bank (overlaps the shins)
         snowBank(ctx, [[-200, 1980], [-120, 1700], [120, 1640], [330, 1690], [520, 1660], [720, 1700], [900, 1650], [1250, 1720], [1250, 1980]], 7);
-        stroke(ctx, c => { c.moveTo(60, 1720); c.quadraticCurveTo(200, 1700, 300, 1730); c.moveTo(640, 1740); c.quadraticCurveTo(760, 1715, 860, 1735); }, 3, PAL.snowDeep);
+        stroke(ctx, c => { c.moveTo(60, 1720); c.quadraticCurveTo(200, 1700, 300, 1730); c.moveTo(640, 1740); c.quadraticCurveTo(760, 1715, 860, 1735); }, 3, TH.groundShade);
         snowSpecks(ctx, -50, 1720, 1100, 1900, 30, 6);
       });
       snowfall(ctx, t, { n: 90, seed: 31, speed: 140, size: 8, wind: 22 });
       snowfall(ctx, t, { n: 16, seed: 41, speed: 260, size: 15, wind: 40 });
     } },
     { name: 'close', start: 2.75, end: 6, lw: 8, draw(ctx, t, lt, u) {
+      theme('winterNight');
       const cam = { x: 540, y: lerp(960, 900, E.inOut(u)), zoom: lerp(1.0, 1.07, E.inOut(u)) };
       withCam(ctx, cam, .3, () => {
         sky(ctx, '#2d3b6e', '#4d5f97');
