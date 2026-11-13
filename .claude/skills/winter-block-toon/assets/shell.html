@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title>
+<style>
+html,body{margin:0;height:100%;background:#0b0c14;color:#cfd3ea;font:14px system-ui,sans-serif}
+#wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px;box-sizing:border-box;height:100%}
+#film{height:calc(100% - 60px);max-width:100%;aspect-ratio:9/16;background:#000;display:block}
+#bar{display:flex;gap:8px;align-items:center;width:min(100%,560px)}
+#bar input{flex:1} button{background:#232640;color:#dde;border:1px solid #3a3f66;border-radius:6px;padding:6px 12px;cursor:pointer}
+body.render #bar{display:none} body.render #wrap{padding:0} body.render #film{height:1920px;width:1080px}
+</style></head><body>
+<div id="wrap"><canvas id="film" width="1080" height="1920"></canvas>
+<div id="bar"><button id="pp">❚❚</button><input id="seek" type="range" min="0" max="1000" value="0"><span id="tc">0.00</span></div></div>
+<script>
+/*__ENGINE__*/
+/*__SCENES__*/
+(function(){
+  const cv=document.getElementById('film'),ctx=cv.getContext('2d');
+  function renderAt(t){
+    t=Math.max(0,Math.min(FILM.duration-1e-6,t));
+    ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+    const sh=FILM.shots.find(s=>t>=s.start&&t<s.end)||FILM.shots[FILM.shots.length-1];
+    LW=sh.lw||6; ctx.save(); sh.draw(ctx,t,t-sh.start,(t-sh.start)/(sh.end-sh.start)); ctx.restore();
+    if(FILM.post) FILM.post(ctx,t);
+  }
+  window.__film={duration:FILM.duration,scenes:FILM.shots.map(s=>({start:s.start,end:s.end,name:s.name})),renderAt};
+  if(new URLSearchParams(location.search).has('render')){document.body.classList.add('render');renderAt(0);return;}
+  let playing=true,t0=performance.now(),tt=0;const seek=document.getElementById('seek'),tc=document.getElementById('tc'),pp=document.getElementById('pp');
+  pp.onclick=()=>{playing=!playing;pp.textContent=playing?'❚❚':'▶';t0=performance.now()-tt*1000};
+  seek.oninput=()=>{tt=seek.value/1000*FILM.duration;t0=performance.now()-tt*1000;renderAt(tt)};
+  addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();pp.onclick()}});
+  (function loop(){if(playing){tt=((performance.now()-t0)/1000)%FILM.duration;renderAt(tt);seek.value=tt/FILM.duration*1000;tc.textContent=tt.toFixed(2)}requestAnimationFrame(loop)})();
+})();
+</script></body></html>

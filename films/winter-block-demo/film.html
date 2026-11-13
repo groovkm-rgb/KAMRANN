@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kış · Blok</title>
+<style>
+html,body{margin:0;height:100%;background:#0b0c14;color:#cfd3ea;font:14px system-ui,sans-serif}
+#wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px;box-sizing:border-box;height:100%}
+#film{height:calc(100% - 60px);max-width:100%;aspect-ratio:9/16;background:#000;display:block}
+#bar{display:flex;gap:8px;align-items:center;width:min(100%,560px)}
+#bar input{flex:1} button{background:#232640;color:#dde;border:1px solid #3a3f66;border-radius:6px;padding:6px 12px;cursor:pointer}
+body.render #bar{display:none} body.render #wrap{padding:0} body.render #film{height:1920px;width:1080px}
+</style></head><body>
+<div id="wrap"><canvas id="film" width="1080" height="1920"></canvas>
+<div id="bar"><button id="pp">❚❚</button><input id="seek" type="range" min="0" max="1000" value="0"><span id="tc">0.00</span></div></div>
+<script>
+// Winter-block toon engine — flat ink-and-fill 2D cartoon look:
+// clean black outlines, flat colours with one cel-shade tone, droopy-eyed long-necked characters,
+// post-Soviet panel blocks at night, sodium street lamps, falling snow, breath clouds.
+// Everything is a pure function of time t (seconds). No Math.random, no clocks.
+'use strict';
+const W = 1080, H = 1920, FPS = 24;
+
+const PAL = {
+  ink: '#16151b',
+  skyTop: '#151d3a', skyBot: '#2a3563',
+  snow: '#e3e5f1', snowShade: '#b9bedb', snowDeep: '#99a0c7', snowNight: '#c9cde6',
+  block: '#5e716e', blockShade: '#475856', blockDark: '#36443f', blockFar: '#4b5a66', blockFarShade: '#3d4a57',
+  winWarm: '#f1c860', winWarm2: '#d79f3d', winDark: '#28344a', winFarDark: '#27324a', winFrame: '#2c3532',
+  lamp: '#d8843a', lampDark: '#a85f27', lampLight: '#ffd27d',
+  skin: '#c8a468', skinShade: '#a9874f', skinLine: '#5f4a2c', lip: '#b98b5a',
+  hair: '#d98a2b', hairHi: '#e9a548', hairShade: '#b26a1b',
+  hoodie: '#1c1d25', hoodieHi: '#2a2c38', piping: '#3f4fa6', zip: '#e9e6da',
+  pants: '#8a95d8', pantsShade: '#6b75b8', stripe: '#f1f2fb',
+  shoe: '#1d1f2e', sole: '#ecebf1',
+  eyeW: '#f2ecd8', breath: '#f1f3fb',
+  shelter: '#8a5233', shelterShade: '#653a24', poster: '#d9d2bb', poster2: '#9fb0a0',
+  wall: '#5d6f86', wallShade: '#4b5b72', wallDark: '#3b4860',
+};
+
+// ---------- math / determinism ----------
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+const inv = (a, b, v) => clamp((v - a) / (b - a));
+const E = {
+  inOut: k => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2,
+  out: k => 1 - Math.pow(1 - k, 3),
+  in: k => k * k * k,
+  sine: k => .5 - .5 * Math.cos(Math.PI * k),
+};
+function hash(a, b = 0, c = 0) {
+  let h = (a * 374761393 + b * 668265263 + c * 2147483647) | 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177); h ^= h >>> 16;
+  return (h >>> 0) / 4294967296;
+}
+// "Animate on twos": character motion snaps to 12 drawings / second like TV animation.
+const twos = t => Math.floor(t * 12) / 12;
+
+// ---------- ink helpers ----------
+let LW = 6; // current base line width (set per shot / per character scale)
+function ink(ctx, build, fill, lw = LW, stroke = PAL.ink) {
+  ctx.beginPath(); build(ctx);
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = stroke; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke(); }
+}
+function poly(pts, close = true) { return c => { c.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) c.lineTo(pts[i][0], pts[i][1]); if (close) c.closePath(); }; }
+// Smooth closed/open curve through points (Catmull-Rom → Bezier).
+function smooth(pts, close = true, k = 1) {
+  return c => {
+    const n = pts.length, P = i => close ? pts[(i + n) % n] : pts[clamp(i, 0, n - 1)];
+    c.moveTo(pts[0][0], pts[0][1]);
+    const m = close ? n : n - 1;
+    for (let i = 0; i < m; i++) {
+      const p0 = P(i - 1), p1 = P(i), p2 = P(i + 1), p3 = P(i + 2);
+      c.bezierCurveTo(p1[0] + (p2[0] - p0[0]) / 6 * k, p1[1] + (p2[1] - p0[1]) / 6 * k, p2[0] - (p3[0] - p1[0]) / 6 * k, p2[1] - (p3[1] - p1[1]) / 6 * k, p2[0], p2[1]);
+    }
+    if (close) c.closePath();
+  };
+}
+function stroke(ctx, build, lw = LW, col = PAL.ink) { ink(ctx, build, null, lw, col); }
+function ellipse(x, y, rx, ry, rot = 0) { return c => c.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2); }
+
+// ---------- camera ----------
+// cam = {x, y, zoom}: world point (x,y) is placed at the frame centre. depth<1 = farther (moves less).
+function withCam(ctx, cam, depth, fn) {
+  ctx.save();
+  const z = 1 + (cam.zoom - 1) * depth;
+  ctx.translate(W / 2, H / 2); ctx.scale(z, z);
+  ctx.translate(-(W / 2 + (cam.x - W / 2) * depth), -(H / 2 + (cam.y - H / 2) * depth));
+  fn(); ctx.restore();
+}
+
+// ---------- sky / atmosphere ----------
+function sky(ctx, top = PAL.skyTop, bot = PAL.skyBot, y0 = 0, y1 = H) {
+  const g = ctx.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, top); g.addColorStop(1, bot);
+  ctx.fillStyle = g; ctx.fillRect(-W, -H, W * 3, H * 3);
+}
+function glow(ctx, x, y, r, col = '255,196,120', a = .35) {
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+  g.addColorStop(0, `rgba(${col},${a})`); g.addColorStop(.35, `rgba(${col},${a * .4})`); g.addColorStop(1, `rgba(${col},0)`);
+  ctx.fillStyle = g; ctx.fillRect(x - r, y - r, r * 2, r * 2); ctx.restore();
+}
+
+// ---------- panel apartment block ----------
+// o: {x, y(top), w, h, floors, cols, seed, side (+px depth to the right / -left), far, lit (0..1), t, onAt:[[col,floor,time]]}
+function panelBlock(ctx, o) {
+  const { x, y, w, h, floors, cols, seed = 1, side = 0, far = false, lit = .35, t = 0 } = o;
+  const lw = o.lw ?? (far ? LW * .55 : LW * .8);
+  const face = far ? PAL.blockFar : PAL.block, shade = far ? PAL.blockFarShade : PAL.blockShade;
+  // side wall (gives volume)
+  if (side) {
+    const sx = side > 0 ? x + w : x, d = side;
+    ink(ctx, poly([[sx, y], [sx + d, y + Math.abs(d) * .25], [sx + d, y + h], [sx, y + h]]), shade, lw);
+  }
+  ink(ctx, poly([[x, y], [x + w, y], [x + w, y + h], [x, y + h]]), face, lw);
+  // roof parapet + antennas
+  ink(ctx, poly([[x - 4, y - h * .012], [x + w + 4, y - h * .012], [x + w + 4, y + h * .008], [x - 4, y + h * .008]]), shade, lw * .8);
+  for (let i = 0; i < 3; i++) {
+    const ax = x + w * (.15 + .3 * i + hash(seed, i, 7) * .12), ah = 18 + hash(seed, i, 8) * 26;
+    stroke(ctx, c => { c.moveTo(ax, y - h * .012); c.lineTo(ax, y - h * .012 - ah); c.moveTo(ax - 10, y - h * .012 - ah * .8); c.lineTo(ax + 10, y - h * .012 - ah * .8); }, lw * .6);
+  }
+  const fh = h / floors, cw = w / cols;
+  // panel seams
+  ctx.globalAlpha = .55;
+  for (let f = 1; f < floors; f++) stroke(ctx, c => { c.moveTo(x, y + f * fh); c.lineTo(x + w, y + f * fh); }, lw * .45);
+  ctx.globalAlpha = 1;
+  // windows
+  const ww = cw * .46, wh = fh * .52;
+  for (let f = 0; f < floors - (o.groundFloor ? 1 : 0); f++) for (let cI = 0; cI < cols; cI++) {
+    const wx = x + cI * cw + (cw - ww) / 2, wy = y + f * fh + fh * .22;
+    let on = hash(seed, f * 97 + cI, 3) < lit;
+    for (const [cc, ff, tt] of o.onAt || []) if (cc === cI && ff === f) on = t >= tt;
+    const col = on ? (hash(seed, cI, f) < .3 ? PAL.winWarm2 : PAL.winWarm) : (far ? PAL.winFarDark : PAL.winDark);
+    ink(ctx, poly([[wx, wy], [wx + ww, wy], [wx + ww, wy + wh], [wx, wy + wh]]), col, lw * .55);
+    if (!far && ww > 22) { // mullion
+      stroke(ctx, c => { c.moveTo(wx + ww * .55, wy); c.lineTo(wx + ww * .55, wy + wh); c.moveTo(wx + ww * .55, wy + wh * .38); c.lineTo(wx + ww, wy + wh * .38); }, lw * .4, PAL.winFrame);
+      if (on && hash(seed, f, cI + 40) < .4) { ctx.fillStyle = 'rgba(120,60,30,.35)'; ctx.fillRect(wx + 2, wy + 2, ww * .3, wh - 4); } // curtain
+    }
+  }
+}
+
+// ---------- street lamp (Soviet "hooked" lamp) ----------
+// base (x, y), height h, dir = +1 hooks right / -1 left
+function streetLamp(ctx, x, y, h, dir = 1, lw = LW) {
+  const top = y - h, hx = x + dir * h * .16;
+  ink(ctx, c => { c.moveTo(x - lw, y); c.lineTo(x - lw * .9, top + h * .1); c.quadraticCurveTo(x, top - h * .02, hx - dir * h * .03, top); c.lineTo(hx - dir * h * .03, top + lw * 1.7); c.quadraticCurveTo(x + lw * 1.6 * dir, top + h * .03, x + lw * .9, top + h * .12); c.lineTo(x + lw, y); c.closePath(); }, PAL.lamp, lw * .8);
+  // hood
+  ink(ctx, c => { c.ellipse(hx, top + h * .012, h * .07, h * .028, 0, Math.PI, 0); c.closePath(); }, PAL.lamp, lw * .8);
+  ink(ctx, ellipse(hx, top + h * .014, h * .055, h * .011), PAL.lampLight, lw * .5);
+  return [hx, top + h * .02];
+}
+
+// ---------- snow ground / banks ----------
+function snowBank(ctx, pts, lw = LW, fill = PAL.snow) {
+  ink(ctx, smooth(pts, true, .9), fill, lw);
+}
+function snowSpecks(ctx, x0, y0, x1, y1, n, seed, lw = LW) {
+  // little ink "o" marks sprinkled on snow surfaces (hand-drawn texture)
+  for (let i = 0; i < n; i++) {
+    const px = lerp(x0, x1, hash(seed, i, 1)), py = lerp(y0, y1, hash(seed, i, 2)), r = 3 + hash(seed, i, 3) * 4;
+    stroke(ctx, ellipse(px, py, r * .7, r), lw * .35, 'rgba(22,21,27,.55)');
+  }
+}
+
+// ---------- bus shelter ----------
+function busShelter(ctx, x, y, w, h, lw = LW) {
+  // posts
+  ink(ctx, poly([[x, y - h], [x + 14, y - h], [x + 14, y], [x, y]]), PAL.shelter, lw * .7);
+  ink(ctx, poly([[x + w - 14, y - h], [x + w, y - h], [x + w, y], [x + w - 14, y]]), PAL.shelter, lw * .7);
+  // back panel with torn posters (no text — shapes only)
+  ink(ctx, poly([[x + 14, y - h * .86], [x + w - 14, y - h * .86], [x + w - 14, y - h * .2], [x + 14, y - h * .2]]), PAL.shelterShade, lw * .6);
+  const posters = [[.08, .78, .3, .28, PAL.poster, -.04], [.42, .74, .28, .34, PAL.poster2, .03], [.18, .44, .34, .2, PAL.poster, .05], [.62, .38, .26, .16, PAL.poster, -.06]];
+  for (const [px, py, pw, ph, col, rot] of posters) {
+    ctx.save(); ctx.translate(x + w * (px + pw / 2), y - h * py + h * ph / 2); ctx.rotate(rot);
+    ink(ctx, poly([[-w * pw / 2, -h * ph / 2], [w * pw / 2, -h * ph / 2], [w * pw / 2 - 6, h * ph / 2], [-w * pw / 2 + 8, h * ph / 2 - 6]]), col, lw * .45);
+    ctx.globalAlpha = .5; for (let i = 0; i < 3; i++) stroke(ctx, c => { c.moveTo(-w * pw * .35, -h * ph * .25 + i * h * ph * .2); c.lineTo(w * pw * (.1 + .2 * (i % 2)), -h * ph * .25 + i * h * ph * .2); }, lw * .5); ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+  // roof with snow load
+  ink(ctx, poly([[x - 20, y - h - 6], [x + w + 20, y - h - 6], [x + w + 20, y - h + 14], [x - 20, y - h + 14]]), PAL.shelter, lw * .7);
+  snowBank(ctx, [[x - 34, y - h - 2], [x - 20, y - h - 30], [x + w * .3, y - h - 44], [x + w * .7, y - h - 40], [x + w + 30, y - h - 26], [x + w + 40, y - h + 4], [x + w + 26, y - h + 26], [x + w + 12, y - h + 6], [x + w * .5, y - h + 2], [x - 10, y - h + 10]], lw * .8);
+}
+
+// ---------- falling snow ----------
+// Hollow, slightly tear-shaped flakes with thin ink rims (as in hand-inked winter scenes).
+function snowfall(ctx, t, o = {}) {
+  const { n = 120, seed = 3, speed = 120, size = 7, wind = 18, x0 = -60, x1 = W + 60, y0 = -60, y1 = H + 60, alpha = 1 } = o;
+  const span = y1 - y0;
+  ctx.save(); ctx.globalAlpha = alpha;
+  for (let i = 0; i < n; i++) {
+    const r = size * (.6 + hash(seed, i, 1) * .8), sp = speed * (.75 + hash(seed, i, 2) * .5);
+    const y = y0 + ((hash(seed, i, 3) * span + t * sp) % span);
+    const x = x0 + hash(seed, i, 4) * (x1 - x0) + Math.sin(t * (1 + hash(seed, i, 5)) + i) * wind + t * wind * .6;
+    const xx = x0 + ((x - x0) % (x1 - x0) + (x1 - x0)) % (x1 - x0);
+    ctx.beginPath(); ctx.ellipse(xx, y, r * .62, r, Math.sin(t + i) * .3, 0, Math.PI * 2);
+    ctx.fillStyle = PAL.breath; ctx.fill();
+    ctx.lineWidth = Math.max(1, r * .18); ctx.strokeStyle = 'rgba(40,44,80,.32)'; ctx.stroke();
+  }
+  ctx.restore();
+}
+// Blizzard streaks (wind-driven lines) for gusts.
+function snowStreaks(ctx, t, o = {}) {
+  const { n = 40, seed = 9, len = 120, speed = 900, ang = -.35, alpha = .5 } = o;
+  ctx.save(); ctx.globalAlpha = alpha; ctx.strokeStyle = PAL.breath; ctx.lineCap = 'round';
+  for (let i = 0; i < n; i++) {
+    const L = len * (.6 + hash(seed, i, 1) * .8), p = (hash(seed, i, 2) * 3000 + t * speed) % 3000;
+    const x = W + 300 - p, y = hash(seed, i, 3) * H + p * Math.tan(ang) * -.4;
+    ctx.lineWidth = 2 + hash(seed, i, 4) * 2.5;
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + L * Math.cos(ang), y + L * Math.sin(ang)); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ---------- breath cloud ----------
+// Puff leaves (x,y) at t0, drifts along dir, grows and fades. Union of soft round lobes with a faint rim.
+function breath(ctx, t, t0, x, y, o = {}) {
+  const { dir = -1, dur = 1.5, size = 60, lw = LW * .7, rise = -.18 } = o;
+  const k = (t - t0) / dur; if (k < 0 || k > 1) return;
+  const g = E.out(k), a = k < .12 ? k / .12 : 1 - E.in(inv(.3, 1, k));
+  const lobes = [];
+  for (let i = 0; i < 6; i++) {
+    const f = i / 5, d = g * size * 2.6 * (.25 + f * .9);
+    const tail = clamp(1 - (k - .08) * 3 + f * 1.4); if (tail <= 0) continue; // lobes near the mouth dissolve first
+    lobes.push([x + dir * d, y + size * rise * (d / size) + Math.sin(i * 2.1 + k * 4) * size * .08, size * (.18 + f * .32 + g * .4) * Math.min(1, tail)]);
+  }
+  const shape = c => { for (const [cx, cy, r] of lobes) { c.moveTo(cx + r * 1.2, cy); c.ellipse(cx, cy, r * 1.2, r * .85, 0, 0, Math.PI * 2); } };
+  ctx.save(); ctx.globalAlpha = a * .5; ink(ctx, shape, null, lw * 1.2, PAL.snowDeep);
+  ctx.globalAlpha = a * .9; ink(ctx, shape, PAL.breath, 0); ctx.restore();
+}
+
+// ---------- film finish ----------
+let _grain = null;
+function grain(ctx, t, a = .07) {
+  if (!_grain) {
+    _grain = [];
+    for (let v = 0; v < 4; v++) {
+      const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d'), id = g.createImageData(256, 256);
+      for (let i = 0; i < 256 * 256; i++) { const n = hash(i, v, 11) * 255; id.data[i * 4] = id.data[i * 4 + 1] = id.data[i * 4 + 2] = n; id.data[i * 4 + 3] = 255; }
+      g.putImageData(id, 0, 0); _grain.push(c);
+    }
+  }
+  ctx.save(); ctx.globalAlpha = a; ctx.globalCompositeOperation = 'overlay';
+  ctx.fillStyle = ctx.createPattern(_grain[Math.floor(t * FPS) % 4], 'repeat'); ctx.fillRect(0, 0, W, H); ctx.restore();
+}
+function vignette(ctx, a = .45) {
+  const g = ctx.createRadialGradient(W / 2, H * .48, H * .28, W / 2, H * .5, H * .78);
+  g.addColorStop(0, 'rgba(10,12,30,0)'); g.addColorStop(1, `rgba(10,12,30,${a})`);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+}
+function coldTint(ctx, a = .08) { ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = `rgba(150,165,230,${a * 4})`; ctx.globalAlpha = .25; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+function fade(ctx, a) { if (a <= 0) return; ctx.fillStyle = `rgba(8,9,18,${clamp(a)})`; ctx.fillRect(0, 0, W, H); }
+
+// Character rig for the winter-block toon look.
+// Long-necked, sleepy-eyed, flat-coloured people with heavy upper lids and thin ink lines.
+// Coordinates are authored at scale s=1: head ≈ 430 px tall, full figure ≈ 1790 px.
+// drawFigure(ctx, o) — o.x,o.y = ground point between the feet.
+// drawHead(ctx, o)   — o.x,o.y = chin point (used by drawFigure, usable alone for close-ups).
+'use strict';
+
+const CAST = {
+  // The lanky lead from the reference look: orange flat-top buzz cut, black zip hoodie, blue track pants.
+  lanky: { skin: PAL.skin, skinShade: PAL.skinShade, hair: PAL.hair, hairHi: PAL.hairHi, hairShade: PAL.hairShade, hairStyle: 'buzz',
+    hoodie: PAL.hoodie, hoodieHi: PAL.hoodieHi, piping: PAL.piping, pants: PAL.pants, pantsShade: PAL.pantsShade, neck: 1, faceW: 1, faceL: 1 },
+  // Stocky friend: blond buzz, moustache, green-and-lilac jacket.
+  stocky: { skin: '#e2a98f', skinShade: '#c48a72', hair: '#e2b33a', hairHi: '#f0c95a', hairShade: '#b88a22', hairStyle: 'buzz', moustache: 'brush',
+    hoodie: '#5f8a66', hoodieHi: '#9d8fd0', piping: '#3d5a40', pants: PAL.pants, pantsShade: PAL.pantsShade, neck: .35, faceW: 1.35, faceL: .85 },
+  // Old man: navy beanie, droopy grey moustache.
+  oldman: { skin: PAL.skin, skinShade: PAL.skinShade, hair: '#3a3f6e', hairHi: '#4a5090', hairShade: '#2a2e55', hairStyle: 'beanie', moustache: 'walrus', stubble: true,
+    hoodie: '#20222e', hoodieHi: '#2c2f40', piping: '#20222e', pants: '#4a4d63', pantsShade: '#3a3c50', neck: .9, faceW: .9, faceL: 1 },
+};
+
+// ---------- eyes ----------
+// lid: 0 = open, 1 = closed. Default look is sleepy (lid ≈ .45). look = -1..1 horizontal pupil.
+function drawEye(ctx, x, y, rx, ry, lid, look, lookY, skin, lw) {
+  ink(ctx, ellipse(x, y, rx, ry), PAL.eyeW, 0);
+  ctx.save(); ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.clip();
+  // pupil
+  ctx.fillStyle = PAL.ink; ctx.beginPath(); ctx.ellipse(x + look * rx * .5, y + ry * .25 + lookY * ry * .3, rx * .17, rx * .2, 0, 0, Math.PI * 2); ctx.fill();
+  // heavy upper lid
+  const ly = y - ry + lid * ry * 2.05;
+  ctx.fillStyle = skin; ctx.fillRect(x - rx - 2, y - ry - 4, rx * 2 + 4, ly - (y - ry) + 4);
+  ctx.restore();
+  ctx.lineCap = 'round';
+  // eye outline (thin), lid edge (thick, slightly curved), lashes flick at the outer corner
+  stroke(ctx, ellipse(x, y, rx, ry), lw * .5);
+  stroke(ctx, c => { c.moveTo(x - rx * 1.08, ly + ry * .1); c.quadraticCurveTo(x, ly - ry * .22, x + rx * 1.08, ly + ry * .05); }, lw * .95);
+  // crease above and bag below
+  stroke(ctx, c => { c.moveTo(x - rx * .9, y - ry * 1.25); c.quadraticCurveTo(x, y - ry * 1.75, x + rx * .95, y - ry * 1.2); }, lw * .45);
+  stroke(ctx, c => { c.moveTo(x - rx * .7, y + ry * 1.3); c.quadraticCurveTo(x, y + ry * 1.65, x + rx * .75, y + ry * 1.25); }, lw * .4);
+}
+
+// ---------- head ----------
+// o: {x, y, s, cast, lid, look, lookY, mouth (0 closed .. 1 'o'), smirk, turn (-1..1 small head yaw), tilt (rad)}
+function drawHead(ctx, o) {
+  const C = typeof o.cast === 'string' ? CAST[o.cast] : (o.cast || CAST.lanky);
+  const s = o.s ?? 1, lw = (o.lw ?? LW) / s, fw = C.faceW ?? 1, fl = C.faceL ?? 1;
+  ctx.save(); ctx.translate(o.x, o.y); ctx.rotate(o.tilt || 0); ctx.scale(s, s);
+  const X = v => v * fw, Y = v => v * fl, tu = (o.turn || 0) * 10;
+  // ear (right side, behind face edge)
+  ink(ctx, c => { c.moveTo(X(106), Y(-282)); c.bezierCurveTo(X(140), Y(-318), X(170), Y(-260), X(152), Y(-218)); c.bezierCurveTo(X(146), Y(-190), X(124), Y(-176), X(108), Y(-182)); }, C.skin, lw);
+  stroke(ctx, c => { c.moveTo(X(118), Y(-262)); c.bezierCurveTo(X(140), Y(-276), X(150), Y(-240), X(134), Y(-216)); c.quadraticCurveTo(X(124), Y(-206), X(126), Y(-226)); }, lw * .55);
+  // face
+  const face = c => {
+    c.moveTo(X(-34), Y(-6)); c.quadraticCurveTo(X(2), Y(8), X(36), Y(-6));
+    c.quadraticCurveTo(X(88), Y(-36), X(102), Y(-118)); c.lineTo(X(112), Y(-236)); c.lineTo(X(114), Y(-350));
+    c.lineTo(X(-94), Y(-352)); c.lineTo(X(-100), Y(-258));
+    c.quadraticCurveTo(X(-104), Y(-182), X(-84), Y(-110)); c.quadraticCurveTo(X(-66), Y(-40), X(-34), Y(-6)); c.closePath();
+  };
+  ink(ctx, face, C.skin, lw);
+  // cel shade on the far cheek (right) — clipped to face
+  ctx.save(); ctx.beginPath(); face(ctx); ctx.clip();
+  ink(ctx, c => { c.moveTo(X(70), Y(-360)); c.lineTo(X(130), Y(-360)); c.lineTo(X(130), Y(0)); c.lineTo(X(40), Y(0)); c.quadraticCurveTo(X(84), Y(-60), X(82), Y(-150)); c.lineTo(X(84), Y(-260)); c.closePath(); }, C.skinShade, 0);
+  ctx.restore();
+  ink(ctx, face, null, lw);
+  // hair / hat
+  if (C.hairStyle === 'buzz') {
+    const hair = c => { c.moveTo(X(-98), Y(-348)); c.lineTo(X(-108), Y(-400)); c.quadraticCurveTo(X(-108), Y(-432), X(-76), Y(-436)); c.lineTo(X(96), Y(-440)); c.quadraticCurveTo(X(126), Y(-436), X(126), Y(-404)); c.lineTo(X(126), Y(-296)); c.lineTo(X(112), Y(-290)); c.lineTo(X(108), Y(-336)); c.lineTo(X(-20), Y(-356)); c.closePath(); };
+    ink(ctx, hair, C.hair, lw);
+    ctx.save(); ctx.beginPath(); hair(ctx); ctx.clip();
+    ink(ctx, poly([[X(-112), Y(-460)], [X(40), Y(-460)], [X(-20), Y(-414)], [X(-112), Y(-404)]]), C.hairHi, 0);
+    ink(ctx, poly([[X(90), Y(-460)], [X(130), Y(-460)], [X(130), Y(-280)], [X(100), Y(-300)]]), C.hairShade, 0);
+    ctx.restore(); ink(ctx, hair, null, lw);
+    stroke(ctx, c => { c.moveTo(X(106), Y(-338)); c.lineTo(X(70), Y(-380)); }, lw * .5);
+  } else if (C.hairStyle === 'beanie') {
+    const hat = c => { c.moveTo(X(-112), Y(-318)); c.lineTo(X(-112), Y(-420)); c.quadraticCurveTo(X(-100), Y(-520), X(10), Y(-524)); c.quadraticCurveTo(X(124), Y(-520), X(132), Y(-420)); c.lineTo(X(134), Y(-308)); c.closePath(); };
+    ink(ctx, hat, C.hair, lw);
+    ink(ctx, poly([[X(-118), Y(-388)], [X(138), Y(-388)], [X(140), Y(-300)], [X(-118), Y(-308)]]), C.hairHi, lw);
+    for (let i = 0; i < 12; i++) stroke(ctx, c => { const xx = lerp(X(-104), X(128), i / 11); c.moveTo(xx, Y(-384)); c.lineTo(xx + 1, Y(-312)); }, lw * .45);
+  }
+  // features
+  const ex = tu;
+  drawEye(ctx, X(-44) + ex, Y(-234), 30 * fw, 21, o.lid ?? .45, o.look ?? 0, o.lookY ?? 0, C.skin, lw);
+  drawEye(ctx, X(42) + ex, Y(-238), 28 * fw, 20, o.lid ?? .45, o.look ?? 0, o.lookY ?? 0, C.skin, lw);
+  // faint brows
+  ctx.globalAlpha = .7;
+  stroke(ctx, c => { c.moveTo(X(-78) + ex, Y(-282)); c.quadraticCurveTo(X(-46) + ex, Y(-296), X(-16) + ex, Y(-284)); }, lw * .5);
+  stroke(ctx, c => { c.moveTo(X(16) + ex, Y(-286)); c.quadraticCurveTo(X(46) + ex, Y(-300), X(74) + ex, Y(-286)); }, lw * .5);
+  ctx.globalAlpha = 1;
+  // long nose (3/4): bridge → tip → nostril hook
+  stroke(ctx, c => { c.moveTo(X(-4) + ex, Y(-228)); c.quadraticCurveTo(X(-10) + ex, Y(-190), X(-26) + ex, Y(-152)); c.quadraticCurveTo(X(-30) + ex, Y(-138), X(-12) + ex, Y(-138)); c.moveTo(X(6) + ex, Y(-140)); c.quadraticCurveTo(X(20) + ex, Y(-136), X(24) + ex, Y(-150)); }, lw * .8);
+  // nasolabial folds + cheek line (gives the tired, older look)
+  stroke(ctx, c => { c.moveTo(X(32) + ex, Y(-150)); c.quadraticCurveTo(X(48) + ex, Y(-118), X(40) + ex, Y(-92)); }, lw * .5);
+  stroke(ctx, c => { c.moveTo(X(-40) + ex, Y(-150)); c.quadraticCurveTo(X(-54) + ex, Y(-122), X(-48) + ex, Y(-96)); }, lw * .4);
+  stroke(ctx, c => { c.moveTo(X(70), Y(-210)); c.quadraticCurveTo(X(80), Y(-160), X(72), Y(-120)); }, lw * .45);
+  // mouth: full lips, pursed; opens to a small 'o' for exhaling
+  const m = o.mouth || 0, sm = o.smirk || 0, mx = X(-4) + ex, my = Y(-96);
+  if (C.moustache === 'brush') ink(ctx, smooth([[mx - 50, my - 18], [mx, my - 34], [mx + 50, my - 16], [mx + 40, my - 4], [mx, my - 12], [mx - 42, my - 4]]), C.hairShade, lw * .6);
+  if (m > .05) {
+    ink(ctx, ellipse(mx - 4, my, 7 + 4 * m, 5 + 7 * m), '#4a2a22', lw * .6);
+    stroke(ctx, c => { c.moveTo(mx - 26, my - 4); c.quadraticCurveTo(mx, my - 18 - 4 * m, mx + 26, my - 4); }, lw * .55);
+  } else {
+    ink(ctx, c => { c.moveTo(mx - 30, my - 2); c.quadraticCurveTo(mx - 12, my - 14, mx, my - 8); c.quadraticCurveTo(mx + 14, my - 14, mx + 30, my - 2 - sm * 8); c.quadraticCurveTo(mx + 8, my + 18, mx - 30, my - 2); c.closePath(); }, PAL.lip, lw * .55);
+    stroke(ctx, c => { c.moveTo(mx - 30, my - 2); c.quadraticCurveTo(mx, my + 2, mx + 30, my - 2 - sm * 8); }, lw * .75);
+  }
+  if (C.moustache === 'walrus') {
+    ink(ctx, c => { c.moveTo(mx - 60, my + 40); c.quadraticCurveTo(mx - 50, my - 40, mx, my - 36); c.quadraticCurveTo(mx + 50, my - 40, mx + 60, my + 40); c.quadraticCurveTo(mx, my - 4, mx - 60, my + 40); }, C.hair, lw * .6);
+    for (let i = 0; i < 9; i++) stroke(ctx, c => { const a = i / 8; c.moveTo(mx + lerp(-48, 48, a), my - 20); c.lineTo(mx + lerp(-62, 62, a), my + 30); }, lw * .35);
+  }
+  // chin crease
+  stroke(ctx, c => { c.moveTo(mx - 14, my + 40); c.quadraticCurveTo(mx, my + 46, mx + 14, my + 40); }, lw * .4);
+  ctx.restore();
+}
+
+// ---------- full figure ----------
+// o: {x, y, s, cast, t, pose:'pockets', sway, breathe, + head opts (lid, look, mouth, smirk, turn, headTilt)}
+function drawFigure(ctx, o) {
+  const C = typeof o.cast === 'string' ? CAST[o.cast] : (o.cast || CAST.lanky);
+  const s = o.s ?? 1, lw = (o.lw ?? LW) / s, t = o.t || 0;
+  const br = Math.sin(t * 2.4) * (o.breathe ?? 1);
+  ctx.save(); ctx.translate(o.x, o.y); ctx.rotate((o.sway || 0) * Math.sin(t * 1.1) * .012); ctx.scale(s, s);
+
+  // --- legs: track pants with two white stripes, slight contrapposto ---
+  const legL = [[-150, -770], [-24, -770], [-40, -420], [-58, -64], [-130, -64], [-150, -420]];
+  const legR = [[18, -770], [152, -770], [146, -430], [124, -64], [52, -64], [40, -430]];
+  ink(ctx, poly(legR), C.pants, lw);
+  ink(ctx, poly([[118, -770], [152, -770], [146, -430], [124, -64], [96, -64], [118, -430]]), C.pantsShade, 0);
+  ink(ctx, poly(legR), null, lw);
+  ink(ctx, poly(legL), C.pants, lw);
+  for (const [a, b] of [[[-138, -760], [-120, -70]], [[-126, -760], [-108, -70]]]) stroke(ctx, c => { c.moveTo(a[0], a[1]); c.lineTo(b[0] + (a[0] < -130 ? -2 : 0), b[1]); }, lw * 1.1, PAL.stripe);
+  for (const [a, b] of [[[138, -760], [112, -70]], [[126, -760], [100, -70]]]) stroke(ctx, c => { c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); }, lw * 1.1, PAL.stripe);
+  // folds: knees + bunching at ankles
+  for (const [x0, y0, x1, y1] of [[-120, -430, -70, -410], [-110, -170, -66, -150], [-128, -120, -80, -96], [70, -440, 120, -420], [64, -170, 110, -150], [58, -118, 100, -98]]) stroke(ctx, c => { c.moveTo(x0, y0); c.quadraticCurveTo((x0 + x1) / 2, y0 - 14, x1, y1); }, lw * .5);
+  // --- sneakers ---
+  const shoe = (x, dir) => {
+    ink(ctx, c => { c.moveTo(x - 46 * dir, -70); c.quadraticCurveTo(x - 60 * dir, -20, x - 56 * dir, -4); c.lineTo(x + 70 * dir, -4); c.quadraticCurveTo(x + 96 * dir, -10, x + 84 * dir, -36); c.quadraticCurveTo(x + 50 * dir, -52, x + 26 * dir, -74); c.closePath(); }, PAL.shoe, lw);
+    ink(ctx, c => { c.moveTo(x - 58 * dir, -18); c.lineTo(x + 92 * dir, -18); c.quadraticCurveTo(x + 96 * dir, -2, x + 70 * dir, 2); c.lineTo(x - 56 * dir, 2); c.closePath(); }, PAL.sole, lw * .8);
+    stroke(ctx, c => { c.moveTo(x - 10 * dir, -64); c.lineTo(x + 30 * dir, -24); c.moveTo(x + 8 * dir, -66); c.lineTo(x + 46 * dir, -26); }, lw * .9, PAL.stripe);
+  };
+  shoe(-94, -1); shoe(88, 1);
+
+  // --- torso: baggy zip hoodie ---
+  ctx.save(); ctx.translate(0, -770); ctx.scale(1, 1 + br * .006); ctx.translate(0, 770);
+  const torso = [[-206, -1226], [-130, -1270], [130, -1270], [206, -1224], [234, -1150], [240, -1000], [240, -760], [-240, -760], [-240, -1000], [-234, -1150]];
+  // hood bunched behind the neck
+  ink(ctx, smooth([[-160, -1250], [-170, -1310], [-110, -1352], [0, -1362], [116, -1350], [172, -1306], [164, -1248]], false), C.hoodie, lw);
+  ink(ctx, poly(torso), C.hoodie, lw);
+  ink(ctx, poly([[110, -1260], [150, -1272], [218, -1236], [236, -1000], [238, -760], [170, -760], [190, -1000]]), C.hoodieHi, 0);
+  ink(ctx, poly(torso), null, lw);
+  // ribbed hem
+  ink(ctx, poly([[-238, -800], [238, -800], [238, -756], [-238, -756]]), C.hoodie, lw * .8);
+  // piping contour lines (the blue inner outline typical of the look)
+  stroke(ctx, c => { c.moveTo(-200, -1210); c.quadraticCurveTo(-222, -1000, -214, -830); }, lw * .55, C.piping);
+  stroke(ctx, c => { c.moveTo(196, -1206); c.quadraticCurveTo(220, -1000, 212, -830); }, lw * .55, C.piping);
+  // collar zipped up to the throat
+  ink(ctx, c => { c.moveTo(-92, -1300); c.quadraticCurveTo(0, -1250, 92, -1300); c.lineTo(84, -1236); c.quadraticCurveTo(0, -1200, -84, -1236); c.closePath(); }, C.hoodie, lw);
+  stroke(ctx, c => { c.moveTo(-80, -1280); c.quadraticCurveTo(0, -1238, 80, -1280); }, lw * .5, C.piping);
+  // zipper: white tape with teeth
+  ink(ctx, poly([[-6, -1222], [10, -1222], [12, -760], [-4, -760]]), PAL.zip, lw * .5);
+  for (let y = -1210; y < -770; y += 15) stroke(ctx, c => { c.moveTo(-2, y); c.lineTo(8, y + 6); }, lw * .35);
+  ink(ctx, poly([[-8, -1230], [12, -1230], [10, -1196], [-6, -1196]]), '#c9c6bb', lw * .5);
+  // drawstrings
+  for (const [x0, x1, y1] of [[-46, -54, -1060], [52, 62, -1040]]) {
+    stroke(ctx, c => { c.moveTo(x0, -1236); c.quadraticCurveTo(x0 - 4, -1150, x1, y1); }, lw * 1.6);
+    stroke(ctx, c => { c.moveTo(x0, -1236); c.quadraticCurveTo(x0 - 4, -1150, x1, y1); }, lw * .7, C.piping);
+    ink(ctx, poly([[x1 - 5, y1], [x1 + 5, y1], [x1 + 5, y1 + 22], [x1 - 5, y1 + 22]]), PAL.zip, lw * .5);
+  }
+  // kangaroo pocket
+  stroke(ctx, c => { c.moveTo(-150, -800); c.lineTo(-136, -936); c.quadraticCurveTo(0, -952, 138, -936); c.lineTo(152, -800); }, lw * .7);
+  // arms: sleeves hanging, hands tucked into the pocket
+  if ((o.pose || 'pockets') === 'pockets') {
+    for (const d of [-1, 1]) {
+      ink(ctx, c => { c.moveTo(d * 210, -1236); c.quadraticCurveTo(d * 262, -1150, d * 262, -1010); c.quadraticCurveTo(d * 256, -930, d * 200, -900); c.lineTo(d * 128, -906); c.lineTo(d * 134, -946); c.quadraticCurveTo(d * 190, -960, d * 196, -1020); c.quadraticCurveTo(d * 188, -1120, d * 170, -1170); c.closePath(); }, d > 0 ? C.hoodieHi : C.hoodie, lw);
+      stroke(ctx, c => { c.moveTo(d * 236, -1100); c.quadraticCurveTo(d * 246, -1040, d * 236, -980); }, lw * .5, C.piping);
+      stroke(ctx, c => { c.moveTo(d * 214, -1010); c.quadraticCurveTo(d * 230, -1000, d * 240, -1012); }, lw * .45);
+      ink(ctx, poly([[d * 150, -946], [d * 128, -906], [d * 160, -902], [d * 176, -940]]), C.hoodie, lw * .6); // cuff
+    }
+  }
+  ctx.restore();
+
+  // --- long neck ---
+  const nk = 220 * (C.neck ?? 1) + 40;
+  ink(ctx, c => { c.moveTo(-44, -1236); c.quadraticCurveTo(-34, -1236 - nk * .5, -38, -1236 - nk - 20); c.lineTo(44, -1236 - nk - 20); c.quadraticCurveTo(40, -1236 - nk * .5, 50, -1236); c.closePath(); }, C.skin, lw);
+  ink(ctx, c => { c.moveTo(18, -1236 - nk); c.lineTo(42, -1236 - nk); c.quadraticCurveTo(38, -1236 - nk * .5, 48, -1240); c.lineTo(22, -1240); c.closePath(); }, C.skinShade, 0);
+  stroke(ctx, c => { c.moveTo(-6, -1236 - nk * .55); c.quadraticCurveTo(4, -1236 - nk * .62, 10, -1236 - nk * .5); }, lw * .45);
+  ink(ctx, c => { c.moveTo(-92, -1300); c.quadraticCurveTo(0, -1250, 92, -1300); c.lineTo(84, -1236); c.quadraticCurveTo(0, -1200, -84, -1236); c.closePath(); }, C.hoodie, lw); // collar over neck
+  stroke(ctx, c => { c.moveTo(-80, -1280); c.quadraticCurveTo(0, -1238, 80, -1280); }, lw * .5, C.piping);
+  ink(ctx, poly([[-6, -1258], [10, -1258], [12, -1222], [-6, -1222]]), PAL.zip, lw * .5);
+
+  ctx.restore();
+  // head drawn in world space so it can tilt independently
+  const chinY = o.y + (-1236 - nk - 4) * s;
+  drawHead(ctx, { ...o, x: o.x + 4 * s, y: chinY, s, lw: o.lw ?? LW, tilt: o.headTilt || 0 });
+  return { chin: [o.x + 4 * s, chinY], mouth: [o.x + 0 * s, chinY - 96 * s * (C.faceL ?? 1)] };
+}
+
+// Winter-block demo — 6 s, two shots.
+// 1) Wide: panel blocks at night, snowfall, sodium lamp, bus stop; the lanky guy waits, breath puffs, a window lights up.
+// 2) Close-up: he exhales a cloud, his eyes slide to the camera, slow blink, faint smirk.
+
+function streetSet(ctx, t, cam) {
+  withCam(ctx, cam, .25, () => { sky(ctx); snowfall(ctx, t, { n: 70, seed: 21, speed: 55, size: 4, wind: 10 }); });
+  withCam(ctx, cam, .45, () => {
+    panelBlock(ctx, { x: -120, y: 600, w: 640, h: 700, floors: 12, cols: 11, seed: 4, far: true, lit: .3, side: 60, t });
+    panelBlock(ctx, { x: 600, y: 680, w: 560, h: 620, floors: 10, cols: 9, seed: 8, far: true, lit: .25, side: -50, t });
+    const [lx, ly] = streetLamp(ctx, 150, 1330, 420, 1, LW * .6); glow(ctx, lx, ly + 30, 160, '255,190,110', .3);
+  });
+  withCam(ctx, cam, .7, () => {
+    panelBlock(ctx, { x: 110, y: 380, w: 560, h: 940, floors: 14, cols: 7, seed: 13, lit: .42, side: 90, t, onAt: [[2, 9, 1.4], [5, 6, 2.1]] });
+  });
+  withCam(ctx, cam, .85, () => {
+    // ground + far banks
+    ctx.fillStyle = PAL.snowNight; ctx.fillRect(-400, 1290, W + 800, 900);
+    snowBank(ctx, [[-300, 1340], [-100, 1250], [180, 1272], [420, 1240], [700, 1268], [960, 1236], [1300, 1290], [1300, 1400], [-300, 1400]], LW * .7);
+    // tire tracks
+    ctx.globalAlpha = .7;
+    for (const o of [0, 26, 150, 176]) stroke(ctx, c => { c.moveTo(-100, 1480 + o * .4); c.bezierCurveTo(300, 1420 + o, 700, 1560 + o, 1200, 1500 + o); }, LW * .45);
+    ctx.globalAlpha = 1;
+    const [lx, ly] = streetLamp(ctx, 900, 1440, 1000, -1, LW * .9);
+    glow(ctx, lx, ly + 40, 420, '255,186,105', .38);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .12;
+    ctx.fillStyle = '#ffbf70'; ctx.beginPath(); ctx.moveTo(lx - 50, ly + 20); ctx.lineTo(lx + 50, ly + 20); ctx.lineTo(lx + 330, 1700); ctx.lineTo(lx - 420, 1700); ctx.closePath(); ctx.fill(); ctx.restore();
+    busShelter(ctx, 940, 1560, 340, 470, LW * .9);
+    snowSpecks(ctx, -50, 1320, 1150, 1900, 60, 5);
+  });
+}
+
+const FILM = {
+  duration: 6,
+  shots: [
+    { name: 'wide', start: 0, end: 2.75, lw: 6, draw(ctx, t, lt, u) {
+      const cam = { x: lerp(540, 520, E.inOut(u)), y: lerp(930, 1000, E.inOut(u)), zoom: lerp(1, 1.1, E.inOut(u)) };
+      streetSet(ctx, t, cam);
+      withCam(ctx, cam, 1, () => {
+        const tc = twos(t);
+        const lid = (lt > 1.7 && lt < 1.84) ? 1 : .5;
+        const f = drawFigure(ctx, { cast: 'lanky', x: 470, y: 1740, s: .6, t: tc, sway: 1, lid, look: -.5, lookY: .2, mouth: (lt > .45 && lt < .75) || (lt > 1.95 && lt < 2.2) ? .6 : 0, headTilt: -.03, lw: 6.5 });
+        breath(ctx, t, .5, f.mouth[0] - 10, f.mouth[1], { size: 34, dur: 1.4, lw: 4 });
+        breath(ctx, t, 2.0, f.mouth[0] - 10, f.mouth[1], { size: 34, dur: 1.4, lw: 4 });
+        // foreground snow bank (overlaps the shins)
+        snowBank(ctx, [[-200, 1980], [-120, 1700], [120, 1640], [330, 1690], [520, 1660], [720, 1700], [900, 1650], [1250, 1720], [1250, 1980]], 7);
+        stroke(ctx, c => { c.moveTo(60, 1720); c.quadraticCurveTo(200, 1700, 300, 1730); c.moveTo(640, 1740); c.quadraticCurveTo(760, 1715, 860, 1735); }, 3, PAL.snowDeep);
+        snowSpecks(ctx, -50, 1720, 1100, 1900, 30, 6);
+      });
+      snowfall(ctx, t, { n: 90, seed: 31, speed: 140, size: 8, wind: 22 });
+      snowfall(ctx, t, { n: 16, seed: 41, speed: 260, size: 15, wind: 40 });
+    } },
+    { name: 'close', start: 2.75, end: 6, lw: 8, draw(ctx, t, lt, u) {
+      const cam = { x: 540, y: lerp(960, 900, E.inOut(u)), zoom: lerp(1.0, 1.07, E.inOut(u)) };
+      withCam(ctx, cam, .3, () => {
+        sky(ctx, '#2d3b6e', '#4d5f97');
+        // big blurred-feel panel wall behind him (soft, low contrast)
+        ctx.globalAlpha = .9;
+        panelBlock(ctx, { x: -200, y: 260, w: 1500, h: 1900, floors: 9, cols: 8, seed: 17, lit: .35, t, lw: 4, onAt: [[6, 2, 4.4]] });
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = 'rgba(110,130,200,.14)'; ctx.fillRect(-400, -400, W + 800, H + 800); // atmospheric haze
+        glow(ctx, 330, 980, 260, '255,200,120', .25);
+        snowfall(ctx, t, { n: 60, seed: 51, speed: 70, size: 6, wind: 12, alpha: .8 });
+      });
+      glow(ctx, 980, 120, 520, '255,180,100', .32);
+      withCam(ctx, cam, 1, () => {
+        const tc = twos(t), l = twos(lt);
+        const look = l < 1.5 ? -.65 : lerp(-.65, .25, E.inOut(inv(1.5, 1.85, l)));
+        const lookY = l < 1.5 ? .15 : lerp(.15, -.1, inv(1.5, 1.85, l));
+        let lid = .52; if (l > 2.35 && l < 2.55) lid = 1; else if (l >= 2.55) lid = .58;
+        const mouth = l > .35 && l < .95 ? E.sine(inv(.35, .5, l)) * (1 - inv(.8, .95, l)) : 0;
+        const f = drawFigure(ctx, { cast: 'lanky', x: 560, y: 3330, s: 1.5, t: tc, sway: .4, lid, look, lookY, mouth, smirk: E.inOut(inv(2.6, 2.9, l)), headTilt: lerp(-.04, .015, E.inOut(inv(1.4, 2, l))), lw: 9 });
+        breath(ctx, t, 2.75 + .45, f.mouth[0] - 24, f.mouth[1], { size: 80, dur: 1.9, lw: 6 });
+      });
+      snowfall(ctx, t, { n: 40, seed: 61, speed: 180, size: 13, wind: 30 });
+      snowfall(ctx, t, { n: 7, seed: 71, speed: 320, size: 26, wind: 50, alpha: .9 });
+    } },
+  ],
+  post(ctx, t) {
+    coldTint(ctx); vignette(ctx, .5); grain(ctx, t, .08);
+    fade(ctx, 1 - inv(0, .3, t)); fade(ctx, inv(5.7, 6, t));
+  },
+};
+
+(function(){
+  const cv=document.getElementById('film'),ctx=cv.getContext('2d');
+  function renderAt(t){
+    t=Math.max(0,Math.min(FILM.duration-1e-6,t));
+    ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+    const sh=FILM.shots.find(s=>t>=s.start&&t<s.end)||FILM.shots[FILM.shots.length-1];
+    LW=sh.lw||6; ctx.save(); sh.draw(ctx,t,t-sh.start,(t-sh.start)/(sh.end-sh.start)); ctx.restore();
+    if(FILM.post) FILM.post(ctx,t);
+  }
+  window.__film={duration:FILM.duration,scenes:FILM.shots.map(s=>({start:s.start,end:s.end,name:s.name})),renderAt};
+  if(new URLSearchParams(location.search).has('render')){document.body.classList.add('render');renderAt(0);return;}
+  let playing=true,t0=performance.now(),tt=0;const seek=document.getElementById('seek'),tc=document.getElementById('tc'),pp=document.getElementById('pp');
+  pp.onclick=()=>{playing=!playing;pp.textContent=playing?'❚❚':'▶';t0=performance.now()-tt*1000};
+  seek.oninput=()=>{tt=seek.value/1000*FILM.duration;t0=performance.now()-tt*1000;renderAt(tt)};
+  addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();pp.onclick()}});
+  (function loop(){if(playing){tt=((performance.now()-t0)/1000)%FILM.duration;renderAt(tt);seek.value=tt/FILM.duration*1000;tc.textContent=tt.toFixed(2)}requestAnimationFrame(loop)})();
+})();
+</script></body></html>
