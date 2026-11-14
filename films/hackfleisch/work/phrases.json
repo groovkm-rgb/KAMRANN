@@ -1,0 +1,336 @@
+{
+ "duration": 49.397542,
+ "frames30": 1482,
+ "source": "silence-align, hand-fixed against waveform + fricative track (34-43 s re-aligned; list words split)",
+ "segments": [
+  [
+   0.120249,
+   1.79497
+  ],
+  [
+   2.11138,
+   3.41698
+  ],
+  [
+   3.6432,
+   4.77871
+  ],
+  [
+   4.93542,
+   7.46517
+  ],
+  [
+   7.77866,
+   10.0699
+  ],
+  [
+   10.3166,
+   11.5978
+  ],
+  [
+   11.7755,
+   13.4774
+  ],
+  [
+   13.7662,
+   15.2517
+  ],
+  [
+   15.5057,
+   17.706
+  ],
+  [
+   18.0284,
+   20.7071
+  ],
+  [
+   21.0494,
+   21.9094
+  ],
+  [
+   22.1752,
+   23.2315
+  ],
+  [
+   23.5573,
+   24.4597
+  ],
+  [
+   24.7905,
+   25.5796
+  ],
+  [
+   25.7718,
+   27.1312
+  ],
+  [
+   27.4674,
+   29.7348
+  ],
+  [
+   30.1792,
+   30.7949
+  ],
+  [
+   31.0547,
+   31.9267
+  ],
+  [
+   32.2498,
+   33.0397
+  ],
+  [
+   33.3878,
+   34.6048
+  ],
+  [
+   34.7703,
+   37.3404
+  ],
+  [
+   37.4766,
+   37.9063
+  ],
+  [
+   38.2064,
+   39.2723
+  ],
+  [
+   39.8565,
+   40.6002
+  ],
+  [
+   40.9751,
+   43.2719
+  ],
+  [
+   43.6089,
+   45.1347
+  ],
+  [
+   45.4221,
+   46.828
+  ],
+  [
+   47.2406,
+   48.8576
+  ],
+  [
+   49.1169,
+   49.397542
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Die Sägeblätter waren im Hackfleisch versteckt.",
+   "s": 0.12,
+   "e": 1.85,
+   "f0": 4,
+   "f1": 56
+  },
+  {
+   "text": "Ein Hochsicherheitsgefängnis.",
+   "s": 2.11,
+   "e": 3.42,
+   "f0": 63,
+   "f1": 103
+  },
+  {
+   "text": "Zwei verurteilte Mörder.",
+   "s": 3.64,
+   "e": 4.78,
+   "f0": 109,
+   "f1": 143
+  },
+  {
+   "text": "Und eine Mitarbeiterin aus der Gefängnisschneiderei,",
+   "s": 4.93,
+   "e": 7.46,
+   "f0": 148,
+   "f1": 224
+  },
+  {
+   "text": "die sich von einem der beiden um den Finger wickeln lässt.",
+   "s": 7.78,
+   "e": 10.07,
+   "f0": 233,
+   "f1": 302
+  },
+  {
+   "text": "Sie schmuggelt Werkzeug rein:",
+   "s": 10.32,
+   "e": 11.6,
+   "f0": 310,
+   "f1": 348
+  },
+  {
+   "text": "Sägeblätter,",
+   "s": 11.78,
+   "e": 12.48,
+   "f0": 353,
+   "f1": 374
+  },
+  {
+   "text": "Meißel,",
+   "s": 12.5,
+   "e": 12.97,
+   "f0": 375,
+   "f1": 389
+  },
+  {
+   "text": "Bohrer.",
+   "s": 13.02,
+   "e": 13.48,
+   "f0": 391,
+   "f1": 404
+  },
+  {
+   "text": "Versteckt in gefrorenem Hackfleisch.",
+   "s": 13.77,
+   "e": 15.25,
+   "f0": 413,
+   "f1": 458
+  },
+  {
+   "text": "Ein Wärter bringt das Paket direkt zu den beiden.",
+   "s": 15.51,
+   "e": 17.71,
+   "f0": 465,
+   "f1": 531
+  },
+  {
+   "text": "Wochenlang sägen sie sich nachts durch die Stahlwand hinter ihren Zellen.",
+   "s": 18.03,
+   "e": 20.71,
+   "f0": 541,
+   "f1": 621
+  },
+  {
+   "text": "Kriechen durch Gänge,",
+   "s": 21.05,
+   "e": 21.91,
+   "f0": 632,
+   "f1": 657
+  },
+  {
+   "text": "durch ein riesiges Rohr,",
+   "s": 22.18,
+   "e": 23.23,
+   "f0": 665,
+   "f1": 697
+  },
+  {
+   "text": "unter der Mauer durch.",
+   "s": 23.56,
+   "e": 24.46,
+   "f0": 707,
+   "f1": 734
+  },
+  {
+   "text": "Und eines Nachts klettern sie aus einem Gullydeckel.",
+   "s": 24.79,
+   "e": 27.13,
+   "f0": 744,
+   "f1": 814
+  },
+  {
+   "text": "Mitten auf einer Straße – außerhalb des Gefängnisses.",
+   "s": 27.47,
+   "e": 29.73,
+   "f0": 824,
+   "f1": 892
+  },
+  {
+   "text": "In ihren Betten:",
+   "s": 30.18,
+   "e": 30.8,
+   "f0": 905,
+   "f1": 924
+  },
+  {
+   "text": "Puppen aus Klamotten.",
+   "s": 31.05,
+   "e": 31.93,
+   "f0": 932,
+   "f1": 958
+  },
+  {
+   "text": "Und eine Notiz:",
+   "s": 32.25,
+   "e": 33.04,
+   "f0": 968,
+   "f1": 991
+  },
+  {
+   "text": "„Einen schönen Tag noch!“",
+   "s": 33.39,
+   "e": 34.6,
+   "f0": 1002,
+   "f1": 1038
+  },
+  {
+   "text": "Draußen sollte die Frau mit dem Fluchtauto warten.",
+   "s": 34.77,
+   "e": 36.64,
+   "f0": 1043,
+   "f1": 1099
+  },
+  {
+   "text": "Aber sie kriegt Panik.",
+   "s": 36.78,
+   "e": 37.86,
+   "f0": 1103,
+   "f1": 1136
+  },
+  {
+   "text": "Und fährt stattdessen …",
+   "s": 38.21,
+   "e": 39.27,
+   "f0": 1146,
+   "f1": 1178
+  },
+  {
+   "text": "ins Krankenhaus.",
+   "s": 39.85,
+   "e": 40.62,
+   "f0": 1196,
+   "f1": 1219
+  },
+  {
+   "text": "Drei Wochen Großfahndung.",
+   "s": 40.97,
+   "e": 42.12,
+   "f0": 1229,
+   "f1": 1264
+  },
+  {
+   "text": "Dann ist die Flucht vorbei.",
+   "s": 42.17,
+   "e": 43.27,
+   "f0": 1265,
+   "f1": 1298
+  },
+  {
+   "text": "Einer der beiden überlebt sie nicht.",
+   "s": 43.61,
+   "e": 45.13,
+   "f0": 1308,
+   "f1": 1354
+  },
+  {
+   "text": "Und die Frau mit dem Hackfleisch?",
+   "s": 45.42,
+   "e": 46.83,
+   "f0": 1363,
+   "f1": 1405
+  },
+  {
+   "text": "Musste danach selbst ins Gefängnis.",
+   "s": 47.24,
+   "e": 49.37,
+   "f0": 1417,
+   "f1": 1481
+  }
+ ],
+ "total_frames": 1497
+}
