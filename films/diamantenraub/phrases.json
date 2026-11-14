@@ -1,0 +1,295 @@
+{
+ "duration": 58.51425,
+ "frames30": 1755,
+ "source": "silence-align (cost 3.43)",
+ "segments": [
+  [
+   0.124762,
+   1.8612
+  ],
+  [
+   2.15889,
+   2.5334
+  ],
+  [
+   2.66215,
+   3.12914
+  ],
+  [
+   3.3361,
+   4.33231
+  ],
+  [
+   4.66451,
+   6.37825
+  ],
+  [
+   6.63399,
+   7.18925
+  ],
+  [
+   7.4576,
+   8.82429
+  ],
+  [
+   9.10816,
+   10.3937
+  ],
+  [
+   10.6189,
+   12.1058
+  ],
+  [
+   12.2405,
+   13.1177
+  ],
+  [
+   13.4187,
+   14.5572
+  ],
+  [
+   14.8273,
+   16.8073
+  ],
+  [
+   17.0856,
+   18.712
+  ],
+  [
+   19.0403,
+   22.2095
+  ],
+  [
+   22.5766,
+   25.1314
+  ],
+  [
+   25.4352,
+   27.3961
+  ],
+  [
+   27.535,
+   30.321
+  ],
+  [
+   30.7715,
+   31.8222
+  ],
+  [
+   32.0226,
+   32.9212
+  ],
+  [
+   33.2566,
+   35.0427
+  ],
+  [
+   35.3503,
+   35.7341
+  ],
+  [
+   36.0063,
+   37.4266
+  ],
+  [
+   37.8129,
+   40.7537
+  ],
+  [
+   41.3987,
+   43.0492
+  ],
+  [
+   43.4212,
+   45.01
+  ],
+  [
+   45.3485,
+   46.1354
+  ],
+  [
+   46.4453,
+   47.8067
+  ],
+  [
+   48.0273,
+   48.6341
+  ],
+  [
+   48.8464,
+   49.0943
+  ],
+  [
+   49.2258,
+   49.7876
+  ],
+  [
+   50.2009,
+   51.478
+  ],
+  [
+   51.6462,
+   53.9744
+  ],
+  [
+   54.3778,
+   55.3564
+  ],
+  [
+   55.9161,
+   58.1758
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Der gr\u00f6\u00dfte Diamantenraub der Geschichte.",
+   "s": 0.125,
+   "e": 1.861
+  },
+  {
+   "text": "Perfekt geplant.",
+   "s": 2.159,
+   "e": 3.129
+  },
+  {
+   "text": "Und dann verr\u00e4t die Diebe \u2026 ein angebissenes Salamibrot.",
+   "s": 3.336,
+   "e": 6.378
+  },
+  {
+   "text": "Der Tresor:",
+   "s": 6.634,
+   "e": 7.189
+  },
+  {
+   "text": "zwei Stockwerke unter der Erde.",
+   "s": 7.458,
+   "e": 8.824
+  },
+  {
+   "text": "Zehn Sicherheitssysteme.",
+   "s": 9.108,
+   "e": 10.394
+  },
+  {
+   "text": "W\u00e4rmesensoren, Radar,",
+   "s": 10.619,
+   "e": 12.106
+  },
+  {
+   "text": "Magnetfelder.",
+   "s": 12.241,
+   "e": 13.118
+  },
+  {
+   "text": "Und ein Zahlenschloss mit hundert Millionen Kombinationen.",
+   "s": 13.419,
+   "e": 16.807
+  },
+  {
+   "text": "Unknackbar, sagen alle.",
+   "s": 17.086,
+   "e": 18.712
+  },
+  {
+   "text": "Aber einer der Diebe gibt sich jahrelang als Diamantenh\u00e4ndler aus.",
+   "s": 19.04,
+   "e": 22.209
+  },
+  {
+   "text": "Er mietet ein B\u00fcro im Geb\u00e4ude.",
+   "s": 22.577,
+   "e": 25.131
+  },
+  {
+   "text": "Und bekommt dadurch \u2026 ein eigenes Schlie\u00dffach im Tresor.",
+   "s": 25.435,
+   "e": 27.396
+  },
+  {
+   "text": "Er geht ein und aus und schaut sich alles ganz genau an.",
+   "s": 27.535,
+   "e": 30.321
+  },
+  {
+   "text": "Dann, an einem Wochenende,",
+   "s": 30.771,
+   "e": 31.822
+  },
+  {
+   "text": "schl\u00e4gt die Bande zu.",
+   "s": 32.023,
+   "e": 32.921
+  },
+  {
+   "text": "\u00dcber hundert Schlie\u00dff\u00e4cher werden geknackt.",
+   "s": 33.257,
+   "e": 35.043
+  },
+  {
+   "text": "Beute:",
+   "s": 35.35,
+   "e": 35.734
+  },
+  {
+   "text": "\u00fcber hundert Millionen Dollar.",
+   "s": 36.006,
+   "e": 37.427
+  },
+  {
+   "text": "Auf der Flucht wirft einer von ihnen einen M\u00fcllsack in einen Wald.",
+   "s": 37.813,
+   "e": 40.754
+  },
+  {
+   "text": "Ein Anwohner findet ihn und schaut rein:",
+   "s": 41.399,
+   "e": 43.049
+  },
+  {
+   "text": "Umschl\u00e4ge vom Diamantenzentrum.",
+   "s": 43.421,
+   "e": 45.01
+  },
+  {
+   "text": "Ein Videoband.",
+   "s": 45.349,
+   "e": 46.135
+  },
+  {
+   "text": "Und ein halbes Salamibrot.",
+   "s": 46.445,
+   "e": 47.807
+  },
+  {
+   "text": "Auf dem Brot:",
+   "s": 48.027,
+   "e": 49.094
+  },
+  {
+   "text": "DNA.",
+   "s": 49.226,
+   "e": 49.788
+  },
+  {
+   "text": "Die Spur f\u00fchrt direkt zur Bande.",
+   "s": 50.201,
+   "e": 51.478
+  },
+  {
+   "text": "Der Kopf der Bande muss f\u00fcr zehn Jahre ins Gef\u00e4ngnis.",
+   "s": 51.646,
+   "e": 53.974
+  },
+  {
+   "text": "Und die Diamanten?",
+   "s": 54.378,
+   "e": 55.356
+  },
+  {
+   "text": "Sind bis heute zum gr\u00f6\u00dften Teil verschwunden.",
+   "s": 55.916,
+   "e": 58.176
+  }
+ ]
+}
