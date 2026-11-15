@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#fff}</style></head><body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const c = document.getElementById('c'), g = c.getContext('2d'), W = 1920, H = 1080;
+g.fillStyle = '#ffffff'; g.fillRect(0, 0, W, H);
+// soft shadow on the floor under Leon
+const sh = g.createRadialGradient(1440, 1060, 10, 1440, 1060, 420); sh.addColorStop(0, 'rgba(0,0,0,0.12)'); sh.addColorStop(1, 'rgba(0,0,0,0)'); 
+// Leon (right), shocked, holding the phone up
+const card = document.createElement('canvas'); card.width = 1200; card.height = 2000; const cg = card.getContext('2d'); cg.scale(2, 2);
+T.toonChar(new T.Pen(cg), T.LEON.courier, { expr: 'shock', blink: 0, mouth: 'o', L: { x: 90, y: 170 }, R: { x: 470, y: 560 }, headTilt: -4 });
+g.drawImage(card, 1080, -92, 918, 1530);
+// phone in his hand, screen to the viewer
+g.save(); g.translate(1790, 690); g.rotate(-0.15); g.scale(0.9, 0.9);
+g.fillStyle = '#1e1c26'; g.beginPath(); g.roundRect(-95, -170, 190, 340, 26); g.fill(); g.lineWidth = 10; g.strokeStyle = '#1a1416'; g.stroke();
+const sc = g.createLinearGradient(0, -150, 0, 150); sc.addColorStop(0, '#2a5ad0'); sc.addColorStop(1, '#1d3a8a'); g.fillStyle = sc; g.beginPath(); g.roundRect(-80, -152, 160, 304, 14); g.fill();
+g.fillStyle = '#ffe14a'; g.font = '900 30px "DejaVu Sans"'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('1.000.000', 0, -20); g.fillText('.043 €', 0, 20);
+g.restore();
+// little shock lines at his head
+g.lineCap = 'round'; g.strokeStyle = '#1a1416'; g.lineWidth = 12;
+for (const [x0, y0, x1, y1] of [[1300, 150, 1250, 100], [1400, 95, 1385, 30], [1680, 95, 1700, 30], [1780, 150, 1830, 100]]) { g.beginPath(); g.moveTo(x0, y0); g.lineTo(x1, y1); g.stroke(); }
+// text (left): short, high contrast
+g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+g.fillStyle = '#1a1416'; g.font = '900 172px "DejaVu Sans"'; g.fillText('1 MILLIARDE', 70, 500);
+g.font = '900 116px "DejaVu Sans"'; const t2 = 'AUS VERSEHEN', w2 = g.measureText(t2).width;
+g.save(); g.translate(80, 570); g.rotate(-0.025); g.fillStyle = '#e8302a'; g.beginPath(); g.roundRect(-10, 0, w2 + 60, 156, 24); g.fill(); g.fillStyle = '#ffffff'; g.fillText(t2, 20, 120); g.restore();
+window.done = true;
+</script></body></html>
