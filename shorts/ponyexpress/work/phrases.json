@@ -1,0 +1,228 @@
+{
+ "duration": 51.121625,
+ "frames30": 1534,
+ "source": "silence-align (cost 4.30)",
+ "segments": [
+  [
+   0.0,
+   1.54179
+  ],
+  [
+   1.72855,
+   3.69068
+  ],
+  [
+   4.00884,
+   5.70163
+  ],
+  [
+   5.88955,
+   9.23086
+  ],
+  [
+   9.41045,
+   10.8154
+  ],
+  [
+   10.9357,
+   11.944
+  ],
+  [
+   12.1527,
+   13.0286
+  ],
+  [
+   13.2185,
+   13.9779
+  ],
+  [
+   14.449,
+   17.7702
+  ],
+  [
+   18.0251,
+   20.1689
+  ],
+  [
+   20.37,
+   21.1887
+  ],
+  [
+   21.5225,
+   23.1876
+  ],
+  [
+   23.5768,
+   25.8756
+  ],
+  [
+   26.218,
+   29.2572
+  ],
+  [
+   29.5306,
+   30.1273
+  ],
+  [
+   30.4607,
+   32.6412
+  ],
+  [
+   32.7723,
+   35.0128
+  ],
+  [
+   35.297,
+   36.3972
+  ],
+  [
+   36.7536,
+   38.6991
+  ],
+  [
+   38.92,
+   41.7646
+  ],
+  [
+   41.9301,
+   43.0323
+  ],
+  [
+   43.5036,
+   46.2885
+  ],
+  [
+   46.6437,
+   48.1082
+  ],
+  [
+   48.5772,
+   49.1221
+  ],
+  [
+   49.4747,
+   49.6643
+  ],
+  [
+   49.7935,
+   50.729
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Stell dir vor, du bist sechzehn.",
+   "s": 0.0,
+   "e": 1.542
+  },
+  {
+   "text": "Und dein Job ist es,",
+   "s": 1.729,
+   "e": 3.691
+  },
+  {
+   "text": "um dein Leben zu reiten.",
+   "s": 4.009,
+   "e": 5.702
+  },
+  {
+   "text": "Amerika steht kurz vor dem B\u00fcrgerkrieg. Der neue Pr\u00e4sident h\u00e4lt eine Rede.",
+   "s": 5.89,
+   "e": 9.231
+  },
+  {
+   "text": "Und Kalifornien muss sie h\u00f6ren \u2013 Tausende Kilometer entfernt.",
+   "s": 9.41,
+   "e": 11.944
+  },
+  {
+   "text": "Es gibt keine Bahn.",
+   "s": 12.153,
+   "e": 13.029
+  },
+  {
+   "text": "Kein Telefon.",
+   "s": 13.219,
+   "e": 13.978
+  },
+  {
+   "text": "Nur Reiter. Alle f\u00fcnfzehn bis f\u00fcnfundzwanzig Kilometer wartet ein frisches Pferd.",
+   "s": 14.449,
+   "e": 17.77
+  },
+  {
+   "text": "Du springst ab, wirfst die Posttasche r\u00fcber,",
+   "s": 18.025,
+   "e": 20.169
+  },
+  {
+   "text": "springst wieder auf.",
+   "s": 20.37,
+   "e": 21.189
+  },
+  {
+   "text": "Durch W\u00fcste, Schnee und Fl\u00fcsse.",
+   "s": 21.523,
+   "e": 23.188
+  },
+  {
+   "text": "Nach \u00fcber hundert Kilometern \u00fcbernimmt der N\u00e4chste.",
+   "s": 23.577,
+   "e": 25.876
+  },
+  {
+   "text": "Sieben Tage und siebzehn Stunden sp\u00e4ter ist die Rede in Kalifornien.",
+   "s": 26.218,
+   "e": 29.257
+  },
+  {
+   "text": "Rekord.",
+   "s": 29.531,
+   "e": 30.127
+  },
+  {
+   "text": "Aber w\u00e4hrend die Reiter durch die Pr\u00e4rie jagen,",
+   "s": 30.461,
+   "e": 32.641
+  },
+  {
+   "text": "stehen neben ihnen M\u00e4nner und bauen Masten auf.",
+   "s": 32.772,
+   "e": 35.013
+  },
+  {
+   "text": "F\u00fcr einen Draht.",
+   "s": 35.297,
+   "e": 36.397
+  },
+  {
+   "text": "Ein paar Monate sp\u00e4ter ist der Draht fertig:",
+   "s": 36.754,
+   "e": 38.699
+  },
+  {
+   "text": "der Telegraf. Eine Nachricht braucht jetzt nicht mehr Tage.",
+   "s": 38.92,
+   "e": 41.765
+  },
+  {
+   "text": "Sondern Minuten.",
+   "s": 41.93,
+   "e": 43.032
+  },
+  {
+   "text": "Zwei Tage sp\u00e4ter ist alles vorbei. Nach nur achtzehn Monaten.",
+   "s": 43.504,
+   "e": 46.288
+  },
+  {
+   "text": "Die schnellsten Reiter der Welt.",
+   "s": 46.644,
+   "e": 48.108
+  },
+  {
+   "text": "Besiegt \u2026 von einem Draht.",
+   "s": 48.577,
+   "e": 50.729
+  }
+ ]
+}
