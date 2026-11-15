@@ -1,0 +1,12 @@
+<!doctype html><html><body style="margin:0;background:#c9a27a"><canvas id="c" width="1800" height="2000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+{ const ff = new FontFace('Rye', 'url(fonts/rye.woff2)'); await ff.load(); document.fonts.add(ff); }
+const c = document.getElementById('c'), G = c.getContext('2d');
+const cells = window.CELLS || [];
+const mk = () => { const k = document.createElement('canvas'); k.width = 600; k.height = 1000; return k; };
+window.drawCells = (list) => { G.clearRect(0,0,1800,2000); G.fillStyle='#c9a27a'; G.fillRect(0,0,1800,2000);
+  list.forEach((src, i) => { const k = mk(), g = k.getContext('2d'); const p = new T.Pen(g); const fn = new Function('T','p', src); fn(T, p);
+    G.drawImage(k, (i % 3) * 600, Math.floor(i / 3) * 1000); }); return true; };
+window.ready = true;
+</script></body></html>

@@ -1,0 +1,9 @@
+frames/
+stills/
+work/v16.wav
+work/env.npy
+node_modules
+mix_raw.wav
+mix.wav
+web/lib/three.module.js
+web/toon.js
