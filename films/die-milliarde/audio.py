@@ -161,6 +161,86 @@ for (a, b, bpm, pr, st, g, ro) in SECS:
     music[:] = tmp + seg * w
 music[int(597.4 * SR):] = 0
 
+# ================= v2: melodic, easy-listening score (replaces the v1 bed above) =================
+music[:] = 0
+@functools.lru_cache(None)
+def marimba(m, d=0.6):
+    t = tt(d); f = midi(m)
+    s = np.sin(2 * np.pi * f * t) * np.exp(-t * 5.5) + 0.25 * np.sin(2 * np.pi * f * 4.0 * t) * np.exp(-t * 18) + 0.08 * np.sin(2 * np.pi * f * 9.9 * t) * np.exp(-t * 30)
+    return (s * np.minimum(1, t / 0.002)).astype(np.float32)
+@functools.lru_cache(None)
+def epiano(m, d=1.4):
+    t = tt(d); f = midi(m)
+    s = np.sin(2 * np.pi * f * t + 0.6 * np.sin(2 * np.pi * f * t) * np.exp(-t * 6)) * np.exp(-t * 1.6)
+    s *= 1 + 0.12 * np.sin(2 * np.pi * 4.5 * t)
+    return (s * np.minimum(1, t / 0.004) * np.minimum(1, (d - t) / 0.15).clip(0)).astype(np.float32)
+@functools.lru_cache(None)
+def softpad(chord, d):
+    t = tt(d); s = np.zeros_like(t)
+    for m in chord:
+        for det in (-0.07, 0.07):
+            s += np.sin(2 * np.pi * midi(m) * 2 ** (det / 12) * t)
+    a = np.minimum(1, t / 0.8) * np.minimum(1, (d - t) / 0.8).clip(0)
+    return filt((s * a / (2 * len(chord))).astype(np.float32), hi=1400)
+@functools.lru_cache(None)
+def sinebass(m, d):
+    t = tt(d); f = midi(m); return ((np.sin(2 * np.pi * f * t) + 0.15 * np.sin(4 * np.pi * f * t)) * np.minimum(1, t / 0.02) * np.exp(-t / max(0.2, d * 0.8))).astype(np.float32)
+@functools.lru_cache(None)
+def softkit(kind):
+    if kind == 'kick':
+        t = tt(0.3); f = 50 + 60 * np.exp(-t * 25); return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 11)).astype(np.float32)
+    if kind == 'shaker':
+        t = tt(0.07); return filt((rng.standard_normal(len(t)) * np.exp(-t * 60) * np.minimum(1, t / 0.01)).astype(np.float32), lo=5000, hi=10000)
+    if kind == 'rim':
+        t = tt(0.08); return (np.sin(2 * np.pi * 1700 * t) * np.exp(-t * 70) * 0.6 + filt(rng.standard_normal(len(t)).astype(np.float32), lo=2000) * np.exp(-t * 90) * 0.4).astype(np.float32)
+MAJ = [0, 2, 4, 7, 9]; MIN = [0, 3, 5, 7, 10]
+def penta(key, scale, idx):
+    o, k = divmod(idx, 5); return key + 12 * o + scale[k]
+MOTIFS = [[2, None, 4, None, 5, 4, 2, None], [4, None, 5, None, 7, None, 5, 4], [5, 4, 2, None, 1, None, 2, None], [2, None, 1, None, 0, None, None, None],
+          [0, 2, 4, None, 4, None, 2, None], [5, None, 4, 2, 4, None, None, None], [2, 4, 5, None, 7, 5, 4, None], [4, None, 2, None, 1, 0, None, None]]
+def melodic(t0, t1, bpm, key, minor, inst, energy, oct_=0):
+    beat = 60 / bpm; bar = 0; t = t0
+    sc = MIN if minor else MAJ
+    prog = [(0, (0, 3, 7)), (8, (8, 12, 15)), (3, (3, 7, 10)), (10, (10, 14, 17))] if minor else [(0, (0, 4, 7)), (9, (9, 12, 16)), (5, (5, 9, 12)), (7, (7, 11, 14))]
+    lead = {'marimba': lambda m, d: marimba(m, 0.7), 'ep': lambda m, d: epiano(m, round(max(0.6, d), 2)), 'piano': lambda m, d: piano(m, 1.6)}[inst]
+    while t < t1 - 0.05:
+        r, ch = prog[bar % 4]; root = key + r; chord = tuple(key + 12 + c for c in ch)
+        bl = round(min(beat * 4, t1 - t + 0.5), 3)
+        M(softpad(chord, bl), t, 0.10)
+        M(sinebass(root - 12, round(beat * 2, 3)), t, 0.30); M(sinebass(root - 12, round(beat * 2, 3)), t + beat * 2, 0.22)
+        if energy >= 0.6:
+            for k in (0, 2):
+                for n in chord: M(epiano(n, 1.0), t + k * beat, 0.035)
+        phrase = (bar // 4) % 2; mot = MOTIFS[(bar % 4) + 4 * phrase]
+        for k, d_ in enumerate(mot):
+            tb = t + k * beat / 2
+            if d_ is None or tb >= t1: continue
+            m = penta(key + 12 + oct_ * 12, sc, d_ + 2)
+            M(lead(m, beat), tb, 0.20 if inst != 'piano' else 0.24)
+        if energy >= 0.8:
+            for b in range(4):
+                tb = t + b * beat
+                if tb >= t1: break
+                if b % 2 == 0 or energy >= 1.8: M(softkit('kick'), tb, 0.22 * min(1.6, energy))
+                if b % 2 == 1: M(softkit('rim'), tb, 0.08 * energy)
+                M(softkit('shaker'), tb + beat * 0.5, 0.05 * energy)
+                if energy >= 1.4: M(softkit('shaker'), tb, 0.03 * energy)
+        bar += 1; t += beat * 4
+SECS = [(0.0, 9.16, 92, 57, True, 'marimba', 0.9, 0), (9.35, 57.0, 100, 60, False, 'marimba', 1.0, 0), (57.3, 133.1, 100, 60, False, 'marimba', 1.1, 0),
+        (133.14, 147.85, 104, 62, False, 'ep', 1.0, 0), (147.9, 181.35, 108, 62, False, 'marimba', 1.4, 0), (181.4, 204.65, 116, 57, False, 'marimba', 2.0, 0),
+        (204.69, 210.5, 72, 57, True, 'piano', 0.4, 0), (210.57, 216.55, 116, 57, False, 'marimba', 2.0, 0), (216.59, 267.65, 80, 57, True, 'piano', 0.6, 0),
+        (267.72, 304.0, 72, 57, True, 'piano', 0.4, 0), (304.03, 371.15, 84, 65, False, 'ep', 0.7, 0), (371.23, 407.85, 100, 65, False, 'marimba', 1.2, 0),
+        (407.93, 462.95, 96, 57, True, 'marimba', 0.9, 0), (462.98, 485.9, 104, 60, False, 'marimba', 1.0, 0), (485.97, 507.65, 76, 65, False, 'piano', 0.5, 0),
+        (507.69, 547.6, 76, 65, False, 'ep', 0.6, 0), (547.63, 587.5, 100, 60, False, 'marimba', 1.0, 0), (587.57, 597.35, 100, 60, False, 'marimba', 0.9, 0)]
+for (a, b, bpm, key, mn, inst, en, oc) in SECS:
+    tmp = music.copy(); music[:] = 0
+    melodic(a, b, bpm, key, mn, inst, en, oc)
+    seg = music.copy(); i0, i1 = int(a * SR), min(N, int((b + 3) * SR))
+    w = np.zeros(N, np.float32); k = int(0.4 * SR); w[i0:i1] = 1; w[i0:i0 + k] = np.linspace(0, 1, k)
+    e = int(b * SR); r = int(0.6 * SR); w[e:e + r] = np.linspace(1, 0, r)[: max(0, min(r, N - e))]; w[e + r:] = 0
+    music[:] = tmp + seg * w
+music[int(597.4 * SR):] = 0
+
 # ---------------- sfx ----------------
 sfx = np.zeros(N, np.float32)
 X = lambda sig, t0, g=1.0: place(sfx, np.asarray(sig, np.float32), t0, g)
@@ -314,4 +394,14 @@ pcm = (np.clip(mix, -1, 1) * 32767).astype(np.int16)
 with wave.open("mix_raw.wav", "wb") as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
 np.save("/tmp/claude-0/voice_n.npy", voice); np.save("/tmp/claude-0/music.npy", music * duck); np.save("/tmp/claude-0/sfx.npy", sfx * (0.6 + 0.4 * duck))
+def wav1(name, x):
+    y = (np.clip(x, -1, 1) * 32767).astype(np.int16)
+    with wave.open(name, "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes(y.tobytes())
+import os; os.makedirs("out/stems", exist_ok=True)
+end = int(597.4 * SR)
+vv = np.tanh(voice * 0.9) / np.tanh(0.9); vv[end:] = 0
+mm = filt(music * duck, lo=35); mm[end:] = 0
+ss = filt(sfx * (0.6 + 0.4 * duck), lo=35); ss[end:] = 0
+wav1("out/stems/2_seslendirme.wav", vv); wav1("out/stems/3_muzik.wav", mm); wav1("out/stems/4_efektler.wav", ss)
 print("ok", len(pcm) / SR, "voice gain", round(float(gv), 2))
