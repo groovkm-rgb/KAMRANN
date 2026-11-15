@@ -218,7 +218,7 @@ the engine into the skill again, then repackage it.
 
 # NOAH SKILL (horizontal 16:9 explainer videos)
 
-`skills/noah-skill/` (also installed in `.claude/skills/noah-skill/`) makes 1920×1080 / 30 fps silent animations with a single fixed character, NOAH: a white round head with two black oval eyes and white gloves. Outfits, places, seasons and times of day change per video. See `skills/noah-skill/SKILL.md`.
+`skills/noah-skill/` (also installed in `.claude/skills/noah-skill/`) makes 1920×1080 / 30 fps animations with a single fixed character, NOAH: a white round head with two black oval eyes and white gloves. Outfits, places, seasons and times of day change per video. Characters can be drawn from the front or the side, and walking is always in profile. Each video gets synthesized music and sound effects that fit its mood; there is never speech or subtitles. Any text inside a scene is German. See `skills/noah-skill/SKILL.md`.
 
-- Demo: `renders/noah-uyku-demo.mp4` (12 s, "1 ay uyumazsan ne olur?" style)
+- Demo: `renders/noah-uyku-demo.mp4` (12 s, "1 ay uyumazsan ne olur?" style, with music and SFX)
 - Upload to claude.ai: `renders/noah-skill.zip`

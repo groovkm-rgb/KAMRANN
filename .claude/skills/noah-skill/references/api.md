@@ -12,6 +12,8 @@ const { F } = K;                // furniture library
 const ROOM = K.set((g) => { ...paint static background once... });
 FILM({
   fps: 30, fadeIn: 0.3, fadeOut: 0.5,
+  music: { mood: 'quirky', gain: 1, seed: 3, bpm: null, key: null },  // or just 'quirky'; mood 'none' = effects only
+  autoSfx: true,                                                     // whoosh/swish on fade, wipe and flash
   scenes: [
     { name, dur, set: ROOM,
       in: 'cut'|'fade'|'flash'|'dip'|'wipe', inDur: 0.3,         // transition INTO this scene
@@ -20,6 +22,8 @@ FILM({
       shake: [[t, amp], ...],                                     // short impact shakes
       light: 1 | -1,                                              // key light from the left (1) or right (-1)
       grade: { tint: '#5a6ab0', tintA: 0.4, warm: 0.12, vignette: 0.32 },
+      music: 'sleepy',                                            // optional mood change from this scene on
+      sfx: [[t, 'name', gain, {dur, rate, n}], ...],             // sound effects, t in scene seconds
       draw(g, t, K) { ...characters, props that move, fx... },
       post(g, t, K) { ...screen-space overlay (rare)... } },
   ],
@@ -49,6 +53,7 @@ Feet stand at `(x, y)`. A standing figure is about 640 px tall at `s = 1` (with 
 | option | values |
 |---|---|
 | `x, y, s, flip` | position (feet), scale, mirror |
+| `view` | `front` (default) or `side` (profile, facing +x; `flip` faces −x). `walk` defaults to `side`. In side view `armR` is the near arm and `armL` is the far, darker arm. |
 | `pose` | `stand` · `walk` (set `step` = cycles, e.g. `t * 1.4`) · `sit` (on a chair/sedir/sofa seat about 280·s above y) · `lie` (in bed: `(x, y)` is the head centre on the pillow; options `blanket`, `blanketPattern`, `breath`, `handsOut`) |
 | `outfit` | preset name or object (below) |
 | `eyes` | `open` · `wide` · `tired` · `sleepy` · `closed` (asleep) · `happy` (^ ^) · `sad` · `worried` · `angry` · `dizzy` · `x` |
@@ -68,6 +73,9 @@ Feet stand at `(x, y)`. A standing figure is about 640 px tall at `s = 1` (with 
 `chin`, `face` (rub eyes), `hold` (object at the chest), `drink` (cup at the face), `rest` (hand on
 the knee when sitting), `cross`, `front`, `type` (animated keyboard), `forward`, `shrug`, `head`
 (hand on the head), `swing` (walk; follows `step`).
+
+**Side-view arm presets** (`K.SIDE_ARMS`, x = forward): `hang`, `hold`, `drink`, `point`, `forward`,
+`up`, `wave`, `chin`, `face`, `rest`, `type`, `cross`, `hip`, `head`, `shrug`, `swing`.
 
 To animate an arm smoothly:
 `armR: K.key(t, [[0, K.ARMS.hold], [0.8, K.ARMS.drink]])`.
@@ -95,6 +103,38 @@ outfit: { ...K.OUTFITS.office, top: { type: 'sweater', color: '#3f6e5a', pattern
 **Never change the head itself.** It is always the white head with two black oval eyes, no mouth,
 no nose and no skin colour, and the hands are always white gloves. Identity comes from clothes,
 hair and hats.
+
+## Hands and feet
+`K.glove(g, x, y, angle, 'open'|'grip'|'point', mirror)` draws a white glove with four fingers, a
+thumb and a cuff. `K.shoe(g, x, y, side, {type, color})` draws a front shoe and
+`K.shoeSide(g, x, y, {type, color}, rot)` a side shoe with sole, heel and laces. The rig uses them
+automatically.
+
+## Sound (`scripts/audio.py`, run by `render_mp4.mjs`)
+**Never speech or subtitles.** The music is synthesized from `music.mood`. The moods are `quirky`
+(pizzicato + bassoon, the "what happens if" explainer sound), `cozy` (guitar + accordion), `folk`
+(Anatolian hicaz saz + darbuka), `sleepy`, `dreamy` (music box), `mystery`, `tense`, `sad` (piano),
+`happy` (ukulele, claps, whistle), `epic` and `none`. Set `scene.music` to switch the mood at that
+scene (crossfaded).
+
+**Sound effects** (`scene.sfx` entries `[t, name, gain, {dur, rate, n, seed}]`):
+- steps: `step`, `step-wood`, `step-snow`, `step-grass`, `step-street`. `K.steps(t0, t1, rate, name, gain)`
+  makes footsteps that match `step: t * rate`.
+- transitions and cartoon: `whoosh`, `swish`, `pop`, `boing`, `ding`, `sparkle`, `chime`, `slide-up`,
+  `slide-down`, `dizzy`, `fail` (sad trombone), `tada`.
+- time: `tick`, `ticks` (`dur`, `rate`), `clock-fast`, `alarm`, `cuckoo`, `bell`.
+- drink and kitchen: `sip`, `gulp`, `clink`, `cup`, `pour`, `kettle`, `drip`.
+- ambience (use `dur`): `fire`, `wind`, `rain`, `birds`, `crowd`, `car`; also `owl`.
+- body (non-verbal only): `snore`, `heartbeat` (`n`).
+- objects: `typing`, `click`, `phone-buzz`, `notify`, `page`, `rustle`, `writing`, `thud`, `knock` (`n`), `door`.
+
+## German text in the scene
+`K.text(g, str, x, y, {size, font: sans|serif|hand|mono|display, weight, color, align, maxW, rot, outline})`
+(use `\n` for multiple lines). Ready-made props: `F.poster(x, y, w, h, {title, lines, accent, pic})`,
+`F.sign(x, y, w, h, label)`, `F.note(x, y, label)`, `F.chalkboard(x, y, w, h, lines)`,
+`F.calendar(x, y, {label, month})`, the phone item `{time: '03:47', text, lines: [...]}` and the book
+item `{title, lines}`. All text is German, e.g. "Bäckerei", "Schlaf ist wichtig", "Tag 30",
+"Wecker: 06:00".
 
 ## Items: `K.item(g, name, x, y, s, opts)`
 `tea` (with `tilt` and `empty` 0..1), `saucer`, `mug`, `coffee`, `phone` (screen glow), `book`,
@@ -138,7 +178,7 @@ hair and hats.
 `{top}`), `table(x0, x1, y, {cloth})`, `shelf(x0, x1, y, {items: jug, plates, books, jar, plant})`,
 `frame(x, y, w, h, {inner})`, `plant(x, y, {s})`, `wardrobe(x, y)`, `door(x, y, {open})`,
 `counter(x0, x1, y)`, `fridge(x, y)`, `streetLamp(x, y, {on})`, `firewood(x, y)`,
-`calendar(x, y, {label})` (`label` draws text, so use it only when the user wants text),
+`calendar(x, y, {label, month})` (German text, only when the story needs it), `poster`, `sign`, `note`, `chalkboard`,
 `radiator(x, y)`.
 
 Depth order is draw order. Anything that must sit in front of the character (a table edge, a
@@ -149,4 +189,4 @@ blanket, a counter) is drawn in `draw()` after `K.noah`, not inside the set.
 - **Getting tired over time:** animate `bags` from 0 to 1 and `eyes` open → tired → sleepy → closed, add `headTilt`, and finish with `K.zzz`.
 - **Time passing:** spin `K.clockHands`, change `time` between scenes (day → golden → night), or hard-cut through a `flash`.
 - **Explainer beat ("your brain…", "after 7 days…"):** a thought bubble with the idea drawn inside, or a quick location change with `in: 'wipe'`.
-- **Walking across a set:** move `x` with `t`, `step: t * 1.3`, and follow with a function camera `(t) => ({ x: lerp(...), y, z: 1.25 })`.
+- **Walking across a set:** move `x` with `t`, `step: t * 1.3` (profile view is automatic; `flip: true` walks left), add `sfx: K.steps(0, dur, 1.3, 'step-snow')`, and follow with a function camera `(t) => ({ x: lerp(...), y, z: 1.25 })`. Speed: x should move about 230·s px per step cycle so the feet don't slide.

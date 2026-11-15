@@ -13,14 +13,16 @@ const ROOM = K.set((g) => {
   K.window(g, 110, 150, 360, 420, { outside: { season: 'winter', time: 'day' }, plant: true });
   F.sedir(g, 560, 1380, 900);
   F.stove(g, 1640, 900);
+  F.sign(g, 1180, 200, 300, 90, 'Willkommen');   // in-scene text is always German
 });
 const STREET = K.set((g) => { K.outdoor(g, { season: 'winter', time: 'day', groundY: 820 }); });
 
 // ---------------------------------------------------------------- scenes
 FILM({
-  fps: 30, fadeIn: 0.3, fadeOut: 0.5,
+  fps: 30, fadeIn: 0.3, fadeOut: 0.5, music: { mood: 'cozy' },
   scenes: [
     { name: 'tea on the sedir', dur: 3, set: ROOM,
+      sfx: [[0, 'fire', 0.4, { dur: 3 }], [1.05, 'sip', 0.9], [2.3, 'clink', 0.5]],
       cam: [{ t: 0, x: 960, y: 560, z: 1.1 }, { t: 3, x: 970, y: 540, z: 1.2 }],
       draw(g, t) {
         const arm = K.key(t, [[0.3, K.ARMS.hold], [1.0, K.ARMS.drink], [2.0, K.ARMS.drink], [2.6, K.ARMS.hold]]);
@@ -30,6 +32,7 @@ FILM({
         K.steam(g, r.hands[1][0], r.hands[1][1] - 60, t, { s: 0.8, a: tilt > -0.1 ? 0.6 : 0 });
       } },
     { name: 'walk outside', dur: 3, set: STREET, in: 'fade',
+      sfx: [...K.steps(0, 3, 1.4, 'step-snow', 0.7), [0, 'wind', 0.4, { dur: 3 }]],
       cam: (t) => ({ x: K.lerp(800, 1100, K.sm(t / 3)), y: 600, z: 1.25 }),
       draw(g, t) {
         K.noah(g, { x: K.lerp(600, 1250, t / 3), y: 940, s: 0.9, pose: 'walk', step: t * 1.4, outfit: 'winter', armL: 'swing', armR: 'swing', look: [0.5, 0], t });

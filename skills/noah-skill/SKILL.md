@@ -1,6 +1,6 @@
 ---
 name: noah-skill
-description: NOAH SKILL. Produce horizontal 16:9 (1920x1080, 30 fps) 2D animated videos in a warm painted storybook style starring one fixed character, NOAH — a pure-white round head with two black oval eyes (no mouth, no nose), white gloves, and a bean body made of clothes (knit cardigans, scarves, caps). Outfits, places, seasons and times of day change per video (village room, bedroom, office, kitchen, snowy street, summer, night…); the character never does. Rendered with HTML Canvas and exported as a frame-exact MP4 with no audio (the user adds voice-over). Use this skill whenever the user asks for a horizontal / YouTube / 16:9 animation, an explainer such as "1 ay boyunca uyumazsan ne olur?", "ne olur eğer…", "what happens if…", a "NOAH" video, "beyaz kafalı karakter", "bu tarzda yatay video", "çay içen adam animasyonu", or another video in the same style as the Köyde Çay / uyku demo films — even if they don't say NOAH.
+description: NOAH SKILL. Produce horizontal 16:9 (1920x1080, 30 fps) 2D animated videos in a warm painted storybook style starring one fixed character, NOAH — a pure-white round head with two black oval eyes (no mouth, no nose), white gloves, and a bean body made of clothes (knit cardigans, scarves, caps). Outfits, places, seasons and times of day change per video (village room, bedroom, office, kitchen, snowy street, summer, night…); the character never does. Characters are drawn from the front or in side profile (walking is always in profile), with human-like gloved hands and real shoes. Rendered with HTML Canvas and exported as a frame-exact MP4 with a synthesized music bed and sound effects that fit the topic — never speech, never subtitles; any text inside the scene (walls, books, phones, signs) is German. Use this skill whenever the user asks for a horizontal / YouTube / 16:9 animation, an explainer such as "1 ay boyunca uyumazsan ne olur?", "ne olur eğer…", "what happens if…", a "NOAH" video, "beyaz kafalı karakter", "bu tarzda yatay video", "çay içen adam animasyonu", or another video in the same style as the Köyde Çay / uyku demo films — even if they don't say NOAH.
 ---
 
 # NOAH SKILL
@@ -23,11 +23,24 @@ Talk to the user in their language (usually Turkish). Keep code comments in Engl
   (`K.OUTFITS` presets or custom). Keep the warm painted palette, thick dark ink outlines, knit
   and tweed textures, soft light shafts and vignette.
 - **16:9, 1920×1080, 30 fps, exact duration.** The user makes YouTube videos.
-- **No audio.** The MP4 has no audio stream; the user records the voice-over. Time the shots to
-  the script so each beat has its own picture.
-- **No on-screen text by default**: no captions, titles or numbers. Explain with pictures:
-  clocks, calendars without numbers, thought bubbles, day/night changes. Add text (for example
-  `F.calendar({label: '7'})`) only when the user asks for it.
+- **Sound: music + effects, never speech.** No narration, no dialogue, no subtitles or captions. Every
+  video gets a melody that fits its topic and mood (`music` in `FILM`, per-scene changes with
+  `scene.music`) and sound effects on the actions (`scene.sfx`: steps, sips, ticks, wind, doors,
+  pops…). `render_mp4.mjs` synthesizes and mixes them automatically (`scripts/audio.py`, -16 LUFS).
+  Pick the mood on purpose: `quirky` for "what happens if…" explainers, `cozy`/`folk` for village
+  and home life, `sleepy`/`dreamy` for night and sleep, `mystery`, `tense`, `sad`, `happy`, `epic`.
+- **Text inside the scene is always German.** No overlay text at all. When the story needs writing
+  in the world — a poster, a shop sign, a book page, a phone screen, a calendar, a sticky note, a
+  chalkboard — it is German, spelled correctly with ä ö ü ß (`F.poster`, `F.sign`, `F.note`,
+  `F.chalkboard`, `F.calendar({label})`, `K.item(g, 'phone', …, {time, text, lines})`,
+  `K.item(g, 'book', …, {title, lines})`, `K.text`). Don't add text the story doesn't need.
+- **Front and side views.** A walking character is always drawn in profile (`pose: 'walk'` defaults
+  to `view: 'side'`; use `flip: true` to walk left). Use `view: 'side'` for standing, sitting,
+  drinking or pointing toward something on the side, and the front view for reactions to camera.
+  Never show someone walking sideways across the frame while facing the camera.
+- **Human hands and feet.** Hands are white gloves with four fingers, a thumb and a cuff (open,
+  gripping, pointing). Feet wear real shoes with soles, heels and laces. Make hands touch what they
+  hold.
 - **Deterministic.** Everything is a function of `t`; use `K.rng(seed)`, never `Math.random`.
 - **Readable anatomy.** Hands hold what they hold, there are no floating limbs, the face is never
   covered (except a cup at the face during a sip), and characters stand on the floor. You find
@@ -52,7 +65,9 @@ chromium` if it is missing). Work in the user's repo (`films/<slug>/`) or a fold
    bedroom, a home office, a snowy street and a village room with a thought bubble. Static things
    go in `K.set(...)`, which is painted once. Moving things and anything in front of the
    character go in `draw`.
-4. **Build and look:** run `node scripts/build_film.mjs films/<slug>`, then
+4. **Anatomy check for a new outfit:** `node scripts/rig_sheet.mjs <out.jpg> <outfit>` draws front
+   poses, a walk cycle in profile and side poses on one image. Look at the hands and feet.
+5. **Build and look:** run `node scripts/build_film.mjs films/<slug>`, then
    `node scripts/snap.mjs films/<slug> <snapdir>`. That makes three stills per scene and a
    `sheet.jpg`. Open the sheet and check:
    - the character reads clearly (big white head, eyes visible, feet on the floor, seated poses
@@ -61,12 +76,15 @@ chromium` if it is missing). Work in the user's repo (`films/<slug>/`) or a fold
    - nothing important is cropped by the camera;
    - every frame has foreground, midground and background (no empty walls or floors);
    - each scene has a light idea (a window beam, a lamp glow, moonlight, fire);
-   - there is no text unless it was requested.
+   - any text in the scene is German and correctly spelled, and there is no overlay text;
+   - walking characters are in profile.
    Fix the problems and snap again. Expect 2–3 rounds; this is where the quality comes from.
-5. **Render:** `node scripts/render_mp4.mjs films/<slug> [out.mp4]`. It renders every frame and
-   writes H.264 at 1920×1080 with no audio, then prints an ffprobe line. Run long renders in the
+6. **Render:** `node scripts/render_mp4.mjs films/<slug> [out.mp4]`. It renders every frame, writes
+   H.264 at 1920×1080, synthesizes the music and sound effects from the cue sheet, muxes them in as
+   AAC (with `--no-audio` for a silent version), then prints an ffprobe line. Listen-check by reading
+   the printed cue count and moods; if a cue name is unknown, `audio.py` warns. Run long renders in the
    background. Never deliver a half-written file.
-6. **Deliver:** send the MP4 to the user (for example with `SendUserFile`). Report the duration,
+7. **Deliver:** send the MP4 to the user (for example with `SendUserFile`). Report the duration,
    the size, what each scene shows and what you fixed. In a git repo, commit the film folder and
    the MP4 (if it is under about 50 MB) and push when the session expects it.
 
@@ -86,5 +104,5 @@ assets/engine/shell.html      page template (the build inlines the engine + scen
 assets/templates/scenes.template.js
 references/api.md             full API and recipes. Read it before writing scenes.
 examples/uyku-demo/scenes.js  12 s "1 ay uyumazsan" style sample
-scripts/new_film.mjs | build_film.mjs | snap.mjs | render_mp4.mjs
+scripts/new_film.mjs | build_film.mjs | snap.mjs | rig_sheet.mjs | render_mp4.mjs | audio.py
 ```
