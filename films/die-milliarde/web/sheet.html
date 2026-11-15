@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0;background:#f4efe4}</style></head><body><canvas id="c"></canvas>
+<script type="module">
+import * as T from './toon.js';
+const mode = location.hash.slice(1) || 'leon';
+const c = document.getElementById('c'), g = c.getContext('2d');
+const cell = (spec, opts, x, y, s = 0.5, label) => { const cc = document.createElement('canvas'); cc.width = 600; cc.height = 1000; const p = new T.Pen(cc.getContext('2d')); T.toonChar(p, spec, opts);
+  g.drawImage(cc, x, y, 600 * s, 1000 * s); if (label) { g.fillStyle = '#3a2a2a'; g.font = 'bold 26px DejaVu Sans'; g.textAlign = 'center'; g.fillText(label, x + 300 * s, y + 1000 * s + 30); } };
+const title = (t, y) => { g.fillStyle = '#2a1a1a'; g.font = 'bold 40px DejaVu Sans'; g.textAlign = 'left'; g.fillText(t, 40, y); };
+if (mode === 'leon') {
+  c.width = 2400; c.height = 2200; g.fillStyle = '#f4efe4'; g.fillRect(0, 0, c.width, c.height);
+  title('LEON BECKER · 26 · Charakterblatt (Referenz für alle Szenen)', 60);
+  const L = T.LEON; let y = 90;
+  [['courier', 'Kurier (Anfang)'], ['rich', 'Woche 1–4 (lila Anzug)'], ['hoodie', 'nach dem Wendepunkt']].forEach(([k, name], row) => {
+    g.fillStyle = '#5a4a3a'; g.font = 'bold 30px DejaVu Sans'; g.textAlign = 'left'; g.fillText(name, 40, y + 40);
+    cell(L[k], { expr: 'happy' }, 40, y + 50, 0.52, 'vorne');
+    cell(L[k], { expr: 'happy', turn: 0.5, look: 0.5 }, 380, y + 50, 0.52, '3/4');
+    cell(L[k], { expr: 'neutral', turn: 0.95, look: 1 }, 720, y + 50, 0.52, 'Seite');
+    const ex = row === 0 ? ['shock', 'sly', 'worried', 'laugh'] : row === 1 ? ['smug', 'goofy', 'worried', 'determined'] : ['happy', 'laugh', 'sly', 'scared'];
+    ex.forEach((e, i) => cell(L[k], { expr: e, L: i === 1 ? 'wave' : 'hang', R: i === 3 ? 'hip' : 'hang', reflect: row === 0 && i === 0 ? '1.000.000.043' : undefined }, 1100 + i * 320, y + 50, 0.5, e));
+    y += 700;
+  });
+} else {
+  c.width = 2700; c.height = 1300; g.fillStyle = '#f4efe4'; g.fillRect(0, 0, c.width, c.height);
+  title('Nebenfiguren (feste Designs)', 60);
+  const list = [[T.KEREM, 'Kerem', { expr: 'goofy' }], [T.OMA, 'Oma Hilde', { expr: 'happy' }], [T.HAHN, 'Konstantin von Hahn', { expr: 'determined' }], [T.GREY, 'Grauer Mann 1', { expr: 'neutral' }], [T.GREY, 'Grauer Mann 2', { expr: 'neutral' }],
+    [T.DIETER, 'Onkel Dieter', { expr: 'goofy', L: 'wave', holdR: 'suitcase', R: 'hang' }], [T.GIRL, 'Mädchen', { expr: 'happy', holdR: 'drawing', R: 'forward' }], [T.MOTHER, 'Kerems Mutter', { expr: 'happy', holdR: 'pide', R: 'forward' }]];
+  list.forEach(([s, n, o], i) => cell(s, o, 30 + i * 330, 100, 0.52, n));
+  const ex = [[T.BOSS, 'Chef'], [T.SALES, 'Verkäufer'], [T.DJ, 'DJ'], [T.NURSE, 'Krankenschwester'], [T.BUSWOMAN, 'Frau im Bus'], [T.SKATER, 'Junge (Skateboard)'], [T.GUESTS[0], 'Gast'], [T.KIDS[0], 'Kind']];
+  ex.forEach(([s, n], i) => cell(s, { expr: 'happy' }, 30 + i * 330, 700, 0.5, n));
+}
+window.done = true;
+</script></body></html>
