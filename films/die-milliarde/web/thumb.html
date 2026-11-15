@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}</style></head><body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+import * as T from './toon.js';
+import { drawScreen } from './common.js';
+const c = document.getElementById('c'), g = c.getContext('2d'), W = 1920, H = 1080;
+const v = location.hash.slice(1) || 'a';
+// --- sunburst background (purple -> gold)
+const bg = g.createRadialGradient(1250, 520, 50, 1250, 520, 1300); bg.addColorStop(0, '#ffe58a'); bg.addColorStop(0.35, '#f2a43a'); bg.addColorStop(0.7, '#8a2fb0'); bg.addColorStop(1, '#2a0a4a');
+g.fillStyle = bg; g.fillRect(0, 0, W, H);
+g.save(); g.translate(1250, 520); for (let i = 0; i < 28; i++) { g.rotate(Math.PI * 2 / 28); g.fillStyle = i % 2 ? 'rgba(255,255,255,0.10)' : 'rgba(255,220,120,0.08)'; g.beginPath(); g.moveTo(0, 0); g.lineTo(1600, -120); g.lineTo(1600, 120); g.fill(); } g.restore();
+// --- money rain (behind)
+const bill = (x, y, r, s) => { g.save(); g.translate(x, y); g.rotate(r); g.scale(s, s); g.fillStyle = '#86d46a'; g.fillRect(-90, -46, 180, 92); g.lineWidth = 8; g.strokeStyle = '#1a1416'; g.strokeRect(-90, -46, 180, 92); g.strokeStyle = '#3a8a3a'; g.lineWidth = 5; g.strokeRect(-72, -30, 144, 60); g.fillStyle = '#2a7a2a'; g.font = '900 54px DejaVu Sans'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('€', 0, 3); g.restore(); };
+let sd = 3; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+for (let i = 0; i < 26; i++) bill(700 + rnd() * 1250, rnd() * 1080, rnd() * 3, 0.6 + rnd() * 0.6);
+// --- the phone (right), glowing gold
+const ph = document.createElement('canvas'); ph.width = 540; ph.height = 1120; drawScreen(ph.getContext('2d'), { mode: 'bank', amount: '1.000.000.043,00 €', gold: 1, clock: '06:01' });
+g.save(); g.translate(1480, 610); g.rotate(0.12);
+const glow = g.createRadialGradient(0, 0, 50, 0, 0, 520); glow.addColorStop(0, 'rgba(255,240,170,0.95)'); glow.addColorStop(1, 'rgba(255,200,80,0)'); g.fillStyle = glow; g.fillRect(-560, -560, 1120, 1120);
+g.fillStyle = '#16141c'; g.beginPath(); g.roundRect(-205, -405, 410, 810, 46); g.fill(); g.lineWidth = 12; g.strokeStyle = '#1a1416'; g.stroke();
+g.drawImage(ph, -185, -375, 370, 767);
+g.restore();
+// big amount banner over the phone
+g.save(); g.translate(1400, 175); g.rotate(-0.06);
+g.font = '900 96px "DejaVu Sans"'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+g.lineWidth = 26; g.strokeStyle = '#1a1416'; g.strokeText('1.000.000.043 €', 0, 0); g.fillStyle = '#ffe14a'; g.fillText('1.000.000.043 €', 0, 0);
+g.restore();
+// --- Leon, huge, shocked (left)
+const card = document.createElement('canvas'); card.width = 1200; card.height = 2000; const cg = card.getContext('2d'); cg.scale(2, 2);
+T.toonChar(new T.Pen(cg), T.LEON.courier, { expr: 'shock', reflect: '€ € €', L: { x: 120, y: 160 }, R: { x: 480, y: 160 }, blink: 0, mouth: 'open' });
+g.save(); g.shadowColor = 'rgba(0,0,0,0.45)'; g.shadowBlur = 40; g.drawImage(card, -120, -40, 1080 * 1.12, 1800 * 1.12); g.restore();
+// motion lines around the head
+g.lineCap = 'round'; for (let i = 0; i < 14; i++) { const a = -Math.PI * 0.95 + i * 0.14, r0 = 430, r1 = 520 + (i % 3) * 30; g.lineWidth = 14; g.strokeStyle = '#1a1416'; g.beginPath(); g.moveTo(480 + r0 * Math.cos(a), 470 + r0 * Math.sin(a)); g.lineTo(480 + r1 * Math.cos(a), 470 + r1 * Math.sin(a)); g.stroke(); }
+// --- title (German)
+const title = (s, x, y, px, fill, rot = 0) => { g.save(); g.translate(x, y); g.rotate(rot); g.font = `900 ${px}px "DejaVu Sans"`; g.textAlign = 'left'; g.textBaseline = 'alphabetic'; g.lineJoin = 'round'; g.lineWidth = px * 0.22; g.strokeStyle = '#1a1416'; g.strokeText(s, 0, 0); g.fillStyle = fill; g.fillText(s, 0, 0); g.restore(); };
+if (v === 'a') { title('AUS VERSEHEN', 60, 940, 118, '#ffffff', -0.03); title('MILLIARDÄR?!', 60, 1060, 128, '#ffe14a', -0.03); }
+else { title('1 MILLIARDE', 60, 940, 128, '#ffe14a', -0.03); title('NICHT MEINE!', 60, 1060, 118, '#ffffff', -0.03); }
+// vignette
+const vg = g.createRadialGradient(W / 2, H / 2, 500, W / 2, H / 2, 1200); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,0.35)'); g.fillStyle = vg; g.fillRect(0, 0, W, H);
+window.done = true;
+</script></body></html>
