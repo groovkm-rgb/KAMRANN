@@ -1,0 +1,9 @@
+frames/
+stills/
+node_modules
+work/voice16.wav
+work/*.log
+mix_raw.wav
+mix.wav
+web/toon.js
+web/sheet.html
