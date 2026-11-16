@@ -1,0 +1,9 @@
+<!doctype html><html><body style="margin:0;background:#888"><canvas id="c" width="2400" height="2000"></canvas>
+<script type="module">
+import * as T from './toon.js';
+import { CHARS } from './chars.js';
+const g = document.getElementById('c').getContext('2d');
+const list = Object.entries(CHARS);
+list.forEach(([k, v], i) => { g.save(); g.translate((i % 8) * 300, Math.floor(i / 8) * 500); g.scale(0.5, 0.5); try { T.char2({ g }, v.spec, v.opts || {}); } catch (e) { document.title = 'ERR ' + e.message; } g.restore(); g.fillStyle='#000'; g.font='20px sans-serif'; g.fillText(k, (i % 8) * 300 + 10, Math.floor(i / 8) * 500 + 20); });
+window.done = true;
+</script></body></html>
