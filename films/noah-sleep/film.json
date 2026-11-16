@@ -1,0 +1,6 @@
+{
+  "title": "Noah Goes to Sleep",
+  "slug": "noah-sleep",
+  "fps": 30,
+  "modules": ["../../.claude/skills/noah-character/noah.js", "props.js", "scenes.js"]
+}
