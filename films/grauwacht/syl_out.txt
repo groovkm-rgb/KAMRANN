@@ -1,0 +1,220 @@
+rate 0.22303010331802695 cost 516.194632197402
+  0    0.11    4.60  4.49/ 4.59   In der Nacht, als sie mich ins Meer geworfen haben, war ich schon acht
+  1    5.14    6.91  1.77/ 2.14   Zumindest für die Welt da draußen.
+  2    7.32   10.20  2.88/ 3.03   Für meine Mutter, für meine Freunde, für Greta.
+  3   10.62   15.18  4.56/ 4.15   Für alle war Jakob Brenner nur noch ein Name in einer Akte.
+  4   15.53   15.99  0.46/ 1.03   Ein Verbrecher.
+  5   16.31   18.44  2.13/ 2.14   Einer, über den man nicht mehr spricht.
+  6   18.99   23.11  4.12/ 3.93   Ich lag in einem groben Leinensack, eingenäht wie ein Stück Fleisch.
+  7   23.57   27.71  4.14/ 2.81   An meinen Füßen hing eine Eisenkugel.
+  8   28.12   35.23  7.11/ 7.27   Zwei Wärter trugen mich die Treppe hoch, und ich hab gehört, wie einer
+  9   35.45   36.16  0.71/ 0.80   Dann der Wind.
+ 10   36.65   37.20  0.55/ 1.03   Dann das Rauschen.
+ 11   37.50   38.29  0.79/ 1.70   Und dann bin ich gefallen.
+ 12   38.93   40.56  1.63/ 2.14   Aber ich muss vorne anfangen.
+ 13   41.31   42.00  0.69/ 1.25 # Teil 1: Der Hafen
+ 14   42.64   43.58  0.94/ 2.14   Lübeck, Frühjahr 1903.
+ 15   43.99   47.03  3.04/ 4.15   Ich war vierundzwanzig, Schiffszimmermann auf der Werft von Reeder Lin
+ 16   47.31   53.39  6.08/ 5.49   Viel hatte ich nicht, aber ich hatte gute Hände, einen ehrlichen Namen
+ 17   53.82   55.67  1.85/ 2.14   Im Sommer wollten wir heiraten.
+ 18   56.03   57.55  1.52/ 1.92   Und ich hatte Konrad Haller.
+ 19   58.01   60.04  2.03/ 1.70   Den Buchhalter vom Reeder.
+ 20   60.53   65.19  4.66/ 6.16   Immer freundlich, immer mit einem Lächeln, und immer hat er Greta ein 
+ 21   65.55   68.42  2.87/ 3.26   Im April hat Lindqvist mich zum Vorarbeiter gemacht.
+ 22   68.94   71.56  2.62/ 2.81   An dem Abend hab ich gefeiert wie ein König.
+ 23   71.97   74.51  2.54/ 3.26   Drei Tage später brannte das Lager am Hafen ab.
+ 24   75.15   77.77  2.62/ 3.48   Und in meiner Kiste in der Werkstatt fanden sie Briefe.
+ 25   78.10   81.15  3.05/ 2.59   Briefe an Schmuggler, mit meiner Unterschrift.
+ 26   81.51   84.10  2.59/ 2.36   Dazu Geld, das aus der Kasse fehlte.
+ 27   84.54   88.09  3.55/ 2.36   Ich hab diese Briefe nie geschrieben.
+ 28   88.45   90.00  1.55/ 2.14   Aber die Schrift sah aus wie meine.
+ 29   90.33   94.00  3.67/ 4.15   Und wer hatte meine Schrift jeden Tag in den Lohnbüchern vor Augen?
+ 30   94.29   95.30  1.01/ 1.03   Konrad Haller.
+ 31   95.81   97.97  2.16/ 2.59   Der Prozess hat keine zwei Stunden gedauert.
+ 32   98.30   99.37  1.07/ 1.03   Zwanzig Jahre.
+ 33   99.73  101.03  1.30/ 1.03   Festung Grauwacht.
+ 34  101.40  102.42  1.02/ 1.25 # Teil 2: Die Festung
+ 35  102.81  106.95  4.14/ 4.37   Grauwacht ist ein Felsen in der Ostsee, zwei Stunden mit dem Boot vom 
+ 36  107.19  108.17  0.98/ 1.92   Graue Mauern, grauer Himmel, graues Wasser.
+ 37  108.40  109.56  1.16/ 1.92   Wer da reinkommt, kommt nicht mehr raus.
+ 38  109.90  112.58  2.68/ 2.59   Das sagten die Wärter gleich am ersten Tag.
+ 39  112.94  115.08  2.14/ 3.26   Meine Zelle war drei Schritte breit und vier Schritte lang.
+ 40  115.52  118.48  2.96/ 3.70   Ein Strohsack, ein Eimer, ein Fenster so klein wie ein Gesangbuch.
+ 41  119.01  119.77  0.76/ 2.59   Hoch oben, damit man nur den Himmel sieht.
+ 42  119.98  123.39  3.41/ 1.92   Im ersten Jahr hab ich geschrien.
+ 43  123.61  125.60  1.99/ 1.70   Im zweiten hab ich geweint.
+ 44  126.04  131.35  5.31/ 4.82   Im dritten hab ich nur noch dagelegen und die Risse in der Decke gezäh
+ 45  131.87  133.89  2.02/ 1.25   Siebenhundertzwölf.
+ 46  134.25  135.93  1.68/ 1.47   Ich weiß es noch genau.
+ 47  136.22  142.52  6.30/ 2.14   Und dann, eines Nachts, hat es geklopft.
+ 48  142.91  143.46  0.55/ 1.25   Unten in der Wand.
+ 49  143.70  145.52  1.82/ 0.80   Ganz leise.
+ 50  145.88  147.09  1.21/ 0.36   Tock.
+ 51  147.38  148.07  0.69/ 0.58   Tock-tock.
+ 52  148.46  148.81  0.35/ 0.36   Tock.
+ 53  149.02  154.72  5.70/ 1.25 # Teil 3: Der Alte
+ 54  155.27  156.71  1.44/ 4.15   Hinter der Wand saß ein Mann, der sich seit elf Jahren einen Tunnel gr
+ 55  157.15  160.79  3.64/ 1.47   Mit einem Löffelstiel.
+ 56  161.40  164.44  3.04/ 4.37   Er hatte sich verrechnet und war statt am Außenhof bei mir gelandet.
+ 57  164.90  167.48  2.58/ 3.26   Als der erste Stein rausfiel, sah ich zuerst nur ein Auge.
+ 58  167.92  169.39  1.47/ 1.47   Dann einen weißen Bart.
+ 59  170.09  171.92  1.83/ 1.47   Und dann hat er gelacht.
+ 60  172.27  174.68  2.41/ 1.70   „Na sowas“, hat er gesagt.
+ 61  175.21  178.69  3.48/ 3.93   „Ich wollte in die Freiheit, und stattdessen find ich einen Nachbarn.“
+ 62  179.12  180.66  1.54/ 1.47   Er hieß Anselm Weidner.
+ 63  180.86  182.80  1.94/ 2.14   Früher Professor in Heidelberg.
+ 64  183.02  186.34  3.32/ 3.93   Physik, Sternkunde, Chemie, Medizin, er wusste einfach alles.
+ 65  186.72  193.51  6.79/ 7.49   Er hatte ein paar mächtigen Leuten die Wahrheit ins Gesicht gesagt, un
+ 66  194.15  197.08  2.93/ 3.48   Von da an haben wir jede Nacht den Stein rausgenommen.
+ 67  197.69  200.14  2.45/ 1.92 # Teil 4: Die Schule im Dunkeln
+ 68  200.60  204.81  4.21/ 4.82   „Ein Kopf ist das Einzige, was sie dir nicht wegnehmen können“, hat An
+ 69  205.21  206.85  1.64/ 1.70   „Also lass ihn uns füllen.“
+ 70  207.49  209.19  1.70/ 1.70   Und das haben wir gemacht.
+ 71  209.42  210.17  0.75/ 0.80   Jahre lang.
+ 72  210.67  214.11  3.44/ 3.03   Er hat mir Rechnen beigebracht, mit Strichen im Staub.
+ 73  214.63  219.58  4.95/ 4.59   Er hat mir erklärt, warum der Mond das Meer zieht und wann Ebbe und Fl
+ 74  219.85  229.20  9.35/ 8.16   Durch mein kleines Fenster hat er mir die Sterne gezeigt: den Polarste
+ 75  229.49  234.65  5.16/ 3.70   Er hat mir beigebracht, wie man aus Ruß und Wasser Tinte macht.
+ 76  234.97  236.64  1.67/ 1.92   Wie man eine Wunde reinigt.
+ 77  236.86  242.63  5.77/ 4.37   Warum Salzwasser einen Körper trägt, wenn man ruhig bleibt und nicht z
+ 78  243.10  245.99  2.89/ 2.36   Französisch, Englisch, ein bisschen Latein.
+ 79  246.35  248.93  2.58/ 2.81   Und er hat mir beigebracht, Schriften zu lesen.
+ 80  249.32  254.34  5.02/ 5.04   Wie jeder Mensch den Stift anders hält, wie jeder Druck seine eigene S
+ 81  254.88  259.50  4.62/ 4.15   „Eine gefälschte Unterschrift“, hat er gesagt, „ist wie eine Lüge.
+ 82  259.88  262.85  2.97/ 2.36   Sie sieht richtig aus, aber sie zittert.“
+ 83  263.37  268.39  5.02/ 4.59   Und er hat mir das Wichtigste beigebracht: „Hass ist ein schweres Gepä
+ 84  268.72  270.45  1.73/ 1.70   Wer damit schwimmt, geht unter.“
+ 85  271.03  273.55  2.52/ 3.48   Ich bin in diese Zelle als dummer Junge gekommen.
+ 86  273.99  278.13  4.14/ 3.26   Nach fünf Jahren mit Anselm war ich ein anderer Mensch.
+ 87  278.70  279.67  0.97/ 1.47 # Teil 5: Das Geheimnis
+ 88  280.22  283.17  2.95/ 3.03   Im Winter 1911 wurde Anselm krank.
+ 89  283.53  285.36  1.83/ 1.70   Erst ein Husten, dann Fieber.
+ 90  285.71  288.27  2.56/ 2.36   Er wusste, was es war, er war ja Arzt.
+ 91  288.86  292.74  3.88/ 3.26   In seiner letzten Nacht hat er mich ganz nah rangeholt.
+ 92  293.02  294.63  1.61/ 1.92   Seine Hand war kalt wie ein Stein.
+ 93  295.10  296.77  1.67/ 1.70   „Hör zu“, hat er geflüstert.
+ 94  297.08  298.86  1.78/ 1.92   „Meine Familie war mal reich.
+ 95  299.09  299.94  0.85/ 0.58   Sehr reich.
+ 96  300.26  303.44  3.18/ 3.26   Bevor sie mich geholt haben, hab ich alles versteckt.
+ 97  303.74  306.14  2.40/ 1.92   Gold, Edelsteine, Papiere.
+ 98  306.51  308.90  2.39/ 2.81   Auf der Insel Möwenholm, nördlich von Rügen.
+ 99  309.16  311.51  2.35/ 2.36   Da steht ein alter, kaputter Leuchtturm.
+100  311.94  315.46  3.52/ 3.03   Von der Tür aus vierzig Schritte Richtung Polarstern.
+101  315.81  318.31  2.50/ 2.36   Da ist ein Felsen mit einem Kreuz drauf.
+102  318.75  319.55  0.80/ 0.80   Darunter.“
+103  319.99  321.40  1.41/ 1.70   Ich hab den Kopf geschüttelt.
+104  321.75  324.74  2.99/ 2.59   „Was soll ich mit Gold, ich komm hier doch nie raus.“
+105  325.26  326.31  1.05/ 1.25   Er hat gelächelt.
+106  326.59  327.09  0.50/ 0.36   „Doch.
+107  327.52  328.53  1.01/ 0.80   Du kommst raus.
+108  329.01  329.99  0.98/ 1.03   Und zwar mit mir.“
+109  330.55  331.92  1.37/ 1.47   Am Morgen war er tot.
+110  332.45  333.28  0.83/ 1.03 # Teil 6: Der Sack
+111  333.86  337.35  3.49/ 2.81   Die Toten von Grauwacht werden nicht begraben.
+112  337.69  344.55  6.86/ 7.27   Sie werden in einen Sack genäht, kriegen eine Kugel an die Füße und we
+113  345.02  346.92  1.90/ 2.14   Das hatte Anselm mir oft erzählt.
+114  347.62  351.66  4.04/ 4.82   Am Abend haben die Wärter seinen Körper in den Sack gelegt und zugenäh
+115  352.19  354.36  2.17/ 2.36   Dann sind sie Abendessen gegangen.
+116  355.06  362.37  7.31/ 6.82   Ich bin durch das Loch gekrochen, hab mit meinem angeschliffenen Löffe
+117  362.91  367.77  4.86/ 4.82   Ich hab ihn in mein Bett gelegt, das Gesicht zur Wand, die Decke bis ü
+118  368.56  370.33  1.77/ 1.92   „Danke, mein Freund“, hab ich gesagt.
+119  370.92  372.62  1.70/ 2.59   Dann bin ich selber in den Sack gekrochen.
+120  373.07  378.02  4.95/ 6.38   Den Löffel hab ich fest in der Hand gehalten und die Naht von innen, s
+121  378.37  379.89  1.52/ 1.70   Um Mitternacht kamen sie.
+122  380.78  383.13  2.35/ 3.48   Und jetzt sind wir wieder da, wo alles angefangen hat.
+123  383.31  384.81  1.50/ 0.58   Der Wind.
+124  385.17  385.87  0.70/ 0.80   Das Rauschen.
+125  386.12  387.27  1.15/ 0.58   Der Fall.
+126  387.47  387.82  0.35/ 1.47   Das Wasser war eiskalt.
+127  388.23  391.80  3.57/ 1.25   Wie tausend Messer.
+128  392.21  395.44  3.23/ 3.26   Die Kugel hat mich runtergezogen, immer tiefer.
+129  395.73  400.30  4.57/ 4.37   Ich hab den Löffel in den Stoff gerammt, wieder und wieder, bis ein Ri
+130  400.75  402.37  1.62/ 1.92   Dann der Knoten an den Füßen.
+131  402.81  404.22  1.41/ 1.70   Meine Lunge hat gebrannt.
+132  404.43  405.85  1.42/ 1.25   Ich dachte, das war's.
+133  406.35  407.92  1.57/ 1.03   Dann war ich frei.
+134  408.48  412.89  4.41/ 3.93   Ich bin nach oben, hab nach Luft geschnappt und den Himmel gesehen.
+135  413.59  416.84  3.25/ 3.03   Zum ersten Mal seit acht Jahren den ganzen Himmel.
+136  417.15  418.53  1.38/ 1.47 # Teil 7: Die Fischer
+137  418.98  423.17  4.19/ 5.04   Ich hab mich auf den Rücken gelegt, ganz ruhig, wie Anselm es mir beig
+138  423.65  426.67  3.02/ 2.81   Die Flut lief Richtung Osten, weg von der Festung.
+139  427.29  431.21  3.92/ 3.70   Ich hab mich treiben lassen und mich am Polarstern orientiert.
+140  431.87  436.10  4.23/ 4.37   Gegen Morgen hab ich einen kleinen Felsen erreicht, voller Möwendreck.
+141  436.93  440.43  3.50/ 3.70   Da hab ich gelegen und gezittert, bis die Sonne aufging.
+142  441.20  444.20  3.00/ 2.36   Am Mittag kam ein Fischkutter vorbei.
+143  444.64  448.36  3.72/ 3.03   Drei Männer aus Rügen, mit Bärten wie Seehunde.
+144  448.76  452.05  3.29/ 3.03   Ich hab gewinkt, bis meine Arme nicht mehr konnten.
+145  452.53  454.34  1.81/ 1.70   „Schiffbrüchig“, hab ich gesagt.
+146  454.91  457.90  2.99/ 1.92   „Unser Schoner ist gesunken.
+147  458.53  460.19  1.66/ 1.47   Ich bin der Einzige.“
+148  460.47  462.52  2.05/ 1.70   Der Kapitän hieß Hinnerk.
+149  462.85  465.01  2.16/ 1.92   Er hat mich lange angeschaut.
+150  465.44  468.52  3.08/ 3.48   Meine Haare bis zur Schulter, meine Haut weiß wie Papier.
+151  468.82  471.13  2.31/ 2.36   Ich glaube, er hat mir kein Wort geglaubt.
+152  471.73  476.45  4.72/ 5.04   Aber er hat mir eine Decke gegeben und einen Becher heißen Tee mit Rum
+153  477.28  481.65  4.37/ 3.70   „Wer gut mit Holz kann, ist bei uns willkommen“, hat er nur gesagt.
+154  482.50  485.13  2.63/ 3.26   Drei Monate hab ich auf diesem Kutter gearbeitet.
+155  485.63  487.91  2.28/ 3.26   Netze geflickt, das Deck repariert, Fisch ausgenommen.
+156  488.23  492.75  4.52/ 5.49   Mit dem ersten Lohn hab ich mir die Haare schneiden lassen und mir ein
+157  493.11  494.68  1.57/ 1.92   Niemand hätte mich mehr erkannt.
+158  495.12  498.72  3.60/ 4.15   Im Juni hab ich Hinnerk gefragt, ob wir mal nach Möwenholm fahren.
+159  499.17  501.89  2.72/ 2.36   „Da soll's gute Heringsschwärme geben.
+160  502.14  504.79  2.65/ 1.03   Er hat gegrinst.
+161  505.33  507.35  2.02/ 1.92   „Da gibt's nur Möwen und Steine.
+162  508.07  509.77  1.70/ 2.14   Aber er ist trotzdem gefahren.
+163  510.51  511.42  0.91/ 1.03 # Teil 8: Der Schatz
+164  512.02  517.16  5.14/ 3.70   Möwenholm war genau so, wie Anselm es beschrieben hatte.
+165  517.52  522.49  4.97/ 4.15   Kahl, windig, und oben auf dem Hügel ein alter, kaputter Leuchtturm.
+166  523.07  524.91  1.84/ 2.36   Ich hab gewartet, bis es dunkel war.
+167  525.62  531.79  6.17/ 5.49   Dann hab ich mich an die Tür vom Leuchtturm gestellt, den Polarstern g
+168  532.31  533.50  1.19/ 1.03   Vierzig Schritte.
+169  534.30  535.13  0.83/ 0.80   Da war er.
+170  535.55  537.65  2.10/ 1.92   Ein Felsen, halb im Gras versteckt.
+171  538.21  542.20  3.99/ 2.81   Und drauf, ganz verwittert, ein eingeritztes Kreuz.
+172  542.82  544.66  1.84/ 2.36   Ich hab mit bloßen Händen gegraben.
+173  544.96  546.52  1.56/ 1.47   Mit einem Stück Treibholz.
+174  546.81  547.92  1.11/ 1.47   Mit den Fingernägeln.
+175  548.56  550.93  2.37/ 2.36   Nach einer Stunde hab ich Holz gespürt.
+176  551.31  554.51  3.20/ 3.70   Eine Kiste, mit Eisen beschlagen und mit Teer versiegelt.
+177  555.11  558.29  3.18/ 3.93   Als ich den Deckel aufgemacht hab, hat das Mondlicht reingeschienen.
+178  558.74  559.50  0.76/ 0.80   Goldmünzen.
+179  560.03  560.61  0.58/ 0.80   Hunderte.
+180  561.03  563.94  2.91/ 2.36   Rubine, Smaragde, Perlenketten.
+181  564.42  567.38  2.96/ 2.81   Und ganz oben, in Wachstuch gewickelt, ein Brief.
+182  568.18  570.24  2.06/ 2.36   „Für den, der meinen Weg zu Ende geht.
+183  570.51  571.93  1.42/ 1.70   Mach etwas Gutes daraus.
+184  572.40  573.46  1.06/ 0.80   Dein Anselm.“
+185  573.92  577.48  3.56/ 3.48   Ich hab mich in die Erde gesetzt und geweint wie ein Kind.
+186  577.71  578.85  1.14/ 1.25 # Teil 9: Die Wahrheit
+187  579.57  583.36  3.79/ 2.81   Ein halbes Jahr später kam ein Herr nach Lübeck.
+188  583.78  587.19  3.41/ 3.93   Gut gekleidet, mit Bart, einen Hut und einen Stock mit Silberknauf.
+189  587.67  589.31  1.64/ 1.70   Er nannte sich Herr Anselm.
+190  589.71  594.68  4.97/ 5.26   Er hat ein Haus am Wasser gekauft und sich einen Anwalt genommen, den 
+191  595.27  597.74  2.47/ 1.70   Ich wollte keine Rache.
+192  598.22  602.84  4.62/ 1.47   Ich wollte die Wahrheit.
+193  603.17  607.73  4.56/ 5.26   Mein Anwalt hat die alten Gerichtsakten angefordert, mitsamt den gefäl
+194  608.10  611.32  3.22/ 6.16   Daneben haben wir Briefe von Konrad Haller gelegt, die er an Lieferant
+195  611.73  617.19  5.46/ 5.93   Und ich hab dem Richter gezeigt, was Anselm mir beigebracht hatte: das
+196  617.53  618.51  0.98/ 1.92   Derselbe Druck auf dem Strich vom „t“.
+197  618.86  623.68  4.82/ 5.93   Dieselbe Tinte, eine billige Sorte, die damals nur im Kontor vom Reede
+198  624.10  627.29  3.19/ 3.48   Dann kam ein alter Lagerarbeiter in den Zeugenstand.
+199  627.57  632.28  4.71/ 5.71   Er hatte Haller in der Brandnacht gesehen und all die Jahre geschwiege
+200  632.92  636.29  3.37/ 2.81   Konrad Haller wurde im Gerichtssaal ganz blass.
+201  636.92  639.50  2.58/ 2.14   Und dann hat er alles gestanden.
+202  640.12  641.14  1.02/ 1.25 # Teil 10: Nach Hause
+203  641.72  649.30  7.58/ 7.27   Ich bin noch am selben Abend durch die alte Gasse am Hafen gelaufen, z
+204  649.96  651.56  1.60/ 1.92   Greta hat die Tür aufgemacht.
+205  651.96  654.23  2.27/ 2.59   Sie war älter geworden, genau wie ich.
+206  654.64  657.12  2.48/ 2.81   In ihren Haaren waren ein paar graue Strähnen.
+207  657.58  660.25  2.67/ 3.03   Sie hat mich angeschaut und lange gar nichts gesagt.
+208  660.68  662.83  2.15/ 2.81   Dann hat sie mir die Hand auf die Wange gelegt.
+209  663.50  665.66  2.16/ 2.59   „Ich hab's immer gewusst“, hat sie geflüstert.
+210  665.91  668.59  2.68/ 2.14   „Ich hab nie geglaubt, dass du das warst.“
+211  669.09  672.03  2.94/ 3.26   Im Herbst 1912 haben wir geheiratet.
+212  672.41  675.48  3.07/ 3.48   Von Anselms Gold hab ich am Hafen eine Schule gebaut.
+213  675.90  679.16  3.26/ 3.48   Für Arbeiterkinder, die sonst nie lesen lernen würden.
+214  679.50  682.29  2.79/ 2.59   Mathematik, Sternkunde, Chemie, Sprachen.
+215  682.62  685.92  3.30/ 3.26   Alles, was er mir in der Dunkelheit beigebracht hat.
+216  686.51  690.49  3.98/ 3.93   Über dem Eingang steht in goldenen Buchstaben: „Weidner-Schule.
+217  691.01  693.90  2.89/ 3.70   Ein Kopf ist das Einzige, was sie dir nicht wegnehmen können.“
+218  694.57  700.54  5.97/ 5.71   Und manchmal, in klaren Nächten, steh ich mit den Kindern auf dem Dach

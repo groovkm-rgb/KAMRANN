@@ -1,0 +1,514 @@
+[
+ {
+  "i": 1,
+  "section": "Prolog",
+  "start": 0.0,
+  "dur": 10.306,
+  "desc": "Gece: sisli Baltık, gri kaya üstünde Grauwacht Kalesi, ay ışığı",
+  "text": "In der Nacht, als sie mich ins Meer geworfen haben, war ich schon acht Jahre tot."
+ },
+ {
+  "i": 2,
+  "section": "Prolog",
+  "start": 10.306,
+  "dur": 8.359,
+  "desc": "Mum ışığında masa: \"Brenner, Jakob\" yazılı akte",
+  "text": "Für alle war Jakob Brenner nur noch ein Name in einer Akte."
+ },
+ {
+  "i": 3,
+  "section": "Prolog",
+  "start": 18.665,
+  "dur": 14.66,
+  "desc": "İki gardiyan fenerle çuvalı (demir gülleli) taş merdivenden taşıyor",
+  "text": "Ich lag in einem groben Leinensack, eingenäht wie ein Stück Fleisch."
+ },
+ {
+  "i": 4,
+  "section": "Prolog",
+  "start": 33.325,
+  "dur": 7.63,
+  "desc": "Batı duvarı, rüzgâr; çuval denize düşüyor, karanlık",
+  "text": "Dann der Wind."
+ },
+ {
+  "i": 5,
+  "section": "Teil 1",
+  "start": 40.955,
+  "dur": 9.407,
+  "desc": "1903 Lübeck limanı, \"Werft Lindqvist\", yelkenli + buharlı gemiler",
+  "text": "Teil 1: Der Hafen"
+ },
+ {
+  "i": 6,
+  "section": "Teil 1",
+  "start": 50.362,
+  "dur": 12.074,
+  "desc": "Rıhtımda Jakob ve Greta; arka pencerede Konrad bakıyor",
+  "text": "Viel hatte ich nicht, aber ich hatte gute Hände, einen ehrlichen Namen und Greta."
+ },
+ {
+  "i": 7,
+  "section": "Teil 1",
+  "start": 62.436,
+  "dur": 9.138,
+  "desc": "Konrad ofis penceresinden; avluda Lindqvist Jakob'u terfi ettiriyor",
+  "text": "Immer freundlich, immer mit einem Lächeln, und immer hat er Greta ein bisschen zu lange angeschaut."
+ },
+ {
+  "i": 8,
+  "section": "Teil 1",
+  "start": 71.573,
+  "dur": 12.553,
+  "desc": "Akşam meyhanede kutlama → uzakta depo yangını (turuncu ışık)",
+  "text": "An dem Abend hab ich gefeiert wie ein König."
+ },
+ {
+  "i": 9,
+  "section": "Teil 1",
+  "start": 84.127,
+  "dur": 9.957,
+  "desc": "Atölyede sandık: sahte mektuplar, para, Lohnbuch",
+  "text": "Dazu Geld, das aus der Kasse fehlte."
+ },
+ {
+  "i": 10,
+  "section": "Teil 1",
+  "start": 94.083,
+  "dur": 8.958,
+  "desc": "Mahkeme salonu: Konrad dinleyicilerde; kürsü, yüksek pencereler, karar \"20 Jahre\"",
+  "text": "Konrad Haller."
+ },
+ {
+  "i": 11,
+  "section": "Teil 2",
+  "start": 103.041,
+  "dur": 12.024,
+  "desc": "Sisli denizde kayıkla Grauwacht'a yaklaşım",
+  "text": "Grauwacht ist ein Felsen in der Ostsee, zwei Stunden mit dem Boot vom Festland."
+ },
+ {
+  "i": 12,
+  "section": "Teil 2",
+  "start": 115.065,
+  "dur": 13.222,
+  "desc": "Gardiyan hücre kapısını açar: saman yatak, kova, küçük pencere",
+  "text": "Das sagten die Wärter gleich am ersten Tag."
+ },
+ {
+  "i": 13,
+  "section": "Teil 2",
+  "start": 128.287,
+  "dur": 11.105,
+  "desc": "Hücrede yıllar: pencerede, oturur, yatar; tavan çatlakları, çentikler",
+  "text": "Hoch oben, damit man nur den Himmel sieht."
+ },
+ {
+  "i": 14,
+  "section": "Teil 2",
+  "start": 139.392,
+  "dur": 9.128,
+  "desc": "Gece, ay huzmesi; duvarın dibinden tık-tık",
+  "text": "Siebenhundertzwölf."
+ },
+ {
+  "i": 15,
+  "section": "Teil 3",
+  "start": 148.52,
+  "dur": 8.119,
+  "desc": "Kesit: karşı hücrede Anselm tünelde kaşık sapıyla kazıyor",
+  "text": "Teil 3: Der Alte"
+ },
+ {
+  "i": 16,
+  "section": "Teil 3",
+  "start": 156.639,
+  "dur": 12.923,
+  "desc": "Taş düşer: delikte bir göz, sonra beyaz sakal",
+  "text": "Er hatte sich verrechnet und war statt am Außenhof bei mir gelandet."
+ },
+ {
+  "i": 17,
+  "section": "Teil 3",
+  "start": 169.561,
+  "dur": 9.018,
+  "desc": "İki hücre kesiti: Anselm güler, \"Nachbar\"",
+  "text": "„Na sowas“, hat er gesagt."
+ },
+ {
+  "i": 18,
+  "section": "Teil 3",
+  "start": 178.579,
+  "dur": 15.01,
+  "desc": "Anısı: Heidelberg'de kürsüde profesör, kara tahta",
+  "text": "Früher Professor in Heidelberg."
+ },
+ {
+  "i": 19,
+  "section": "Teil 3",
+  "start": 193.589,
+  "dur": 11.045,
+  "desc": "Her gece taş çıkarılır, mum ışığında sohbet",
+  "text": "Von da an haben wir jede Nacht den Stein rausgenommen."
+ },
+ {
+  "i": 20,
+  "section": "Teil 4",
+  "start": 204.634,
+  "dur": 14.62,
+  "desc": "Tozda sayılar; ay ve gelgit çizimi",
+  "text": "„Also lass ihn uns füllen.“"
+ },
+ {
+  "i": 21,
+  "section": "Teil 4",
+  "start": 219.254,
+  "dur": 11.105,
+  "desc": "Küçük pencereden yıldızlar: Kutup Yıldızı, Büyük Ayı",
+  "text": "Durch mein kleines Fenster hat er mir die Sterne gezeigt: den Polarstern, den Großen Wagen, und wie man mit ihnen nachts übers Wasser findet."
+ },
+ {
+  "i": 22,
+  "section": "Teil 4",
+  "start": 230.359,
+  "dur": 12.114,
+  "desc": "İsle mürekkep yapımı, yara temizleme, tuzlu su çizimi",
+  "text": "Er hat mir beigebracht, wie man aus Ruß und Wasser Tinte macht."
+ },
+ {
+  "i": 23,
+  "section": "Teil 4",
+  "start": 242.473,
+  "dur": 11.764,
+  "desc": "Diller ve el yazısı karşılaştırması",
+  "text": "Französisch, Englisch, ein bisschen Latein."
+ },
+ {
+  "i": 24,
+  "section": "Teil 4",
+  "start": 254.237,
+  "dur": 8.479,
+  "desc": "Sahte imza: titreyen çizgi büyüteçte",
+  "text": "„Eine gefälschte Unterschrift“, hat er gesagt, „ist wie eine Lüge."
+ },
+ {
+  "i": 25,
+  "section": "Teil 4",
+  "start": 262.716,
+  "dur": 10.606,
+  "desc": "\"Hass ist ein schweres Gepäck\" – sakin Jakob, el omuzda",
+  "text": "Und er hat mir das Wichtigste beigebracht: „Hass ist ein schweres Gepäck, Jakob."
+ },
+ {
+  "i": 26,
+  "section": "Teil 4",
+  "start": 273.321,
+  "dur": 11.704,
+  "desc": "Zaman geçer: kış, uzun saç; Anselm öksürüyor",
+  "text": "Nach fünf Jahren mit Anselm war ich ein anderer Mensch."
+ },
+ {
+  "i": 27,
+  "section": "Teil 5",
+  "start": 285.026,
+  "dur": 9.377,
+  "desc": "Son gece: Jakob Anselm'in yanında, elini tutuyor",
+  "text": "Er wusste, was es war, er war ja Arzt."
+ },
+ {
+  "i": 28,
+  "section": "Teil 5",
+  "start": 294.403,
+  "dur": 11.395,
+  "desc": "\"Hör zu\": düşünce balonunda hazine",
+  "text": "„Hör zu“, hat er geflüstert."
+ },
+ {
+  "i": 29,
+  "section": "Teil 5",
+  "start": 305.798,
+  "dur": 13.462,
+  "desc": "Tozda harita: ada, fener, 40 adım → Kutup Yıldızı, haçlı kaya",
+  "text": "Auf der Insel Möwenholm, nördlich von Rügen."
+ },
+ {
+  "i": 30,
+  "section": "Teil 5",
+  "start": 319.259,
+  "dur": 10.546,
+  "desc": "Jakob başını sallar; Anselm gülümser",
+  "text": "Ich hab den Kopf geschüttelt."
+ },
+ {
+  "i": 31,
+  "section": "Teil 5",
+  "start": 329.805,
+  "dur": 14.451,
+  "desc": "Sabah soğuk ışık; örtülü beden; Jakob başı eğik",
+  "text": "Am Morgen war er tot."
+ },
+ {
+  "i": 32,
+  "section": "Teil 6",
+  "start": 344.256,
+  "dur": 10.026,
+  "desc": "Gardiyanlar Anselm'i çuvala diker, akşam yemeğine gider",
+  "text": "Das hatte Anselm mir oft erzählt."
+ },
+ {
+  "i": 33,
+  "section": "Teil 6",
+  "start": 354.282,
+  "dur": 13.482,
+  "desc": "Jakob delikten geçer, dikişi söker, Anselm'i yatağına yatırır",
+  "text": "Ich bin durch das Loch gekrochen, hab mit meinem angeschliffenen Löffel die Naht aufgemacht und Anselm rausgeholt."
+ },
+ {
+  "i": 34,
+  "section": "Teil 6",
+  "start": 367.764,
+  "dur": 9.797,
+  "desc": "\"Danke, mein Freund\" – çuvala girer, dikişi içten çeker",
+  "text": "„Danke, mein Freund“, hab ich gesagt."
+ },
+ {
+  "i": 35,
+  "section": "Teil 6",
+  "start": 377.561,
+  "dur": 9.847,
+  "desc": "Gece yarısı: batı duvarında atış, düşüş (ölçülü gerilim)",
+  "text": "Um Mitternacht kamen sie."
+ },
+ {
+  "i": 36,
+  "section": "Teil 6",
+  "start": 387.408,
+  "dur": 12.503,
+  "desc": "Su altı: koyu mavi, kabarcıklar, kaşıkla çuvalın yırtılması",
+  "text": "Das Wasser war eiskalt."
+ },
+ {
+  "i": 37,
+  "section": "Teil 6",
+  "start": 399.911,
+  "dur": 12.823,
+  "desc": "Düğüm çözülür, yüzeye çıkış",
+  "text": "Dann der Knoten an den Füßen."
+ },
+ {
+  "i": 38,
+  "section": "Teil 6",
+  "start": 412.733,
+  "dur": 10.046,
+  "desc": "Sırtüstü yüzer, yıldızlı gökyüzünün tamamı",
+  "text": "Zum ersten Mal seit acht Jahren den ganzen Himmel."
+ },
+ {
+  "i": 39,
+  "section": "Teil 7",
+  "start": 422.78,
+  "dur": 8.209,
+  "desc": "Geniş gece denizi, uzakta kale, Kutup Yıldızı",
+  "text": "Die Flut lief Richtung Osten, weg von der Festung."
+ },
+ {
+  "i": 40,
+  "section": "Teil 7",
+  "start": 430.989,
+  "dur": 9.317,
+  "desc": "Şafak: martı pisliğiyle dolu küçük kaya",
+  "text": "Gegen Morgen hab ich einen kleinen Felsen erreicht, voller Möwendreck."
+ },
+ {
+  "i": 41,
+  "section": "Teil 7",
+  "start": 440.306,
+  "dur": 11.315,
+  "desc": "Öğlen: ahşap kutter yaklaşır, Jakob el sallar",
+  "text": "Am Mittag kam ein Fischkutter vorbei."
+ },
+ {
+  "i": 42,
+  "section": "Teil 7",
+  "start": 451.621,
+  "dur": 10.306,
+  "desc": "Güvertede Kaptan Hinnerk Jakob'a uzun uzun bakar",
+  "text": "„Schiffbrüchig“, hab ich gesagt."
+ },
+ {
+  "i": 43,
+  "section": "Teil 7",
+  "start": 461.927,
+  "dur": 14.411,
+  "desc": "Battaniye, rumlu çay; uzun saç",
+  "text": "Meine Haare bis zur Schulter, meine Haut weiß wie Papier."
+ },
+ {
+  "i": 44,
+  "section": "Teil 7",
+  "start": 476.338,
+  "dur": 12.593,
+  "desc": "Güverte montajı: ağ onarma, tamir, balık temizleme",
+  "text": "„Wer gut mit Holz kann, ist bei uns willkommen“, hat er nur gesagt."
+ },
+ {
+  "i": 45,
+  "section": "Teil 7",
+  "start": 488.931,
+  "dur": 11.544,
+  "desc": "Kısa saç, sakal; dümende Hinnerk ile",
+  "text": "Mit dem ersten Lohn hab ich mir die Haare schneiden lassen und mir einen Bart wachsen lassen."
+ },
+ {
+  "i": 46,
+  "section": "Teil 7",
+  "start": 500.475,
+  "dur": 9.048,
+  "desc": "Gün batımında uzaktaki adaya yol",
+  "text": "„Da soll's gute Heringsschwärme geben."
+ },
+ {
+  "i": 47,
+  "section": "Teil 8",
+  "start": 509.523,
+  "dur": 12.543,
+  "desc": "Möwenholm: çıplak tepe, yıkık fener, rüzgârda otlar",
+  "text": "Teil 8: Der Schatz"
+ },
+ {
+  "i": 48,
+  "section": "Teil 8",
+  "start": 522.066,
+  "dur": 11.215,
+  "desc": "Gece: fener kapısı, Kutup Yıldızı, 40 adım",
+  "text": "Ich hab gewartet, bis es dunkel war."
+ },
+ {
+  "i": 49,
+  "section": "Teil 8",
+  "start": 533.281,
+  "dur": 8.509,
+  "desc": "Ay ışığında haç oyulmuş kaya",
+  "text": "Da war er."
+ },
+ {
+  "i": 50,
+  "section": "Teil 8",
+  "start": 541.789,
+  "dur": 12.273,
+  "desc": "Kazma: eller, dalgaağacı; demirli sandık",
+  "text": "Ich hab mit bloßen Händen gegraben."
+ },
+ {
+  "i": 51,
+  "section": "Teil 8",
+  "start": 554.063,
+  "dur": 13.052,
+  "desc": "Kapak açılır: altın, yakut, zümrüt, inci, ay ışığı",
+  "text": "Als ich den Deckel aufgemacht hab, hat das Mondlicht reingeschienen."
+ },
+ {
+  "i": 52,
+  "section": "Teil 8",
+  "start": 567.115,
+  "dur": 12.683,
+  "desc": "Mektup (mumlu bez) yakın plan; Jakob oturup ağlar",
+  "text": "„Für den, der meinen Weg zu Ende geht."
+ },
+ {
+  "i": 53,
+  "section": "Teil 9",
+  "start": 579.798,
+  "dur": 8.818,
+  "desc": "1912 Lübeck: şık bey (şapka, gümüş başlı baston) rıhtımda",
+  "text": "Ein halbes Jahr später kam ein Herr nach Lübeck."
+ },
+ {
+  "i": 54,
+  "section": "Teil 9",
+  "start": 588.616,
+  "dur": 8.499,
+  "desc": "Deniz kenarındaki ev: avukat ve Jakob",
+  "text": "Er hat ein Haus am Wasser gekauft und sich einen Anwalt genommen, den besten der Stadt."
+ },
+ {
+  "i": 55,
+  "section": "Teil 9",
+  "start": 597.115,
+  "dur": 9.867,
+  "desc": "Avukat masası: eski dosyalar, sahte ve gerçek mektuplar yan yana",
+  "text": "Mein Anwalt hat die alten Gerichtsakten angefordert, mitsamt den gefälschten Briefen."
+ },
+ {
+  "i": 56,
+  "section": "Teil 9",
+  "start": 606.981,
+  "dur": 9.417,
+  "desc": "Mahkeme: \"J\" kıvrımındaki titreme büyütülmüş",
+  "text": "Und ich hab dem Richter gezeigt, was Anselm mir beigebracht hatte: dasselbe Zittern im Bogen vom „J“."
+ },
+ {
+  "i": 57,
+  "section": "Teil 9",
+  "start": 616.399,
+  "dur": 10.026,
+  "desc": "Mürekkep şişesi delil; yaşlı depo işçisi tanık kürsüsüne",
+  "text": "Dieselbe Tinte, eine billige Sorte, die damals nur im Kontor vom Reeder benutzt wurde."
+ },
+ {
+  "i": 58,
+  "section": "Teil 9",
+  "start": 626.425,
+  "dur": 12.533,
+  "desc": "Tanık konuşur; Haller sararır, itiraf eder",
+  "text": "Er hatte Haller in der Brandnacht gesehen und all die Jahre geschwiegen, weil er Angst hatte."
+ },
+ {
+  "i": 59,
+  "section": "Teil 10",
+  "start": 638.958,
+  "dur": 9.827,
+  "desc": "Akşam, gaz lambalı eski sokak, mavi panjurlu ev",
+  "text": "Teil 10: Nach Hause"
+ },
+ {
+  "i": 60,
+  "section": "Teil 10",
+  "start": 648.785,
+  "dur": 10.706,
+  "desc": "Greta kapıyı açar; birkaç gri tel",
+  "text": "Greta hat die Tür aufgemacht."
+ },
+ {
+  "i": 61,
+  "section": "Teil 10",
+  "start": 659.491,
+  "dur": 8.399,
+  "desc": "Eli yanağında: \"Ich hab's immer gewusst\"",
+  "text": "Dann hat sie mir die Hand auf die Wange gelegt."
+ },
+ {
+  "i": 62,
+  "section": "Teil 10",
+  "start": 667.889,
+  "dur": 10.396,
+  "desc": "Sonbahar düğünü; arkada iskeleli okul inşaatı",
+  "text": "Im Herbst 1912 haben wir geheiratet."
+ },
+ {
+  "i": 63,
+  "section": "Teil 10",
+  "start": 678.285,
+  "dur": 11.494,
+  "desc": "Okul: pencerelerde sınıf, kapıda \"Weidner-Schule\"",
+  "text": "Mathematik, Sternkunde, Chemie, Sprachen."
+ },
+ {
+  "i": 64,
+  "section": "Teil 10",
+  "start": 689.78,
+  "dur": 10.22,
+  "desc": "Gece çatıda çocuklarla Kutup Yıldızı",
+  "text": "Ein Kopf ist das Einzige, was sie dir nicht wegnehmen können.“"
+ }
+]

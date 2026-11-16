@@ -1,0 +1,1754 @@
+[
+{
+"text": "In der Nacht, als sie mich ins Meer geworfen haben, war ich schon acht Jahre tot.",
+"para": 0,
+"head": false,
+"n": 20.6,
+"start": 0.11,
+"end": 4.6
+},
+{
+"text": "Zumindest für die Welt da draußen.",
+"para": 1,
+"head": false,
+"n": 9.6,
+"start": 5.14,
+"end": 6.91
+},
+{
+"text": "Für meine Mutter, für meine Freunde, für Greta.",
+"para": 1,
+"head": false,
+"n": 13.6,
+"start": 7.32,
+"end": 10.2
+},
+{
+"text": "Für alle war Jakob Brenner nur noch ein Name in einer Akte.",
+"para": 1,
+"head": false,
+"n": 18.6,
+"start": 10.62,
+"end": 15.18
+},
+{
+"text": "Ein Verbrecher.",
+"para": 1,
+"head": false,
+"n": 4.6,
+"start": 15.53,
+"end": 15.99
+},
+{
+"text": "Einer, über den man nicht mehr spricht.",
+"para": 1,
+"head": false,
+"n": 9.6,
+"start": 16.31,
+"end": 18.44
+},
+{
+"text": "Ich lag in einem groben Leinensack, eingenäht wie ein Stück Fleisch.",
+"para": 2,
+"head": false,
+"n": 17.6,
+"start": 18.99,
+"end": 23.11
+},
+{
+"text": "An meinen Füßen hing eine Eisenkugel.",
+"para": 2,
+"head": false,
+"n": 12.6,
+"start": 23.57,
+"end": 27.71
+},
+{
+"text": "Zwei Wärter trugen mich die Treppe hoch, und ich hab gehört, wie einer gesagt hat: „Der Alte ist ja schwerer, als er aussieht.“",
+"para": 2,
+"head": false,
+"n": 32.6,
+"start": 28.12,
+"end": 35.23
+},
+{
+"text": "Dann der Wind.",
+"para": 3,
+"head": false,
+"n": 3.6,
+"start": 35.45,
+"end": 36.16
+},
+{
+"text": "Dann das Rauschen.",
+"para": 3,
+"head": false,
+"n": 4.6,
+"start": 36.65,
+"end": 37.2
+},
+{
+"text": "Und dann bin ich gefallen.",
+"para": 3,
+"head": false,
+"n": 7.6,
+"start": 37.5,
+"end": 38.29
+},
+{
+"text": "Aber ich muss vorne anfangen.",
+"para": 4,
+"head": false,
+"n": 9.6,
+"start": 38.93,
+"end": 40.56
+},
+{
+"text": "Teil 1: Der Hafen",
+"para": 5,
+"head": true,
+"n": 5.6,
+"start": 41.31,
+"end": 42.0
+},
+{
+"text": "Lübeck, Frühjahr 1903.",
+"para": 6,
+"head": false,
+"n": 9.6,
+"start": 42.64,
+"end": 43.58
+},
+{
+"text": "Ich war vierundzwanzig, Schiffszimmermann auf der Werft von Reeder Lindqvist.",
+"para": 6,
+"head": false,
+"n": 18.6,
+"start": 43.99,
+"end": 47.03
+},
+{
+"text": "Viel hatte ich nicht, aber ich hatte gute Hände, einen ehrlichen Namen und Greta.",
+"para": 6,
+"head": false,
+"n": 24.6,
+"start": 47.31,
+"end": 53.39
+},
+{
+"text": "Im Sommer wollten wir heiraten.",
+"para": 6,
+"head": false,
+"n": 9.6,
+"start": 53.82,
+"end": 55.67
+},
+{
+"text": "Und ich hatte Konrad Haller.",
+"para": 7,
+"head": false,
+"n": 8.6,
+"start": 56.03,
+"end": 57.55
+},
+{
+"text": "Den Buchhalter vom Reeder.",
+"para": 7,
+"head": false,
+"n": 7.6,
+"start": 58.01,
+"end": 60.04
+},
+{
+"text": "Immer freundlich, immer mit einem Lächeln, und immer hat er Greta ein bisschen zu lange angeschaut.",
+"para": 7,
+"head": false,
+"n": 27.6,
+"start": 60.53,
+"end": 65.19
+},
+{
+"text": "Im April hat Lindqvist mich zum Vorarbeiter gemacht.",
+"para": 8,
+"head": false,
+"n": 14.6,
+"start": 65.55,
+"end": 68.42
+},
+{
+"text": "An dem Abend hab ich gefeiert wie ein König.",
+"para": 8,
+"head": false,
+"n": 12.6,
+"start": 68.94,
+"end": 71.56
+},
+{
+"text": "Drei Tage später brannte das Lager am Hafen ab.",
+"para": 8,
+"head": false,
+"n": 14.6,
+"start": 71.97,
+"end": 74.51
+},
+{
+"text": "Und in meiner Kiste in der Werkstatt fanden sie Briefe.",
+"para": 8,
+"head": false,
+"n": 15.6,
+"start": 75.15,
+"end": 77.77
+},
+{
+"text": "Briefe an Schmuggler, mit meiner Unterschrift.",
+"para": 8,
+"head": false,
+"n": 11.6,
+"start": 78.1,
+"end": 81.15
+},
+{
+"text": "Dazu Geld, das aus der Kasse fehlte.",
+"para": 8,
+"head": false,
+"n": 10.6,
+"start": 81.51,
+"end": 84.1
+},
+{
+"text": "Ich hab diese Briefe nie geschrieben.",
+"para": 9,
+"head": false,
+"n": 10.6,
+"start": 84.54,
+"end": 88.09
+},
+{
+"text": "Aber die Schrift sah aus wie meine.",
+"para": 9,
+"head": false,
+"n": 9.6,
+"start": 88.45,
+"end": 90.0
+},
+{
+"text": "Und wer hatte meine Schrift jeden Tag in den Lohnbüchern vor Augen?",
+"para": 9,
+"head": false,
+"n": 18.6,
+"start": 90.33,
+"end": 94.0
+},
+{
+"text": "Konrad Haller.",
+"para": 9,
+"head": false,
+"n": 4.6,
+"start": 94.29,
+"end": 95.3
+},
+{
+"text": "Der Prozess hat keine zwei Stunden gedauert.",
+"para": 10,
+"head": false,
+"n": 11.6,
+"start": 95.81,
+"end": 97.97
+},
+{
+"text": "Zwanzig Jahre.",
+"para": 10,
+"head": false,
+"n": 4.6,
+"start": 98.3,
+"end": 99.37
+},
+{
+"text": "Festung Grauwacht.",
+"para": 10,
+"head": false,
+"n": 4.6,
+"start": 99.73,
+"end": 101.03
+},
+{
+"text": "Teil 2: Die Festung",
+"para": 11,
+"head": true,
+"n": 5.6,
+"start": 101.4,
+"end": 102.42
+},
+{
+"text": "Grauwacht ist ein Felsen in der Ostsee, zwei Stunden mit dem Boot vom Festland.",
+"para": 12,
+"head": false,
+"n": 19.6,
+"start": 102.81,
+"end": 106.95
+},
+{
+"text": "Graue Mauern, grauer Himmel, graues Wasser.",
+"para": 12,
+"head": false,
+"n": 8.6,
+"start": 107.19,
+"end": 108.17
+},
+{
+"text": "Wer da reinkommt, kommt nicht mehr raus.",
+"para": 12,
+"head": false,
+"n": 8.6,
+"start": 108.4,
+"end": 109.56
+},
+{
+"text": "Das sagten die Wärter gleich am ersten Tag.",
+"para": 12,
+"head": false,
+"n": 11.6,
+"start": 109.9,
+"end": 112.58
+},
+{
+"text": "Meine Zelle war drei Schritte breit und vier Schritte lang.",
+"para": 13,
+"head": false,
+"n": 14.6,
+"start": 112.94,
+"end": 115.08
+},
+{
+"text": "Ein Strohsack, ein Eimer, ein Fenster so klein wie ein Gesangbuch.",
+"para": 13,
+"head": false,
+"n": 16.6,
+"start": 115.52,
+"end": 118.48
+},
+{
+"text": "Hoch oben, damit man nur den Himmel sieht.",
+"para": 13,
+"head": false,
+"n": 11.6,
+"start": 119.01,
+"end": 119.77
+},
+{
+"text": "Im ersten Jahr hab ich geschrien.",
+"para": 14,
+"head": false,
+"n": 8.6,
+"start": 119.98,
+"end": 123.39
+},
+{
+"text": "Im zweiten hab ich geweint.",
+"para": 14,
+"head": false,
+"n": 7.6,
+"start": 123.61,
+"end": 125.6
+},
+{
+"text": "Im dritten hab ich nur noch dagelegen und die Risse in der Decke gezählt.",
+"para": 14,
+"head": false,
+"n": 21.6,
+"start": 126.04,
+"end": 131.35
+},
+{
+"text": "Siebenhundertzwölf.",
+"para": 14,
+"head": false,
+"n": 5.6,
+"start": 131.87,
+"end": 133.89
+},
+{
+"text": "Ich weiß es noch genau.",
+"para": 14,
+"head": false,
+"n": 6.6,
+"start": 134.25,
+"end": 135.93
+},
+{
+"text": "Und dann, eines Nachts, hat es geklopft.",
+"para": 15,
+"head": false,
+"n": 9.6,
+"start": 136.22,
+"end": 142.52
+},
+{
+"text": "Unten in der Wand.",
+"para": 15,
+"head": false,
+"n": 5.6,
+"start": 142.91,
+"end": 143.46
+},
+{
+"text": "Ganz leise.",
+"para": 15,
+"head": false,
+"n": 3.6,
+"start": 143.7,
+"end": 145.52
+},
+{
+"text": "Tock.",
+"para": 16,
+"head": false,
+"n": 1.6,
+"start": 145.88,
+"end": 147.09
+},
+{
+"text": "Tock-tock.",
+"para": 16,
+"head": false,
+"n": 2.6,
+"start": 147.38,
+"end": 148.07
+},
+{
+"text": "Tock.",
+"para": 16,
+"head": false,
+"n": 1.6,
+"start": 148.46,
+"end": 148.81
+},
+{
+"text": "Teil 3: Der Alte",
+"para": 17,
+"head": true,
+"n": 5.6,
+"start": 149.02,
+"end": 154.72
+},
+{
+"text": "Hinter der Wand saß ein Mann, der sich seit elf Jahren einen Tunnel grub.",
+"para": 18,
+"head": false,
+"n": 18.6,
+"start": 155.27,
+"end": 156.71
+},
+{
+"text": "Mit einem Löffelstiel.",
+"para": 18,
+"head": false,
+"n": 6.6,
+"start": 157.15,
+"end": 160.79
+},
+{
+"text": "Er hatte sich verrechnet und war statt am Außenhof bei mir gelandet.",
+"para": 18,
+"head": false,
+"n": 19.6,
+"start": 161.4,
+"end": 164.44
+},
+{
+"text": "Als der erste Stein rausfiel, sah ich zuerst nur ein Auge.",
+"para": 19,
+"head": false,
+"n": 14.6,
+"start": 164.9,
+"end": 167.48
+},
+{
+"text": "Dann einen weißen Bart.",
+"para": 19,
+"head": false,
+"n": 6.6,
+"start": 167.92,
+"end": 169.39
+},
+{
+"text": "Und dann hat er gelacht.",
+"para": 19,
+"head": false,
+"n": 6.6,
+"start": 170.09,
+"end": 171.92
+},
+{
+"text": "„Na sowas“, hat er gesagt.",
+"para": 19,
+"head": false,
+"n": 7.6,
+"start": 172.27,
+"end": 174.68
+},
+{
+"text": "„Ich wollte in die Freiheit, und stattdessen find ich einen Nachbarn.“",
+"para": 19,
+"head": false,
+"n": 17.6,
+"start": 175.21,
+"end": 178.69
+},
+{
+"text": "Er hieß Anselm Weidner.",
+"para": 20,
+"head": false,
+"n": 6.6,
+"start": 179.12,
+"end": 180.66
+},
+{
+"text": "Früher Professor in Heidelberg.",
+"para": 20,
+"head": false,
+"n": 9.6,
+"start": 180.86,
+"end": 182.8
+},
+{
+"text": "Physik, Sternkunde, Chemie, Medizin, er wusste einfach alles.",
+"para": 20,
+"head": false,
+"n": 17.6,
+"start": 183.02,
+"end": 186.34
+},
+{
+"text": "Er hatte ein paar mächtigen Leuten die Wahrheit ins Gesicht gesagt, und das hatte gereicht, um ihn hier verschwinden zu lassen.",
+"para": 20,
+"head": false,
+"n": 33.6,
+"start": 186.72,
+"end": 193.51
+},
+{
+"text": "Von da an haben wir jede Nacht den Stein rausgenommen.",
+"para": 21,
+"head": false,
+"n": 15.6,
+"start": 194.15,
+"end": 197.08
+},
+{
+"text": "Teil 4: Die Schule im Dunkeln",
+"para": 22,
+"head": true,
+"n": 8.6,
+"start": 197.69,
+"end": 200.14
+},
+{
+"text": "„Ein Kopf ist das Einzige, was sie dir nicht wegnehmen können“, hat Anselm gesagt.",
+"para": 23,
+"head": false,
+"n": 21.6,
+"start": 200.6,
+"end": 204.81
+},
+{
+"text": "„Also lass ihn uns füllen.“",
+"para": 23,
+"head": false,
+"n": 7.6,
+"start": 205.21,
+"end": 206.85
+},
+{
+"text": "Und das haben wir gemacht.",
+"para": 24,
+"head": false,
+"n": 7.6,
+"start": 207.49,
+"end": 209.19
+},
+{
+"text": "Jahre lang.",
+"para": 24,
+"head": false,
+"n": 3.6,
+"start": 209.42,
+"end": 210.17
+},
+{
+"text": "Er hat mir Rechnen beigebracht, mit Strichen im Staub.",
+"para": 25,
+"head": false,
+"n": 13.6,
+"start": 210.67,
+"end": 214.11
+},
+{
+"text": "Er hat mir erklärt, warum der Mond das Meer zieht und wann Ebbe und Flut kommen.",
+"para": 25,
+"head": false,
+"n": 20.6,
+"start": 214.63,
+"end": 219.58
+},
+{
+"text": "Durch mein kleines Fenster hat er mir die Sterne gezeigt: den Polarstern, den Großen Wagen, und wie man mit ihnen nachts übers Wasser findet.",
+"para": 25,
+"head": false,
+"n": 36.6,
+"start": 219.85,
+"end": 229.2
+},
+{
+"text": "Er hat mir beigebracht, wie man aus Ruß und Wasser Tinte macht.",
+"para": 26,
+"head": false,
+"n": 16.6,
+"start": 229.49,
+"end": 234.65
+},
+{
+"text": "Wie man eine Wunde reinigt.",
+"para": 26,
+"head": false,
+"n": 8.6,
+"start": 234.97,
+"end": 236.64
+},
+{
+"text": "Warum Salzwasser einen Körper trägt, wenn man ruhig bleibt und nicht zappelt.",
+"para": 26,
+"head": false,
+"n": 19.6,
+"start": 236.86,
+"end": 242.63
+},
+{
+"text": "Französisch, Englisch, ein bisschen Latein.",
+"para": 26,
+"head": false,
+"n": 10.6,
+"start": 243.1,
+"end": 245.99
+},
+{
+"text": "Und er hat mir beigebracht, Schriften zu lesen.",
+"para": 26,
+"head": false,
+"n": 12.6,
+"start": 246.35,
+"end": 248.93
+},
+{
+"text": "Wie jeder Mensch den Stift anders hält, wie jeder Druck seine eigene Spur hinterlässt.",
+"para": 26,
+"head": false,
+"n": 22.6,
+"start": 249.32,
+"end": 254.34
+},
+{
+"text": "„Eine gefälschte Unterschrift“, hat er gesagt, „ist wie eine Lüge.",
+"para": 27,
+"head": false,
+"n": 18.6,
+"start": 254.88,
+"end": 259.5
+},
+{
+"text": "Sie sieht richtig aus, aber sie zittert.“",
+"para": 27,
+"head": false,
+"n": 10.6,
+"start": 259.88,
+"end": 262.85
+},
+{
+"text": "Und er hat mir das Wichtigste beigebracht: „Hass ist ein schweres Gepäck, Jakob.",
+"para": 28,
+"head": false,
+"n": 20.6,
+"start": 263.37,
+"end": 268.39
+},
+{
+"text": "Wer damit schwimmt, geht unter.“",
+"para": 28,
+"head": false,
+"n": 7.6,
+"start": 268.72,
+"end": 270.45
+},
+{
+"text": "Ich bin in diese Zelle als dummer Junge gekommen.",
+"para": 29,
+"head": false,
+"n": 15.6,
+"start": 271.03,
+"end": 273.55
+},
+{
+"text": "Nach fünf Jahren mit Anselm war ich ein anderer Mensch.",
+"para": 29,
+"head": false,
+"n": 14.6,
+"start": 273.99,
+"end": 278.13
+},
+{
+"text": "Teil 5: Das Geheimnis",
+"para": 30,
+"head": true,
+"n": 6.6,
+"start": 278.7,
+"end": 279.67
+},
+{
+"text": "Im Winter 1911 wurde Anselm krank.",
+"para": 31,
+"head": false,
+"n": 13.6,
+"start": 280.22,
+"end": 283.17
+},
+{
+"text": "Erst ein Husten, dann Fieber.",
+"para": 31,
+"head": false,
+"n": 7.6,
+"start": 283.53,
+"end": 285.36
+},
+{
+"text": "Er wusste, was es war, er war ja Arzt.",
+"para": 31,
+"head": false,
+"n": 10.6,
+"start": 285.71,
+"end": 288.27
+},
+{
+"text": "In seiner letzten Nacht hat er mich ganz nah rangeholt.",
+"para": 32,
+"head": false,
+"n": 14.6,
+"start": 288.86,
+"end": 292.74
+},
+{
+"text": "Seine Hand war kalt wie ein Stein.",
+"para": 32,
+"head": false,
+"n": 8.6,
+"start": 293.02,
+"end": 294.63
+},
+{
+"text": "„Hör zu“, hat er geflüstert.",
+"para": 33,
+"head": false,
+"n": 7.6,
+"start": 295.1,
+"end": 296.77
+},
+{
+"text": "„Meine Familie war mal reich.",
+"para": 33,
+"head": false,
+"n": 8.6,
+"start": 297.08,
+"end": 298.86
+},
+{
+"text": "Sehr reich.",
+"para": 33,
+"head": false,
+"n": 2.6,
+"start": 299.09,
+"end": 299.94
+},
+{
+"text": "Bevor sie mich geholt haben, hab ich alles versteckt.",
+"para": 33,
+"head": false,
+"n": 14.6,
+"start": 300.26,
+"end": 303.44
+},
+{
+"text": "Gold, Edelsteine, Papiere.",
+"para": 33,
+"head": false,
+"n": 8.6,
+"start": 303.74,
+"end": 306.14
+},
+{
+"text": "Auf der Insel Möwenholm, nördlich von Rügen.",
+"para": 33,
+"head": false,
+"n": 12.6,
+"start": 306.51,
+"end": 308.9
+},
+{
+"text": "Da steht ein alter, kaputter Leuchtturm.",
+"para": 33,
+"head": false,
+"n": 10.6,
+"start": 309.16,
+"end": 311.51
+},
+{
+"text": "Von der Tür aus vierzig Schritte Richtung Polarstern.",
+"para": 33,
+"head": false,
+"n": 13.6,
+"start": 311.94,
+"end": 315.46
+},
+{
+"text": "Da ist ein Felsen mit einem Kreuz drauf.",
+"para": 33,
+"head": false,
+"n": 10.6,
+"start": 315.81,
+"end": 318.31
+},
+{
+"text": "Darunter.“",
+"para": 33,
+"head": false,
+"n": 3.6,
+"start": 318.75,
+"end": 319.55
+},
+{
+"text": "Ich hab den Kopf geschüttelt.",
+"para": 34,
+"head": false,
+"n": 7.6,
+"start": 319.99,
+"end": 321.4
+},
+{
+"text": "„Was soll ich mit Gold, ich komm hier doch nie raus.“",
+"para": 34,
+"head": false,
+"n": 11.6,
+"start": 321.75,
+"end": 324.74
+},
+{
+"text": "Er hat gelächelt.",
+"para": 35,
+"head": false,
+"n": 5.6,
+"start": 325.26,
+"end": 326.31
+},
+{
+"text": "„Doch.",
+"para": 35,
+"head": false,
+"n": 1.6,
+"start": 326.59,
+"end": 327.09
+},
+{
+"text": "Du kommst raus.",
+"para": 35,
+"head": false,
+"n": 3.6,
+"start": 327.52,
+"end": 328.53
+},
+{
+"text": "Und zwar mit mir.“",
+"para": 35,
+"head": false,
+"n": 4.6,
+"start": 329.01,
+"end": 329.99
+},
+{
+"text": "Am Morgen war er tot.",
+"para": 36,
+"head": false,
+"n": 6.6,
+"start": 330.55,
+"end": 331.92
+},
+{
+"text": "Teil 6: Der Sack",
+"para": 37,
+"head": true,
+"n": 4.6,
+"start": 332.45,
+"end": 333.28
+},
+{
+"text": "Die Toten von Grauwacht werden nicht begraben.",
+"para": 38,
+"head": false,
+"n": 12.6,
+"start": 333.86,
+"end": 337.35
+},
+{
+"text": "Sie werden in einen Sack genäht, kriegen eine Kugel an die Füße und werden nachts von der Westmauer ins Meer geworfen.",
+"para": 38,
+"head": false,
+"n": 32.6,
+"start": 337.69,
+"end": 344.55
+},
+{
+"text": "Das hatte Anselm mir oft erzählt.",
+"para": 38,
+"head": false,
+"n": 9.6,
+"start": 345.02,
+"end": 346.92
+},
+{
+"text": "Am Abend haben die Wärter seinen Körper in den Sack gelegt und zugenäht.",
+"para": 39,
+"head": false,
+"n": 21.6,
+"start": 347.62,
+"end": 351.66
+},
+{
+"text": "Dann sind sie Abendessen gegangen.",
+"para": 39,
+"head": false,
+"n": 10.6,
+"start": 352.19,
+"end": 354.36
+},
+{
+"text": "Ich bin durch das Loch gekrochen, hab mit meinem angeschliffenen Löffel die Naht aufgemacht und Anselm rausgeholt.",
+"para": 40,
+"head": false,
+"n": 30.6,
+"start": 355.06,
+"end": 362.37
+},
+{
+"text": "Ich hab ihn in mein Bett gelegt, das Gesicht zur Wand, die Decke bis über den Kopf.",
+"para": 40,
+"head": false,
+"n": 21.6,
+"start": 362.91,
+"end": 367.77
+},
+{
+"text": "„Danke, mein Freund“, hab ich gesagt.",
+"para": 40,
+"head": false,
+"n": 8.6,
+"start": 368.56,
+"end": 370.33
+},
+{
+"text": "Dann bin ich selber in den Sack gekrochen.",
+"para": 40,
+"head": false,
+"n": 11.6,
+"start": 370.92,
+"end": 372.62
+},
+{
+"text": "Den Löffel hab ich fest in der Hand gehalten und die Naht von innen, so gut es ging, zusammengezogen.",
+"para": 40,
+"head": false,
+"n": 28.6,
+"start": 373.07,
+"end": 378.02
+},
+{
+"text": "Um Mitternacht kamen sie.",
+"para": 41,
+"head": false,
+"n": 7.6,
+"start": 378.37,
+"end": 379.89
+},
+{
+"text": "Und jetzt sind wir wieder da, wo alles angefangen hat.",
+"para": 42,
+"head": false,
+"n": 15.6,
+"start": 380.78,
+"end": 383.13
+},
+{
+"text": "Der Wind.",
+"para": 42,
+"head": false,
+"n": 2.6,
+"start": 383.31,
+"end": 384.81
+},
+{
+"text": "Das Rauschen.",
+"para": 42,
+"head": false,
+"n": 3.6,
+"start": 385.17,
+"end": 385.87
+},
+{
+"text": "Der Fall.",
+"para": 42,
+"head": false,
+"n": 2.6,
+"start": 386.12,
+"end": 387.27
+},
+{
+"text": "Das Wasser war eiskalt.",
+"para": 43,
+"head": false,
+"n": 6.6,
+"start": 387.47,
+"end": 387.82
+},
+{
+"text": "Wie tausend Messer.",
+"para": 43,
+"head": false,
+"n": 5.6,
+"start": 388.23,
+"end": 391.8
+},
+{
+"text": "Die Kugel hat mich runtergezogen, immer tiefer.",
+"para": 43,
+"head": false,
+"n": 14.6,
+"start": 392.21,
+"end": 395.44
+},
+{
+"text": "Ich hab den Löffel in den Stoff gerammt, wieder und wieder, bis ein Riss kam.",
+"para": 43,
+"head": false,
+"n": 19.6,
+"start": 395.73,
+"end": 400.3
+},
+{
+"text": "Dann der Knoten an den Füßen.",
+"para": 43,
+"head": false,
+"n": 8.6,
+"start": 400.75,
+"end": 402.37
+},
+{
+"text": "Meine Lunge hat gebrannt.",
+"para": 43,
+"head": false,
+"n": 7.6,
+"start": 402.81,
+"end": 404.22
+},
+{
+"text": "Ich dachte, das war's.",
+"para": 43,
+"head": false,
+"n": 5.6,
+"start": 404.43,
+"end": 405.85
+},
+{
+"text": "Dann war ich frei.",
+"para": 44,
+"head": false,
+"n": 4.6,
+"start": 406.35,
+"end": 407.92
+},
+{
+"text": "Ich bin nach oben, hab nach Luft geschnappt und den Himmel gesehen.",
+"para": 44,
+"head": false,
+"n": 17.6,
+"start": 408.48,
+"end": 412.89
+},
+{
+"text": "Zum ersten Mal seit acht Jahren den ganzen Himmel.",
+"para": 44,
+"head": false,
+"n": 13.6,
+"start": 413.59,
+"end": 416.84
+},
+{
+"text": "Teil 7: Die Fischer",
+"para": 45,
+"head": true,
+"n": 6.6,
+"start": 417.15,
+"end": 418.53
+},
+{
+"text": "Ich hab mich auf den Rücken gelegt, ganz ruhig, wie Anselm es mir beigebracht hatte.",
+"para": 46,
+"head": false,
+"n": 22.6,
+"start": 418.98,
+"end": 423.17
+},
+{
+"text": "Die Flut lief Richtung Osten, weg von der Festung.",
+"para": 46,
+"head": false,
+"n": 12.6,
+"start": 423.65,
+"end": 426.67
+},
+{
+"text": "Ich hab mich treiben lassen und mich am Polarstern orientiert.",
+"para": 46,
+"head": false,
+"n": 16.6,
+"start": 427.29,
+"end": 431.21
+},
+{
+"text": "Gegen Morgen hab ich einen kleinen Felsen erreicht, voller Möwendreck.",
+"para": 47,
+"head": false,
+"n": 19.6,
+"start": 431.87,
+"end": 436.1
+},
+{
+"text": "Da hab ich gelegen und gezittert, bis die Sonne aufging.",
+"para": 47,
+"head": false,
+"n": 16.6,
+"start": 436.93,
+"end": 440.43
+},
+{
+"text": "Am Mittag kam ein Fischkutter vorbei.",
+"para": 48,
+"head": false,
+"n": 10.6,
+"start": 441.2,
+"end": 444.2
+},
+{
+"text": "Drei Männer aus Rügen, mit Bärten wie Seehunde.",
+"para": 48,
+"head": false,
+"n": 13.6,
+"start": 444.64,
+"end": 448.36
+},
+{
+"text": "Ich hab gewinkt, bis meine Arme nicht mehr konnten.",
+"para": 48,
+"head": false,
+"n": 13.6,
+"start": 448.76,
+"end": 452.05
+},
+{
+"text": "„Schiffbrüchig“, hab ich gesagt.",
+"para": 49,
+"head": false,
+"n": 7.6,
+"start": 452.53,
+"end": 454.34
+},
+{
+"text": "„Unser Schoner ist gesunken.",
+"para": 49,
+"head": false,
+"n": 8.6,
+"start": 454.91,
+"end": 457.9
+},
+{
+"text": "Ich bin der Einzige.“",
+"para": 49,
+"head": false,
+"n": 6.6,
+"start": 458.53,
+"end": 460.19
+},
+{
+"text": "Der Kapitän hieß Hinnerk.",
+"para": 50,
+"head": false,
+"n": 7.6,
+"start": 460.47,
+"end": 462.52
+},
+{
+"text": "Er hat mich lange angeschaut.",
+"para": 50,
+"head": false,
+"n": 8.6,
+"start": 462.85,
+"end": 465.01
+},
+{
+"text": "Meine Haare bis zur Schulter, meine Haut weiß wie Papier.",
+"para": 50,
+"head": false,
+"n": 15.6,
+"start": 465.44,
+"end": 468.52
+},
+{
+"text": "Ich glaube, er hat mir kein Wort geglaubt.",
+"para": 50,
+"head": false,
+"n": 10.6,
+"start": 468.82,
+"end": 471.13
+},
+{
+"text": "Aber er hat mir eine Decke gegeben und einen Becher heißen Tee mit Rum.",
+"para": 50,
+"head": false,
+"n": 22.6,
+"start": 471.73,
+"end": 476.45
+},
+{
+"text": "„Wer gut mit Holz kann, ist bei uns willkommen“, hat er nur gesagt.",
+"para": 50,
+"head": false,
+"n": 16.6,
+"start": 477.28,
+"end": 481.65
+},
+{
+"text": "Drei Monate hab ich auf diesem Kutter gearbeitet.",
+"para": 51,
+"head": false,
+"n": 14.6,
+"start": 482.5,
+"end": 485.13
+},
+{
+"text": "Netze geflickt, das Deck repariert, Fisch ausgenommen.",
+"para": 51,
+"head": false,
+"n": 14.6,
+"start": 485.63,
+"end": 487.91
+},
+{
+"text": "Mit dem ersten Lohn hab ich mir die Haare schneiden lassen und mir einen Bart wachsen lassen.",
+"para": 51,
+"head": false,
+"n": 24.6,
+"start": 488.23,
+"end": 492.75
+},
+{
+"text": "Niemand hätte mich mehr erkannt.",
+"para": 51,
+"head": false,
+"n": 8.6,
+"start": 493.11,
+"end": 494.68
+},
+{
+"text": "Im Juni hab ich Hinnerk gefragt, ob wir mal nach Möwenholm fahren.",
+"para": 52,
+"head": false,
+"n": 18.6,
+"start": 495.12,
+"end": 498.72
+},
+{
+"text": "„Da soll's gute Heringsschwärme geben.",
+"para": 52,
+"head": false,
+"n": 10.6,
+"start": 499.17,
+"end": 501.89
+},
+{
+"text": "Er hat gegrinst.",
+"para": 52,
+"head": false,
+"n": 4.6,
+"start": 502.14,
+"end": 504.79
+},
+{
+"text": "„Da gibt's nur Möwen und Steine.",
+"para": 52,
+"head": false,
+"n": 8.6,
+"start": 505.33,
+"end": 507.35
+},
+{
+"text": "Aber er ist trotzdem gefahren.",
+"para": 52,
+"head": false,
+"n": 9.6,
+"start": 508.07,
+"end": 509.77
+},
+{
+"text": "Teil 8: Der Schatz",
+"para": 53,
+"head": true,
+"n": 4.6,
+"start": 510.51,
+"end": 511.42
+},
+{
+"text": "Möwenholm war genau so, wie Anselm es beschrieben hatte.",
+"para": 54,
+"head": false,
+"n": 16.6,
+"start": 512.02,
+"end": 517.16
+},
+{
+"text": "Kahl, windig, und oben auf dem Hügel ein alter, kaputter Leuchtturm.",
+"para": 54,
+"head": false,
+"n": 18.6,
+"start": 517.52,
+"end": 522.49
+},
+{
+"text": "Ich hab gewartet, bis es dunkel war.",
+"para": 55,
+"head": false,
+"n": 10.6,
+"start": 523.07,
+"end": 524.91
+},
+{
+"text": "Dann hab ich mich an die Tür vom Leuchtturm gestellt, den Polarstern gesucht und bin losgegangen.",
+"para": 55,
+"head": false,
+"n": 24.6,
+"start": 525.62,
+"end": 531.79
+},
+{
+"text": "Vierzig Schritte.",
+"para": 55,
+"head": false,
+"n": 4.6,
+"start": 532.31,
+"end": 533.5
+},
+{
+"text": "Da war er.",
+"para": 56,
+"head": false,
+"n": 3.6,
+"start": 534.3,
+"end": 535.13
+},
+{
+"text": "Ein Felsen, halb im Gras versteckt.",
+"para": 56,
+"head": false,
+"n": 8.6,
+"start": 535.55,
+"end": 537.65
+},
+{
+"text": "Und drauf, ganz verwittert, ein eingeritztes Kreuz.",
+"para": 56,
+"head": false,
+"n": 12.6,
+"start": 538.21,
+"end": 542.2
+},
+{
+"text": "Ich hab mit bloßen Händen gegraben.",
+"para": 57,
+"head": false,
+"n": 10.6,
+"start": 542.82,
+"end": 544.66
+},
+{
+"text": "Mit einem Stück Treibholz.",
+"para": 57,
+"head": false,
+"n": 6.6,
+"start": 544.96,
+"end": 546.52
+},
+{
+"text": "Mit den Fingernägeln.",
+"para": 57,
+"head": false,
+"n": 6.6,
+"start": 546.81,
+"end": 547.92
+},
+{
+"text": "Nach einer Stunde hab ich Holz gespürt.",
+"para": 57,
+"head": false,
+"n": 10.6,
+"start": 548.56,
+"end": 550.93
+},
+{
+"text": "Eine Kiste, mit Eisen beschlagen und mit Teer versiegelt.",
+"para": 57,
+"head": false,
+"n": 16.6,
+"start": 551.31,
+"end": 554.51
+},
+{
+"text": "Als ich den Deckel aufgemacht hab, hat das Mondlicht reingeschienen.",
+"para": 58,
+"head": false,
+"n": 17.6,
+"start": 555.11,
+"end": 558.29
+},
+{
+"text": "Goldmünzen.",
+"para": 58,
+"head": false,
+"n": 3.6,
+"start": 558.74,
+"end": 559.5
+},
+{
+"text": "Hunderte.",
+"para": 58,
+"head": false,
+"n": 3.6,
+"start": 560.03,
+"end": 560.61
+},
+{
+"text": "Rubine, Smaragde, Perlenketten.",
+"para": 58,
+"head": false,
+"n": 10.6,
+"start": 561.03,
+"end": 563.94
+},
+{
+"text": "Und ganz oben, in Wachstuch gewickelt, ein Brief.",
+"para": 58,
+"head": false,
+"n": 12.6,
+"start": 564.42,
+"end": 567.38
+},
+{
+"text": "„Für den, der meinen Weg zu Ende geht.",
+"para": 59,
+"head": false,
+"n": 10.6,
+"start": 568.18,
+"end": 570.24
+},
+{
+"text": "Mach etwas Gutes daraus.",
+"para": 59,
+"head": false,
+"n": 7.6,
+"start": 570.51,
+"end": 571.93
+},
+{
+"text": "Dein Anselm.“",
+"para": 59,
+"head": false,
+"n": 3.6,
+"start": 572.4,
+"end": 573.46
+},
+{
+"text": "Ich hab mich in die Erde gesetzt und geweint wie ein Kind.",
+"para": 60,
+"head": false,
+"n": 15.6,
+"start": 573.92,
+"end": 577.48
+},
+{
+"text": "Teil 9: Die Wahrheit",
+"para": 61,
+"head": true,
+"n": 5.6,
+"start": 577.71,
+"end": 578.85
+},
+{
+"text": "Ein halbes Jahr später kam ein Herr nach Lübeck.",
+"para": 62,
+"head": false,
+"n": 12.6,
+"start": 579.57,
+"end": 583.36
+},
+{
+"text": "Gut gekleidet, mit Bart, einen Hut und einen Stock mit Silberknauf.",
+"para": 62,
+"head": false,
+"n": 17.6,
+"start": 583.78,
+"end": 587.19
+},
+{
+"text": "Er nannte sich Herr Anselm.",
+"para": 62,
+"head": false,
+"n": 7.6,
+"start": 587.67,
+"end": 589.31
+},
+{
+"text": "Er hat ein Haus am Wasser gekauft und sich einen Anwalt genommen, den besten der Stadt.",
+"para": 62,
+"head": false,
+"n": 23.6,
+"start": 589.71,
+"end": 594.68
+},
+{
+"text": "Ich wollte keine Rache.",
+"para": 63,
+"head": false,
+"n": 7.6,
+"start": 595.27,
+"end": 597.74
+},
+{
+"text": "Ich wollte die Wahrheit.",
+"para": 63,
+"head": false,
+"n": 6.6,
+"start": 598.22,
+"end": 602.84
+},
+{
+"text": "Mein Anwalt hat die alten Gerichtsakten angefordert, mitsamt den gefälschten Briefen.",
+"para": 64,
+"head": false,
+"n": 23.6,
+"start": 603.17,
+"end": 607.73
+},
+{
+"text": "Daneben haben wir Briefe von Konrad Haller gelegt, die er an Lieferanten geschrieben hatte.",
+"para": 64,
+"head": false,
+"n": 27.6,
+"start": 608.1,
+"end": 611.32
+},
+{
+"text": "Und ich hab dem Richter gezeigt, was Anselm mir beigebracht hatte: dasselbe Zittern im Bogen vom „J“.",
+"para": 64,
+"head": false,
+"n": 26.6,
+"start": 611.73,
+"end": 617.19
+},
+{
+"text": "Derselbe Druck auf dem Strich vom „t“.",
+"para": 64,
+"head": false,
+"n": 8.6,
+"start": 617.53,
+"end": 618.51
+},
+{
+"text": "Dieselbe Tinte, eine billige Sorte, die damals nur im Kontor vom Reeder benutzt wurde.",
+"para": 64,
+"head": false,
+"n": 26.6,
+"start": 618.86,
+"end": 623.68
+},
+{
+"text": "Dann kam ein alter Lagerarbeiter in den Zeugenstand.",
+"para": 65,
+"head": false,
+"n": 15.6,
+"start": 624.1,
+"end": 627.29
+},
+{
+"text": "Er hatte Haller in der Brandnacht gesehen und all die Jahre geschwiegen, weil er Angst hatte.",
+"para": 65,
+"head": false,
+"n": 25.6,
+"start": 627.57,
+"end": 632.28
+},
+{
+"text": "Konrad Haller wurde im Gerichtssaal ganz blass.",
+"para": 66,
+"head": false,
+"n": 12.6,
+"start": 632.92,
+"end": 636.29
+},
+{
+"text": "Und dann hat er alles gestanden.",
+"para": 66,
+"head": false,
+"n": 9.6,
+"start": 636.92,
+"end": 639.5
+},
+{
+"text": "Teil 10: Nach Hause",
+"para": 67,
+"head": true,
+"n": 5.6,
+"start": 640.12,
+"end": 641.14
+},
+{
+"text": "Ich bin noch am selben Abend durch die alte Gasse am Hafen gelaufen, zu dem kleinen Haus mit den blauen Fensterläden.",
+"para": 68,
+"head": false,
+"n": 32.6,
+"start": 641.72,
+"end": 649.3
+},
+{
+"text": "Greta hat die Tür aufgemacht.",
+"para": 69,
+"head": false,
+"n": 8.6,
+"start": 649.96,
+"end": 651.56
+},
+{
+"text": "Sie war älter geworden, genau wie ich.",
+"para": 69,
+"head": false,
+"n": 11.6,
+"start": 651.96,
+"end": 654.23
+},
+{
+"text": "In ihren Haaren waren ein paar graue Strähnen.",
+"para": 69,
+"head": false,
+"n": 12.6,
+"start": 654.64,
+"end": 657.12
+},
+{
+"text": "Sie hat mich angeschaut und lange gar nichts gesagt.",
+"para": 69,
+"head": false,
+"n": 13.6,
+"start": 657.58,
+"end": 660.25
+},
+{
+"text": "Dann hat sie mir die Hand auf die Wange gelegt.",
+"para": 70,
+"head": false,
+"n": 12.6,
+"start": 660.68,
+"end": 662.83
+},
+{
+"text": "„Ich hab's immer gewusst“, hat sie geflüstert.",
+"para": 70,
+"head": false,
+"n": 11.6,
+"start": 663.5,
+"end": 665.66
+},
+{
+"text": "„Ich hab nie geglaubt, dass du das warst.“",
+"para": 70,
+"head": false,
+"n": 9.6,
+"start": 665.91,
+"end": 668.59
+},
+{
+"text": "Im Herbst 1912 haben wir geheiratet.",
+"para": 71,
+"head": false,
+"n": 14.6,
+"start": 669.09,
+"end": 672.03
+},
+{
+"text": "Von Anselms Gold hab ich am Hafen eine Schule gebaut.",
+"para": 71,
+"head": false,
+"n": 15.6,
+"start": 672.41,
+"end": 675.48
+},
+{
+"text": "Für Arbeiterkinder, die sonst nie lesen lernen würden.",
+"para": 71,
+"head": false,
+"n": 15.6,
+"start": 675.9,
+"end": 679.16
+},
+{
+"text": "Mathematik, Sternkunde, Chemie, Sprachen.",
+"para": 71,
+"head": false,
+"n": 11.6,
+"start": 679.5,
+"end": 682.29
+},
+{
+"text": "Alles, was er mir in der Dunkelheit beigebracht hat.",
+"para": 71,
+"head": false,
+"n": 14.6,
+"start": 682.62,
+"end": 685.92
+},
+{
+"text": "Über dem Eingang steht in goldenen Buchstaben: „Weidner-Schule.",
+"para": 72,
+"head": false,
+"n": 17.6,
+"start": 686.51,
+"end": 690.49
+},
+{
+"text": "Ein Kopf ist das Einzige, was sie dir nicht wegnehmen können.“",
+"para": 72,
+"head": false,
+"n": 16.6,
+"start": 691.01,
+"end": 693.9
+},
+{
+"text": "Und manchmal, in klaren Nächten, steh ich mit den Kindern auf dem Dach und zeig ihnen den Polarstern.",
+"para": 73,
+"head": false,
+"n": 25.6,
+"start": 694.57,
+"end": 700.54
+}
+]
