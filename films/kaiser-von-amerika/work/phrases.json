@@ -1,0 +1,294 @@
+{
+ "duration": 50.102833,
+ "frames30": 1503,
+ "source": "silence-align (cost 3.59)",
+ "segments": [
+  [
+   0.0,
+   2.54964
+  ],
+  [
+   2.90669,
+   3.7015
+  ],
+  [
+   4.03458,
+   5.11569
+  ],
+  [
+   5.3468,
+   6.51442
+  ],
+  [
+   6.85814,
+   8.50043
+  ],
+  [
+   8.91367,
+   9.49113
+  ],
+  [
+   9.79594,
+   10.1377
+  ],
+  [
+   10.5349,
+   12.0027
+  ],
+  [
+   12.4754,
+   12.8834
+  ],
+  [
+   13.2768,
+   14.1308
+  ],
+  [
+   14.4936,
+   16.6407
+  ],
+  [
+   16.9795,
+   18.038
+  ],
+  [
+   18.4732,
+   20.6451
+  ],
+  [
+   21.017,
+   22.2667
+  ],
+  [
+   22.7343,
+   23.5692
+  ],
+  [
+   23.8935,
+   24.484
+  ],
+  [
+   24.9591,
+   25.9896
+  ],
+  [
+   26.1497,
+   27.1441
+  ],
+  [
+   27.4225,
+   29.0295
+  ],
+  [
+   29.2872,
+   30.3895
+  ],
+  [
+   30.7029,
+   31.3759
+  ],
+  [
+   31.5434,
+   32.4661
+  ],
+  [
+   32.7394,
+   33.069
+  ],
+  [
+   33.3178,
+   34.2578
+  ],
+  [
+   34.452,
+   35.6751
+  ],
+  [
+   35.9103,
+   36.829
+  ],
+  [
+   37.1097,
+   37.5925
+  ],
+  [
+   37.912,
+   38.3016
+  ],
+  [
+   38.4742,
+   39.9352
+  ],
+  [
+   40.258,
+   41.1068
+  ],
+  [
+   41.5364,
+   43.4487
+  ],
+  [
+   43.8343,
+   44.6817
+  ],
+  [
+   44.8743,
+   47.4916
+  ],
+  [
+   47.8715,
+   48.6818
+  ],
+  [
+   48.9728,
+   49.7612
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein Mann l\u00e4uft durch die Stra\u00dfen von San Francisco.",
+   "s": 0.0,
+   "e": 2.55
+  },
+  {
+   "text": "Blaue Uniform,",
+   "s": 2.907,
+   "e": 3.701
+  },
+  {
+   "text": "goldene Schulterklappen,",
+   "s": 4.035,
+   "e": 5.116
+  },
+  {
+   "text": "ein S\u00e4bel an der Seite.",
+   "s": 5.347,
+   "e": 6.514
+  },
+  {
+   "text": "Und die Leute verbeugen sich vor ihm.",
+   "s": 6.858,
+   "e": 8.5
+  },
+  {
+   "text": "Denn er ist \u2026 der Kaiser von Amerika.",
+   "s": 8.914,
+   "e": 12.003
+  },
+  {
+   "text": "Na ja.",
+   "s": 12.475,
+   "e": 12.883
+  },
+  {
+   "text": "Sagt er zumindest.",
+   "s": 13.277,
+   "e": 14.131
+  },
+  {
+   "text": "Eigentlich war er mal ein reicher Gesch\u00e4ftsmann.",
+   "s": 14.494,
+   "e": 16.641
+  },
+  {
+   "text": "Dann verliert er alles.",
+   "s": 16.98,
+   "e": 18.038
+  },
+  {
+   "text": "Und eines Tages schickt er einen Brief an die Zeitung:",
+   "s": 18.473,
+   "e": 20.645
+  },
+  {
+   "text": "Ab heute bin ich Kaiser.",
+   "s": 21.017,
+   "e": 22.267
+  },
+  {
+   "text": "Die Zeitung druckt das.",
+   "s": 22.734,
+   "e": 23.569
+  },
+  {
+   "text": "Einfach so.",
+   "s": 23.893,
+   "e": 24.484
+  },
+  {
+   "text": "Sein erster Befehl?",
+   "s": 24.959,
+   "e": 25.99
+  },
+  {
+   "text": "Er l\u00f6st den Kongress auf.",
+   "s": 26.15,
+   "e": 27.144
+  },
+  {
+   "text": "Der Kongress macht nat\u00fcrlich einfach weiter.",
+   "s": 27.422,
+   "e": 29.029
+  },
+  {
+   "text": "Er druckt sein eigenes Geld.",
+   "s": 29.287,
+   "e": 30.39
+  },
+  {
+   "text": "Und viele L\u00e4den nehmen es tats\u00e4chlich an.",
+   "s": 30.703,
+   "e": 32.466
+  },
+  {
+   "text": "Einmal wird er sogar verhaftet.",
+   "s": 32.739,
+   "e": 34.258
+  },
+  {
+   "text": "Die ganze Stadt regt sich auf.",
+   "s": 34.452,
+   "e": 35.675
+  },
+  {
+   "text": "Er kommt sofort frei.",
+   "s": 35.91,
+   "e": 36.829
+  },
+  {
+   "text": "Und es hei\u00dft,",
+   "s": 37.11,
+   "e": 37.593
+  },
+  {
+   "text": "ab da salutieren die Polizisten vor ihm.",
+   "s": 37.912,
+   "e": 39.935
+  },
+  {
+   "text": "Dann befiehlt er:",
+   "s": 40.258,
+   "e": 41.107
+  },
+  {
+   "text": "Baut eine Br\u00fccke \u00fcber die Bucht! Alle lachen.",
+   "s": 41.536,
+   "e": 43.449
+  },
+  {
+   "text": "Heute steht sie da.",
+   "s": 43.834,
+   "e": 44.682
+  },
+  {
+   "text": "Und als er stirbt, kommen Tausende zu seiner Beerdigung.",
+   "s": 44.874,
+   "e": 47.492
+  },
+  {
+   "text": "F\u00fcr einen Kaiser \u2026 ohne Reich.",
+   "s": 47.871,
+   "e": 49.761
+  }
+ ]
+}
