@@ -1,29 +1,35 @@
-// Noah sits at home and drinks tea (3 s).
-const SEAT = -60;
-const noah = (t, o = {}) => Object.assign({ who: CAST.noah, x: SEAT, s: 1, sit: 1, look: [1, .3], main: 'front', off: 'down', ...EXPR.content, lid: .2 }, o);
-const chair = c => PROPS.chair(c, SEAT, { color: '#6b4a34' });
+// Noah sits at home and drinks tea (3 s). The character is the user's own artwork used as sprites.
 const ROOM = { tod: 'day' };
+const chair = c => PROPS.chair(c, 0, { color: '#6b4a34' });
+const breathe = t => Math.sin(t * 3.2) * 3;
+const GX = TABLE.x + 50;
+// opaque glass body (same outline as the engine's tea glass) so the face doesn't show through
+function glassBack(c) {
+  c.beginPath(); c.moveTo(-17, -52); c.quadraticCurveTo(-22, -30, -10, -14); c.quadraticCurveTo(-19, 0, -14, 12); c.lineTo(14, 12);
+  c.quadraticCurveTo(19, 0, 10, -14); c.quadraticCurveTo(22, -30, 17, -52); c.closePath(); c.fillStyle = '#e8f0ef'; c.fill();
+}
 
-defineFilm({
+SPRITES_READY.then(() => defineFilm({
   fadeIn: .25, fadeOut: .35,
   shots: [
-    { name: 'wide: tea is ready', dur: 1.2, f(lt, T, t) {
-      const reach = ease(seg(lt, .45, 1.1));
-      const glassOnTable = reach < .98;
-      const n = noah(t, { main: glassOnTable ? { from: 'down', to: 'front', k: reach } : { pose: 'front', item: 'teaglass' }, mouth: 'smile', look: [1, .6] });
-      return { set: 'room', setOpts: ROOM, cam: CAM.mix({ x: 40, y: -420, z: 1.45 }, { x: 30, y: -430, z: 1.6 }, ease(lt / T)), blur: 6,
-        behind: [chair], chars: [n], front: [c => homeTable(c, t, glassOnTable)],
-        fx: glassOnTable ? [c => FX.steam(c, TABLE.x - 148, TABLE.top - 60, t, { h: 120 })] : [] };
+    { name: 'medium: tea on the table', dur: 1.3, f(lt, T, t) {
+      return { set: 'room', setOpts: ROOM, cam: CAM.mix({ x: 20, y: -500, z: 1.6 }, { x: 20, y: -510, z: 1.75 }, ease(lt / T)), blur: 7,
+        behind: [chair, c => drawNoah(c, 'happy', breathe(t))], front: [c => homeTable(c, t, { fill: .85 })],
+        fx: [c => FX.steam(c, GX, TABLE.top - 60, t, { h: 130 })] };
     } },
-    { name: 'CU: sip', dur: 1.8, f(lt, T, t) {
-      const k = ease(seg(lt, 0, .55)), down = ease(seg(lt, 1.35, 1.8));
-      const sipping = k > .85 && down < .2;
-      const n = noah(t, { main: { from: 'front', to: 'drink', k: k - down, item: 'teaglass', itemOpts: { fill: .8 } },
-        ...(sipping ? EXPR.content : EXPR.happy), mouth: sipping ? 'sip' : 'smile', lid: sipping ? .8 : .25, blush: .35 * k, look: [.4, 0] });
-      const [hx, hy] = handWorld(n, 'main', t), [cx, cy] = headWorld(n);
-      return { set: 'room', setOpts: ROOM, cam: CAM.mix(CAM.closeUp(n, 2.1), CAM.closeUp(n, 2.3), lt / T), blur: 12,
-        behind: [chair], chars: [n], front: [c => homeTable(c, t, false)],
-        fx: [c => FX.steam(c, hx - 8, hy - 70, t, { h: 90, a: .8 }), c => FX.sparkle(c, cx + 150, cy - 110, seg(lt, 1.0, 1.6), 1.3)] };
+    { name: 'CU: sip', dur: 1.1, f(lt, T, t) {
+      const b = breathe(t), tilt = -.08 - .12 * ease(seg(lt, .1, .9));
+      const [gx, gy] = sprPt('think', 85, 141, b);
+      return { set: 'room', setOpts: ROOM, cam: CAM.mix({ x: 0, y: -560, z: 2.1 }, { x: 0, y: -555, z: 2.25 }, lt / T), blur: 12,
+        behind: [chair, c => drawNoah(c, 'think', b)], front: [c => homeTable(c, t, null)],
+        fx: [c => { c.save(); c.translate(gx - 14, gy + 10); c.rotate(tilt); c.scale(1.8, 1.8); glassBack(c); drawTeaGlass(c, { fill: .7 - .15 * lt / T }); c.restore(); },
+             c => FX.steam(c, gx + 10, gy - 130, t, { h: 70, a: .6 })] };
+    } },
+    { name: 'medium: content', dur: 0.6, f(lt, T, t) {
+      const [hx, hy] = sprPt('happy', 73, 60);
+      return { set: 'room', setOpts: ROOM, cam: { x: 20, y: -510, z: 1.75 }, blur: 7,
+        behind: [chair, c => drawNoah(c, 'happy', breathe(t))], front: [c => homeTable(c, t, { fill: .5 })],
+        fx: [c => FX.steam(c, GX, TABLE.top - 60, t, { h: 90, a: .6 }), c => FX.sparkle(c, hx + 170, hy - 60, seg(lt, 0, .55), 1.4)] };
     } },
   ],
-});
+}));

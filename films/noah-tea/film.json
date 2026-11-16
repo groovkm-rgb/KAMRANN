@@ -1,5 +1,6 @@
 {
   "title": "Noah Tea",
   "slug": "noah-tea",
-  "fps": 30
+  "fps": 30,
+  "modules": ["sprites.js", "props.js", "scenes.js"]
 }
