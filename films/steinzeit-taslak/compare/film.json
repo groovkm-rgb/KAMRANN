@@ -1,0 +1,17 @@
+{
+ "title": "Steinzeit \u2013 Taslak",
+ "slug": "steinzeit-taslak",
+ "fps": 30,
+ "modules": [
+  "../../../.claude/skills/noah-character/noah.js",
+  "../../../.claude/skills/noah-character/places/light.js",
+  "../../../.claude/skills/noah-character/places/stone-age.js",
+  "../../../.claude/skills/noah-character/places/forest.js",
+  "../../../.claude/skills/noah-character/places/mountains.js",
+  "../../../.claude/skills/noah-character/places/cave.js",
+  "../../../.claude/skills/noah-character/places/animals.js",
+  "../../../.claude/skills/noah-character/places/fonts.js",
+  "../../../.claude/skills/noah-character/places/overlays.js",
+  "../compare.js"
+ ]
+}
