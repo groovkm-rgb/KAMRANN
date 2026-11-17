@@ -5,7 +5,7 @@
 //   inside draw(): hudText, hudCounter, hudCalc, hudTable, hudTimeline, hudIcon   (card-local coords, 0,0 = top-left of the body)
 const HUD = { paper: '#fbf6ea', ink: '#211c1a', muted: '#7d7064', accent: '#e0663a', blue: '#2f6fb0', green: '#3d8a4f', line: '#e4d9c6', margin: 46 };
 const hudFont = (size) => `700 ${size}px ${typeof NOAH_FONT !== 'undefined' ? NOAH_FONT : 'Inter'}, Inter, 'DejaVu Sans', sans-serif`;
-// 1234567 -> "1.234.567" (Turkish/German grouping), deterministic (no locale APIs)
+// 1234567 -> "1.234.567" (German grouping, decimal comma), deterministic (no locale APIs)
 function fmtNum(n, dec = 0, sep = '.', dsep = ',') {
   const neg = n < 0; n = Math.abs(n); let [i, d] = n.toFixed(dec).split('.');
   i = i.replace(/\B(?=(\d{3})+(?!\d))/g, sep); return (neg ? '−' : '') + i + (d ? dsep + d : '');

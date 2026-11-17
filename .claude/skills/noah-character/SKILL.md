@@ -5,7 +5,7 @@ description: The user's own character NOAH (white round head, dot eyes, swept-ba
 
 # Noah films (the user's character)
 
-Talk to the user in Turkish. Code comments in English.
+Talk to the user in Turkish. Code comments in English. On-screen text is always German (see house rules).
 
 ## House rules
 
@@ -25,8 +25,10 @@ Talk to the user in Turkish. Code comments in English.
   the floor, night blue with warm fire/lamps. Haze turns distance soft; glows on every light source;
   dust motes in beams; soft cool cast shadows (`castShadow`) under characters; warm-light / cool-shadow grade.
 - **Light ink on the world** (thin outlines near, none on far landscape); **characters keep thick ink**.
-- Text appears only in info cards / badges (`overlays.js`) and in Noah's shirt lettering. Default card
-  language: Turkish; numbers Turkish style (1.234.567 and 8,2); years under 10.000 without a dot (M.Ö. 8000).
+- **All on-screen text is GERMAN — always** (the user's rule): info cards, badges, tables, labels, signs, anything
+  written inside a scene. Talk to the user in Turkish, but never put Turkish or English text in a frame. Only Noah's shirt
+  keeps his name "Noah". Numbers German style: 1.234.567 and 8,2; years under 10.000 without a dot; BC/AD as
+  "8000 v. Chr." / "500 n. Chr."; units and abbreviations German ("8,2 Mrd.", "~5 Mio.", "Jahre", "km", "°C").
 - **Never change Noah's proportions** in `NOAH` / `noahHeadLocal` / `NOAH_SIDE` to fit a scene. Outfits and the
   primitive look are separate layers on top. After any edit to the rig, compare it next to `reference.jpg`
   (front crop `(110,20,280,420)`, side crop `(360,20,530,420)`, both ×4) and fix differences, not the reference.
@@ -106,11 +108,12 @@ hudCounter(c, from, to, k, x, y, size, { fmt, color })   hudCalc(c, lines, k, x,
 hudTable(c, x, y, cols, rows, k, { hi, size })             hudTimeline(c, x, y, w, ticks, value)
 hudText(c, s, x, y, size, col, align)   hudBadge(c, t, { t0, t1, x, y, text, color })   fmtNum(n, dec)
 ```
-Font: Inter Bold embedded (OFL, `assets/fonts/LICENSE-Inter.txt`).
+Font: Inter Bold embedded (OFL, `assets/fonts/LICENSE-Inter.txt`); it covers German umlauts and ß. Card texts in German
+(e.g. titles ZEITREISE, WELTBEVÖLKERUNG, BERECHNUNG; column heads EPOCHE, JAHR, BEVÖLKERUNG).
 
 ## Examples
 
-- `films/time-travel-demo/` — Noah walks in the forest; corner card counts 2026 → M.Ö. 8000, timeline, calculation, population table.
+- `films/time-travel-demo/` — Noah walks in the forest; German corner cards: ZEITREISE counts 2026 → 8000 v. Chr. with timeline and calculation, WELTBEVÖLKERUNG table.
 - `films/stone-age-wakeup/` — primitive Noah (beard, wild hair, fur) wakes up in a cave at dawn.
 - `films/places-demo/` — stills: forest + animals, stone-age night camp, office, golden-hour city, animal line-up.
 - `films/noah-sleep/`, `films/stone-age-camp/` — older vertical tests (before the 16:9 rule).
