@@ -1,0 +1,6 @@
+{
+  "title": "Stone Age Camp (still)",
+  "slug": "stone-age-camp",
+  "fps": 30,
+  "modules": ["../../.claude/skills/noah-character/noah.js", "../../.claude/skills/noah-character/places/stone-age.js", "scenes.js"]
+}

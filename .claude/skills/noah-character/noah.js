@@ -104,7 +104,7 @@ function noahHandLocal(c, ang) {
   c.beginPath(); c.moveTo(-32, 20); c.quadraticCurveTo(-62, 44, -52, 66); c.quadraticCurveTo(-40, 72, -30, 52); nFill(c, NOAH.skin, NOAH.W * .7);
   c.restore();
 }
-function noahArm(c, side, spec, watch) {
+function noahArm(c, side, spec, watch, sleeve = true) {
   const S = NOAH.SHOULDER, sx = side * S.x, sy = S.y;
   const a = spec.a, b = spec.b ?? 0, a2 = a + b;
   const ex = sx + side * Math.sin(a) * NOAH.UPPER, ey = sy + Math.cos(a) * NOAH.UPPER;
@@ -114,8 +114,9 @@ function noahArm(c, side, spec, watch) {
   // short t-shirt sleeve in the arm's frame (u = along the arm, o = outward)
   const ux = side * Math.sin(a), uy = Math.cos(a), ox = side * Math.cos(a), oy = -Math.sin(a) * 1;
   const P = (u, o) => [sx + ux * u + ox * o, sy + uy * u + oy * o * side * side];
+  if (sleeve) {
   const pts = [P(-28, -48), P(-26, 18), P(150, 66), P(166, -28)];
-  c.beginPath(); c.moveTo(...pts[0]); c.quadraticCurveTo(...P(-40, -10), ...pts[1]); c.quadraticCurveTo(...P(60, 52), ...pts[2]); c.lineTo(...pts[3]); c.closePath(); nFill(c, NOAH.shirt);
+  c.beginPath(); c.moveTo(...pts[0]); c.quadraticCurveTo(...P(-40, -10), ...pts[1]); c.quadraticCurveTo(...P(60, 52), ...pts[2]); c.lineTo(...pts[3]); c.closePath(); nFill(c, NOAH.shirt); }
   if (watch) {
     const k = .82, cx = ex + (wx - ex) * k, cy = ey + (wy - ey) * k, fx = side * Math.sin(a2), fy = Math.cos(a2);
     nLine(c, [cx - fy * 40, cy + fx * 40, cx + fy * 40, cy - fx * 40], 22, NOAH.out); nLine(c, [cx - fy * 36, cy + fx * 36, cx + fy * 36, cy - fx * 36], 13, NOAH.watch);
@@ -137,7 +138,44 @@ function noahTorso(c) {
   c.lineTo(132, -760); c.quadraticCurveTo(144, -820, 155, -942); c.lineTo(58, -952); c.quadraticCurveTo(0, -915, -58, -952); c.closePath(); nFill(c, NOAH.shirt);
   noahLetters(c, 4, -760, 1);
 }
+// ---- outfits (body clothes only; head, hair, face never change) ----
+const NOAH_FUR = { fur: '#b8773c', furDark: '#7d4a22', furLight: '#d9a066', wrap: '#8a5a32' };
+function noahTunic(c) {
+  // stone-age fur tunic over the left shoulder, jagged hem; right shoulder bare
+  c.beginPath(); c.moveTo(-58, -952); c.lineTo(-150, -942); c.quadraticCurveTo(-140, -820, -128, -760); c.lineTo(-122, NOAH.HEM + 20); c.lineTo(126, NOAH.HEM + 20);
+  c.lineTo(132, -760); c.quadraticCurveTo(144, -820, 155, -942); c.lineTo(58, -952); c.quadraticCurveTo(0, -915, -58, -952); c.closePath(); nFill(c, NOAH.skin);
+  c.beginPath(); c.moveTo(-138, -800); c.quadraticCurveTo(0, -860, 70, -955); c.lineTo(165, -945); c.quadraticCurveTo(150, -820, 142, -760);
+  const hem = NOAH.HEM + 70; c.lineTo(146, hem - 10);
+  for (let i = 0; i <= 8; i++) { const x = 146 - i * 37; c.lineTo(x - 18, hem + (i % 2 ? 34 : 6)); }
+  c.lineTo(-140, hem - 10); c.lineTo(-136, -760); c.closePath(); nFill(c, NOAH_FUR.fur);
+  c.save(); c.clip();
+  for (let i = 0; i < 16; i++) { const x = -120 + ((i * 53) % 260), y = -820 + ((i * 97) % 330); c.beginPath(); c.ellipse(x, y, 16 + (i % 3) * 5, 11, i, 0, Math.PI * 2); c.fillStyle = NOAH_FUR.furDark; c.fill(); }
+  for (let i = 0; i < 12; i++) { const x = -110 + ((i * 71) % 250), y = -780 + ((i * 61) % 300); nLine(c, [x, y, x + 10, y + 26], 4, NOAH_FUR.furLight); }
+  c.restore();
+  // rope belt
+  nLine(c, [-128, NOAH.HEM - 40, 132, NOAH.HEM - 46], 22, NOAH.out); nLine(c, [-128, NOAH.HEM - 40, 132, NOAH.HEM - 46], 12, '#c9a46a');
+}
+function noahLegsSitting(c, p, bare) {
+  // front view, seated on something seatH units high: knees towards the camera, shins straight down
+  const seat = -(p.seatH ?? 250), kneeY = seat - 40;
+  for (const s of [-1, 1]) {
+    const kx = s * 150, fx = s * 120;
+    if (bare) {
+      nLine(c, [kx, kneeY, fx, -70], 96 + NOAH.W * 2, NOAH.out); nLine(c, [kx, kneeY, fx, -70], 96, NOAH.skin);
+      c.beginPath(); c.moveTo(s * 10, kneeY - 90); c.lineTo(s * 150, kneeY - 75); c.lineTo(s * 205, kneeY + 5); c.lineTo(s * 95, kneeY + 30); c.lineTo(s * 10, kneeY - 10); c.closePath(); nFill(c, NOAH.skin);
+      c.beginPath(); c.ellipse(kx, kneeY + 5, 64, 54, 0, 0, Math.PI * 2); nFill(c, NOAH.skin);
+      // fur foot wraps
+      c.beginPath(); c.moveTo(fx - 62, -120); c.lineTo(fx + 62, -120); c.quadraticCurveTo(fx + 85, -20, fx + 70, 4); c.lineTo(fx - 70, 4); c.quadraticCurveTo(fx - 85, -20, fx - 62, -120); nFill(c, NOAH_FUR.wrap);
+      nLine(c, [fx - 60, -85, fx + 60, -95], 7, NOAH_FUR.furDark);
+    } else {
+      nLine(c, [kx, kneeY, fx, -80], 110 + NOAH.W * 2, NOAH.out); nLine(c, [kx, kneeY, fx, -80], 110, NOAH.pants);
+      c.beginPath(); c.ellipse(kx, kneeY + 5, 72, 56, 0, 0, Math.PI * 2); nFill(c, NOAH.pants);
+      c.beginPath(); c.ellipse(fx, -40, 80, 44, 0, 0, Math.PI * 2); nFill(c, NOAH.shoe);
+    }
+  }
+}
 function drawNoah(c, p = {}) {
+  if (p.outfit === 'caveman' || p.sit) return drawNoahOutfit(c, p);
   const k = p.k ?? .5, arms = Object.assign({}, NOAH.ARMS, p.arms || {}), e = p.expr || {};
   c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k);
   if (p.lean) c.rotate(p.lean);
@@ -159,3 +197,23 @@ function drawNoahHead(c, x, y, k = .5, e = {}, tilt = 0) {
   c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k); c.translate(0, -NOAH.HEAD.y); noahHairBack(c); noahHeadLocal(c, e); c.restore();
 }
 function drawNoahHand(c, x, y, k = .5, ang = 0) { c.save(); c.translate(x, y); c.scale(k, k); noahHandLocal(c, ang); c.restore(); }
+
+// Full body with an outfit and/or seated. outfit: 'classic' (default) | 'caveman'. sit: true, seatH (units, default 250).
+function drawNoahOutfit(c, p) {
+  const k = p.k ?? .5, arms = Object.assign({}, NOAH.ARMS, p.arms || {}), e = p.expr || {};
+  const cave = p.outfit === 'caveman', dy = p.sit ? (-(p.seatH ?? 250)) - (NOAH.HEM + 40) - 60 : 0;
+  c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k);
+  if (p.sit) noahLegsSitting(c, p, cave);
+  c.save(); c.translate(0, dy + (p.bob || 0));
+  if (!p.sit) { if (cave) { for (const s of [-1, 1]) { nLine(c, [s * 60, NOAH.HEM, s * 62, -90], 96 + NOAH.W * 2, NOAH.out); nLine(c, [s * 60, NOAH.HEM, s * 62, -90], 96, NOAH.skin); } } else noahLegs(c, p); }
+  if (cave) noahTunic(c); else noahTorso(c);
+  c.beginPath(); c.rect(-46, -1000, 92, 62); c.fillStyle = NOAH.skin; c.fill(); nLine(c, [-46, -1000, -46, -948], 10, NOAH.out); nLine(c, [46, -1000, 46, -948], 10, NOAH.out);
+  if (!cave) { c.beginPath(); c.moveTo(-58, -952); c.quadraticCurveTo(0, -915, 58, -952); c.lineWidth = 10; c.strokeStyle = NOAH.out; c.stroke(); }
+  const armsUp = arms.l.a > 1.6 || arms.r.a > 1.6;
+  const drawArms = () => { noahArm(c, -1, arms.l, false, !cave); noahArm(c, 1, arms.r, !cave, !cave); };
+  if (!armsUp) drawArms();
+  c.save(); c.translate(0, NOAH.HEAD.y + 260); c.rotate(p.tilt || 0); c.translate(0, -(NOAH.HEAD.y + 260));
+  noahHairBack(c); noahHeadLocal(c, e); c.restore();
+  if (armsUp) drawArms();
+  c.restore(); c.restore();
+}

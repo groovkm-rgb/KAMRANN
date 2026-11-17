@@ -24,6 +24,9 @@ drawNoahHand(c, x, y, k, ang)                                       // a loose h
 ```
 - `arms: { l: { a, b, hand }, r: {...} }` — `a` shoulder angle from straight down (+ = outward, ~2.45 = up),
   `b` elbow bend added to `a`. Default relaxed: `{ a: .13, b: -.08 }`. Watch is on `r` (viewer's right).
+- `outfit: 'classic' | 'caveman'` (fur tunic, rope belt, bare arms/legs, fur foot wraps, no watch/lettering).
+  Outfits change only the body clothes; head, hair and face never change.
+- `sit: true, seatH: 300` — seated, front view (knees forward, shins down); put a seat of height `seatH * k` behind him.
 - `expr`: `eyes: 'open' | 'closed'`, `lid` 0..1 (sleepy), `look` −1..1, `browUp` 0..1,
   `mouth: 'smile' | 'soft' | 'flat' | 'o' | 'yawn'`, `open` 0..1 for the yawn.
 
@@ -35,6 +38,13 @@ Add the module before the film's own files in `film.json`:
 ```
 Draw Noah from `behind` / `front` functions (e.g. `behind: [c => drawNoah(c, {...})]`); sets, props,
 FX, camera, build/snap/verify/render all come from the toon-shorts skill. Example: `films/noah-sleep/`.
+
+## Places (`places/`)
+
+Reusable sets and props, added as a module after `noah.js`:
+- `places/stone-age.js` — `stoneAgeForest` set (night/dusk forest clearing, cave cliff `caveX`, layered trees,
+  bushes, ferns) and props `campfire`, `fireGlow`, `logSeat`, `rock`, `fern`, `spear`, `bonePile`.
+  Example still: `films/stone-age-camp/`.
 
 ## Not covered yet
 
