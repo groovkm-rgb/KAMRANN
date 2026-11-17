@@ -1,0 +1,250 @@
+{
+ "duration": 46.628542,
+ "frames30": 1399,
+ "source": "silence-align (cost 3.15)",
+ "segments": [
+  [
+   0.0,
+   2.19009
+  ],
+  [
+   2.72474,
+   3.73175
+  ],
+  [
+   4.30776,
+   4.64422
+  ],
+  [
+   4.90787,
+   5.90612
+  ],
+  [
+   6.5134,
+   7.16392
+  ],
+  [
+   7.47816,
+   8.65245
+  ],
+  [
+   9.17537,
+   9.88283
+  ],
+  [
+   10.2029,
+   11.5591
+  ],
+  [
+   12.0543,
+   12.9052
+  ],
+  [
+   13.4686,
+   16.4781
+  ],
+  [
+   16.6336,
+   17.5144
+  ],
+  [
+   17.6379,
+   19.9541
+  ],
+  [
+   20.1436,
+   20.6904
+  ],
+  [
+   20.8244,
+   22.4727
+  ],
+  [
+   22.6256,
+   25.67
+  ],
+  [
+   25.928,
+   26.6867
+  ],
+  [
+   26.9453,
+   28.0736
+  ],
+  [
+   28.4283,
+   28.8696
+  ],
+  [
+   29.092,
+   29.6946
+  ],
+  [
+   29.9124,
+   30.7586
+  ],
+  [
+   31.1059,
+   32.4272
+  ],
+  [
+   32.5764,
+   33.9844
+  ],
+  [
+   34.2841,
+   35.8592
+  ],
+  [
+   36.2312,
+   37.0776
+  ],
+  [
+   37.295,
+   38.0726
+  ],
+  [
+   38.2015,
+   39.0867
+  ],
+  [
+   39.4387,
+   42.1855
+  ],
+  [
+   42.5657,
+   44.8461
+  ],
+  [
+   45.1185,
+   46.2351
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein Mann steht auf einer kleinen Insel im Fluss.",
+   "s": 0.0,
+   "e": 2.19
+  },
+  {
+   "text": "Fast zwei Meter gro\u00df.",
+   "s": 2.725,
+   "e": 3.732
+  },
+  {
+   "text": "D\u00fcrr wie eine Bohnenstange.",
+   "s": 4.308,
+   "e": 5.906
+  },
+  {
+   "text": "Und in der Hand:",
+   "s": 6.513,
+   "e": 7.164
+  },
+  {
+   "text": "ein riesiges Schwert.",
+   "s": 7.478,
+   "e": 8.652
+  },
+  {
+   "text": "Ihm gegen\u00fcber:",
+   "s": 9.175,
+   "e": 9.883
+  },
+  {
+   "text": "ein Mann, der ihn umbringen will.",
+   "s": 10.203,
+   "e": 11.559
+  },
+  {
+   "text": "Wie es dazu kam?",
+   "s": 12.054,
+   "e": 12.905
+  },
+  {
+   "text": "Der Lange hat in der Zeitung heimlich fiese Briefe \u00fcber ihn geschrieben.",
+   "s": 13.469,
+   "e": 16.478
+  },
+  {
+   "text": "Unter falschem Namen.",
+   "s": 16.634,
+   "e": 17.514
+  },
+  {
+   "text": "Und der andere ist stinksauer. Er fordert ihn zum Duell.",
+   "s": 17.638,
+   "e": 19.954
+  },
+  {
+   "text": "Das Problem:",
+   "s": 20.144,
+   "e": 20.69
+  },
+  {
+   "text": "Der Gegner ist ein richtig guter Sch\u00fctze.",
+   "s": 20.824,
+   "e": 22.473
+  },
+  {
+   "text": "Aber wer gefordert wird, darf die Waffen w\u00e4hlen. Und der Lange sagt:",
+   "s": 22.626,
+   "e": 25.67
+  },
+  {
+   "text": "Keine Pistolen.",
+   "s": 25.928,
+   "e": 26.687
+  },
+  {
+   "text": "Riesige Reiters\u00e4bel.",
+   "s": 26.945,
+   "e": 28.074
+  },
+  {
+   "text": "Zwischen ihnen liegt ein Brett.",
+   "s": 28.428,
+   "e": 29.695
+  },
+  {
+   "text": "Keiner darf dr\u00fcber.",
+   "s": 29.912,
+   "e": 30.759
+  },
+  {
+   "text": "Dann hebt der Lange sein Schwert \u2026 und schl\u00e4gt einen Ast ab.",
+   "s": 31.106,
+   "e": 33.984
+  },
+  {
+   "text": "Hoch \u00fcber dem Kopf seines Gegners.",
+   "s": 34.284,
+   "e": 35.859
+  },
+  {
+   "text": "Da wird allen klar:",
+   "s": 36.231,
+   "e": 37.078
+  },
+  {
+   "text": "Gegen diese Arme hast du keine Chance.",
+   "s": 37.295,
+   "e": 39.087
+  },
+  {
+   "text": "Kurz darauf wird das Duell abgeblasen. Und der lange Mann?",
+   "s": 39.439,
+   "e": 42.185
+  },
+  {
+   "text": "Wird sp\u00e4ter Pr\u00e4sident. Der mit dem Zylinder.",
+   "s": 42.566,
+   "e": 44.846
+  },
+  {
+   "text": "Auf dem F\u00fcnf-Dollar-Schein.",
+   "s": 45.118,
+   "e": 46.235
+  }
+ ]
+}
