@@ -354,6 +354,11 @@ put(S(260), whoosh(.4, 400, 2500, 142), -18)
 put(S(264) + .1, car(143), -16)
 put(S(265) + .3, vibrate(.7), -24)
 
+# transitions: whoosh on whip pans, airy shimmer on flashes
+for a, xf, st, nm in json.load(open('transitions.json')):
+    if st == 'whip': put(a - xf - .05, whoosh(xf + .35, 250, 3500, int(a * 7)), -17)
+    if st == 'flash': put(a - xf, whoosh(xf + .6, 2000, 7000, int(a * 5)), -22)
+
 # ======================= MIX =======================
 duck = lambda d_: (10 ** (-d_ * act / 20))[:, None].astype(np.float32)
 # lion silence: music & ambience dip

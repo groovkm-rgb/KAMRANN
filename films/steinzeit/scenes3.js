@@ -124,6 +124,7 @@ scene(S(238), t => { const lt = t - S(238);
   const list = [[S(242), 275.2], [S(242) + 1.6, 498.5], [S(242) + 3.2, 575.5], [S(242) + 4.8, 604], [S(242) + 6.4, 345.5], [S(242) + 8, 466], [S(242) + 9.6, 141.5]];
   let tp = list[0][1], t0 = list[0][0]; for (const [a, p] of list) if (t >= a) { tp = p; t0 = a; }
   const fr = sceneAt(tp + (t - t0) * .5);
+  if (fr.__blend) return fr;
   fr.screen = (fr.screen || []).concat([c => { c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalCompositeOperation = 'soft-light'; c.fillStyle = 'rgba(255,190,120,.35)'; c.fillRect(0, 0, W, H); c.globalCompositeOperation = 'source-over'; const f = bump(t - t0, 0, .25); if (f > 0) { c.fillStyle = `rgba(255,236,210,${.35 * f})`; c.fillRect(0, 0, W, H); } vignette2(c, .7, '20,10,4'); c.restore(); }]);
   return fr;
 }, .5, 'S29 montage');

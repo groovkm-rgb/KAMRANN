@@ -1,31 +1,64 @@
 // DIRECTOR: scenes on the absolute voice-over timeline, soft cross-dissolves between scenes (xf seconds), hard cuts (xf 0).
 // scene(a, f, xf): f(t) -> toon-shorts frame (t = absolute seconds). Scenes may be evaluated slightly before `a` during a dissolve.
 const SC = [];
-function scene(a, f, xf = .45, name = '') { SC.push({ a, f, xf, name }); }
+// style: 'dissolve' | 'leak' (warm light leak) | 'whip' (fast pan) | 'dip' (through black) | 'flash'
+function scene(a, f, xf = .45, name = '', style = 'dissolve') { SC.push({ a, f, xf, name, style }); }
 const S = i => TM_S[i][0], SE = i => TM_S[i][1];
 const FILM_END = VO_END + 1.25;
-const _buf = document.createElement('canvas'); _buf.width = 1920; _buf.height = 1080;
-let _engineRender = null;
-function drawScene(sc, t) {
-  _film.shots = [{ name: sc.name, a: 0, b: 1e6, f: () => sc.f(t) }]; _film.duration = 1e6; _film.fadeIn = 0; _film.fadeOut = 0;
+const _bufs = [0, 1, 2, 3].map(() => { const b = document.createElement('canvas'); b.width = 1920; b.height = 1080; return b; });
+let _engineRender = null, _cur = { a: 0, b: 1 };
+function applyDrift(fr, t) {
+  // slow "Ken Burns" push-in + gentle handheld sway on every world shot, so nothing ever sits completely still
+  if (!fr || !fr.cam || fr.set === 'blank' || fr.noDrift) return fr;
+  const k = clamp((t - _cur.a) / Math.max(1, _cur.b - _cur.a)), c = fr.cam;
+  fr.cam = Object.assign({}, c, { z: c.z * (1 + .045 * ease(k)), x: c.x + Math.sin(t * .21 + _cur.a) * 6 / c.z, y: c.y + Math.sin(t * .17 + 1 + _cur.a) * 4 / c.z, rot: (c.rot || 0) + Math.sin(t * .13 + _cur.a) * .004 });
+  return fr;
+}
+function renderFrameObj(fr, t, depth = 0) {
+  const ctx = document.getElementById('film').getContext('2d');
+  if (fr && fr.__blend) {
+    const [A, B, k, style] = fr.__blend, buf = _bufs[depth], bc = buf.getContext('2d');
+    renderFrameObj(A, t, depth + 1); bc.setTransform(1, 0, 0, 1, 0, 0); bc.globalAlpha = 1; bc.drawImage(ctx.canvas, 0, 0);
+    renderFrameObj(B, t, depth + 1); composite(ctx, buf, k, style, depth); return;
+  }
+  const f2 = applyDrift(fr, t);
+  _film.shots = [{ name: 'x', a: 0, b: 1e6, f: () => f2 }]; _film.duration = 1e6; _film.fadeIn = 0; _film.fadeOut = 0;
   _engineRender(t);
+}
+function composite(ctx, A, k, style, depth) {
+  // canvas holds B (incoming), A is the outgoing image
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
+  if (style === 'whip') {
+    const tmp = _bufs[(depth + 2) % 4], tc = tmp.getContext('2d'); tc.setTransform(1, 0, 0, 1, 0, 0); tc.globalAlpha = 1; tc.drawImage(ctx.canvas, 0, 0);
+    const e = ease(k); ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    for (let i = 0; i < 6; i++) { const o = i * 26 * Math.sin(k * Math.PI); ctx.globalAlpha = i ? .16 : 1; ctx.drawImage(A, -e * W - o, 0); ctx.drawImage(tmp, (1 - e) * W - o, 0); }
+  } else if (style === 'dip') {
+    if (k < .5) { ctx.drawImage(A, 0, 0); ctx.fillStyle = `rgba(0,0,0,${k * 2})`; ctx.fillRect(0, 0, W, H); } else { ctx.fillStyle = `rgba(0,0,0,${(1 - k) * 2})`; ctx.fillRect(0, 0, W, H); }
+  } else {
+    ctx.globalAlpha = 1 - k; ctx.drawImage(A, 0, 0); ctx.globalAlpha = 1;
+    const b = Math.sin(k * Math.PI);
+    if (style === 'leak' && b > 0) { ctx.globalCompositeOperation = 'screen'; let g = ctx.createRadialGradient(W * (.15 + .7 * k), H * .3, 0, W * (.15 + .7 * k), H * .3, W * .7); g.addColorStop(0, `rgba(255,190,110,${.55 * b})`); g.addColorStop(.5, `rgba(255,120,60,${.25 * b})`); g.addColorStop(1, 'rgba(255,120,60,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      g = ctx.createLinearGradient(0, 0, W, 0); g.addColorStop(0, `rgba(255,230,180,${.2 * b})`); g.addColorStop(1, 'rgba(255,230,180,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
+    if (style === 'flash' && b > 0) { ctx.fillStyle = `rgba(255,248,235,${.8 * b})`; ctx.fillRect(0, 0, W, H); }
+  }
+  ctx.restore();
 }
 function renderDirector(t) {
   SC.sort((p, q) => p.a - q.a);
   let i = 0; for (let k = 0; k < SC.length; k++) if (SC[k].a <= t) i = k;
   const cur = SC[i], nxt = SC[i + 1], ctx = document.getElementById('film').getContext('2d');
-  const k = nxt && nxt.xf > 0 && t > nxt.a - nxt.xf ? ease(clamp((t - (nxt.a - nxt.xf)) / nxt.xf)) : 0;
+  const k = nxt && nxt.xf > 0 && t > nxt.a - nxt.xf ? clamp((t - (nxt.a - nxt.xf)) / nxt.xf) : 0;
+  _cur = { a: cur.a, b: nxt ? nxt.a : FILM_END };
   if (k > 0) {
-    drawScene(cur, t); const b = _buf.getContext('2d'); b.setTransform(1, 0, 0, 1, 0, 0); b.globalAlpha = 1; b.drawImage(ctx.canvas, 0, 0);
-    drawScene(nxt, t); ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1 - k; ctx.drawImage(_buf, 0, 0); ctx.restore();
-  } else drawScene(cur, t);
-  // final fade to black after the last words
+    const A = cur.f(t); _cur = { a: nxt.a, b: SC[i + 2] ? SC[i + 2].a : FILM_END }; const B = nxt.f(t);
+    renderFrameObj({ __blend: [A, B, k, nxt.style] }, t);
+  } else renderFrameObj(cur.f(t), t);
   const fo = seg(t, FILM_END - .6, FILM_END); if (fo > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = `rgba(0,0,0,${fo})`; ctx.fillRect(0, 0, W, H); }
 }
 function startDirector() {
   defineFilm({ shots: [{ name: 'all', dur: FILM_END, f: () => ({}) }] });
   _engineRender = window.__film.renderAt;
-  window.__film = { FPS, DURATION: FILM_END, renderAt: renderDirector, scenes: SC.slice().sort((p, q) => p.a - q.a).map(s => ({ name: s.name, start: s.a, end: s.a + 1 })), sheet: () => {} };
+  window.__film = { FPS, DURATION: FILM_END, renderAt: renderDirector, scenes: SC.slice().sort((p, q) => p.a - q.a).map(s => ({ name: s.name, start: s.a, end: s.a + 1 })), sheet: () => {}, transitions: SC.slice().sort((p, q) => p.a - q.a).map(s => [s.a, s.xf, s.style, s.name]) };
 }
 
 // ---------- shared helpers ----------
@@ -72,5 +105,11 @@ function outFrame(t, cam, o = {}) {
     }, c => finish(c, t, { vig: o.vig ?? .45 })],
   };
 }
-// a shot list inside one scene: shots([[t0, fn], [t1, fn] ...], t) picks the last whose t0 <= t
-function shots(list, t) { let f = list[0][1], a = list[0][0]; for (const [t0, fn] of list) if (t >= t0) { f = fn; a = t0; } return f(t - a, t); }
+// a shot list inside one scene: shots([[t0, fn, style?, xf?], ...], t) — soft transitions between sub-shots too
+function shots(list, t) {
+  let i = 0; for (let k = 0; k < list.length; k++) if (t >= list[k][0]) i = k;
+  const run = j => list[j][1](t - list[j][0], t);
+  const nx = list[i + 1];
+  if (nx) { const xf = nx[3] ?? .4, st = nx[2] || 'dissolve'; if (st !== 'cut' && xf > 0 && t > nx[0] - xf) return { __blend: [run(i), run(i + 1), clamp((t - (nx[0] - xf)) / xf), st] }; }
+  return run(i);
+}
