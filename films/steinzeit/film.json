@@ -1,0 +1,2 @@
+{ "title": "Noah – Ein Tag in der Steinzeit", "slug": "steinzeit", "fps": 30,
+  "modules": ["lib/noah.js", "lib/light.js", "lib/stone-age.js", "lib/forest.js", "lib/cave.js", "lib/animals.js", "lib/fonts.js", "lib/fx.js", "lib/cave2.js", "scenes.js"] }
