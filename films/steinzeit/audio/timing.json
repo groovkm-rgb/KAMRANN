@@ -1,0 +1,11258 @@
+[
+{
+"p": 0,
+"s": "Stell dir vor, du machst die Augen auf – und es ist stockdunkel.",
+"t0": 0.1,
+"t1": 3.78,
+"w": [
+[
+"Stell",
+0.1
+],
+[
+"dir",
+0.41
+],
+[
+"vor,",
+0.61
+],
+[
+"du",
+0.86
+],
+[
+"machst",
+1.02
+],
+[
+"die",
+1.37
+],
+[
+"Augen",
+1.58
+],
+[
+"auf",
+2.25
+],
+[
+"–",
+2.46
+],
+[
+"und",
+2.56
+],
+[
+"es",
+2.76
+],
+[
+"ist",
+2.91
+],
+[
+"stockdunkel.",
+3.12
+]
+]
+},
+{
+"p": 0,
+"s": "Kein Handylicht, kein Wecker, kein Straßenlärm.",
+"t0": 4.17,
+"t1": 7.1,
+"w": [
+[
+"Kein",
+4.17
+],
+[
+"Handylicht,",
+4.42
+],
+[
+"kein",
+5.03
+],
+[
+"Wecker,",
+5.56
+],
+[
+"kein",
+6.18
+],
+[
+"Straßenlärm.",
+6.44
+]
+]
+},
+{
+"p": 0,
+"s": "Nur ein leises Knistern.",
+"t0": 7.57,
+"t1": 8.86,
+"w": [
+[
+"Nur",
+7.57
+],
+[
+"ein",
+7.78
+],
+[
+"leises",
+7.98
+],
+[
+"Knistern.",
+8.34
+]
+]
+},
+{
+"p": 0,
+"s": "Und es riecht nach Rauch.",
+"t0": 9.26,
+"t1": 10.1,
+"w": [
+[
+"Und",
+9.26
+],
+[
+"es",
+9.39
+],
+[
+"riecht",
+9.49
+],
+[
+"nach",
+9.71
+],
+[
+"Rauch.",
+9.87
+]
+]
+},
+{
+"p": 0,
+"s": "Genau so geht's Noah gerade.",
+"t0": 10.49,
+"t1": 11.99,
+"w": [
+[
+"Genau",
+10.49
+],
+[
+"so",
+10.8
+],
+[
+"geht's",
+10.96
+],
+[
+"Noah",
+11.32
+],
+[
+"gerade.",
+11.58
+]
+]
+},
+{
+"p": 0,
+"s": "Er liegt auf einem Haufen Felle, über ihm hängt ein Felsdach, und draußen pfeift ein eiskalter Wind.",
+"t0": 12.49,
+"t1": 17.27,
+"w": [
+[
+"Er",
+12.49
+],
+[
+"liegt",
+12.62
+],
+[
+"auf",
+12.87
+],
+[
+"einem",
+13.04
+],
+[
+"Haufen",
+13.3
+],
+[
+"Felle,",
+13.59
+],
+[
+"über",
+14.23
+],
+[
+"ihm",
+14.44
+],
+[
+"hängt",
+14.61
+],
+[
+"ein",
+14.87
+],
+[
+"Felsdach,",
+15.04
+],
+[
+"und",
+15.61
+],
+[
+"draußen",
+15.78
+],
+[
+"pfeift",
+16.12
+],
+[
+"ein",
+16.42
+],
+[
+"eiskalter",
+16.59
+],
+[
+"Wind.",
+17.02
+]
+]
+},
+{
+"p": 0,
+"s": "Noah tastet nach seinem Handy.",
+"t0": 17.7,
+"t1": 18.96,
+"w": [
+[
+"Noah",
+17.7
+],
+[
+"tastet",
+17.9
+],
+[
+"nach",
+18.19
+],
+[
+"seinem",
+18.39
+],
+[
+"Handy.",
+18.68
+]
+]
+},
+{
+"p": 0,
+"s": "Nichts.",
+"t0": 19.23,
+"t1": 19.74,
+"w": [
+[
+"Nichts.",
+19.23
+]
+]
+},
+{
+"p": 0,
+"s": "Er schaut auf seine Uhr – die läuft zwar noch, aber die bringt ihm hier überhaupt nichts.",
+"t0": 19.99,
+"t1": 23.93,
+"w": [
+[
+"Er",
+19.99
+],
+[
+"schaut",
+20.11
+],
+[
+"auf",
+20.4
+],
+[
+"seine",
+20.56
+],
+[
+"Uhr",
+20.81
+],
+[
+"–",
+20.97
+],
+[
+"die",
+21.31
+],
+[
+"läuft",
+21.47
+],
+[
+"zwar",
+21.72
+],
+[
+"noch,",
+21.92
+],
+[
+"aber",
+22.17
+],
+[
+"die",
+22.37
+],
+[
+"bringt",
+22.54
+],
+[
+"ihm",
+22.82
+],
+[
+"hier",
+22.99
+],
+[
+"überhaupt",
+23.19
+],
+[
+"nichts.",
+23.6
+]
+]
+},
+{
+"p": 0,
+"s": "Denn Noah ist nicht mehr in seinem Zimmer.",
+"t0": 24.22,
+"t1": 26.3,
+"w": [
+[
+"Denn",
+24.22
+],
+[
+"Noah",
+24.46
+],
+[
+"ist",
+24.7
+],
+[
+"nicht",
+24.9
+],
+[
+"mehr",
+25.19
+],
+[
+"in",
+25.43
+],
+[
+"seinem",
+25.57
+],
+[
+"Zimmer.",
+25.91
+]
+]
+},
+{
+"p": 0,
+"s": "Er ist fünfzehntausend Jahre in der Vergangenheit gelandet.",
+"t0": 26.62,
+"t1": 32.85,
+"w": [
+[
+"Er",
+26.62
+],
+[
+"ist",
+26.93
+],
+[
+"fünfzehntausend",
+27.35
+],
+[
+"Jahre",
+29.01
+],
+[
+"in",
+29.63
+],
+[
+"der",
+29.94
+],
+[
+"Vergangenheit",
+30.36
+],
+[
+"gelandet.",
+31.81
+]
+]
+},
+{
+"p": 0,
+"s": "Mitten in der Eiszeit, irgendwo in Europa.",
+"t0": 33.32,
+"t1": 35.46,
+"w": [
+[
+"Mitten",
+33.32
+],
+[
+"in",
+33.67
+],
+[
+"der",
+33.82
+],
+[
+"Eiszeit,",
+34.02
+],
+[
+"irgendwo",
+34.46
+],
+[
+"in",
+34.91
+],
+[
+"Europa.",
+35.06
+]
+]
+},
+{
+"p": 1,
+"s": "Und bevor du fragst: Nein, hier laufen keine Dinosaurier rum.",
+"t0": 35.87,
+"t1": 38.67,
+"w": [
+[
+"Und",
+35.87
+],
+[
+"bevor",
+36.03
+],
+[
+"du",
+36.26
+],
+[
+"fragst:",
+36.38
+],
+[
+"Nein,",
+36.69
+],
+[
+"hier",
+36.92
+],
+[
+"laufen",
+37.11
+],
+[
+"keine",
+37.39
+],
+[
+"Dinosaurier",
+38.01
+],
+[
+"rum.",
+38.48
+]
+]
+},
+{
+"p": 1,
+"s": "Die sind schon seit sechsundsechzig Millionen Jahren weg.",
+"t0": 38.84,
+"t1": 42.07,
+"w": [
+[
+"Die",
+38.84
+],
+[
+"sind",
+39.04
+],
+[
+"schon",
+39.29
+],
+[
+"seit",
+39.58
+],
+[
+"sechsundsechzig",
+39.83
+],
+[
+"Millionen",
+40.62
+],
+[
+"Jahren",
+41.48
+],
+[
+"weg.",
+41.82
+]
+]
+},
+{
+"p": 1,
+"s": "Zwischen den letzten Dinos und den Menschen hier liegt also viel, viel mehr Zeit als zwischen den Menschen hier und dir.",
+"t0": 42.35,
+"t1": 47.98,
+"w": [
+[
+"Zwischen",
+42.35
+],
+[
+"den",
+42.74
+],
+[
+"letzten",
+42.92
+],
+[
+"Dinos",
+43.27
+],
+[
+"und",
+43.53
+],
+[
+"den",
+43.71
+],
+[
+"Menschen",
+43.89
+],
+[
+"hier",
+44.28
+],
+[
+"liegt",
+44.82
+],
+[
+"also",
+45.08
+],
+[
+"viel,",
+45.3
+],
+[
+"viel",
+45.57
+],
+[
+"mehr",
+45.79
+],
+[
+"Zeit",
+46.01
+],
+[
+"als",
+46.22
+],
+[
+"zwischen",
+46.4
+],
+[
+"den",
+46.8
+],
+[
+"Menschen",
+46.97
+],
+[
+"hier",
+47.37
+],
+[
+"und",
+47.59
+],
+[
+"dir.",
+47.76
+]
+]
+},
+{
+"p": 1,
+"s": "Was es aber gibt, sind Tiere, die mindestens genauso krass sind.",
+"t0": 48.57,
+"t1": 51.68,
+"w": [
+[
+"Was",
+48.57
+],
+[
+"es",
+48.76
+],
+[
+"aber",
+48.9
+],
+[
+"gibt,",
+49.14
+],
+[
+"sind",
+49.43
+],
+[
+"Tiere,",
+49.67
+],
+[
+"die",
+50.01
+],
+[
+"mindestens",
+50.2
+],
+[
+"genauso",
+50.72
+],
+[
+"krass",
+51.11
+],
+[
+"sind.",
+51.39
+]
+]
+},
+{
+"p": 1,
+"s": "Mammuts.",
+"t0": 51.98,
+"t1": 52.66,
+"w": [
+[
+"Mammuts.",
+51.98
+]
+]
+},
+{
+"p": 1,
+"s": "Wollnashörner.",
+"t0": 52.83,
+"t1": 53.82,
+"w": [
+[
+"Wollnashörner.",
+52.83
+]
+]
+},
+{
+"p": 1,
+"s": "Höhlenlöwen.",
+"t0": 54.02,
+"t1": 54.89,
+"w": [
+[
+"Höhlenlöwen.",
+54.02
+]
+]
+},
+{
+"p": 1,
+"s": "Und die meisten davon wird es bald nicht mehr geben.",
+"t0": 55.32,
+"t1": 57.83,
+"w": [
+[
+"Und",
+55.32
+],
+[
+"die",
+55.51
+],
+[
+"meisten",
+55.7
+],
+[
+"davon",
+56.08
+],
+[
+"wird",
+56.36
+],
+[
+"es",
+56.6
+],
+[
+"bald",
+56.74
+],
+[
+"nicht",
+56.98
+],
+[
+"mehr",
+57.26
+],
+[
+"geben.",
+57.5
+]
+]
+},
+{
+"p": 2,
+"s": "Okay, aber eins nach dem anderen.",
+"t0": 58.17,
+"t1": 60.36,
+"w": [
+[
+"Okay,",
+58.17
+],
+[
+"aber",
+58.49
+],
+[
+"eins",
+59.15
+],
+[
+"nach",
+59.41
+],
+[
+"dem",
+59.68
+],
+[
+"anderen.",
+59.89
+]
+]
+},
+{
+"p": 2,
+"s": "Noah setzt sich auf und merkt sofort: Boah, ist das kalt!",
+"t0": 60.76,
+"t1": 64.07,
+"w": [
+[
+"Noah",
+60.76
+],
+[
+"setzt",
+61.01
+],
+[
+"sich",
+61.32
+],
+[
+"auf",
+61.57
+],
+[
+"und",
+61.77
+],
+[
+"merkt",
+61.97
+],
+[
+"sofort:",
+62.28
+],
+[
+"Boah,",
+62.83
+],
+[
+"ist",
+63.36
+],
+[
+"das",
+63.56
+],
+[
+"kalt!",
+63.77
+]
+]
+},
+{
+"p": 2,
+"s": "Europa ist in dieser Zeit ein ganz anderer Ort.",
+"t0": 64.44,
+"t1": 66.66,
+"w": [
+[
+"Europa",
+64.44
+],
+[
+"ist",
+64.76
+],
+[
+"in",
+64.95
+],
+[
+"dieser",
+65.09
+],
+[
+"Zeit",
+65.41
+],
+[
+"ein",
+65.64
+],
+[
+"ganz",
+65.83
+],
+[
+"anderer",
+66.06
+],
+[
+"Ort.",
+66.43
+]
+]
+},
+{
+"p": 2,
+"s": "Riesige Gletscher bedecken den Norden, der Meeresspiegel liegt ungefähr hundert Meter tiefer als heute, und da, wo heute Wälder und Städte sind, gibt's vor allem weite, offene Graslandschaft.",
+"t0": 66.87,
+"t1": 72.7,
+"w": [
+[
+"Riesige",
+66.87
+],
+[
+"Gletscher",
+67.1
+],
+[
+"bedecken",
+67.38
+],
+[
+"den",
+67.63
+],
+[
+"Norden,",
+67.74
+],
+[
+"der",
+67.97
+],
+[
+"Meeresspiegel",
+68.08
+],
+[
+"liegt",
+68.48
+],
+[
+"ungefähr",
+68.87
+],
+[
+"hundert",
+69.12
+],
+[
+"Meter",
+69.34
+],
+[
+"tiefer",
+69.51
+],
+[
+"als",
+69.71
+],
+[
+"heute,",
+69.82
+],
+[
+"und",
+70.02
+],
+[
+"da,",
+70.13
+],
+[
+"wo",
+70.25
+],
+[
+"heute",
+70.33
+],
+[
+"Wälder",
+70.5
+],
+[
+"und",
+70.7
+],
+[
+"Städte",
+70.81
+],
+[
+"sind,",
+71.01
+],
+[
+"gibt's",
+71.18
+],
+[
+"vor",
+71.37
+],
+[
+"allem",
+71.49
+],
+[
+"weite,",
+71.85
+],
+[
+"offene",
+72.05
+],
+[
+"Graslandschaft.",
+72.25
+]
+]
+},
+{
+"p": 2,
+"s": "Steppe, so weit das Auge reicht.",
+"t0": 72.9,
+"t1": 74.1,
+"w": [
+[
+"Steppe,",
+72.9
+],
+[
+"so",
+73.19
+],
+[
+"weit",
+73.3
+],
+[
+"das",
+73.48
+],
+[
+"Auge",
+73.63
+],
+[
+"reicht.",
+73.81
+]
+]
+},
+{
+"p": 2,
+"s": "Und im Winter wird's hier richtig brutal.",
+"t0": 74.41,
+"t1": 76.76,
+"w": [
+[
+"Und",
+74.41
+],
+[
+"im",
+74.63
+],
+[
+"Winter",
+74.8
+],
+[
+"wird's",
+75.19
+],
+[
+"hier",
+75.59
+],
+[
+"richtig",
+75.86
+],
+[
+"brutal.",
+76.31
+]
+]
+},
+{
+"p": 3,
+"s": "Neben Noah liegen andere Leute, eingewickelt in Felle.",
+"t0": 77.01,
+"t1": 80.65,
+"w": [
+[
+"Neben",
+77.01
+],
+[
+"Noah",
+77.35
+],
+[
+"liegen",
+77.64
+],
+[
+"andere",
+78.04
+],
+[
+"Leute,",
+78.44
+],
+[
+"eingewickelt",
+78.84
+],
+[
+"in",
+79.77
+],
+[
+"Felle.",
+80.25
+]
+]
+},
+{
+"p": 3,
+"s": "Das ist seine Gruppe.",
+"t0": 80.82,
+"t1": 81.94,
+"w": [
+[
+"Das",
+80.82
+],
+[
+"ist",
+81.02
+],
+[
+"seine",
+81.23
+],
+[
+"Gruppe.",
+81.53
+]
+]
+},
+{
+"p": 3,
+"s": "Vielleicht zwanzig, dreißig Menschen.",
+"t0": 82.37,
+"t1": 85.27,
+"w": [
+[
+"Vielleicht",
+82.37
+],
+[
+"zwanzig,",
+83.21
+],
+[
+"dreißig",
+83.9
+],
+[
+"Menschen.",
+84.51
+]
+]
+},
+{
+"p": 3,
+"s": "Eltern, Kinder, Großeltern, Tanten, Onkel.",
+"t0": 85.66,
+"t1": 87.9,
+"w": [
+[
+"Eltern,",
+85.66
+],
+[
+"Kinder,",
+86.0
+],
+[
+"Großeltern,",
+86.34
+],
+[
+"Tanten,",
+87.27
+],
+[
+"Onkel.",
+87.6
+]
+]
+},
+{
+"p": 3,
+"s": "Mehr nicht.",
+"t0": 88.22,
+"t1": 89.07,
+"w": [
+[
+"Mehr",
+88.22
+],
+[
+"nicht.",
+88.57
+]
+]
+},
+{
+"p": 3,
+"s": "Keine Nachbarn, kein Dorf, keine Stadt.",
+"t0": 89.35,
+"t1": 92.45,
+"w": [
+[
+"Keine",
+89.35
+],
+[
+"Nachbarn,",
+89.82
+],
+[
+"kein",
+90.59
+],
+[
+"Dorf,",
+90.98
+],
+[
+"keine",
+91.44
+],
+[
+"Stadt.",
+91.91
+]
+]
+},
+{
+"p": 3,
+"s": "Die nächste Gruppe ist vielleicht Tage entfernt.",
+"t0": 92.75,
+"t1": 94.65,
+"w": [
+[
+"Die",
+92.75
+],
+[
+"nächste",
+92.91
+],
+[
+"Gruppe",
+93.22
+],
+[
+"ist",
+93.49
+],
+[
+"vielleicht",
+93.64
+],
+[
+"Tage",
+94.07
+],
+[
+"entfernt.",
+94.26
+]
+]
+},
+{
+"p": 3,
+"s": "Und diese paar Leute hier – das ist alles.",
+"t0": 95.02,
+"t1": 98.38,
+"w": [
+[
+"Und",
+95.02
+],
+[
+"diese",
+95.33
+],
+[
+"paar",
+95.8
+],
+[
+"Leute",
+96.19
+],
+[
+"hier",
+96.66
+],
+[
+"–",
+97.05
+],
+[
+"das",
+97.21
+],
+[
+"ist",
+97.52
+],
+[
+"alles.",
+97.83
+]
+]
+},
+{
+"p": 3,
+"s": "Das ist deine Familie, dein Team, deine Versicherung und dein Krankenhaus in einem.",
+"t0": 98.67,
+"t1": 104.3,
+"w": [
+[
+"Das",
+98.67
+],
+[
+"ist",
+98.89
+],
+[
+"deine",
+99.12
+],
+[
+"Familie,",
+99.81
+],
+[
+"dein",
+100.32
+],
+[
+"Team,",
+100.6
+],
+[
+"deine",
+101.22
+],
+[
+"Versicherung",
+101.56
+],
+[
+"und",
+102.57
+],
+[
+"dein",
+102.79
+],
+[
+"Krankenhaus",
+103.07
+],
+[
+"in",
+103.74
+],
+[
+"einem.",
+103.91
+]
+]
+},
+{
+"p": 3,
+"s": "Wer hier alleine ist, hat verdammt schlechte Karten.",
+"t0": 104.73,
+"t1": 107.17,
+"w": [
+[
+"Wer",
+104.73
+],
+[
+"hier",
+104.91
+],
+[
+"alleine",
+105.14
+],
+[
+"ist,",
+105.51
+],
+[
+"hat",
+105.74
+],
+[
+"verdammt",
+105.93
+],
+[
+"schlechte",
+106.34
+],
+[
+"Karten.",
+106.8
+]
+]
+},
+{
+"p": 4,
+"s": "Eine ältere Frau hockt schon an der Feuerstelle.",
+"t0": 107.74,
+"t1": 110.19,
+"w": [
+[
+"Eine",
+107.74
+],
+[
+"ältere",
+107.97
+],
+[
+"Frau",
+108.28
+],
+[
+"hockt",
+108.51
+],
+[
+"schon",
+109.02
+],
+[
+"an",
+109.29
+],
+[
+"der",
+109.42
+],
+[
+"Feuerstelle.",
+109.6
+]
+]
+},
+{
+"p": 4,
+"s": "Das Feuer ist über Nacht fast ausgegangen, nur noch ein bisschen Glut ist übrig.",
+"t0": 110.62,
+"t1": 114.23,
+"w": [
+[
+"Das",
+110.62
+],
+[
+"Feuer",
+110.78
+],
+[
+"ist",
+111.03
+],
+[
+"über",
+111.19
+],
+[
+"Nacht",
+111.4
+],
+[
+"fast",
+111.64
+],
+[
+"ausgegangen,",
+111.85
+],
+[
+"nur",
+112.67
+],
+[
+"noch",
+112.84
+],
+[
+"ein",
+113.04
+],
+[
+"bisschen",
+113.21
+],
+[
+"Glut",
+113.57
+],
+[
+"ist",
+113.78
+],
+[
+"übrig.",
+113.94
+]
+]
+},
+{
+"p": 4,
+"s": "Sie legt trockenes Gras drauf, pustet vorsichtig, schiebt kleine Zweige nach – und zack, die Flammen sind wieder da.",
+"t0": 114.66,
+"t1": 120.88,
+"w": [
+[
+"Sie",
+114.66
+],
+[
+"legt",
+114.82
+],
+[
+"trockenes",
+115.02
+],
+[
+"Gras",
+115.43
+],
+[
+"drauf,",
+115.63
+],
+[
+"pustet",
+116.27
+],
+[
+"vorsichtig,",
+116.55
+],
+[
+"schiebt",
+117.04
+],
+[
+"kleine",
+117.7
+],
+[
+"Zweige",
+117.98
+],
+[
+"nach",
+118.26
+],
+[
+"–",
+118.47
+],
+[
+"und",
+118.97
+],
+[
+"zack,",
+119.13
+],
+[
+"die",
+119.37
+],
+[
+"Flammen",
+119.91
+],
+[
+"sind",
+120.23
+],
+[
+"wieder",
+120.44
+],
+[
+"da.",
+120.72
+]
+]
+},
+{
+"p": 4,
+"s": "Feuer ist hier alles.",
+"t0": 121.31,
+"t1": 122.54,
+"w": [
+[
+"Feuer",
+121.31
+],
+[
+"ist",
+121.59
+],
+[
+"hier",
+121.98
+],
+[
+"alles.",
+122.22
+]
+]
+},
+{
+"p": 4,
+"s": "Es wärmt, es macht Licht, es hält wilde Tiere auf Abstand, und man kann damit Essen braten.",
+"t0": 122.94,
+"t1": 128.16,
+"w": [
+[
+"Es",
+122.94
+],
+[
+"wärmt,",
+123.07
+],
+[
+"es",
+123.37
+],
+[
+"macht",
+123.5
+],
+[
+"Licht,",
+124.07
+],
+[
+"es",
+124.37
+],
+[
+"hält",
+125.05
+],
+[
+"wilde",
+125.26
+],
+[
+"Tiere",
+125.52
+],
+[
+"auf",
+125.78
+],
+[
+"Abstand,",
+125.95
+],
+[
+"und",
+126.74
+],
+[
+"man",
+126.91
+],
+[
+"kann",
+127.08
+],
+[
+"damit",
+127.3
+],
+[
+"Essen",
+127.56
+],
+[
+"braten.",
+127.82
+]
+]
+},
+{
+"p": 4,
+"s": "Und ja, die Leute wissen, wie man Feuer macht.",
+"t0": 128.67,
+"t1": 130.86,
+"w": [
+[
+"Und",
+128.67
+],
+[
+"ja,",
+128.8
+],
+[
+"die",
+128.94
+],
+[
+"Leute",
+129.7
+],
+[
+"wissen,",
+129.9
+],
+[
+"wie",
+130.16
+],
+[
+"man",
+130.3
+],
+[
+"Feuer",
+130.43
+],
+[
+"macht.",
+130.63
+]
+]
+},
+{
+"p": 4,
+"s": "Zum Beispiel, indem sie einen Feuerstein gegen ein Stück Pyrit schlagen.",
+"t0": 131.57,
+"t1": 135.58,
+"w": [
+[
+"Zum",
+131.57
+],
+[
+"Beispiel,",
+131.77
+],
+[
+"indem",
+132.27
+],
+[
+"sie",
+132.58
+],
+[
+"einen",
+132.78
+],
+[
+"Feuerstein",
+133.08
+],
+[
+"gegen",
+133.97
+],
+[
+"ein",
+134.27
+],
+[
+"Stück",
+134.47
+],
+[
+"Pyrit",
+134.78
+],
+[
+"schlagen.",
+135.08
+]
+]
+},
+{
+"p": 4,
+"s": "Das gibt Funken.",
+"t0": 135.98,
+"t1": 136.91,
+"w": [
+[
+"Das",
+135.98
+],
+[
+"gibt",
+136.2
+],
+[
+"Funken.",
+136.47
+]
+]
+},
+{
+"p": 4,
+"s": "Aber warum der ganze Aufwand, wenn man die Glut einfach am Leben halten kann?",
+"t0": 137.34,
+"t1": 140.86,
+"w": [
+[
+"Aber",
+137.34
+],
+[
+"warum",
+137.57
+],
+[
+"der",
+137.84
+],
+[
+"ganze",
+138.02
+],
+[
+"Aufwand,",
+138.29
+],
+[
+"wenn",
+138.69
+],
+[
+"man",
+138.92
+],
+[
+"die",
+139.1
+],
+[
+"Glut",
+139.28
+],
+[
+"einfach",
+139.51
+],
+[
+"am",
+139.87
+],
+[
+"Leben",
+140.0
+],
+[
+"halten",
+140.27
+],
+[
+"kann?",
+140.59
+]
+]
+},
+{
+"p": 4,
+"s": "Clever, oder?",
+"t0": 141.35,
+"t1": 142.16,
+"w": [
+[
+"Clever,",
+141.35
+],
+[
+"oder?",
+141.81
+]
+]
+},
+{
+"p": 5,
+"s": "Noah schaut sich die Leute genauer an.",
+"t0": 142.79,
+"t1": 144.32,
+"w": [
+[
+"Noah",
+142.79
+],
+[
+"schaut",
+142.99
+],
+[
+"sich",
+143.26
+],
+[
+"die",
+143.46
+],
+[
+"Leute",
+143.61
+],
+[
+"genauer",
+143.85
+],
+[
+"an.",
+144.16
+]
+]
+},
+{
+"p": 5,
+"s": "Und jetzt kommt was, das viele überrascht: Die sehen eigentlich aus wie wir.",
+"t0": 144.68,
+"t1": 148.88,
+"w": [
+[
+"Und",
+144.68
+],
+[
+"jetzt",
+144.85
+],
+[
+"kommt",
+145.12
+],
+[
+"was,",
+145.38
+],
+[
+"das",
+145.79
+],
+[
+"viele",
+145.97
+],
+[
+"überrascht:",
+146.23
+],
+[
+"Die",
+147.4
+],
+[
+"sehen",
+147.57
+],
+[
+"eigentlich",
+147.84
+],
+[
+"aus",
+148.31
+],
+[
+"wie",
+148.49
+],
+[
+"wir.",
+148.66
+]
+]
+},
+{
+"p": 5,
+"s": "Wirklich.",
+"t0": 149.14,
+"t1": 149.71,
+"w": [
+[
+"Wirklich.",
+149.14
+]
+]
+},
+{
+"p": 5,
+"s": "Steck einen von denen in Jeans und Hoodie, setz ihn in die U-Bahn – kein Mensch würde sich umdrehen.",
+"t0": 150.15,
+"t1": 155.29,
+"w": [
+[
+"Steck",
+150.15
+],
+[
+"einen",
+150.42
+],
+[
+"von",
+150.68
+],
+[
+"denen",
+150.86
+],
+[
+"in",
+151.12
+],
+[
+"Jeans",
+151.26
+],
+[
+"und",
+151.52
+],
+[
+"Hoodie,",
+151.7
+],
+[
+"setz",
+152.05
+],
+[
+"ihn",
+152.52
+],
+[
+"in",
+152.7
+],
+[
+"die",
+152.83
+],
+[
+"U-Bahn",
+153.01
+],
+[
+"–",
+153.32
+],
+[
+"kein",
+153.41
+],
+[
+"Mensch",
+154.05
+],
+[
+"würde",
+154.36
+],
+[
+"sich",
+154.63
+],
+[
+"umdrehen.",
+154.85
+]
+]
+},
+{
+"p": 5,
+"s": "Das sind moderne Menschen, Homo sapiens, genau wie du.",
+"t0": 155.66,
+"t1": 158.66,
+"w": [
+[
+"Das",
+155.66
+],
+[
+"sind",
+155.84
+],
+[
+"moderne",
+156.07
+],
+[
+"Menschen,",
+156.44
+],
+[
+"Homo",
+157.21
+],
+[
+"sapiens,",
+157.44
+],
+[
+"genau",
+157.85
+],
+[
+"wie",
+158.29
+],
+[
+"du.",
+158.48
+]
+]
+},
+{
+"p": 5,
+"s": "Gleiches Gehirn, gleiche Gefühle, wahrscheinlich sogar der gleiche Humor.",
+"t0": 159.18,
+"t1": 163.17,
+"w": [
+[
+"Gleiches",
+159.18
+],
+[
+"Gehirn,",
+159.59
+],
+[
+"gleiche",
+160.12
+],
+[
+"Gefühle,",
+160.49
+],
+[
+"wahrscheinlich",
+161.33
+],
+[
+"sogar",
+162.02
+],
+[
+"der",
+162.29
+],
+[
+"gleiche",
+162.48
+],
+[
+"Humor.",
+162.85
+]
+]
+},
+{
+"p": 5,
+"s": "Nur ein komplett anderes Leben.",
+"t0": 163.89,
+"t1": 165.28,
+"w": [
+[
+"Nur",
+163.89
+],
+[
+"ein",
+164.06
+],
+[
+"komplett",
+164.24
+],
+[
+"anderes",
+164.63
+],
+[
+"Leben.",
+164.98
+]
+]
+},
+{
+"p": 6,
+"s": "Und die Klamotten?",
+"t0": 165.48,
+"t1": 167.0,
+"w": [
+[
+"Und",
+165.48
+],
+[
+"die",
+165.8
+],
+[
+"Klamotten?",
+166.12
+]
+]
+},
+{
+"p": 6,
+"s": "Keine zerfetzten Lumpen wie im Film.",
+"t0": 167.39,
+"t1": 169.8,
+"w": [
+[
+"Keine",
+167.39
+],
+[
+"zerfetzten",
+167.73
+],
+[
+"Lumpen",
+168.36
+],
+[
+"wie",
+168.77
+],
+[
+"im",
+169.28
+],
+[
+"Film.",
+169.46
+]
+]
+},
+{
+"p": 6,
+"s": "Die Leute tragen Kleidung aus Leder und Fell, richtig zugeschnitten und genäht.",
+"t0": 170.56,
+"t1": 174.72,
+"w": [
+[
+"Die",
+170.56
+],
+[
+"Leute",
+170.75
+],
+[
+"tragen",
+171.03
+],
+[
+"Kleidung",
+171.35
+],
+[
+"aus",
+171.78
+],
+[
+"Leder",
+171.96
+],
+[
+"und",
+172.24
+],
+[
+"Fell,",
+172.43
+],
+[
+"richtig",
+173.13
+],
+[
+"zugeschnitten",
+173.5
+],
+[
+"und",
+174.16
+],
+[
+"genäht.",
+174.35
+]
+]
+},
+{
+"p": 6,
+"s": "Mit Nadeln aus Knochen, die sogar ein Öhr haben – also ein kleines Loch für den Faden.",
+"t0": 175.34,
+"t1": 179.84,
+"w": [
+[
+"Mit",
+175.34
+],
+[
+"Nadeln",
+175.53
+],
+[
+"aus",
+175.86
+],
+[
+"Knochen,",
+176.05
+],
+[
+"die",
+176.47
+],
+[
+"sogar",
+176.66
+],
+[
+"ein",
+176.94
+],
+[
+"Öhr",
+177.13
+],
+[
+"haben",
+177.32
+],
+[
+"–",
+177.6
+],
+[
+"also",
+177.7
+],
+[
+"ein",
+178.18
+],
+[
+"kleines",
+178.37
+],
+[
+"Loch",
+178.75
+],
+[
+"für",
+178.98
+],
+[
+"den",
+179.32
+],
+[
+"Faden.",
+179.51
+]
+]
+},
+{
+"p": 6,
+"s": "Und als Faden nehmen sie Tiersehnen.",
+"t0": 180.19,
+"t1": 182.16,
+"w": [
+[
+"Und",
+180.19
+],
+[
+"als",
+180.4
+],
+[
+"Faden",
+180.62
+],
+[
+"nehmen",
+180.94
+],
+[
+"sie",
+181.31
+],
+[
+"Tiersehnen.",
+181.52
+]
+]
+},
+{
+"p": 6,
+"s": "Manche Sachen sind sogar mit Perlen aus Muscheln oder Tierzähnen verziert.",
+"t0": 182.53,
+"t1": 186.33,
+"w": [
+[
+"Manche",
+182.53
+],
+[
+"Sachen",
+182.88
+],
+[
+"sind",
+183.24
+],
+[
+"sogar",
+183.49
+],
+[
+"mit",
+183.8
+],
+[
+"Perlen",
+184.0
+],
+[
+"aus",
+184.35
+],
+[
+"Muscheln",
+184.56
+],
+[
+"oder",
+185.01
+],
+[
+"Tierzähnen",
+185.27
+],
+[
+"verziert.",
+185.82
+]
+]
+},
+{
+"p": 6,
+"s": "Stil hatten die also auch.",
+"t0": 186.76,
+"t1": 188.2,
+"w": [
+[
+"Stil",
+186.76
+],
+[
+"hatten",
+187.0
+],
+[
+"die",
+187.49
+],
+[
+"also",
+187.68
+],
+[
+"auch.",
+187.92
+]
+]
+},
+{
+"p": 7,
+"s": "Dann geht's los.",
+"t0": 188.46,
+"t1": 189.26,
+"w": [
+[
+"Dann",
+188.46
+],
+[
+"geht's",
+188.7
+],
+[
+"los.",
+189.02
+]
+]
+},
+{
+"p": 7,
+"s": "Frühstück gibt's hier nicht einfach so.",
+"t0": 189.74,
+"t1": 191.47,
+"w": [
+[
+"Frühstück",
+189.74
+],
+[
+"gibt's",
+190.34
+],
+[
+"hier",
+190.61
+],
+[
+"nicht",
+190.8
+],
+[
+"einfach",
+191.02
+],
+[
+"so.",
+191.32
+]
+]
+},
+{
+"p": 7,
+"s": "Was gegessen wird, muss erst mal gefunden werden.",
+"t0": 191.94,
+"t1": 194.82,
+"w": [
+[
+"Was",
+191.94
+],
+[
+"gegessen",
+192.12
+],
+[
+"wird,",
+192.53
+],
+[
+"muss",
+193.41
+],
+[
+"erst",
+193.63
+],
+[
+"mal",
+193.86
+],
+[
+"gefunden",
+194.04
+],
+[
+"werden.",
+194.46
+]
+]
+},
+{
+"p": 7,
+"s": "Ein Teil der Gruppe zieht los zum Sammeln, und Noah geht mit.",
+"t0": 195.3,
+"t1": 198.3,
+"w": [
+[
+"Ein",
+195.3
+],
+[
+"Teil",
+195.47
+],
+[
+"der",
+195.68
+],
+[
+"Gruppe",
+195.85
+],
+[
+"zieht",
+196.14
+],
+[
+"los",
+196.39
+],
+[
+"zum",
+196.56
+],
+[
+"Sammeln,",
+196.73
+],
+[
+"und",
+197.5
+],
+[
+"Noah",
+197.67
+],
+[
+"geht",
+197.88
+],
+[
+"mit.",
+198.09
+]
+]
+},
+{
+"p": 7,
+"s": "Draußen ist die Luft klar und eisig, der Boden knirscht unter den Füßen.",
+"t0": 198.87,
+"t1": 202.81,
+"w": [
+[
+"Draußen",
+198.87
+],
+[
+"ist",
+199.24
+],
+[
+"die",
+199.43
+],
+[
+"Luft",
+199.62
+],
+[
+"klar",
+200.04
+],
+[
+"und",
+200.27
+],
+[
+"eisig,",
+200.46
+],
+[
+"der",
+200.78
+],
+[
+"Boden",
+201.32
+],
+[
+"knirscht",
+201.6
+],
+[
+"unter",
+202.02
+],
+[
+"den",
+202.3
+],
+[
+"Füßen.",
+202.48
+]
+]
+},
+{
+"p": 7,
+"s": "Die Sammler suchen Beeren, essbare Wurzeln, Nüsse, Kräuter, Vogeleier – alles, was die Natur gerade hergibt.",
+"t0": 203.26,
+"t1": 209.01,
+"w": [
+[
+"Die",
+203.26
+],
+[
+"Sammler",
+203.45
+],
+[
+"suchen",
+203.83
+],
+[
+"Beeren,",
+204.16
+],
+[
+"essbare",
+204.54
+],
+[
+"Wurzeln,",
+205.06
+],
+[
+"Nüsse,",
+205.49
+],
+[
+"Kräuter,",
+205.82
+],
+[
+"Vogeleier",
+206.24
+],
+[
+"–",
+206.72
+],
+[
+"alles,",
+206.81
+],
+[
+"was",
+207.14
+],
+[
+"die",
+207.78
+],
+[
+"Natur",
+207.97
+],
+[
+"gerade",
+208.25
+],
+[
+"hergibt.",
+208.58
+]
+]
+},
+{
+"p": 7,
+"s": "Und dafür laufen sie.",
+"t0": 209.72,
+"t1": 210.81,
+"w": [
+[
+"Und",
+209.72
+],
+[
+"dafür",
+209.92
+],
+[
+"laufen",
+210.22
+],
+[
+"sie.",
+210.56
+]
+]
+},
+{
+"p": 7,
+"s": "Viel.",
+"t0": 211.48,
+"t1": 211.61,
+"w": [
+[
+"Viel.",
+211.48
+]
+]
+},
+{
+"p": 7,
+"s": "Forscher gehen davon aus, dass Jäger und Sammler oft zehn, fünfzehn Kilometer am Tag zu Fuß unterwegs waren.",
+"t0": 212.3,
+"t1": 217.29,
+"w": [
+[
+"Forscher",
+212.3
+],
+[
+"gehen",
+212.67
+],
+[
+"davon",
+212.92
+],
+[
+"aus,",
+213.17
+],
+[
+"dass",
+213.37
+],
+[
+"Jäger",
+213.58
+],
+[
+"und",
+213.83
+],
+[
+"Sammler",
+213.99
+],
+[
+"oft",
+214.32
+],
+[
+"zehn,",
+214.49
+],
+[
+"fünfzehn",
+214.92
+],
+[
+"Kilometer",
+215.45
+],
+[
+"am",
+215.86
+],
+[
+"Tag",
+215.98
+],
+[
+"zu",
+216.15
+],
+[
+"Fuß",
+216.27
+],
+[
+"unterwegs",
+216.44
+],
+[
+"waren.",
+216.85
+]
+]
+},
+{
+"p": 7,
+"s": "Ohne Turnschuhe.",
+"t0": 217.79,
+"t1": 218.83,
+"w": [
+[
+"Ohne",
+217.79
+],
+[
+"Turnschuhe.",
+218.1
+]
+]
+},
+{
+"p": 7,
+"s": "Kein Wunder, dass die alle ziemlich fit sind.",
+"t0": 219.31,
+"t1": 221.27,
+"w": [
+[
+"Kein",
+219.31
+],
+[
+"Wunder,",
+219.52
+],
+[
+"dass",
+219.86
+],
+[
+"die",
+220.08
+],
+[
+"alle",
+220.25
+],
+[
+"ziemlich",
+220.46
+],
+[
+"fit",
+220.84
+],
+[
+"sind.",
+221.01
+]
+]
+},
+{
+"p": 8,
+"s": "Noah entdeckt einen Pilz, der richtig lecker aussieht.",
+"t0": 221.88,
+"t1": 224.1,
+"w": [
+[
+"Noah",
+221.88
+],
+[
+"entdeckt",
+222.07
+],
+[
+"einen",
+222.41
+],
+[
+"Pilz,",
+222.63
+],
+[
+"der",
+222.86
+],
+[
+"richtig",
+223.16
+],
+[
+"lecker",
+223.46
+],
+[
+"aussieht.",
+223.72
+]
+]
+},
+{
+"p": 8,
+"s": "Er will ihn gerade abreißen – da packt ihn ein Junge am Arm und schüttelt heftig den Kopf.",
+"t0": 224.79,
+"t1": 228.96,
+"w": [
+[
+"Er",
+224.79
+],
+[
+"will",
+224.91
+],
+[
+"ihn",
+225.11
+],
+[
+"gerade",
+225.27
+],
+[
+"abreißen",
+225.55
+],
+[
+"–",
+225.91
+],
+[
+"da",
+225.99
+],
+[
+"packt",
+226.41
+],
+[
+"ihn",
+226.89
+],
+[
+"ein",
+227.05
+],
+[
+"Junge",
+227.2
+],
+[
+"am",
+227.44
+],
+[
+"Arm",
+227.56
+],
+[
+"und",
+227.72
+],
+[
+"schüttelt",
+227.88
+],
+[
+"heftig",
+228.28
+],
+[
+"den",
+228.56
+],
+[
+"Kopf.",
+228.72
+]
+]
+},
+{
+"p": 8,
+"s": "Giftig.",
+"t0": 229.5,
+"t1": 229.84,
+"w": [
+[
+"Giftig.",
+229.5
+]
+]
+},
+{
+"p": 8,
+"s": "Und genau dieses Wissen zählt hier.",
+"t0": 230.47,
+"t1": 232.47,
+"w": [
+[
+"Und",
+230.47
+],
+[
+"genau",
+230.64
+],
+[
+"dieses",
+230.9
+],
+[
+"Wissen",
+231.38
+],
+[
+"zählt",
+231.68
+],
+[
+"hier.",
+232.22
+]
+]
+},
+{
+"p": 8,
+"s": "Es gibt keine Bücher und kein Internet.",
+"t0": 233.04,
+"t1": 235.01,
+"w": [
+[
+"Es",
+233.04
+],
+[
+"gibt",
+233.17
+],
+[
+"keine",
+233.38
+],
+[
+"Bücher",
+233.63
+],
+[
+"und",
+234.21
+],
+[
+"kein",
+234.38
+],
+[
+"Internet.",
+234.59
+]
+]
+},
+{
+"p": 8,
+"s": "Alles, was man wissen muss, steckt in den Köpfen der Leute.",
+"t0": 235.37,
+"t1": 238.13,
+"w": [
+[
+"Alles,",
+235.37
+],
+[
+"was",
+235.63
+],
+[
+"man",
+235.78
+],
+[
+"wissen",
+235.92
+],
+[
+"muss,",
+236.18
+],
+[
+"steckt",
+236.4
+],
+[
+"in",
+236.91
+],
+[
+"den",
+237.17
+],
+[
+"Köpfen",
+237.32
+],
+[
+"der",
+237.72
+],
+[
+"Leute.",
+237.87
+]
+]
+},
+{
+"p": 8,
+"s": "Welche Pflanze heilt und welche tötet.",
+"t0": 238.52,
+"t1": 240.82,
+"w": [
+[
+"Welche",
+238.52
+],
+[
+"Pflanze",
+238.87
+],
+[
+"heilt",
+239.28
+],
+[
+"und",
+239.91
+],
+[
+"welche",
+240.11
+],
+[
+"tötet.",
+240.47
+]
+]
+},
+{
+"p": 8,
+"s": "Wann welche Beeren reif sind.",
+"t0": 241.22,
+"t1": 242.82,
+"w": [
+[
+"Wann",
+241.22
+],
+[
+"welche",
+241.44
+],
+[
+"Beeren",
+242.04
+],
+[
+"reif",
+242.34
+],
+[
+"sind.",
+242.56
+]
+]
+},
+{
+"p": 8,
+"s": "Wohin die Tiere im Frühling ziehen.",
+"t0": 243.25,
+"t1": 244.59,
+"w": [
+[
+"Wohin",
+243.25
+],
+[
+"die",
+243.47
+],
+[
+"Tiere",
+243.62
+],
+[
+"im",
+243.85
+],
+[
+"Frühling",
+243.96
+],
+[
+"ziehen.",
+244.29
+]
+]
+},
+{
+"p": 8,
+"s": "Das wird von Generation zu Generation weitererzählt.",
+"t0": 245.22,
+"t1": 247.93,
+"w": [
+[
+"Das",
+245.22
+],
+[
+"wird",
+245.41
+],
+[
+"von",
+245.87
+],
+[
+"Generation",
+246.06
+],
+[
+"zu",
+246.57
+],
+[
+"Generation",
+246.71
+],
+[
+"weitererzählt.",
+247.23
+]
+]
+},
+{
+"p": 8,
+"s": "Und wer das nicht weiß, überlebt hier nicht lange.",
+"t0": 248.35,
+"t1": 250.76,
+"w": [
+[
+"Und",
+248.35
+],
+[
+"wer",
+248.51
+],
+[
+"das",
+248.66
+],
+[
+"nicht",
+248.82
+],
+[
+"weiß,",
+249.06
+],
+[
+"überlebt",
+249.7
+],
+[
+"hier",
+250.05
+],
+[
+"nicht",
+250.25
+],
+[
+"lange.",
+250.49
+]
+]
+},
+{
+"p": 9,
+"s": "Zurück am Lager sitzt ein Mann auf einem Stein und arbeitet an etwas.",
+"t0": 251.4,
+"t1": 254.24,
+"w": [
+[
+"Zurück",
+251.4
+],
+[
+"am",
+251.68
+],
+[
+"Lager",
+251.81
+],
+[
+"sitzt",
+252.05
+],
+[
+"ein",
+252.29
+],
+[
+"Mann",
+252.45
+],
+[
+"auf",
+252.66
+],
+[
+"einem",
+252.82
+],
+[
+"Stein",
+253.06
+],
+[
+"und",
+253.31
+],
+[
+"arbeitet",
+253.47
+],
+[
+"an",
+253.83
+],
+[
+"etwas.",
+253.96
+]
+]
+},
+{
+"p": 9,
+"s": "Er hält einen Feuerstein in der einen Hand und schlägt mit einem Stück Geweih drauf.",
+"t0": 254.73,
+"t1": 258.35,
+"w": [
+[
+"Er",
+254.73
+],
+[
+"hält",
+254.85
+],
+[
+"einen",
+255.04
+],
+[
+"Feuerstein",
+255.27
+],
+[
+"in",
+255.69
+],
+[
+"der",
+255.8
+],
+[
+"einen",
+255.96
+],
+[
+"Hand",
+256.19
+],
+[
+"und",
+256.74
+],
+[
+"schlägt",
+256.89
+],
+[
+"mit",
+257.2
+],
+[
+"einem",
+257.35
+],
+[
+"Stück",
+257.58
+],
+[
+"Geweih",
+257.81
+],
+[
+"drauf.",
+258.08
+]
+]
+},
+{
+"p": 9,
+"s": "Ganz gezielt.",
+"t0": 258.73,
+"t1": 259.55,
+"w": [
+[
+"Ganz",
+258.73
+],
+[
+"gezielt.",
+259.02
+]
+]
+},
+{
+"p": 9,
+"s": "Klack.",
+"t0": 259.87,
+"t1": 260.38,
+"w": [
+[
+"Klack.",
+259.87
+]
+]
+},
+{
+"p": 9,
+"s": "Klack.",
+"t0": 260.54,
+"t1": 261.11,
+"w": [
+[
+"Klack.",
+260.54
+]
+]
+},
+{
+"p": 9,
+"s": "Und plötzlich splittert eine lange, dünne Klinge ab.",
+"t0": 261.38,
+"t1": 263.38,
+"w": [
+[
+"Und",
+261.38
+],
+[
+"plötzlich",
+261.53
+],
+[
+"splittert",
+261.91
+],
+[
+"eine",
+262.29
+],
+[
+"lange,",
+262.47
+],
+[
+"dünne",
+262.74
+],
+[
+"Klinge",
+262.96
+],
+[
+"ab.",
+263.23
+]
+]
+},
+{
+"p": 9,
+"s": "Die ist so scharf, dass sie locker mit manchem Küchenmesser mithalten kann.",
+"t0": 263.71,
+"t1": 266.92,
+"w": [
+[
+"Die",
+263.71
+],
+[
+"ist",
+263.88
+],
+[
+"so",
+264.05
+],
+[
+"scharf,",
+264.17
+],
+[
+"dass",
+264.51
+],
+[
+"sie",
+264.72
+],
+[
+"locker",
+264.89
+],
+[
+"mit",
+265.19
+],
+[
+"manchem",
+265.36
+],
+[
+"Küchenmesser",
+265.7
+],
+[
+"mithalten",
+266.24
+],
+[
+"kann.",
+266.67
+]
+]
+},
+{
+"p": 9,
+"s": "Noah will's auch mal probieren.",
+"t0": 267.59,
+"t1": 268.68,
+"w": [
+[
+"Noah",
+267.59
+],
+[
+"will's",
+267.76
+],
+[
+"auch",
+268.0
+],
+[
+"mal",
+268.17
+],
+[
+"probieren.",
+268.31
+]
+]
+},
+{
+"p": 9,
+"s": "Er nimmt einen Stein, holt aus, schlägt zu – und schneidet sich prompt in den Finger.",
+"t0": 269.07,
+"t1": 273.65,
+"w": [
+[
+"Er",
+269.07
+],
+[
+"nimmt",
+269.18
+],
+[
+"einen",
+269.4
+],
+[
+"Stein,",
+269.61
+],
+[
+"holt",
+269.87
+],
+[
+"aus,",
+270.48
+],
+[
+"schlägt",
+270.66
+],
+[
+"zu",
+271.33
+],
+[
+"–",
+271.59
+],
+[
+"und",
+271.66
+],
+[
+"schneidet",
+272.16
+],
+[
+"sich",
+272.52
+],
+[
+"prompt",
+272.7
+],
+[
+"in",
+273.11
+],
+[
+"den",
+273.21
+],
+[
+"Finger.",
+273.36
+]
+]
+},
+{
+"p": 9,
+"s": "Die anderen lachen sich kaputt.",
+"t0": 274.05,
+"t1": 275.34,
+"w": [
+[
+"Die",
+274.05
+],
+[
+"anderen",
+274.18
+],
+[
+"lachen",
+274.46
+],
+[
+"sich",
+274.69
+],
+[
+"kaputt.",
+274.86
+]
+]
+},
+{
+"p": 9,
+"s": "Willkommen in der Steinzeit, Noah.",
+"t0": 275.99,
+"t1": 277.8,
+"w": [
+[
+"Willkommen",
+275.99
+],
+[
+"in",
+276.51
+],
+[
+"der",
+276.65
+],
+[
+"Steinzeit,",
+277.0
+],
+[
+"Noah.",
+277.52
+]
+]
+},
+{
+"p": 10,
+"s": "Aus diesen Klingen machen sie alles Mögliche: Messer, Schaber für Felle, Bohrer, Speerspitzen.",
+"t0": 278.29,
+"t1": 284.14,
+"w": [
+[
+"Aus",
+278.29
+],
+[
+"diesen",
+278.44
+],
+[
+"Klingen",
+278.71
+],
+[
+"machen",
+279.02
+],
+[
+"sie",
+279.49
+],
+[
+"alles",
+279.81
+],
+[
+"Mögliche:",
+280.04
+],
+[
+"Messer,",
+281.0
+],
+[
+"Schaber",
+281.67
+],
+[
+"für",
+281.98
+],
+[
+"Felle,",
+282.14
+],
+[
+"Bohrer,",
+282.4
+],
+[
+"Speerspitzen.",
+283.11
+]
+]
+},
+{
+"p": 10,
+"s": "Und sie haben noch eine richtig geniale Erfindung: die Speerschleuder.",
+"t0": 284.83,
+"t1": 288.09,
+"w": [
+[
+"Und",
+284.83
+],
+[
+"sie",
+285.0
+],
+[
+"haben",
+285.17
+],
+[
+"noch",
+285.43
+],
+[
+"eine",
+285.65
+],
+[
+"richtig",
+285.86
+],
+[
+"geniale",
+286.41
+],
+[
+"Erfindung:",
+286.75
+],
+[
+"die",
+287.23
+],
+[
+"Speerschleuder.",
+287.4
+]
+]
+},
+{
+"p": 10,
+"s": "Das ist ein Stock mit einem Haken am Ende.",
+"t0": 288.73,
+"t1": 290.83,
+"w": [
+[
+"Das",
+288.73
+],
+[
+"ist",
+288.91
+],
+[
+"ein",
+289.28
+],
+[
+"Stock",
+289.45
+],
+[
+"mit",
+289.72
+],
+[
+"einem",
+289.9
+],
+[
+"Haken",
+290.16
+],
+[
+"am",
+290.43
+],
+[
+"Ende.",
+290.56
+]
+]
+},
+{
+"p": 10,
+"s": "Da legt man den Speer ein und schleudert ihn – fast so, als hätte man einen extra langen Arm.",
+"t0": 291.34,
+"t1": 295.69,
+"w": [
+[
+"Da",
+291.34
+],
+[
+"legt",
+291.45
+],
+[
+"man",
+291.63
+],
+[
+"den",
+291.77
+],
+[
+"Speer",
+292.1
+],
+[
+"ein",
+292.32
+],
+[
+"und",
+292.61
+],
+[
+"schleudert",
+292.9
+],
+[
+"ihn",
+293.3
+],
+[
+"–",
+293.94
+],
+[
+"fast",
+294.01
+],
+[
+"so,",
+294.19
+],
+[
+"als",
+294.33
+],
+[
+"hätte",
+294.47
+],
+[
+"man",
+294.69
+],
+[
+"einen",
+294.83
+],
+[
+"extra",
+295.05
+],
+[
+"langen",
+295.26
+],
+[
+"Arm.",
+295.51
+]
+]
+},
+{
+"p": 10,
+"s": "Damit fliegt der Speer viel schneller und viel weiter, als wenn man ihn nur mit der Hand wirft.",
+"t0": 296.07,
+"t1": 300.27,
+"w": [
+[
+"Damit",
+296.07
+],
+[
+"fliegt",
+296.3
+],
+[
+"der",
+296.74
+],
+[
+"Speer",
+296.89
+],
+[
+"viel",
+297.11
+],
+[
+"schneller",
+297.3
+],
+[
+"und",
+297.68
+],
+[
+"viel",
+297.83
+],
+[
+"weiter,",
+298.43
+],
+[
+"als",
+298.73
+],
+[
+"wenn",
+298.88
+],
+[
+"man",
+299.07
+],
+[
+"ihn",
+299.22
+],
+[
+"nur",
+299.37
+],
+[
+"mit",
+299.52
+],
+[
+"der",
+299.67
+],
+[
+"Hand",
+299.82
+],
+[
+"wirft.",
+300.01
+]
+]
+},
+{
+"p": 10,
+"s": "Und genau die wird heute gebraucht.",
+"t0": 300.85,
+"t1": 302.65,
+"w": [
+[
+"Und",
+300.85
+],
+[
+"genau",
+301.02
+],
+[
+"die",
+301.28
+],
+[
+"wird",
+301.45
+],
+[
+"heute",
+301.92
+],
+[
+"gebraucht.",
+302.18
+]
+]
+},
+{
+"p": 10,
+"s": "Denn heute wird gejagt.",
+"t0": 303.21,
+"t1": 304.78,
+"w": [
+[
+"Denn",
+303.21
+],
+[
+"heute",
+303.44
+],
+[
+"wird",
+303.72
+],
+[
+"gejagt.",
+304.23
+]
+]
+},
+{
+"p": 11,
+"s": "Die Jäger machen sich fertig.",
+"t0": 305.15,
+"t1": 306.29,
+"w": [
+[
+"Die",
+305.15
+],
+[
+"Jäger",
+305.3
+],
+[
+"machen",
+305.53
+],
+[
+"sich",
+305.8
+],
+[
+"fertig.",
+305.99
+]
+]
+},
+{
+"p": 11,
+"s": "Noah darf mit.",
+"t0": 306.61,
+"t1": 307.6,
+"w": [
+[
+"Noah",
+306.61
+],
+[
+"darf",
+306.94
+],
+[
+"mit.",
+307.27
+]
+]
+},
+{
+"p": 11,
+"s": "Aber nur, wenn er die Klappe hält.",
+"t0": 308.0,
+"t1": 309.99,
+"w": [
+[
+"Aber",
+308.0
+],
+[
+"nur,",
+308.22
+],
+[
+"wenn",
+308.44
+],
+[
+"er",
+308.93
+],
+[
+"die",
+309.07
+],
+[
+"Klappe",
+309.24
+],
+[
+"hält.",
+309.72
+]
+]
+},
+{
+"p": 11,
+"s": "Sie ziehen los, raus in die Steppe.",
+"t0": 310.67,
+"t1": 312.7,
+"w": [
+[
+"Sie",
+310.67
+],
+[
+"ziehen",
+310.84
+],
+[
+"los,",
+311.13
+],
+[
+"raus",
+311.87
+],
+[
+"in",
+312.08
+],
+[
+"die",
+312.2
+],
+[
+"Steppe.",
+312.37
+]
+]
+},
+{
+"p": 11,
+"s": "Und was Noah da sieht, verschlägt ihm komplett die Sprache.",
+"t0": 313.12,
+"t1": 316.34,
+"w": [
+[
+"Und",
+313.12
+],
+[
+"was",
+313.3
+],
+[
+"Noah",
+313.47
+],
+[
+"da",
+313.69
+],
+[
+"sieht,",
+313.82
+],
+[
+"verschlägt",
+314.41
+],
+[
+"ihm",
+315.04
+],
+[
+"komplett",
+315.22
+],
+[
+"die",
+315.77
+],
+[
+"Sprache.",
+315.94
+]
+]
+},
+{
+"p": 12,
+"s": "In der Ferne zieht eine riesige Herde Rentiere vorbei.",
+"t0": 316.36,
+"t1": 319.27,
+"w": [
+[
+"In",
+316.36
+],
+[
+"der",
+316.52
+],
+[
+"Ferne",
+316.73
+],
+[
+"zieht",
+317.05
+],
+[
+"eine",
+317.36
+],
+[
+"riesige",
+317.63
+],
+[
+"Herde",
+318.05
+],
+[
+"Rentiere",
+318.37
+],
+[
+"vorbei.",
+318.85
+]
+]
+},
+{
+"p": 12,
+"s": "Hunderte Tiere, vielleicht sogar tausende.",
+"t0": 319.57,
+"t1": 321.79,
+"w": [
+[
+"Hunderte",
+319.57
+],
+[
+"Tiere,",
+319.98
+],
+[
+"vielleicht",
+320.3
+],
+[
+"sogar",
+321.06
+],
+[
+"tausende.",
+321.33
+]
+]
+},
+{
+"p": 12,
+"s": "Rentiere sind für die Menschen in dieser Zeit das Wichtigste überhaupt.",
+"t0": 322.16,
+"t1": 325.23,
+"w": [
+[
+"Rentiere",
+322.16
+],
+[
+"sind",
+322.54
+],
+[
+"für",
+322.76
+],
+[
+"die",
+322.93
+],
+[
+"Menschen",
+323.1
+],
+[
+"in",
+323.48
+],
+[
+"dieser",
+323.61
+],
+[
+"Zeit",
+323.91
+],
+[
+"das",
+324.12
+],
+[
+"Wichtigste",
+324.29
+],
+[
+"überhaupt.",
+324.76
+]
+]
+},
+{
+"p": 12,
+"s": "Von denen gibt's Fleisch, Fell für Kleidung und Zelte, Sehnen für Fäden, Knochen und Geweih für Werkzeuge.",
+"t0": 325.68,
+"t1": 331.07,
+"w": [
+[
+"Von",
+325.68
+],
+[
+"denen",
+325.86
+],
+[
+"gibt's",
+326.14
+],
+[
+"Fleisch,",
+326.46
+],
+[
+"Fell",
+327.12
+],
+[
+"für",
+327.35
+],
+[
+"Kleidung",
+327.54
+],
+[
+"und",
+327.95
+],
+[
+"Zelte,",
+328.13
+],
+[
+"Sehnen",
+328.68
+],
+[
+"für",
+329.01
+],
+[
+"Fäden,",
+329.19
+],
+[
+"Knochen",
+329.51
+],
+[
+"und",
+329.88
+],
+[
+"Geweih",
+330.06
+],
+[
+"für",
+330.38
+],
+[
+"Werkzeuge.",
+330.57
+]
+]
+},
+{
+"p": 12,
+"s": "Fast nichts wird weggeworfen.",
+"t0": 331.45,
+"t1": 332.67,
+"w": [
+[
+"Fast",
+331.45
+],
+[
+"nichts",
+331.65
+],
+[
+"wird",
+331.94
+],
+[
+"weggeworfen.",
+332.14
+]
+]
+},
+{
+"p": 13,
+"s": "Daneben grasen Wildpferde.",
+"t0": 332.92,
+"t1": 334.22,
+"w": [
+[
+"Daneben",
+332.92
+],
+[
+"grasen",
+333.31
+],
+[
+"Wildpferde.",
+333.64
+]
+]
+},
+{
+"p": 13,
+"s": "Klein, stämmig, mit dichtem Fell.",
+"t0": 334.42,
+"t1": 336.21,
+"w": [
+[
+"Klein,",
+334.42
+],
+[
+"stämmig,",
+334.79
+],
+[
+"mit",
+335.26
+],
+[
+"dichtem",
+335.47
+],
+[
+"Fell.",
+335.89
+]
+]
+},
+{
+"p": 13,
+"s": "Etwas weiter weg stehen ein paar Steppenbisons, gewaltige Tiere mit Hörnern und einem Buckel.",
+"t0": 336.59,
+"t1": 341.93,
+"w": [
+[
+"Etwas",
+336.59
+],
+[
+"weiter",
+336.9
+],
+[
+"weg",
+337.25
+],
+[
+"stehen",
+337.46
+],
+[
+"ein",
+338.09
+],
+[
+"paar",
+338.29
+],
+[
+"Steppenbisons,",
+338.55
+],
+[
+"gewaltige",
+339.58
+],
+[
+"Tiere",
+340.09
+],
+[
+"mit",
+340.4
+],
+[
+"Hörnern",
+340.6
+],
+[
+"und",
+341.01
+],
+[
+"einem",
+341.22
+],
+[
+"Buckel.",
+341.52
+]
+]
+},
+{
+"p": 13,
+"s": "Und dann – Noah bleibt fast das Herz stehen – tauchen hinter einem Hügel sie auf: Mammuts.",
+"t0": 342.28,
+"t1": 347.47,
+"w": [
+[
+"Und",
+342.28
+],
+[
+"dann",
+342.45
+],
+[
+"–",
+342.67
+],
+[
+"Noah",
+343.07
+],
+[
+"bleibt",
+343.29
+],
+[
+"fast",
+343.79
+],
+[
+"das",
+344.0
+],
+[
+"Herz",
+344.17
+],
+[
+"stehen",
+344.39
+],
+[
+"–",
+345.03
+],
+[
+"tauchen",
+345.11
+],
+[
+"hinter",
+345.45
+],
+[
+"einem",
+345.75
+],
+[
+"Hügel",
+346.01
+],
+[
+"sie",
+346.27
+],
+[
+"auf:",
+346.87
+],
+[
+"Mammuts.",
+347.08
+]
+]
+},
+{
+"p": 13,
+"s": "Wollhaarmammuts.",
+"t0": 347.72,
+"t1": 349.0,
+"w": [
+[
+"Wollhaarmammuts.",
+347.72
+]
+]
+},
+{
+"p": 13,
+"s": "Ungefähr so groß wie ein afrikanischer Elefant, aber mit dichtem, braunem Fell, kleinen Ohren gegen die Kälte und riesigen, gebogenen Stoßzähnen.",
+"t0": 349.29,
+"t1": 357.32,
+"w": [
+[
+"Ungefähr",
+349.29
+],
+[
+"so",
+349.76
+],
+[
+"groß",
+349.92
+],
+[
+"wie",
+350.18
+],
+[
+"ein",
+350.39
+],
+[
+"afrikanischer",
+350.6
+],
+[
+"Elefant,",
+351.34
+],
+[
+"aber",
+351.81
+],
+[
+"mit",
+352.07
+],
+[
+"dichtem,",
+352.28
+],
+[
+"braunem",
+352.75
+],
+[
+"Fell,",
+353.54
+],
+[
+"kleinen",
+353.86
+],
+[
+"Ohren",
+354.28
+],
+[
+"gegen",
+354.59
+],
+[
+"die",
+354.91
+],
+[
+"Kälte",
+355.12
+],
+[
+"und",
+355.43
+],
+[
+"riesigen,",
+355.64
+],
+[
+"gebogenen",
+356.17
+],
+[
+"Stoßzähnen.",
+356.69
+]
+]
+},
+{
+"p": 13,
+"s": "So ein Mammut frisst fast den ganzen Tag.",
+"t0": 357.68,
+"t1": 359.82,
+"w": [
+[
+"So",
+357.68
+],
+[
+"ein",
+357.83
+],
+[
+"Mammut",
+358.04
+],
+[
+"frisst",
+358.39
+],
+[
+"fast",
+358.75
+],
+[
+"den",
+359.0
+],
+[
+"ganzen",
+359.21
+],
+[
+"Tag.",
+359.57
+]
+]
+},
+{
+"p": 13,
+"s": "Gras, Kräuter, Zweige – weit über hundert Kilo am Tag.",
+"t0": 360.16,
+"t1": 363.33,
+"w": [
+[
+"Gras,",
+360.16
+],
+[
+"Kräuter,",
+360.48
+],
+[
+"Zweige",
+360.96
+],
+[
+"–",
+361.34
+],
+[
+"weit",
+361.45
+],
+[
+"über",
+361.94
+],
+[
+"hundert",
+362.2
+],
+[
+"Kilo",
+362.63
+],
+[
+"am",
+362.9
+],
+[
+"Tag.",
+363.06
+]
+]
+},
+{
+"p": 14,
+"s": "Und dann ist da noch ein Tier, das aussieht wie aus einem Fantasyfilm.",
+"t0": 363.71,
+"t1": 367.38,
+"w": [
+[
+"Und",
+363.71
+],
+[
+"dann",
+363.89
+],
+[
+"ist",
+364.1
+],
+[
+"da",
+364.28
+],
+[
+"noch",
+364.41
+],
+[
+"ein",
+364.63
+],
+[
+"Tier,",
+365.14
+],
+[
+"das",
+365.4
+],
+[
+"aussieht",
+365.57
+],
+[
+"wie",
+366.2
+],
+[
+"aus",
+366.37
+],
+[
+"einem",
+366.55
+],
+[
+"Fantasyfilm.",
+366.81
+]
+]
+},
+{
+"p": 14,
+"s": "Ein Wollnashorn.",
+"t0": 367.53,
+"t1": 368.56,
+"w": [
+[
+"Ein",
+367.53
+],
+[
+"Wollnashorn.",
+367.77
+]
+]
+},
+{
+"p": 14,
+"s": "Ein Nashorn mit dickem, zotteligem Fell und einem langen, flachen Horn vorne, das über einen Meter lang werden kann.",
+"t0": 368.85,
+"t1": 375.42,
+"w": [
+[
+"Ein",
+368.85
+],
+[
+"Nashorn",
+369.06
+],
+[
+"mit",
+369.47
+],
+[
+"dickem,",
+369.67
+],
+[
+"zotteligem",
+370.08
+],
+[
+"Fell",
+370.64
+],
+[
+"und",
+370.9
+],
+[
+"einem",
+371.11
+],
+[
+"langen,",
+371.41
+],
+[
+"flachen",
+371.82
+],
+[
+"Horn",
+372.23
+],
+[
+"vorne,",
+372.49
+],
+[
+"das",
+373.27
+],
+[
+"über",
+373.63
+],
+[
+"einen",
+373.88
+],
+[
+"Meter",
+374.19
+],
+[
+"lang",
+374.5
+],
+[
+"werden",
+374.75
+],
+[
+"kann.",
+375.11
+]
+]
+},
+{
+"p": 14,
+"s": "Wahrscheinlich hat es damit den Schnee zur Seite geschoben, um an das Gras darunter zu kommen.",
+"t0": 376.06,
+"t1": 380.2,
+"w": [
+[
+"Wahrscheinlich",
+376.06
+],
+[
+"hat",
+376.64
+],
+[
+"es",
+376.8
+],
+[
+"damit",
+376.92
+],
+[
+"den",
+377.15
+],
+[
+"Schnee",
+377.31
+],
+[
+"zur",
+377.58
+],
+[
+"Seite",
+377.73
+],
+[
+"geschoben,",
+377.97
+],
+[
+"um",
+378.4
+],
+[
+"an",
+378.8
+],
+[
+"das",
+378.92
+],
+[
+"Gras",
+379.23
+],
+[
+"darunter",
+379.42
+],
+[
+"zu",
+379.77
+],
+[
+"kommen.",
+379.89
+]
+]
+},
+{
+"p": 14,
+"s": "Mit so einem Tier legt man sich besser nicht an.",
+"t0": 380.57,
+"t1": 382.9,
+"w": [
+[
+"Mit",
+380.57
+],
+[
+"so",
+380.73
+],
+[
+"einem",
+380.86
+],
+[
+"Tier",
+381.1
+],
+[
+"legt",
+381.31
+],
+[
+"man",
+381.51
+],
+[
+"sich",
+382.0
+],
+[
+"besser",
+382.2
+],
+[
+"nicht",
+382.49
+],
+[
+"an.",
+382.74
+]
+]
+},
+{
+"p": 14,
+"s": "Auch nicht als Jäger.",
+"t0": 383.47,
+"t1": 384.22,
+"w": [
+[
+"Auch",
+383.47
+],
+[
+"nicht",
+383.64
+],
+[
+"als",
+383.84
+],
+[
+"Jäger.",
+383.98
+]
+]
+},
+{
+"p": 15,
+"s": "Und am Horizont, nur ganz kurz, ein Riesenhirsch.",
+"t0": 384.64,
+"t1": 386.79,
+"w": [
+[
+"Und",
+384.64
+],
+[
+"am",
+384.8
+],
+[
+"Horizont,",
+384.92
+],
+[
+"nur",
+385.31
+],
+[
+"ganz",
+385.47
+],
+[
+"kurz,",
+385.67
+],
+[
+"ein",
+385.91
+],
+[
+"Riesenhirsch.",
+386.24
+]
+]
+},
+{
+"p": 15,
+"s": "Ein Hirsch mit einem Geweih, das von einer Spitze zur anderen bis zu dreieinhalb Meter breit werden kann.",
+"t0": 387.39,
+"t1": 391.56,
+"w": [
+[
+"Ein",
+387.39
+],
+[
+"Hirsch",
+387.55
+],
+[
+"mit",
+387.82
+],
+[
+"einem",
+387.98
+],
+[
+"Geweih,",
+388.22
+],
+[
+"das",
+388.53
+],
+[
+"von",
+388.69
+],
+[
+"einer",
+388.85
+],
+[
+"Spitze",
+389.08
+],
+[
+"zur",
+389.36
+],
+[
+"anderen",
+389.51
+],
+[
+"bis",
+389.83
+],
+[
+"zu",
+389.99
+],
+[
+"dreieinhalb",
+390.1
+],
+[
+"Meter",
+390.58
+],
+[
+"breit",
+390.81
+],
+[
+"werden",
+391.05
+],
+[
+"kann.",
+391.32
+]
+]
+},
+{
+"p": 15,
+"s": "Stell dir das mal vor.",
+"t0": 391.75,
+"t1": 393.01,
+"w": [
+[
+"Stell",
+391.75
+],
+[
+"dir",
+392.08
+],
+[
+"das",
+392.3
+],
+[
+"mal",
+392.52
+],
+[
+"vor.",
+392.74
+]
+]
+},
+{
+"p": 15,
+"s": "Dreieinhalb Meter.",
+"t0": 393.32,
+"t1": 394.2,
+"w": [
+[
+"Dreieinhalb",
+393.32
+],
+[
+"Meter.",
+393.88
+]
+]
+},
+{
+"p": 15,
+"s": "Auf dem Kopf.",
+"t0": 394.57,
+"t1": 395.31,
+"w": [
+[
+"Auf",
+394.57
+],
+[
+"dem",
+394.78
+],
+[
+"Kopf.",
+394.99
+]
+]
+},
+{
+"p": 16,
+"s": "Die Jäger interessieren sich heute aber für die Rentiere.",
+"t0": 395.74,
+"t1": 397.9,
+"w": [
+[
+"Die",
+395.74
+],
+[
+"Jäger",
+395.89
+],
+[
+"interessieren",
+396.11
+],
+[
+"sich",
+396.63
+],
+[
+"heute",
+396.82
+],
+[
+"aber",
+397.04
+],
+[
+"für",
+397.23
+],
+[
+"die",
+397.38
+],
+[
+"Rentiere.",
+397.53
+]
+]
+},
+{
+"p": 16,
+"s": "Sie schleichen sich an, gegen den Wind, damit die Tiere sie nicht riechen.",
+"t0": 398.29,
+"t1": 401.65,
+"w": [
+[
+"Sie",
+398.29
+],
+[
+"schleichen",
+398.43
+],
+[
+"sich",
+398.81
+],
+[
+"an,",
+398.99
+],
+[
+"gegen",
+399.13
+],
+[
+"den",
+399.65
+],
+[
+"Wind,",
+399.79
+],
+[
+"damit",
+400.0
+],
+[
+"die",
+400.49
+],
+[
+"Tiere",
+400.63
+],
+[
+"sie",
+400.84
+],
+[
+"nicht",
+400.98
+],
+[
+"riechen.",
+401.19
+]
+]
+},
+{
+"p": 16,
+"s": "Sie gehen in die Hocke.",
+"t0": 402.01,
+"t1": 402.71,
+"w": [
+[
+"Sie",
+402.01
+],
+[
+"gehen",
+402.13
+],
+[
+"in",
+402.3
+],
+[
+"die",
+402.39
+],
+[
+"Hocke.",
+402.51
+]
+]
+},
+{
+"p": 16,
+"s": "Keiner sagt ein Wort.",
+"t0": 403.1,
+"t1": 404.04,
+"w": [
+[
+"Keiner",
+403.1
+],
+[
+"sagt",
+403.4
+],
+[
+"ein",
+403.61
+],
+[
+"Wort.",
+403.78
+]
+]
+},
+{
+"p": 16,
+"s": "Nur Handzeichen.",
+"t0": 404.42,
+"t1": 405.49,
+"w": [
+[
+"Nur",
+404.42
+],
+[
+"Handzeichen.",
+404.58
+]
+]
+},
+{
+"p": 16,
+"s": "Noah hält die Luft an.",
+"t0": 406.21,
+"t1": 407.03,
+"w": [
+[
+"Noah",
+406.21
+],
+[
+"hält",
+406.36
+],
+[
+"die",
+406.5
+],
+[
+"Luft",
+406.62
+],
+[
+"an.",
+406.76
+]
+]
+},
+{
+"p": 16,
+"s": "Ein Jäger hebt die Speerschleuder, holt aus, wirft – und daneben.",
+"t0": 407.52,
+"t1": 411.54,
+"w": [
+[
+"Ein",
+407.52
+],
+[
+"Jäger",
+407.72
+],
+[
+"hebt",
+408.01
+],
+[
+"die",
+408.26
+],
+[
+"Speerschleuder,",
+408.45
+],
+[
+"holt",
+409.58
+],
+[
+"aus,",
+409.82
+],
+[
+"wirft",
+410.31
+],
+[
+"–",
+410.6
+],
+[
+"und",
+410.7
+],
+[
+"daneben.",
+411.1
+]
+]
+},
+{
+"p": 16,
+"s": "Die Herde schreckt auf und galoppiert davon.",
+"t0": 411.97,
+"t1": 413.89,
+"w": [
+[
+"Die",
+411.97
+],
+[
+"Herde",
+412.14
+],
+[
+"schreckt",
+412.4
+],
+[
+"auf",
+412.78
+],
+[
+"und",
+412.95
+],
+[
+"galoppiert",
+413.12
+],
+[
+"davon.",
+413.59
+]
+]
+},
+{
+"p": 16,
+"s": "Die Jäger fluchen leise.",
+"t0": 414.32,
+"t1": 415.44,
+"w": [
+[
+"Die",
+414.32
+],
+[
+"Jäger",
+414.5
+],
+[
+"fluchen",
+414.77
+],
+[
+"leise.",
+415.13
+]
+]
+},
+{
+"p": 16,
+"s": "So ist das eben.",
+"t0": 415.81,
+"t1": 416.55,
+"w": [
+[
+"So",
+415.81
+],
+[
+"ist",
+415.94
+],
+[
+"das",
+416.11
+],
+[
+"eben.",
+416.29
+]
+]
+},
+{
+"p": 16,
+"s": "Nicht jede Jagd klappt.",
+"t0": 417.05,
+"t1": 418.26,
+"w": [
+[
+"Nicht",
+417.05
+],
+[
+"jede",
+417.26
+],
+[
+"Jagd",
+417.44
+],
+[
+"klappt.",
+417.62
+]
+]
+},
+{
+"p": 16,
+"s": "Manchmal kommen die Jäger tagelang mit leeren Händen zurück.",
+"t0": 418.7,
+"t1": 421.04,
+"w": [
+[
+"Manchmal",
+418.7
+],
+[
+"kommen",
+419.05
+],
+[
+"die",
+419.31
+],
+[
+"Jäger",
+419.47
+],
+[
+"tagelang",
+419.7
+],
+[
+"mit",
+420.04
+],
+[
+"leeren",
+420.2
+],
+[
+"Händen",
+420.46
+],
+[
+"zurück.",
+420.73
+]
+]
+},
+{
+"p": 16,
+"s": "Und dann gibt's eben nur das, was die Sammler gefunden haben.",
+"t0": 421.5,
+"t1": 424.68,
+"w": [
+[
+"Und",
+421.5
+],
+[
+"dann",
+421.66
+],
+[
+"gibt's",
+421.87
+],
+[
+"eben",
+422.61
+],
+[
+"nur",
+422.82
+],
+[
+"das,",
+422.98
+],
+[
+"was",
+423.18
+],
+[
+"die",
+423.54
+],
+[
+"Sammler",
+423.7
+],
+[
+"gefunden",
+424.03
+],
+[
+"haben.",
+424.39
+]
+]
+},
+{
+"p": 17,
+"s": "Aber heute haben sie Glück.",
+"t0": 425.26,
+"t1": 426.48,
+"w": [
+[
+"Aber",
+425.26
+],
+[
+"heute",
+425.48
+],
+[
+"haben",
+425.74
+],
+[
+"sie",
+426.0
+],
+[
+"Glück.",
+426.18
+]
+]
+},
+{
+"p": 17,
+"s": "Sie folgen der Herde ein ganzes Stück.",
+"t0": 426.9,
+"t1": 428.5,
+"w": [
+[
+"Sie",
+426.9
+],
+[
+"folgen",
+427.06
+],
+[
+"der",
+427.35
+],
+[
+"Herde",
+427.52
+],
+[
+"ein",
+427.76
+],
+[
+"ganzes",
+427.93
+],
+[
+"Stück.",
+428.21
+]
+]
+},
+{
+"p": 17,
+"s": "Ein paar Tiere bleiben zurück, die Jäger kreisen sie ein, und diesmal sitzt der Wurf.",
+"t0": 428.93,
+"t1": 432.92,
+"w": [
+[
+"Ein",
+428.93
+],
+[
+"paar",
+429.08
+],
+[
+"Tiere",
+429.26
+],
+[
+"bleiben",
+429.49
+],
+[
+"zurück,",
+429.79
+],
+[
+"die",
+430.45
+],
+[
+"Jäger",
+430.6
+],
+[
+"kreisen",
+430.83
+],
+[
+"sie",
+431.12
+],
+[
+"ein,",
+431.27
+],
+[
+"und",
+431.71
+],
+[
+"diesmal",
+431.86
+],
+[
+"sitzt",
+432.15
+],
+[
+"der",
+432.55
+],
+[
+"Wurf.",
+432.7
+]
+]
+},
+{
+"p": 17,
+"s": "Ein Rentier geht zu Boden.",
+"t0": 433.41,
+"t1": 434.51,
+"w": [
+[
+"Ein",
+433.41
+],
+[
+"Rentier",
+433.57
+],
+[
+"geht",
+433.9
+],
+[
+"zu",
+434.1
+],
+[
+"Boden.",
+434.22
+]
+]
+},
+{
+"p": 17,
+"s": "Einer der Jäger kniet sich hin und legt kurz die Hand auf das Tier.",
+"t0": 435.01,
+"t1": 437.94,
+"w": [
+[
+"Einer",
+435.01
+],
+[
+"der",
+435.24
+],
+[
+"Jäger",
+435.39
+],
+[
+"kniet",
+435.62
+],
+[
+"sich",
+435.85
+],
+[
+"hin",
+436.05
+],
+[
+"und",
+436.2
+],
+[
+"legt",
+436.35
+],
+[
+"kurz",
+436.55
+],
+[
+"die",
+436.89
+],
+[
+"Hand",
+437.04
+],
+[
+"auf",
+437.23
+],
+[
+"das",
+437.39
+],
+[
+"Tier.",
+437.54
+]
+]
+},
+{
+"p": 17,
+"s": "Was genau die Menschen damals gedacht haben, wissen wir nicht.",
+"t0": 438.41,
+"t1": 440.82,
+"w": [
+[
+"Was",
+438.41
+],
+[
+"genau",
+438.56
+],
+[
+"die",
+438.79
+],
+[
+"Menschen",
+438.95
+],
+[
+"damals",
+439.29
+],
+[
+"gedacht",
+439.56
+],
+[
+"haben,",
+439.86
+],
+[
+"wissen",
+440.13
+],
+[
+"wir",
+440.4
+],
+[
+"nicht.",
+440.55
+]
+]
+},
+{
+"p": 17,
+"s": "Aber ohne diese Tiere hätte es sie selbst nicht gegeben.",
+"t0": 441.32,
+"t1": 443.96,
+"w": [
+[
+"Aber",
+441.32
+],
+[
+"ohne",
+441.54
+],
+[
+"diese",
+441.75
+],
+[
+"Tiere",
+442.01
+],
+[
+"hätte",
+442.27
+],
+[
+"es",
+442.53
+],
+[
+"sie",
+442.66
+],
+[
+"selbst",
+442.84
+],
+[
+"nicht",
+443.14
+],
+[
+"gegeben.",
+443.57
+]
+]
+},
+{
+"p": 18,
+"s": "Auf dem Rückweg merkt Noah plötzlich, dass etwas nicht stimmt.",
+"t0": 444.51,
+"t1": 447.19,
+"w": [
+[
+"Auf",
+444.51
+],
+[
+"dem",
+444.68
+],
+[
+"Rückweg",
+444.85
+],
+[
+"merkt",
+445.19
+],
+[
+"Noah",
+445.45
+],
+[
+"plötzlich,",
+445.66
+],
+[
+"dass",
+446.13
+],
+[
+"etwas",
+446.34
+],
+[
+"nicht",
+446.59
+],
+[
+"stimmt.",
+446.85
+]
+]
+},
+{
+"p": 18,
+"s": "Die Jäger bleiben wie angewurzelt stehen.",
+"t0": 447.86,
+"t1": 449.51,
+"w": [
+[
+"Die",
+447.86
+],
+[
+"Jäger",
+448.02
+],
+[
+"bleiben",
+448.25
+],
+[
+"wie",
+448.57
+],
+[
+"angewurzelt",
+448.72
+],
+[
+"stehen.",
+449.2
+]
+]
+},
+{
+"p": 18,
+"s": "Am Rand eines Gebüschs bewegt sich was.",
+"t0": 450.12,
+"t1": 451.82,
+"w": [
+[
+"Am",
+450.12
+],
+[
+"Rand",
+450.25
+],
+[
+"eines",
+450.46
+],
+[
+"Gebüschs",
+450.72
+],
+[
+"bewegt",
+451.1
+],
+[
+"sich",
+451.4
+],
+[
+"was.",
+451.61
+]
+]
+},
+{
+"p": 18,
+"s": "Ein Höhlenlöwe.",
+"t0": 452.2,
+"t1": 453.05,
+"w": [
+[
+"Ein",
+452.2
+],
+[
+"Höhlenlöwe.",
+452.41
+]
+]
+},
+{
+"p": 18,
+"s": "Größer als die Löwen von heute, mit hellem Fell und wahrscheinlich ohne große Mähne.",
+"t0": 453.37,
+"t1": 457.44,
+"w": [
+[
+"Größer",
+453.37
+],
+[
+"als",
+453.69
+],
+[
+"die",
+453.87
+],
+[
+"Löwen",
+454.05
+],
+[
+"von",
+454.32
+],
+[
+"heute,",
+454.5
+],
+[
+"mit",
+454.81
+],
+[
+"hellem",
+454.99
+],
+[
+"Fell",
+455.31
+],
+[
+"und",
+455.77
+],
+[
+"wahrscheinlich",
+455.95
+],
+[
+"ohne",
+456.63
+],
+[
+"große",
+456.85
+],
+[
+"Mähne.",
+457.12
+]
+]
+},
+{
+"p": 18,
+"s": "Er hat das Rentier gerochen.",
+"t0": 457.65,
+"t1": 458.88,
+"w": [
+[
+"Er",
+457.65
+],
+[
+"hat",
+457.78
+],
+[
+"das",
+457.95
+],
+[
+"Rentier",
+458.12
+],
+[
+"gerochen.",
+458.46
+]
+]
+},
+{
+"p": 18,
+"s": "Einen langen Moment passiert gar nichts.",
+"t0": 459.16,
+"t1": 460.8,
+"w": [
+[
+"Einen",
+459.16
+],
+[
+"langen",
+459.4
+],
+[
+"Moment",
+459.68
+],
+[
+"passiert",
+459.96
+],
+[
+"gar",
+460.32
+],
+[
+"nichts.",
+460.48
+]
+]
+},
+{
+"p": 18,
+"s": "Dann rücken die Jäger dicht zusammen, heben die Speere, machen sich groß und brüllen.",
+"t0": 461.14,
+"t1": 465.0,
+"w": [
+[
+"Dann",
+461.14
+],
+[
+"rücken",
+461.35
+],
+[
+"die",
+461.65
+],
+[
+"Jäger",
+461.82
+],
+[
+"dicht",
+462.07
+],
+[
+"zusammen,",
+462.33
+],
+[
+"heben",
+462.96
+],
+[
+"die",
+463.22
+],
+[
+"Speere,",
+463.39
+],
+[
+"machen",
+463.73
+],
+[
+"sich",
+464.02
+],
+[
+"groß",
+464.24
+],
+[
+"und",
+464.45
+],
+[
+"brüllen.",
+464.62
+]
+]
+},
+{
+"p": 18,
+"s": "Und der Löwe dreht ab.",
+"t0": 465.44,
+"t1": 466.57,
+"w": [
+[
+"Und",
+465.44
+],
+[
+"der",
+465.64
+],
+[
+"Löwe",
+465.83
+],
+[
+"dreht",
+466.08
+],
+[
+"ab.",
+466.37
+]
+]
+},
+{
+"p": 18,
+"s": "Puh.",
+"t0": 466.86,
+"t1": 467.13,
+"w": [
+[
+"Puh.",
+466.86
+]
+]
+},
+{
+"p": 18,
+"s": "Das war knapp.",
+"t0": 467.64,
+"t1": 470.02,
+"w": [
+[
+"Das",
+467.64
+],
+[
+"war",
+468.27
+],
+[
+"knapp.",
+468.91
+]
+]
+},
+{
+"p": 18,
+"s": "Gegen eine Gruppe, die zusammenhält, hat selbst so ein Raubtier wenig Lust auf Ärger.",
+"t0": 470.46,
+"t1": 472.7,
+"w": [
+[
+"Gegen",
+470.46
+],
+[
+"eine",
+470.62
+],
+[
+"Gruppe,",
+470.75
+],
+[
+"die",
+470.95
+],
+[
+"zusammenhält,",
+471.06
+],
+[
+"hat",
+471.42
+],
+[
+"selbst",
+471.53
+],
+[
+"so",
+471.71
+],
+[
+"ein",
+471.79
+],
+[
+"Raubtier",
+471.89
+],
+[
+"wenig",
+472.13
+],
+[
+"Lust",
+472.28
+],
+[
+"auf",
+472.41
+],
+[
+"Ärger.",
+472.52
+]
+]
+},
+{
+"p": 18,
+"s": "Und genau das ist das Geheimnis der Menschen in dieser Zeit: Allein bist du schwach.",
+"t0": 473.11,
+"t1": 477.63,
+"w": [
+[
+"Und",
+473.11
+],
+[
+"genau",
+473.28
+],
+[
+"das",
+473.53
+],
+[
+"ist",
+473.69
+],
+[
+"das",
+473.86
+],
+[
+"Geheimnis",
+474.02
+],
+[
+"der",
+474.44
+],
+[
+"Menschen",
+474.61
+],
+[
+"in",
+474.98
+],
+[
+"dieser",
+475.1
+],
+[
+"Zeit:",
+475.39
+],
+[
+"Allein",
+475.64
+],
+[
+"bist",
+476.37
+],
+[
+"du",
+476.58
+],
+[
+"schwach.",
+477.26
+]
+]
+},
+{
+"p": 18,
+"s": "Zusammen seid ihr stark.",
+"t0": 478.15,
+"t1": 479.84,
+"w": [
+[
+"Zusammen",
+478.15
+],
+[
+"seid",
+478.76
+],
+[
+"ihr",
+479.1
+],
+[
+"stark.",
+479.37
+]
+]
+},
+{
+"p": 19,
+"s": "Zurück im Lager wird das Rentier zerlegt.",
+"t0": 480.25,
+"t1": 482.39,
+"w": [
+[
+"Zurück",
+480.25
+],
+[
+"im",
+480.61
+],
+[
+"Lager",
+480.76
+],
+[
+"wird",
+481.07
+],
+[
+"das",
+481.32
+],
+[
+"Rentier",
+481.52
+],
+[
+"zerlegt.",
+481.93
+]
+]
+},
+{
+"p": 19,
+"s": "Jeder hat seine Aufgabe.",
+"t0": 482.57,
+"t1": 484.06,
+"w": [
+[
+"Jeder",
+482.57
+],
+[
+"hat",
+482.93
+],
+[
+"seine",
+483.17
+],
+[
+"Aufgabe.",
+483.52
+]
+]
+},
+{
+"p": 19,
+"s": "Das Fell wird abgezogen, das Fleisch geschnitten, die Knochen werden aufgeschlagen, um ans Mark zu kommen.",
+"t0": 484.39,
+"t1": 489.55,
+"w": [
+[
+"Das",
+484.39
+],
+[
+"Fell",
+484.56
+],
+[
+"wird",
+484.78
+],
+[
+"abgezogen,",
+485.0
+],
+[
+"das",
+485.48
+],
+[
+"Fleisch",
+485.66
+],
+[
+"geschnitten,",
+486.24
+],
+[
+"die",
+486.81
+],
+[
+"Knochen",
+487.24
+],
+[
+"werden",
+487.59
+],
+[
+"aufgeschlagen,",
+487.89
+],
+[
+"um",
+488.55
+],
+[
+"ans",
+488.68
+],
+[
+"Mark",
+488.85
+],
+[
+"zu",
+489.07
+],
+[
+"kommen.",
+489.2
+]
+]
+},
+{
+"p": 19,
+"s": "Das ist nämlich richtig nahrhaft und fettig, und Fett ist in der Kälte Gold wert.",
+"t0": 490.04,
+"t1": 494.29,
+"w": [
+[
+"Das",
+490.04
+],
+[
+"ist",
+490.22
+],
+[
+"nämlich",
+490.39
+],
+[
+"richtig",
+490.74
+],
+[
+"nahrhaft",
+491.09
+],
+[
+"und",
+491.48
+],
+[
+"fettig,",
+491.66
+],
+[
+"und",
+492.01
+],
+[
+"Fett",
+492.55
+],
+[
+"ist",
+492.76
+],
+[
+"in",
+493.24
+],
+[
+"der",
+493.37
+],
+[
+"Kälte",
+493.55
+],
+[
+"Gold",
+493.81
+],
+[
+"wert.",
+494.03
+]
+]
+},
+{
+"p": 19,
+"s": "Das Fleisch brutzelt über dem Feuer.",
+"t0": 494.69,
+"t1": 496.44,
+"w": [
+[
+"Das",
+494.69
+],
+[
+"Fleisch",
+494.88
+],
+[
+"brutzelt",
+495.26
+],
+[
+"über",
+495.68
+],
+[
+"dem",
+495.92
+],
+[
+"Feuer.",
+496.11
+]
+]
+},
+{
+"p": 19,
+"s": "Und dann wird geteilt.",
+"t0": 496.85,
+"t1": 498.46,
+"w": [
+[
+"Und",
+496.85
+],
+[
+"dann",
+497.07
+],
+[
+"wird",
+497.71
+],
+[
+"geteilt.",
+497.97
+]
+]
+},
+{
+"p": 19,
+"s": "Und zwar mit allen.",
+"t0": 498.76,
+"t1": 499.95,
+"w": [
+[
+"Und",
+498.76
+],
+[
+"zwar",
+498.95
+],
+[
+"mit",
+499.44
+],
+[
+"allen.",
+499.62
+]
+]
+},
+{
+"p": 19,
+"s": "Auch mit denen, die heute nichts gefunden haben.",
+"t0": 500.4,
+"t1": 502.93,
+"w": [
+[
+"Auch",
+500.4
+],
+[
+"mit",
+500.62
+],
+[
+"denen,",
+500.8
+],
+[
+"die",
+501.12
+],
+[
+"heute",
+501.63
+],
+[
+"nichts",
+501.9
+],
+[
+"gefunden",
+502.21
+],
+[
+"haben.",
+502.62
+]
+]
+},
+{
+"p": 19,
+"s": "Denn morgen kann's genau andersrum sein.",
+"t0": 503.34,
+"t1": 505.69,
+"w": [
+[
+"Denn",
+503.34
+],
+[
+"morgen",
+503.58
+],
+[
+"kann's",
+503.91
+],
+[
+"genau",
+504.64
+],
+[
+"andersrum",
+504.93
+],
+[
+"sein.",
+505.4
+]
+]
+},
+{
+"p": 20,
+"s": "Noah beißt in sein Stück Fleisch.",
+"t0": 506.25,
+"t1": 507.84,
+"w": [
+[
+"Noah",
+506.25
+],
+[
+"beißt",
+506.42
+],
+[
+"in",
+506.63
+],
+[
+"sein",
+506.99
+],
+[
+"Stück",
+507.16
+],
+[
+"Fleisch.",
+507.37
+]
+]
+},
+{
+"p": 20,
+"s": "Kein Salz, keine Soße, kein Ketchup.",
+"t0": 508.11,
+"t1": 510.13,
+"w": [
+[
+"Kein",
+508.11
+],
+[
+"Salz,",
+508.36
+],
+[
+"keine",
+508.83
+],
+[
+"Soße,",
+509.13
+],
+[
+"kein",
+509.43
+],
+[
+"Ketchup.",
+509.68
+]
+]
+},
+{
+"p": 20,
+"s": "Aber mal ehrlich?",
+"t0": 510.58,
+"t1": 511.56,
+"w": [
+[
+"Aber",
+510.58
+],
+[
+"mal",
+510.79
+],
+[
+"ehrlich?",
+511.17
+]
+]
+},
+{
+"p": 20,
+"s": "Nach so einem Tag schmeckt das wie das beste Essen der Welt.",
+"t0": 512.04,
+"t1": 515.15,
+"w": [
+[
+"Nach",
+512.04
+],
+[
+"so",
+512.28
+],
+[
+"einem",
+512.42
+],
+[
+"Tag",
+512.71
+],
+[
+"schmeckt",
+512.9
+],
+[
+"das",
+513.33
+],
+[
+"wie",
+513.52
+],
+[
+"das",
+513.71
+],
+[
+"beste",
+514.1
+],
+[
+"Essen",
+514.39
+],
+[
+"der",
+514.67
+],
+[
+"Welt.",
+514.86
+]
+]
+},
+{
+"p": 21,
+"s": "Und während alle essen, fällt Noah ein Tier auf, das ruhig am Rand des Lagers liegt.",
+"t0": 515.64,
+"t1": 519.72,
+"w": [
+[
+"Und",
+515.64
+],
+[
+"während",
+515.81
+],
+[
+"alle",
+516.16
+],
+[
+"essen,",
+516.37
+],
+[
+"fällt",
+516.67
+],
+[
+"Noah",
+517.21
+],
+[
+"ein",
+517.42
+],
+[
+"Tier",
+517.59
+],
+[
+"auf,",
+517.81
+],
+[
+"das",
+518.02
+],
+[
+"ruhig",
+518.2
+],
+[
+"am",
+518.45
+],
+[
+"Rand",
+518.58
+],
+[
+"des",
+518.8
+],
+[
+"Lagers",
+518.97
+],
+[
+"liegt.",
+519.27
+]
+]
+},
+{
+"p": 21,
+"s": "Es sieht aus wie ein Wolf.",
+"t0": 520.06,
+"t1": 521.16,
+"w": [
+[
+"Es",
+520.06
+],
+[
+"sieht",
+520.18
+],
+[
+"aus",
+520.43
+],
+[
+"wie",
+520.59
+],
+[
+"ein",
+520.75
+],
+[
+"Wolf.",
+520.92
+]
+]
+},
+{
+"p": 21,
+"s": "Aber es knurrt nicht.",
+"t0": 521.72,
+"t1": 522.52,
+"w": [
+[
+"Aber",
+521.72
+],
+[
+"es",
+521.9
+],
+[
+"knurrt",
+522.01
+],
+[
+"nicht.",
+522.27
+]
+]
+},
+{
+"p": 21,
+"s": "Es wartet einfach, ob was für es abfällt.",
+"t0": 523.05,
+"t1": 525.21,
+"w": [
+[
+"Es",
+523.05
+],
+[
+"wartet",
+523.18
+],
+[
+"einfach,",
+523.47
+],
+[
+"ob",
+523.86
+],
+[
+"was",
+523.98
+],
+[
+"für",
+524.35
+],
+[
+"es",
+524.52
+],
+[
+"abfällt.",
+524.65
+]
+]
+},
+{
+"p": 21,
+"s": "Und das ist kein Zufall.",
+"t0": 525.7,
+"t1": 526.71,
+"w": [
+[
+"Und",
+525.7
+],
+[
+"das",
+525.84
+],
+[
+"ist",
+525.98
+],
+[
+"kein",
+526.11
+],
+[
+"Zufall.",
+526.43
+]
+]
+},
+{
+"p": 21,
+"s": "Ungefähr in dieser Zeit beginnt die Freundschaft zwischen Mensch und Hund.",
+"t0": 527.28,
+"t1": 530.65,
+"w": [
+[
+"Ungefähr",
+527.28
+],
+[
+"in",
+527.66
+],
+[
+"dieser",
+527.79
+],
+[
+"Zeit",
+528.08
+],
+[
+"beginnt",
+528.29
+],
+[
+"die",
+528.63
+],
+[
+"Freundschaft",
+528.8
+],
+[
+"zwischen",
+529.55
+],
+[
+"Mensch",
+529.93
+],
+[
+"und",
+530.23
+],
+[
+"Hund.",
+530.4
+]
+]
+},
+{
+"p": 21,
+"s": "In Bonn-Oberkassel, also bei uns in Deutschland, hat man ein Grab gefunden, das rund vierzehntausend Jahre alt ist.",
+"t0": 530.89,
+"t1": 536.54,
+"w": [
+[
+"In",
+530.89
+],
+[
+"Bonn-Oberkassel,",
+531.03
+],
+[
+"also",
+531.8
+],
+[
+"bei",
+532.03
+],
+[
+"uns",
+532.21
+],
+[
+"in",
+532.4
+],
+[
+"Deutschland,",
+532.53
+],
+[
+"hat",
+533.48
+],
+[
+"man",
+533.66
+],
+[
+"ein",
+533.84
+],
+[
+"Grab",
+534.03
+],
+[
+"gefunden,",
+534.26
+],
+[
+"das",
+534.71
+],
+[
+"rund",
+534.9
+],
+[
+"vierzehntausend",
+535.12
+],
+[
+"Jahre",
+535.85
+],
+[
+"alt",
+536.13
+],
+[
+"ist.",
+536.31
+]
+]
+},
+{
+"p": 21,
+"s": "Darin liegen zwei Menschen – und ein Hund.",
+"t0": 537.16,
+"t1": 539.29,
+"w": [
+[
+"Darin",
+537.16
+],
+[
+"liegen",
+537.43
+],
+[
+"zwei",
+537.73
+],
+[
+"Menschen",
+537.96
+],
+[
+"–",
+538.35
+],
+[
+"und",
+538.67
+],
+[
+"ein",
+538.85
+],
+[
+"Hund.",
+539.02
+]
+]
+},
+{
+"p": 21,
+"s": "Und jetzt kommt's: Der Hund war als Welpe schwer krank.",
+"t0": 539.78,
+"t1": 542.53,
+"w": [
+[
+"Und",
+539.78
+],
+[
+"jetzt",
+539.95
+],
+[
+"kommt's:",
+540.2
+],
+[
+"Der",
+540.99
+],
+[
+"Hund",
+541.16
+],
+[
+"war",
+541.36
+],
+[
+"als",
+541.53
+],
+[
+"Welpe",
+541.7
+],
+[
+"schwer",
+541.95
+],
+[
+"krank.",
+542.24
+]
+]
+},
+{
+"p": 21,
+"s": "Er hat nur überlebt, weil die Menschen ihn wochenlang gepflegt haben.",
+"t0": 542.98,
+"t1": 545.85,
+"w": [
+[
+"Er",
+542.98
+],
+[
+"hat",
+543.1
+],
+[
+"nur",
+543.27
+],
+[
+"überlebt,",
+543.43
+],
+[
+"weil",
+543.84
+],
+[
+"die",
+544.05
+],
+[
+"Menschen",
+544.21
+],
+[
+"ihn",
+544.58
+],
+[
+"wochenlang",
+544.74
+],
+[
+"gepflegt",
+545.19
+],
+[
+"haben.",
+545.56
+]
+]
+},
+{
+"p": 21,
+"s": "Das heißt: Schon damals hatten die Leute ihre Hunde richtig lieb.",
+"t0": 546.26,
+"t1": 549.8,
+"w": [
+[
+"Das",
+546.26
+],
+[
+"heißt:",
+546.45
+],
+[
+"Schon",
+547.16
+],
+[
+"damals",
+547.45
+],
+[
+"hatten",
+547.78
+],
+[
+"die",
+548.12
+],
+[
+"Leute",
+548.31
+],
+[
+"ihre",
+548.6
+],
+[
+"Hunde",
+548.84
+],
+[
+"richtig",
+549.13
+],
+[
+"lieb.",
+549.51
+]
+]
+},
+{
+"p": 22,
+"s": "Langsam wird es dunkel.",
+"t0": 550.16,
+"t1": 551.35,
+"w": [
+[
+"Langsam",
+550.16
+],
+[
+"wird",
+550.4
+],
+[
+"es",
+550.77
+],
+[
+"dunkel.",
+551.11
+]
+]
+},
+{
+"p": 22,
+"s": "Und jetzt kommt der Teil des Tages, der Noah am meisten überrascht.",
+"t0": 551.96,
+"t1": 555.97,
+"w": [
+[
+"Und",
+551.96
+],
+[
+"jetzt",
+552.17
+],
+[
+"kommt",
+552.49
+],
+[
+"der",
+552.81
+],
+[
+"Teil",
+553.02
+],
+[
+"des",
+553.28
+],
+[
+"Tages,",
+553.5
+],
+[
+"der",
+553.87
+],
+[
+"Noah",
+554.49
+],
+[
+"am",
+554.75
+],
+[
+"meisten",
+554.91
+],
+[
+"überrascht.",
+555.33
+]
+]
+},
+{
+"p": 22,
+"s": "Alle setzen sich ums Feuer.",
+"t0": 556.78,
+"t1": 557.97,
+"w": [
+[
+"Alle",
+556.78
+],
+[
+"setzen",
+556.96
+],
+[
+"sich",
+557.22
+],
+[
+"ums",
+557.41
+],
+[
+"Feuer.",
+557.55
+]
+]
+},
+{
+"p": 22,
+"s": "Ein alter Mann fängt an, eine Geschichte zu erzählen.",
+"t0": 558.52,
+"t1": 560.91,
+"w": [
+[
+"Ein",
+558.52
+],
+[
+"alter",
+558.7
+],
+[
+"Mann",
+558.96
+],
+[
+"fängt",
+559.18
+],
+[
+"an,",
+559.45
+],
+[
+"eine",
+559.63
+],
+[
+"Geschichte",
+559.85
+],
+[
+"zu",
+560.33
+],
+[
+"erzählen.",
+560.47
+]
+]
+},
+{
+"p": 22,
+"s": "Über eine große Jagd von früher, über die Vorfahren, über die Tiere.",
+"t0": 561.46,
+"t1": 566.34,
+"w": [
+[
+"Über",
+561.46
+],
+[
+"eine",
+561.74
+],
+[
+"große",
+562.01
+],
+[
+"Jagd",
+562.34
+],
+[
+"von",
+562.62
+],
+[
+"früher,",
+563.06
+],
+[
+"über",
+563.66
+],
+[
+"die",
+564.63
+],
+[
+"Vorfahren,",
+564.85
+],
+[
+"über",
+565.46
+],
+[
+"die",
+565.73
+],
+[
+"Tiere.",
+565.95
+]
+]
+},
+{
+"p": 22,
+"s": "Die Kinder hören mit großen Augen zu.",
+"t0": 566.58,
+"t1": 568.37,
+"w": [
+[
+"Die",
+566.58
+],
+[
+"Kinder",
+566.77
+],
+[
+"hören",
+567.1
+],
+[
+"mit",
+567.38
+],
+[
+"großen",
+567.57
+],
+[
+"Augen",
+567.9
+],
+[
+"zu.",
+568.18
+]
+]
+},
+{
+"p": 22,
+"s": "Dann holt jemand eine kleine Flöte raus.",
+"t0": 568.83,
+"t1": 570.87,
+"w": [
+[
+"Dann",
+568.83
+],
+[
+"holt",
+569.06
+],
+[
+"jemand",
+569.29
+],
+[
+"eine",
+569.61
+],
+[
+"kleine",
+569.84
+],
+[
+"Flöte",
+570.32
+],
+[
+"raus.",
+570.59
+]
+]
+},
+{
+"p": 22,
+"s": "Gemacht aus einem Vogelknochen, mit Löchern drin.",
+"t0": 571.42,
+"t1": 574.05,
+"w": [
+[
+"Gemacht",
+571.42
+],
+[
+"aus",
+571.94
+],
+[
+"einem",
+572.11
+],
+[
+"Vogelknochen,",
+572.36
+],
+[
+"mit",
+573.3
+],
+[
+"Löchern",
+573.47
+],
+[
+"drin.",
+573.8
+]
+]
+},
+{
+"p": 22,
+"s": "Und spielt eine Melodie.",
+"t0": 574.55,
+"t1": 575.65,
+"w": [
+[
+"Und",
+574.55
+],
+[
+"spielt",
+574.73
+],
+[
+"eine",
+575.03
+],
+[
+"Melodie.",
+575.25
+]
+]
+},
+{
+"p": 22,
+"s": "Und ja, das gab's wirklich.",
+"t0": 576.36,
+"t1": 578.01,
+"w": [
+[
+"Und",
+576.36
+],
+[
+"ja,",
+576.43
+],
+[
+"das",
+577.15
+],
+[
+"gab's",
+577.48
+],
+[
+"wirklich.",
+577.58
+]
+]
+},
+{
+"p": 22,
+"s": "In der Höhle Hohle Fels auf der Schwäbischen Alb hat man eine Flöte aus einem Geierknochen gefunden, die über fünfunddreißigtausend Jahre alt ist.",
+"t0": 578.34,
+"t1": 585.47,
+"w": [
+[
+"In",
+578.34
+],
+[
+"der",
+578.74
+],
+[
+"Höhle",
+578.9
+],
+[
+"Hohle",
+579.16
+],
+[
+"Fels",
+579.41
+],
+[
+"auf",
+579.62
+],
+[
+"der",
+579.79
+],
+[
+"Schwäbischen",
+579.96
+],
+[
+"Alb",
+580.5
+],
+[
+"hat",
+580.67
+],
+[
+"man",
+580.84
+],
+[
+"eine",
+581.01
+],
+[
+"Flöte",
+581.37
+],
+[
+"aus",
+581.62
+],
+[
+"einem",
+581.79
+],
+[
+"Geierknochen",
+582.04
+],
+[
+"gefunden,",
+582.59
+],
+[
+"die",
+583.01
+],
+[
+"über",
+583.55
+],
+[
+"fünfunddreißigtausend",
+583.91
+],
+[
+"Jahre",
+584.84
+],
+[
+"alt",
+585.09
+],
+[
+"ist.",
+585.26
+]
+]
+},
+{
+"p": 22,
+"s": "Damit gehört sie zu den ältesten Musikinstrumenten der Welt.",
+"t0": 586.12,
+"t1": 589.11,
+"w": [
+[
+"Damit",
+586.12
+],
+[
+"gehört",
+586.37
+],
+[
+"sie",
+586.94
+],
+[
+"zu",
+587.11
+],
+[
+"den",
+587.23
+],
+[
+"ältesten",
+587.4
+],
+[
+"Musikinstrumenten",
+587.94
+],
+[
+"der",
+588.69
+],
+[
+"Welt.",
+588.86
+]
+]
+},
+{
+"p": 22,
+"s": "Musik ist also viel, viel älter, als die meisten denken.",
+"t0": 589.55,
+"t1": 591.87,
+"w": [
+[
+"Musik",
+589.55
+],
+[
+"ist",
+589.79
+],
+[
+"also",
+589.96
+],
+[
+"viel,",
+590.16
+],
+[
+"viel",
+590.4
+],
+[
+"älter,",
+590.61
+],
+[
+"als",
+590.89
+],
+[
+"die",
+591.06
+],
+[
+"meisten",
+591.22
+],
+[
+"denken.",
+591.54
+]
+]
+},
+{
+"p": 23,
+"s": "Dann nimmt eine junge Frau etwas rote Farbe.",
+"t0": 592.6,
+"t1": 594.98,
+"w": [
+[
+"Dann",
+592.6
+],
+[
+"nimmt",
+592.82
+],
+[
+"eine",
+593.29
+],
+[
+"junge",
+593.52
+],
+[
+"Frau",
+593.79
+],
+[
+"etwas",
+594.01
+],
+[
+"rote",
+594.44
+],
+[
+"Farbe.",
+594.67
+]
+]
+},
+{
+"p": 23,
+"s": "Ocker, vermischt mit Wasser.",
+"t0": 595.38,
+"t1": 596.79,
+"w": [
+[
+"Ocker,",
+595.38
+],
+[
+"vermischt",
+595.62
+],
+[
+"mit",
+596.38
+],
+[
+"Wasser.",
+596.52
+]
+]
+},
+{
+"p": 23,
+"s": "Sie drückt ihre Hand an die Felswand und pustet die Farbe drumherum.",
+"t0": 597.37,
+"t1": 600.63,
+"w": [
+[
+"Sie",
+597.37
+],
+[
+"drückt",
+597.54
+],
+[
+"ihre",
+597.99
+],
+[
+"Hand",
+598.2
+],
+[
+"an",
+598.41
+],
+[
+"die",
+598.53
+],
+[
+"Felswand",
+598.7
+],
+[
+"und",
+599.07
+],
+[
+"pustet",
+599.24
+],
+[
+"die",
+599.53
+],
+[
+"Farbe",
+599.92
+],
+[
+"drumherum.",
+600.17
+]
+]
+},
+{
+"p": 23,
+"s": "Als sie die Hand wegnimmt, bleibt ein Handabdruck an der Wand zurück.",
+"t0": 601.17,
+"t1": 604.21,
+"w": [
+[
+"Als",
+601.17
+],
+[
+"sie",
+601.33
+],
+[
+"die",
+601.48
+],
+[
+"Hand",
+601.64
+],
+[
+"wegnimmt,",
+601.84
+],
+[
+"bleibt",
+602.23
+],
+[
+"ein",
+602.8
+],
+[
+"Handabdruck",
+602.95
+],
+[
+"an",
+603.42
+],
+[
+"der",
+603.54
+],
+[
+"Wand",
+603.7
+],
+[
+"zurück.",
+603.9
+]
+]
+},
+{
+"p": 23,
+"s": "Daneben malt sie mit Holzkohle ein Pferd.",
+"t0": 604.62,
+"t1": 606.71,
+"w": [
+[
+"Daneben",
+604.62
+],
+[
+"malt",
+605.02
+],
+[
+"sie",
+605.27
+],
+[
+"mit",
+605.47
+],
+[
+"Holzkohle",
+605.66
+],
+[
+"ein",
+606.16
+],
+[
+"Pferd.",
+606.36
+]
+]
+},
+{
+"p": 23,
+"s": "Nur ein paar Striche, aber so lebendig, dass man fast denkt, es läuft gleich los.",
+"t0": 607.14,
+"t1": 611.11,
+"w": [
+[
+"Nur",
+607.14
+],
+[
+"ein",
+607.31
+],
+[
+"paar",
+607.48
+],
+[
+"Striche,",
+607.69
+],
+[
+"aber",
+608.06
+],
+[
+"so",
+608.27
+],
+[
+"lebendig,",
+608.4
+],
+[
+"dass",
+608.82
+],
+[
+"man",
+609.03
+],
+[
+"fast",
+609.2
+],
+[
+"denkt,",
+609.41
+],
+[
+"es",
+610.08
+],
+[
+"läuft",
+610.2
+],
+[
+"gleich",
+610.61
+],
+[
+"los.",
+610.9
+]
+]
+},
+{
+"p": 23,
+"s": "Solche Bilder findet man bis heute in Höhlen in Frankreich und Spanien.",
+"t0": 611.66,
+"t1": 615.39,
+"w": [
+[
+"Solche",
+611.66
+],
+[
+"Bilder",
+611.98
+],
+[
+"findet",
+612.31
+],
+[
+"man",
+612.63
+],
+[
+"bis",
+612.81
+],
+[
+"heute",
+613.0
+],
+[
+"in",
+613.53
+],
+[
+"Höhlen",
+613.67
+],
+[
+"in",
+613.99
+],
+[
+"Frankreich",
+614.13
+],
+[
+"und",
+614.79
+],
+[
+"Spanien.",
+614.98
+]
+]
+},
+{
+"p": 23,
+"s": "Die Malereien in der Höhle von Lascaux zum Beispiel sind rund siebzehntausend Jahre alt.",
+"t0": 615.54,
+"t1": 619.43,
+"w": [
+[
+"Die",
+615.54
+],
+[
+"Malereien",
+615.71
+],
+[
+"in",
+616.15
+],
+[
+"der",
+616.28
+],
+[
+"Höhle",
+616.46
+],
+[
+"von",
+616.72
+],
+[
+"Lascaux",
+616.89
+],
+[
+"zum",
+617.24
+],
+[
+"Beispiel",
+617.42
+],
+[
+"sind",
+617.81
+],
+[
+"rund",
+618.03
+],
+[
+"siebzehntausend",
+618.25
+],
+[
+"Jahre",
+618.95
+],
+[
+"alt.",
+619.21
+]
+]
+},
+{
+"p": 23,
+"s": "Und die Leute von damals würden wahrscheinlich staunen, dass wir heute vor ihren Bildern stehen und sie bewundern.",
+"t0": 619.78,
+"t1": 625.91,
+"w": [
+[
+"Und",
+619.78
+],
+[
+"die",
+619.97
+],
+[
+"Leute",
+620.16
+],
+[
+"von",
+620.44
+],
+[
+"damals",
+620.63
+],
+[
+"würden",
+620.96
+],
+[
+"wahrscheinlich",
+621.54
+],
+[
+"staunen,",
+622.24
+],
+[
+"dass",
+622.66
+],
+[
+"wir",
+623.19
+],
+[
+"heute",
+623.38
+],
+[
+"vor",
+623.66
+],
+[
+"ihren",
+623.85
+],
+[
+"Bildern",
+624.13
+],
+[
+"stehen",
+624.51
+],
+[
+"und",
+625.02
+],
+[
+"sie",
+625.2
+],
+[
+"bewundern.",
+625.39
+]
+]
+},
+{
+"p": 24,
+"s": "Noah legt seine Hand daneben.",
+"t0": 626.5,
+"t1": 627.93,
+"w": [
+[
+"Noah",
+626.5
+],
+[
+"legt",
+626.74
+],
+[
+"seine",
+626.98
+],
+[
+"Hand",
+627.26
+],
+[
+"daneben.",
+627.5
+]
+]
+},
+{
+"p": 24,
+"s": "Ein Abdruck aus der Zukunft, sozusagen.",
+"t0": 628.38,
+"t1": 630.69,
+"w": [
+[
+"Ein",
+628.38
+],
+[
+"Abdruck",
+628.57
+],
+[
+"aus",
+629.13
+],
+[
+"der",
+629.32
+],
+[
+"Zukunft,",
+629.51
+],
+[
+"sozusagen.",
+630.16
+]
+]
+},
+{
+"p": 25,
+"s": "Und jetzt mal zu einem Mythos, den du bestimmt kennst: Die Steinzeitmenschen sind doch alle mit dreißig gestorben, oder?",
+"t0": 631.18,
+"t1": 638.32,
+"w": [
+[
+"Und",
+631.18
+],
+[
+"jetzt",
+631.37
+],
+[
+"mal",
+631.66
+],
+[
+"zu",
+631.86
+],
+[
+"einem",
+632.0
+],
+[
+"Mythos,",
+632.55
+],
+[
+"den",
+632.94
+],
+[
+"du",
+633.65
+],
+[
+"bestimmt",
+633.79
+],
+[
+"kennst:",
+634.23
+],
+[
+"Die",
+634.61
+],
+[
+"Steinzeitmenschen",
+635.0
+],
+[
+"sind",
+635.87
+],
+[
+"doch",
+636.27
+],
+[
+"alle",
+636.67
+],
+[
+"mit",
+636.92
+],
+[
+"dreißig",
+637.11
+],
+[
+"gestorben,",
+637.5
+],
+[
+"oder?",
+638.03
+]
+]
+},
+{
+"p": 25,
+"s": "Na ja.",
+"t0": 638.65,
+"t1": 639.02,
+"w": [
+[
+"Na",
+638.65
+],
+[
+"ja.",
+638.81
+]
+]
+},
+{
+"p": 25,
+"s": "Nicht ganz.",
+"t0": 639.45,
+"t1": 639.96,
+"w": [
+[
+"Nicht",
+639.45
+],
+[
+"ganz.",
+639.71
+]
+]
+},
+{
+"p": 25,
+"s": "Die durchschnittliche Lebenserwartung war tatsächlich niedrig.",
+"t0": 640.54,
+"t1": 644.12,
+"w": [
+[
+"Die",
+640.54
+],
+[
+"durchschnittliche",
+640.76
+],
+[
+"Lebenserwartung",
+641.73
+],
+[
+"war",
+642.77
+],
+[
+"tatsächlich",
+642.99
+],
+[
+"niedrig.",
+643.63
+]
+]
+},
+{
+"p": 25,
+"s": "Aber das lag vor allem daran, dass sehr viele Kinder sehr früh gestorben sind.",
+"t0": 644.29,
+"t1": 647.47,
+"w": [
+[
+"Aber",
+644.29
+],
+[
+"das",
+644.49
+],
+[
+"lag",
+644.65
+],
+[
+"vor",
+644.81
+],
+[
+"allem",
+644.97
+],
+[
+"daran,",
+645.22
+],
+[
+"dass",
+645.5
+],
+[
+"sehr",
+645.7
+],
+[
+"viele",
+645.9
+],
+[
+"Kinder",
+646.14
+],
+[
+"sehr",
+646.42
+],
+[
+"früh",
+646.62
+],
+[
+"gestorben",
+646.83
+],
+[
+"sind.",
+647.23
+]
+]
+},
+{
+"p": 25,
+"s": "Wer die Kindheit überlebt hat, konnte durchaus fünfzig, sechzig oder sogar noch älter werden.",
+"t0": 647.79,
+"t1": 651.48,
+"w": [
+[
+"Wer",
+647.79
+],
+[
+"die",
+647.95
+],
+[
+"Kindheit",
+648.1
+],
+[
+"überlebt",
+648.46
+],
+[
+"hat,",
+648.81
+],
+[
+"konnte",
+649.01
+],
+[
+"durchaus",
+649.28
+],
+[
+"fünfzig,",
+649.64
+],
+[
+"sechzig",
+649.99
+],
+[
+"oder",
+650.3
+],
+[
+"sogar",
+650.5
+],
+[
+"noch",
+650.73
+],
+[
+"älter",
+650.93
+],
+[
+"werden.",
+651.17
+]
+]
+},
+{
+"p": 25,
+"s": "Und die Alten waren super wichtig.",
+"t0": 651.77,
+"t1": 653.29,
+"w": [
+[
+"Und",
+651.77
+],
+[
+"die",
+651.94
+],
+[
+"Alten",
+652.12
+],
+[
+"waren",
+652.38
+],
+[
+"super",
+652.64
+],
+[
+"wichtig.",
+652.9
+]
+]
+},
+{
+"p": 25,
+"s": "Die hatten das Wissen.",
+"t0": 653.65,
+"t1": 654.45,
+"w": [
+[
+"Die",
+653.65
+],
+[
+"hatten",
+653.79
+],
+[
+"das",
+654.03
+],
+[
+"Wissen.",
+654.17
+]
+]
+},
+{
+"p": 25,
+"s": "Die wussten, wo man in einem harten Winter noch Wasser findet.",
+"t0": 654.7,
+"t1": 657.61,
+"w": [
+[
+"Die",
+654.7
+],
+[
+"wussten,",
+654.88
+],
+[
+"wo",
+655.3
+],
+[
+"man",
+655.44
+],
+[
+"in",
+655.62
+],
+[
+"einem",
+655.76
+],
+[
+"harten",
+656.04
+],
+[
+"Winter",
+656.36
+],
+[
+"noch",
+656.69
+],
+[
+"Wasser",
+656.92
+],
+[
+"findet.",
+657.24
+]
+]
+},
+{
+"p": 25,
+"s": "Die wussten, welche Pflanzen helfen.",
+"t0": 657.9,
+"t1": 659.29,
+"w": [
+[
+"Die",
+657.9
+],
+[
+"wussten,",
+658.05
+],
+[
+"welche",
+658.39
+],
+[
+"Pflanzen",
+658.65
+],
+[
+"helfen.",
+658.99
+]
+]
+},
+{
+"p": 25,
+"s": "Die waren sozusagen das lebende Internet der Gruppe.",
+"t0": 659.65,
+"t1": 662.09,
+"w": [
+[
+"Die",
+659.65
+],
+[
+"waren",
+659.83
+],
+[
+"sozusagen",
+660.11
+],
+[
+"das",
+660.57
+],
+[
+"lebende",
+660.75
+],
+[
+"Internet",
+661.12
+],
+[
+"der",
+661.54
+],
+[
+"Gruppe.",
+661.72
+]
+]
+},
+{
+"p": 26,
+"s": "Draußen ist es jetzt richtig dunkel.",
+"t0": 662.47,
+"t1": 664.86,
+"w": [
+[
+"Draußen",
+662.47
+],
+[
+"ist",
+662.99
+],
+[
+"es",
+663.25
+],
+[
+"jetzt",
+663.44
+],
+[
+"richtig",
+663.83
+],
+[
+"dunkel.",
+664.34
+]
+]
+},
+{
+"p": 26,
+"s": "Keine Straßenlaternen, kein Licht in irgendeinem Fenster.",
+"t0": 665.2,
+"t1": 667.44,
+"w": [
+[
+"Keine",
+665.2
+],
+[
+"Straßenlaternen,",
+665.4
+],
+[
+"kein",
+665.96
+],
+[
+"Licht",
+666.12
+],
+[
+"in",
+666.32
+],
+[
+"irgendeinem",
+666.42
+],
+[
+"Fenster.",
+667.14
+]
+]
+},
+{
+"p": 26,
+"s": "Nur das Feuer.",
+"t0": 668.04,
+"t1": 668.55,
+"w": [
+[
+"Nur",
+668.04
+],
+[
+"das",
+668.18
+],
+[
+"Feuer.",
+668.31
+]
+]
+},
+{
+"p": 26,
+"s": "Und darüber ein Sternenhimmel, wie Noah ihn noch nie gesehen hat.",
+"t0": 669.07,
+"t1": 671.75,
+"w": [
+[
+"Und",
+669.07
+],
+[
+"darüber",
+669.23
+],
+[
+"ein",
+669.56
+],
+[
+"Sternenhimmel,",
+669.72
+],
+[
+"wie",
+670.33
+],
+[
+"Noah",
+670.49
+],
+[
+"ihn",
+670.69
+],
+[
+"noch",
+670.86
+],
+[
+"nie",
+671.06
+],
+[
+"gesehen",
+671.22
+],
+[
+"hat.",
+671.55
+]
+]
+},
+{
+"p": 26,
+"s": "Tausende Sterne.",
+"t0": 672.21,
+"t1": 673.07,
+"w": [
+[
+"Tausende",
+672.21
+],
+[
+"Sterne.",
+672.67
+]
+]
+},
+{
+"p": 26,
+"s": "Die Milchstraße zieht sich klar und hell über den ganzen Himmel.",
+"t0": 673.38,
+"t1": 676.23,
+"w": [
+[
+"Die",
+673.38
+],
+[
+"Milchstraße",
+673.56
+],
+[
+"zieht",
+674.08
+],
+[
+"sich",
+674.34
+],
+[
+"klar",
+674.56
+],
+[
+"und",
+674.78
+],
+[
+"hell",
+674.96
+],
+[
+"über",
+675.18
+],
+[
+"den",
+675.4
+],
+[
+"ganzen",
+675.57
+],
+[
+"Himmel.",
+675.88
+]
+]
+},
+{
+"p": 26,
+"s": "Ohne Lichtverschmutzung sieht die Nacht einfach komplett anders aus.",
+"t0": 676.46,
+"t1": 679.79,
+"w": [
+[
+"Ohne",
+676.46
+],
+[
+"Lichtverschmutzung",
+676.86
+],
+[
+"sieht",
+677.73
+],
+[
+"die",
+678.0
+],
+[
+"Nacht",
+678.19
+],
+[
+"einfach",
+678.46
+],
+[
+"komplett",
+678.83
+],
+[
+"anders",
+679.24
+],
+[
+"aus.",
+679.56
+]
+]
+},
+{
+"p": 27,
+"s": "Und dann – aus der Ferne – ein Heulen.",
+"t0": 680.1,
+"t1": 682.73,
+"w": [
+[
+"Und",
+680.1
+],
+[
+"dann",
+680.31
+],
+[
+"–",
+680.58
+],
+[
+"aus",
+681.03
+],
+[
+"der",
+681.24
+],
+[
+"Ferne",
+681.45
+],
+[
+"–",
+681.99
+],
+[
+"ein",
+682.1
+],
+[
+"Heulen.",
+682.31
+]
+]
+},
+{
+"p": 27,
+"s": "Wölfe.",
+"t0": 683.24,
+"t1": 683.82,
+"w": [
+[
+"Wölfe.",
+683.24
+]
+]
+},
+{
+"p": 27,
+"s": "Die Kinder rücken näher ans Feuer.",
+"t0": 684.44,
+"t1": 685.97,
+"w": [
+[
+"Die",
+684.44
+],
+[
+"Kinder",
+684.61
+],
+[
+"rücken",
+684.92
+],
+[
+"näher",
+685.23
+],
+[
+"ans",
+685.49
+],
+[
+"Feuer.",
+685.66
+]
+]
+},
+{
+"p": 27,
+"s": "Zwei Männer bleiben wach und halten Wache.",
+"t0": 686.33,
+"t1": 688.22,
+"w": [
+[
+"Zwei",
+686.33
+],
+[
+"Männer",
+686.55
+],
+[
+"bleiben",
+686.86
+],
+[
+"wach",
+687.21
+],
+[
+"und",
+687.43
+],
+[
+"halten",
+687.6
+],
+[
+"Wache.",
+687.91
+]
+]
+},
+{
+"p": 27,
+"s": "Sie legen immer wieder Holz nach.",
+"t0": 688.62,
+"t1": 690.11,
+"w": [
+[
+"Sie",
+688.62
+],
+[
+"legen",
+688.8
+],
+[
+"immer",
+689.06
+],
+[
+"wieder",
+689.32
+],
+[
+"Holz",
+689.63
+],
+[
+"nach.",
+689.85
+]
+]
+},
+{
+"p": 27,
+"s": "Die anderen kuscheln sich unter die Felle.",
+"t0": 690.48,
+"t1": 692.04,
+"w": [
+[
+"Die",
+690.48
+],
+[
+"anderen",
+690.63
+],
+[
+"kuscheln",
+690.92
+],
+[
+"sich",
+691.24
+],
+[
+"unter",
+691.42
+],
+[
+"die",
+691.64
+],
+[
+"Felle.",
+691.79
+]
+]
+},
+{
+"p": 27,
+"s": "Eng aneinander, damit keiner friert.",
+"t0": 692.43,
+"t1": 694.06,
+"w": [
+[
+"Eng",
+692.43
+],
+[
+"aneinander,",
+692.61
+],
+[
+"damit",
+693.13
+],
+[
+"keiner",
+693.4
+],
+[
+"friert.",
+693.71
+]
+]
+},
+{
+"p": 27,
+"s": "Noah liegt mittendrin.",
+"t0": 694.45,
+"t1": 695.32,
+"w": [
+[
+"Noah",
+694.45
+],
+[
+"liegt",
+694.64
+],
+[
+"mittendrin.",
+694.87
+]
+]
+},
+{
+"p": 27,
+"s": "Er hört das Knistern, das ruhige Atmen der anderen und irgendwo draußen den Wind.",
+"t0": 695.82,
+"t1": 700.04,
+"w": [
+[
+"Er",
+695.82
+],
+[
+"hört",
+695.95
+],
+[
+"das",
+696.17
+],
+[
+"Knistern,",
+696.34
+],
+[
+"das",
+696.78
+],
+[
+"ruhige",
+696.96
+],
+[
+"Atmen",
+697.26
+],
+[
+"der",
+697.52
+],
+[
+"anderen",
+697.7
+],
+[
+"und",
+698.39
+],
+[
+"irgendwo",
+698.56
+],
+[
+"draußen",
+698.95
+],
+[
+"den",
+699.6
+],
+[
+"Wind.",
+699.78
+]
+]
+},
+{
+"p": 28,
+"s": "Und er denkt nach.",
+"t0": 700.51,
+"t1": 701.13,
+"w": [
+[
+"Und",
+700.51
+],
+[
+"er",
+700.64
+],
+[
+"denkt",
+700.74
+],
+[
+"nach.",
+700.93
+]
+]
+},
+{
+"p": 28,
+"s": "Diese Menschen haben nichts von dem, was wir heute haben.",
+"t0": 701.8,
+"t1": 704.18,
+"w": [
+[
+"Diese",
+701.8
+],
+[
+"Menschen",
+702.05
+],
+[
+"haben",
+702.42
+],
+[
+"nichts",
+702.66
+],
+[
+"von",
+702.95
+],
+[
+"dem,",
+703.11
+],
+[
+"was",
+703.32
+],
+[
+"wir",
+703.48
+],
+[
+"heute",
+703.65
+],
+[
+"haben.",
+703.89
+]
+]
+},
+{
+"p": 28,
+"s": "Kein Handy, keine Heizung, keinen Supermarkt, keinen Arzt.",
+"t0": 704.68,
+"t1": 708.51,
+"w": [
+[
+"Kein",
+704.68
+],
+[
+"Handy,",
+704.92
+],
+[
+"keine",
+705.25
+],
+[
+"Heizung,",
+705.85
+],
+[
+"keinen",
+706.46
+],
+[
+"Supermarkt,",
+706.79
+],
+[
+"keinen",
+707.74
+],
+[
+"Arzt.",
+708.07
+]
+]
+},
+{
+"p": 28,
+"s": "Jeder Tag kann gefährlich werden.",
+"t0": 708.85,
+"t1": 710.26,
+"w": [
+[
+"Jeder",
+708.85
+],
+[
+"Tag",
+709.07
+],
+[
+"kann",
+709.22
+],
+[
+"gefährlich",
+709.56
+],
+[
+"werden.",
+709.97
+]
+]
+},
+{
+"p": 28,
+"s": "Aber sie haben einander.",
+"t0": 710.68,
+"t1": 711.64,
+"w": [
+[
+"Aber",
+710.68
+],
+[
+"sie",
+710.87
+],
+[
+"haben",
+711.03
+],
+[
+"einander.",
+711.26
+]
+]
+},
+{
+"p": 28,
+"s": "Sie lachen, sie teilen, sie erzählen Geschichten, sie machen Musik, sie malen.",
+"t0": 712.08,
+"t1": 715.91,
+"w": [
+[
+"Sie",
+712.08
+],
+[
+"lachen,",
+712.23
+],
+[
+"sie",
+712.52
+],
+[
+"teilen,",
+712.67
+],
+[
+"sie",
+712.97
+],
+[
+"erzählen",
+713.11
+],
+[
+"Geschichten,",
+713.45
+],
+[
+"sie",
+714.42
+],
+[
+"machen",
+714.57
+],
+[
+"Musik,",
+714.82
+],
+[
+"sie",
+715.5
+],
+[
+"malen.",
+715.65
+]
+]
+},
+{
+"p": 28,
+"s": "Eigentlich sind sie gar nicht so anders als wir.",
+"t0": 716.33,
+"t1": 718.29,
+"w": [
+[
+"Eigentlich",
+716.33
+],
+[
+"sind",
+716.73
+],
+[
+"sie",
+717.09
+],
+[
+"gar",
+717.24
+],
+[
+"nicht",
+717.38
+],
+[
+"so",
+717.6
+],
+[
+"anders",
+717.71
+],
+[
+"als",
+717.96
+],
+[
+"wir.",
+718.11
+]
+]
+},
+{
+"p": 29,
+"s": "Und viele der Tiere, die Noah heute gesehen hat, sind bald verschwunden.",
+"t0": 718.67,
+"t1": 722.93,
+"w": [
+[
+"Und",
+718.67
+],
+[
+"viele",
+718.87
+],
+[
+"der",
+719.17
+],
+[
+"Tiere,",
+719.37
+],
+[
+"die",
+719.72
+],
+[
+"Noah",
+719.92
+],
+[
+"heute",
+720.17
+],
+[
+"gesehen",
+720.47
+],
+[
+"hat,",
+721.05
+],
+[
+"sind",
+721.3
+],
+[
+"bald",
+721.55
+],
+[
+"verschwunden.",
+722.23
+]
+]
+},
+{
+"p": 29,
+"s": "Das Wollnashorn, der Höhlenlöwe, der Riesenhirsch, und in Europa auch die Mammuts.",
+"t0": 723.28,
+"t1": 727.68,
+"w": [
+[
+"Das",
+723.28
+],
+[
+"Wollnashorn,",
+723.48
+],
+[
+"der",
+724.13
+],
+[
+"Höhlenlöwe,",
+724.59
+],
+[
+"der",
+725.19
+],
+[
+"Riesenhirsch,",
+725.39
+],
+[
+"und",
+726.08
+],
+[
+"in",
+726.28
+],
+[
+"Europa",
+726.43
+],
+[
+"auch",
+726.78
+],
+[
+"die",
+727.03
+],
+[
+"Mammuts.",
+727.23
+]
+]
+},
+{
+"p": 29,
+"s": "Noch ein paar tausend Jahre, dann sind sie weg.",
+"t0": 727.86,
+"t1": 730.2,
+"w": [
+[
+"Noch",
+727.86
+],
+[
+"ein",
+728.06
+],
+[
+"paar",
+728.22
+],
+[
+"tausend",
+728.42
+],
+[
+"Jahre,",
+728.74
+],
+[
+"dann",
+729.03
+],
+[
+"sind",
+729.64
+],
+[
+"sie",
+729.84
+],
+[
+"weg.",
+730.0
+]
+]
+},
+{
+"p": 29,
+"s": "Wahrscheinlich, weil es nach der Eiszeit wärmer wurde und ihre Steppe verschwand – und weil der Mensch sie gejagt hat.",
+"t0": 730.71,
+"t1": 736.6,
+"w": [
+[
+"Wahrscheinlich,",
+730.71
+],
+[
+"weil",
+731.39
+],
+[
+"es",
+731.6
+],
+[
+"nach",
+731.73
+],
+[
+"der",
+731.95
+],
+[
+"Eiszeit",
+732.12
+],
+[
+"wärmer",
+732.46
+],
+[
+"wurde",
+732.76
+],
+[
+"und",
+733.01
+],
+[
+"ihre",
+733.18
+],
+[
+"Steppe",
+733.39
+],
+[
+"verschwand",
+733.88
+],
+[
+"–",
+734.35
+],
+[
+"und",
+734.44
+],
+[
+"weil",
+734.61
+],
+[
+"der",
+735.3
+],
+[
+"Mensch",
+735.47
+],
+[
+"sie",
+735.92
+],
+[
+"gejagt",
+736.09
+],
+[
+"hat.",
+736.39
+]
+]
+},
+{
+"p": 29,
+"s": "Was davon wie viel ausgemacht hat, darüber streiten die Forscher bis heute.",
+"t0": 737.02,
+"t1": 740.25,
+"w": [
+[
+"Was",
+737.02
+],
+[
+"davon",
+737.18
+],
+[
+"wie",
+737.41
+],
+[
+"viel",
+737.56
+],
+[
+"ausgemacht",
+737.76
+],
+[
+"hat,",
+738.18
+],
+[
+"darüber",
+738.38
+],
+[
+"streiten",
+738.97
+],
+[
+"die",
+739.32
+],
+[
+"Forscher",
+739.47
+],
+[
+"bis",
+739.82
+],
+[
+"heute.",
+739.98
+]
+]
+},
+{
+"p": 29,
+"s": "Die allerletzten Mammuts lebten übrigens auf einer kleinen Insel im Nordpolarmeer, der Wrangelinsel.",
+"t0": 740.83,
+"t1": 745.4,
+"w": [
+[
+"Die",
+740.83
+],
+[
+"allerletzten",
+741.01
+],
+[
+"Mammuts",
+741.6
+],
+[
+"lebten",
+741.96
+],
+[
+"übrigens",
+742.28
+],
+[
+"auf",
+742.69
+],
+[
+"einer",
+742.87
+],
+[
+"kleinen",
+743.14
+],
+[
+"Insel",
+743.5
+],
+[
+"im",
+743.77
+],
+[
+"Nordpolarmeer,",
+743.91
+],
+[
+"der",
+744.59
+],
+[
+"Wrangelinsel.",
+744.77
+]
+]
+},
+{
+"p": 29,
+"s": "Und zwar bis vor ungefähr viertausend Jahren.",
+"t0": 745.82,
+"t1": 748.36,
+"w": [
+[
+"Und",
+745.82
+],
+[
+"zwar",
+746.01
+],
+[
+"bis",
+746.25
+],
+[
+"vor",
+746.45
+],
+[
+"ungefähr",
+746.64
+],
+[
+"viertausend",
+747.07
+],
+[
+"Jahren.",
+747.97
+]
+]
+},
+{
+"p": 29,
+"s": "Das heißt: Als in Ägypten die großen Pyramiden schon standen, gab's noch Mammuts.",
+"t0": 748.75,
+"t1": 752.11,
+"w": [
+[
+"Das",
+748.75
+],
+[
+"heißt:",
+748.89
+],
+[
+"Als",
+749.13
+],
+[
+"in",
+749.43
+],
+[
+"Ägypten",
+749.54
+],
+[
+"die",
+749.81
+],
+[
+"großen",
+749.95
+],
+[
+"Pyramiden",
+750.19
+],
+[
+"schon",
+750.53
+],
+[
+"standen,",
+750.74
+],
+[
+"gab's",
+751.04
+],
+[
+"noch",
+751.63
+],
+[
+"Mammuts.",
+751.8
+]
+]
+},
+{
+"p": 29,
+"s": "Verrückt, oder?",
+"t0": 752.64,
+"t1": 753.41,
+"w": [
+[
+"Verrückt,",
+752.64
+],
+[
+"oder?",
+753.19
+]
+]
+},
+{
+"p": 30,
+"s": "Noahs Augen werden schwer.",
+"t0": 753.93,
+"t1": 755.01,
+"w": [
+[
+"Noahs",
+753.93
+],
+[
+"Augen",
+754.14
+],
+[
+"werden",
+754.34
+],
+[
+"schwer.",
+754.58
+]
+]
+},
+{
+"p": 30,
+"s": "Das Feuer wird kleiner.",
+"t0": 755.54,
+"t1": 756.64,
+"w": [
+[
+"Das",
+755.54
+],
+[
+"Feuer",
+755.7
+],
+[
+"wird",
+755.93
+],
+[
+"kleiner.",
+756.12
+]
+]
+},
+{
+"p": 30,
+"s": "Und dann wird alles dunkel.",
+"t0": 757.1,
+"t1": 758.34,
+"w": [
+[
+"Und",
+757.1
+],
+[
+"dann",
+757.28
+],
+[
+"wird",
+757.5
+],
+[
+"alles",
+757.72
+],
+[
+"dunkel.",
+757.99
+]
+]
+},
+{
+"p": 31,
+"s": "Piep.",
+"t0": 758.74,
+"t1": 758.98,
+"w": [
+[
+"Piep.",
+758.74
+]
+]
+},
+{
+"p": 31,
+"s": "Piep.",
+"t0": 759.49,
+"t1": 759.72,
+"w": [
+[
+"Piep.",
+759.49
+]
+]
+},
+{
+"p": 31,
+"s": "Piep.",
+"t0": 760.22,
+"t1": 760.78,
+"w": [
+[
+"Piep.",
+760.22
+]
+]
+},
+{
+"p": 31,
+"s": "Noah reißt die Augen auf.",
+"t0": 761.06,
+"t1": 761.98,
+"w": [
+[
+"Noah",
+761.06
+],
+[
+"reißt",
+761.24
+],
+[
+"die",
+761.45
+],
+[
+"Augen",
+761.59
+],
+[
+"auf.",
+761.8
+]
+]
+},
+{
+"p": 31,
+"s": "Sein Wecker.",
+"t0": 762.37,
+"t1": 762.96,
+"w": [
+[
+"Sein",
+762.37
+],
+[
+"Wecker.",
+762.6
+]
+]
+},
+{
+"p": 31,
+"s": "Sein Zimmer.",
+"t0": 763.24,
+"t1": 763.81,
+"w": [
+[
+"Sein",
+763.24
+],
+[
+"Zimmer.",
+763.46
+]
+]
+},
+{
+"p": 31,
+"s": "Sein Bett.",
+"t0": 764.19,
+"t1": 764.66,
+"w": [
+[
+"Sein",
+764.19
+],
+[
+"Bett.",
+764.4
+]
+]
+},
+{
+"p": 31,
+"s": "Draußen fährt ein Auto vorbei.",
+"t0": 765.09,
+"t1": 766.25,
+"w": [
+[
+"Draußen",
+765.09
+],
+[
+"fährt",
+765.39
+],
+[
+"ein",
+765.61
+],
+[
+"Auto",
+765.76
+],
+[
+"vorbei.",
+765.95
+]
+]
+},
+{
+"p": 31,
+"s": "Er greift nach seinem Handy – es ist da.",
+"t0": 766.61,
+"t1": 768.39,
+"w": [
+[
+"Er",
+766.61
+],
+[
+"greift",
+766.7
+],
+[
+"nach",
+766.91
+],
+[
+"seinem",
+767.05
+],
+[
+"Handy",
+767.26
+],
+[
+"–",
+767.44
+],
+[
+"es",
+767.5
+],
+[
+"ist",
+767.58
+],
+[
+"da.",
+768.27
+]
+]
+},
+{
+"p": 31,
+"s": "Alles wieder normal.",
+"t0": 768.92,
+"t1": 769.65,
+"w": [
+[
+"Alles",
+768.92
+],
+[
+"wieder",
+769.09
+],
+[
+"normal.",
+769.43
+]
+]
+},
+{
+"p": 31,
+"s": "Er schaut auf seine Hand.",
+"t0": 770.45,
+"t1": 771.22,
+"w": [
+[
+"Er",
+770.45
+],
+[
+"schaut",
+770.54
+],
+[
+"auf",
+770.75
+],
+[
+"seine",
+770.86
+],
+[
+"Hand.",
+771.04
+]
+]
+},
+{
+"p": 31,
+"s": "Moment mal…",
+"t0": 771.85,
+"t1": 772.35,
+"w": [
+[
+"Moment",
+771.85
+],
+[
+"mal…",
+772.2
+]
+]
+},
+{
+"p": 31,
+"s": "ist da ein kleiner Schnitt am Finger?",
+"t0": 772.9,
+"t1": 774.44,
+"w": [
+[
+"ist",
+772.9
+],
+[
+"da",
+773.06
+],
+[
+"ein",
+773.18
+],
+[
+"kleiner",
+773.35
+],
+[
+"Schnitt",
+773.67
+],
+[
+"am",
+773.99
+],
+[
+"Finger?",
+774.12
+]
+]
+},
+{
+"p": 32,
+"s": "Na, was meinst du?",
+"t0": 774.8,
+"t1": 775.79,
+"w": [
+[
+"Na,",
+774.8
+],
+[
+"was",
+775.01
+],
+[
+"meinst",
+775.22
+],
+[
+"du?",
+775.58
+]
+]
+},
+{
+"p": 32,
+"s": "Hättest du einen Tag in der Steinzeit überlebt?",
+"t0": 776.39,
+"t1": 778.38,
+"w": [
+[
+"Hättest",
+776.39
+],
+[
+"du",
+776.72
+],
+[
+"einen",
+776.85
+],
+[
+"Tag",
+777.09
+],
+[
+"in",
+777.26
+],
+[
+"der",
+777.38
+],
+[
+"Steinzeit",
+777.55
+],
+[
+"überlebt?",
+777.97
+]
+]
+},
+{
+"p": 32,
+"s": "Ohne Handy, ohne Heizung, aber mit einer Gruppe, die zusammenhält?",
+"t0": 779.01,
+"t1": 782.24,
+"w": [
+[
+"Ohne",
+779.01
+],
+[
+"Handy,",
+779.23
+],
+[
+"ohne",
+779.54
+],
+[
+"Heizung,",
+780.03
+],
+[
+"aber",
+780.43
+],
+[
+"mit",
+780.65
+],
+[
+"einer",
+780.83
+],
+[
+"Gruppe,",
+781.09
+],
+[
+"die",
+781.44
+],
+[
+"zusammenhält?",
+781.62
+]
+]
+},
+{
+"p": 32,
+"s": "Schreib's mir in die Kommentare.",
+"t0": 782.6,
+"t1": 783.84,
+"w": [
+[
+"Schreib's",
+782.6
+],
+[
+"mir",
+782.98
+],
+[
+"in",
+783.13
+],
+[
+"die",
+783.24
+],
+[
+"Kommentare.",
+783.39
+]
+]
+},
+{
+"p": 32,
+"s": "Und wenn du wissen willst, wie ein Tag in einer ganz anderen Zeit ausgesehen hat – dann bleib dran.",
+"t0": 784.15,
+"t1": 788.59,
+"w": [
+[
+"Und",
+784.15
+],
+[
+"wenn",
+784.31
+],
+[
+"du",
+784.51
+],
+[
+"wissen",
+784.63
+],
+[
+"willst,",
+784.91
+],
+[
+"wie",
+785.22
+],
+[
+"ein",
+785.38
+],
+[
+"Tag",
+785.54
+],
+[
+"in",
+785.7
+],
+[
+"einer",
+785.82
+],
+[
+"ganz",
+786.06
+],
+[
+"anderen",
+786.26
+],
+[
+"Zeit",
+786.58
+],
+[
+"ausgesehen",
+786.78
+],
+[
+"hat",
+787.21
+],
+[
+"–",
+787.37
+],
+[
+"dann",
+787.45
+],
+[
+"bleib",
+788.11
+],
+[
+"dran.",
+788.35
+]
+]
+},
+{
+"p": 32,
+"s": "Noah ist bestimmt bald wieder unterwegs.",
+"t0": 789.2,
+"t1": 791.28,
+"w": [
+[
+"Noah",
+789.2
+],
+[
+"ist",
+789.45
+],
+[
+"bestimmt",
+789.66
+],
+[
+"bald",
+790.11
+],
+[
+"wieder",
+790.37
+],
+[
+"unterwegs.",
+790.72
+]
+]
+}
+]

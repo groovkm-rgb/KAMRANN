@@ -168,7 +168,7 @@ function caveLights(c, cam, t, o = {}) {
   const L = [];
   for (const f of o.fires || []) {
     const fl = 1 + .09 * Math.sin(t * 9.1 + f.x) + .06 * Math.sin(t * 23 + f.x) + .04 * Math.sin(t * 3.3);
-    const [sx, sy] = w2s(cam, f.x, f.y ?? -80), r = (f.r || 1300) * cam.z * (.5 + .5 * (f.k ?? 1));
+    const [sx, sy] = w2s(cam, f.x, f.y ?? -80), r = (f.r || 1600) * cam.z * (.5 + .5 * (f.k ?? 1));
     L.push({ x: sx, y: sy, r, col: '255,140,60', a: (.85 * (f.k ?? 1) + .15) * fl }, { x: sx, y: sy, r: r * .35, col: '255,200,130', a: .5 * (f.k ?? 1) * fl });
   }
   if (o.mouth != null) { const [sx, sy] = w2s(cam, o.mouth + 380, -320); L.push({ x: sx, y: sy, r: 1500 * cam.z, col: o.mouthCol || '140,175,225', a: o.mouthA ?? .8 }, { x: sx + 80 * cam.z, y: sy - 60 * cam.z, r: 520 * cam.z, col: '255,250,245', a: (o.mouthA ?? .8) * 1.1 }); }

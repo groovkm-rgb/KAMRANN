@@ -1,0 +1,276 @@
+   0.10    3.78 p00 Stell dir vor, du machst die Augen auf – und es ist stockdunkel.
+   4.17    7.10 p00 Kein Handylicht, kein Wecker, kein Straßenlärm.
+   7.57    8.86 p00 Nur ein leises Knistern.
+   9.26   10.10 p00 Und es riecht nach Rauch.
+  10.49   11.99 p00 Genau so geht's Noah gerade.
+  12.49   17.27 p00 Er liegt auf einem Haufen Felle, über ihm hängt ein Felsdach, und drau
+  17.70   18.96 p00 Noah tastet nach seinem Handy.
+  19.23   19.74 p00 Nichts.
+  19.99   23.93 p00 Er schaut auf seine Uhr – die läuft zwar noch, aber die bringt ihm hie
+  24.22   26.30 p00 Denn Noah ist nicht mehr in seinem Zimmer.
+  26.62   32.85 p00 Er ist fünfzehntausend Jahre in der Vergangenheit gelandet.
+  33.32   35.46 p00 Mitten in der Eiszeit, irgendwo in Europa.
+  35.87   38.67 p01 Und bevor du fragst: Nein, hier laufen keine Dinosaurier rum.
+  38.84   42.07 p01 Die sind schon seit sechsundsechzig Millionen Jahren weg.
+  42.35   47.98 p01 Zwischen den letzten Dinos und den Menschen hier liegt also viel, viel
+  48.57   51.68 p01 Was es aber gibt, sind Tiere, die mindestens genauso krass sind.
+  51.98   52.66 p01 Mammuts.
+  52.83   53.82 p01 Wollnashörner.
+  54.02   54.89 p01 Höhlenlöwen.
+  55.32   57.83 p01 Und die meisten davon wird es bald nicht mehr geben.
+  58.17   60.36 p02 Okay, aber eins nach dem anderen.
+  60.76   64.07 p02 Noah setzt sich auf und merkt sofort: Boah, ist das kalt!
+  64.44   66.66 p02 Europa ist in dieser Zeit ein ganz anderer Ort.
+  66.87   72.70 p02 Riesige Gletscher bedecken den Norden, der Meeresspiegel liegt ungefäh
+  72.90   74.10 p02 Steppe, so weit das Auge reicht.
+  74.41   76.76 p02 Und im Winter wird's hier richtig brutal.
+  77.01   80.65 p03 Neben Noah liegen andere Leute, eingewickelt in Felle.
+  80.82   81.94 p03 Das ist seine Gruppe.
+  82.37   85.27 p03 Vielleicht zwanzig, dreißig Menschen.
+  85.66   87.90 p03 Eltern, Kinder, Großeltern, Tanten, Onkel.
+  88.22   89.07 p03 Mehr nicht.
+  89.35   92.45 p03 Keine Nachbarn, kein Dorf, keine Stadt.
+  92.75   94.65 p03 Die nächste Gruppe ist vielleicht Tage entfernt.
+  95.02   98.38 p03 Und diese paar Leute hier – das ist alles.
+  98.67  104.30 p03 Das ist deine Familie, dein Team, deine Versicherung und dein Krankenh
+ 104.73  107.17 p03 Wer hier alleine ist, hat verdammt schlechte Karten.
+ 107.74  110.19 p04 Eine ältere Frau hockt schon an der Feuerstelle.
+ 110.62  114.23 p04 Das Feuer ist über Nacht fast ausgegangen, nur noch ein bisschen Glut 
+ 114.66  120.88 p04 Sie legt trockenes Gras drauf, pustet vorsichtig, schiebt kleine Zweig
+ 121.31  122.54 p04 Feuer ist hier alles.
+ 122.94  128.16 p04 Es wärmt, es macht Licht, es hält wilde Tiere auf Abstand, und man kan
+ 128.67  130.86 p04 Und ja, die Leute wissen, wie man Feuer macht.
+ 131.57  135.58 p04 Zum Beispiel, indem sie einen Feuerstein gegen ein Stück Pyrit schlage
+ 135.98  136.91 p04 Das gibt Funken.
+ 137.34  140.86 p04 Aber warum der ganze Aufwand, wenn man die Glut einfach am Leben halte
+ 141.35  142.16 p04 Clever, oder?
+ 142.79  144.32 p05 Noah schaut sich die Leute genauer an.
+ 144.68  148.88 p05 Und jetzt kommt was, das viele überrascht: Die sehen eigentlich aus wi
+ 149.14  149.71 p05 Wirklich.
+ 150.15  155.29 p05 Steck einen von denen in Jeans und Hoodie, setz ihn in die U-Bahn – ke
+ 155.66  158.66 p05 Das sind moderne Menschen, Homo sapiens, genau wie du.
+ 159.18  163.17 p05 Gleiches Gehirn, gleiche Gefühle, wahrscheinlich sogar der gleiche Hum
+ 163.89  165.28 p05 Nur ein komplett anderes Leben.
+ 165.48  167.00 p06 Und die Klamotten?
+ 167.39  169.80 p06 Keine zerfetzten Lumpen wie im Film.
+ 170.56  174.72 p06 Die Leute tragen Kleidung aus Leder und Fell, richtig zugeschnitten un
+ 175.34  179.84 p06 Mit Nadeln aus Knochen, die sogar ein Öhr haben – also ein kleines Loc
+ 180.19  182.16 p06 Und als Faden nehmen sie Tiersehnen.
+ 182.53  186.33 p06 Manche Sachen sind sogar mit Perlen aus Muscheln oder Tierzähnen verzi
+ 186.76  188.20 p06 Stil hatten die also auch.
+ 188.46  189.26 p07 Dann geht's los.
+ 189.74  191.47 p07 Frühstück gibt's hier nicht einfach so.
+ 191.94  194.82 p07 Was gegessen wird, muss erst mal gefunden werden.
+ 195.30  198.30 p07 Ein Teil der Gruppe zieht los zum Sammeln, und Noah geht mit.
+ 198.87  202.81 p07 Draußen ist die Luft klar und eisig, der Boden knirscht unter den Füße
+ 203.26  209.01 p07 Die Sammler suchen Beeren, essbare Wurzeln, Nüsse, Kräuter, Vogeleier 
+ 209.72  210.81 p07 Und dafür laufen sie.
+ 211.48  211.61 p07 Viel.
+ 212.30  217.29 p07 Forscher gehen davon aus, dass Jäger und Sammler oft zehn, fünfzehn Ki
+ 217.79  218.83 p07 Ohne Turnschuhe.
+ 219.31  221.27 p07 Kein Wunder, dass die alle ziemlich fit sind.
+ 221.88  224.10 p08 Noah entdeckt einen Pilz, der richtig lecker aussieht.
+ 224.79  228.96 p08 Er will ihn gerade abreißen – da packt ihn ein Junge am Arm und schütt
+ 229.50  229.84 p08 Giftig.
+ 230.47  232.47 p08 Und genau dieses Wissen zählt hier.
+ 233.04  235.01 p08 Es gibt keine Bücher und kein Internet.
+ 235.37  238.13 p08 Alles, was man wissen muss, steckt in den Köpfen der Leute.
+ 238.52  240.82 p08 Welche Pflanze heilt und welche tötet.
+ 241.22  242.82 p08 Wann welche Beeren reif sind.
+ 243.25  244.59 p08 Wohin die Tiere im Frühling ziehen.
+ 245.22  247.93 p08 Das wird von Generation zu Generation weitererzählt.
+ 248.35  250.76 p08 Und wer das nicht weiß, überlebt hier nicht lange.
+ 251.40  254.24 p09 Zurück am Lager sitzt ein Mann auf einem Stein und arbeitet an etwas.
+ 254.73  258.35 p09 Er hält einen Feuerstein in der einen Hand und schlägt mit einem Stück
+ 258.73  259.55 p09 Ganz gezielt.
+ 259.87  260.38 p09 Klack.
+ 260.54  261.11 p09 Klack.
+ 261.38  263.38 p09 Und plötzlich splittert eine lange, dünne Klinge ab.
+ 263.71  266.92 p09 Die ist so scharf, dass sie locker mit manchem Küchenmesser mithalten 
+ 267.59  268.68 p09 Noah will's auch mal probieren.
+ 269.07  273.65 p09 Er nimmt einen Stein, holt aus, schlägt zu – und schneidet sich prompt
+ 274.05  275.34 p09 Die anderen lachen sich kaputt.
+ 275.99  277.80 p09 Willkommen in der Steinzeit, Noah.
+ 278.29  284.14 p10 Aus diesen Klingen machen sie alles Mögliche: Messer, Schaber für Fell
+ 284.83  288.09 p10 Und sie haben noch eine richtig geniale Erfindung: die Speerschleuder.
+ 288.73  290.83 p10 Das ist ein Stock mit einem Haken am Ende.
+ 291.34  295.69 p10 Da legt man den Speer ein und schleudert ihn – fast so, als hätte man 
+ 296.07  300.27 p10 Damit fliegt der Speer viel schneller und viel weiter, als wenn man ih
+ 300.85  302.65 p10 Und genau die wird heute gebraucht.
+ 303.21  304.78 p10 Denn heute wird gejagt.
+ 305.15  306.29 p11 Die Jäger machen sich fertig.
+ 306.61  307.60 p11 Noah darf mit.
+ 308.00  309.99 p11 Aber nur, wenn er die Klappe hält.
+ 310.67  312.70 p11 Sie ziehen los, raus in die Steppe.
+ 313.12  316.34 p11 Und was Noah da sieht, verschlägt ihm komplett die Sprache.
+ 316.36  319.27 p12 In der Ferne zieht eine riesige Herde Rentiere vorbei.
+ 319.57  321.79 p12 Hunderte Tiere, vielleicht sogar tausende.
+ 322.16  325.23 p12 Rentiere sind für die Menschen in dieser Zeit das Wichtigste überhaupt
+ 325.68  331.07 p12 Von denen gibt's Fleisch, Fell für Kleidung und Zelte, Sehnen für Fäde
+ 331.45  332.67 p12 Fast nichts wird weggeworfen.
+ 332.92  334.22 p13 Daneben grasen Wildpferde.
+ 334.42  336.21 p13 Klein, stämmig, mit dichtem Fell.
+ 336.59  341.93 p13 Etwas weiter weg stehen ein paar Steppenbisons, gewaltige Tiere mit Hö
+ 342.28  347.47 p13 Und dann – Noah bleibt fast das Herz stehen – tauchen hinter einem Hüg
+ 347.72  349.00 p13 Wollhaarmammuts.
+ 349.29  357.32 p13 Ungefähr so groß wie ein afrikanischer Elefant, aber mit dichtem, brau
+ 357.68  359.82 p13 So ein Mammut frisst fast den ganzen Tag.
+ 360.16  363.33 p13 Gras, Kräuter, Zweige – weit über hundert Kilo am Tag.
+ 363.71  367.38 p14 Und dann ist da noch ein Tier, das aussieht wie aus einem Fantasyfilm.
+ 367.53  368.56 p14 Ein Wollnashorn.
+ 368.85  375.42 p14 Ein Nashorn mit dickem, zotteligem Fell und einem langen, flachen Horn
+ 376.06  380.20 p14 Wahrscheinlich hat es damit den Schnee zur Seite geschoben, um an das 
+ 380.57  382.90 p14 Mit so einem Tier legt man sich besser nicht an.
+ 383.47  384.22 p14 Auch nicht als Jäger.
+ 384.64  386.79 p15 Und am Horizont, nur ganz kurz, ein Riesenhirsch.
+ 387.39  391.56 p15 Ein Hirsch mit einem Geweih, das von einer Spitze zur anderen bis zu d
+ 391.75  393.01 p15 Stell dir das mal vor.
+ 393.32  394.20 p15 Dreieinhalb Meter.
+ 394.57  395.31 p15 Auf dem Kopf.
+ 395.74  397.90 p16 Die Jäger interessieren sich heute aber für die Rentiere.
+ 398.29  401.65 p16 Sie schleichen sich an, gegen den Wind, damit die Tiere sie nicht riec
+ 402.01  402.71 p16 Sie gehen in die Hocke.
+ 403.10  404.04 p16 Keiner sagt ein Wort.
+ 404.42  405.49 p16 Nur Handzeichen.
+ 406.21  407.03 p16 Noah hält die Luft an.
+ 407.52  411.54 p16 Ein Jäger hebt die Speerschleuder, holt aus, wirft – und daneben.
+ 411.97  413.89 p16 Die Herde schreckt auf und galoppiert davon.
+ 414.32  415.44 p16 Die Jäger fluchen leise.
+ 415.81  416.55 p16 So ist das eben.
+ 417.05  418.26 p16 Nicht jede Jagd klappt.
+ 418.70  421.04 p16 Manchmal kommen die Jäger tagelang mit leeren Händen zurück.
+ 421.50  424.68 p16 Und dann gibt's eben nur das, was die Sammler gefunden haben.
+ 425.26  426.48 p17 Aber heute haben sie Glück.
+ 426.90  428.50 p17 Sie folgen der Herde ein ganzes Stück.
+ 428.93  432.92 p17 Ein paar Tiere bleiben zurück, die Jäger kreisen sie ein, und diesmal 
+ 433.41  434.51 p17 Ein Rentier geht zu Boden.
+ 435.01  437.94 p17 Einer der Jäger kniet sich hin und legt kurz die Hand auf das Tier.
+ 438.41  440.82 p17 Was genau die Menschen damals gedacht haben, wissen wir nicht.
+ 441.32  443.96 p17 Aber ohne diese Tiere hätte es sie selbst nicht gegeben.
+ 444.51  447.19 p18 Auf dem Rückweg merkt Noah plötzlich, dass etwas nicht stimmt.
+ 447.86  449.51 p18 Die Jäger bleiben wie angewurzelt stehen.
+ 450.12  451.82 p18 Am Rand eines Gebüschs bewegt sich was.
+ 452.20  453.05 p18 Ein Höhlenlöwe.
+ 453.37  457.44 p18 Größer als die Löwen von heute, mit hellem Fell und wahrscheinlich ohn
+ 457.65  458.88 p18 Er hat das Rentier gerochen.
+ 459.16  460.80 p18 Einen langen Moment passiert gar nichts.
+ 461.14  465.00 p18 Dann rücken die Jäger dicht zusammen, heben die Speere, machen sich gr
+ 465.44  466.57 p18 Und der Löwe dreht ab.
+ 466.86  467.13 p18 Puh.
+ 467.64  470.02 p18 Das war knapp.
+ 470.46  472.70 p18 Gegen eine Gruppe, die zusammenhält, hat selbst so ein Raubtier wenig 
+ 473.11  477.63 p18 Und genau das ist das Geheimnis der Menschen in dieser Zeit: Allein bi
+ 478.15  479.84 p18 Zusammen seid ihr stark.
+ 480.25  482.39 p19 Zurück im Lager wird das Rentier zerlegt.
+ 482.57  484.06 p19 Jeder hat seine Aufgabe.
+ 484.39  489.55 p19 Das Fell wird abgezogen, das Fleisch geschnitten, die Knochen werden a
+ 490.04  494.29 p19 Das ist nämlich richtig nahrhaft und fettig, und Fett ist in der Kälte
+ 494.69  496.44 p19 Das Fleisch brutzelt über dem Feuer.
+ 496.85  498.46 p19 Und dann wird geteilt.
+ 498.76  499.95 p19 Und zwar mit allen.
+ 500.40  502.93 p19 Auch mit denen, die heute nichts gefunden haben.
+ 503.34  505.69 p19 Denn morgen kann's genau andersrum sein.
+ 506.25  507.84 p20 Noah beißt in sein Stück Fleisch.
+ 508.11  510.13 p20 Kein Salz, keine Soße, kein Ketchup.
+ 510.58  511.56 p20 Aber mal ehrlich?
+ 512.04  515.15 p20 Nach so einem Tag schmeckt das wie das beste Essen der Welt.
+ 515.64  519.72 p21 Und während alle essen, fällt Noah ein Tier auf, das ruhig am Rand des
+ 520.06  521.16 p21 Es sieht aus wie ein Wolf.
+ 521.72  522.52 p21 Aber es knurrt nicht.
+ 523.05  525.21 p21 Es wartet einfach, ob was für es abfällt.
+ 525.70  526.71 p21 Und das ist kein Zufall.
+ 527.28  530.65 p21 Ungefähr in dieser Zeit beginnt die Freundschaft zwischen Mensch und H
+ 530.89  536.54 p21 In Bonn-Oberkassel, also bei uns in Deutschland, hat man ein Grab gefu
+ 537.16  539.29 p21 Darin liegen zwei Menschen – und ein Hund.
+ 539.78  542.53 p21 Und jetzt kommt's: Der Hund war als Welpe schwer krank.
+ 542.98  545.85 p21 Er hat nur überlebt, weil die Menschen ihn wochenlang gepflegt haben.
+ 546.26  549.80 p21 Das heißt: Schon damals hatten die Leute ihre Hunde richtig lieb.
+ 550.16  551.35 p22 Langsam wird es dunkel.
+ 551.96  555.97 p22 Und jetzt kommt der Teil des Tages, der Noah am meisten überrascht.
+ 556.78  557.97 p22 Alle setzen sich ums Feuer.
+ 558.52  560.91 p22 Ein alter Mann fängt an, eine Geschichte zu erzählen.
+ 561.46  566.34 p22 Über eine große Jagd von früher, über die Vorfahren, über die Tiere.
+ 566.58  568.37 p22 Die Kinder hören mit großen Augen zu.
+ 568.83  570.87 p22 Dann holt jemand eine kleine Flöte raus.
+ 571.42  574.05 p22 Gemacht aus einem Vogelknochen, mit Löchern drin.
+ 574.55  575.65 p22 Und spielt eine Melodie.
+ 576.36  578.01 p22 Und ja, das gab's wirklich.
+ 578.34  585.47 p22 In der Höhle Hohle Fels auf der Schwäbischen Alb hat man eine Flöte au
+ 586.12  589.11 p22 Damit gehört sie zu den ältesten Musikinstrumenten der Welt.
+ 589.55  591.87 p22 Musik ist also viel, viel älter, als die meisten denken.
+ 592.60  594.98 p23 Dann nimmt eine junge Frau etwas rote Farbe.
+ 595.38  596.79 p23 Ocker, vermischt mit Wasser.
+ 597.37  600.63 p23 Sie drückt ihre Hand an die Felswand und pustet die Farbe drumherum.
+ 601.17  604.21 p23 Als sie die Hand wegnimmt, bleibt ein Handabdruck an der Wand zurück.
+ 604.62  606.71 p23 Daneben malt sie mit Holzkohle ein Pferd.
+ 607.14  611.11 p23 Nur ein paar Striche, aber so lebendig, dass man fast denkt, es läuft 
+ 611.66  615.39 p23 Solche Bilder findet man bis heute in Höhlen in Frankreich und Spanien
+ 615.54  619.43 p23 Die Malereien in der Höhle von Lascaux zum Beispiel sind rund siebzehn
+ 619.78  625.91 p23 Und die Leute von damals würden wahrscheinlich staunen, dass wir heute
+ 626.50  627.93 p24 Noah legt seine Hand daneben.
+ 628.38  630.69 p24 Ein Abdruck aus der Zukunft, sozusagen.
+ 631.18  638.32 p25 Und jetzt mal zu einem Mythos, den du bestimmt kennst: Die Steinzeitme
+ 638.65  639.02 p25 Na ja.
+ 639.45  639.96 p25 Nicht ganz.
+ 640.54  644.12 p25 Die durchschnittliche Lebenserwartung war tatsächlich niedrig.
+ 644.29  647.47 p25 Aber das lag vor allem daran, dass sehr viele Kinder sehr früh gestorb
+ 647.79  651.48 p25 Wer die Kindheit überlebt hat, konnte durchaus fünfzig, sechzig oder s
+ 651.77  653.29 p25 Und die Alten waren super wichtig.
+ 653.65  654.45 p25 Die hatten das Wissen.
+ 654.70  657.61 p25 Die wussten, wo man in einem harten Winter noch Wasser findet.
+ 657.90  659.29 p25 Die wussten, welche Pflanzen helfen.
+ 659.65  662.09 p25 Die waren sozusagen das lebende Internet der Gruppe.
+ 662.47  664.86 p26 Draußen ist es jetzt richtig dunkel.
+ 665.20  667.44 p26 Keine Straßenlaternen, kein Licht in irgendeinem Fenster.
+ 668.04  668.55 p26 Nur das Feuer.
+ 669.07  671.75 p26 Und darüber ein Sternenhimmel, wie Noah ihn noch nie gesehen hat.
+ 672.21  673.07 p26 Tausende Sterne.
+ 673.38  676.23 p26 Die Milchstraße zieht sich klar und hell über den ganzen Himmel.
+ 676.46  679.79 p26 Ohne Lichtverschmutzung sieht die Nacht einfach komplett anders aus.
+ 680.10  682.73 p27 Und dann – aus der Ferne – ein Heulen.
+ 683.24  683.82 p27 Wölfe.
+ 684.44  685.97 p27 Die Kinder rücken näher ans Feuer.
+ 686.33  688.22 p27 Zwei Männer bleiben wach und halten Wache.
+ 688.62  690.11 p27 Sie legen immer wieder Holz nach.
+ 690.48  692.04 p27 Die anderen kuscheln sich unter die Felle.
+ 692.43  694.06 p27 Eng aneinander, damit keiner friert.
+ 694.45  695.32 p27 Noah liegt mittendrin.
+ 695.82  700.04 p27 Er hört das Knistern, das ruhige Atmen der anderen und irgendwo drauße
+ 700.51  701.13 p28 Und er denkt nach.
+ 701.80  704.18 p28 Diese Menschen haben nichts von dem, was wir heute haben.
+ 704.68  708.51 p28 Kein Handy, keine Heizung, keinen Supermarkt, keinen Arzt.
+ 708.85  710.26 p28 Jeder Tag kann gefährlich werden.
+ 710.68  711.64 p28 Aber sie haben einander.
+ 712.08  715.91 p28 Sie lachen, sie teilen, sie erzählen Geschichten, sie machen Musik, si
+ 716.33  718.29 p28 Eigentlich sind sie gar nicht so anders als wir.
+ 718.67  722.93 p29 Und viele der Tiere, die Noah heute gesehen hat, sind bald verschwunde
+ 723.28  727.68 p29 Das Wollnashorn, der Höhlenlöwe, der Riesenhirsch, und in Europa auch 
+ 727.86  730.20 p29 Noch ein paar tausend Jahre, dann sind sie weg.
+ 730.71  736.60 p29 Wahrscheinlich, weil es nach der Eiszeit wärmer wurde und ihre Steppe 
+ 737.02  740.25 p29 Was davon wie viel ausgemacht hat, darüber streiten die Forscher bis h
+ 740.83  745.40 p29 Die allerletzten Mammuts lebten übrigens auf einer kleinen Insel im No
+ 745.82  748.36 p29 Und zwar bis vor ungefähr viertausend Jahren.
+ 748.75  752.11 p29 Das heißt: Als in Ägypten die großen Pyramiden schon standen, gab's no
+ 752.64  753.41 p29 Verrückt, oder?
+ 753.93  755.01 p30 Noahs Augen werden schwer.
+ 755.54  756.64 p30 Das Feuer wird kleiner.
+ 757.10  758.34 p30 Und dann wird alles dunkel.
+ 758.74  758.98 p31 Piep.
+ 759.49  759.72 p31 Piep.
+ 760.22  760.78 p31 Piep.
+ 761.06  761.98 p31 Noah reißt die Augen auf.
+ 762.37  762.96 p31 Sein Wecker.
+ 763.24  763.81 p31 Sein Zimmer.
+ 764.19  764.66 p31 Sein Bett.
+ 765.09  766.25 p31 Draußen fährt ein Auto vorbei.
+ 766.61  768.39 p31 Er greift nach seinem Handy – es ist da.
+ 768.92  769.65 p31 Alles wieder normal.
+ 770.45  771.22 p31 Er schaut auf seine Hand.
+ 771.85  772.35 p31 Moment mal…
+ 772.90  774.44 p31 ist da ein kleiner Schnitt am Finger?
+ 774.80  775.79 p32 Na, was meinst du?
+ 776.39  778.38 p32 Hättest du einen Tag in der Steinzeit überlebt?
+ 779.01  782.24 p32 Ohne Handy, ohne Heizung, aber mit einer Gruppe, die zusammenhält?
+ 782.60  783.84 p32 Schreib's mir in die Kommentare.
+ 784.15  788.59 p32 Und wenn du wissen willst, wie ein Tag in einer ganz anderen Zeit ausg
+ 789.20  791.28 p32 Noah ist bestimmt bald wieder unterwegs.

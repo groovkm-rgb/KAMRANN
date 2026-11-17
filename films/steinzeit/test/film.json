@@ -1,0 +1,2 @@
+{ "title": "test", "slug": "test", "fps": 30,
+  "modules": ["../lib/noah.js", "../lib/light.js", "../lib/stone-age.js", "../lib/forest.js", "../lib/cave.js", "../lib/animals.js", "../lib/fonts.js", "../lib/fx.js", "../lib/cave2.js", "../lib/tribe.js", "../lib/noah-era.js", "../lib/room.js", "../lib/fauna.js", "../lib/steppe.js", "test.js"] }
