@@ -1,0 +1,6 @@
+{
+  "title": "Noah wakes up in the Stone Age",
+  "slug": "stone-age-wakeup",
+  "fps": 30,
+  "modules": ["../../.claude/skills/noah-character/noah.js", "../../.claude/skills/noah-character/places/light.js", "../../.claude/skills/noah-character/places/stone-age.js", "../../.claude/skills/noah-character/places/forest.js", "../../.claude/skills/noah-character/places/cave.js", "scenes.js"]
+}
