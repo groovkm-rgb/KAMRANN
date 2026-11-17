@@ -32,8 +32,11 @@ Talk to the user in Turkish. Code comments in English. On-screen text is always 
 - **Never change Noah's proportions** in `NOAH` / `noahHeadLocal` / `NOAH_SIDE` to fit a scene. Outfits and the
   primitive look are separate layers on top. After any edit to the rig, compare it next to `reference.jpg`
   (front crop `(110,20,280,420)`, side crop `(360,20,530,420)`, both ×4) and fix differences, not the reference.
-- Before new features or big changes to this skill, show the user samples and wait for approval, then update
-  this file.
+- **Do not render videos unless the user explicitly asks for a video** (the user's rule). Samples, tests,
+  new places/features and changes are shown as **PNG stills** only. Render an MP4 only when the user's own message
+  asks for a video ("video yap", "video üret", "… saniyelik video"); if unsure, show stills and ask.
+- Before new features or big changes to this skill, show the user samples (stills) and wait for approval, then
+  update this file.
 
 ## Workflow
 
@@ -56,9 +59,11 @@ Talk to the user in Turkish. Code comments in English. On-screen text is always 
 3. Build with the toon-shorts engine: `node <toon-shorts>/scripts/build_film.mjs films/<slug>`.
 4. Look at stills: `node .claude/skills/noah-character/scripts/render169.cjs films/<slug> 0.5 2.1 4.3`
    (PNGs in `films/<slug>/stills/`). Check faces, framing, light, detail; fix; repeat 2–4 times.
-5. Render: `node .claude/skills/noah-character/scripts/render169.cjs films/<slug> --mp4 films/<slug>/<slug>.mp4`
-   (prints an ffprobe line: 1920x1080, exact frame count, no audio).
-6. Send the MP4 to the user, describe each shot and what you checked/fixed, and say what you did not verify.
+5. **Only if the user asked for a video:** render
+   `node .claude/skills/noah-character/scripts/render169.cjs films/<slug> --mp4 films/<slug>/<slug>.mp4`
+   (prints an ffprobe line: 1920x1080, exact frame count, no audio). Otherwise stop at step 4.
+6. Send the stills (or the MP4 when one was asked for) to the user, describe each shot and what you checked/fixed,
+   and say what you did not verify.
 
 `scenes.js` uses the toon-shorts frame object (`set`, `setOpts`, `cam`, `behind`, `front`, `fx`, `screen`, `vignette`,
 `fadeIn/fadeOut`) and helpers (`ease`, `seg`, `bump`, `lerp`, `clamp`, `rnd`, `CAM.mix`, `FX.zzz`, `FX.smoke`…).
