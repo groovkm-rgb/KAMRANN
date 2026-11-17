@@ -1,0 +1,262 @@
+{
+ "duration": 50.233458,
+ "frames30": 1507,
+ "source": "silence-align (cost 4.57)",
+ "segments": [
+  [
+   0.120385,
+   0.737234
+  ],
+  [
+   1.03678,
+   3.07383
+  ],
+  [
+   3.57345,
+   4.71737
+  ],
+  [
+   5.12472,
+   6.16211
+  ],
+  [
+   6.53678,
+   7.25923
+  ],
+  [
+   7.7627,
+   8.07458
+  ],
+  [
+   8.28327,
+   8.37265
+  ],
+  [
+   8.73673,
+   10.0453
+  ],
+  [
+   10.6276,
+   11.8797
+  ],
+  [
+   12.0583,
+   13.0371
+  ],
+  [
+   13.5042,
+   13.7935
+  ],
+  [
+   14.4289,
+   15.2847
+  ],
+  [
+   15.657,
+   16.7698
+  ],
+  [
+   17.055,
+   18.1042
+  ],
+  [
+   18.2368,
+   19.1433
+  ],
+  [
+   19.5287,
+   21.7288
+  ],
+  [
+   22.0679,
+   22.972
+  ],
+  [
+   23.3645,
+   25.6467
+  ],
+  [
+   26.0572,
+   28.3973
+  ],
+  [
+   28.7925,
+   30.0434
+  ],
+  [
+   30.5215,
+   31.1151
+  ],
+  [
+   31.2977,
+   31.859
+  ],
+  [
+   32.1565,
+   34.153
+  ],
+  [
+   34.536,
+   36.1365
+  ],
+  [
+   36.7422,
+   37.3932
+  ],
+  [
+   37.7391,
+   39.5058
+  ],
+  [
+   39.7671,
+   41.6606
+  ],
+  [
+   42.0097,
+   43.8277
+  ],
+  [
+   44.3394,
+   47.1851
+  ],
+  [
+   47.4341,
+   47.7881
+  ],
+  [
+   48.0063,
+   49.0599
+  ],
+  [
+   49.1999,
+   49.8834
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Drei Uhr nachts.",
+   "s": 0.12,
+   "e": 0.737
+  },
+  {
+   "text": "Eine Frau schleicht durch eine dunkle Stra\u00dfe.",
+   "s": 1.037,
+   "e": 3.074
+  },
+  {
+   "text": "Sie hebt ein Rohr an den Mund \u2026 zielt auf ein Fenster \u2026 und pustet.",
+   "s": 3.573,
+   "e": 7.259
+  },
+  {
+   "text": "Pling!",
+   "s": 7.763,
+   "e": 8.373
+  },
+  {
+   "text": "Eine getrocknete Erbse.",
+   "s": 8.737,
+   "e": 10.045
+  },
+  {
+   "text": "Direkt gegen die Scheibe.",
+   "s": 10.628,
+   "e": 11.88
+  },
+  {
+   "text": "Eine Einbrecherin?",
+   "s": 12.058,
+   "e": 13.037
+  },
+  {
+   "text": "Nein.",
+   "s": 13.504,
+   "e": 13.793
+  },
+  {
+   "text": "Sie ist ein Wecker.",
+   "s": 14.429,
+   "e": 15.285
+  },
+  {
+   "text": "Ein menschlicher Wecker.",
+   "s": 15.657,
+   "e": 16.77
+  },
+  {
+   "text": "Wecker sind damals teuer,",
+   "s": 17.055,
+   "e": 18.104
+  },
+  {
+   "text": "und nicht jeder hat einen.",
+   "s": 18.237,
+   "e": 19.143
+  },
+  {
+   "text": "Aber wer zu sp\u00e4t in die Fabrik kommt, kriegt \u00c4rger.",
+   "s": 19.529,
+   "e": 21.729
+  },
+  {
+   "text": "Oder fliegt raus.",
+   "s": 22.068,
+   "e": 22.972
+  },
+  {
+   "text": "Also zahlen die Leute ein paar M\u00fcnzen pro Woche.",
+   "s": 23.364,
+   "e": 25.647
+  },
+  {
+   "text": "Und jeden Morgen kommt jemand und klopft ans Fenster.",
+   "s": 26.057,
+   "e": 28.397
+  },
+  {
+   "text": "Mit einem langen Stock.",
+   "s": 28.793,
+   "e": 30.043
+  },
+  {
+   "text": "Oder eben mit Erbsen.",
+   "s": 30.521,
+   "e": 31.859
+  },
+  {
+   "text": "Und er geht erst weiter, wenn du wirklich wach bist.",
+   "s": 32.157,
+   "e": 34.153
+  },
+  {
+   "text": "Aber wer weckt eigentlich \u2026 den Wecker?",
+   "s": 34.536,
+   "e": 36.136
+  },
+  {
+   "text": "Die meisten schlafen einfach tags\u00fcber.",
+   "s": 36.742,
+   "e": 39.506
+  },
+  {
+   "text": "Und es gab sogar einen Zungenbrecher dar\u00fcber:",
+   "s": 39.767,
+   "e": 41.661
+  },
+  {
+   "text": "Unser Wecker hatte einen Wecker.",
+   "s": 42.01,
+   "e": 43.828
+  },
+  {
+   "text": "Aber der Wecker vom Wecker hat unseren Wecker nicht geweckt.",
+   "s": 44.339,
+   "e": 47.788
+  },
+  {
+   "text": "Also hat unser Wecker uns nicht geweckt.",
+   "s": 48.006,
+   "e": 49.883
+  }
+ ]
+}

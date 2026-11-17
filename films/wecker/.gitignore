@@ -1,0 +1,8 @@
+frames/
+stills/
+work/v.raw
+work/*.log
+node_modules/
+mix_raw.wav
+mix.wav
+out/
