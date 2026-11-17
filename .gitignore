@@ -2,3 +2,6 @@ node_modules/
 *.webm
 /snaps/
 .DS_Store
+films/**/film.html
+films/**/film-169.html
+films/**/stills/
