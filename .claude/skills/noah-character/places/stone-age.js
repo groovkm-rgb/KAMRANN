@@ -1,5 +1,5 @@
 // STONE AGE places for Noah films (toon-shorts engine: needs layer, fs, line, ell, circle, rnd, shade, W, H).
-//   set:   stoneAgeForest  (night forest clearing, cave cliff, layered trees, ferns)   opts { tod: 'night' | 'dusk' }
+//   (the forest/cave set itself lives in forest.js: forest / stoneAgeForest)
 //   props: campfire(c, x, t, s), fireGlow(c, x, t, k), logSeat(c, x, w), rock(c, x, y, r, seed), fern(c, x, y, s, seed), bonePile(c, x)
 // stoneAgeForest(..., { tod: 'night' | 'day' | 'dusk', cave: true | false, caveX }) — with cave:false and tod:'day' it is a plain sunny forest.
 const STONE = {
@@ -23,43 +23,6 @@ function fern(c, x, y, s = 1, seed = 0, col = '#3f7a3c') {
 function rock(c, x, y, r, seed = 0, col = '#6d6a72') {
   c.beginPath(); for (let i = 0; i < 9; i++) { const a = Math.PI + i / 8 * Math.PI, rr = r * (.8 + rnd(seed + i) * .3); const px = x + Math.cos(a) * rr * 1.3, py = y + Math.sin(a) * rr; i ? c.lineTo(px, py) : c.moveTo(px, py); } c.closePath(); fs(c, col, 6);
   c.beginPath(); c.moveTo(x - r * .6, y - r * .5); c.quadraticCurveTo(x, y - r * .85, x + r * .5, y - r * .55); c.lineWidth = 5; c.strokeStyle = shade(col, .25); c.stroke();
-}
-function stoneAgeForest(c, cam, t, o = {}) {
-  const P = STONE[o.tod || 'night'];
-  c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = P.sky; c.fillRect(0, 0, W, H);
-  layer(c, cam, .1, c => {
-    c.fillStyle = P.sky2; c.fillRect(-3000, -1400, 6000, 900);
-    if ((o.tod || 'night') === 'night') { for (let i = 0; i < 70; i++) { circle(c, -1500 + rnd(i) * 3000, -2600 + rnd(i + 40) * 1900, 2 + rnd(i + 80) * 3); fs(c, '#f4f1d8'); } circle(c, 260, -2050, 95); fs(c, '#f4efd2', 6); circle(c, 225, -2075, 22); fs(c, '#e2dcbc'); circle(c, 290, -2010, 14); fs(c, '#e2dcbc'); }
-    else { circle(c, -200, -1700, 120); fs(c, (o.tod === 'day') ? '#fff3b0' : '#ffe0a0'); if (o.tod === 'day') for (let i = 0; i < 5; i++) { const x = -1200 + i * 600, y = -2100 + rnd(i + 300) * 400; for (const [dx, r] of [[0, 70], [70, 90], [150, 65]]) { circle(c, x + dx, y, r); fs(c, '#ffffff'); } } }
-  });
-  layer(c, cam, .3, c => {
-    // cave cliff with a dark opening on the left
-    for (let i = 0; i < 12; i++) stoneTree(c, -1400 + i * 240 + rnd(i) * 80, -150, 480 + rnd(i + 5) * 300, 50, P.far, P.farLeaf, i * 7, 6);
-    const cx = o.caveX ?? 250;
-    if (o.cave !== false) {
-    c.beginPath(); c.moveTo(cx - 60, -150); c.quadraticCurveTo(cx - 40, -700, cx + 250, -880); c.quadraticCurveTo(cx + 700, -1050, cx + 1200, -900); c.lineTo(cx + 2200, -900); c.lineTo(cx + 2200, -150); c.closePath(); fs(c, P.cliff, 7);
-    for (let i = 0; i < 6; i++) line(c, [cx + 120 + i * 150, -760 + rnd(i) * 80, cx + 180 + i * 150, -560 + rnd(i + 3) * 80], 5, shade(P.cliff, -.2));
-    c.beginPath(); c.moveTo(cx + 200, -150); c.quadraticCurveTo(cx + 190, -560, cx + 420, -580); c.quadraticCurveTo(cx + 640, -560, cx + 640, -150); c.closePath(); fs(c, '#120e14', 6);
-    }
-    for (let i = 0; i < 30; i++) { circle(c, -2000 + i * 140, -150, 70 + rnd(i + 50) * 40); fs(c, P.farLeaf, 5); }
-  });
-  layer(c, cam, .55, c => {
-    for (let i = 0; i < 9; i++) { if (i === 5) continue; stoneTree(c, -1500 + i * 360 + rnd(i + 20) * 120, -150, 650 + rnd(i + 25) * 300, 75, shade(P.trunk, -.25), P.midLeaf, i * 11 + 3, 7); }
-    for (let i = 0; i < 24; i++) { circle(c, -1800 + i * 160, -140, 60 + rnd(i + 90) * 50); fs(c, shade(P.midLeaf, .05), 6); }
-  });
-  layer(c, cam, .75, c => {
-    c.fillStyle = P.ground; c.fillRect(-4000, -150, 8000, 6000);
-    c.beginPath(); c.moveTo(-4000, -150); for (let x = -4000; x <= 4000; x += 90) c.lineTo(x, -150 - (x / 90 % 2 ? 22 : 0)); c.lineTo(4000, -100); c.lineTo(-4000, -100); c.closePath(); fs(c, P.grass);
-    stoneTree(c, -760, -60, 1500, 130, P.trunk, P.mid, 101, 8);
-    stoneTree(c, 900, -60, 1700, 150, P.trunk, P.mid, 131, 8);
-    for (let i = 0; i < 10; i++) fern(c, -1400 + i * 300 + rnd(i + 60) * 100, -120, .9 + rnd(i + 70) * .4, i * 5, '#3a6e38');
-    rock(c, 560, -110, 70, 3, P.rock); rock(c, -520, -100, 55, 9, P.rock);
-  });
-  layer(c, cam, 1, c => {
-    for (let i = 0; i < 40; i++) { const x = -1500 + rnd(i + 100) * 3000, y = 40 + rnd(i + 140) * 500; for (let k = -1; k <= 1; k++) line(c, [x, y, x + k * 10, y - 30], 4, P.grass); }
-    for (let i = 0; i < 18; i++) { ell(c, -1300 + rnd(i + 200) * 2600, 60 + rnd(i + 230) * 450, 14, 8); fs(c, P.rock, 3); }
-  });
-  return { base: P.ground, tint: null };
 }
 function logSeat(c, x, w = 380, h = 150) {
   rrect(c, x - w / 2, -h, w, h, h / 2); fs(c, '#6e4a2c', 8);
@@ -97,4 +60,3 @@ function spear(c, x, lean = .12, len = 900) {
   line(c, [-20, -len + 20, 20, -len - 10], 8, '#c9a46a'); line(c, [-20, -len - 10, 20, -len + 20], 8, '#c9a46a');
   c.restore();
 }
-const forestSet = (c, cam, t, o = {}) => stoneAgeForest(c, cam, t, Object.assign({ tod: 'day', cave: false }, o));

@@ -175,6 +175,7 @@ function noahLegsSitting(c, p, bare) {
   }
 }
 function drawNoah(c, p = {}) {
+  if (p.ink && !p._inked) { const W0 = NOAH.W; NOAH.W = W0 * p.ink; try { return drawNoah(c, Object.assign({}, p, { _inked: 1 })); } finally { NOAH.W = W0; } }
   if (p.outfit === 'caveman' || p.sit) return drawNoahOutfit(c, p);
   const k = p.k ?? .5, arms = Object.assign({}, NOAH.ARMS, p.arms || {}), e = p.expr || {};
   c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k);
@@ -311,6 +312,7 @@ function noahSideTorso(c, cave, s = 1) {
   c.restore();
 }
 function drawNoahSide(c, p = {}) {
+  if (p.ink && !p._inked) { const W0 = NOAH.W; NOAH.W = W0 * p.ink; try { return drawNoahSide(c, Object.assign({}, p, { _inked: 1 })); } finally { NOAH.W = W0; } }
   const k = p.k ?? .5, e = p.expr || {}, cave = p.outfit === 'caveman';
   const ph = p.walk, walking = ph !== null && ph !== undefined;
   const sw = walking ? Math.sin(ph) : 0, lift = walking ? Math.max(0, Math.cos(ph)) : 0, lift2 = walking ? Math.max(0, -Math.cos(ph)) : 0;
