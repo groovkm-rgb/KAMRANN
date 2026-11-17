@@ -217,3 +217,114 @@ function drawNoahOutfit(c, p) {
   if (armsUp) drawArms();
   c.restore(); c.restore();
 }
+
+// ======================= SIDE PROFILE (measured from the sheet's SIDE figure) =======================
+// drawNoahSide(c, { x, y, k, s: 1 | -1 (facing right / left), walk: phase rad | null, expr, outfit, armSwing, tilt, bob })
+const NOAH_SIDE = { HX: -10, HY: -1240, R: 255, HIP: [5, -520], THIGH: 215, SHIN: 215, SHOULDER: [-45, -915], LEG_W: 118 };
+function noahSideHead(c, e = {}) {
+  const S = NOAH_SIDE, cx = S.HX, cy = S.HY, R = S.R;
+  // back hair hanging behind the neck
+  c.beginPath(); c.moveTo(-60, -1300); c.lineTo(-255, -1250); c.lineTo(-248, -1090); c.lineTo(-232, -1010); c.lineTo(-212, -962); c.lineTo(-192, -1008); c.lineTo(-170, -952);
+  c.lineTo(-146, -1000); c.lineTo(-120, -962); c.lineTo(-92, -1030); c.lineTo(-60, -1150); c.closePath(); nFill(c, NOAH.hair, NOAH.W * .7);
+  // skull + chin shade
+  c.save(); c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fillStyle = NOAH.shade; c.fill(); c.clip();
+  c.beginPath(); c.arc(cx - 4, cy - 34, R - 4, 0, Math.PI * 2); c.fillStyle = NOAH.skin; c.fill(); c.restore();
+  c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); nFill(c, null);
+  // swept-back hair covering the back half of the head, curl at the front top
+  const cap = () => {
+    c.beginPath(); c.moveTo(212, -1388);
+    c.quadraticCurveTo(246, -1440, 205, -1482);
+    c.bezierCurveTo(120, -1548, -120, -1545, -218, -1432);
+    c.bezierCurveTo(-280, -1340, -272, -1180, -242, -1068);
+    c.lineTo(-218, -1028); c.lineTo(-198, -1060); c.lineTo(-174, -1018); c.lineTo(-152, -1058); c.lineTo(-130, -1026); c.lineTo(-112, -1070);
+    c.bezierCurveTo(-95, -1105, -30, -1140, 2, -1215);
+    c.bezierCurveTo(30, -1255, 10, -1290, 22, -1330);
+    c.quadraticCurveTo(28, -1385, 70, -1392);
+    c.quadraticCurveTo(140, -1400, 212, -1388); c.closePath();
+  };
+  cap(); nFill(c, NOAH.hair, NOAH.W * .8);
+  c.save(); cap(); c.clip();
+  for (let i = 0; i < 7; i++) {
+    const sx = 205 - i * 30, sy = -1400 - i * 14;
+    c.beginPath(); c.moveTo(sx, sy); c.bezierCurveTo(sx - 110, sy - 70 + i * 4, -150 - i * 8, sy - 20 + i * 10, -232 + i * 5, -1300 + i * 40);
+    c.lineWidth = i % 2 ? 6 : 4; c.strokeStyle = i % 2 ? NOAH.hairDark : NOAH.hairLight; c.lineCap = 'round'; c.stroke();
+  }
+  c.restore();
+  // face (both eyes visible, as on the sheet)
+  for (const [ex, sc] of [[122, .95], [216, .78]]) {
+    const ey = -1212;
+    if (e.eyes === 'closed') { c.beginPath(); c.moveTo(ex - 22, ey - 4); c.quadraticCurveTo(ex, ey + 18, ex + 22, ey - 4); c.lineWidth = 9; c.strokeStyle = NOAH.eye; c.lineCap = 'round'; c.stroke(); }
+    else {
+      const lid = e.lid || 0;
+      c.save(); c.beginPath(); c.rect(ex - 40, ey - 40 + lid * 70, 80, 90); c.clip();
+      c.beginPath(); c.ellipse(ex + (e.look || 0) * 5, ey, 21 * sc, 32, 0, 0, Math.PI * 2); c.fillStyle = NOAH.eye; c.fill(); c.restore();
+      if (lid > .05) nLine(c, [ex - 22, ey - 34 + lid * 68, ex + 22, ey - 34 + lid * 68], 7, NOAH.eye);
+    }
+  }
+  const bu = (e.browUp || 0) * 16;
+  c.beginPath(); c.moveTo(88, -1272 - bu); c.quadraticCurveTo(122, -1290 - bu, 155, -1276 - bu); c.lineWidth = 13; c.strokeStyle = NOAH.brow; c.lineCap = 'round'; c.stroke();
+  c.beginPath(); c.moveTo(200, -1280 - bu); c.quadraticCurveTo(222, -1292 - bu, 238, -1278 - bu); c.stroke();
+  const m = e.mouth || 'smile';
+  if (m === 'smile') { c.beginPath(); c.moveTo(92, -1098); c.quadraticCurveTo(140, -1078, 186, -1100); c.lineWidth = 9; c.strokeStyle = NOAH.out; c.stroke(); }
+  else if (m === 'soft' || m === 'flat') nLine(c, [110, -1092, 165, -1092], 8, NOAH.out);
+  else { const o = m === 'yawn' ? (e.open ?? 1) : .4; c.beginPath(); c.ellipse(145, -1088, 16 + 8 * o, 10 + 36 * o, 0, 0, Math.PI * 2); c.fillStyle = NOAH.mouthIn; c.fill(); c.lineWidth = 7; c.strokeStyle = NOAH.out; c.stroke(); }
+}
+function noahSideLeg(c, th, bend, far, cave) {
+  const S = NOAH_SIDE, [hx, hy] = S.HIP;
+  const kx = hx + Math.sin(th) * S.THIGH, ky = hy + Math.cos(th) * S.THIGH;
+  const t2 = th - bend, ax = kx + Math.sin(t2) * S.SHIN, ay = ky + Math.cos(t2) * S.SHIN;
+  const col = cave ? (far ? '#e6e2de' : NOAH.skin) : (far ? shadeHex(NOAH.pants, -.18) : NOAH.pants);
+  const w = cave ? 92 : S.LEG_W;
+  nLine(c, [hx, hy, kx, ky, ax, ay], w + NOAH.W * 2, NOAH.out); nLine(c, [hx, hy, kx, ky, ax, ay], w, col);
+  if (!cave) { c.save(); c.globalAlpha = .55; for (const o of [-24, 0, 24]) nLine(c, [hx + o, hy, kx + o, ky, ax + o, ay], 3, NOAH.stripe); c.restore(); }
+  // shoe / foot wrap, kept roughly level
+  c.save(); c.translate(ax, ay - 10); c.rotate(Math.max(-.35, Math.min(.35, t2 * .5)));
+  c.beginPath(); c.moveTo(-58, -4); c.lineTo(-60, 72); c.lineTo(122, 74); c.quadraticCurveTo(150, 62, 134, 34); c.quadraticCurveTo(95, 6, 36, -6); c.closePath();
+  nFill(c, cave ? NOAH_FUR.wrap : (far ? shadeHex(NOAH.shoe, -.2) : NOAH.shoe), NOAH.W * .9);
+  c.restore();
+}
+function noahSideArm(c, th, bend, far, cave) {
+  const [sx, sy] = NOAH_SIDE.SHOULDER;
+  const ex = sx + Math.sin(th) * NOAH.UPPER, ey = sy + Math.cos(th) * NOAH.UPPER;
+  const t2 = th + bend, wx = ex + Math.sin(t2) * NOAH.FORE, wy = ey + Math.cos(t2) * NOAH.FORE;
+  const skin = far ? '#e8e4e0' : NOAH.skin;
+  nLine(c, [sx, sy, ex, ey, wx, wy], NOAH.ARM_W + NOAH.W * 2, NOAH.out); nLine(c, [sx, sy, ex, ey, wx, wy], NOAH.ARM_W, skin);
+  if (!cave) { // sleeve
+    c.save(); c.translate(sx, sy); c.rotate(-th);
+    c.beginPath(); c.moveTo(-58, -50); c.quadraticCurveTo(0, -78, 60, -45); c.lineTo(66, 165); c.lineTo(-66, 170); c.closePath(); nFill(c, far ? shadeHex(NOAH.shirt, .08) : NOAH.shirt);
+    c.restore();
+  }
+  c.save(); c.translate(wx, wy); c.scale(.92, 1); noahHandLocal(c, -t2); c.restore();
+}
+function shadeHex(hex, k) { const n = parseInt(hex.slice(1), 16); const f = v => Math.max(0, Math.min(255, Math.round(k < 0 ? v * (1 + k) : v + (255 - v) * k))); return '#' + [n >> 16, (n >> 8) & 255, n & 255].map(f).map(v => v.toString(16).padStart(2, '0')).join(''); }
+function noahSideTorso(c, cave, s = 1) {
+  if (cave) {
+    c.beginPath(); c.moveTo(-60, -968); c.lineTo(-108, -945); c.lineTo(-112, -520); for (let i = 0; i <= 6; i++) c.lineTo(-112 + i * 36, -470 + (i % 2 ? 30 : 0)); c.lineTo(104, -520); c.lineTo(100, -935); c.lineTo(40, -968); c.closePath(); nFill(c, NOAH_FUR.fur);
+    c.save(); c.clip(); for (let i = 0; i < 9; i++) { c.beginPath(); c.ellipse(-80 + (i * 47) % 170, -900 + (i * 83) % 380, 15, 10, i, 0, Math.PI * 2); c.fillStyle = NOAH_FUR.furDark; c.fill(); } c.restore();
+    nLine(c, [-112, -560, 104, -566], 22, NOAH.out); nLine(c, [-112, -560, 104, -566], 12, '#c9a46a');
+    return;
+  }
+  c.beginPath(); c.moveTo(-60, -968); c.quadraticCurveTo(-100, -960, -108, -940); c.lineTo(-112, -515); c.lineTo(104, -515); c.lineTo(100, -930); c.quadraticCurveTo(80, -960, 40, -968); c.quadraticCurveTo(-10, -948, -60, -968); c.closePath(); nFill(c, NOAH.shirt);
+  // the lettering wraps around: only "N" and a bit of "o" show on the side
+  c.save(); c.beginPath(); c.rect(-112, -980, 216, 470); c.clip();
+  if (s < 0) { c.scale(-1, 1); noahLetters(c, -126, -760, .95); } else noahLetters(c, 140, -760, .95);
+  c.restore();
+}
+function drawNoahSide(c, p = {}) {
+  const k = p.k ?? .5, e = p.expr || {}, cave = p.outfit === 'caveman';
+  const ph = p.walk, walking = ph !== null && ph !== undefined;
+  const sw = walking ? Math.sin(ph) : 0, lift = walking ? Math.max(0, Math.cos(ph)) : 0, lift2 = walking ? Math.max(0, -Math.cos(ph)) : 0;
+  const bob = (walking ? -Math.abs(Math.cos(ph)) * 12 : 0) + (p.bob || 0);
+  const aSw = p.armSwing ?? .38;
+  c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k);
+  c.save(); c.translate(0, bob);
+  // far side limbs first
+  noahSideArm(c, walking ? aSw * sw : .05, walking ? .12 + .1 * Math.max(0, sw) : -.05, true, cave);
+  noahSideLeg(c, walking ? -.42 * sw : -.03, walking ? .7 * lift2 : 0, true, cave);
+  noahSideLeg(c, walking ? .42 * sw : .03, walking ? .7 * lift : 0, false, cave);
+  noahSideTorso(c, cave, p.s || 1);
+  c.beginPath(); c.rect(-28, -1000, 72, 50); c.fillStyle = NOAH.skin; c.fill(); nLine(c, [-28, -1000, -28, -958], 9, NOAH.out); nLine(c, [44, -1000, 44, -958], 9, NOAH.out);
+  c.save(); c.translate(0, -980); c.rotate(p.tilt || 0); c.translate(0, 980); noahSideHead(c, e); c.restore();
+  noahSideArm(c, walking ? -aSw * sw : .02, walking ? .12 + .1 * Math.max(0, -sw) : -.05, false, cave);
+  c.restore(); c.restore();
+}

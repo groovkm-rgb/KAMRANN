@@ -1,0 +1,6 @@
+{
+  "title": "Noah places demo (16:9 stills)",
+  "slug": "places-demo",
+  "fps": 30,
+  "modules": ["../../.claude/skills/noah-character/noah.js", "../../.claude/skills/noah-character/places/stone-age.js", "../../.claude/skills/noah-character/places/animals.js", "scenes.js"]
+}
