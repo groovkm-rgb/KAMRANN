@@ -13,9 +13,12 @@ Talk to the user in Turkish. Code comments in English.
   vertical toon-shorts renderer. Silent MP4 (no audio) unless the user asks otherwise.
 - **No background blur** (`blur: 0` in every frame). Depth comes from parallax layers, haze between
   layers, light and value — not from blurring.
-- **Noah is small in the world:** `k ≈ .25` (≈ 380 world units ≈ 1.75 m) with `cam.z ≈ 1–1.3` for normal
-  shots; close-ups zoom the camera (z 1.6–2.6), they do not enlarge Noah. Pass `ink: 1.8` so his outline
-  stays thick at this size. World scale for places/animals: **1 m ≈ 220 world units**.
+- **Noah's size on screen:** draw him at `k ≈ .25` (≈ 380 world units ≈ 1.75 m) so places and animals stay in
+  proportion, and frame normal shots with **`cam.z ≈ 1.3–1.4`** so he is about **45–50 % of the frame height**
+  (the user asked for him bigger than at z 1). Use `cam.z ≈ 1.0` only for wide establishing shots, and 1.7–2.6 for
+  close-ups. Never enlarge Noah with `k` to make him look bigger: zoom the camera. Track a walking Noah with the
+  camera (e.g. `cam.x = noahX + 260`). Pass `ink: 1.8` so his outline stays thick. World scale for places/animals:
+  **1 m ≈ 220 world units**.
 - **Detailed worlds:** every frame has foreground, midground and background; no bare floors or plain walls.
 - **Cinematic light, one light idea per shot** (from the user's cartoon skill): low golden sun with long
   shadows, sun shafts through trees or a cave mouth, a beam through a window with the pane projected on
