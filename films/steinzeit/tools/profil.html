@@ -1,0 +1,28 @@
+<!doctype html><html><body style="margin:0"><canvas id="film" width="1080" height="1920" style="display:none"></canvas>
+<canvas id="a" width="800" height="800"></canvas><canvas id="b" width="800" height="800"></canvas><canvas id="c" width="800" height="800"></canvas>
+<script>const FILM={fps:30};</script>
+<script src="/root/.claude/skills/synced/4717a1bd-cd09-4f93-a969-d1bc2c78004d_a8063d07-bcae-413f-ba45-94fa5cab70af/toon-shorts/assets/engine/toon.js"></script><script src="/home/user/KAMRANN/films/steinzeit/lib/noah.js"></script><script src="/home/user/KAMRANN/films/steinzeit/lib/fx.js"></script><script src="/home/user/KAMRANN/films/steinzeit/lib/noah-era.js"></script>
+<script>
+function bg(c, c1, c2, ring) {
+  const g = c.createRadialGradient(400, 360, 40, 400, 400, 560); g.addColorStop(0, c1); g.addColorStop(1, c2); c.fillStyle = g; c.fillRect(0, 0, 800, 800);
+  // time-travel motif: clock ring with ticks + soft swirl
+  c.save(); c.translate(400, 400);
+  for (let i = 0; i < 6; i++) { c.beginPath(); c.arc(0, 0, 250 + i * 34, 0, Math.PI * 2); c.lineWidth = 2; c.strokeStyle = 'rgba(255,255,255,' + (.10 - i * .012) + ')'; c.stroke(); }
+  for (let i = 0; i < 60; i++) { const a = i / 60 * Math.PI * 2, r1 = 345, r2 = i % 5 ? 358 : 380; c.beginPath(); c.moveTo(Math.cos(a) * r1, Math.sin(a) * r1); c.lineTo(Math.cos(a) * r2, Math.sin(a) * r2); c.lineWidth = i % 5 ? 3 : 7; c.strokeStyle = ring; c.lineCap = 'round'; c.stroke(); }
+  for (let i = 0; i < 70; i++) { const a = rnd(i) * Math.PI * 2, r = 120 + rnd(i + 9) * 300; c.beginPath(); c.arc(Math.cos(a) * r, Math.sin(a) * r, 1.5 + rnd(i + 3) * 3, 0, Math.PI * 2); c.fillStyle = 'rgba(255,240,200,' + (.25 + rnd(i + 5) * .5) + ')'; c.fill(); }
+  c.restore();
+}
+function noah(c, e, era, arms, tilt) {
+  c.save(); c.translate(400, 1100); const k = .61;
+  // soft glow behind the head
+  const g = c.createRadialGradient(0, -1240 * k, 60, 0, -1240 * k, 330); g.addColorStop(0, 'rgba(255,255,255,.35)'); g.addColorStop(1, 'rgba(255,255,255,0)'); c.fillStyle = g; c.fillRect(-400, -1500, 800, 800);
+  drawNoahE(c, { x: 0, y: 0, k, ink: 1.5, era, expr: e, arms, tilt });
+  noahHeadPolish(c, 0, -1240 * k, k, e, tilt || 0, { lx: .7, ly: -.5, shadow: .25, rim: .3, rimCol: '255,230,190', glint: 1, glintCol: '255,255,255' });
+  c.restore();
+}
+const A = document.getElementById('a').getContext('2d'), B = document.getElementById('b').getContext('2d'), C = document.getElementById('c').getContext('2d');
+bg(A, '#ffc65a', '#e2632a', 'rgba(90,30,10,.55)'); noah(A, { eyes: 'open', mouth: 'smile', browUp: .3, look: 0 }, 0, { l: { a: .13, b: -.08 }, r: { a: .13, b: -.08 } }, 0);
+bg(B, '#5ec8ff', '#2a3f9e', 'rgba(255,255,255,.55)'); noah(B, { eyes: 'open', mouth: 'yawn', open: .7, browUp: 1, look: .3 }, 0, { l: { a: .55, b: 2.15 }, r: { a: .55, b: 2.15 } }, -.05);
+bg(C, '#f2b56a', '#5a3a2a', 'rgba(255,230,190,.5)'); noah(C, { eyes: 'open', mouth: 'smile', browUp: .4, look: .2 }, 1, { l: { a: .13, b: -.08 }, r: { a: .5, b: 2.3 } }, .05);
+window.done = 1;
+</script></body></html>
