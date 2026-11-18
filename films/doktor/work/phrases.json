@@ -1,0 +1,233 @@
+{
+ "duration": 42.344458,
+ "frames30": 1270,
+ "source": "silence-align (cost 2.37)",
+ "segments": [
+  [
+   0.0,
+   1.66206
+  ],
+  [
+   1.86145,
+   2.9315
+  ],
+  [
+   3.22063,
+   4.72964
+  ],
+  [
+   4.9988,
+   7.58964
+  ],
+  [
+   7.83016,
+   9.13429
+  ],
+  [
+   9.39222,
+   11.2766
+  ],
+  [
+   11.513,
+   14.564
+  ],
+  [
+   14.6923,
+   15.2607
+  ],
+  [
+   15.5733,
+   16.0366
+  ],
+  [
+   16.4551,
+   18.0901
+  ],
+  [
+   18.3351,
+   19.031
+  ],
+  [
+   19.3767,
+   20.7005
+  ],
+  [
+   20.8569,
+   21.7062
+  ],
+  [
+   21.8939,
+   23.129
+  ],
+  [
+   23.4641,
+   24.2834
+  ],
+  [
+   24.613,
+   25.9547
+  ],
+  [
+   26.3695,
+   27.796
+  ],
+  [
+   28.2435,
+   29.1324
+  ],
+  [
+   29.5892,
+   32.0176
+  ],
+  [
+   32.3351,
+   34.3773
+  ],
+  [
+   34.6061,
+   35.6278
+  ],
+  [
+   35.9498,
+   37.9785
+  ],
+  [
+   38.2155,
+   38.8428
+  ],
+  [
+   39.0864,
+   39.6436
+  ],
+  [
+   40.2299,
+   41.0306
+  ],
+  [
+   41.2942,
+   41.9465
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Stell dir vor, du bist Arzt.",
+   "s": 0.0,
+   "e": 1.662
+  },
+  {
+   "text": "Vor zweihundert Jahren.",
+   "s": 1.861,
+   "e": 2.932
+  },
+  {
+   "text": "Dein erster Patient hat Fieber.",
+   "s": 3.221,
+   "e": 4.73
+  },
+  {
+   "text": "Was machst du? Ganz klar: Blut abnehmen. Viel Blut.",
+   "s": 4.999,
+   "e": 7.59
+  },
+  {
+   "text": "Oder du setzt ihm Blutegel an.",
+   "s": 7.83,
+   "e": 9.134
+  },
+  {
+   "text": "Die sollen das \u201eschlechte Blut\u201c rausholen.",
+   "s": 9.392,
+   "e": 11.277
+  },
+  {
+   "text": "Danach gehst du direkt r\u00fcber zu den Frauen, die gerade ein Baby bekommen.",
+   "s": 11.513,
+   "e": 14.564
+  },
+  {
+   "text": "H\u00e4nde waschen?",
+   "s": 14.692,
+   "e": 15.261
+  },
+  {
+   "text": "Wozu?",
+   "s": 15.573,
+   "e": 16.037
+  },
+  {
+   "text": "Vorher hast du noch an Leichen gearbeitet \u2026 aber egal.",
+   "s": 16.455,
+   "e": 19.031
+  },
+  {
+   "text": "Dann kommt ein Kollege und sagt:",
+   "s": 19.377,
+   "e": 20.701
+  },
+  {
+   "text": "Wascht euch die H\u00e4nde!",
+   "s": 20.857,
+   "e": 21.706
+  },
+  {
+   "text": "Dann sterben weniger M\u00fctter.",
+   "s": 21.894,
+   "e": 23.129
+  },
+  {
+   "text": "Und er hat recht.",
+   "s": 23.464,
+   "e": 24.283
+  },
+  {
+   "text": "Die Zahlen gehen sofort runter.",
+   "s": 24.613,
+   "e": 25.955
+  },
+  {
+   "text": "Und was machen die anderen \u00c4rzte?",
+   "s": 26.369,
+   "e": 27.796
+  },
+  {
+   "text": "Sie lachen ihn aus.",
+   "s": 28.244,
+   "e": 29.132
+  },
+  {
+   "text": "Und wenn jemand halb ertrunken aus dem Fluss gezogen wird?",
+   "s": 29.589,
+   "e": 32.018
+  },
+  {
+   "text": "Daf\u00fcr liegt am Ufer ein Notfallkoffer bereit.",
+   "s": 32.335,
+   "e": 34.377
+  },
+  {
+   "text": "Mit einem Blasebalg.",
+   "s": 34.606,
+   "e": 35.628
+  },
+  {
+   "text": "Damit pustest du dem Patienten Tabakrauch \u2026 in den Hintern.",
+   "s": 35.95,
+   "e": 38.843
+  },
+  {
+   "text": "Kein Witz.",
+   "s": 39.086,
+   "e": 39.644
+  },
+  {
+   "text": "Damals hie\u00df das:",
+   "s": 40.23,
+   "e": 41.031
+  },
+  {
+   "text": "Erste Hilfe.",
+   "s": 41.294,
+   "e": 41.947
+  }
+ ]
+}
