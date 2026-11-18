@@ -1,0 +1,23 @@
+{
+ "title": "thumb",
+ "slug": "thumb",
+ "fps": 30,
+ "modules": [
+  "../lib/noah.js",
+  "../lib/light.js",
+  "../lib/stone-age.js",
+  "../lib/cave.js",
+  "../lib/fonts.js",
+  "../lib/fx.js",
+  "../lib/cave2.js",
+  "../lib/tribe.js",
+  "../lib/noah-era.js",
+  "../lib/room.js",
+  "../lib/fauna.js",
+  "../lib/steppe.js",
+  "../lib/cards.js",
+  "../lib/timing.js",
+  "../lib/director.js",
+  "thumb.js"
+ ]
+}
