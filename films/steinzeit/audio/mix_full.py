@@ -21,7 +21,7 @@ def tw(w, n=1, after=0.0):
 def rd(p):
     w = wave.open(p); return np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
 
-voice = np.zeros(N, np.float32); v = rd('voice.wav'); voice[:len(v)] = v[:N]
+voice = np.zeros(N, np.float32); v = rd('voice_leveled.wav'); voice[:len(v)] = v[:N]
 V = np.stack([voice, voice], 1)
 act = voice_activity(V)[:N]
 vr = np.sqrt(np.mean(voice[act > .5] ** 2)); VDB = 20 * np.log10(vr)
