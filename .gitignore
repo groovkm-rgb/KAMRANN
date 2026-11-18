@@ -2,3 +2,5 @@ node_modules/
 *.webm
 /snaps/
 .DS_Store
+films/steinzeit/*.mp4
+!films/steinzeit/steinzeit_taslak_5s.mp4

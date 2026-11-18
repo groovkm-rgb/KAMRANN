@@ -172,7 +172,7 @@ scene(S(250), t => { const lt = t - S(250), cam = { x: lt * 30, y: -420, z: .6 }
   fr.screen.splice(fr.screen.length - 1, 0, c => { cardWrangel(c, t, S(250) - .1, S(252) + .5, S(254) - .2); if (lt > 0 && lt < 3.5) { /* label handled by the card */ } }); return fr; }, .45, 'S30 Wrangel', 'whip');
 
 // ---- S33: Noah close, then waving goodbye ----
-scene(S(272), t => { const cam = { x: 0, y: -262, z: 2.5 }, e = EX(t, { mouth: 'smile', browUp: .4 });
+scene(S(272), t => { const cam = { x: 0, y: -372, z: 2.0 }, e = EX(t, { mouth: 'smile', browUp: .4 });
   return roomFrame(t, cam, { tod: 'morning', front: [c => { N(c, t, { x: 0, expr: e }); polish(c, t, 0, -1240 * K, e, { lx: .8, ly: -.5 }); }], after: [c => cardFrage(c, t, S(271) - .1, S(274))] }); }, .4, 'S33 close');
 scene(S(274), t => { const cam = { x: 120, y: -360, z: 1.35 }, wave = Math.sin((t - S(274)) * 7), e = EX(t, { mouth: 'smile', browUp: .3 });
   return roomFrame(t, cam, { tod: 'morning', horse: seg(t, VO_END - .8, VO_END + .2) * (1 - seg(t, VO_END + .5, VO_END + .9)),
