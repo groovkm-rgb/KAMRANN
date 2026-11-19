@@ -1,6 +1,6 @@
 """Full soundtrack for 'Ein Tag in der Steinzeit': voice + procedural music, ambience and synced SFX, with ducking.
 Run from films/steinzeit/audio:  python3 mix_full.py  ->  full_mix.wav (48 kHz stereo, 16 bit)"""
-import json, re, wave
+import json, re, wave, os
 import numpy as np
 from scipy import signal
 from sfx import SR, rng, bp, lp, hp, smooth_env, stereo, voice_activity
@@ -369,7 +369,10 @@ gm = db(VDB - 22) / (np.sqrt(np.mean(music_d[sp0] ** 2)) + 1e-9)
 music_l = music_d * gm   # music sits ~ -22 dB under the voice while speaking
 amb_l = amb * duck(4) * quiet[:, None]
 fx_l = fx * duck(3)
-mix = V + music_l + amb_l + fx_l
+NOVOICE = bool(os.environ.get('NOVOICE'))
+if NOVOICE:  # music & effects only: no voice, no ducking (same base levels)
+    music_l = music * quiet[:, None] * gm; amb_l = amb * quiet[:, None]; fx_l = fx
+mix = (0 if NOVOICE else V) + music_l + amb_l + fx_l
 # gentle fade in/out
 fi = np.clip(np.arange(N) / (SR * .05), 0, 1); fo = np.clip((N - np.arange(N)) / (SR * 1.0), 0, 1); mix *= (fi * fo)[:, None]
 pk = np.abs(mix).max(); print('peak dBFS', round(20 * np.log10(pk), 2))
@@ -378,5 +381,5 @@ mix = np.tanh(mix * 1.05) / np.tanh(1.05) if pk > .95 else mix
 def rms_db(x, sel): return round(20 * np.log10(np.sqrt(np.mean(x[sel] ** 2)) + 1e-12), 1)
 sp = act > .5
 print('voice', rms_db(V, sp), 'music(speech)', rms_db(music_l, sp), 'amb(speech)', rms_db(amb_l, sp), 'fx(speech)', rms_db(fx_l, sp))
-w = wave.open('full_mix.wav', 'wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(mix, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
+w = wave.open('nv_mix.wav' if NOVOICE else 'full_mix.wav', 'wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(mix, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
 print('samples', N, 'dur', N / SR)
