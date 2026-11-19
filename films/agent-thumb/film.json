@@ -1,0 +1,11 @@
+{ "title": "Agent – Thumbnail", "slug": "agent-thumb", "fps": 30,
+  "modules": ["../../.claude/skills/noah-character/noah.js",
+    "../../.claude/skills/noah-character/places/light.js",
+    "../../.claude/skills/noah-character/places/stone-age.js",
+    "../../.claude/skills/noah-character/places/forest.js",
+    "../../.claude/skills/noah-character/places/city.js",
+    "../../.claude/skills/noah-character/places/office.js",
+    "../../.claude/skills/noah-character/places/fonts.js",
+    "../../.claude/skills/noah-character/places/overlays.js",
+    "../agent-kit/outfits.js", "../agent-kit/people.js", "../agent-kit/rain.js", "../agent-kit/dossier.js",
+    "../agent-kit/bedroom.js", "../agent-kit/noir.js", "../agent-kit/rooms.js", "../agent-kit/places2.js", "../agent-kit/shots.js", "scenes.js"] }
