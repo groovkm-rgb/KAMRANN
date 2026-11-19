@@ -4,3 +4,4 @@ node_modules/
 .DS_Store
 films/steinzeit/*.mp4
 !films/steinzeit/steinzeit_taslak_5s.mp4
+films/steinzeit/*.mp3

@@ -21,7 +21,7 @@ def tw(w, n=1, after=0.0):
 def rd(p):
     w = wave.open(p); return np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
 
-voice = np.zeros(N, np.float32); v = rd('voice_leveled.wav'); voice[:len(v)] = v[:N]
+voice = np.zeros(N, np.float32); v = rd(os.environ.get('VOICE', 'voice_leveled.wav')); voice[:len(v)] = v[:N]
 V = np.stack([voice, voice], 1)
 act = voice_activity(V)[:N]
 vr = np.sqrt(np.mean(voice[act > .5] ** 2)); VDB = 20 * np.log10(vr)
@@ -381,5 +381,5 @@ mix = np.tanh(mix * 1.05) / np.tanh(1.05) if pk > .95 else mix
 def rms_db(x, sel): return round(20 * np.log10(np.sqrt(np.mean(x[sel] ** 2)) + 1e-12), 1)
 sp = act > .5
 print('voice', rms_db(V, sp), 'music(speech)', rms_db(music_l, sp), 'amb(speech)', rms_db(amb_l, sp), 'fx(speech)', rms_db(fx_l, sp))
-w = wave.open('nv_mix.wav' if NOVOICE else 'full_mix.wav', 'wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(mix, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
+w = wave.open(os.environ.get('OUT') or ('nv_mix.wav' if NOVOICE else 'full_mix.wav'), 'wb'); w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(mix, -1, 1) * 32767).astype(np.int16).tobytes()); w.close()
 print('samples', N, 'dur', N / SR)
