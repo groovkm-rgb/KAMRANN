@@ -22,6 +22,24 @@ function shotA(lt, T, t) {
         c.save(); c.translate(785, 580); c.rotate(-.04); c.fillStyle = '#05060a'; c.fillRect(-12, -62, 600, 84); c.fillStyle = '#ffd34a'; c.fillRect(0, -52, 576, 64); hudText(c, '3 UHR NACHTS', 288, -2, 50, '#05060a', 'center'); c.restore();
       }] };
 }
+function shotC(lt, T, t) {
+  const v = S(150, -330, 1.25);
+  return { set: rainStreet, setOpts: { lamps: [-700, 690, 1500], seed: 3 }, cam: v, vignette: .2,
+    fx: [c => {
+      silhouette(c, cc => drawPal(cc, { look: 'follower', x: 760, k: .25, outfit: 'agent', coat: true, hat: true, s: -1 }), '#07090f', { col: 'rgba(255,200,130,.95)', off: [[-4, -3]] });
+      rainSplashes(c, 3.3, { x0: -400, x1: 1200, n: 70 });
+    }],
+    screen: [c => rainSheet(c, 3.3, { amount: 1.1, alpha: .4 }), c => noirGrade(c, 3.3, { vig: .55, grain: .3 }),
+      c => { // Noah close in the foreground (left), eyes sliding toward the man
+        c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.translate(400, 1290); c.scale(1.45, 1.45);
+        drawNoah(c, { x: 0, y: 0, k: .5, ink: 1.8, outfit: 'agent', coat: true, hat: true, expr: { lid: .12, look: .95, mouth: 'flat', browUp: .25 } });
+        c.restore();
+        c.save(); c.globalCompositeOperation = 'screen'; const g = c.createRadialGradient(900, 300, 0, 900, 300, 700); g.addColorStop(0, 'rgba(255,60,60,.12)'); g.addColorStop(1, 'rgba(255,60,60,0)'); c.fillStyle = g; c.fillRect(0, 0, W, H); c.restore();
+        bigText(c, 'ALS AGENT', 740, 250, 170, { col: '#ffffff' });
+        bigText(c, 'GEBOREN?', 740, 440, 170, { col: '#ff3b30' });
+        
+      }] };
+}
 function shotB(lt, T, t) {
   return { set: (c, cam, tt) => { ceilingNightT(c, cam, tt); return { base: '#0c0f18' }; }, cam: S(0, 0, 1), vignette: .3,
     screen: [c => noirGrade(c, 1, { vig: .6, grain: .3 }),
@@ -34,4 +52,4 @@ function shotB(lt, T, t) {
       }] };
 }
 function ceilingNightT(c, cam, t) { c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#0d111c'; c.fillRect(0, 0, W, H); layer(c, cam, .8, c => { c.fillStyle = '#151a28'; c.fillRect(-3000, -3000, 6000, 6000); blindStripes(c, -2200, -1400, 3600, 1300, 12, 120, 40, .12); }); }
-NOAH_FONTS_READY.then(() => defineFilm({ shots: [{ name: 'A', dur: 1, f: shotA }, { name: 'B', dur: 1, f: shotB }] }));
+NOAH_FONTS_READY.then(() => defineFilm({ shots: [{ name: 'A', dur: 1, f: shotA }, { name: 'B', dur: 1, f: shotB }, { name: 'C', dur: 1, f: shotC }] }));
