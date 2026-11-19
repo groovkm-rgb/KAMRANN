@@ -1,0 +1,2 @@
+{ "title": "Agent outfits", "slug": "agent-outfits", "fps": 30,
+  "modules": ["../../.claude/skills/noah-character/noah.js", "../../.claude/skills/noah-character/places/light.js", "../agent-kit/outfits.js", "../agent-kit/people.js", "scenes.js"] }

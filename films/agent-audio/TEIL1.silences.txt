@@ -1,0 +1,128 @@
+silence_start: 4.77254
+silence_end: 5.18612 | silence_duration: 0.413583
+silence_start: 12.867
+silence_end: 13.7293 | silence_duration: 0.862358
+silence_start: 15.552
+silence_end: 16.0429 | silence_duration: 0.490975
+silence_start: 18.1907
+silence_end: 18.6651 | silence_duration: 0.474354
+silence_start: 21.4464
+silence_end: 21.8995 | silence_duration: 0.453129
+silence_start: 24.369
+silence_end: 24.7757 | silence_duration: 0.406712
+silence_start: 25.9093
+silence_end: 26.2593 | silence_duration: 0.35
+silence_start: 27.9828
+silence_end: 28.3611 | silence_duration: 0.378277
+silence_start: 37.8482
+silence_end: 38.7054 | silence_duration: 0.857256
+silence_start: 41.2977
+silence_end: 42.2731 | silence_duration: 0.975374
+silence_start: 48.8291
+silence_end: 49.5163 | silence_duration: 0.687188
+silence_start: 50.8812
+silence_end: 51.2615 | silence_duration: 0.380317
+silence_start: 53.7139
+silence_end: 54.239 | silence_duration: 0.525034
+silence_start: 57.9985
+silence_end: 58.5032 | silence_duration: 0.504739
+silence_start: 59.9986
+silence_end: 60.6652 | silence_duration: 0.666621
+silence_start: 62.591
+silence_end: 63.0675 | silence_duration: 0.476463
+silence_start: 67.9464
+silence_end: 68.4131 | silence_duration: 0.466712
+silence_start: 72.1641
+silence_end: 72.576 | silence_duration: 0.411859
+silence_start: 73.6762
+silence_end: 74.0895 | silence_duration: 0.413265
+silence_start: 75.2876
+silence_end: 75.6783 | silence_duration: 0.390726
+silence_start: 87.1986
+silence_end: 87.5959 | silence_duration: 0.397302
+silence_start: 89.6282
+silence_end: 90.1109 | silence_duration: 0.482698
+silence_start: 92.4556
+silence_end: 92.8531 | silence_duration: 0.397506
+silence_start: 98.0921
+silence_end: 98.4667 | silence_duration: 0.374603
+silence_start: 100.565
+silence_end: 100.96 | silence_duration: 0.395102
+silence_start: 111.456
+silence_end: 111.874 | silence_duration: 0.418617
+silence_start: 112.795
+silence_end: 113.265 | silence_duration: 0.469977
+silence_start: 115.94
+silence_end: 116.305 | silence_duration: 0.364626
+silence_start: 122.546
+silence_end: 122.986 | silence_duration: 0.440476
+silence_start: 126.183
+silence_end: 126.793 | silence_duration: 0.609728
+silence_start: 127.232
+silence_end: 127.625 | silence_duration: 0.392857
+silence_start: 128.289
+silence_end: 128.691 | silence_duration: 0.402404
+silence_start: 129.77
+silence_end: 130.173 | silence_duration: 0.403129
+silence_start: 131.288
+silence_end: 131.832 | silence_duration: 0.544807
+silence_start: 133.162
+silence_end: 133.62 | silence_duration: 0.457166
+silence_start: 135.021
+silence_end: 135.429 | silence_duration: 0.408163
+silence_start: 135.746
+silence_end: 136.108 | silence_duration: 0.362608
+silence_start: 137.154
+silence_end: 137.619 | silence_duration: 0.465238
+silence_start: 139.085
+silence_end: 139.602 | silence_duration: 0.516213
+silence_start: 141.784
+silence_end: 142.452 | silence_duration: 0.667868
+silence_start: 144.761
+silence_end: 145.33 | silence_duration: 0.56941
+silence_start: 146.762
+silence_end: 147.163 | silence_duration: 0.400907
+silence_start: 149.12
+silence_end: 149.523 | silence_duration: 0.403401
+silence_start: 151.775
+silence_end: 152.241 | silence_duration: 0.466304
+silence_start: 154.196
+silence_end: 154.728 | silence_duration: 0.5322
+silence_start: 155.506
+silence_end: 156.028 | silence_duration: 0.521383
+silence_start: 157.075
+silence_end: 157.661 | silence_duration: 0.585669
+silence_start: 160.321
+silence_end: 160.747 | silence_duration: 0.425374
+silence_start: 164.337
+silence_end: 164.737 | silence_duration: 0.40059
+silence_start: 166.474
+silence_end: 167.099 | silence_duration: 0.62458
+silence_start: 169.998
+silence_end: 170.458 | silence_duration: 0.459932
+silence_start: 171.753
+silence_end: 172.207 | silence_duration: 0.45458
+silence_start: 175.298
+silence_end: 175.674 | silence_duration: 0.375873
+silence_start: 176.783
+silence_end: 177.347 | silence_duration: 0.563968
+silence_start: 179.383
+silence_end: 179.806 | silence_duration: 0.422993
+silence_start: 181.66
+silence_end: 182.054 | silence_duration: 0.393537
+silence_start: 186.593
+silence_end: 187.046 | silence_duration: 0.452313
+silence_start: 189.185
+silence_end: 189.748 | silence_duration: 0.563764
+silence_start: 190.604
+silence_end: 191.105 | silence_duration: 0.501111
+silence_start: 202.373
+silence_end: 202.781 | silence_duration: 0.407664
+silence_start: 208.127
+silence_end: 208.488 | silence_duration: 0.360907
+silence_start: 209.549
+silence_end: 209.942 | silence_duration: 0.392676
+silence_start: 216.1
+silence_end: 216.457 | silence_duration: 0.356961
+silence_start: 219.551
+silence_end: 220.029 | silence_duration: 0.478662

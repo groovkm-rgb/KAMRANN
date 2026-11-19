@@ -1,0 +1,196 @@
+[
+ {
+  "kind": "amb",
+  "at": 0,
+  "name": "bedroomRain",
+  "until": 21.45
+ },
+ {
+  "kind": "whoosh",
+  "at": 3.95
+ },
+ {
+  "kind": "typeRun",
+  "at": 4.1,
+  "dur": 0.4
+ },
+ {
+  "kind": "vibrate",
+  "at": 5.14,
+  "dur": 1.55
+ },
+ {
+  "kind": "vibrate",
+  "at": 7.05,
+  "dur": 1.2
+ },
+ {
+  "kind": "whooshOut",
+  "at": 7.9
+ },
+ {
+  "kind": "vibrate",
+  "at": 8.55,
+  "dur": 0.8
+ },
+ {
+  "kind": "rustle",
+  "at": 9.1
+ },
+ {
+  "kind": "rustle",
+  "at": 13.5,
+  "soft": 1
+ },
+ {
+  "kind": "heart",
+  "at": 18.6
+ },
+ {
+  "kind": "heart",
+  "at": 19.506
+ },
+ {
+  "kind": "heart",
+  "at": 20.384
+ },
+ {
+  "kind": "heart",
+  "at": 21.233
+ },
+ {
+  "kind": "amb",
+  "at": 21.45,
+  "name": "deskRoom",
+  "until": 28.9
+ },
+ {
+  "kind": "whoosh",
+  "at": 21.45
+ },
+ {
+  "kind": "drop",
+  "at": 21.67
+ },
+ {
+  "kind": "paper",
+  "at": 22
+ },
+ {
+  "kind": "heart",
+  "at": 22.058
+ },
+ {
+  "kind": "whoosh",
+  "at": 22.15,
+  "soft": 1
+ },
+ {
+  "kind": "typeRun",
+  "at": 22.7,
+  "dur": 0.7
+ },
+ {
+  "kind": "heart",
+  "at": 22.858
+ },
+ {
+  "kind": "typeRow",
+  "at": 23.4,
+  "dur": 0.45
+ },
+ {
+  "kind": "heart",
+  "at": 23.635
+ },
+ {
+  "kind": "typeRow",
+  "at": 24.15,
+  "dur": 0.45
+ },
+ {
+  "kind": "heart",
+  "at": 24.39
+ },
+ {
+  "kind": "typeRow",
+  "at": 24.9,
+  "dur": 0.45
+ },
+ {
+  "kind": "heart",
+  "at": 25.126
+ },
+ {
+  "kind": "typeRow",
+  "at": 25.6,
+  "dur": 0.45
+ },
+ {
+  "kind": "heart",
+  "at": 25.842
+ },
+ {
+  "kind": "typeRow",
+  "at": 26.3,
+  "dur": 0.45
+ },
+ {
+  "kind": "heart",
+  "at": 26.539
+ },
+ {
+  "kind": "heart",
+  "at": 27.22
+ },
+ {
+  "kind": "strike",
+  "at": 27.75
+ },
+ {
+  "kind": "strike",
+  "at": 27.84
+ },
+ {
+  "kind": "heart",
+  "at": 27.883
+ },
+ {
+  "kind": "strike",
+  "at": 27.93
+ },
+ {
+  "kind": "strike",
+  "at": 28.02
+ },
+ {
+  "kind": "strike",
+  "at": 28.11
+ },
+ {
+  "kind": "whooshOut",
+  "at": 28.35
+ },
+ {
+  "kind": "heart",
+  "at": 28.531
+ },
+ {
+  "kind": "amb",
+  "at": 28.9,
+  "name": "streetRain",
+  "until": 31
+ },
+ {
+  "kind": "heart",
+  "at": 29.164
+ },
+ {
+  "kind": "heart",
+  "at": 29.789
+ },
+ {
+  "kind": "heart",
+  "at": 30.414
+ }
+]

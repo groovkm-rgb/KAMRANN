@@ -2,3 +2,10 @@ node_modules/
 *.webm
 /snaps/
 .DS_Store
+
+# agent film: media stays local (sent to the user directly)
+films/agent-*/*.mp4
+films/agent-*/*.wav
+films/agent-*/*.mp3
+films/agent-*/film.html
+films/agent-*/stills/

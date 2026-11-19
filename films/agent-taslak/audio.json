@@ -1,0 +1,8 @@
+{ "duration": 31.0,
+  "voice": [ { "file": "../agent-audio/TEIL1.mp3", "from": 0, "to": 21.45, "at": 0 },
+             { "file": "../agent-audio/TEIL1.mp3", "from": 42.0, "to": 50.95, "at": 21.45 } ],
+  "cues": "cues.json",
+  "music": [ { "at": 0, "mood": "tension" }, { "at": 18.45, "mood": "tension", "notes": ["D3", "Eb3"], "step": 1.4 },
+             { "at": 21.45, "mood": "pulse", "boom": true, "bpm": 92 }, { "at": 28.9, "mood": "tension", "boom": true, "notes": ["A2", "D3"] } ],
+  "duck_db": -10, "music_gain": 0.55, "amb_gain": 0.6, "fx_gain": 0.45, "fade_out": 0.8,
+  "out_wav": "agent-taslak-mix.wav", "video": "agent-taslak-silent.mp4", "out_mp4": "agent-taslak.mp4" }
