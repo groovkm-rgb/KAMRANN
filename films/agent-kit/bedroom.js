@@ -77,7 +77,7 @@ function phoneUI(c, x, y, w, h, o = {}) {
       const bw = Math.max(...lines.map(l => c.measureText(l).width)) + 10 * u, bh = lines.length * 8.6 * u + 7 * u, by = y + 40 * u;
       rrect(c, x + 6 * u, by, bw, bh, 5 * u); c.fillStyle = '#2a3142'; c.fill();
       lines.forEach((l, i) => hudText(c, l, x + 11 * u, by + 9.6 * u + i * 8.6 * u, fs1, '#f4f6fa'));
-      hudText(c, '03:00', x + 6 * u + bw - 2 * u, by + bh + 4.6 * u, 3 * u, '#7d879c', 'right');
+      hudText(c, o.time || '03:00', x + 6 * u + bw - 2 * u, by + bh + 4.6 * u, 3 * u, '#7d879c', 'right');
     } else if (o.typing) { rrect(c, x + 6 * u, y + 40 * u, 20 * u, 10 * u, 5 * u); c.fillStyle = '#2a3142'; c.fill(); for (let i = 0; i < 3; i++) { circle(c, x + 11 * u + i * 5 * u, y + 45 * u, 1.3 * u); c.fillStyle = `rgba(220,226,240,${.4 + .6 * Math.max(0, Math.sin(t * 8 - i))})`; c.fill(); } }
     c.fillStyle = '#161b26'; c.fillRect(x, y + h - 16 * u, w, 16 * u); rrect(c, x + 6 * u, y + h - 13 * u, 74 * u, 8 * u, 4 * u); c.fillStyle = '#232a38'; c.fill(); hudText(c, 'Nachricht', x + 11 * u, y + h - 7.6 * u, 3.6 * u, '#6d7890');
     circle(c, x + 89 * u, y + h - 9 * u, 4.6 * u); c.fillStyle = '#3a4a78'; c.fill();

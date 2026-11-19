@@ -1,0 +1,12 @@
+{ "duration": 220.03,
+  "voice": [ { "file": "../agent-audio/TEIL1.mp3", "at": 0 } ],
+  "cues": "cues.json",
+  "music": [ { "at": 0, "mood": "tension" }, { "at": 21.45, "mood": "warm" }, { "at": 27.86, "mood": "tension" },
+             { "at": 42.0, "mood": "pulse", "boom": true, "bpm": 92 }, { "at": 49.38, "mood": "tension", "boom": true },
+             { "at": 60.6, "mood": "tension", "notes": ["F3", "E3", "D3"] }, { "at": 90.1, "mood": "pulse", "bpm": 84 },
+             { "at": 111.8, "mood": "pulse", "bpm": 92, "boom": true }, { "at": 126.7, "mood": "tension" },
+             { "at": 131.8, "mood": "pulse", "bpm": 108 }, { "at": 139.4, "mood": "tension" }, { "at": 166.4, "mood": "pulse", "bpm": 96 },
+             { "at": 172.15, "mood": "tension", "notes": ["D3", "Eb3"], "step": 1.3 }, { "at": 186.0, "mood": "tension", "notes": ["A2", "D3", "F3"] },
+             { "at": 202.7, "mood": "warm" }, { "at": 216.3, "mood": "melancholy" } ],
+  "duck_db": -10, "music_gain": 0.55, "amb_gain": 0.6, "fx_gain": 0.45, "fade_out": 0.4,
+  "out_wav": "agent-teil1-mix.wav", "video": "agent-teil1-silent.mp4", "out_mp4": "agent-teil1.mp4" }

@@ -9,3 +9,4 @@ films/agent-*/*.wav
 films/agent-*/*.mp3
 films/agent-*/film.html
 films/agent-*/stills/
+films/agent-*/render.log

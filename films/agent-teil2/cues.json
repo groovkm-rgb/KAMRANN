@@ -1,0 +1,1430 @@
+[
+ {
+  "kind": "amb",
+  "at": 0,
+  "name": "office",
+  "until": 41.62
+ },
+ {
+  "kind": "keys",
+  "at": 9
+ },
+ {
+  "kind": "paper",
+  "at": 11,
+  "gain": 0.6
+ },
+ {
+  "kind": "paper",
+  "at": 11.9,
+  "gain": 0.6
+ },
+ {
+  "kind": "paper",
+  "at": 12.8,
+  "gain": 0.6
+ },
+ {
+  "kind": "paper",
+  "at": 13.7,
+  "gain": 0.6
+ },
+ {
+  "kind": "paper",
+  "at": 14.6,
+  "gain": 0.6
+ },
+ {
+  "kind": "paper",
+  "at": 15.5,
+  "gain": 0.6
+ },
+ {
+  "kind": "keys",
+  "at": 18.4
+ },
+ {
+  "kind": "keys",
+  "at": 20.76
+ },
+ {
+  "kind": "keys",
+  "at": 22.38
+ },
+ {
+  "kind": "whoosh",
+  "at": 25.62
+ },
+ {
+  "kind": "drop",
+  "at": 25.87
+ },
+ {
+  "kind": "paper",
+  "at": 26.17
+ },
+ {
+  "kind": "whoosh",
+  "at": 26.32,
+  "soft": 1
+ },
+ {
+  "kind": "typeRun",
+  "at": 26.9,
+  "dur": 0.6
+ },
+ {
+  "kind": "typeRow",
+  "at": 27.6,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 28.3,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 29,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 29.7,
+  "dur": 0.3
+ },
+ {
+  "kind": "stamp",
+  "at": 30.6
+ },
+ {
+  "kind": "whooshOut",
+  "at": 33.15
+ },
+ {
+  "kind": "ding",
+  "at": 37.3
+ },
+ {
+  "kind": "vibrate",
+  "at": 42,
+  "dur": 1.9
+ },
+ {
+  "kind": "amb",
+  "at": 47.98,
+  "name": "kitchen",
+  "until": 62.42
+ },
+ {
+  "kind": "kiss",
+  "at": 56.2
+ },
+ {
+  "kind": "amb",
+  "at": 62.42,
+  "name": "station",
+  "until": 82.88
+ },
+ {
+  "kind": "step",
+  "at": 62.6,
+  "surf": "marble"
+ },
+ {
+  "kind": "step",
+  "at": 63.15,
+  "surf": "marble"
+ },
+ {
+  "kind": "step",
+  "at": 63.7,
+  "surf": "marble"
+ },
+ {
+  "kind": "step",
+  "at": 64.25,
+  "surf": "marble"
+ },
+ {
+  "kind": "step",
+  "at": 64.8,
+  "surf": "marble"
+ },
+ {
+  "kind": "step",
+  "at": 65.35,
+  "surf": "marble"
+ },
+ {
+  "kind": "step",
+  "at": 65.9,
+  "surf": "marble"
+ },
+ {
+  "kind": "step",
+  "at": 66.45,
+  "surf": "marble"
+ },
+ {
+  "kind": "lock",
+  "at": 67.3
+ },
+ {
+  "kind": "locker",
+  "at": 67.5
+ },
+ {
+  "kind": "envelope",
+  "at": 69.6
+ },
+ {
+  "kind": "paper",
+  "at": 71.6
+ },
+ {
+  "kind": "paper",
+  "at": 72.6
+ },
+ {
+  "kind": "paper",
+  "at": 73.8
+ },
+ {
+  "kind": "paper",
+  "at": 75.9
+ },
+ {
+  "kind": "whoosh",
+  "at": 78.3
+ },
+ {
+  "kind": "burn",
+  "at": 78.3
+ },
+ {
+  "kind": "typeRun",
+  "at": 78.45,
+  "dur": 0.4
+ },
+ {
+  "kind": "whooshOut",
+  "at": 82.3
+ },
+ {
+  "kind": "amb",
+  "at": 82.88,
+  "name": "streetRain",
+  "until": 104.7
+ },
+ {
+  "kind": "brake",
+  "at": 83.4
+ },
+ {
+  "kind": "step",
+  "at": 93,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 93.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 94,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 94.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 95,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 95.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 96,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 96.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 97,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 97.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 98,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 98.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 99,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 99.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 100,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 100.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 101,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 101.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 102,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 102.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 103,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 103.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 104,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 104.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "amb",
+  "at": 104.7,
+  "name": "cafe",
+  "until": 115.42
+ },
+ {
+  "kind": "cup",
+  "at": 106.4
+ },
+ {
+  "kind": "cup",
+  "at": 113.8
+ },
+ {
+  "kind": "amb",
+  "at": 115.42,
+  "name": "store",
+  "until": 120.56
+ },
+ {
+  "kind": "whoosh",
+  "at": 116
+ },
+ {
+  "kind": "typeRun",
+  "at": 116.15,
+  "dur": 0.4
+ },
+ {
+  "kind": "typeRow",
+  "at": 117,
+  "dur": 0.25
+ },
+ {
+  "kind": "typeRow",
+  "at": 119.4,
+  "dur": 0.25
+ },
+ {
+  "kind": "amb",
+  "at": 120.56,
+  "name": "tram",
+  "until": 125.5
+ },
+ {
+  "kind": "tramBell",
+  "at": 121
+ },
+ {
+  "kind": "typeRow",
+  "at": 121.6,
+  "dur": 0.25
+ },
+ {
+  "kind": "whooshOut",
+  "at": 123.3
+ },
+ {
+  "kind": "tramBell",
+  "at": 124.6
+ },
+ {
+  "kind": "amb",
+  "at": 125.5,
+  "name": "streetRain",
+  "until": 180.68
+ },
+ {
+  "kind": "crack",
+  "at": 142,
+  "gain": 0.6
+ },
+ {
+  "kind": "heart",
+  "at": 146.1,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 146.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 146.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 146.832,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 147.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 147.546,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 147.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 148.244,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 148.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 148.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 148.925,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 149.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 149.592,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 149.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 150.244,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 150.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 150.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 150.883,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 151.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 151.508,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 151.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 152.12,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 152.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 152.72,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 152.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 153.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 153.308,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 153.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 153.885,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 154.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 154.451,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 154.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 155.007,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 155.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 155.552,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 155.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 156.088,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 156.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 156.614,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 156.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 157.131,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 157.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 157.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 157.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 158.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 158.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 158.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 158.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 159.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 159.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 159.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 159.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 160.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 160.3,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 160.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "step",
+  "at": 160.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "heart",
+  "at": 161.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 161.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 162.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 162.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 163.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 163.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 164.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 164.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 165.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 165.64,
+  "gain": 0.8
+ },
+ {
+  "kind": "heart",
+  "at": 166.14,
+  "gain": 0.8
+ },
+ {
+  "kind": "whoosh",
+  "at": 168.8
+ },
+ {
+  "kind": "typeRun",
+  "at": 168.95,
+  "dur": 0.4
+ },
+ {
+  "kind": "typeRun",
+  "at": 169.3,
+  "dur": 0.4
+ },
+ {
+  "kind": "whooshOut",
+  "at": 178.9
+ },
+ {
+  "kind": "amb",
+  "at": 180.68,
+  "name": "store",
+  "until": 191.64
+ },
+ {
+  "kind": "door",
+  "at": 180.9
+ },
+ {
+  "kind": "step",
+  "at": 181,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 181.42,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 181.84,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 182.26,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 182.68,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 183.1,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 183.52,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 183.94,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 184.36,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 184.78,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 185.2,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "escalator",
+  "at": 185.4
+ },
+ {
+  "kind": "step",
+  "at": 185.62,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 186.04,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 186.46,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 186.88,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 187.3,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 187.72,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 188.14,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 188.56,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 188.98,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 189.4,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 189.82,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 190.24,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 190.66,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 191.08,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "step",
+  "at": 191.5,
+  "surf": "marble",
+  "gain": 0.7
+ },
+ {
+  "kind": "amb",
+  "at": 191.64,
+  "name": "streetRain",
+  "until": 201.08
+ },
+ {
+  "kind": "door",
+  "at": 191.7
+ },
+ {
+  "kind": "breathOut",
+  "at": 197.1
+ },
+ {
+  "kind": "amb",
+  "at": 201.08,
+  "name": "park",
+  "until": 249.66
+ },
+ {
+  "kind": "ding",
+  "at": 233.3,
+  "gain": 0.6
+ },
+ {
+  "kind": "ding",
+  "at": 234.1,
+  "gain": 0.6
+ },
+ {
+  "kind": "ding",
+  "at": 234.8,
+  "gain": 0.6
+ },
+ {
+  "kind": "wings",
+  "at": 241.5
+ },
+ {
+  "kind": "wings",
+  "at": 241.9
+ },
+ {
+  "kind": "whoosh",
+  "at": 244.2
+ },
+ {
+  "kind": "typeRun",
+  "at": 244.35,
+  "dur": 0.4
+ },
+ {
+  "kind": "stamp",
+  "at": 244.7
+ },
+ {
+  "kind": "whooshOut",
+  "at": 249.1
+ },
+ {
+  "kind": "amb",
+  "at": 249.66,
+  "name": "hotel",
+  "until": 282.46
+ },
+ {
+  "kind": "siren",
+  "at": 251
+ },
+ {
+  "kind": "keys",
+  "at": 256.1
+ },
+ {
+  "kind": "keys",
+  "at": 257.4
+ },
+ {
+  "kind": "tick",
+  "at": 258.4
+ },
+ {
+  "kind": "tick",
+  "at": 269.6
+ },
+ {
+  "kind": "amb",
+  "at": 282.46,
+  "name": "party",
+  "until": 291.62
+ },
+ {
+  "kind": "amb",
+  "at": 291.62,
+  "name": "homeDay",
+  "until": 301.86
+ },
+ {
+  "kind": "door",
+  "at": 291.8
+ },
+ {
+  "kind": "lock",
+  "at": 292.4
+ },
+ {
+  "kind": "amb",
+  "at": 301.86,
+  "name": "restaurant",
+  "until": 311.5
+ },
+ {
+  "kind": "door",
+  "at": 306.7
+ },
+ {
+  "kind": "amb",
+  "at": 311.5,
+  "name": "cityDay",
+  "until": 321.2
+ },
+ {
+  "kind": "amb",
+  "at": 321.2,
+  "name": "beach",
+  "until": 325.02
+ },
+ {
+  "kind": "kidLaugh",
+  "at": 322
+ },
+ {
+  "kind": "amb",
+  "at": 325.02,
+  "name": "bedroomRain",
+  "until": 326.92
+ },
+ {
+  "kind": "amb",
+  "at": 326.92,
+  "name": "interrog",
+  "until": 344.08
+ },
+ {
+  "kind": "stamp",
+  "at": 341.6,
+  "gain": 2
+ },
+ {
+  "kind": "crack",
+  "at": 341.6,
+  "gain": 0.6
+ },
+ {
+  "kind": "whoosh",
+  "at": 344.08
+ },
+ {
+  "kind": "drop",
+  "at": 344.33
+ },
+ {
+  "kind": "paper",
+  "at": 344.63
+ },
+ {
+  "kind": "whoosh",
+  "at": 344.78,
+  "soft": 1
+ },
+ {
+  "kind": "typeRun",
+  "at": 345.3,
+  "dur": 0.5
+ },
+ {
+  "kind": "typeRow",
+  "at": 346.2,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 346.65,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 347.1,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 347.55,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 348,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 348.45,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 348.9,
+  "dur": 0.3
+ },
+ {
+  "kind": "typeRow",
+  "at": 349.35,
+  "dur": 0.3
+ },
+ {
+  "kind": "whooshOut",
+  "at": 351.67
+ },
+ {
+  "kind": "amb",
+  "at": 352.22,
+  "name": "hall",
+  "until": 370.72
+ },
+ {
+  "kind": "lock",
+  "at": 364.2,
+  "gain": 1.5
+ },
+ {
+  "kind": "whoosh",
+  "at": 366.2
+ },
+ {
+  "kind": "typeRun",
+  "at": 366.35,
+  "dur": 0.4
+ },
+ {
+  "kind": "stamp",
+  "at": 366.7
+ },
+ {
+  "kind": "whooshOut",
+  "at": 370.2
+ },
+ {
+  "kind": "amb",
+  "at": 370.72,
+  "name": "homeDay",
+  "until": 387.64
+ },
+ {
+  "kind": "amb",
+  "at": 387.64,
+  "name": "office",
+  "until": 425.92
+ },
+ {
+  "kind": "step",
+  "at": 402.5,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 402.76,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 403.02,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 403.28,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 403.54,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 403.8,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 404.06,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 404.32,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 404.58,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 404.84,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 405.1,
+  "surf": "wet"
+ },
+ {
+  "kind": "step",
+  "at": 405.36,
+  "surf": "wet"
+ },
+ {
+  "kind": "amb",
+  "at": 425.92,
+  "name": "homeDay",
+  "until": 453.32
+ },
+ {
+  "kind": "door",
+  "at": 426.1
+ },
+ {
+  "kind": "step",
+  "at": 428.9,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "step",
+  "at": 429.1,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "step",
+  "at": 429.3,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "kidLaugh",
+  "at": 429.4
+ },
+ {
+  "kind": "step",
+  "at": 429.5,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "step",
+  "at": 429.7,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "step",
+  "at": 429.9,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "step",
+  "at": 430.1,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "step",
+  "at": 430.3,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "kidLaugh",
+  "at": 430.4
+ },
+ {
+  "kind": "step",
+  "at": 430.5,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "step",
+  "at": 430.7,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "step",
+  "at": 430.9,
+  "surf": "hard",
+  "gain": 0.4
+ },
+ {
+  "kind": "rustle",
+  "at": 443.6
+ },
+ {
+  "kind": "kidLaugh",
+  "at": 444.2
+ },
+ {
+  "kind": "kidLaugh",
+  "at": 446.8
+ },
+ {
+  "kind": "amb",
+  "at": 453.32,
+  "name": "park",
+  "until": 509.15
+ },
+ {
+  "kind": "whoosh",
+  "at": 453.4,
+  "soft": 1
+ },
+ {
+  "kind": "whoosh",
+  "at": 455.6
+ },
+ {
+  "kind": "typeRun",
+  "at": 455.75,
+  "dur": 0.4
+ },
+ {
+  "kind": "whooshOut",
+  "at": 459.7
+ },
+ {
+  "kind": "whoosh",
+  "at": 487.38
+ },
+ {
+  "kind": "drop",
+  "at": 487.63
+ },
+ {
+  "kind": "paper",
+  "at": 487.93
+ },
+ {
+  "kind": "whoosh",
+  "at": 488.08,
+  "soft": 1
+ },
+ {
+  "kind": "typeRun",
+  "at": 488.6,
+  "dur": 0.6
+ },
+ {
+  "kind": "typeRow",
+  "at": 489.6,
+  "dur": 0.5
+ },
+ {
+  "kind": "typeRow",
+  "at": 490.55,
+  "dur": 0.5
+ },
+ {
+  "kind": "typeRow",
+  "at": 491.5,
+  "dur": 0.5
+ },
+ {
+  "kind": "typeRow",
+  "at": 492.45,
+  "dur": 0.5
+ },
+ {
+  "kind": "whooshOut",
+  "at": 495.43
+ },
+ {
+  "kind": "paper",
+  "at": 505.7
+ }
+]

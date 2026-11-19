@@ -12,6 +12,11 @@ const PALS = {
   follower:  { hair: 'short', col: '#2e2a28', dark: '#1a1716', light: '#4a4440' },
   informant: { hair: 'bob', col: '#8a7a6a', dark: '#64574a', light: '#ab9c8a' },
   colleague: { hair: 'short', col: '#4a3f38', dark: '#2e2622', light: '#6a5d54', glasses: true },
+  recruiter: { hair: 'short', col: '#1e1a18', dark: '#0e0c0b', light: '#3a3430', shades: true },
+  inspector: { hair: 'short', col: '#6a6460', dark: '#4a4440', light: '#8a847e', glasses: true },
+  neighbor:  { hair: 'bob', col: '#b07a4a', dark: '#8a5a32', light: '#d09a6a' },
+  agentF:    { hair: 'bun', col: '#3a2a22', dark: '#22160f', light: '#5a4232' },
+  kidA:      { hair: 'messy', col: '#6a4a38', dark: '#4a2e22', light: '#8a6a58' },
 };
 function palHairBack(c, L, cy) {
   if (L.hair === 'long') {
@@ -59,6 +64,7 @@ function palHead(c, look, e = {}) {
   _nx.noahFace(c, Object.assign({ mouth: 'soft' }, e));
   if (L.glasses) for (const s of [-1, 1]) { c.beginPath(); c.arc(s * 92, cy + 25, 58, 0, Math.PI * 2); c.lineWidth = 9; c.strokeStyle = '#3a3230'; c.stroke(); }
   if (L.glasses) nLine(c, [-34, cy + 18, 34, cy + 18], 8, '#3a3230');
+  if (L.shades) { for (const s of [-1, 1]) { c.beginPath(); c.ellipse(s * 92, cy + 28, 70, 50, 0, 0, Math.PI * 2); c.fillStyle = '#111'; c.fill(); c.fillStyle = 'rgba(255,255,255,.3)'; c.beginPath(); c.ellipse(s * 92 - 22, cy + 12, 16, 8, -.4, 0, Math.PI * 2); c.fill(); } nLine(c, [-26, cy + 20, 26, cy + 20], 10, '#111'); }
   if (L.hair === 'long' || L.hair === 'pigtails' || L.hair === 'bob') for (const s of [-1, 1]) { c.beginPath(); c.moveTo(s * 92 + s * 18, cy - 12); c.lineTo(s * 92 + s * 36, cy - 26); c.lineWidth = 6; c.strokeStyle = NOAH.eye; c.stroke(); } // lashes
 }
 function drawPalHead(c, x, y, k, look, e = {}, tilt = 0) { c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k); c.translate(0, -NOAH.HEAD.y); palHead(c, look, e); c.restore(); }

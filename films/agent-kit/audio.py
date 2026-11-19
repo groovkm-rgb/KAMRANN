@@ -7,7 +7,7 @@ Everything is generated with numpy/scipy (no samples), deterministic (fixed seed
 """
 import json, subprocess, sys, os, re
 import numpy as np
-from scipy.signal import butter, sosfilt
+from scipy.signal import butter, sosfilt, fftconvolve
 
 SR = 48000
 RNG = np.random.default_rng(7)
@@ -79,6 +79,62 @@ def sfx_paper():
 def sfx_strike():
     n = secs(.2); t = np.arange(n) / SR; e = np.sin(np.pi * t / .2) * (1 + .8 * np.sign(np.sin(2 * np.pi * 70 * t)))
     return bp(white(n), 1400, 4200) * e * .3
+
+def reverb(x, sec=1.2, wet=.3):
+    n = secs(sec); ir = white(n) * np.exp(-np.arange(n) / SR * 5 / sec); ir = lp(ir, 5000); ir /= np.sqrt(np.sum(ir ** 2))
+    return x * (1 - wet) + fftconvolve(x, ir)[:len(x)] * wet
+def babble(n, voices=8, lo=250, hi=2800):
+    """unintelligible crowd / PA murmur: noise through moving formants with syllable envelopes"""
+    out = np.zeros(n); t = np.arange(n) / SR
+    for v in range(voices):
+        rate = RNG.uniform(3.5, 6); env = (np.sin(2 * np.pi * rate * t + RNG.uniform(0, 6)) > RNG.uniform(-.2, .4)).astype(float)
+        env = lp(env * (lp(np.abs(white(n)), .3) * 3 > .5), 25)
+        f0 = RNG.uniform(110, 230); src = np.sign(np.sin(2 * np.pi * f0 * t * (1 + .05 * np.sin(2 * np.pi * .7 * t + v)))) * .5 + white(n) * .3
+        out += (bp(src, lo, hi) + bp(src, RNG.uniform(600, 900), RNG.uniform(1100, 1500)) * .8) * env
+    return out / (np.std(out) + 1e-9)
+def sfx_step(surf='wet', gain=1):
+    n = secs(.18); t = np.arange(n) / SR
+    thud = np.sin(2 * np.pi * (90 if surf != 'marble' else 140) * t) * np.exp(-t * 40)
+    click = hp(white(n), 1500 if surf != 'carpet' else 400) * np.exp(-t * (90 if surf != 'carpet' else 160)) * (.2 if surf == 'carpet' else .6)
+    x = thud * .7 + click
+    if surf == 'wet': x += bp(white(n), 1500, 6000) * np.exp(-t * 25) * .5
+    if surf == 'marble': x = reverb(np.pad(x, (0, secs(.6))), .8, .35)
+    return x * gain * RNG.uniform(.8, 1)
+def sfx_simple(kind):
+    if kind == 'tick': n = secs(.08); t = np.arange(n) / SR; return np.sin(2 * np.pi * 1800 * t) * np.exp(-t * 60) * .4
+    if kind == 'punch': n = secs(.25); t = np.arange(n) / SR; return np.sin(2 * np.pi * 70 * t) * np.exp(-t * 25) + lp(white(n), 1500) * np.exp(-t * 50) * .6
+    if kind == 'ding': n = secs(1.5); t = np.arange(n) / SR; return (np.sin(2 * np.pi * 1320 * t) + .4 * np.sin(2 * np.pi * 2640 * t)) * np.exp(-t * 3) * .3
+    if kind == 'freeze': n = secs(1.0); t = np.arange(n) / SR; return np.pad(sfx_whoosh(.7, True), (0, n - secs(.7))) * .6 + np.pad(np.sin(2 * np.pi * 45 * t[:secs(.7)]) * np.exp(-t[:secs(.7)] * 4), (0, n - secs(.7))) * .6
+    if kind == 'crack': n = secs(1.2); t = np.arange(n) / SR; return np.sin(2 * np.pi * 50 * t) * np.exp(-t * 3) * .9 + hp(white(n), 300) * np.exp(-t * 12) * .4
+    if kind == 'door': n = secs(.9); t = np.arange(n) / SR; return (np.sin(2 * np.pi * 85 * t) * np.exp(-t * 14) + bp(white(n), 200, 1200) * np.exp(-t * 18) * .6 + np.pad(hp(white(secs(.05)), 2000), (0, n - secs(.05))) * .4)
+    if kind == 'lock': n = secs(.3); t = np.arange(n) / SR; x = np.zeros(n); x[:secs(.03)] += hp(white(secs(.03)), 2500); x[secs(.12):secs(.15)] += hp(white(secs(.03)), 2000) * .8; return x * .7
+    if kind == 'locker': n = secs(.8); t = np.arange(n) / SR; return bp(white(n), 800, 4000) * np.exp(-t * 10) * .5 + np.sin(2 * np.pi * 320 * t) * np.exp(-t * 6) * .3 + np.sin(2 * np.pi * 610 * t) * np.exp(-t * 7) * .2
+    if kind == 'envelope': return sfx_paper() * 1.2
+    if kind == 'brake': n = secs(3.0); t = np.arange(n) / SR; f = 2600 - 900 * t / 3; return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.pi * t / 3) * .15 + bp(white(n), 100, 600) * np.sin(np.pi * t / 3) * .4
+    if kind == 'tramBell': n = secs(1.6); t = np.arange(n) / SR; x = sum(np.sin(2 * np.pi * f * t) * a for f, a in [(880, 1), (2210, .5), (3310, .3)]) * np.exp(-t * 3); return (x + np.roll(x, secs(.25))) * .25
+    if kind == 'escalator': n = secs(3); t = np.arange(n) / SR; return (lp(brown(n), 200) * .5 + bp(white(n), 1000, 3000) * (np.sin(2 * np.pi * 8 * t) > .8) * .15) * np.sin(np.pi * t / 3)
+    if kind == 'burn': n = secs(2.5); t = np.arange(n) / SR; cr = hp(white(n), 2000) * (lp(np.abs(white(n)), 30) > .8); return (cr * .4 + bp(white(n), 300, 1500) * .15) * np.sin(np.pi * t / 2.5) + np.pad(hp(white(secs(.06)), 3000) * .5, (0, n - secs(.06)))
+    if kind == 'keys': x = np.zeros(secs(2)); tt = 0
+    if kind == 'keys':
+        while tt < 1.8: y = sfx_tak() * .5; i = secs(tt); x[i:i + len(y)] += y[:len(x) - i]; tt += RNG.uniform(.07, .16)
+        return lp(x, 4000)
+    if kind == 'breathIn': n = secs(1.0); t = np.arange(n) / SR; return bp(white(n), 500, 3000) * np.sin(np.pi * t) ** 2 * .25
+    if kind == 'breathOut': n = secs(1.8); t = np.arange(n) / SR; return bp(white(n), 300, 2000) * np.sin(np.pi * t / 1.8) ** 2 * np.exp(-t) * .3
+    if kind == 'kidLaugh':
+        n = secs(1.6); t = np.arange(n) / SR; f0 = 380 + 40 * np.sin(2 * np.pi * 1.3 * t); src = np.sign(np.sin(2 * np.pi * np.cumsum(f0) / SR)) * .5 + white(n) * .3
+        env = (np.sin(2 * np.pi * 6 * t) > 0).astype(float) * np.exp(-t * 1.2); env = lp(env, 40)
+        return (bp(src, 700, 1300) + bp(src, 2200, 3200) * .6) * env * .35
+    if kind == 'wings': n = secs(1.2); t = np.arange(n) / SR; return bp(white(n), 300, 2500) * (np.sin(2 * np.pi * 9 * t) * .5 + .5) * np.exp(-t * 2.5) * .5
+    if kind == 'umbrella': n = secs(.6); t = np.arange(n) / SR; return bp(white(n), 400, 4000) * np.exp(-t * 6) * .5 + np.pad(hp(white(secs(.04)), 2000), (0, n - secs(.04))) * .5
+    if kind == 'zip': n = secs(.4); t = np.arange(n) / SR; return bp(white(n), 2000, 6000) * (np.sin(2 * np.pi * 60 * t) > 0) * np.sin(np.pi * t / .4) * .3
+    if kind == 'siren': n = secs(6); t = np.arange(n) / SR; f = 700 + 250 * np.sin(2 * np.pi * .4 * t); return lp(np.sin(2 * np.pi * np.cumsum(f) / SR), 1500) * np.sin(np.pi * t / 6) * .08
+    if kind == 'drip': n = secs(.3); t = np.arange(n) / SR; f = 900 + 1200 * np.exp(-t * 40); return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 30) * .25
+    if kind == 'kiss': n = secs(.15); t = np.arange(n) / SR; return bp(white(n), 1000, 5000) * np.exp(-t * 40) * .3
+    if kind == 'cup': n = secs(.5); t = np.arange(n) / SR; return sum(np.sin(2 * np.pi * f * t) * np.exp(-t * d) for f, d in [(2100, 14), (3400, 20), (5200, 30)]) * .12
+    if kind == 'whoosh2': return sfx_whoosh(.4)
+    return np.zeros(10)
+SIMPLE = ['tick', 'punch', 'ding', 'freeze', 'crack', 'door', 'lock', 'locker', 'envelope', 'brake', 'tramBell', 'escalator', 'burn', 'keys', 'breathIn', 'breathOut', 'kidLaugh', 'wings', 'umbrella', 'zip', 'siren', 'drip', 'kiss', 'cup', 'whoosh2']
+
 SFX = {
     'vibrate': lambda c: (sfx_vibrate(c.get('dur', 1)), .55, 0),
     'rustle': lambda c: (sfx_rustle(c.get('soft')), .7, -.2),
@@ -91,7 +147,9 @@ SFX = {
     'drop': lambda c: (sfx_drop(), .55, 0),
     'paper': lambda c: (sfx_paper(), .4, -.1),
     'strike': lambda c: (sfx_strike(), .22, -.2),
+    'step': lambda c: (sfx_step(c.get('surf', 'wet')), .35, RNG.uniform(-.2, .2)),
 }
+for _k in SIMPLE: SFX[_k] = (lambda k: (lambda c: (sfx_simple(k), {'tick': .2, 'ding': .25, 'kidLaugh': .6, 'siren': .7, 'drip': .5, 'keys': .4}.get(k, .5), 0)))(_k)
 
 # ---------------- ambiences ----------------
 def amb(name, dur):
@@ -108,6 +166,42 @@ def amb(name, dur):
         rain = bp(pink(n), 300, 9000) * .11 * (1 + .2 * lp(white(n), 1) * 8); spl = hp(white(n), 3000) * (lp(np.abs(white(n)), 40) > .9) * .05
         rumble = bp(brown(n), 40, 300) * .06
         return np.stack([rain + spl + rumble, bp(pink(n), 300, 9000) * .11 + rumble])
+    if name == 'cityDay':
+        tr = bp(brown(n), 50, 500) * .06 + bp(pink(n), 500, 4000) * .015; birds = np.zeros(n)
+        for i in range(int(dur * .7)): j = RNG.integers(0, max(1, n - secs(.3))); tt = np.arange(secs(.2)) / SR; birds[j:j + len(tt)] += np.sin(2 * np.pi * (3000 + 800 * np.sin(2 * np.pi * 25 * tt)) * tt) * np.exp(-tt * 15) * .02
+        return np.stack([tr + birds, tr + np.roll(birds, 4000)])
+    if name == 'roomTone': m = lp(brown(n), 150) * .035 + lp(pink(n), 3000) * .006; return np.stack([m, m])
+    if name == 'office':
+        hum = np.sin(2 * np.pi * 120 * t) * .007 + bp(white(n), 3500, 7000) * .004; room = lp(brown(n), 200) * .03; m = hum + room; return np.stack([m, m])
+    if name == 'gym': m = reverb(lp(brown(n), 300) * .04, 1.5, .4); return np.stack([m, m])
+    if name == 'homeDay': m = lp(brown(n), 150) * .03 + bp(brown(n), 60, 400) * .015; return np.stack([m, m])
+    if name == 'party': b = babble(n, 6) * .03; b = reverb(b, .7, .2); m = lp(brown(n), 150) * .02; return np.stack([b + m, np.roll(b, 2000) + m])
+    if name == 'station':
+        b = reverb(babble(n, 10) * .03, 2.0, .45); pa = np.zeros(n)
+        for st in [2.0, dur * .55]:
+            i0 = secs(st); L = min(secs(3.5), n - i0)
+            if L > 0: pa[i0:i0 + L] = reverb(bp(babble(L, 1, 400, 2500), 400, 2500) * .04, 2.5, .6)
+        rum = lp(brown(n), 120) * .05; return np.stack([b + pa + rum, np.roll(b, 3000) + pa + rum])
+    if name == 'cafe': b = babble(n, 7) * .025; m = lp(brown(n), 150) * .02; rain = lp(pink(n), 2000) * .025; return np.stack([b + m + rain, np.roll(b, 2500) + m + rain])
+    if name == 'store': b = reverb(babble(n, 12) * .025, 1.2, .35); m = lp(brown(n), 200) * .03; return np.stack([b + m, np.roll(b, 3000) + m])
+    if name == 'tram': rum = lp(brown(n), 140) * .09 * (1 + .3 * np.sin(2 * np.pi * 1.7 * t)); rain = bp(pink(n), 500, 5000) * .04; clk = np.zeros(n); clk[::secs(.9)] = 1; clk = lp(clk, 300) * 2; m = rum + rain + clk * .05; return np.stack([m, m])
+    if name == 'park':
+        wind = bp(pink(n), 150, 1200) * .05 * (1 + .6 * lp(white(n), .5) * 10); coo = np.zeros(n)
+        for i in range(int(dur * .4)):
+            j = RNG.integers(0, max(1, n - secs(.8))); tt = np.arange(secs(.7)) / SR; coo[j:j + len(tt)] += np.sin(2 * np.pi * (330 + 40 * np.sin(2 * np.pi * 3 * tt)) * tt) * np.sin(np.pi * tt / .7) * .03
+        return np.stack([wind + coo, wind * .9 + np.roll(coo, 3000)])
+    if name == 'hotel':
+        rain = bp(pink(n), 500, 6000) * .05 + lp(pink(n), 800) * .03; d = np.zeros(n); per = secs(1.7)
+        for j in range(secs(.5), n - secs(.3), per): tt = np.arange(secs(.3)) / SR; d[j:j + len(tt)] += np.sin(2 * np.pi * np.cumsum(900 + 1200 * np.exp(-tt * 40)) / SR) * np.exp(-tt * 30) * .04
+        m = rain + d; return np.stack([m, m])
+    if name == 'kitchen': m = lp(brown(n), 150) * .03 + bp(white(n), 2000, 6000) * .003; birds = amb('cityDay', dur)[0] * .3; return np.stack([m + birds, m + birds])
+    if name == 'restaurant': b = babble(n, 9) * .03; cl = np.zeros(n)
+    if name == 'restaurant':
+        for i in range(int(dur * 1.2)): j = RNG.integers(0, max(1, n - secs(.5))); y = sfx_simple('cup'); cl[j:j + len(y)] += y * .15
+        return np.stack([b + cl, np.roll(b, 2000) + cl])
+    if name == 'beach': w = lp(pink(n), 1500) * .08 * (1 + .7 * np.sin(2 * np.pi * .12 * t)); return np.stack([w, np.roll(w, 5000)])
+    if name == 'hall': m = reverb(lp(brown(n), 200) * .03, 2.5, .5); return np.stack([m, m])
+    if name == 'interrog': m = np.sin(2 * np.pi * 120 * t) * .008 + lp(brown(n), 150) * .025; return np.stack([m, m])
     return np.zeros((2, n))
 
 # ---------------- music (noir: low piano, string drone, heavy bass) ----------------
