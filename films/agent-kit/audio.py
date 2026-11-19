@@ -158,15 +158,15 @@ def amb(name, dur):
         rain = bp(pink(n), 700, 6500) * .05 * (1 + .25 * lp(white(n), 1.5) * 8)
         drops = np.zeros(n); idx = RNG.integers(0, n, int(dur * 14)); drops[idx] = RNG.uniform(.2, 1, len(idx)); drops = bp(lp(drops, 6000), 2000, 6000) * .5
         room = lp(brown(n), 160) * .05; city = bp(brown(n), 60, 400) * .03
-        q = .2   # indoor: the rain behind the window stays very quiet
+        q = .07   # indoor: the rain behind the window stays very quiet
         return np.stack([(rain + drops) * q + room + city, (rain * .9 + np.roll(drops, 300)) * q + room + city])
     if name == 'deskRoom':      # small room, lamp hum, muffled rain
-        hum = (np.sin(2 * np.pi * 100 * t) * .006 + np.sin(2 * np.pi * 200 * t) * .003); rain = lp(pink(n), 1200) * .035; room = lp(brown(n), 200) * .04
+        hum = (np.sin(2 * np.pi * 100 * t) * .006 + np.sin(2 * np.pi * 200 * t) * .003); rain = lp(pink(n), 1200) * .012; room = lp(brown(n), 200) * .04
         m = hum + rain + room; return np.stack([m, m])
     if name == 'streetRain':    # heavy rain, splashes, city rumble
-        rain = bp(pink(n), 300, 9000) * .11 * (1 + .2 * lp(white(n), 1) * 8); spl = hp(white(n), 3000) * (lp(np.abs(white(n)), 40) > .9) * .05
+        rain = bp(pink(n), 300, 9000) * .04 * (1 + .2 * lp(white(n), 1) * 8); spl = hp(white(n), 3000) * (lp(np.abs(white(n)), 40) > .9) * .02
         rumble = bp(brown(n), 40, 300) * .06
-        return np.stack([rain + spl + rumble, bp(pink(n), 300, 9000) * .11 + rumble])
+        return np.stack([rain + spl + rumble, bp(pink(n), 300, 9000) * .04 + rumble])
     if name == 'cityDay':
         tr = bp(brown(n), 50, 500) * .06 + bp(pink(n), 500, 4000) * .015; birds = np.zeros(n)
         for i in range(int(dur * .7)): j = RNG.integers(0, max(1, n - secs(.3))); tt = np.arange(secs(.2)) / SR; birds[j:j + len(tt)] += np.sin(2 * np.pi * (3000 + 800 * np.sin(2 * np.pi * 25 * tt)) * tt) * np.exp(-tt * 15) * .02
@@ -183,16 +183,16 @@ def amb(name, dur):
             i0 = secs(st); L = min(secs(3.5), n - i0)
             if L > 0: pa[i0:i0 + L] = reverb(bp(babble(L, 1, 400, 2500), 400, 2500) * .04, 2.5, .6)
         rum = lp(brown(n), 120) * .05; return np.stack([b + pa + rum, np.roll(b, 3000) + pa + rum])
-    if name == 'cafe': b = babble(n, 7) * .025; m = lp(brown(n), 150) * .02; rain = lp(pink(n), 2000) * .025; return np.stack([b + m + rain, np.roll(b, 2500) + m + rain])
+    if name == 'cafe': b = babble(n, 7) * .025; m = lp(brown(n), 150) * .02; rain = lp(pink(n), 2000) * .01; return np.stack([b + m + rain, np.roll(b, 2500) + m + rain])
     if name == 'store': b = reverb(babble(n, 12) * .025, 1.2, .35); m = lp(brown(n), 200) * .03; return np.stack([b + m, np.roll(b, 3000) + m])
-    if name == 'tram': rum = lp(brown(n), 140) * .09 * (1 + .3 * np.sin(2 * np.pi * 1.7 * t)); rain = bp(pink(n), 500, 5000) * .04; clk = np.zeros(n); clk[::secs(.9)] = 1; clk = lp(clk, 300) * 2; m = rum + rain + clk * .05; return np.stack([m, m])
+    if name == 'tram': rum = lp(brown(n), 140) * .09 * (1 + .3 * np.sin(2 * np.pi * 1.7 * t)); rain = bp(pink(n), 500, 5000) * .015; clk = np.zeros(n); clk[::secs(.9)] = 1; clk = lp(clk, 300) * 2; m = rum + rain + clk * .05; return np.stack([m, m])
     if name == 'park':
         wind = bp(pink(n), 150, 1200) * .05 * (1 + .6 * lp(white(n), .5) * 10); coo = np.zeros(n)
         for i in range(int(dur * .4)):
             j = RNG.integers(0, max(1, n - secs(.8))); tt = np.arange(secs(.7)) / SR; coo[j:j + len(tt)] += np.sin(2 * np.pi * (330 + 40 * np.sin(2 * np.pi * 3 * tt)) * tt) * np.sin(np.pi * tt / .7) * .03
         return np.stack([wind + coo, wind * .9 + np.roll(coo, 3000)])
     if name == 'hotel':
-        rain = bp(pink(n), 500, 6000) * .05 + lp(pink(n), 800) * .03; d = np.zeros(n); per = secs(1.7)
+        rain = bp(pink(n), 500, 6000) * .018 + lp(pink(n), 800) * .012; d = np.zeros(n); per = secs(1.7)
         for j in range(secs(.5), n - secs(.3), per): tt = np.arange(secs(.3)) / SR; d[j:j + len(tt)] += np.sin(2 * np.pi * np.cumsum(900 + 1200 * np.exp(-tt * 40)) / SR) * np.exp(-tt * 30) * .04
         m = rain + d; return np.stack([m, m])
     if name == 'kitchen': m = lp(brown(n), 150) * .03 + bp(white(n), 2000, 6000) * .003; birds = amb('cityDay', dur)[0] * .3; return np.stack([m + birds, m + birds])
@@ -253,6 +253,14 @@ def decode(path, a=None, b=None):
     if b is not None: cmd += ['-to', str(b)] if a is None else ['-t', str(b - a)]
     cmd += ['-i', path, '-f', 'f32le', '-ac', '1', '-ar', str(SR), '-']
     return np.frombuffer(subprocess.run(cmd, capture_output=True, check=True).stdout, np.float32).astype(np.float64)
+def tame_voice(v, ceil_db=9):
+    """fast compressor for the narration: short shouted / plosive bursts may not exceed the typical speech level by more than ceil_db"""
+    hop = SR // 200; nfr = len(v) // hop + 1; pad = np.pad(v, (0, nfr * hop - len(v)))
+    r = np.sqrt(np.mean(pad.reshape(nfr, hop) ** 2, axis=1) + 1e-12); act = r[r > np.max(r) * .03]
+    thr = np.median(act) * db(ceil_db); want = np.minimum(1, thr / r)
+    g = np.ones(nfr); s = 1.0
+    for i in range(nfr): s = want[i] if want[i] < s else s + (want[i] - s) * .04; g[i] = s   # instant attack, ~125 ms release
+    g = np.convolve(g, np.ones(3) / 3, 'same'); return v * np.interp(np.arange(len(v)) / hop, np.arange(nfr), g)
 def duck_gain(voice, depth_db=-10, att=.03, rel=.6):
     hop = SR // 100; nfr = len(voice) // hop + 1; pad = np.pad(voice, (0, nfr * hop - len(voice)))
     rms = np.sqrt(np.mean(pad.reshape(nfr, hop) ** 2, axis=1) + 1e-12); lvl = 20 * np.log10(rms)
@@ -267,6 +275,7 @@ def main(spec_path):
     voice = np.zeros(N)
     for v in S['voice']:
         x = fade(decode(P(v['file']), v.get('from'), v.get('to')), .012, .03); i = secs(v['at']); x = x[:N - i]; voice[i:i + len(x)] += x
+    voice = tame_voice(voice, S.get('voice_ceiling_db', 9))
     cues = json.load(open(P(S['cues'])))
     fx = np.zeros((2, N)); ambb = np.zeros((2, N))
     for c in cues:
@@ -276,6 +285,8 @@ def main(spec_path):
         if c['kind'] not in SFX: print('unknown cue', c); continue
         x, g, pan = SFX[c['kind']](c); add(fx, x, c['at'], g * c.get('gain', 1), c.get('pan', pan))
     mus = music(S['music'], dur)
+    if os.environ.get('STEMS'):
+        for nm, x in [('music', mus), ('amb', ambb), ('fx', fx)]: write_wav(P(f'stem-{nm}.wav'), x * .5)
     gd = duck_gain(voice, S.get('duck_db', -10))
     vpk = np.max(np.abs(voice)) + 1e-9; voice = voice / vpk * .5
     mix = np.stack([voice, voice]) + (mus * S.get('music_gain', .55) + ambb * S.get('amb_gain', .6)) * gd + fx * S.get('fx_gain', .45) * (.3 + .7 * gd)
