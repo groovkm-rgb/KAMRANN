@@ -20,11 +20,11 @@ lst = os.path.join(OUT, 'list.txt'); open(lst, 'w').write(''.join(f"file '{v}'\n
 run(['ffmpeg', '-y', '-v', 'error', '-f', 'concat', '-safe', '0', '-i', lst, '-c', 'copy', os.path.join(OUT, 'video.mp4')])
 raw = os.path.join(OUT, 'mix-raw.wav')
 run(['ffmpeg', '-y', '-v', 'error', '-i', P('agent-teil1', 'agent-teil1-mix.wav'), '-i', P('agent-teil2', 'agent-teil2-mix.wav'), '-filter_complex', '[0:a][1:a]concat=n=2:v=0:a=1[a]', '-map', '[a]', raw])
-m = subprocess.run(['ffmpeg', '-hide_banner', '-i', raw, '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'], capture_output=True, text=True).stderr
+m = subprocess.run(['ffmpeg', '-hide_banner', '-i', raw, '-af', 'loudnorm=I=-16:TP=-3:LRA=11:print_format=json', '-f', 'null', '-'], capture_output=True, text=True).stderr
 j = json.loads(m[m.rindex('{'):m.rindex('}') + 1])
-af = f"loudnorm=I=-16:TP=-1.5:LRA=11:measured_I={j['input_i']}:measured_TP={j['input_tp']}:measured_LRA={j['input_lra']}:measured_thresh={j['input_thresh']}:offset={j['target_offset']}:linear=true"
+af = f"loudnorm=I=-16:TP=-3:LRA=11:measured_I={j['input_i']}:measured_TP={j['input_tp']}:measured_LRA={j['input_lra']}:measured_thresh={j['input_thresh']}:offset={j['target_offset']}:linear=true,alimiter=limit=0.7:attack=1:release=80:level=disabled"
 mix = os.path.join(OUT, 'mix.wav'); run(['ffmpeg', '-y', '-v', 'error', '-i', raw, '-af', af, '-ar', '48000', mix])
 final = os.path.join(OUT, 'agent-geheimagent.mp4')
-run(['ffmpeg', '-y', '-v', 'error', '-i', os.path.join(OUT, 'video.mp4'), '-i', mix, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-af', 'volume=0.6dB,alimiter=limit=0.6:attack=1:release=80:level=disabled,aresample=48000', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', final])
+run(['ffmpeg', '-y', '-v', 'error', '-i', os.path.join(OUT, 'video.mp4'), '-i', mix, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', final])
 print(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'stream=codec_name,width,height,nb_frames:format=duration,size', '-of', 'compact', final], capture_output=True, text=True).stdout)
 r = subprocess.run(['ffmpeg', '-hide_banner', '-i', final, '-af', 'ebur128=peak=true', '-f', 'null', '-'], capture_output=True, text=True).stderr; print(r[r.rindex('Summary:'):])

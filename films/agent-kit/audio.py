@@ -158,7 +158,8 @@ def amb(name, dur):
         rain = bp(pink(n), 700, 6500) * .05 * (1 + .25 * lp(white(n), 1.5) * 8)
         drops = np.zeros(n); idx = RNG.integers(0, n, int(dur * 14)); drops[idx] = RNG.uniform(.2, 1, len(idx)); drops = bp(lp(drops, 6000), 2000, 6000) * .5
         room = lp(brown(n), 160) * .05; city = bp(brown(n), 60, 400) * .03
-        return np.stack([rain + drops + room + city, rain * .9 + np.roll(drops, 300) + room + city])
+        q = .2   # indoor: the rain behind the window stays very quiet
+        return np.stack([(rain + drops) * q + room + city, (rain * .9 + np.roll(drops, 300)) * q + room + city])
     if name == 'deskRoom':      # small room, lamp hum, muffled rain
         hum = (np.sin(2 * np.pi * 100 * t) * .006 + np.sin(2 * np.pi * 200 * t) * .003); rain = lp(pink(n), 1200) * .035; room = lp(brown(n), 200) * .04
         m = hum + rain + room; return np.stack([m, m])
