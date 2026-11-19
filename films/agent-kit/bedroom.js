@@ -146,18 +146,23 @@ function bedroomSide(c, cam, t, o = {}) {
     c.beginPath(); rrect(c, 250, -860, 90, 860, 18); fs(c, BED.wood, 3); c.beginPath(); rrect(c, 262, -840, 66, 600, 14); fs(c, BED.woodD, 2);
     c.beginPath(); c.rect(-1250, -330, 1510, 120); fs(c, BED.woodD, 3); line(c, [-1240, -210, -1240, 0], 22, BED.woodD); line(c, [250, -210, 250, 0], 22, BED.woodD);
     c.beginPath(); rrect(c, -1240, -400, 1490, 90, 24); fs(c, BED.sheet, 3);
-    // far pillow + wife (behind)
-    c.beginPath(); c.ellipse(140, -470, 150, 56, -.05, 0, Math.PI * 2); fs(c, shade(BED.pillow, -.12), 3);
-    if (o.wife !== false) drawPalHead(c, 150, -545, .21, 'wife', { eyes: 'closed', mouth: 'soft' }, 1.25);
-    // near pillow + Noah (lying on his back, head toward the headboard)
-    c.beginPath(); c.ellipse(120, -430, 165, 62, .04, 0, Math.PI * 2); fs(c, BED.pillow, 3);
-    c.save(); c.beginPath(); c.ellipse(120, -430, 165, 62, .04, 0, Math.PI * 2); c.clip(); c.fillStyle = 'rgba(0,0,0,.08)'; c.fillRect(-60, -430, 400, 80); c.restore();
-    drawNoahHead(c, 105, -480, .23, o.noah || { lid: .15, mouth: 'flat' }, 1.32);
-    // blanket over both bodies, draped over the edge
-    c.beginPath(); c.moveTo(20, -440); c.quadraticCurveTo(-60, -520, -260, -500); c.quadraticCurveTo(-560, -470, -760, -455); c.quadraticCurveTo(-940, -470, -1080, -430); c.quadraticCurveTo(-1230, -420, -1250, -380);
-    c.lineTo(-1260, -150); for (let i = 0; i <= 10; i++) c.quadraticCurveTo(-1200 + i * 125 - 60, -120 + (i % 2) * 30, -1200 + i * 125, -140); c.lineTo(60, -150); c.lineTo(60, -400); c.closePath(); fs(c, BED.blanket, 3);
-    c.save(); c.clip(); for (let i = 0; i < 9; i++) line(c, [-1150 + i * 140, -470, -1180 + i * 140 + 30, -150], 6, 'rgba(0,0,0,.18)'); c.fillStyle = 'rgba(0,0,0,.2)'; c.fillRect(-1300, -330, 1400, 200); c.restore();
-    c.beginPath(); c.moveTo(20, -440); c.quadraticCurveTo(-30, -480, -120, -490); c.lineTo(-120, -455); c.quadraticCurveTo(-20, -440, 40, -400); c.closePath(); fs(c, BED.sheet, 2.5);
+    // pillows (big enough for the cartoon heads)
+    c.beginPath(); c.ellipse(150, -430, 240, 70, -.04, 0, Math.PI * 2); fs(c, shade(BED.pillow, -.12), 3);
+    // wife (far side): lying on her back, blanket up to her shoulders, head peeking above Noah's
+    if (o.wife !== false) {
+      lyingSide(c, 185, -600, .46, q => drawPal(c, Object.assign(q, { look: 'wife', side: true, outfit: 'nightie', walk: null, ink: 1.8, expr: { eyes: 'closed', mouth: 'soft' } })));
+      c.beginPath(); c.moveTo(-1250, -420); c.quadraticCurveTo(-1000, -620, -700, -660); c.quadraticCurveTo(-300, -700, 40, -690); c.quadraticCurveTo(80, -600, 40, -470); c.lineTo(-1250, -400); c.closePath(); fs(c, BED.blanketD, 3);
+      c.save(); c.clip(); for (let i = 0; i < 8; i++) line(c, [-1150 + i * 150, -700, -1170 + i * 150, -420], 5, 'rgba(0,0,0,.2)'); c.restore();
+    }
+    c.beginPath(); c.ellipse(130, -400, 230, 60, .03, 0, Math.PI * 2); fs(c, BED.pillow, 3);
+    c.save(); c.beginPath(); c.ellipse(130, -400, 230, 60, .03, 0, Math.PI * 2); c.clip(); c.fillStyle = 'rgba(0,0,0,.08)'; c.fillRect(-120, -400, 500, 80); c.restore();
+    // Noah: lying on his back (side profile turned 90°), head on the pillow, arm along his body
+    lyingSide(c, 120, -480, .5, q => drawNoahSide(c, Object.assign(q, { outfit: 'pyjama', walk: null, ink: 1.8, expr: o.noah || { lid: .15, mouth: 'flat' } })));
+    // blanket pulled up to his waist, draped over the edge
+    c.beginPath(); c.moveTo(-245, -420); c.quadraticCurveTo(-250, -560, -320, -565); c.quadraticCurveTo(-480, -575, -560, -555); c.quadraticCurveTo(-900, -520, -1250, -400);
+    c.lineTo(-1260, -150); for (let i = 0; i <= 10; i++) c.quadraticCurveTo(-1200 + i * 100 - 50, -120 + (i % 2) * 30, -1200 + i * 100, -140); c.lineTo(-200, -150); c.lineTo(-200, -400); c.closePath(); fs(c, BED.blanket, 3);
+    c.save(); c.clip(); for (let i = 0; i < 8; i++) line(c, [-1150 + i * 120, -560, -1180 + i * 120 + 30, -150], 6, 'rgba(0,0,0,.18)'); c.fillStyle = 'rgba(0,0,0,.2)'; c.fillRect(-1300, -330, 1200, 200); c.restore();
+    c.beginPath(); c.moveTo(-245, -420); c.quadraticCurveTo(-250, -560, -320, -565); c.lineTo(-345, -530); c.quadraticCurveTo(-290, -520, -290, -420); c.closePath(); fs(c, BED.sheet, 2.5);
     blindStripes(c, -900, -700, 1400, 480, 6, 54, 20, .08);
     nightstand(c, 500, { t, clock: o.clock, phoneGlow: o.phoneGlow, buzz: o.buzz });
     // foreground: dark wardrobe edge at the far left
@@ -179,29 +184,34 @@ function bedTop(c, cam, t, o = {}) {
     c.beginPath(); rrect(c, -640, -950, 1280, 1950, 30); fs(c, BED.sheet, 3);
     // pillows
     for (const s of [-1, 1]) { c.beginPath(); rrect(c, s * 300 - 250, -930, 500, 290, 70); fs(c, BED.pillow, 3); c.save(); c.clip(); c.fillStyle = 'rgba(0,0,0,.07)'; c.beginPath(); c.ellipse(s * 300, -780, 170, 90, 0, 0, Math.PI * 2); c.fill(); c.restore(); }
-    // wife: head turned away, hair over the pillow, eyes closed
-    drawPalHead(c, 310, -790, .3, 'wife', { eyes: 'closed', mouth: 'soft' }, .55);
-    // Noah: on his back, looking up (at the ceiling = the camera)
-    c.beginPath(); c.moveTo(-480, -560); c.quadraticCurveTo(-300, -640, -120, -560); c.lineTo(-110, -470); c.lineTo(-490, -470); c.closePath(); fs(c, '#8fa3bf', 3);
-    for (const s of [-1, 1]) line(c, [-300 + s * 10, -600, -300 + s * 70, -520], 6, '#2f3f5f');
-    drawNoahHead(c, -300, -780, .3, o.noahExpr || { lid: .15, mouth: 'flat' }, 0);
-    // blanket
-    c.beginPath(); c.moveTo(-650, -520); c.quadraticCurveTo(0, -560, 650, -520); c.lineTo(660, 1010); c.lineTo(-660, 1010); c.closePath(); fs(c, BED.blanket, 3);
-    c.save(); c.clip();
-    c.fillStyle = 'rgba(255,255,255,.05)'; c.beginPath(); c.ellipse(-300, 0, 230, 700, 0, 0, Math.PI * 2); c.fill(); c.beginPath(); c.ellipse(300, -20, 230, 680, .05, 0, Math.PI * 2); c.fill();
-    for (let i = 0; i < 7; i++) line(c, [-640 + i * 210, -500, -600 + i * 210 + (i % 2) * 40, 1000], 7, 'rgba(0,0,0,.16)'); c.restore();
-    c.beginPath(); c.moveTo(-650, -520); c.quadraticCurveTo(0, -560, 650, -520); c.lineTo(650, -430); c.quadraticCurveTo(0, -470, -650, -430); c.closePath(); fs(c, BED.sheet, 3);
-    // Noah's hand + phone on his chest
+    // wife: on her back, head turned toward the window, asleep; blanket up to her chest
+    drawPal(c, { look: 'wife', x: 300, y: 120, k: .72, ink: 1.8, outfit: 'nightie', tilt: .3, expr: { eyes: 'closed', mouth: 'soft' }, arms: { l: { a: .25, b: -.1 }, r: { a: .3, b: -.15 } } });
+    // Noah: on his back, looking up (= at the camera), phone in his right hand on his chest
+    const NA = { a: .55, b: -2.3 }, nk = .75, nfx = -300, nfy = 140;
+    drawNoah(c, { x: nfx, y: nfy, k: nk, ink: 1.8, outfit: 'pyjama', expr: o.noahExpr || { lid: .15, mouth: 'flat' }, arms: { l: { a: .22, b: -.06 }, r: NA } });
+    // blanket: up to Noah's waist, up to the wife's chest
+    const bl = () => { c.beginPath(); c.moveTo(-650, -230); c.quadraticCurveTo(-320, -270, -60, -240); c.quadraticCurveTo(20, -480, 120, -500); c.quadraticCurveTo(400, -530, 650, -500); c.lineTo(660, 1010); c.lineTo(-660, 1010); c.closePath(); };
+    bl(); fs(c, BED.blanket, 3);
+    c.save(); bl(); c.clip();
+    c.fillStyle = 'rgba(255,255,255,.05)'; c.beginPath(); c.ellipse(-300, 300, 230, 600, 0, 0, Math.PI * 2); c.fill(); c.beginPath(); c.ellipse(300, 100, 230, 640, .05, 0, Math.PI * 2); c.fill();
+    for (let i = 0; i < 7; i++) line(c, [-640 + i * 210, -500, -600 + i * 210 + (i % 2) * 40, 1000], 7, 'rgba(0,0,0,.16)');
+    c.fillStyle = BED.sheet; c.beginPath(); c.moveTo(-650, -230); c.quadraticCurveTo(-320, -270, -60, -240); c.quadraticCurveTo(20, -480, 120, -500); c.quadraticCurveTo(400, -530, 650, -500); c.lineTo(650, -420); c.quadraticCurveTo(400, -450, 140, -420); c.quadraticCurveTo(40, -400, -40, -160); c.quadraticCurveTo(-320, -190, -650, -150); c.closePath(); c.fill(); c.lineWidth = 3; c.strokeStyle = OUT; c.stroke();
+    c.restore(); bl(); fs(c, null, 3);
     if (o.phoneOnChest !== false) {
-      const px = -260, py = -300;
-      c.beginPath(); c.moveTo(-520, -150); c.quadraticCurveTo(-420, -230, -330, -260); c.lineTo(-300, -200); c.quadraticCurveTo(-400, -170, -480, -90); c.closePath(); fs(c, '#8fa3bf', 3);
-      c.save(); c.translate(px, py); c.rotate(-.12); phoneUI(c, -70, -120, 140, 280, { mode: 'chat', words: 6, glow: 0, t }); c.restore();
-      drawNoahHand(c, -300, -210, .3, 2.3);
+      // phone held in the right hand (hand = rig wrist), screen facing his face
+      const ex = 150 + Math.sin(NA.a) * 215, ey = -915 + Math.cos(NA.a) * 215, a2 = NA.a + NA.b, wx = nfx + (ex + Math.sin(a2) * 205) * nk, wy = nfy + (ey + Math.cos(a2) * 205) * nk;
+      c.save(); c.translate(wx - 40, wy - 30); c.rotate(.35); phoneUI(c, -65, -130, 130, 260, { mode: 'chat', glow: 0, t }); c.restore();
+      drawNoahHand(c, wx, wy, nk, -a2 + Math.PI * .05);
     }
     c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = 'rgba(70,82,125,1)'; c.fillRect(-5000, -5000, 10000, 10000); c.restore();
     blindStripes(c, -1600, -1500, 2600, 1900, 14, 120, 44, .11);
-    if (o.phoneOnChest !== false && o.phoneGlow) { bloom(c, -260, -360, 700, '110,150,255', .45 * o.phoneGlow); bloom(c, -300, -760, 260, '130,165,255', .3 * o.phoneGlow); }
+    if (o.phoneOnChest !== false && o.phoneGlow) { bloom(c, -280, -470, 800, '110,150,255', .45 * o.phoneGlow); bloom(c, -300, -790, 360, '130,165,255', .3 * o.phoneGlow); }
     seg7(c, o.clock || '03:01', -998, -786, 52, '#ff3b2f', { colon: Math.floor(t * 2) % 2 === 0 });
   });
   return { base: '#1a1512' };
+}
+
+// a side-profile body lying on its back: head centre at (hx, hy), feet toward -x, face up
+function lyingSide(c, hx, hy, k, draw) {
+  c.save(); c.translate(hx - 1240 * k, hy - 10 * k); c.rotate(Math.PI / 2); draw({ x: 0, y: 0, k, s: -1 }); c.restore();
 }

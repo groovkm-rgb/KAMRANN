@@ -74,7 +74,8 @@ NX.pal = null;
     c.save(); c.beginPath(); c.arc(S.HX, S.HY, S.R, 0, Math.PI * 2); c.fillStyle = NOAH.shade; c.fill(); c.clip(); c.beginPath(); c.arc(S.HX - 4, S.HY - 34, S.R - 4, 0, Math.PI * 2); c.fillStyle = NOAH.skin; c.fill(); c.restore();
     c.beginPath(); c.arc(S.HX, S.HY, S.R, 0, Math.PI * 2); nFill(c, null);
     c.beginPath(); c.moveTo(180, -1420); c.bezierCurveTo(100, -1540, -200, -1540, -262, -1330); c.bezierCurveTo(-280, -1200, -250, -1080, -200, -1010); c.lineTo(-100, -1060); c.bezierCurveTo(-60, -1160, 20, -1300, 180, -1420); c.closePath(); nFill(c, L.col, NOAH.W * .8);
-    c.beginPath(); c.ellipse(150 + (e.look || 0) * 5, -1212, 20, 31, 0, 0, Math.PI * 2); c.fillStyle = NOAH.eye; c.fill();
+    if (e.eyes === 'closed') { c.beginPath(); c.moveTo(128, -1214); c.quadraticCurveTo(150, -1196, 172, -1214); c.lineWidth = 9; c.strokeStyle = NOAH.eye; c.lineCap = 'round'; c.stroke(); }
+    else { c.beginPath(); c.ellipse(150 + (e.look || 0) * 5, -1212, 20, 31, 0, 0, Math.PI * 2); c.fillStyle = NOAH.eye; c.fill(); }
     nLine(c, [118, -1092, 168, -1092], 8, NOAH.out);
     if (NX.p && NX.p.hat) nxHatSide(c);
   };

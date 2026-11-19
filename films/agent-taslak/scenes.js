@@ -19,7 +19,7 @@ CUE('amb', T.cut2, { name: 'deskRoom', until: 28.9 }); CUE('amb', 28.9, { name: 
 const TAG = { t0: 3.95, t1: 8.2, corner: 'tl', text: 'TAG 1 · 03:00 Uhr', stamp: false }; dosCardCues(TAG, 1);
 const shotA = {
   name: 'A bedroom wide → clock', dur: 6.8, f(lt, Tt, t) {
-    const v = lt < 2.6 ? camAt(S(-330, -640, .8), S(-180, -600, .9), lt / 2.6) : camAt(S(-180, -600, .9), S(410, -470, 2.35), (lt - 2.6) / 1.5);
+    const v = lt < 2.6 ? camAt(S(-330, -640, .8), S(-180, -600, .9), lt / 2.6) : camAt(S(-180, -600, .9), S(490, -470, 2.3), (lt - 2.6) / 1.5);
     v.x += Math.sin(t * .6) * 6; v.y += Math.cos(t * .5) * 4;
     const buzz = t > T.vib && t < T.vib + 1.55 ? (Math.floor((t - T.vib) / .38) % 2 ? 0 : 3) : 0;
     return { set: bedroomSide, setOpts: { phoneGlow: t > T.vib ? clamp((t - T.vib) * 4, 0, 1) : 0, buzz, noah: withBlink(EX.alert, t, 6, 2), clock: '03:00' }, cam: v, vignette: .2,
@@ -42,11 +42,11 @@ const shotC = {
   } };
 const shotD = {
   name: 'D the message (POV, phone in hand)', dur: T.bett - T.msg, f(lt, Tt, t) {
-    const n = T.words.filter(w => t >= w).length, sway = Math.sin(t * 1.3) * 6;
+    const n = 6, sway = Math.sin(t * 1.3) * 6;
     return { set: (c, cam, tt) => { ceilingNight(c, cam, tt); return { base: '#0c0f18' }; }, cam: S(0, 0, 1 + lt * .012), vignette: .3,
       fx: [c => {
         c.save(); c.translate(sway, 30 + Math.cos(t * 1.1) * 5); c.rotate(.02 + sway * .001);
-        phoneUI(c, -250, -470, 500, 1000, { mode: 'chat', words: n, typing: n === 0, t, glow: 1.6 });
+        phoneUI(c, -250, -470, 500, 1000, { mode: 'chat', words: n, t, glow: 1.6 });
         // hand holding the phone from below (thumb on the side), pyjama cuff
         line(c, [120, 900, 150, 520], 170, OUT); line(c, [120, 900, 150, 520], 150, '#8fa3bf'); for (const d of [-40, 0, 40]) line(c, [120 + d, 900, 150 + d, 520], 10, '#c9d6e6');
         drawNoahHand(c, 160, 470, 1.05, Math.PI * .92);
@@ -56,14 +56,14 @@ const shotD = {
   } };
 const shotE = {
   name: 'E overhead: awake next to his sleeping wife', dur: T.sie - T.bett, f(lt, Tt, t) {
-    const v = t < T.frau ? camAt(S(-300, -720, 2.0), S(-290, -700, 1.85), lt / (T.frau - T.bett)) : camAt(S(-290, -700, 1.85), S(10, -600, 1.08), (t - T.frau) / 2.0);
+    const v = t < T.frau ? camAt(S(-300, -600, 1.2), S(-295, -590, 1.12), lt / (T.frau - T.bett)) : camAt(S(-295, -590, 1.12), S(0, -380, .8), (t - T.frau) / 2.0);
     const e = Object.assign({}, EX.alert, { look: t < 15.3 ? 0 : t < 16.3 ? .7 : .2 });
     return { set: bedTop, setOpts: { noahExpr: withBlink(e, t, 7, 5), phoneGlow: 1 }, cam: v, vignette: .2,
       screen: [c => noirGrade(c, t, { vig: .6 })] };
   } };
 const shotF = {
   name: 'F close-up: phone light on his face, heartbeat', dur: T.cut2 - T.sie, f(lt, Tt, t) {
-    const pulse = beatPulse(t), v = camAt(S(-300, -760, 3.3), S(-300, -770, 3.75), lt / Tt); v.z += pulse * .025;
+    const pulse = beatPulse(t), v = camAt(S(-300, -700, 1.95), S(-300, -720, 2.25), lt / Tt); v.z += pulse * .015;
     const e = Object.assign({}, EX.alert, { look: lt < 1.6 ? .15 : -.55 });
     return { set: bedTop, setOpts: { noahExpr: e, phoneGlow: 1.2 }, cam: v, vignette: .3,
       screen: [c => { c.save(); c.globalCompositeOperation = 'screen'; const g = c.createLinearGradient(0, H, 0, H * .3); g.addColorStop(0, `rgba(90,130,255,${.38 + pulse * .05})`); g.addColorStop(1, 'rgba(90,130,255,0)'); c.fillStyle = g; c.fillRect(0, 0, W, H); c.restore(); },

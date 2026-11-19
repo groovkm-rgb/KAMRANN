@@ -10,6 +10,7 @@ const NX = {
   OUT: {
     agent:  { pants: '#1d2640', stripe: '#28324f', shoe: '#17151a', jacket: '#1f2a45', lapel: '#18213a', shirt: '#f4f2ec', tie: '#15171d', coat: '#8b8d88', coatDark: '#6c6e6a', sleeve: '#1f2a45' },
     pyjama: { pants: '#8fa3bf', stripe: '#c9d6e6', shoe: '#4a3f4a', top: '#8fa3bf', topStripe: '#c9d6e6', piping: '#2f3f5f', sleeve: '#8fa3bf' },
+    nightie: { pants: '#8a5a6e', stripe: '#a87a8c', shoe: '#4a3a44', top: '#8a5a6e', topStripe: '#a87a8c', piping: '#4a2a38', sleeve: '#8a5a6e' },
     home:   { pants: NOAH.pants, stripe: NOAH.stripe, shoe: NOAH.shoe, top: '#7a5a48', rib: '#5f4436', sleeve: '#7a5a48' },
     old:    { pants: '#4a4a4e', stripe: '#56565a', shoe: '#2a2624', coat: '#77797a', coatDark: '#5c5e60', shirt: '#e8e4dc', sleeve: '#77797a', hair: ['#b9b5b0', '#8e8a86', '#dedad5'], brow: '#9a958f' },
   },
@@ -104,7 +105,7 @@ function nxOldCoat(c, o) {
 noahTorso = function (c) {
   const o = NX.OUT[NX.cur];
   if (NX.cur === 'agent') return nxSuit(c, o, NX.p.coat);
-  if (NX.cur === 'pyjama') return nxPyjamaTorso(c, o);
+  if ((NX.cur === 'pyjama' || NX.cur === 'nightie')) return nxPyjamaTorso(c, o);
   if (NX.cur === 'home') return nxSweater(c, o);
   if (NX.cur === 'old') return nxOldCoat(c, o);
   return _nx.noahTorso(c);
@@ -122,7 +123,7 @@ noahArm = function (c, side, spec, watch, sleeve = true) {
   nLine(c, [...end, wx, wy], NOAH.ARM_W + NOAH.W * 2, NOAH.out); nLine(c, [...end, wx, wy], NOAH.ARM_W, NOAH.skin);
   if (NX.cur === 'agent' && !coat) { nLine(c, [...P(.7), ...cuff], NOAH.ARM_W + 14 + NOAH.W * 2, NOAH.out); nLine(c, [...P(.7), ...cuff], NOAH.ARM_W + 14, o.shirt); }
   nLine(c, [sx, sy, ex, ey, ...end], wdt + NOAH.W * 2, NOAH.out); nLine(c, [sx, sy, ex, ey, ...end], wdt, col);
-  if (NX.cur === 'pyjama') { c.save(); c.globalAlpha = .9; nLine(c, [sx, sy, ex, ey, ...end], 8, o.topStripe); c.restore(); }
+  if ((NX.cur === 'pyjama' || NX.cur === 'nightie')) { c.save(); c.globalAlpha = .9; nLine(c, [sx, sy, ex, ey, ...end], 8, o.topStripe); c.restore(); }
   if (coat) { const q = P(.72); nLine(c, [q[0] - 40, q[1] - 6, q[0] + 40, q[1] + 6], 14, o.coatDark); }
   // elbow crease
   nLine(c, [ex - side * 18, ey - 6, ex + side * 10, ey + 10], 4, 'rgba(0,0,0,.35)');
@@ -157,8 +158,8 @@ noahSideTorso = function (c, cave, s = 1) {
     for (const y of [-780, -680, -580, -480]) { c.beginPath(); c.arc(100, y, 9, 0, Math.PI * 2); nFill(c, '#2e2b28', 3); }
     c.beginPath(); c.moveTo(-40, -975); c.lineTo(-70, -1030); c.lineTo(60, -1030); c.lineTo(80, -960); c.closePath(); nFill(c, o.coatDark, NOAH.W * .6);
   } else {
-    body(); nFill(c, NX.cur === 'pyjama' ? o.top : o.top);
-    if (NX.cur === 'pyjama') { c.save(); body(); c.clip(); for (let x = -120; x < 120; x += 34) nLine(c, [x, -970, x, -490], 10, o.topStripe); c.restore(); body(); nFill(c, null); }
+    body(); nFill(c, (NX.cur === 'pyjama' || NX.cur === 'nightie') ? o.top : o.top);
+    if ((NX.cur === 'pyjama' || NX.cur === 'nightie')) { c.save(); body(); c.clip(); for (let x = -120; x < 120; x += 34) nLine(c, [x, -970, x, -490], 10, o.topStripe); c.restore(); body(); nFill(c, null); }
     if (NX.cur === 'home') { c.fillStyle = o.rib; c.fillRect(-114, -560, 220, 60); body(); nFill(c, null); }
   }
 };
