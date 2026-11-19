@@ -84,14 +84,14 @@ def reverb(x, sec=1.2, wet=.3):
     n = secs(sec); ir = white(n) * np.exp(-np.arange(n) / SR * 5 / sec); ir = lp(ir, 5000); ir /= np.sqrt(np.sum(ir ** 2))
     return x * (1 - wet) + fftconvolve(x, ir)[:len(x)] * wet
 def babble(n, voices=8, lo=250, hi=2800):
-    """unintelligible crowd / PA murmur: noise through moving formants with syllable envelopes"""
+    """soft, unintelligible room murmur: breathy noise through two formant bands with slow syllable swells (no buzzy pitch source)"""
     out = np.zeros(n); t = np.arange(n) / SR
     for v in range(voices):
-        rate = RNG.uniform(3.5, 6); env = (np.sin(2 * np.pi * rate * t + RNG.uniform(0, 6)) > RNG.uniform(-.2, .4)).astype(float)
-        env = lp(env * (lp(np.abs(white(n)), .3) * 3 > .5), 25)
-        f0 = RNG.uniform(110, 230); src = np.sign(np.sin(2 * np.pi * f0 * t * (1 + .05 * np.sin(2 * np.pi * .7 * t + v)))) * .5 + white(n) * .3
-        out += (bp(src, lo, hi) + bp(src, RNG.uniform(600, 900), RNG.uniform(1100, 1500)) * .8) * env
-    return out / (np.std(out) + 1e-9)
+        rate = RNG.uniform(2.5, 4.5); env = .5 + .5 * np.sin(2 * np.pi * rate * t + RNG.uniform(0, 6))
+        env *= lp(np.abs(white(n)), .4) * 3; env = lp(np.clip(env, 0, 1.5), 8)
+        src = white(n); f1 = RNG.uniform(350, 600)
+        out += (bp(src, f1, f1 * 1.6) + bp(src, RNG.uniform(900, 1200), RNG.uniform(1400, 1800)) * .5) * env
+    out = lp(out, min(hi, 1800)); return out / (np.std(out) + 1e-9)
 def sfx_step(surf='wet', gain=1):
     n = secs(.18); t = np.arange(n) / SR
     thud = np.sin(2 * np.pi * (90 if surf != 'marble' else 140) * t) * np.exp(-t * 40)
@@ -176,7 +176,7 @@ def amb(name, dur):
         hum = np.sin(2 * np.pi * 120 * t) * .007 + bp(white(n), 3500, 7000) * .004; room = lp(brown(n), 200) * .03; m = hum + room; return np.stack([m, m])
     if name == 'gym': m = reverb(lp(brown(n), 300) * .04, 1.5, .4); return np.stack([m, m])
     if name == 'homeDay': m = lp(brown(n), 150) * .03 + bp(brown(n), 60, 400) * .015; return np.stack([m, m])
-    if name == 'party': b = babble(n, 6) * .03; b = reverb(b, .7, .2); m = lp(brown(n), 150) * .02; return np.stack([b + m, np.roll(b, 2000) + m])
+    if name == 'party': b = babble(n, 6) * .008; b = reverb(b, .7, .2); m = lp(brown(n), 150) * .02; return np.stack([b + m, np.roll(b, 2000) + m])
     if name == 'station':
         b = reverb(babble(n, 10) * .03, 2.0, .45); pa = np.zeros(n)
         for st in [2.0, dur * .55]:
