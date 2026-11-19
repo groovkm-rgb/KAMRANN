@@ -111,6 +111,26 @@
   "dur": 1.9
  },
  {
+  "kind": "tick",
+  "at": 45.34,
+  "gain": 0.5
+ },
+ {
+  "kind": "tick",
+  "at": 46.16,
+  "gain": 0.5
+ },
+ {
+  "kind": "tick",
+  "at": 46.22,
+  "gain": 0.5
+ },
+ {
+  "kind": "tick",
+  "at": 46.92,
+  "gain": 0.5
+ },
+ {
   "kind": "amb",
   "at": 47.98,
   "name": "kitchen",

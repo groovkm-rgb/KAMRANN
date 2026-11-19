@@ -38,6 +38,36 @@
   "at": 9.1
  },
  {
+  "kind": "tick",
+  "at": 10.14,
+  "gain": 0.5
+ },
+ {
+  "kind": "tick",
+  "at": 10.82,
+  "gain": 0.5
+ },
+ {
+  "kind": "tick",
+  "at": 11.02,
+  "gain": 0.5
+ },
+ {
+  "kind": "tick",
+  "at": 11.52,
+  "gain": 0.5
+ },
+ {
+  "kind": "tick",
+  "at": 12.18,
+  "gain": 0.5
+ },
+ {
+  "kind": "tick",
+  "at": 12.3,
+  "gain": 0.5
+ },
+ {
   "kind": "rustle",
   "at": 13.5,
   "soft": 1

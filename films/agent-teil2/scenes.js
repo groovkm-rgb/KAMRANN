@@ -82,10 +82,10 @@ CUE('ding', 37.3);
 function shotDeskPhone(lt, T, t) {
   const buzz = t > 42.0 && t < 44.0 ? Math.sin(t * 95) * 5 : 0;
   return { set: deskTop, cam: drift(camAt(S(0, 0, 1.2), S(0, -30, 1.45), lt / T), t, 2), vignette: .35,
-    fx: [c => { c.save(); c.translate(buzz, 0); c.rotate(-.06); phoneUI(c, -175, -365, 350, 730, t < 44.6 ? { mode: 'lock', big: '17:42', date: 'Montag', notif: seg(t, 42.0, 42.4), t, glow: 1.2 } : { mode: 'chat', words: 6, t, glow: 1.2, msg: 'Morgen. 8 Uhr. Bahnhof.', time: '17:42' }); c.restore(); filingStack(c, -700, 8, 300); }],
+    fx: [c => { c.save(); c.translate(buzz, 0); c.rotate(-.06); phoneUI(c, -175, -365, 350, 730, t < 44.6 ? { mode: 'lock', big: '17:42', date: 'Montag', notif: seg(t, 42.0, 42.4), t, glow: 1.2 } : { mode: 'chat', words: [45.34, 46.16, 46.22, 46.92].filter(w => t >= w).length, typing: t < 45.34, t, glow: 1.2, msg: 'Morgen. 8 Uhr. Bahnhof.', time: '17:42' }); c.restore(); filingStack(c, -700, 8, 300); }],
     screen: [c => G.grey(c, t)] };
 }
-CUE('vibrate', 42.0, { dur: 1.9 });
+CUE('vibrate', 42.0, { dur: 1.9 }); [45.34, 46.16, 46.22, 46.92].forEach(w => CUE('tick', w, { gain: .5 }));
 function kitchen(c, cam, t) { return room(c, cam, t, { wall: '#d8c8a8', floor: '#8a6a4a', floorType: 'tile', light: 'day', curtain: '#c8a060', windows: [{ x: -300, w: 600, h: 520, view: 'day' }], back: (c, b) => { for (let i = 0; i < 4; i++) { c.beginPath(); c.rect(-1400 + i * 320, b - 1300, 290, 300); fs(c, '#e8e0cc', 3); circle(c, -1150 + i * 320, b - 1150, 8); fs(c, '#888', 1); } }, floorFn: c => counter(c, -1000, 1300) }); }
 CUE('amb', 47.98, { name: 'kitchen', until: 62.42 });
 function shotKitchen(lt, T, t) {

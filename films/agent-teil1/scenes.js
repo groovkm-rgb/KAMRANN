@@ -23,10 +23,12 @@ function shotLock(lt, T, t) {
     }],
     screen: [c => G.night(c, t), c => dosTag(c, t, TAG1)] };
 }
+const MSGW = [10.14, 10.82, 11.02, 11.52, 12.18, 12.3];   // the message is typed word by word with the voice
+MSGW.forEach(w => CUE('tick', w, { gain: .5 }));
 function shotMsg(lt, T, t) {
-  const sway = Math.sin(t * 1.3) * 6;
+  const sway = Math.sin(t * 1.3) * 6, n = MSGW.filter(w => t >= w).length;
   return { set: (c, cam, tt) => { ceilingNight(c, cam, tt); return { base: '#0c0f18' }; }, cam: S(0, 0, 1 + lt * .012), vignette: .3,
-    fx: [c => { c.save(); c.translate(sway, 30 + Math.cos(t * 1.1) * 5); c.rotate(.02 + sway * .001); phoneUI(c, -250, -470, 500, 1000, { mode: 'chat', words: 6, t, glow: 1.6 });
+    fx: [c => { c.save(); c.translate(sway, 30 + Math.cos(t * 1.1) * 5); c.rotate(.02 + sway * .001); phoneUI(c, -250, -470, 500, 1000, { mode: 'chat', words: n, typing: n === 0, t, glow: 1.6 });
       line(c, [120, 900, 150, 520], 170, OUT); line(c, [120, 900, 150, 520], 150, '#8fa3bf'); for (const d of [-40, 0, 40]) line(c, [120 + d, 900, 150 + d, 520], 10, '#c9d6e6'); drawNoahHand(c, 160, 470, 1.05, Math.PI * .92); c.restore(); }],
     screen: [c => noirGrade(c, t, { vig: .7 })] };
 }

@@ -252,7 +252,7 @@ def decode(path, a=None, b=None):
     if b is not None: cmd += ['-to', str(b)] if a is None else ['-t', str(b - a)]
     cmd += ['-i', path, '-f', 'f32le', '-ac', '1', '-ar', str(SR), '-']
     return np.frombuffer(subprocess.run(cmd, capture_output=True, check=True).stdout, np.float32).astype(np.float64)
-def duck_gain(voice, depth_db=-10, att=.06, rel=.5):
+def duck_gain(voice, depth_db=-10, att=.03, rel=.6):
     hop = SR // 100; nfr = len(voice) // hop + 1; pad = np.pad(voice, (0, nfr * hop - len(voice)))
     rms = np.sqrt(np.mean(pad.reshape(nfr, hop) ** 2, axis=1) + 1e-12); lvl = 20 * np.log10(rms)
     act = np.clip((lvl - (np.percentile(lvl, 95) - 30)) / 8, 0, 1)
@@ -277,7 +277,22 @@ def main(spec_path):
     mus = music(S['music'], dur)
     gd = duck_gain(voice, S.get('duck_db', -10))
     vpk = np.max(np.abs(voice)) + 1e-9; voice = voice / vpk * .5
-    mix = np.stack([voice, voice]) + (mus * S.get('music_gain', .55) + ambb * S.get('amb_gain', .6)) * gd + fx * S.get('fx_gain', .45) * (.55 + .45 * gd)
+    mix = np.stack([voice, voice]) + (mus * S.get('music_gain', .55) + ambb * S.get('amb_gain', .6)) * gd + fx * S.get('fx_gain', .45) * (.3 + .7 * gd)
+    # voice priority: wherever the voice speaks, keep the whole bed (music + ambience + sfx) at least `margin` dB under it
+    bed = mix - np.stack([voice, voice]); hop = SR // 100; nfr = N // hop + 1; pad = lambda x: np.pad(x, (0, nfr * hop - len(x)))
+    vr = np.sqrt(np.mean(pad(voice).reshape(nfr, hop) ** 2, axis=1) + 1e-12); br = np.sqrt(np.mean(pad((bed[0] + bed[1]) / 2).reshape(nfr, hop) ** 2, axis=1) + 1e-12)
+    vs = np.convolve(vr, np.ones(15) / 15, 'same'); act = vs > np.max(vs) * .06
+    g = np.where(act, np.minimum(1, vs * db(-S.get('margin', 12)) / br), 1.0)
+    for i in range(1, nfr): g[i] = min(g[i], g[i - 1] * 1.02 + .002) if g[i] > g[i - 1] else g[i]   # slow release
+    g = np.minimum.accumulate(g[::-1])[::-1] * 0 + g  # (kept simple)
+    g = np.convolve(g, np.ones(5) / 5, 'same'); gs = np.interp(np.arange(N) / hop, np.arange(nfr), g)
+    mix = np.stack([voice, voice]) + bed * gs
+    # report: how far the bed sits under the voice where the voice speaks
+    bed = mix - np.stack([voice, voice]); hop = SR // 10; nfr = N // hop
+    vr = np.sqrt(np.mean(voice[:nfr * hop].reshape(nfr, hop) ** 2, axis=1) + 1e-12); br = np.sqrt(np.mean(bed[0, :nfr * hop].reshape(nfr, hop) ** 2, axis=1) + 1e-12)
+    act = vr > np.percentile(vr, 60); diff = 20 * np.log10(vr[act] / br[act])
+    print(f'voice above bed while speaking: median {np.median(diff):.1f} dB, worst 2% {np.percentile(diff, 2):.1f} dB')
+    worst = np.argsort(diff)[:8]; print('quietest voice-vs-bed moments (s):', sorted(round(float(np.where(act)[0][i] * .1), 1) for i in worst))
     tail = S.get('fade_out', .6); mix[:, -secs(tail):] *= np.linspace(1, 0, secs(tail))
     raw = P(S['out_wav'] + '.raw.wav'); write_wav(raw, mix)
     # loudness: two-pass loudnorm to -16 LUFS

@@ -160,12 +160,12 @@
    ]
   }
  ],
- "duck_db": -10,
- "music_gain": 0.55,
- "amb_gain": 0.6,
- "fx_gain": 0.45,
+ "duck_db": -16,
+ "music_gain": 0.42,
+ "amb_gain": 0.4,
+ "fx_gain": 0.4,
  "fade_out": 1.2,
  "out_wav": "agent-teil2-mix.wav",
- "video": "agent-teil2-silent.mp4",
- "out_mp4": "agent-teil2.mp4"
+ "out_mp4": null,
+ "margin": 13
 }

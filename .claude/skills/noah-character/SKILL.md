@@ -128,3 +128,12 @@ Font: Inter Bold embedded (OFL, `assets/fonts/LICENSE-Inter.txt`); it covers Ger
 Side profile has no sitting/lying pose and no beard/wild hair; no 3/4 view; the sheet's angry/confused/thinking/pointing
 poses are not coded. Measure them from `reference.jpg` before using them and tell the user rather than improvising a
 different-looking Noah.
+
+## Agent-film kit (`films/agent-kit/`, built for "Was wäre, wenn du ein Geheimagent wärst?")
+
+Load after `noah.js` / places / fonts / overlays, in this order: `outfits.js people.js rain.js dossier.js bedroom.js noir.js rooms.js places2.js shots.js`.
+- **Outfits** (layers on the unchanged rig, front + side): `outfit: 'agent'` (+ `coat: true`, `hat: true`), `'pyjama'`, `'nightie'`, `'home'`, `'old'` (grey hair, grey coat); `expr.bags` for sleepless eyes. `EX.alert / mask / fear / tired / fakeSmile / warm / sleepless`, `withBlink(e, t, every, seed)`.
+- **Other people** in Noah's drawing language: `drawPal(c, { look: 'wife'|'son'|'daughter'|'mother'|'follower'|'informant'|'colleague'|'recruiter'|'inspector'|'neighbor'|'agentF', ...drawNoah keys, side })`, `drawPalHead`, `silhouette(c, fn, col, rim)`.
+- **Text system "Geheime Akte"** (all German): `dosTag` / `dosCard` corner cards, `dosStamp`, `dosType` (typewriter), `tamShot({ t0, t1, page })` = full-screen table that drops on a desk as a folder, opens, camera pushes in and out. Every card registers sound cues (`CUE`).
+- **Places**: `bedroomSide`, `bedTop` (lying bodies: `lyingSide`), `rainStreet` (neon, puddles, reflections), `room(...)` generic interior (+ `sofa dinTable cake tv laptop hotelBed counter door ...`), `station`, `park` (`fog` / `autumn`), `kaufhaus`, `tramInside`, `alley`, `board`, `gymSil`, `beach`, `ceremonyHall`, `houseFront`, `deskTop`. Grades: `G.night / rain / warm / grey / day / cold / fog / gold` (`noirGrade` adds grain).
+- **Sound**: `audio.py spec.json` synthesizes noir music, ambiences and SFX from the film's cues (`export_cues.cjs`), ducks them under the voice, keeps the bed ≥ 13 dB under speech (`margin`), masters to −16 LUFS. `render_range.cjs` re-renders a frame range as a patch; `final.py` splices patches, joins parts and masters the result.
