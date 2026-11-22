@@ -237,7 +237,8 @@ function kabutoTop(c, o = {}) {
     c.beginPath(); c.moveTo(s * (R + 22), cy - 112); c.quadraticCurveTo(s * (R + 90), cy - 150, s * (R + 82), cy - 82); c.lineWidth = 6; c.strokeStyle = SAM.lace; c.stroke();
     drawKamon(c, s * (R + 58), cy - 108, 18, SAM.goldL);
   }
-  // maedate: invented gold crescent with a small disc (no real house crest)
+  // maedate: invented gold crescent with a small disc (no real house crest); enemy: gilt antlers
+  if (o.enemy) { for (const s of [-1, 1]) { c.beginPath(); c.moveTo(s * 30, cy - 250); c.quadraticCurveTo(s * 150, cy - 400, s * 110, cy - 560); c.lineTo(s * 130, cy - 566); c.quadraticCurveTo(s * 190, cy - 400, s * 50, cy - 240); c.closePath(); fo(c, SAM.goldL, lw * .7); c.beginPath(); c.moveTo(s * 130, cy - 420); c.lineTo(s * 230, cy - 470); c.lineTo(s * 140, cy - 400); c.closePath(); fo(c, SAM.goldL, lw * .6); } return; }
   c.save(); c.translate(0, cy - 160);
   c.beginPath(); c.moveTo(-200, -170); c.quadraticCurveTo(-120, 30, 0, 26); c.quadraticCurveTo(120, 30, 200, -170); c.quadraticCurveTo(110, -20, 0, -20); c.quadraticCurveTo(-110, -20, -200, -170); c.closePath();
   const gg = c.createLinearGradient(0, -170, 0, 30); gg.addColorStop(0, SAM.goldL); gg.addColorStop(1, '#9c7a2c'); fo(c, gg, lw * .8);
@@ -449,6 +450,7 @@ function sashimono(c, t = 0, o = {}) {
 // ---------------------------------------------------------------- full body, front view
 function drawSam(c, p = {}) {
   if (p.ink && !p._inked) { const W0 = NOAH.W; NOAH.W = W0 * p.ink; try { return drawSam(c, Object.assign({}, p, { _inked: 1 })); } finally { NOAH.W = W0; } }
+  if (p.outfit === 'nohaori') p = Object.assign({}, p, { outfit: 'samurai', haori: false });
   const k = p.k ?? .5, e = p.expr || {}, of = p.outfit || 'samurai';
   const arms = { l: Object.assign({}, { a: .1, b: -.06 }, (p.arms || {}).l), r: Object.assign({}, { a: .1, b: -.06 }, (p.arms || {}).r) };
   const hair = p.hair || (of === 'armor' ? 'helmet' : of === 'ronin' ? 'loose' : 'chonmage');
@@ -458,6 +460,7 @@ function drawSam(c, p = {}) {
     ronin: { col: SAM.ronin, dark: SAM.roninD, light: SAM.roninL, hak: '#5b5048', hakD: '#463d36', stripe: null, haori: false, mon: false, patches: [[-120, -840, 70, 80, SAM.patch], [60, -700, 80, 70, SAM.patch2]] },
     edo: { col: SAM.edo, dark: SAM.edoD, light: SAM.edoL, hak: '#5f5e63', hakD: '#4a494e', stripe: '#77767b', haori: false, mon: true, cover: SAM.sleeveCover },
     armor: { col: SAM.indigoD, dark: '#141a2c', light: SAM.indigo, armor: true },
+    custom: p.custom ? { col: p.custom.col, dark: p.custom.dark, light: p.custom.light, hak: p.custom.hak || p.custom.col, hakD: p.custom.hakD || p.custom.dark, stripe: p.custom.stripe, haori: p.custom.haori, haoriCol: p.custom.haoriCol, mon: p.custom.mon, cover: p.custom.cover, patches: p.custom.patches, brocade: p.custom.brocade } : null,
   }[of];
   c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k); if (p.lean) c.rotate(p.lean);
   const bob = p.bob || 0, br = p.breathe ? Math.sin(p.breathe) * 6 : 0;
@@ -468,25 +471,36 @@ function drawSam(c, p = {}) {
     for (const r of [.35, .65, .9]) { ell(c, 0, 0, 330 * r, 300 * r); c.lineWidth = 3; c.strokeStyle = '#a88a50'; c.stroke(); }
     c.restore();
   }
-  if (style.armor) armorBody(c, { sway: p.sway || 0, lift: p.lift });
+  const sz = p.seiza ? 330 : 0, swordsOn = swords && !p.seiza;
+  if (p.seiza) {
+    // kneeling (front): body lowered, hakama spreads over the knees on the floor
+    c.save(); c.translate(0, sz);
+    c.beginPath(); c.moveTo(-150, -620); c.lineTo(150, -620); c.quadraticCurveTo(300, -520, 320, -380); c.quadraticCurveTo(330, -330, 280, -326); c.lineTo(-280, -326); c.quadraticCurveTo(-330, -330, -320, -380); c.quadraticCurveTo(-300, -520, -150, -620); c.closePath();
+    fo(c, style.armor ? '#5a1c22' : style.hak, NOAH.W);
+    c.save(); c.clip(); for (const x of [-200, -120, -40, 40, 120, 200]) stroke(c, [x * .5, -600, x, -330], 5, style.armor ? '#3f1318' : style.hakD); if (style.stripe) for (let x = -320; x <= 320; x += 18) stroke(c, [x * .5, -620, x, -330], 2, style.stripe); c.restore();
+    c.restore();
+  } else if (style.armor) armorBody(c, { sway: p.sway || 0, lift: p.lift });
   else {
     feetFront(c, { geta: p.geta, lift: p.lift });
-    if (swords) swordsFront(c, 'back');
+    if (swordsOn) swordsFront(c, 'back');
     hakamaFront(c, { col: style.hak, dark: style.hakD, stripe: style.stripe, walk: p.walk });
   }
-  c.save(); c.translate(0, bob + br * .3);
-  if (!style.armor) { kosodeTorso(c, { col: style.col, dark: style.dark, mon: style.mon && !style.haori, texture: of === 'samurai' ? 'rgba(90,110,160,.45)' : of === 'ronin' ? 'rgba(60,45,30,.5)' : null, patches: style.patches }); obiFront(c); if (swords) swordsFront(c, 'front'); }
-  else if (swords) { swordsFront(c, 'front'); }
+  c.save(); c.translate(0, bob + br * .3 + sz);
+  if (style.armor && p.seiza) { const P = { sway: 0 }; c.save(); c.beginPath(); c.rect(-200, -980, 400, 420); c.clip(); armorBody(c, P); c.restore(); }
+  if (!style.armor) { kosodeTorso(c, { col: style.col, dark: style.dark, mon: style.mon && !style.haori, texture: of === 'samurai' ? 'rgba(90,110,160,.45)' : of === 'ronin' ? 'rgba(60,45,30,.5)' : null, patches: style.patches }); obiFront(c); if (swordsOn) swordsFront(c, 'front'); }
+  else if (swordsOn) { swordsFront(c, 'front'); }
   // neck
   c.beginPath(); c.rect(-46, -1000, 92, 62); c.fillStyle = NOAH.skin; c.fill(); stroke(c, [-46, -1000, -46, -955], 10, NOAH.out); stroke(c, [46, -1000, 46, -955], 10, NOAH.out);
-  const armOpt = { col: style.haori ? SAM.haori : style.col, dark: style.haori ? SAM.haoriD : style.dark, light: style.haori ? SAM.haoriL : style.light, wide: style.armor ? 0 : 250, cover: style.cover, armor: style.armor };
+  const hc = style.haoriCol || SAM.haori; const armOpt = { col: style.haori ? hc : style.col, dark: style.haori ? shadeHex(hc, -.25) : style.dark, light: style.haori ? shadeHex(hc, .2) : style.light, wide: style.armor ? 0 : 250, cover: style.cover, armor: style.armor };
   const up = arms.l.a > 1.6 || arms.r.a > 1.6;
   const drawArms = () => { samArm(c, -1, arms.l, armOpt); samArm(c, 1, arms.r, armOpt); };
-  if (style.haori) haoriFront(c, { col: SAM.haori, dark: SAM.haoriD });
+  if (style.haori) haoriFront(c, { col: hc, dark: shadeHex(hc, -.25) });
+  if (style.brocade) { c.save(); for (let i = 0; i < 30; i++) { const x = -130 + (i % 6) * 52, y = -920 + Math.floor(i / 6) * 70; if (Math.abs(x) < 70) continue; drawKamon(c, x, y, 14, 'rgba(220,190,110,.55)'); } c.restore(); }
   if (!up) drawArms();
   if (style.armor) { sodeFront(c, -1, p.sway || 0); sodeFront(c, 1, p.sway || 0); }
   c.save(); c.translate(0, NOAH.HEAD.y + 260); c.rotate(p.tilt || 0); c.translate(0, -(NOAH.HEAD.y + 260));
-  if (hair === 'helmet') { kabuto(c, { sway: p.sway || 0 }); samHeadLocal(c, e, 'helmet'); kabutoTop(c); }
+  if (p.headFn) p.headFn(c, e);
+  else if (hair === 'helmet') { kabuto(c, { sway: p.sway || 0 }); samHeadLocal(c, e, 'helmet'); kabutoTop(c, { enemy: p.enemyCrest }); }
   else samHeadLocal(c, e, hair);
   c.restore();
   if (up) drawArms();

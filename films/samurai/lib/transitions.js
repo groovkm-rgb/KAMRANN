@@ -122,3 +122,11 @@ function scrollRoller(c, x, H, k) {
   for (const y of [18, H - 18]) { ell(c, x, y, 40, 22); fo(c, '#2a180c', 3, '#140c06'); ell(c, x, y - 4, 28, 12); fo(c, '#b38a4a'); }
   c.restore();
 }
+// 9) paper tear: the old image is a sheet that tears diagonally and the halves fall away
+TRANS.tear = function (c, A, B, k) {
+  c.drawImage(B, 0, 0);
+  const kk = easeIn(k), edge = (side) => { c.beginPath(); const pts = []; for (let i = 0; i <= 24; i++) { const y = -40 + i * (H + 80) / 24, x = W / 2 + (y - H / 2) * .25 + (rnd(i + 3) - .5) * 70; pts.push([x, y]); }
+    c.moveTo(side < 0 ? -50 : W + 50, -40); pts.forEach(([x, y]) => c.lineTo(x, y)); c.lineTo(side < 0 ? -50 : W + 50, H + 40); c.closePath(); return pts; };
+  for (const s of [-1, 1]) { c.save(); c.translate(s * kk * 1100, kk * kk * 500); c.rotate(s * kk * .25); const pts = edge(s); c.save(); c.clip(); c.drawImage(A, 0, 0); c.restore();
+    c.beginPath(); pts.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.lineWidth = 16; c.strokeStyle = '#efe6d0'; c.stroke(); c.restore(); }
+};

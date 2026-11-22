@@ -1,0 +1,4557 @@
+[
+ {
+  "t0": 0,
+  "dur": 2.46,
+  "name": "01 Samurai im Morgenlicht",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 2.46,
+  "dur": 1.96,
+  "name": "02 Haus vor dem Morgengrauen",
+  "ang": "wide",
+  "tr": "ink",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 4.42,
+  "dur": 1.33,
+  "name": "03 Mondlicht auf Tatami",
+  "ang": "low",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 5.75,
+  "dur": 1.17,
+  "name": "04 Stille: Mond im Teich",
+  "ang": "pov",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 6.92,
+  "dur": 1.34,
+  "name": "05 Auge öffnet sich",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 8.26,
+  "dur": 1.94,
+  "name": "06 Zwei Schwerter",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 10.2,
+  "dur": 1.96,
+  "name": "07 Lang und kurz (Pinselnotizen)",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 12.16,
+  "dur": 2.12,
+  "name": "08 Makro Stichblatt und Griff",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 14.280000000000001,
+  "dur": 2.02,
+  "name": "09 Hand zum Griff",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 16.3,
+  "dur": 1.82,
+  "name": "10 Wach, wachsam (sitzend)",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 18.12,
+  "dur": 2.78,
+  "name": "11 Nebelfeld, rote Sonne",
+  "ang": "wide",
+  "tr": "cut",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 20.900000000000002,
+  "dur": 1.94,
+  "name": "12 Einsamer Krieger im Nebel",
+  "ang": "low",
+  "tr": "mist",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 22.840000000000003,
+  "dur": 1.28,
+  "name": "13 Japan, weite Landschaft",
+  "ang": "wide",
+  "tr": "ink",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 24.120000000000005,
+  "dur": 4.3,
+  "name": "14 T1 Zeitleiste",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 28.420000000000005,
+  "dur": 2.48,
+  "name": "15 Fürst gegen Fürst",
+  "ang": "split",
+  "tr": "shoji",
+  "sfx": [],
+  "amb": ""
+ },
+ {
+  "t0": 30.9,
+  "dur": 0.75,
+  "name": "01 Burg brennt",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "fire",
+    -10
+   ],
+   [
+    0.1,
+    "crash",
+    -12
+   ]
+  ],
+  "amb": "fire"
+ },
+ {
+  "t0": 31.65,
+  "dur": 0.65,
+  "name": "01 Pferde im Rauch",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "gallop",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 32.3,
+  "dur": 0.55,
+  "name": "01 Fahne fällt",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "flag",
+    -10
+   ],
+   [
+    0.45,
+    "thud",
+    -12
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 32.85,
+  "dur": 0.55,
+  "name": "01 Familien fliehen",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "shouts",
+    -16
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 33.4,
+  "dur": 1.54,
+  "name": "01 Mittendrin: du",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.05,
+    "armor",
+    -14
+   ],
+   [
+    0.9,
+    "wind",
+    -18
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 34.94,
+  "dur": 1.14,
+  "name": "01 Ein Samurai",
+  "ang": "closeup",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.1,
+    "swordRing",
+    -14
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 36.08,
+  "dur": 2.82,
+  "name": "01 Verneigung vor dem Herrn",
+  "ang": "wide",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0.1,
+    "shoji",
+    -10
+   ],
+   [
+    0.9,
+    "fabric",
+    -14
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 38.9,
+  "dur": 1.72,
+  "name": "01 Der Herr (im Schatten)",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "fan",
+    -14
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 40.62,
+  "dur": 2.08,
+  "name": "01 Filmklischee: Held im Regen",
+  "ang": "medium",
+  "tr": "cut",
+  "sfx": [
+   [
+    0,
+    "rain",
+    -12
+   ],
+   [
+    0.3,
+    "fakeSting",
+    -12
+   ]
+  ],
+  "amb": "rain"
+ },
+ {
+  "t0": 42.7,
+  "dur": 3.24,
+  "name": "01 Klischee wird durchgestrichen",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.9,
+    "brush",
+    -8
+   ],
+   [
+    1.5,
+    "brush",
+    -8
+   ],
+   [
+    2.6,
+    "paperTear",
+    -8
+   ]
+  ],
+  "amb": "rain"
+ },
+ {
+  "t0": 45.94,
+  "dur": 2.46,
+  "name": "01 Die Wahrheit: ein stiller Morgen",
+  "ang": "medium",
+  "tr": "tear",
+  "sfx": [
+   [
+    0.2,
+    "birds",
+    -18
+   ],
+   [
+    0.4,
+    "sweep",
+    -14
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 48.4,
+  "dur": 2.28,
+  "name": "01 Leise: Tropfen am Bambus",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    1.1,
+    "drop",
+    -10
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 50.68,
+  "dur": 1.87,
+  "name": "01 Komm mit",
+  "ang": "medium",
+  "tr": "sakura",
+  "sfx": [
+   [
+    0.3,
+    "fabric",
+    -14
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 52.55,
+  "dur": 2.45,
+  "name": "01 Ein ganz normaler Tag",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "steps",
+    -14
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 55,
+  "dur": 4.76,
+  "name": "02 Wiege mit Familienwappen",
+  "ang": "medium",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0.05,
+    "shoji",
+    -10
+   ],
+   [
+    0.8,
+    "creak",
+    -18
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 59.76,
+  "dur": 1.86,
+  "name": "02 Geboren, nicht gewählt",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.5,
+    "brush",
+    -12
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 61.62,
+  "dur": 1.5,
+  "name": "02 Der Vater",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "steps",
+    -16
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 63.12,
+  "dur": 1.66,
+  "name": "02 Der Großvater",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "cough",
+    -20
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 64.78,
+  "dur": 2.36,
+  "name": "02 Drei Generationen",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "fabric",
+    -16
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 67.14,
+  "dur": 4.26,
+  "name": "02 T2 Stände-Pyramide",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.3,
+    "brush",
+    -14
+   ],
+   [
+    0.8,
+    "brush",
+    -16
+   ],
+   [
+    1.3,
+    "brush",
+    -16
+   ],
+   [
+    1.8,
+    "brush",
+    -16
+   ],
+   [
+    3.9,
+    "hanko",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 71.4,
+  "dur": 2.2,
+  "name": "02 T2: 6–7 von 100",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    1.4,
+    "brush",
+    -12
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 73.6,
+  "dur": 1.3,
+  "name": "02 Bauer im Reisfeld",
+  "ang": "wide",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.1,
+    "splash",
+    -14
+   ]
+  ],
+  "amb": "field"
+ },
+ {
+  "t0": 74.9,
+  "dur": 0.85,
+  "name": "02 Handwerker",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "plane",
+    -10
+   ]
+  ],
+  "amb": "workshop"
+ },
+ {
+  "t0": 75.75,
+  "dur": 1.59,
+  "name": "02 Händler mit Abakus",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "soroban",
+    -10
+   ]
+  ],
+  "amb": "city"
+ },
+ {
+  "t0": 77.34,
+  "dur": 2.56,
+  "name": "02 Sie verneigen sich",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "steps",
+    -14
+   ],
+   [
+    0.8,
+    "fabric",
+    -16
+   ]
+  ],
+  "amb": "field"
+ },
+ {
+  "t0": 79.9,
+  "dur": 1.9,
+  "name": "02 Klingt gut? Warte ab",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "tick",
+    -14
+   ]
+  ],
+  "amb": "field"
+ },
+ {
+  "t0": 81.8,
+  "dur": 3.9,
+  "name": "03 Kalte Halle, Kind kniet",
+  "ang": "wide",
+  "tr": "black",
+  "sfx": [
+   [
+    0,
+    "taiko",
+    -8
+   ],
+   [
+    0.6,
+    "wind",
+    -18
+   ]
+  ],
+  "amb": "coldwind"
+ },
+ {
+  "t0": 85.7,
+  "dur": 3.68,
+  "name": "03 Das erste Holzschwert (Hände)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "wood",
+    -10
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 89.38,
+  "dur": 2.02,
+  "name": "03 Vor Sonnenaufgang üben",
+  "ang": "wide",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -8
+   ],
+   [
+    0.6,
+    "swish",
+    -12
+   ],
+   [
+    1.2,
+    "swish",
+    -12
+   ]
+  ],
+  "amb": "coldwind"
+ },
+ {
+  "t0": 91.4,
+  "dur": 1.88,
+  "name": "03 Zeitraffer: Jahreszeiten",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "whooshSoft",
+    -14
+   ],
+   [
+    0.5,
+    "whooshSoft",
+    -16
+   ],
+   [
+    1,
+    "whooshSoft",
+    -16
+   ],
+   [
+    1.5,
+    "whooshSoft",
+    -16
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 93.28,
+  "dur": 2.12,
+  "name": "03 Barfuß im Schnee",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "snowStep",
+    -10
+   ],
+   [
+    0.7,
+    "snowStep",
+    -10
+   ],
+   [
+    1.3,
+    "snowStep",
+    -10
+   ]
+  ],
+  "amb": "coldwind"
+ },
+ {
+  "t0": 95.4,
+  "dur": 1.1,
+  "name": "03 Sommerhitze",
+  "ang": "wide",
+  "tr": "fade",
+  "sfx": [
+   [
+    0,
+    "cicadas",
+    -14
+   ],
+   [
+    0.3,
+    "swish",
+    -12
+   ]
+  ],
+  "amb": "summer"
+ },
+ {
+  "t0": 96.5,
+  "dur": 1,
+  "name": "03 Verbundene Hand (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "fabric",
+    -12
+   ]
+  ],
+  "amb": "summer"
+ },
+ {
+  "t0": 97.5,
+  "dur": 1.2,
+  "name": "03 Bogenschießen",
+  "ang": "pov",
+  "tr": "cut",
+  "sfx": [
+   [
+    0.05,
+    "arrow",
+    -8
+   ],
+   [
+    0.42,
+    "thunk",
+    -6
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 98.7,
+  "dur": 1.42,
+  "name": "03 Reiten und Speer",
+  "ang": "split",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "gallop",
+    -10
+   ],
+   [
+    0.9,
+    "swish",
+    -10
+   ]
+  ],
+  "amb": "field"
+ },
+ {
+  "t0": 100.12,
+  "dur": 4.16,
+  "name": "03 Keine Angst, kein Schmerz",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "heartbeat",
+    -16
+   ]
+  ],
+  "amb": "coldwind"
+ },
+ {
+  "t0": 104.28,
+  "dur": 1.32,
+  "name": "03 Hinfallen",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "fall",
+    -8
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 105.6,
+  "dur": 2.08,
+  "name": "03 Aufstehen, ohne ein Wort",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "fabric",
+    -14
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 107.68,
+  "dur": 2.3,
+  "name": "03 Kein Jammern",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "brush",
+    -10
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 109.98,
+  "dur": 3.02,
+  "name": "04 Match-Cut: Stahlklinge",
+  "ang": "medium",
+  "tr": "match",
+  "sfx": [
+   [
+    0.05,
+    "swordDraw",
+    -8
+   ],
+   [
+    1,
+    "swish",
+    -10
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 113,
+  "dur": 2.1,
+  "name": "04 Tuschestein, Stange reiben",
+  "ang": "overhead",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -10
+   ],
+   [
+    0.3,
+    "inkGrind",
+    -8
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 115.1,
+  "dur": 1.6,
+  "name": "04 Pinsel auf Washi",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "brush",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 116.7,
+  "dur": 2.3,
+  "name": "04 Kalligrafie, Stunden vergehen",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "brush",
+    -14
+   ],
+   [
+    1.4,
+    "brush",
+    -14
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 119,
+  "dur": 1.5,
+  "name": "04 Gedichte lesen",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "paper",
+    -12
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 120.5,
+  "dur": 1.4,
+  "name": "04 Teezeremonie: Schöpfkelle",
+  "ang": "pov",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.3,
+    "waterPour",
+    -10
+   ],
+   [
+    0,
+    "kettleBoil",
+    -16
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 121.9,
+  "dur": 1.3,
+  "name": "04 Teebesen",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "whisk",
+    -10
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 123.2,
+  "dur": 1.1,
+  "name": "04 Schale mit beiden Händen",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "fabric",
+    -16
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 124.3,
+  "dur": 2.9,
+  "name": "04 Beides beherrschen",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "kettleBoil",
+    -20
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 127.2,
+  "dur": 3,
+  "name": "04 Schwert | Pinsel (Split)",
+  "ang": "split",
+  "tr": "cut",
+  "sfx": [
+   [
+    0.2,
+    "swish",
+    -8
+   ],
+   [
+    0.9,
+    "brush",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 130.2,
+  "dur": 4.5,
+  "name": "04 T3 Ausbildung",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.2,
+    "brush",
+    -14
+   ],
+   [
+    1,
+    "brush",
+    -16
+   ],
+   [
+    1.5,
+    "brush",
+    -16
+   ],
+   [
+    2,
+    "brush",
+    -16
+   ],
+   [
+    0.8,
+    "hanko",
+    -10
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 134.7,
+  "dur": 3.8,
+  "name": "04 Respekt: Schrift dem Lehrer zeigen",
+  "ang": "medium",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "shoji",
+    -10
+   ],
+   [
+    1.4,
+    "paper",
+    -14
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 138.5,
+  "dur": 1.7,
+  "name": "04 Jetzt bist du erwachsen",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "swordRing",
+    -18
+   ]
+  ],
+  "amb": "garden"
+ },
+ {
+  "t0": 140.2,
+  "dur": 3,
+  "name": "04 Zeitraffer: Tag wird Nacht",
+  "ang": "wide",
+  "tr": "sakura",
+  "sfx": [
+   [
+    0.6,
+    "whooshSoft",
+    -14
+   ]
+  ],
+  "amb": "nightfall"
+ },
+ {
+  "t0": 143.2,
+  "dur": 2.5,
+  "name": "05 Im Dunkeln aufstehen",
+  "ang": "medium",
+  "tr": "black",
+  "sfx": [
+   [
+    0.6,
+    "fabric",
+    -10
+   ],
+   [
+    1.2,
+    "tatamiStep",
+    -14
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 145.7,
+  "dur": 3.9,
+  "name": "05 Matte zusammenrollen (Zeitraffer)",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "fabric",
+    -10
+   ],
+   [
+    0.8,
+    "fabric",
+    -12
+   ],
+   [
+    1.4,
+    "thudSoft",
+    -14
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 149.6,
+  "dur": 4.1,
+  "name": "05 Strohmatte, dünne Decke (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "fabric",
+    -14
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 153.7,
+  "dur": 2.4,
+  "name": "05 Das Haus ist einfach",
+  "ang": "wide",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.3,
+    "birds",
+    -20
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 156.1,
+  "dur": 2.6,
+  "name": "05 Papierwände, Holzböden",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "brush",
+    -12
+   ],
+   [
+    1.3,
+    "brush",
+    -12
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 158.7,
+  "dur": 2.3,
+  "name": "05 Eiskalt: Schnee auf dem Dach",
+  "ang": "low",
+  "tr": "fade",
+  "sfx": [
+   [
+    0,
+    "coldwind",
+    -12
+   ]
+  ],
+  "amb": "coldwind"
+ },
+ {
+  "t0": 161,
+  "dur": 1.3,
+  "name": "05 Holzeimer am Brunnen",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "bucket",
+    -10
+   ]
+  ],
+  "amb": "coldwind"
+ },
+ {
+  "t0": 162.3,
+  "dur": 2.7,
+  "name": "05 Kaltes Wasser ins Gesicht",
+  "ang": "closeup",
+  "tr": "cut",
+  "sfx": [
+   [
+    0.05,
+    "splash",
+    -4
+   ],
+   [
+    0.3,
+    "gasp",
+    -12
+   ]
+  ],
+  "amb": "coldwind"
+ },
+ {
+  "t0": 165,
+  "dur": 4.3,
+  "name": "05 Rasieren der Stirnpartie",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "razor",
+    -8
+   ],
+   [
+    1.2,
+    "razor",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 169.3,
+  "dur": 1.8,
+  "name": "05 Öl für die Haare (Makro)",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "oil",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 171.1,
+  "dur": 1.8,
+  "name": "05 Holzkamm (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "comb",
+    -8
+   ],
+   [
+    0.9,
+    "comb",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 172.9,
+  "dur": 2,
+  "name": "05 Hochbinden",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "lace",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 174.9,
+  "dur": 1.9,
+  "name": "05 Der Knoten wird gefaltet",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "tick",
+    -12
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 176.8,
+  "dur": 2.1,
+  "name": "05 Zeichen des Standes",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "brush",
+    -10
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 178.9,
+  "dur": 2.2,
+  "name": "05 Jeder weiß es sofort",
+  "ang": "wide",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -10
+   ]
+  ],
+  "amb": "city"
+ },
+ {
+  "t0": 181.1,
+  "dur": 1.9,
+  "name": "05 Das ist ein Samurai",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "swordRing",
+    -14
+   ]
+  ],
+  "amb": "city"
+ },
+ {
+  "t0": 183,
+  "dur": 1.4,
+  "name": "05 Anziehen: Kragen schließen",
+  "ang": "pov",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "shoji",
+    -10
+   ],
+   [
+    0.6,
+    "fabric",
+    -8
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 184.4,
+  "dur": 4.1,
+  "name": "05 Hakama binden",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "lace",
+    -8
+   ],
+   [
+    1.3,
+    "lace",
+    -10
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 188.5,
+  "dur": 2.9,
+  "name": "05 Das Wichtigste: der Schwertständer (ruhig)",
+  "ang": "wide",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.5,
+    "swordRing",
+    -20
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 191.4,
+  "dur": 2.7,
+  "name": "05 In den Gürtel stecken – Klack",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "swordSlide",
+    -10
+   ],
+   [
+    1.85,
+    "clack",
+    -4
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 194.1,
+  "dur": 4.5,
+  "name": "05 T4 Das Schwert",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.2,
+    "brush",
+    -14
+   ],
+   [
+    0.6,
+    "hanko",
+    -10
+   ],
+   [
+    0.5,
+    "brush",
+    -16
+   ],
+   [
+    0.9,
+    "brush",
+    -16
+   ],
+   [
+    1.3,
+    "brush",
+    -16
+   ],
+   [
+    1.7,
+    "brush",
+    -16
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 198.6,
+  "dur": 2.2,
+  "name": "05 Das kurze Schwert (für den Fall…)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "swordRing",
+    -18
+   ],
+   [
+    0.9,
+    "heartbeat",
+    -16
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 200.8,
+  "dur": 2.7,
+  "name": "05 Nur Samurai tragen zwei Schwerter",
+  "ang": "wide",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.2,
+    "steps",
+    -14
+   ]
+  ],
+  "amb": "city"
+ },
+ {
+  "t0": 203.5,
+  "dur": 2.7,
+  "name": "05 Ehre: Stichblatt mit Wappen",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "swordRing",
+    -14
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 206.2,
+  "dur": 2.4,
+  "name": "05 Deine Seele",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "breathIn",
+    -16
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 208.6,
+  "dur": 2,
+  "name": "05 Scheiden stoßen zusammen",
+  "ang": "medium",
+  "tr": "cut",
+  "sfx": [
+   [
+    1,
+    "clack",
+    -4
+   ],
+   [
+    1.05,
+    "taiko",
+    -6
+   ]
+  ],
+  "amb": "city"
+ },
+ {
+  "t0": 210.6,
+  "dur": 1.4,
+  "name": "05 Erstarrt – Blicke",
+  "ang": "split",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "heartbeat",
+    -10
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 212,
+  "dur": 1.8,
+  "name": "05 Tiefe Entschuldigung",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "fabric",
+    -12
+   ]
+  ],
+  "amb": "city"
+ },
+ {
+  "t0": 213.8,
+  "dur": 2.5,
+  "name": "05 Das Schwert = die Seele",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "brush",
+    -10
+   ],
+   [
+    1.6,
+    "hanko",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 216.3,
+  "dur": 1.9,
+  "name": "06 Frühstück von oben",
+  "ang": "overhead",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "shoji",
+    -10
+   ],
+   [
+    0.6,
+    "bowlSet",
+    -12
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 218.2,
+  "dur": 1.9,
+  "name": "06 Natürlich: Reis",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "chopsticks",
+    -10
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 220.1,
+  "dur": 3.7,
+  "name": "06 Miso und eingelegtes Gemüse",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "slurp",
+    -16
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 223.8,
+  "dur": 2,
+  "name": "06 Getrockneter Fisch",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "plate",
+    -14
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 225.8,
+  "dur": 2.1,
+  "name": "06 Fleisch? Kaum.",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "brush",
+    -10
+   ],
+   [
+    1,
+    "brush",
+    -8
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 227.9,
+  "dur": 1.9,
+  "name": "06 Der Reis in der Schale",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "riceGrain",
+    -14
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 229.8,
+  "dur": 1.3,
+  "name": "06 Match-Cut: Reissäcke im Speicher",
+  "ang": "wide",
+  "tr": "match",
+  "sfx": [
+   [
+    0.1,
+    "thud",
+    -12
+   ]
+  ],
+  "amb": "storehouse"
+ },
+ {
+  "t0": 231.1,
+  "dur": 4.9,
+  "name": "06 T6 Lohn in Reis",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.3,
+    "brush",
+    -14
+   ],
+   [
+    0.8,
+    "hanko",
+    -10
+   ],
+   [
+    0.7,
+    "brush",
+    -14
+   ],
+   [
+    1.3,
+    "brush",
+    -16
+   ],
+   [
+    1.6,
+    "brush",
+    -16
+   ],
+   [
+    2.2,
+    "counter",
+    -14
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 236,
+  "dur": 3,
+  "name": "06 Reicher Samurai: Berge von Reis",
+  "ang": "low",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.3,
+    "thud",
+    -14
+   ]
+  ],
+  "amb": "storehouse"
+ },
+ {
+  "t0": 239,
+  "dur": 1.9,
+  "name": "06 Armer Samurai muss rechnen",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "soroban",
+    -10
+   ]
+  ],
+  "amb": "storehouse"
+ },
+ {
+  "t0": 240.9,
+  "dur": 3.1,
+  "name": "07 Morgens zum Training",
+  "ang": "side",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -10
+   ],
+   [
+    0.4,
+    "steps",
+    -14
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 244,
+  "dur": 2.8,
+  "name": "07 Die Halle aus Holz",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "doorSlide",
+    -10
+   ],
+   [
+    0.6,
+    "woodCreak",
+    -16
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 246.8,
+  "dur": 2.5,
+  "name": "07 Schweißtropfen (Makro, langsam)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    1.6,
+    "drop",
+    -8
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 249.3,
+  "dur": 1.4,
+  "name": "07 Wiederholung 1",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.15,
+    "swish",
+    -8
+   ],
+   [
+    0.3,
+    "kiai",
+    -20
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 250.7,
+  "dur": 1.3,
+  "name": "07 Wiederholung 3",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.15,
+    "swish",
+    -8
+   ],
+   [
+    0.3,
+    "kiai",
+    -20
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 252,
+  "dur": 0.6,
+  "name": "07 Wiederholung 5",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.15,
+    "swish",
+    -8
+   ],
+   [
+    0.3,
+    "kiai",
+    -20
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 252.6,
+  "dur": 0.6,
+  "name": "07 Wiederholung 6",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.15,
+    "swish",
+    -8
+   ],
+   [
+    0.3,
+    "kiai",
+    -20
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 253.2,
+  "dur": 4.6,
+  "name": "07 Zehntausendmal (Zeitraffer)",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "swishFast",
+    -10
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 257.8,
+  "dur": 3.2,
+  "name": "07 Partnerübung: Holz auf Holz",
+  "ang": "medium",
+  "tr": "cut",
+  "sfx": [
+   [
+    0.2,
+    "bokkenClash",
+    -6
+   ],
+   [
+    0.8,
+    "bokkenClash",
+    -6
+   ],
+   [
+    1.5,
+    "bokkenClash",
+    -6
+   ],
+   [
+    2.4,
+    "bokkenClash",
+    -6
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 261,
+  "dur": 2.2,
+  "name": "07 Ein Schlag entscheidet (eingefroren)",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.15,
+    "bokkenClash",
+    -2
+   ],
+   [
+    0.2,
+    "freezeHit",
+    -10
+   ],
+   [
+    0.6,
+    "brush",
+    -10
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 263.2,
+  "dur": 1.9,
+  "name": "07 Wer zu spät ist…",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "heartbeat",
+    -10
+   ],
+   [
+    1.7,
+    "taiko",
+    -4
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 265.1,
+  "dur": 2.4,
+  "name": "08 Die Burg (Untersicht)",
+  "ang": "low",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -10
+   ],
+   [
+    0.6,
+    "crow",
+    -16
+   ],
+   [
+    1.4,
+    "flag",
+    -18
+   ]
+  ],
+  "amb": "castle"
+ },
+ {
+  "t0": 267.5,
+  "dur": 2,
+  "name": "08 Nächste Überraschung",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "tick",
+    -12
+   ]
+  ],
+  "amb": "castle"
+ },
+ {
+  "t0": 269.5,
+  "dur": 3,
+  "name": "08 Torwache",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "wind",
+    -18
+   ]
+  ],
+  "amb": "castle"
+ },
+ {
+  "t0": 272.5,
+  "dur": 1.6,
+  "name": "08 Fast langweilig",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.5,
+    "sigh",
+    -14
+   ],
+   [
+    1.1,
+    "fly",
+    -18
+   ]
+  ],
+  "amb": "castle"
+ },
+ {
+  "t0": 274.1,
+  "dur": 2.7,
+  "name": "08 Briefe überbringen",
+  "ang": "medium",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "shoji",
+    -10
+   ],
+   [
+    0.9,
+    "paper",
+    -12
+   ],
+   [
+    1.4,
+    "fabric",
+    -14
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 276.8,
+  "dur": 2,
+  "name": "08 Bauern streiten",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "arguing",
+    -14
+   ]
+  ],
+  "amb": "field"
+ },
+ {
+  "t0": 278.8,
+  "dur": 2,
+  "name": "08 Reissäcke zählen",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "brush",
+    -14
+   ],
+   [
+    0.8,
+    "tick",
+    -16
+   ],
+   [
+    1.3,
+    "tick",
+    -16
+   ]
+  ],
+  "amb": "storehouse"
+ },
+ {
+  "t0": 280.8,
+  "dur": 3.8,
+  "name": "08 Stundenlang warten (Schatten wandern)",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "clockless",
+    -20
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 284.6,
+  "dur": 1.6,
+  "name": "08 Der Herr ruft",
+  "ang": "low",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.2,
+    "fanSnap",
+    -10
+   ]
+  ],
+  "amb": "throne"
+ },
+ {
+  "t0": 286.2,
+  "dur": 3.8,
+  "name": "08 Tiefe Verneigung (Profil)",
+  "ang": "side",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "fabric",
+    -10
+   ]
+  ],
+  "amb": "throne"
+ },
+ {
+  "t0": 290,
+  "dur": 2.7,
+  "name": "08 Nur sprechen, wenn gefragt (von oben)",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "silence",
+    -30
+   ]
+  ],
+  "amb": "throne"
+ },
+ {
+  "t0": 292.7,
+  "dur": 2,
+  "name": "08 Dein Herr ist alles",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "taikoSoft",
+    -12
+   ]
+  ],
+  "amb": "throne"
+ },
+ {
+  "t0": 294.7,
+  "dur": 3.2,
+  "name": "08 Treueschwur: Hände auf der Matte",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "fabric",
+    -12
+   ],
+   [
+    1.6,
+    "drum",
+    -14
+   ]
+  ],
+  "amb": "throne"
+ },
+ {
+  "t0": 297.9,
+  "dur": 3.9,
+  "name": "08 In die Schlacht ziehen",
+  "ang": "low",
+  "tr": "mist",
+  "sfx": [
+   [
+    0,
+    "marching",
+    -10
+   ],
+   [
+    0.5,
+    "horagai",
+    -14
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 301.8,
+  "dur": 2.5,
+  "name": "08 Burg verteidigen, nachts",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "fire",
+    -14
+   ],
+   [
+    0.6,
+    "arrow",
+    -10
+   ],
+   [
+    1.3,
+    "arrow",
+    -10
+   ],
+   [
+    1.9,
+    "shouts",
+    -18
+   ]
+  ],
+  "amb": "fire"
+ },
+ {
+  "t0": 304.3,
+  "dur": 4.1,
+  "name": "08 Noah auf der Mauer, Flammen",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "fire",
+    -12
+   ],
+   [
+    1.2,
+    "armor",
+    -14
+   ]
+  ],
+  "amb": "fire"
+ },
+ {
+  "t0": 308.4,
+  "dur": 3.2,
+  "name": "08 Prioritäten: 1. Herr",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.2,
+    "brush",
+    -10
+   ],
+   [
+    0.9,
+    "hanko",
+    -6
+   ],
+   [
+    1.1,
+    "brush",
+    -14
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 311.6,
+  "dur": 3.2,
+  "name": "08 … die Familie kommt danach",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "brush",
+    -12
+   ],
+   [
+    0.6,
+    "brush",
+    -14
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 314.8,
+  "dur": 5.2,
+  "name": "08 BUSHIDO",
+  "ang": "table",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -8
+   ],
+   [
+    0.3,
+    "brushBig",
+    -6
+   ],
+   [
+    2.1,
+    "brush",
+    -12
+   ],
+   [
+    2.9,
+    "hanko",
+    -4
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 320,
+  "dur": 3.3,
+  "name": "09 Eines Tages ist es soweit",
+  "ang": "low",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.3,
+    "bellFar",
+    -16
+   ],
+   [
+    1.5,
+    "crow",
+    -18
+   ]
+  ],
+  "amb": "castle"
+ },
+ {
+  "t0": 323.3,
+  "dur": 3.4,
+  "name": "09 Bote galoppiert, Fackeln",
+  "ang": "wide",
+  "tr": "cut",
+  "sfx": [
+   [
+    0,
+    "gallop",
+    -6
+   ],
+   [
+    1.4,
+    "whinny",
+    -10
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 326.7,
+  "dur": 1.6,
+  "name": "09 Morgen wird gekämpft",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "taiko",
+    -10
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 328.3,
+  "dur": 2.5,
+  "name": "09 Kaum schlafen",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "crickets",
+    -18
+   ],
+   [
+    1.6,
+    "fabric",
+    -16
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 330.8,
+  "dur": 2.7,
+  "name": "09 Schwertpflege: Ölpapier",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "oilCloth",
+    -8
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 333.5,
+  "dur": 2.1,
+  "name": "09 Viele kleine Platten (Makro)",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "armor",
+    -10
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 335.6,
+  "dur": 3.6,
+  "name": "09 Seidenschnüre (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "lace",
+    -8
+   ],
+   [
+    1.4,
+    "lace",
+    -10
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 339.2,
+  "dur": 1.8,
+  "name": "09 Schulterschutz anlegen",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "armor",
+    -10
+   ],
+   [
+    1.2,
+    "lace",
+    -10
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 341,
+  "dur": 2,
+  "name": "09 Der Helfer zieht die Schnüre",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "lace",
+    -6
+   ],
+   [
+    1,
+    "lace",
+    -6
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 343,
+  "dur": 4.4,
+  "name": "09 T5 Die Rüstung",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.2,
+    "brush",
+    -12
+   ],
+   [
+    0.7,
+    "hanko",
+    -10
+   ],
+   [
+    0.5,
+    "brush",
+    -16
+   ],
+   [
+    0.8,
+    "brush",
+    -16
+   ],
+   [
+    1.1,
+    "brush",
+    -16
+   ],
+   [
+    1.4,
+    "brush",
+    -16
+   ],
+   [
+    1.7,
+    "brush",
+    -16
+   ],
+   [
+    2,
+    "brush",
+    -16
+   ],
+   [
+    2.3,
+    "brush",
+    -16
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 347.4,
+  "dur": 4.7,
+  "name": "09 Abschiedsgedicht bei Laternenlicht (ruhig)",
+  "ang": "medium",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.6,
+    "brush",
+    -14
+   ],
+   [
+    2.4,
+    "brush",
+    -14
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 352.1,
+  "dur": 2.6,
+  "name": "09 Gefaltet in ein Kästchen",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "paper",
+    -10
+   ],
+   [
+    1.4,
+    "lidClose",
+    -8
+   ],
+   [
+    2.2,
+    "taiko",
+    -4
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 354.7,
+  "dur": 1.7,
+  "name": "10 Nebliger Morgen, zwei Heere",
+  "ang": "wide",
+  "tr": "mist",
+  "sfx": [
+   [
+    0,
+    "battlewind",
+    -12
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 356.4,
+  "dur": 1.7,
+  "name": "10 Nebel über dem Gras (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "grassWind",
+    -12
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 358.1,
+  "dur": 2.2,
+  "name": "10 Tausende Krieger (sehr weit)",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "armyMurmur",
+    -14
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 360.3,
+  "dur": 1.2,
+  "name": "10 Fahnen flattern (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "flag",
+    -6
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 361.5,
+  "dur": 1.6,
+  "name": "10 Trommeln schlagen",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "taiko",
+    -4
+   ],
+   [
+    0.7,
+    "taiko",
+    -4
+   ],
+   [
+    1.25,
+    "taiko",
+    -4
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 363.1,
+  "dur": 1.9,
+  "name": "10 Dein Herz schlägt mit",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "heartbeat",
+    -6
+   ],
+   [
+    1,
+    "heartbeat",
+    -6
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 365,
+  "dur": 4.3,
+  "name": "10 T7 Schlachtkarte",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.3,
+    "brush",
+    -14
+   ],
+   [
+    0.7,
+    "hanko",
+    -10
+   ],
+   [
+    1.2,
+    "brush",
+    -12
+   ],
+   [
+    1.4,
+    "brush",
+    -12
+   ],
+   [
+    2.3,
+    "brush",
+    -10
+   ],
+   [
+    2.6,
+    "brush",
+    -12
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 369.3,
+  "dur": 1.5,
+  "name": "10 Ein lauter Knall: Gewehrreihe",
+  "ang": "wide",
+  "tr": "cut",
+  "sfx": [
+   [
+    0.05,
+    "gunVolley",
+    0
+   ],
+   [
+    0.1,
+    "smokeHiss",
+    -10
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 370.8,
+  "dur": 1.2,
+  "name": "10 Noch einer – Schock",
+  "ang": "pov",
+  "tr": "",
+  "sfx": [
+   [
+    0.1,
+    "gunShot",
+    -2
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 372,
+  "dur": 2.8,
+  "name": "10 Gewehre: Bauer lädt nach",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "ramrod",
+    -8
+   ],
+   [
+    1.4,
+    "fuse",
+    -10
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 374.8,
+  "dur": 2.4,
+  "name": "10 Lunte und Rauch (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "fuse",
+    -6
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 377.2,
+  "dur": 4.3,
+  "name": "10 T8 Bogen gegen Gewehr",
+  "ang": "table",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -8
+   ],
+   [
+    0.2,
+    "brush",
+    -12
+   ],
+   [
+    0.4,
+    "brush",
+    -12
+   ],
+   [
+    1.2,
+    "brush",
+    -14
+   ],
+   [
+    1.9,
+    "brush",
+    -14
+   ],
+   [
+    2.4,
+    "brush",
+    -10
+   ],
+   [
+    2.7,
+    "hanko",
+    -6
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 381.5,
+  "dur": 3.2,
+  "name": "10 Ein Bauer gegen ein Leben voll Training",
+  "ang": "split",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "fuse",
+    -10
+   ],
+   [
+    2.3,
+    "gunShot",
+    -6
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 384.7,
+  "dur": 1.3,
+  "name": "10 Ansturm: Pferde stürmen",
+  "ang": "low",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "gallop",
+    -4
+   ],
+   [
+    0.3,
+    "shouts",
+    -14
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 386,
+  "dur": 1.3,
+  "name": "10 Ansturm: Pfeilregen",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "arrowsVolley",
+    -4
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 387.3,
+  "dur": 1,
+  "name": "10 Ansturm: Zusammenprall",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "steelClash",
+    -4
+   ],
+   [
+    0.6,
+    "steelClash",
+    -6
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 388.3,
+  "dur": 1,
+  "name": "10 Ansturm: Fahne fällt",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "flag",
+    -8
+   ],
+   [
+    0.7,
+    "thud",
+    -8
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 389.3,
+  "dur": 1,
+  "name": "10 Ansturm: Licht im Rauch",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "battleFar",
+    -10
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 390.3,
+  "dur": 1.9,
+  "name": "10 Kein Heldentum: erschöpft im Rauch",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "breathHeavy",
+    -10
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 392.2,
+  "dur": 3.8,
+  "name": "10 Ums Überleben (Standbild)",
+  "ang": "low",
+  "tr": "cut",
+  "sfx": [
+   [
+    0.15,
+    "swish",
+    -6
+   ],
+   [
+    0.35,
+    "freezeHit",
+    -6
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 396,
+  "dur": 2.6,
+  "name": "10 Flucht = Schande",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "runSteps",
+    -10
+   ],
+   [
+    1.2,
+    "brush",
+    -10
+   ]
+  ],
+  "amb": "battle"
+ },
+ {
+  "t0": 398.6,
+  "dur": 2.4,
+  "name": "10 Name, Platz, Respekt verloren",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "clothTear",
+    -8
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 401,
+  "dur": 2,
+  "name": "10 Danach: stilles Feld, Krähen",
+  "ang": "low",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.2,
+    "crow",
+    -10
+   ],
+   [
+    1,
+    "crow",
+    -12
+   ],
+   [
+    0,
+    "battlewind",
+    -14
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 403,
+  "dur": 2.4,
+  "name": "11 Der dunkelste Teil: weißer Vorhang, leeres Kissen",
+  "ang": "medium",
+  "tr": "black",
+  "sfx": [
+   [
+    0.5,
+    "windSoft",
+    -16
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 405.4,
+  "dur": 4.4,
+  "name": "11 Weiß gekleidete Gestalt, von hinten, fern",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    1,
+    "bellFar",
+    -18
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 409.8,
+  "dur": 4.8,
+  "name": "11 Das kurze Schwert auf dem Tablett, in Papier",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.5,
+    "paper",
+    -16
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 414.6,
+  "dur": 3.3,
+  "name": "11 Ein einzelnes Kirschblatt fällt (ruhig)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "silence",
+    -40
+   ],
+   [
+    3.2,
+    "taikoSoft",
+    -8
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 417.9,
+  "dur": 2.6,
+  "name": "11 Für uns heute unvorstellbar: Wolkenmeer",
+  "ang": "wide",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.3,
+    "windHigh",
+    -14
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 420.5,
+  "dur": 3,
+  "name": "11 Wappenfahne im Wind",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "flag",
+    -10
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 423.5,
+  "dur": 3,
+  "name": "11 Lieber Ehre als Schande: Gestalt im Morgenlicht",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.5,
+    "windSoft",
+    -16
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 426.5,
+  "dur": 4.4,
+  "name": "11 Jeden Morgen an den Tod denken (Veranda)",
+  "ang": "medium",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.4,
+    "birdsDawn",
+    -18
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 430.9,
+  "dur": 4.4,
+  "name": "11 Nicht aus Traurigkeit",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "breathSoft",
+    -18
+   ]
+  ],
+  "amb": "morning"
+ },
+ {
+  "t0": 435.3,
+  "dur": 2.3,
+  "name": "12 Die Fahne des Herrn im Schlamm",
+  "ang": "macro",
+  "tr": "black",
+  "sfx": [
+   [
+    0.1,
+    "rain",
+    -10
+   ],
+   [
+    0.4,
+    "taikoSoft",
+    -12
+   ]
+  ],
+  "amb": "rain"
+ },
+ {
+  "t0": 437.6,
+  "dur": 3.2,
+  "name": "12 Was jeder Samurai fürchtet",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "rain",
+    -12
+   ],
+   [
+    1.4,
+    "thunderFar",
+    -14
+   ]
+  ],
+  "amb": "rain"
+ },
+ {
+  "t0": 440.8,
+  "dur": 1.9,
+  "name": "12 Rōnin im Bambuswald",
+  "ang": "side",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -10
+   ],
+   [
+    0.2,
+    "bambooWind",
+    -10
+   ],
+   [
+    0.5,
+    "steps",
+    -16
+   ]
+  ],
+  "amb": "bamboo"
+ },
+ {
+  "t0": 442.7,
+  "dur": 5.1,
+  "name": "12 T9 Rōnin-Status",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.3,
+    "brush",
+    -14
+   ],
+   [
+    0.75,
+    "hanko",
+    -10
+   ],
+   [
+    1.6,
+    "brushX",
+    -6
+   ],
+   [
+    2.3,
+    "brushX",
+    -6
+   ],
+   [
+    3.8,
+    "brushX",
+    -6
+   ],
+   [
+    4.6,
+    "brushX",
+    -6
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 447.8,
+  "dur": 3.5,
+  "name": "12 Durchs Land ziehen: Bergpass",
+  "ang": "wide",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.3,
+    "steps",
+    -14
+   ],
+   [
+    1.2,
+    "windHigh",
+    -16
+   ]
+  ],
+  "amb": "mountain"
+ },
+ {
+  "t0": 451.3,
+  "dur": 2.7,
+  "name": "12 Leibwächter für reiche Händler",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "coins",
+    -12
+   ]
+  ],
+  "amb": "city"
+ },
+ {
+  "t0": 454,
+  "dur": 1.7,
+  "name": "12 …manche werden Räuber",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "windSoft",
+    -12
+   ],
+   [
+    1,
+    "swordDraw",
+    -12
+   ]
+  ],
+  "amb": "dusk"
+ },
+ {
+  "t0": 455.7,
+  "dur": 3.4,
+  "name": "12 Leben im Niemandsland (Regen)",
+  "ang": "closeup",
+  "tr": "fade",
+  "sfx": [
+   [
+    0,
+    "rain",
+    -8
+   ]
+  ],
+  "amb": "rain"
+ },
+ {
+  "t0": 459.1,
+  "dur": 2,
+  "name": "12 Du hast noch deine Schwerter",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "swordRing",
+    -16
+   ]
+  ],
+  "amb": "rain"
+ },
+ {
+  "t0": 461.1,
+  "dur": 2.4,
+  "name": "12 Niemand mehr, für den du sie trägst",
+  "ang": "side",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "windHigh",
+    -14
+   ]
+  ],
+  "amb": "mountain"
+ },
+ {
+  "t0": 463.5,
+  "dur": 2.2,
+  "name": "13 Wendung: Kirschbäume, ruhige Burg",
+  "ang": "wide",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -8
+   ],
+   [
+    0.4,
+    "birds",
+    -16
+   ]
+  ],
+  "amb": "spring"
+ },
+ {
+  "t0": 465.7,
+  "dur": 3.3,
+  "name": "13 Mit der kaum jemand rechnet",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "tick",
+    -12
+   ]
+  ],
+  "amb": "spring"
+ },
+ {
+  "t0": 469,
+  "dur": 5.7,
+  "name": "13 T1 Zeitleiste: Frieden 1603–1868",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.2,
+    "brush",
+    -14
+   ],
+   [
+    0.5,
+    "hanko",
+    -10
+   ],
+   [
+    0.4,
+    "brush",
+    -16
+   ],
+   [
+    1.1,
+    "brushBig",
+    -8
+   ],
+   [
+    1.8,
+    "brush",
+    -12
+   ],
+   [
+    2.6,
+    "hanko",
+    -6
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 474.7,
+  "dur": 3,
+  "name": "13 Ein mächtiger Herrscher vereint das Land",
+  "ang": "low",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "flag",
+    -12
+   ],
+   [
+    1.5,
+    "taikoSoft",
+    -10
+   ]
+  ],
+  "amb": "castle"
+ },
+ {
+  "t0": 477.7,
+  "dur": 4.7,
+  "name": "13 Etwas, das es ewig nicht gab",
+  "ang": "wide",
+  "tr": "sakura",
+  "sfx": [
+   [
+    0.6,
+    "stream",
+    -14
+   ],
+   [
+    1.4,
+    "birds",
+    -16
+   ]
+  ],
+  "amb": "spring"
+ },
+ {
+  "t0": 482.4,
+  "dur": 4.5,
+  "name": "13 T10 Frieden: über 250 Jahre",
+  "ang": "table",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "shoji",
+    -10
+   ],
+   [
+    0.2,
+    "brushBig",
+    -8
+   ],
+   [
+    0.5,
+    "counter",
+    -10
+   ],
+   [
+    2.7,
+    "hanko",
+    -4
+   ],
+   [
+    1.7,
+    "chestLid",
+    -12
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 486.9,
+  "dur": 3.9,
+  "name": "13 Rüstung in die Truhe",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "armor",
+    -10
+   ],
+   [
+    1.3,
+    "chestLid",
+    -6
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 490.8,
+  "dur": 1.6,
+  "name": "13 Du bist ein Krieger",
+  "ang": "low",
+  "tr": "cut",
+  "sfx": [
+   [
+    0.1,
+    "swordDraw",
+    -10
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 492.4,
+  "dur": 4.7,
+  "name": "13 Die ganze Erziehung: Rückblende",
+  "ang": "split",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "swish",
+    -10
+   ],
+   [
+    1,
+    "bokkenClash",
+    -10
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 497.1,
+  "dur": 4.8,
+  "name": "13 Nichts mehr zu kämpfen",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "crowFar",
+    -18
+   ]
+  ],
+  "amb": "spring"
+ },
+ {
+  "t0": 501.9,
+  "dur": 2.2,
+  "name": "13 Der Schwertschlag…",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "swish",
+    -6
+   ]
+  ],
+  "amb": "dojo"
+ },
+ {
+  "t0": 504.1,
+  "dur": 2.2,
+  "name": "13 …wird zum Pinselstrich (Match-Cut)",
+  "ang": "macro",
+  "tr": "match",
+  "sfx": [
+   [
+    0.1,
+    "brush",
+    -6
+   ]
+  ],
+  "amb": "office"
+ },
+ {
+  "t0": 506.3,
+  "dur": 1.4,
+  "name": "13 Sie sitzen in Büros",
+  "ang": "wide",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "soroban",
+    -16
+   ],
+   [
+    0.6,
+    "paper",
+    -16
+   ]
+  ],
+  "amb": "office"
+ },
+ {
+  "t0": 507.7,
+  "dur": 1.6,
+  "name": "13 Abakus (Makro)",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "soroban",
+    -4
+   ]
+  ],
+  "amb": "office"
+ },
+ {
+  "t0": 509.3,
+  "dur": 2.4,
+  "name": "13 Siegel: Pat",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.55,
+    "hanko",
+    -2
+   ]
+  ],
+  "amb": "office"
+ },
+ {
+  "t0": 511.7,
+  "dur": 2.8,
+  "name": "13 Krieger → Beamter",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "brush",
+    -10
+   ],
+   [
+    1.2,
+    "brush",
+    -12
+   ]
+  ],
+  "amb": "office"
+ },
+ {
+  "t0": 514.5,
+  "dur": 3.8,
+  "name": "13 Das Schwert, nie gezogen",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "dust",
+    -16
+   ],
+   [
+    1.8,
+    "swordRing",
+    -22
+   ]
+  ],
+  "amb": "office"
+ },
+ {
+  "t0": 518.3,
+  "dur": 1.2,
+  "name": "13 Viele werden arm: leerer Reiskrug",
+  "ang": "macro",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.3,
+    "hollow",
+    -10
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 519.5,
+  "dur": 3,
+  "name": "13 Reislohn gleich, Preise steigen",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.2,
+    "brush",
+    -12
+   ],
+   [
+    0.6,
+    "brush",
+    -12
+   ],
+   [
+    1,
+    "brush",
+    -10
+   ],
+   [
+    1.5,
+    "brush",
+    -10
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 522.5,
+  "dur": 2.9,
+  "name": "13 Nachts heimlich Schirme kleben",
+  "ang": "medium",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.3,
+    "glue",
+    -10
+   ],
+   [
+    1.6,
+    "paper",
+    -12
+   ],
+   [
+    0,
+    "crickets",
+    -18
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 525.4,
+  "dur": 3.7,
+  "name": "13 Sandalen flechten (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "straw",
+    -8
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 529.1,
+  "dur": 3.1,
+  "name": "13 Ein Geräusch – schnell verstecken (Scham)",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "footstepsOut",
+    -10
+   ],
+   [
+    0.8,
+    "fabric",
+    -6
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 532.2,
+  "dur": 1.8,
+  "name": "13 Das zeigt dir kein Film",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "brush",
+    -10
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 534,
+  "dur": 3.5,
+  "name": "14 Nach Jahrhunderten endgültig vorbei",
+  "ang": "wide",
+  "tr": "black",
+  "sfx": [
+   [
+    0,
+    "taiko",
+    -6
+   ],
+   [
+    0.8,
+    "windSoft",
+    -14
+   ]
+  ],
+  "amb": "dusk"
+ },
+ {
+  "t0": 537.5,
+  "dur": 2.7,
+  "name": "14 Das Land öffnet sich: Dampfschiff am Horizont",
+  "ang": "side",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "shipHorn",
+    -16
+   ],
+   [
+    0,
+    "sea",
+    -14
+   ]
+  ],
+  "amb": "sea"
+ },
+ {
+  "t0": 540.2,
+  "dur": 2.5,
+  "name": "14 Armee mit Uniformen und Gewehren",
+  "ang": "wide",
+  "tr": "cut",
+  "sfx": [
+   [
+    0,
+    "drill",
+    -6
+   ],
+   [
+    1.2,
+    "drumSnare",
+    -10
+   ]
+  ],
+  "amb": "drill"
+ },
+ {
+  "t0": 542.7,
+  "dur": 1.9,
+  "name": "14 Die Samurai werden abgeschafft",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "drumSnareFar",
+    -18
+   ]
+  ],
+  "amb": "drill"
+ },
+ {
+  "t0": 544.6,
+  "dur": 4.5,
+  "name": "14 T11 Verbot: die Bekanntmachung",
+  "ang": "wide",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "shoji",
+    -10
+   ],
+   [
+    0.6,
+    "hammer",
+    -8
+   ],
+   [
+    0.9,
+    "hammer",
+    -8
+   ],
+   [
+    1.6,
+    "brush",
+    -12
+   ],
+   [
+    2.4,
+    "brush",
+    -12
+   ],
+   [
+    3.6,
+    "hanko",
+    0
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 549.1,
+  "dur": 3.8,
+  "name": "14 Schlimmer als jede Niederlage",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "breathIn",
+    -12
+   ]
+  ],
+  "amb": "city"
+ },
+ {
+  "t0": 552.9,
+  "dur": 3.9,
+  "name": "14 Schwerter in die Truhe",
+  "ang": "medium",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.6,
+    "swordSlide",
+    -12
+   ],
+   [
+    2.6,
+    "chestLid",
+    -4
+   ],
+   [
+    3,
+    "dust",
+    -14
+   ]
+  ],
+  "amb": "interior"
+ },
+ {
+  "t0": 556.8,
+  "dur": 1.9,
+  "name": "14 Truhe auf dem Dachboden (Zeitraffer)",
+  "ang": "overhead",
+  "tr": "",
+  "sfx": [
+   [
+    0.2,
+    "creak",
+    -14
+   ],
+   [
+    0.6,
+    "whooshSoft",
+    -16
+   ]
+  ],
+  "amb": "attic"
+ },
+ {
+  "t0": 558.7,
+  "dur": 1.7,
+  "name": "14 Eine ganze Welt verschwindet",
+  "ang": "low",
+  "tr": "mist",
+  "sfx": [
+   [
+    0.2,
+    "windSoft",
+    -14
+   ]
+  ],
+  "amb": "dusk"
+ },
+ {
+  "t0": 560.4,
+  "dur": 4.5,
+  "name": "15 Zurück zu dir",
+  "ang": "wide",
+  "tr": "sakura",
+  "sfx": [
+   [
+    0.3,
+    "cicadas",
+    -16
+   ]
+  ],
+  "amb": "summerEvening"
+ },
+ {
+  "t0": 564.9,
+  "dur": 2,
+  "name": "15 Im kleinen Haus, auf der Veranda",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "fabric",
+    -18
+   ]
+  ],
+  "amb": "summerEvening"
+ },
+ {
+  "t0": 566.9,
+  "dur": 1.6,
+  "name": "15 Grillen im Gras (Makro)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0,
+    "crickets",
+    -8
+   ]
+  ],
+  "amb": "crickets"
+ },
+ {
+  "t0": 568.5,
+  "dur": 2.6,
+  "name": "15 Die Frau stellt eine Schale Reis hin",
+  "ang": "side",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "bowlSet",
+    -10
+   ]
+  ],
+  "amb": "crickets"
+ },
+ {
+  "t0": 571.1,
+  "dur": 1.8,
+  "name": "15 Die Kinder schlafen schon (kleines Lächeln)",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.5,
+    "breathSoft",
+    -18
+   ]
+  ],
+  "amb": "crickets"
+ },
+ {
+  "t0": 572.9,
+  "dur": 2.4,
+  "name": "15 Pinsel in die Tusche tauchen",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.4,
+    "inkDip",
+    -8
+   ]
+  ],
+  "amb": "crickets"
+ },
+ {
+  "t0": 575.3,
+  "dur": 1.7,
+  "name": "15 Ein paar Zeilen",
+  "ang": "side",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "brush",
+    -12
+   ],
+   [
+    1.1,
+    "brush",
+    -12
+   ]
+  ],
+  "amb": "crickets"
+ },
+ {
+  "t0": 577,
+  "dur": 2.1,
+  "name": "15 Über den Mond, über die Kirschblüten",
+  "ang": "wide",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.3,
+    "windSoft",
+    -18
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 579.1,
+  "dur": 4.3,
+  "name": "15 Sie vergehen so schnell (fallende Blüten)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.5,
+    "windSoft",
+    -18
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 583.4,
+  "dur": 2,
+  "name": "15 Dann legst du dich hin",
+  "ang": "overhead",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "shoji",
+    -12
+   ],
+   [
+    0.8,
+    "fabric",
+    -14
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 585.4,
+  "dur": 2,
+  "name": "15 Die zwei Schwerter wieder neben dem Kopf",
+  "ang": "medium",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "swordRing",
+    -18
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 587.4,
+  "dur": 2.5,
+  "name": "15 Das Auge schließt sich (Spiegel des Anfangs)",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    1.4,
+    "breathSoft",
+    -16
+   ]
+  ],
+  "amb": "night"
+ },
+ {
+  "t0": 589.9,
+  "dur": 1.9,
+  "name": "15 Ein normaler Dienst…",
+  "ang": "wide",
+  "tr": "ink",
+  "sfx": [
+   [
+    0,
+    "ink",
+    -10
+   ],
+   [
+    0.4,
+    "crow",
+    -16
+   ]
+  ],
+  "amb": "castle"
+ },
+ {
+  "t0": 591.8,
+  "dur": 3.1,
+  "name": "15 …oder eine Schlacht",
+  "ang": "low",
+  "tr": "cut",
+  "sfx": [
+   [
+    0,
+    "taiko",
+    -6
+   ],
+   [
+    0.2,
+    "horagai",
+    -14
+   ]
+  ],
+  "amb": "battlewind"
+ },
+ {
+  "t0": 594.9,
+  "dur": 2.7,
+  "name": "15 Hättest du das gekonnt?",
+  "ang": "closeup",
+  "tr": "shoji",
+  "sfx": [
+   [
+    0,
+    "shoji",
+    -12
+   ],
+   [
+    1.5,
+    "taikoSoft",
+    -14
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 597.6,
+  "dur": 5.7,
+  "name": "15 T12 Leere Kästchen (ruhig)",
+  "ang": "table",
+  "tr": "scroll",
+  "sfx": [
+   [
+    0,
+    "scroll",
+    -8
+   ],
+   [
+    0.35,
+    "brush",
+    -10
+   ],
+   [
+    0.5,
+    "brush",
+    -14
+   ],
+   [
+    1.15,
+    "brush",
+    -10
+   ],
+   [
+    1.3,
+    "brush",
+    -14
+   ],
+   [
+    1.95,
+    "brush",
+    -10
+   ],
+   [
+    2.1,
+    "brush",
+    -14
+   ]
+  ],
+  "amb": ""
+ },
+ {
+  "t0": 603.3,
+  "dur": 1.8,
+  "name": "15 Für die Ehre: das Wappen",
+  "ang": "macro",
+  "tr": "",
+  "sfx": [
+   [
+    0.3,
+    "swordRing",
+    -16
+   ]
+  ],
+  "amb": "quiet"
+ },
+ {
+  "t0": 605.1,
+  "dur": 2.8,
+  "name": "15 Schreib es in die Kommentare",
+  "ang": "medium",
+  "tr": "fade",
+  "sfx": [
+   [
+    0.4,
+    "fabric",
+    -16
+   ]
+  ],
+  "amb": "spring"
+ },
+ {
+  "t0": 607.9,
+  "dur": 2.4,
+  "name": "15 Hättest du als Samurai überlebt?",
+  "ang": "closeup",
+  "tr": "",
+  "sfx": [
+   [
+    0.6,
+    "tick",
+    -14
+   ]
+  ],
+  "amb": "spring"
+ },
+ {
+  "t0": 610.3,
+  "dur": 1.54,
+  "name": "15 Kirschblütensturm – Trommel – Schwarz",
+  "ang": "wide",
+  "tr": "sakura",
+  "sfx": [
+   [
+    0.2,
+    "windGust",
+    -10
+   ],
+   [
+    1.2,
+    "taiko",
+    -2
+   ]
+  ],
+  "amb": "spring"
+ }
+]
