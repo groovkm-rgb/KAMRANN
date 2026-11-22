@@ -8,11 +8,11 @@ Ham liste (Almanca adlarla, tam zamanlar): `work/sfx_list.json`.
 | 0,02 | Taiko, tek tok vuruş | siyah |
 | 1,10 | Kılıç kınından çekme "şiiing" | bıçak boyunca ışık çizgisi ("Samurai") |
 | 2,46 | Islak fırça "şlap" | mürekkep geçişi |
-| 2,46–18,1 | Cırcır böcekleri + gece havası (ortam) | ev, iç mekân |
+| 2,46–18,1 | Cırcır böcekleri + gece havası (ortam) | ev, havuz, iç mekân |
 | 2,50 | Bambuda rüzgâr | bahçe |
 | 2,90 | Tapınak çanı (uzakta) | ev, şafak öncesi |
 | 3,90 | Koi havuzunda su damlası | havuz |
-| 5,80 | Futon kumaşı hışırtısı | kuşbakışı uyku |
+| 5,98 | Durgun havuza tek damla | ay yansıması, sükûnet |
 | 6,95 | Nefes alma | göz açılıyor |
 | 8,30 | Lake tıkırtısı (kılıç rafı) | iki kılıç |
 | 9,34 | Kın üzerinde ışık parıltısı (çelik tını) | "zwei Schwerter" |

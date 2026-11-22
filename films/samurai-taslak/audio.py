@@ -16,7 +16,7 @@ S('Tempelglocke (fern)', temple_bell(), 2.9, -14, .5)
 S('Koi-Wassertropfen im Teich', water_drop(), 3.9, -14, .4)
 S('Bambus im Wind', wind(2, .3), 2.5, -24, -.6)
 # ---- 03/04 inside, sleeping
-S('Futon-Stoff raschelt', fabric(.9), 5.8, -16)
+S('Einzelner Tropfen im stillen Teich', water_drop(), 5.98, -12, -.2)
 S('Einatmen (Augen öffnen)', breath_in(), 6.95, -14)
 # ---- 06 two swords
 S('Lack-Tick am Schwertständer', lacquer_tick(), 8.3, -16, .3)

@@ -120,19 +120,20 @@ defineShots([
     motes(c, 300, 1700, 150, 900, lt + 3, { n: 40, color: '200,215,255', alpha: .45 });
     vignette(c, .6);
   } },
-  // 4 — overhead: Noah asleep on the futon, the two swords next to his head
-  { name: '04 Vogelperspektive Schlaf', dur: 1.17, draw(c, lt) {
-    const z = 1 + lt * .05;
-    c.save(); c.translate(960, 540); c.rotate(-.06 + lt * .02); c.scale(z, z); c.translate(-960, -540);
-    tatamiTop(c, -300, -300, 6, 4, 520, 440, { col: '#5e6470', edge: '#15161b' });
-    futonTop(c, 1000, 560, 520, 900, { under: '#7c8090', cover: '#233056', pillow: '#6d6a62' });
-    drawSamHead(c, 1000, 250, .52, sleepE, 0, 'chonmage');
-    swordsOnFloorTop(c, 560, 270, .62, lt);
-    // a hand on the cover
-    // moonlight stripe across
-    moonBeam(c, 300, -100, 1300, 1200, 200, 380, .2);
-    c.restore();
-    moonGrade(c, .3);
+  // 4 — stillness: the moon mirrored in the still pond, one drop rings out (no bed)
+  { name: '04 Stille: Mond im Teich', dur: 1.17, draw(c, lt) {
+    fill(c, '#0a1226');
+    c.fillStyle = vgrad(c, 0, 0, 0, H, [[0, '#0d1830'], [1, '#08101f']]); c.fillRect(0, 0, W, H);
+    // moon reflection, wobbling with the ripples
+    const rip = seg(lt, .25, 1.17);
+    for (let i = 0; i < 14; i++) { const y = 470 + i * 12, w = 120 - i * 5 + Math.sin(lt * 3 + i) * 6 * rip; ell(c, 980 + Math.sin(i * 1.7 + lt * 4) * 10 * rip, y, w, 5); c.fillStyle = `rgba(230,236,255,${.75 - i * .045})`; c.fill(); }
+    bloom(c, 980, 520, 300, '170,190,255', .25);
+    // ripple rings from a single drop
+    for (let r = 0; r < 4; r++) { const k = seg(lt, .25 + r * .12, 1.17); if (k <= 0) continue; ell(c, 760, 640, 40 + k * 520, 12 + k * 150); c.lineWidth = 3; c.strokeStyle = `rgba(180,200,255,${.5 * (1 - k)})`; c.stroke(); }
+    // reeds, a stone edge and maple leaves floating
+    for (let i = 0; i < 18; i++) { const x = 1500 + i * 26; stroke(c, [x, 1090, x + Math.sin(lt + i) * 6 - 20, 700 + rnd(i) * 160], 7, '#05080f'); }
+    ell(c, 200, 1040, 420, 140); fo(c, '#1a1f2a', 4, '#05070c');
+    for (let i = 0; i < 5; i++) { c.save(); c.translate(420 + i * 230 + lt * 8, 820 + rnd(i) * 160); c.rotate(i + lt * .1); poly(c, [0, -22, 9, -6, 24, -8, 12, 6, 16, 22, 0, 12, -16, 22, -12, 6, -24, -8, -9, -6]); c.fillStyle = '#4a2028'; c.fill(); c.restore(); }
     vignette(c, .6);
   } },
   // 5 — macro: one eye opens
@@ -156,8 +157,6 @@ defineShots([
     // the sweep of light across the stand
     const sw = lerp(-400, 2400, ease(seg(lt, .75, 1.9)));
     c.save(); c.globalCompositeOperation = 'screen'; const g = c.createLinearGradient(sw - 260, 0, sw + 260, 0); g.addColorStop(0, 'rgba(170,195,255,0)'); g.addColorStop(.5, 'rgba(170,195,255,.28)'); g.addColorStop(1, 'rgba(170,195,255,0)'); c.fillStyle = g; c.fillRect(0, 300, W, 700); c.restore();
-    // futon edge foreground
-    c.fillStyle = '#1b2440'; c.beginPath(); c.moveTo(1500, 1080); c.quadraticCurveTo(1600, 900, 1980, 880); c.lineTo(1980, 1080); c.closePath(); c.fill(); c.lineWidth = 5; c.strokeStyle = '#05060a'; c.stroke();
     vignette(c, .6);
   } },
   // 7 — top-down on the swords with brush labels: Katana / Wakizashi
@@ -211,15 +210,16 @@ defineShots([
     bloom(c, 1640, 600, 260, '160,190,255', .18);
     vignette(c, .65);
   } },
-  // 10 — close-up: Noah lying awake, eyes darting (alert)
-  { name: '10 Wach, wachsam', dur: 1.82, draw(c, lt) {
+  // 10 — medium close-up: Noah sits upright in the dark room, alert, eyes darting
+  { name: '10 Wach, wachsam (sitzend)', dur: 1.82, draw(c, lt) {
     fill(c, '#0c1020');
-    c.save(); c.translate(960, 560); c.rotate(-.12); c.scale(1.02 + lt * .02, 1.02 + lt * .02); c.translate(-960, -560);
-    // pillow + cover edge
-    c.beginPath(); c.roundRect(560, 640, 820, 300, 120); fo(c, '#4f4c48', 6, '#06070a');
-    c.fillStyle = '#1f2a4c'; c.beginPath(); c.moveTo(300, 1100); c.quadraticCurveTo(960, 900, 1700, 1100); c.closePath(); c.fill();
+    shojiWall(c, -40, 0, 2000, 760, { panels: 4, rows: 4, glow: .32, glowCol: '150,175,230', frame: '#100b08', paper: '#2c3650' });
+    c.fillStyle = '#100b08'; c.fillRect(0, 740, W, 40);
+    tatamiPersp(c, 760, 1080, { far: '#20263a', near: '#343c4e', edge: 'rgba(8,8,12,.85)' });
     const look = keys(lt, [[0, 0], [.25, -.85], [.6, -.85], [.8, .8], [1.25, .8], [1.45, 0]]);
-    drawSamHead(c, 960, 470, 1.25, withBlink({ lid: .1, look, mouth: 'flat' }, lt, 3, 6), 0, 'chonmage');
+    const z = 1 + lt * .03;
+    c.save(); c.translate(960, 540); c.scale(z, z); c.translate(-960, -540);
+    drawSam(c, { x: 960, y: 1640, k: .95, ink: 1.4, outfit: 'samurai', haori: false, swords: false, expr: withBlink({ lid: .1, look, mouth: 'flat' }, lt, 3, 6), breathe: lt * 3 });
     c.restore();
     c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = vgrad(c, 0, 0, W, 0, [[0, 'rgba(160,180,240,1)'], [1, 'rgba(45,55,100,1)']]); c.fillRect(0, 0, W, H); c.restore();
     vignette(c, .65);
