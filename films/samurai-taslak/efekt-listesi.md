@@ -5,8 +5,10 @@ Ham liste (Almanca adlarla, tam zamanlar): `work/sfx_list.json`.
 
 | Zaman | Efekt | Görüntü |
 |---|---|---|
-| 0,02 | Taiko, tek tok vuruş | siyah |
-| 1,10 | Kılıç kınından çekme "şiiing" | bıçak boyunca ışık çizgisi ("Samurai") |
+| 0,00 | Kiraz dallarında rüzgâr | aydınlık açılış: Noah, kiraz ağaçları, kale |
+| 0,02 | Taiko, tek tok vuruş | açılış |
+| 0,60 · 1,90 | Sabah kuşları | açılış |
+| 1,12 | Tsuba'da güneş parıltısı "ting" | "Samurai" |
 | 2,46 | Islak fırça "şlap" | mürekkep geçişi |
 | 2,46–18,1 | Cırcır böcekleri + gece havası (ortam) | ev, havuz, iç mekân |
 | 2,50 | Bambuda rüzgâr | bahçe |

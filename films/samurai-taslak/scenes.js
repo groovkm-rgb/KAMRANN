@@ -50,18 +50,30 @@ function daimyoSil(c, x, y, s, side, crest, t, raise) {
 }
 
 defineShots([
-  // 1 — black, a single taiko hit; on "Samurai" a line of light runs along a blade
-  { name: '01 Klinge im Dunkeln', dur: 2.46, draw(c, lt) {
-    fill(c, '#000');
-    const k = seg(lt, 1.12, 2.3);
-    if (k > 0) {
-      c.save(); c.translate(160, 690); c.rotate(-.2); c.scale(2.05, 2.05);
-      c.globalAlpha = .28 + .25 * k; drawSword(c, { kind: 'katana', naked: true, sheath: false }); c.globalAlpha = 1;
-      const gx = SWORD.katana.tsuka + 12 + easeOut(k) * SWORD.katana.blade;
-      bloom(c, gx, -4, 120, '235,245,255', .9 * bump(k, 0, 1)); bloom(c, gx, -4, 26, '255,255,255', 1 * bump(k, 0, 1));
-      c.restore();
-    }
-    vignette(c, .7);
+  // 1 — bright opening: Noah as a samurai under blossoming cherry trees, castle behind; on "Samurai" a sun glint on the sword
+  { name: '01 Samurai im Morgenlicht', dur: 2.46, draw(c, lt, T, t) {
+    const z = 1.0 + ease(seg(lt, 0, 2.46)) * .08, cam = { x: 960, y: 560, z };
+    skyGrad(c, [[0, '#7fb2de'], [.55, '#cfe3ef'], [.8, '#f6e6c8'], [1, '#f3d7a6']]);
+    layer(c, cam, .05, c => { bloom(c, 1500, 240, 420, '255,236,190', .55); circ(c, 1500, 240, 70); c.fillStyle = '#fff6dc'; c.fill(); });
+    layer(c, cam, .15, c => { ridge(c, -300, 2300, 660, 260, '#93a9c4', 2, { freq: 3 }); haze(c, '235,240,245', .3); ridge(c, -300, 2300, 720, 150, '#6f8f8a', 6, { freq: 6 }); haze(c, '240,235,220', .2); });
+    layer(c, cam, .35, c => { castle(c, 1380, 760, .55, { lw: 2.5 }); for (let i = 0; i < 6; i++) nobori(c, 1080 + i * 70, 760, 160, { w: 22, t: lt + i, seed: i, col: '#f1ece0', mon: (c, x, y, r) => drawKamon(c, x, y, r, SAM.indigo), lw: 1.5 }); c.fillStyle = '#7f9a5a'; c.fillRect(-500, 755, 3000, 400); });
+    layer(c, cam, .6, c => { c.fillStyle = '#9db46a'; c.fillRect(-500, 840, 3000, 400); for (let i = 0; i < 40; i++) { ell(c, -200 + i * 70, 850 + rnd(i) * 30, 60, 14); c.fillStyle = '#8aa35c'; c.fill(); } stoneLantern(c, 330, 880, .9); });
+    // Noah, front, left hand on the scabbard by the guard (thumb ready), calm focus
+    layer(c, cam, 1, c => {
+      castShadow(c, 960, 260, { alpha: .25, dir: -1, len: 1 });
+      const glance = t > 1.16 ? .0 : 0;
+      drawSam(c, { x: 960, y: 1250, k: .62, ink: 1.6, outfit: 'samurai', expr: withBlink({ lid: .22, look: glance, mouth: 'flat' }, lt, 2, 3.5), breathe: lt * 2.5,
+        arms: { r: { a: .5, b: -1.38, fist: true }, l: { a: .12, b: -.06 } } });
+      // sun glint on the habaki / guard at "Samurai"
+      const gk = bump(lt, 1.1, 1.7); if (gk > 0) { const gx = 960 + 92 * .62, gy = 1250 - 600 * .62; bloom(c, gx, gy, 160, '255,250,220', .9 * gk); c.save(); c.translate(gx, gy); c.rotate(lt); for (let r = 0; r < 4; r++) { c.rotate(Math.PI / 4); stroke(c, [-90 * gk, 0, 90 * gk, 0], 4, `rgba(255,255,240,${gk})`); } c.restore(); }
+    });
+    // foreground cherry branches and falling petals
+    const br = (x, y, s, f) => { c.save(); c.translate(x, y); c.scale(s * f, s); stroke(c, [0, 0, 260, 60, 520, 40, 760, 120], 26, '#3b2a24'); stroke(c, [260, 60, 360, 190, 470, 230], 14, '#3b2a24');
+      for (let i = 0; i < 34; i++) { const px = rnd(i + 3) * 760, py = 60 + (rnd(i + 5) - .5) * 220; ell(c, px, py, 34 + rnd(i) * 18, 24 + rnd(i + 1) * 10); c.fillStyle = i % 3 ? '#f6c3d0' : '#fbdde4'; c.fill(); } c.restore(); };
+    br(-60, 90 + Math.sin(lt * 1.2) * 6, 1, 1); br(W + 60, 40 + Math.sin(lt * 1.1 + 1) * 6, .9, -1);
+    for (let i = 0; i < 60; i++) { const ph = (lt * .25 + rnd(i)) % 1; sakuraPetal(c, (rnd(i + 9) * 2200 - 200 + ph * 300 + Math.sin(lt * 2 + i) * 40) % 2100, -40 + ph * 1160, 10 + rnd(i + 2) * 10, lt * 3 + i, rnd(i + 4)); }
+    grade(c, { sx: .8, sy: .15, warmA: .22, coolA: .12 });
+    vignette(c, .25);
   } },
   // 2 — pre-dawn: the samurai house from the garden (ink brush wipe in)
   { name: '02 Haus vor dem Morgengrauen', dur: 1.96, tr: { type: 'ink', dur: .62 }, draw(c, lt) {

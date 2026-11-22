@@ -8,7 +8,9 @@ LOG = []
 def S(name, sig, t, db=0, pan=0, bus=None): (bus or sfx).add(sig, t, db, pan); LOG.append((t, name, db))
 # ---- 01 darkness / blade
 S('Taiko-Schlag (einzeln)', taiko(1.1), 0.02, -2)
-S('Schwert ziehen „Schiiing“ (Lichtlinie auf der Klinge)', sword_draw(), 1.10, -6, .2)
+S('Sonnenglanz auf dem Stichblatt „Ting“', sword_ring(), 1.12, -10, .2)
+S('Wind in den Kirschblüten', wind(2.5, .4), 0.0, -20)
+S('Vögel am Morgen', bird(), 0.6, -22, .5); S('Vögel am Morgen', bird(.15, 4400), 1.9, -24, -.4)
 # ---- 02 house before dawn
 S('Tusche-Wischer „Schlap“', ink_splat(), 2.46, -4)
 S('Grillen (Nacht, Ambience)', crickets(15.7), 2.46, -20, -.3); S('Nachtluft', night_air(15.7), 2.46, -22)
