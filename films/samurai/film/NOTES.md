@@ -1,5 +1,6 @@
 # Was wäre, wenn du ein Samurai wärst? — tam film
 
+- Çıkış: samurai.mp4 (yerel, 309 MB; GitHub 100 MB sınırı yüzünden repoda değil) · −15,9 LUFS, gerçek tepe −1,0 dBFS, müzik konuşmanın 25,9 dB altında.
 - Ses: `../../samurai-taslak/voice.mp3` (10:11,84). Video süresi = 611,84 sn, 1920x1080, 30 fps, 18.355 kare.
 - Kurgu: 243 çekim, ortalama 2,52 sn. 5 sn'den uzun 4 çekim var (5,1–5,7 sn): T9, BUSHIDO, T1 (barış), T12. Ardışık aynı geçiş yok, ardışık aynı açı etiketi yok (`shots.json`).
 - Geçişler: mürekkep 12 · kılıç kesmesi 13 · shoji 12 · sis 14 · parşömen 12 · kiraz 5 · eşleşen kesme 3 · davul/siyah 5 · kâğıt yırtılması 1 · kısa erime 12.
