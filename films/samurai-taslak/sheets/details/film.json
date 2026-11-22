@@ -1,0 +1,1 @@
+{ "title": "Detail-Blätter", "modules": ["lib:engine.js", "lib:vendor/noah.js", "lib:vendor/light.js", "lib:transitions.js", "lib:samurai.js", "lib:places-jp.js", "lib:scrollui.js", "sheet.js"] }

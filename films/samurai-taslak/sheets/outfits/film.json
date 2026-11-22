@@ -1,0 +1,1 @@
+{ "title": "Kostüm-Blatt", "modules": ["lib:engine.js", "lib:vendor/noah.js", "lib:vendor/light.js", "lib:transitions.js", "lib:samurai.js", "sheet.js"] }

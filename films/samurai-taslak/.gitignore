@@ -1,0 +1,8 @@
+film.html
+stills/
+sheets/*/stills/
+sheets/*/film.html
+work/video.mp4
+work/*.wav
+work/render.log
+work/transcribe.log
