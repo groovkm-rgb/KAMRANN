@@ -7,6 +7,10 @@ description: "The user's own character NOAH (white round head, dot eyes, swept-b
 
 Talk to the user in Turkish. Code comments in English. On-screen text is always German (see house rules).
 
+**FIRST read `LESSONS.md`** (mistakes the user already caught, and the rules that prevent them). Whenever the user
+reports a new problem in a film, fix it AND append a new entry to `LESSONS.md` in the same turn, then commit. The skill
+must get better with every film.
+
 ## House rules
 
 - **Always horizontal: 1920x1080, 30 fps.** Render with `scripts/render169.cjs` (below), never the
