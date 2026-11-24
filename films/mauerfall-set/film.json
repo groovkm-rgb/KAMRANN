@@ -1,0 +1,17 @@
+{
+  "title": "Mauerfall – Set-Test",
+  "slug": "mauerfall-set",
+  "fps": 30,
+  "modules": [
+    "../../.claude/skills/noah-character/noah.js",
+    "../../.claude/skills/noah-character/places/light.js",
+    "../mauerfall-lib/tex.js",
+    "../mauerfall-lib/noah89.js",
+    "../mauerfall-lib/folk.js",
+    "../mauerfall-lib/vehicles.js",
+    "../mauerfall-lib/ost.js",
+    "../mauerfall-lib/flat.js",
+    "../mauerfall-lib/bridge.js",
+    "scenes.js"
+  ]
+}
