@@ -30,12 +30,13 @@ function kHall(cam, t, o = {}) {
     behind: [c => { presseTable(c, t, { spokes: o.spokes }); hallCrowd(c, t, o); if (o.people) o.people(c); }],
     screen: [c => { if (o.near) o.near(c); }, c => presseLight(c, cam, t, { flash: o.noFlash ? 0 : flashK(t) * .22 }), c => { if (o.ui) o.ui(c); }] };
 }
-const FLASHES = [0.35, 0.95, 1.55, 2.3, 2.95, 4.2, 4.95, 6.3, 7.3, 7.55, 7.75, 9.5, 12.2, 14.0, 18.6, 20.0];
+const FLASHES = [1.2, 1.75, 2.35, 2.95, 3.6, 3.9, 4.3, 4.8, 5.25, 6.3, 7.3, 7.55, 7.75, 9.5, 12.2, 14.0, 18.6, 20.0];
 const flashK = t => { let f = 0; for (const ft of FLASHES) if (t >= ft && t < ft + .18) f = Math.max(f, 1 - (t - ft) / .18); return f; };
 function hallCrowd(c, t, o = {}) {
   const up = o.up || 0;
   const rows = [[-1500, -160], [-1150, -120], [-800, -90], [-450, -60], [300, -150], [620, -120], [1300, -140], [1620, -110], [1950, -150], [2300, -100], [250, 90], [560, 60], [1420, 70], [1750, 40], [2100, 80], [2450, 60], [-200, 120], [-650, 140]];
   rows.forEach(([x, y], i) => journalist(c, x, y, i, t, { up: o.asker === i ? 0 : up, s: x < 0 ? 1 : -1, kind: o.asker === i ? 'mic' : undefined }));
+  if (o.dense) [[-1350, 230], [-1000, 260], [-650, 290], [-300, 260], [80, 300], [420, 320], [1350, 300], [1650, 330], [1980, 290], [2300, 320], [2600, 280], [-1700, 300]].forEach(([x, y], i) => journalist(c, x, y, i + 3, t, { up, s: x < 980 ? 1 : -1, kind: ['photo', 'eng', 'photo', 'pad'][i % 4] }));
   for (const [lx, d] of [[-1900, 1], [2600, -1]]) tvLight(c, lx, PH_HZ + 80, d, 1);
 }
 function kTor(cam, t, o = {}) {

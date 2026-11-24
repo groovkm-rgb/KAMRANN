@@ -1731,10 +1731,14 @@ function visX(cam, p, m = 200) { const z = 1 + (cam.z - 1) * p, hw = W / 2 / z; 
 function visY(cam, p, m = 200) { const z = 1 + (cam.z - 1) * p, hh = H / 2 / z; return [cam.y * p - hh - m, cam.y * p + hh + m]; }
 // irregular low-alpha patches (dirt, damp, repairs): soft radial blobs, no hard edges
 function mottle(c, x, y, w, h, seed, o = {}) {
+  // patches sit on a WORLD grid (not relative to the visible area), so they stay put when the camera moves
   const n = o.n ?? Math.ceil(w * h / 26000), r0 = o.r ?? 60, dark = o.dark || '#2a2420', light = o.light || '#ffffff', a = o.a ?? .07;
-  for (let i = 0; i < n; i++) {
-    const px = x + rnd(seed + i * 3.17) * w, py = y + rnd(seed + i * 5.31) * h, r = r0 * (.5 + rnd(seed + i * 7.7) * 1.4), sq = .45 + rnd(seed + i * 4.1) * .6;
-    const col = rnd(seed + i * 1.9) > .42 ? dark : light, aa = a * (.5 + rnd(seed + i * 2.3) * .9);
+  const cell = Math.max(8, Math.sqrt(w * h / Math.max(1, n)));
+  for (let i = Math.floor(x / cell); i * cell < x + w; i++) for (let j = Math.floor(y / cell); j * cell < y + h; j++) {
+    const q = seed + i * 7.31 + j * 13.17, px = (i + rnd(q * 3.17)) * cell, py = (j + rnd(q * 5.31)) * cell;
+    if (px < x - r0 || px > x + w + r0 || py < y - r0 || py > y + h + r0) continue;
+    const r = r0 * (.5 + rnd(q * 7.7) * 1.4), sq = .45 + rnd(q * 4.1) * .6;
+    const col = rnd(q * 1.9) > .42 ? dark : light, aa = a * (.5 + rnd(q * 2.3) * .9);
     const g = c.createRadialGradient(px, py, 0, px, py, r); g.addColorStop(0, rgba(col, aa)); g.addColorStop(.6, rgba(col, aa * .5)); g.addColorStop(1, rgba(col, 0));
     c.save(); c.translate(px, py); c.scale(1, sq); c.translate(-px, -py); c.fillStyle = g; c.fillRect(px - r, py - r, 2 * r, 2 * r); c.restore();
   }
@@ -1748,7 +1752,8 @@ function grain(c, x, y, w, h, a = .5, sc = 1) {
     for (let i = 0; i < 60; i++) { g.strokeStyle = 'rgba(0,0,0,.12)'; g.lineWidth = 1; g.beginPath(); const px = rnd(i * 7.1) * 256, py = rnd(i * 8.2) * 256; g.moveTo(px, py); g.lineTo(px + (rnd(i) - .5) * 20, py + (rnd(i + 1) - .5) * 12); g.stroke(); }
     _grain = c.createPattern(cv, 'repeat');
   }
-  c.save(); c.globalAlpha = a; c.beginPath(); c.rect(x, y, w, h); c.translate(x, y); c.scale(sc, sc); c.fillStyle = _grain; c.fill(); c.restore();
+  // pattern anchored at the world origin -> the grain moves with the world, not with the screen
+  c.save(); c.globalAlpha = a; c.beginPath(); c.rect(x, y, w, h); c.clip(); c.scale(sc, sc); c.fillStyle = _grain; c.fillRect(x / sc, y / sc, w / sc, h / sc); c.restore();
 }
 // rain / damp streaks running down from a ledge
 function streaks(c, x, y, w, len, seed, o = {}) {
@@ -1849,13 +1854,13 @@ function cobbles(c, x0, x1, y0, y1, seed, o = {}) {
   let y = y0, r = 0;
   while (y < y1) {
     const k = (y - y0) / Math.max(1, y1 - y0), rh = h0 + (h1 - h0) * k, sw = rh * ratio * (o.wide || 1.6);
-    const off = rnd(seed + r * 3.3) * sw; let x = x0 - off, i = 0;
-    while (x < x1) {
-      const v = rnd(seed + r * 977 + i * 13.1), w = sw * (.75 + rnd(seed + r * 31 + i * 7) * .45);
+    // stones on a world grid: column index i is fixed in the world, so they stay put when the camera pans
+    const off = rnd(seed + r * 3.3) * sw;
+    for (let i = Math.floor((x0 - off) / sw) - 1; i * sw + off < x1; i++) {
+      const x = i * sw + off, v = rnd(seed + r * 977 + i * 13.1), w = sw * (.86 + rnd(seed + r * 31 + i * 7) * .14);
       c.fillStyle = v > .9 ? dk(base, .22) : v > .72 ? lt(base, var_) : v < .1 ? mixHex(base, '#6a5a4a', .35) : v < .25 ? dk(base, .1) : base;
       rrect(c, x + 2, y + 1.5, w - 4, rh - 3, Math.min(rh * .4, 8)); c.fill();
       if (o.wet !== false) { c.fillStyle = `rgba(230,236,240,${(o.sheen ?? .16) * (.4 + rnd(seed + r * 5 + i) * .8)})`; rrect(c, x + 5, y + 2.5, (w - 10) * .7, Math.max(1.5, rh * .18), 2); c.fill(); }
-      x += w; i++;
     }
     y += rh; r++;
   }
@@ -1887,14 +1892,16 @@ function puddle(c, x, y, rx, ry, seed, o = {}) {
 }
 // fallen leaves / litter on the ground
 function leaves(c, x0, x1, y0, y1, seed, n = 30, o = {}) {
-  const cols = o.cols || ['#a86b2a', '#8a5a26', '#c08a3a', '#6e4a28', '#b39048'];
-  for (let i = 0; i < n; i++) {
-    const x = x0 + rnd(seed + i * 2.1) * (x1 - x0), y = y0 + rnd(seed + i * 3.9) * (y1 - y0), s = (o.s || 1) * (7 + rnd(seed + i * 5.3) * 7);
+  // world-anchored: leaves live in 400-unit world cells (same density as before)
+  const cols = o.cols || ['#a86b2a', '#8a5a26', '#c08a3a', '#6e4a28', '#b39048'], C = 400, per = Math.max(1, Math.round(n * C / Math.max(1, x1 - x0)));
+  for (let ci = Math.floor(x0 / C); ci * C < x1; ci++) for (let k = 0; k < per; k++) {
+    const i = ci * 37 + k, x = ci * C + rnd(seed + i * 2.1) * C, y = y0 + rnd(seed + i * 3.9) * (y1 - y0), s = (o.s || 1) * (7 + rnd(seed + i * 5.3) * 7);
     c.save(); c.translate(x, y); c.rotate(rnd(seed + i) * 6); c.scale(1, .5);
-    c.beginPath(); c.moveTo(-s, 0); c.quadraticCurveTo(0, -s * .9, s, 0); c.quadraticCurveTo(0, s * .9, -s, 0); c.fillStyle = cols[i % cols.length]; c.fill();
+    c.beginPath(); c.moveTo(-s, 0); c.quadraticCurveTo(0, -s * .9, s, 0); c.quadraticCurveTo(0, s * .9, -s, 0); c.fillStyle = cols[Math.abs(i) % cols.length]; c.fill();
     c.strokeStyle = 'rgba(40,25,10,.5)'; c.lineWidth = 1; c.beginPath(); c.moveTo(-s, 0); c.lineTo(s, 0); c.stroke(); c.restore();
   }
 }
+function litter(c, x0, x1, y0, y1, seed, every = 400) { for (let ci = Math.floor(x0 / every); ci * every < x1; ci++) cigButt(c, ci * every + rnd(seed + ci) * every, y0 + rnd(seed + ci * 3) * (y1 - y0), rnd(seed + ci * 5) * 6); }
 function cigButt(c, x, y, r = 0) { c.save(); c.translate(x, y); c.rotate(r); c.fillStyle = '#efe9dc'; c.fillRect(-9, -2.5, 12, 5); c.fillStyle = '#c98a3e'; c.fillRect(3, -2.5, 6, 5); c.fillStyle = '#555'; c.fillRect(-10, -2, 2, 4); c.restore(); }
 // soft contact shadow (overcast light)
 function softShadow(c, x, y, w, a = .3) { const g = c.createRadialGradient(x, y, 0, x, y, w); g.addColorStop(0, `rgba(20,18,22,${a})`); g.addColorStop(1, 'rgba(20,18,22,0)'); c.save(); c.translate(x, y); c.scale(1, .18); c.translate(-x, -y); c.fillStyle = g; c.fillRect(x - w, y - w, w * 2, w * 2); c.restore(); }
@@ -1928,28 +1935,33 @@ function visXZ(cam, p, m = 200) { const hw = W / 2 / cam.z; return [cam.x * p - 
 // natural bare tree: recursive, irregular branches and twigs (world units, foot at x,y)
 function bareTree(c, x, y, o = {}) {
   const s = o.seed || x, t = o.t || 0, h = o.h || 900, bark = o.bark || '#4a423a', leafP = o.leaves ?? .35;
-  const br = (x0, y0, a, len, w, d) => {
-    const bend = (rnd(s + d * 7.1 + x0 * .013) - .5) * .5, mx = x0 + Math.cos(a + bend * .5) * len * .5, my = y0 + Math.sin(a + bend * .5) * len * .5;
-    const x1 = x0 + Math.cos(a + bend) * len + Math.sin(t * .7 + d) * (6 - d) * 1.2, y1 = y0 + Math.sin(a + bend) * len;
+  // every branch has a fixed id; all randomness comes from (seed, id) so the shape never changes between frames.
+  // Only a slow, small sway (wind) moves the tips.
+  const br = (x0, y0, a, len, w, d, id) => {
+    const q = s * .37 + id * 7.13, bend = (rnd(q) - .5) * .5, sway = Math.sin(t * .9 + id * .7) * .012 * (6 - d);
+    const aa = a + sway, mx = x0 + Math.cos(aa + bend * .5) * len * .5, my = y0 + Math.sin(aa + bend * .5) * len * .5;
+    const x1 = x0 + Math.cos(aa + bend) * len, y1 = y0 + Math.sin(aa + bend) * len;
     c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo(mx, my, x1, y1); c.lineCap = 'round'; c.lineWidth = w + (d > 2 ? 3 : 1.5); c.strokeStyle = OUT; c.stroke(); c.lineWidth = w; c.strokeStyle = bark; c.stroke();
     if (d > 0) {
-      const nb = d > 3 ? 2 : 2 + (rnd(s + d + x1) > .5 ? 1 : 0);
-      for (let i = 0; i < nb; i++) { const sp = (i - (nb - 1) / 2) * (.55 + rnd(s + i * 3 + y1) * .35) + (rnd(s + i + x1 * .1) - .5) * .3; br(x1, y1, a + sp, len * (.62 + rnd(s + i * 5 + d) * .22), w * .66, d - 1); }
+      const nb = d > 3 ? 2 : 2 + (rnd(q + 1.1) > .5 ? 1 : 0);
+      for (let i = 0; i < nb; i++) { const sp = (i - (nb - 1) / 2) * (.55 + rnd(q + i * 3.3) * .35) + (rnd(q + i * 1.7) - .5) * .3; br(x1, y1, aa + sp, len * (.62 + rnd(q + i * 5.1) * .22), w * .66, d - 1, id * 4 + i + 1); }
     } else {
-      for (let k = 0; k < 3; k++) { const ta = a + (rnd(s + k + x1) - .5) * 1.4; line(c, [x1, y1, x1 + Math.cos(ta) * 40, y1 + Math.sin(ta) * 40], 2.5, bark); }
-      if (rnd(s + x1 * .7 + y1) < leafP) { c.save(); c.translate(x1, y1); c.rotate(rnd(x1) * 6); ell(c, 0, 0, 16, 10); c.fillStyle = ['#b8862e', '#9a6a26', '#c8a048', '#8a5a2a'][Math.floor(rnd(y1) * 4)]; c.fill(); c.lineWidth = 1.5; c.strokeStyle = 'rgba(40,25,10,.6)'; c.stroke(); c.restore(); }
+      for (let k = 0; k < 3; k++) { const ta = aa + (rnd(q + k * 2.9) - .5) * 1.4; line(c, [x1, y1, x1 + Math.cos(ta) * 40, y1 + Math.sin(ta) * 40], 2.5, bark); }
+      if (rnd(q + 9.9) < leafP) { c.save(); c.translate(x1, y1); c.rotate(rnd(q + 4.4) * 6); ell(c, 0, 0, 16, 10); c.fillStyle = ['#b8862e', '#9a6a26', '#c8a048', '#8a5a2a'][Math.floor(rnd(q + 6.6) * 4)]; c.fill(); c.lineWidth = 1.5; c.strokeStyle = 'rgba(40,25,10,.6)'; c.stroke(); c.restore(); }
     }
   };
-  // trunk with bark texture
   const tw = o.trunk || 56;
   c.beginPath(); c.moveTo(x - tw / 2 - 6, y); c.quadraticCurveTo(x - tw / 2, y - h * .5, x - tw * .35, y - h); c.lineTo(x + tw * .35, y - h); c.quadraticCurveTo(x + tw / 2, y - h * .5, x + tw / 2 + 6, y); c.closePath(); fs(c, bark, 3);
   c.save(); c.clip(); for (let k = 0; k < 40; k++) { const by = y - rnd(s + k * 3) * h; line(c, [x - tw / 2 + rnd(s + k) * tw, by, x - tw / 2 + rnd(s + k) * tw + 4, by - 30 - rnd(k) * 60], 2.5, rnd(k + s) > .5 ? 'rgba(20,16,12,.45)' : 'rgba(200,190,170,.25)'); } c.fillStyle = 'rgba(0,0,0,.22)'; c.fillRect(x, y - h, tw, h); c.restore();
-  br(x, y - h, -Math.PI / 2 - .55, h * .45, tw * .55, 5); br(x, y - h, -Math.PI / 2 + .5, h * .48, tw * .55, 5); br(x, y - h * .92, -Math.PI / 2 + .05, h * .5, tw * .5, 5);
-  if (o.low !== false) br(x, y - h * .75, -Math.PI / 2 - 1.1, h * .3, tw * .32, 3);
+  br(x, y - h, -Math.PI / 2 - .55, h * .45, tw * .55, 5, 1); br(x, y - h, -Math.PI / 2 + .5, h * .48, tw * .55, 5, 2); br(x, y - h * .92, -Math.PI / 2 + .05, h * .5, tw * .5, 5, 3);
+  if (o.low !== false) br(x, y - h * .75, -Math.PI / 2 - 1.1, h * .3, tw * .32, 3, 4);
 }
 // NEAR LAYER: objects close to the camera — pan factor p (> 1 moves faster) and drawn sc times bigger.
 // Their ground line (y = 0 inside fn) sits on screen where world line groundY is. Good for cropped foreground occluders.
 function nearLayer(c, cam, p, sc, groundY, fn) { layerZ(c, cam, p, c => { const bx = cam.x * p, by = baseZ(cam, groundY, p); c.translate(bx, by); c.scale(sc, sc); c.translate(-bx, 0); fn(c); }); }
+
+// run fn over fixed world chunks [a, b) of width C that cover x0..x1 (keeps scattered detail anchored to the world)
+function perChunk(x0, x1, C, fn) { for (let ci = Math.floor(x0 / C); ci * C < x1; ci++) fn(ci * C, (ci + 1) * C, ci); }
 
 // ---- mauerfall-lib/noah89.js ----
 // NOAH 1989 outfits on top of the unchanged rig (noah.js): head, hair, face, skeleton and limb lengths are NOT touched.
@@ -2974,7 +2986,7 @@ function ostStreet(c, cam, t, o = {}) {
     for (let i = Math.floor(x0 / 900); i * 900 < x1; i++) { if (rnd(i + 80) > .55) puddle(c, i * 900 + rnd(i + 81) * 500, 170 + rnd(i + 82) * 560, 90 + rnd(i + 83) * 120, 16 + rnd(i) * 12, i, { top: P.night ? 'rgba(255,190,110,.55)' : o.tod === 'dusk' ? 'rgba(150,140,150,.8)' : 'rgba(205,210,210,.75)', bot: P.night ? 'rgba(20,24,40,.8)' : undefined }); }
     leaves(c, x0, x1, HZ + 10, 120, 21, Math.round((x1 - x0) / 60));
     leaves(c, x0, x1, 130, 800, 23, Math.round((x1 - x0) / 90), { s: 1.4 });
-    for (let i = 0; i < (x1 - x0) / 400; i++) cigButt(c, x0 + rnd(i + 90) * (x1 - x0), HZ + 20 + rnd(i + 91) * 380, rnd(i));
+    litter(c, x0, x1, HZ + 20, HZ + 400, 90, 400);
     c.fillStyle = '#6a6761'; c.fillRect(x0, 820, x1 - x0, 22); c.fillStyle = '#a7a39b'; c.fillRect(x0, 842, x1 - x0, 26); slabs(c, x0, x1, 868, 1080, 9, { base: '#9a948a', w: 260 }); cobbles(c, x0, x1, 1080, 1500, 13, { base: '#7a756e', h0: 18, h1: 26, wide: 1, sheen: .1 }); leaves(c, x0, x1, 860, 1300, 29, Math.round((x1 - x0) / 120), { s: 1.6 });
     for (let i = Math.floor(x0 / 2600); i * 2600 < x1; i++) { const mx = i * 2600 + 900; ell(c, mx, 500, 110, 22); fs(c, '#3a3836', 2); for (let k = -3; k <= 3; k++) line(c, [mx + k * 26, 486, mx + k * 26, 514], 2, '#55524e'); }
   });
@@ -3324,7 +3336,7 @@ function presseTable(c, t, o = {}) {
   for (const [px, P] of panel) drawFolk(c, Object.assign({ x: px, y: PH_HZ - 10, k: .25, expr: { mouth: 'flat', look: rnd(px) - .5 } }, P));
   // spokesman (generic: grey suit, heavy black frames, side parting greying)
   const sp = o.spokes || {};
-  drawFolk(c, { x: 0, y: PH_HZ - 10, k: .25, hair: 'side', hairCol: '#7a746c', coat: '#6a6c70', type: 'suit', tie: '#3a3a3a', glasses: '#141414', arms: sp.arms || { l: { a: .5, b: -1.8 }, r: { a: .5, b: -1.8 } }, holdR: sp.paper ? (cc => { cc.save(); cc.rotate(-.2); cc.beginPath(); cc.rect(-70, -20, 150, 200); fs(cc, '#f6f3ea', 5); for (let k = 0; k < 7; k++) line(cc, [-50, 20 + k * 22, 60, 20 + k * 22], 3, '#8a8a8a'); cc.restore(); }) : null, expr: Object.assign({ mouth: 'flat', look: 0 }, sp.expr || {}), tilt: sp.tilt || 0 });
+  drawFolk(c, { x: 0, y: PH_HZ - 10, k: .25, hair: 'side', hairCol: '#7a746c', coat: '#6a6c70', type: 'suit', tie: '#3a3a3a', glasses: '#141414', arms: sp.arms || { l: { a: .5, b: -1.8 }, r: { a: .5, b: -1.8 } }, holdR: sp.paper && !sp.paperUp ? (cc => { cc.save(); cc.rotate(-.2); cc.beginPath(); cc.rect(-70, -20, 150, 200); fs(cc, '#f6f3ea', 5); for (let k = 0; k < 7; k++) line(cc, [-50, 20 + k * 22, 60, 20 + k * 22], 3, '#8a8a8a'); cc.restore(); }) : null, expr: Object.assign({ mouth: 'flat', look: 0 }, sp.expr || {}), tilt: sp.tilt || 0 });
   // table
   c.beginPath(); c.moveTo(-1200, y - 250); c.lineTo(1200, y - 250); c.lineTo(1240, y - 200); c.lineTo(-1240, y - 200); c.closePath(); fs(c, '#e8e4d8', 3);
   c.beginPath(); c.rect(-1240, y - 200, 2480, 230); fs(c, '#3a5a4a', 3); c.save(); c.beginPath(); c.rect(-1240, y - 200, 2480, 230); c.clip(); for (let x = -1240; x < 1240; x += 40) line(c, [x, y - 200, x + 6, y + 30], 2, 'rgba(0,0,0,.18)'); c.restore();
@@ -3499,8 +3511,8 @@ function bornholmer(c, cam, t, o = {}) {
     c.fillStyle = P.ground; c.fillRect(x0, HZ, gx1 - x0, 2900);
     for (let r = 0, y = HZ; y < 2400; r++) { const h = 120 + r * 14; line(c, [x0, y, gx1, y], 3, 'rgba(40,38,36,.45)'); for (let x = Math.floor(x0 / 700) * 700 + (r % 2) * 350; x < gx1; x += 700) line(c, [x, y, x, y + h], 3, 'rgba(40,38,36,.45)'); y += h; }
     mottle(c, x0, HZ, gx1 - x0, 2900, 77, { r: 160, a: .06 }); grain(c, x0, HZ, gx1 - x0, 2900, .6, 2);
-    for (let i = 0; i < 14; i++) { c.fillStyle = 'rgba(25,22,24,.22)'; ell(c, x0 + rnd(i + 40) * (gx1 - x0), HZ + 200 + rnd(i + 41) * 1500, 90 + rnd(i) * 70, 20); c.fill(); }
-    for (let i = 0; i < 7; i++) puddle(c, x0 + rnd(i + 60) * (gx1 - x0), HZ + 150 + rnd(i + 61) * 1500, 130, 24, i, {});
+    perChunk(x0, gx1, 700, (a, b, i) => { c.fillStyle = 'rgba(25,22,24,.22)'; ell(c, a + rnd(i + 40) * 700, HZ + 200 + rnd(i + 41) * 1500, 90 + rnd(i) * 70, 20); c.fill(); });
+    perChunk(x0, gx1, 1400, (a, b, i) => puddle(c, a + rnd(i + 60) * 1400, HZ + 150 + rnd(i + 61) * 1500, 130, 24, i, {}));
     // island (raised kerb) for the booths
     c.fillStyle = '#8f8b82'; c.fillRect(-3300, -150, 2600, 260); c.fillStyle = '#b4b0a6'; c.fillRect(-3300, -170, 2600, 24); c.fillStyle = '#5f5c56'; c.fillRect(-3300, 110, 2600, 30); for (let x = -3300; x < -700; x += 200) line(c, [x, 110, x, 140], 2, '#3a3a38');
     for (const ly of [-330, 470, 1250]) for (let x = Math.floor(x0 / 600) * 600; x < gx1 - 300; x += 600) { c.fillStyle = 'rgba(240,238,228,.78)'; c.fillRect(x, ly, 300, 16); }
@@ -3570,7 +3582,8 @@ function gateFar(c, cx, b, sc, sun) {
   if (sun) { c.globalCompositeOperation = 'soft-light'; const g = c.createLinearGradient(-W2, 0, W2, 0); g.addColorStop(0, 'rgba(255,200,120,.6)'); g.addColorStop(1, 'rgba(255,200,120,0)'); c.fillStyle = g; c.fillRect(-W2 - 100, -6400, 2 * W2 + 200, 6400); }
   c.restore();
 }
-function graffitiWall(c, x0, x1, yF, seed = 1) {
+function graffitiWall(c, x0, x1, yF, seed = 1, chunk) {
+  if (!chunk) { perChunk(x0, x1, 2640, (a, b, ci) => graffitiWall(c, a, b, yF, seed + ci * 101, true)); return; }
   const h = 790, top = yF - h;
   c.fillStyle = '#d9d6cc'; c.fillRect(x0, top, x1 - x0, h);
   c.save(); c.beginPath(); c.rect(x0, top, x1 - x0, h); c.clip();
@@ -3614,9 +3627,9 @@ function torSet(c, cam, t, o = {}) {
     const [x0, x1] = visXZ(cam, 1, 400);
     // ground west of the wall: wet asphalt / sand strip, puddles reflecting the sun, litter, leaves
     c.fillStyle = '#7a7268'; c.fillRect(x0, TOR_WALL, x1 - x0, 2000); grain(c, x0, TOR_WALL, x1 - x0, 2000, .6, 2); mottle(c, x0, TOR_WALL, x1 - x0, 2000, 8, { r: 160, a: .1 });
-    for (let i = 0; i < 6; i++) puddle(c, x0 + rnd(i + 50) * (x1 - x0), TOR_WALL + 150 + rnd(i + 51) * 700, 160, 26, i, { top: 'rgba(255,230,190,.8)', bot: 'rgba(150,170,190,.7)' });
+    perChunk(x0, x1, 1500, (a, b, ci) => puddle(c, a + rnd(ci + 50) * 1500, TOR_WALL + 150 + rnd(ci + 51) * 700, 160, 26, ci, { top: 'rgba(255,230,190,.8)', bot: 'rgba(150,170,190,.7)' }));
     leaves(c, x0, x1, TOR_WALL + 20, TOR_WALL + 1200, 61, 90, { s: 1.6 });
-    for (let i = 0; i < (x1 - x0) / 300; i++) cigButt(c, x0 + rnd(i + 70) * (x1 - x0), TOR_WALL + 40 + rnd(i + 71) * 900, rnd(i));
+    litter(c, x0, x1, TOR_WALL + 40, TOR_WALL + 940, 70, 300);
     graffitiWall(c, x0, x1, TOR_WALL, 3);
     const ao = c.createLinearGradient(0, TOR_WALL, 0, TOR_WALL + 100); ao.addColorStop(0, 'rgba(20,16,12,.5)'); ao.addColorStop(1, 'rgba(20,16,12,0)'); c.fillStyle = ao; c.fillRect(x0, TOR_WALL, x1 - x0, 100);
   });
@@ -3931,7 +3944,7 @@ function ungarn(c, cam, t, o = {}) {
   layerZ(c, cam, .3, c => { const b = baseZ(cam, -300, .3); c.fillStyle = '#7aa05a'; c.beginPath(); c.moveTo(-6000, b); for (let x = -6000; x <= 6000; x += 300) c.lineTo(x, b - 260 - Math.sin(x * .001) * 160); c.lineTo(6000, b); c.fill(); for (let i = -20; i < 20; i++) { const x = i * 300 + rnd(i) * 100, y = b - 200 - Math.sin(x * .001) * 160; ell(c, x, y - 220, 50, 220); c.fillStyle = '#4a7a3a'; c.fill(); line(c, [x, y, x, y - 60], 10, '#5a4a30'); } });
   layerZ(c, cam, 1, c => {
     const [x0, x1] = visXZ(cam, 1, 600);
-    c.fillStyle = '#9ab868'; c.fillRect(x0, -300, x1 - x0, 1800); for (let i = 0; i < (x1 - x0) / 20; i++) line(c, [x0 + rnd(i) * (x1 - x0), -280 + rnd(i + 3) * 1500, x0 + rnd(i) * (x1 - x0) + 4, -300 + rnd(i + 3) * 1500], 3, rnd(i + 7) > .5 ? '#6a8a48' : '#b8d088');
+    c.fillStyle = '#9ab868'; c.fillRect(x0, -300, x1 - x0, 1800); perChunk(x0, x1, 200, (a, b, ci) => { for (let k = 0; k < 10; k++) { const i = ci * 10 + k, gx = a + rnd(i) * 200, gy = -280 + rnd(i + 3) * 1500; line(c, [gx, gy, gx + 4, gy - 20], 3, rnd(i + 7) > .5 ? '#6a8a48' : '#b8d088'); } });
     c.fillStyle = '#b8a888'; c.fillRect(x0, 240, x1 - x0, 260); grain(c, x0, 240, x1 - x0, 260, .6, 2);
     // fence with a cut opening (o.gap x)
     const gx = o.gapX ?? 0;
@@ -4122,12 +4135,13 @@ function kHall(cam, t, o = {}) {
     behind: [c => { presseTable(c, t, { spokes: o.spokes }); hallCrowd(c, t, o); if (o.people) o.people(c); }],
     screen: [c => { if (o.near) o.near(c); }, c => presseLight(c, cam, t, { flash: o.noFlash ? 0 : flashK(t) * .22 }), c => { if (o.ui) o.ui(c); }] };
 }
-const FLASHES = [0.35, 0.95, 1.55, 2.3, 2.95, 4.2, 4.95, 6.3, 7.3, 7.55, 7.75, 9.5, 12.2, 14.0, 18.6, 20.0];
+const FLASHES = [1.2, 1.75, 2.35, 2.95, 3.6, 3.9, 4.3, 4.8, 5.25, 6.3, 7.3, 7.55, 7.75, 9.5, 12.2, 14.0, 18.6, 20.0];
 const flashK = t => { let f = 0; for (const ft of FLASHES) if (t >= ft && t < ft + .18) f = Math.max(f, 1 - (t - ft) / .18); return f; };
 function hallCrowd(c, t, o = {}) {
   const up = o.up || 0;
   const rows = [[-1500, -160], [-1150, -120], [-800, -90], [-450, -60], [300, -150], [620, -120], [1300, -140], [1620, -110], [1950, -150], [2300, -100], [250, 90], [560, 60], [1420, 70], [1750, 40], [2100, 80], [2450, 60], [-200, 120], [-650, 140]];
   rows.forEach(([x, y], i) => journalist(c, x, y, i, t, { up: o.asker === i ? 0 : up, s: x < 0 ? 1 : -1, kind: o.asker === i ? 'mic' : undefined }));
+  if (o.dense) [[-1350, 230], [-1000, 260], [-650, 290], [-300, 260], [80, 300], [420, 320], [1350, 300], [1650, 330], [1980, 290], [2300, 320], [2600, 280], [-1700, 300]].forEach(([x, y], i) => journalist(c, x, y, i + 3, t, { up, s: x < 980 ? 1 : -1, kind: ['photo', 'eng', 'photo', 'pad'][i % 4] }));
   for (const [lx, d] of [[-1900, 1], [2600, -1]]) tvLight(c, lx, PH_HZ + 80, d, 1);
 }
 function kTor(cam, t, o = {}) {
@@ -4206,9 +4220,16 @@ const NY = -40; // Noah's pavement line in the street
 // ---------- the shot list ----------
 const SL = [
   // ===== 01 INTRO: press hall (Noah in the first frame), the jump to the open wall =====
-  [0, (lt, T, t) => kHall(camMove({ x: 760, y: -160, z: 1.7 }, { x: 960, y: -160, z: 2.4 }, lt, T), t, { people: c => NF(c, 980, 180, { expr: E.curiousL, armsFront: true }, t), near: nearHeads2(t, [1060, 1560]) }), 'Ein Zettel'],
-  [1, (lt, T, t) => kHall(camMove({ x: -20, y: -560, z: 1.5 }, { x: 0, y: -600, z: 2.4 }, lt, T), t, { spokes: { paper: true, arms: { l: { a: .5, b: -1.8 }, r: { a: 1.1, b: -1.9 } } }, near: c => nearLayer(c, { x: 0, y: -580, z: 1.5 + ease01(lt, T) * .9 }, 1.3, 1.7, 190, cc => NB(cc, 120, 0)) }), 'Ein einziger Zettel'],
-  [3, (lt, T, t) => kHall({ x: -300 + lt * 260, y: -280, z: 1.25 }, t, { people: c => NF(c, 980, 180, { expr: E.curiousL }, t) }), 'Saal voller Journalisten'],
+  // NEW INTRO: (A) extreme close-up on Noah, a flash bursts, his eyes snap up; (B) over his shoulder, fast push onto the single sheet,
+  // red felt tip circles it; (C) whip-pan reveal of the packed, flashing hall with Noah in the middle.
+  [0, (lt, T, t) => { const f = t < .33 ? 0 : Math.max(0, 1 - (t - .33) / .28), up = t > .36; const S = kHall(camMove({ x: 1720, y: -668, z: 4.4 }, { x: 1720, y: -662, z: 5.4 }, lt, T), t, { dense: true, noFlash: true, people: c => { bloom(c, 1900, -900, 500, '255,252,235', .7); bloom(c, 1500, -760, 260, '255,250,230', .5); NF(c, 1720, -360, { expr: up ? { lid: 0, browUp: .9, look: -.8, mouth: 'o', open: .25 } : { lid: .45, look: .1, mouth: 'soft' } }, t); } }); S.flash = f * .95; S.shake = f * 14; return S; }, 'Ein Zettel (ECU, Blitz)'],
+  [1, (lt, T, t) => { const k = easeOut(clamp(lt / T)), cam = CAM.mix({ x: 500, y: -500, z: 1.3 }, { x: 150, y: -735, z: 3.4 }, k);
+    return kHall(cam, t, { dense: true, spokes: { paperUp: true, arms: { l: { a: .5, b: -1.8 }, r: { a: 2.2, b: -.4 } }, expr: { look: .2, lid: .3 } },
+      people: c => { zettel(c, 140, -745, t); markerCircle(c, 140, -745, 80, 105, clamp((lt - 1.2) / .9), 7); },
+      near: c => nearLayer(c, { x: 500, y: -500, z: 1.3 }, 1.3, 1.8, 470, cc => NB(cc, 860, 0)) }); }, 'Ein einziger Zettel (Push)'],
+  [3, (lt, T, t) => { const k = easeOut(clamp(lt / T)), cam = CAM.mix({ x: 150, y: -735, z: 3.0 }, { x: 640, y: -270, z: 1.02 }, k);
+    const S = kHall(cam, t, { dense: true, spokes: { paperUp: true, arms: { l: { a: .5, b: -1.8 }, r: { a: 2.2, b: -.4 } } }, people: c => { zettel(c, 140, -745, t); NF(c, 980, 180, { expr: E.curiousL, arms: { r: { a: 1.25, b: -1.5, hand: .3 } }, hold: { r: pad } }, t); } });
+    if (lt < .32) { S.speed = 0; S.shake = 10 * (1 - lt / .32); } return S; }, 'Saal voller Journalisten (Whip)'],
   [4, (lt, T, t) => kHall({ x: 2100, y: -170, z: 1.9 }, t, { people: c => { NF(c, 2280, 150, { expr: { lid: .55, mouth: 'flat', look: -.8 } }, t); bloom(c, 2600 - 90, PH_HZ - 680, 900, '255,252,235', .8 * ease01(lt, .4)); } }), 'Grelle Scheinwerfer'],
   [5, (lt, T, t) => kHall({ x: 1300, y: -260, z: 1.7 }, t, { people: c => NF(c, 1450, 160, { expr: E.curiousL }, t), near: nearHeads2(t, [1100, 1900]) }), 'Kameras'],
   [6, (lt, T, t) => kHall(camMove({ x: -120, y: -600, z: 1.9 }, { x: -40, y: -620, z: 2.3 }, lt, T), t, { spokes: { expr: { lid: .5, look: .3 }, tilt: .08 }, near: c => nearLayer(c, { x: -120, y: -600, z: 1.9 }, 1.3, 1.6, 150, cc => NB(cc, 300, 0)) }), 'müder Mann im grauen Anzug'],
@@ -4234,7 +4255,7 @@ const SL = [
   [27, (lt, T, t) => kStreet({ x: -1260, y: -330, z: 2.4 }, t, { people: c => NF(c, -1300, NY, { expr: E.smile }, t) }), '24 Jahre alt'],
   [28, (lt, T, t) => kStreet({ x: -4100, y: -420, z: 1.25 }, t, { people: c => NS(c, -4700 + lt * 300, NY, { s: 1, walk: t * 8, expr: E.soft }, t) }), 'Ost-Berlin, Prenzlauer Berg'],
   [29, (lt, T, t) => kFlat({ x: -760, y: -360, z: 1.7 }, t, { tod: 'day', people: c => NF(c, -620, 0, { outfit: '1989-home', arms: { l: { a: .9, b: -.9 } }, expr: E.soft }, t) }), 'Altbauwohnung mit Kohleofen'],
-  [30, (lt, T, t) => { const x = -1200 + ease01(lt, T) * 1500; return kSet((c, cm, tt) => treppenhaus(c, cm, tt), { x: x + 200, y: stairY(x) - 300, z: 1.25 }, t, { people: c => { NS(c, x, stairY(x), { s: -1, walk: t * 6, armSwing: .2, outfit: '1989-home', expr: { mouth: 'flat', lid: .3 } }, t); } , near: c => stairRail(c) }); }, 'Briketts in den dritten Stock'],
+  [30, (lt, T, t) => { const x = 500 - ease01(lt, T) * 1500; return kSet((c, cm, tt) => treppenhaus(c, cm, tt), { x: x + 200, y: stairY(x) - 300, z: 1.25 }, t, { people: c => { NS(c, x, stairY(x), { s: -1, walk: t * 6, armSwing: .2, outfit: '1989-home', expr: { mouth: 'flat', lid: .3 } }, t); } , near: c => stairRail(c) }); }, 'Briketts in den dritten Stock'],
   [31, (lt, T, t) => kSet((c, cm, tt) => fabrik(c, cm, tt), { x: 150, y: -330, z: 1.4 }, t, { people: c => { werkbank(c, 0, 60); NF(c, 300, 120, { expr: E.soft, arms: { l: { a: .9, b: -1.4 }, r: { a: .9, b: -1.4 } } }, t); } }), 'Betrieb'],
   [32, (lt, T, t) => kSet((c, cm, tt) => fabrik(c, cm, tt), { x: 100, y: -330, z: 1.3 }, t, { people: c => { drawFolkSide(c, Object.assign({ x: -350, y: 80, s: 1, expr: { mouth: 'smile' } }, CROWD[4])); drawFolkSide(c, Object.assign({ x: 550, y: 60, s: -1, expr: { mouth: 'shout', open: .6 } }, CROWD[9])); NF(c, 100, 120, { expr: E.smile }, t); } }), 'Freunde'],
   [33, (lt, T, t) => kSet((c, cm, tt) => kneipe(c, cm, tt), { x: 0, y: -360, z: 1.2 }, t, { people: c => { for (let i = 0; i < 5; i++) drawFolk(c, Object.assign({ x: -900 + i * 420, y: 120 - Math.max(0, Math.sin(t * 8 + i)) * 30, arms: { l: { a: 2 + Math.sin(t * 8 + i) * .4, b: -.4 }, r: { a: 1.5, b: -.8 } }, expr: { mouth: 'smile' } }, WESTIS[i])); NF(c, 0, 140 - Math.max(0, Math.sin(t * 8)) * 34, { outfit: '1989-home', arms: { l: { a: 2.3, b: -.3 }, r: { a: 1.6 + Math.sin(t * 8) * .3, b: -.6 } }, expr: E.smile }, t); }, light: c => { grade(c, { sx: .5, sy: .3, warm: '255,120,200', warmA: .3, cool: '20,10,60', coolA: .3 }); } }), 'tanzen'],
@@ -4499,6 +4520,11 @@ const SL = [
   [361, (lt, T, t) => kBorn(camMove({ x: 2500, y: -400, z: 2.2 }, { x: 2500, y: -390, z: 2.6 }, lt, T), t, { today: true, people: c => drawNoah(c, { x: 2500, y: -60, k: .25, ink: 1.8, expr: { mouth: 'smile', browUp: .2, eyes: blinkOn(t) ? 'closed' : 'open' } }) }), 'Schreib es in die Kommentare'],
 ];
 // ---------- helpers used above ----------
+function zettel(c, x, y, t) { // the single sheet held up: slight flutter, typed lines, moving glint
+  c.save(); c.translate(x, y); c.rotate(-.12 + Math.sin(t * 3) * .03); c.beginPath(); c.rect(-30, -42, 60, 84); fs(c, '#f8f5ec', 2.5); for (let k = 0; k < 8; k++) line(c, [-22, -30 + k * 9, 20 - (k % 3) * 8, -30 + k * 9], 1.5, '#8a8a8a');
+  const g = (t * .8) % 1; c.save(); c.beginPath(); c.rect(-30, -42, 60, 84); c.clip(); c.fillStyle = 'rgba(255,255,255,.75)'; c.beginPath(); c.moveTo(-60 + g * 140, -42); c.lineTo(-45 + g * 140, -42); c.lineTo(-80 + g * 140, 42); c.lineTo(-95 + g * 140, 42); c.fill(); c.restore(); c.restore();
+  bloom(c, x, y, 120, '255,255,240', .35);
+}
 const NXH = 980;
 function nearHeads2(t, xs) { return c => nearLayer(c, { x: 800, y: -100, z: 1.8 }, 1.5, 1.8, 470, cc => xs.forEach((x, i) => drawFolkSide(cc, Object.assign({ x, y: 0, s: i % 2 ? 1 : -1, expr: { mouth: 'flat' } }, JOURN[(i + 2) % JOURN.length])))); }
 function QUEUE_P(c, t, talk) { QUEUE.forEach((q, i) => drawFolkSide(c, Object.assign({ x: -1550 + i * 165, y: -70 + (i % 2) * 20, s: i % 2 ? -1 : 1, expr: { mouth: talk && Math.sin(t * 8 + i) > .3 ? 'o' : 'soft' } }, q))); }

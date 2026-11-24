@@ -368,7 +368,7 @@ function ostStreet(c, cam, t, o = {}) {
     for (let i = Math.floor(x0 / 900); i * 900 < x1; i++) { if (rnd(i + 80) > .55) puddle(c, i * 900 + rnd(i + 81) * 500, 170 + rnd(i + 82) * 560, 90 + rnd(i + 83) * 120, 16 + rnd(i) * 12, i, { top: P.night ? 'rgba(255,190,110,.55)' : o.tod === 'dusk' ? 'rgba(150,140,150,.8)' : 'rgba(205,210,210,.75)', bot: P.night ? 'rgba(20,24,40,.8)' : undefined }); }
     leaves(c, x0, x1, HZ + 10, 120, 21, Math.round((x1 - x0) / 60));
     leaves(c, x0, x1, 130, 800, 23, Math.round((x1 - x0) / 90), { s: 1.4 });
-    for (let i = 0; i < (x1 - x0) / 400; i++) cigButt(c, x0 + rnd(i + 90) * (x1 - x0), HZ + 20 + rnd(i + 91) * 380, rnd(i));
+    litter(c, x0, x1, HZ + 20, HZ + 400, 90, 400);
     c.fillStyle = '#6a6761'; c.fillRect(x0, 820, x1 - x0, 22); c.fillStyle = '#a7a39b'; c.fillRect(x0, 842, x1 - x0, 26); slabs(c, x0, x1, 868, 1080, 9, { base: '#9a948a', w: 260 }); cobbles(c, x0, x1, 1080, 1500, 13, { base: '#7a756e', h0: 18, h1: 26, wide: 1, sheen: .1 }); leaves(c, x0, x1, 860, 1300, 29, Math.round((x1 - x0) / 120), { s: 1.6 });
     for (let i = Math.floor(x0 / 2600); i * 2600 < x1; i++) { const mx = i * 2600 + 900; ell(c, mx, 500, 110, 22); fs(c, '#3a3836', 2); for (let k = -3; k <= 3; k++) line(c, [mx + k * 26, 486, mx + k * 26, 514], 2, '#55524e'); }
   });

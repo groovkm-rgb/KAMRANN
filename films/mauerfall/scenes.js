@@ -23,9 +23,16 @@ const NY = -40; // Noah's pavement line in the street
 // ---------- the shot list ----------
 const SL = [
   // ===== 01 INTRO: press hall (Noah in the first frame), the jump to the open wall =====
-  [0, (lt, T, t) => kHall(camMove({ x: 760, y: -160, z: 1.7 }, { x: 960, y: -160, z: 2.4 }, lt, T), t, { people: c => NF(c, 980, 180, { expr: E.curiousL, armsFront: true }, t), near: nearHeads2(t, [1060, 1560]) }), 'Ein Zettel'],
-  [1, (lt, T, t) => kHall(camMove({ x: -20, y: -560, z: 1.5 }, { x: 0, y: -600, z: 2.4 }, lt, T), t, { spokes: { paper: true, arms: { l: { a: .5, b: -1.8 }, r: { a: 1.1, b: -1.9 } } }, near: c => nearLayer(c, { x: 0, y: -580, z: 1.5 + ease01(lt, T) * .9 }, 1.3, 1.7, 190, cc => NB(cc, 120, 0)) }), 'Ein einziger Zettel'],
-  [3, (lt, T, t) => kHall({ x: -300 + lt * 260, y: -280, z: 1.25 }, t, { people: c => NF(c, 980, 180, { expr: E.curiousL }, t) }), 'Saal voller Journalisten'],
+  // NEW INTRO: (A) extreme close-up on Noah, a flash bursts, his eyes snap up; (B) over his shoulder, fast push onto the single sheet,
+  // red felt tip circles it; (C) whip-pan reveal of the packed, flashing hall with Noah in the middle.
+  [0, (lt, T, t) => { const f = t < .33 ? 0 : Math.max(0, 1 - (t - .33) / .28), up = t > .36; const S = kHall(camMove({ x: 1720, y: -668, z: 4.4 }, { x: 1720, y: -662, z: 5.4 }, lt, T), t, { dense: true, noFlash: true, people: c => { bloom(c, 1900, -900, 500, '255,252,235', .7); bloom(c, 1500, -760, 260, '255,250,230', .5); NF(c, 1720, -360, { expr: up ? { lid: 0, browUp: .9, look: -.8, mouth: 'o', open: .25 } : { lid: .45, look: .1, mouth: 'soft' } }, t); } }); S.flash = f * .95; S.shake = f * 14; return S; }, 'Ein Zettel (ECU, Blitz)'],
+  [1, (lt, T, t) => { const k = easeOut(clamp(lt / T)), cam = CAM.mix({ x: 500, y: -500, z: 1.3 }, { x: 150, y: -735, z: 3.4 }, k);
+    return kHall(cam, t, { dense: true, spokes: { paperUp: true, arms: { l: { a: .5, b: -1.8 }, r: { a: 2.2, b: -.4 } }, expr: { look: .2, lid: .3 } },
+      people: c => { zettel(c, 140, -745, t); markerCircle(c, 140, -745, 80, 105, clamp((lt - 1.2) / .9), 7); },
+      near: c => nearLayer(c, { x: 500, y: -500, z: 1.3 }, 1.3, 1.8, 470, cc => NB(cc, 860, 0)) }); }, 'Ein einziger Zettel (Push)'],
+  [3, (lt, T, t) => { const k = easeOut(clamp(lt / T)), cam = CAM.mix({ x: 150, y: -735, z: 3.0 }, { x: 640, y: -270, z: 1.02 }, k);
+    const S = kHall(cam, t, { dense: true, spokes: { paperUp: true, arms: { l: { a: .5, b: -1.8 }, r: { a: 2.2, b: -.4 } } }, people: c => { zettel(c, 140, -745, t); NF(c, 980, 180, { expr: E.curiousL, arms: { r: { a: 1.25, b: -1.5, hand: .3 } }, hold: { r: pad } }, t); } });
+    if (lt < .32) { S.speed = 0; S.shake = 10 * (1 - lt / .32); } return S; }, 'Saal voller Journalisten (Whip)'],
   [4, (lt, T, t) => kHall({ x: 2100, y: -170, z: 1.9 }, t, { people: c => { NF(c, 2280, 150, { expr: { lid: .55, mouth: 'flat', look: -.8 } }, t); bloom(c, 2600 - 90, PH_HZ - 680, 900, '255,252,235', .8 * ease01(lt, .4)); } }), 'Grelle Scheinwerfer'],
   [5, (lt, T, t) => kHall({ x: 1300, y: -260, z: 1.7 }, t, { people: c => NF(c, 1450, 160, { expr: E.curiousL }, t), near: nearHeads2(t, [1100, 1900]) }), 'Kameras'],
   [6, (lt, T, t) => kHall(camMove({ x: -120, y: -600, z: 1.9 }, { x: -40, y: -620, z: 2.3 }, lt, T), t, { spokes: { expr: { lid: .5, look: .3 }, tilt: .08 }, near: c => nearLayer(c, { x: -120, y: -600, z: 1.9 }, 1.3, 1.6, 150, cc => NB(cc, 300, 0)) }), 'müder Mann im grauen Anzug'],
@@ -51,7 +58,7 @@ const SL = [
   [27, (lt, T, t) => kStreet({ x: -1260, y: -330, z: 2.4 }, t, { people: c => NF(c, -1300, NY, { expr: E.smile }, t) }), '24 Jahre alt'],
   [28, (lt, T, t) => kStreet({ x: -4100, y: -420, z: 1.25 }, t, { people: c => NS(c, -4700 + lt * 300, NY, { s: 1, walk: t * 8, expr: E.soft }, t) }), 'Ost-Berlin, Prenzlauer Berg'],
   [29, (lt, T, t) => kFlat({ x: -760, y: -360, z: 1.7 }, t, { tod: 'day', people: c => NF(c, -620, 0, { outfit: '1989-home', arms: { l: { a: .9, b: -.9 } }, expr: E.soft }, t) }), 'Altbauwohnung mit Kohleofen'],
-  [30, (lt, T, t) => { const x = -1200 + ease01(lt, T) * 1500; return kSet((c, cm, tt) => treppenhaus(c, cm, tt), { x: x + 200, y: stairY(x) - 300, z: 1.25 }, t, { people: c => { NS(c, x, stairY(x), { s: -1, walk: t * 6, armSwing: .2, outfit: '1989-home', expr: { mouth: 'flat', lid: .3 } }, t); } , near: c => stairRail(c) }); }, 'Briketts in den dritten Stock'],
+  [30, (lt, T, t) => { const x = 500 - ease01(lt, T) * 1500; return kSet((c, cm, tt) => treppenhaus(c, cm, tt), { x: x + 200, y: stairY(x) - 300, z: 1.25 }, t, { people: c => { NS(c, x, stairY(x), { s: -1, walk: t * 6, armSwing: .2, outfit: '1989-home', expr: { mouth: 'flat', lid: .3 } }, t); } , near: c => stairRail(c) }); }, 'Briketts in den dritten Stock'],
   [31, (lt, T, t) => kSet((c, cm, tt) => fabrik(c, cm, tt), { x: 150, y: -330, z: 1.4 }, t, { people: c => { werkbank(c, 0, 60); NF(c, 300, 120, { expr: E.soft, arms: { l: { a: .9, b: -1.4 }, r: { a: .9, b: -1.4 } } }, t); } }), 'Betrieb'],
   [32, (lt, T, t) => kSet((c, cm, tt) => fabrik(c, cm, tt), { x: 100, y: -330, z: 1.3 }, t, { people: c => { drawFolkSide(c, Object.assign({ x: -350, y: 80, s: 1, expr: { mouth: 'smile' } }, CROWD[4])); drawFolkSide(c, Object.assign({ x: 550, y: 60, s: -1, expr: { mouth: 'shout', open: .6 } }, CROWD[9])); NF(c, 100, 120, { expr: E.smile }, t); } }), 'Freunde'],
   [33, (lt, T, t) => kSet((c, cm, tt) => kneipe(c, cm, tt), { x: 0, y: -360, z: 1.2 }, t, { people: c => { for (let i = 0; i < 5; i++) drawFolk(c, Object.assign({ x: -900 + i * 420, y: 120 - Math.max(0, Math.sin(t * 8 + i)) * 30, arms: { l: { a: 2 + Math.sin(t * 8 + i) * .4, b: -.4 }, r: { a: 1.5, b: -.8 } }, expr: { mouth: 'smile' } }, WESTIS[i])); NF(c, 0, 140 - Math.max(0, Math.sin(t * 8)) * 34, { outfit: '1989-home', arms: { l: { a: 2.3, b: -.3 }, r: { a: 1.6 + Math.sin(t * 8) * .3, b: -.6 } }, expr: E.smile }, t); }, light: c => { grade(c, { sx: .5, sy: .3, warm: '255,120,200', warmA: .3, cool: '20,10,60', coolA: .3 }); } }), 'tanzen'],
@@ -316,6 +323,11 @@ const SL = [
   [361, (lt, T, t) => kBorn(camMove({ x: 2500, y: -400, z: 2.2 }, { x: 2500, y: -390, z: 2.6 }, lt, T), t, { today: true, people: c => drawNoah(c, { x: 2500, y: -60, k: .25, ink: 1.8, expr: { mouth: 'smile', browUp: .2, eyes: blinkOn(t) ? 'closed' : 'open' } }) }), 'Schreib es in die Kommentare'],
 ];
 // ---------- helpers used above ----------
+function zettel(c, x, y, t) { // the single sheet held up: slight flutter, typed lines, moving glint
+  c.save(); c.translate(x, y); c.rotate(-.12 + Math.sin(t * 3) * .03); c.beginPath(); c.rect(-30, -42, 60, 84); fs(c, '#f8f5ec', 2.5); for (let k = 0; k < 8; k++) line(c, [-22, -30 + k * 9, 20 - (k % 3) * 8, -30 + k * 9], 1.5, '#8a8a8a');
+  const g = (t * .8) % 1; c.save(); c.beginPath(); c.rect(-30, -42, 60, 84); c.clip(); c.fillStyle = 'rgba(255,255,255,.75)'; c.beginPath(); c.moveTo(-60 + g * 140, -42); c.lineTo(-45 + g * 140, -42); c.lineTo(-80 + g * 140, 42); c.lineTo(-95 + g * 140, 42); c.fill(); c.restore(); c.restore();
+  bloom(c, x, y, 120, '255,255,240', .35);
+}
 const NXH = 980;
 function nearHeads2(t, xs) { return c => nearLayer(c, { x: 800, y: -100, z: 1.8 }, 1.5, 1.8, 470, cc => xs.forEach((x, i) => drawFolkSide(cc, Object.assign({ x, y: 0, s: i % 2 ? 1 : -1, expr: { mouth: 'flat' } }, JOURN[(i + 2) % JOURN.length])))); }
 function QUEUE_P(c, t, talk) { QUEUE.forEach((q, i) => drawFolkSide(c, Object.assign({ x: -1550 + i * 165, y: -70 + (i % 2) * 20, s: i % 2 ? -1 : 1, expr: { mouth: talk && Math.sin(t * 8 + i) > .3 ? 'o' : 'soft' } }, q))); }

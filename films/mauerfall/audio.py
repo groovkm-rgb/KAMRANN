@@ -180,7 +180,11 @@ piano_bed(CUT(330), DUR - 1.0, g=.9)                       # finale
 i0 = int((DUR - 1.4) * SR); music[i0:] *= np.linspace(1, 0, N - i0)
 
 # ---------------- SFX (frame-matched to the shots) ----------------
-for ft in [0.35, 0.95, 1.55, 2.3, 2.95, 4.2, 4.95, 6.3, 7.3, 7.55, 7.75, 9.5, 12.2, 14.0, 18.6, 20.0]: place(sfx, click(), ft, .55)
+for ft in [0.33, 1.2, 1.75, 2.35, 2.95, 3.6, 3.9, 4.3, 4.8, 5.25, 6.3, 7.3, 7.55, 7.75, 9.5, 12.2, 14.0, 18.6, 20.0]: place(sfx, click(), ft, .55)
+place(sfx, thunk(55, .7) * 1.6, 0.33, 1.0); place(sfx, ting(2637, .6), 0.36, .3)          # intro hit on the flash
+place(sfx, whoosh(.5), 0.75, .8); place(sfx, ting(3136, .8), 1.9, .2)                     # push onto the sheet, glint
+place(sfx, paper(.6) * .7, 2.15, .6)                                                     # felt tip circles the sheet
+place(sfx, whoosh(.35) * 1.4, 3.42, 1.0)                                                 # whip pan
 place(sfx, thunk(240, .15), CUT(4) + .05, .9)                       # TV light switched on
 for t0 in (S(7, .1), S(7, .6), S(8, .2), S(14, .2)): place(sfx, paper(), t0, .7)
 ticks(15.0, CUT(18) - .1, 1.0, 1.0, .3)                             # 18:53 motif starts with the stamp

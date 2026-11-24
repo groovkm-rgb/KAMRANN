@@ -12,10 +12,14 @@ function visX(cam, p, m = 200) { const z = 1 + (cam.z - 1) * p, hw = W / 2 / z; 
 function visY(cam, p, m = 200) { const z = 1 + (cam.z - 1) * p, hh = H / 2 / z; return [cam.y * p - hh - m, cam.y * p + hh + m]; }
 // irregular low-alpha patches (dirt, damp, repairs): soft radial blobs, no hard edges
 function mottle(c, x, y, w, h, seed, o = {}) {
+  // patches sit on a WORLD grid (not relative to the visible area), so they stay put when the camera moves
   const n = o.n ?? Math.ceil(w * h / 26000), r0 = o.r ?? 60, dark = o.dark || '#2a2420', light = o.light || '#ffffff', a = o.a ?? .07;
-  for (let i = 0; i < n; i++) {
-    const px = x + rnd(seed + i * 3.17) * w, py = y + rnd(seed + i * 5.31) * h, r = r0 * (.5 + rnd(seed + i * 7.7) * 1.4), sq = .45 + rnd(seed + i * 4.1) * .6;
-    const col = rnd(seed + i * 1.9) > .42 ? dark : light, aa = a * (.5 + rnd(seed + i * 2.3) * .9);
+  const cell = Math.max(8, Math.sqrt(w * h / Math.max(1, n)));
+  for (let i = Math.floor(x / cell); i * cell < x + w; i++) for (let j = Math.floor(y / cell); j * cell < y + h; j++) {
+    const q = seed + i * 7.31 + j * 13.17, px = (i + rnd(q * 3.17)) * cell, py = (j + rnd(q * 5.31)) * cell;
+    if (px < x - r0 || px > x + w + r0 || py < y - r0 || py > y + h + r0) continue;
+    const r = r0 * (.5 + rnd(q * 7.7) * 1.4), sq = .45 + rnd(q * 4.1) * .6;
+    const col = rnd(q * 1.9) > .42 ? dark : light, aa = a * (.5 + rnd(q * 2.3) * .9);
     const g = c.createRadialGradient(px, py, 0, px, py, r); g.addColorStop(0, rgba(col, aa)); g.addColorStop(.6, rgba(col, aa * .5)); g.addColorStop(1, rgba(col, 0));
     c.save(); c.translate(px, py); c.scale(1, sq); c.translate(-px, -py); c.fillStyle = g; c.fillRect(px - r, py - r, 2 * r, 2 * r); c.restore();
   }
@@ -29,7 +33,8 @@ function grain(c, x, y, w, h, a = .5, sc = 1) {
     for (let i = 0; i < 60; i++) { g.strokeStyle = 'rgba(0,0,0,.12)'; g.lineWidth = 1; g.beginPath(); const px = rnd(i * 7.1) * 256, py = rnd(i * 8.2) * 256; g.moveTo(px, py); g.lineTo(px + (rnd(i) - .5) * 20, py + (rnd(i + 1) - .5) * 12); g.stroke(); }
     _grain = c.createPattern(cv, 'repeat');
   }
-  c.save(); c.globalAlpha = a; c.beginPath(); c.rect(x, y, w, h); c.translate(x, y); c.scale(sc, sc); c.fillStyle = _grain; c.fill(); c.restore();
+  // pattern anchored at the world origin -> the grain moves with the world, not with the screen
+  c.save(); c.globalAlpha = a; c.beginPath(); c.rect(x, y, w, h); c.clip(); c.scale(sc, sc); c.fillStyle = _grain; c.fillRect(x / sc, y / sc, w / sc, h / sc); c.restore();
 }
 // rain / damp streaks running down from a ledge
 function streaks(c, x, y, w, len, seed, o = {}) {
@@ -130,13 +135,13 @@ function cobbles(c, x0, x1, y0, y1, seed, o = {}) {
   let y = y0, r = 0;
   while (y < y1) {
     const k = (y - y0) / Math.max(1, y1 - y0), rh = h0 + (h1 - h0) * k, sw = rh * ratio * (o.wide || 1.6);
-    const off = rnd(seed + r * 3.3) * sw; let x = x0 - off, i = 0;
-    while (x < x1) {
-      const v = rnd(seed + r * 977 + i * 13.1), w = sw * (.75 + rnd(seed + r * 31 + i * 7) * .45);
+    // stones on a world grid: column index i is fixed in the world, so they stay put when the camera pans
+    const off = rnd(seed + r * 3.3) * sw;
+    for (let i = Math.floor((x0 - off) / sw) - 1; i * sw + off < x1; i++) {
+      const x = i * sw + off, v = rnd(seed + r * 977 + i * 13.1), w = sw * (.86 + rnd(seed + r * 31 + i * 7) * .14);
       c.fillStyle = v > .9 ? dk(base, .22) : v > .72 ? lt(base, var_) : v < .1 ? mixHex(base, '#6a5a4a', .35) : v < .25 ? dk(base, .1) : base;
       rrect(c, x + 2, y + 1.5, w - 4, rh - 3, Math.min(rh * .4, 8)); c.fill();
       if (o.wet !== false) { c.fillStyle = `rgba(230,236,240,${(o.sheen ?? .16) * (.4 + rnd(seed + r * 5 + i) * .8)})`; rrect(c, x + 5, y + 2.5, (w - 10) * .7, Math.max(1.5, rh * .18), 2); c.fill(); }
-      x += w; i++;
     }
     y += rh; r++;
   }
@@ -168,14 +173,16 @@ function puddle(c, x, y, rx, ry, seed, o = {}) {
 }
 // fallen leaves / litter on the ground
 function leaves(c, x0, x1, y0, y1, seed, n = 30, o = {}) {
-  const cols = o.cols || ['#a86b2a', '#8a5a26', '#c08a3a', '#6e4a28', '#b39048'];
-  for (let i = 0; i < n; i++) {
-    const x = x0 + rnd(seed + i * 2.1) * (x1 - x0), y = y0 + rnd(seed + i * 3.9) * (y1 - y0), s = (o.s || 1) * (7 + rnd(seed + i * 5.3) * 7);
+  // world-anchored: leaves live in 400-unit world cells (same density as before)
+  const cols = o.cols || ['#a86b2a', '#8a5a26', '#c08a3a', '#6e4a28', '#b39048'], C = 400, per = Math.max(1, Math.round(n * C / Math.max(1, x1 - x0)));
+  for (let ci = Math.floor(x0 / C); ci * C < x1; ci++) for (let k = 0; k < per; k++) {
+    const i = ci * 37 + k, x = ci * C + rnd(seed + i * 2.1) * C, y = y0 + rnd(seed + i * 3.9) * (y1 - y0), s = (o.s || 1) * (7 + rnd(seed + i * 5.3) * 7);
     c.save(); c.translate(x, y); c.rotate(rnd(seed + i) * 6); c.scale(1, .5);
-    c.beginPath(); c.moveTo(-s, 0); c.quadraticCurveTo(0, -s * .9, s, 0); c.quadraticCurveTo(0, s * .9, -s, 0); c.fillStyle = cols[i % cols.length]; c.fill();
+    c.beginPath(); c.moveTo(-s, 0); c.quadraticCurveTo(0, -s * .9, s, 0); c.quadraticCurveTo(0, s * .9, -s, 0); c.fillStyle = cols[Math.abs(i) % cols.length]; c.fill();
     c.strokeStyle = 'rgba(40,25,10,.5)'; c.lineWidth = 1; c.beginPath(); c.moveTo(-s, 0); c.lineTo(s, 0); c.stroke(); c.restore();
   }
 }
+function litter(c, x0, x1, y0, y1, seed, every = 400) { for (let ci = Math.floor(x0 / every); ci * every < x1; ci++) cigButt(c, ci * every + rnd(seed + ci) * every, y0 + rnd(seed + ci * 3) * (y1 - y0), rnd(seed + ci * 5) * 6); }
 function cigButt(c, x, y, r = 0) { c.save(); c.translate(x, y); c.rotate(r); c.fillStyle = '#efe9dc'; c.fillRect(-9, -2.5, 12, 5); c.fillStyle = '#c98a3e'; c.fillRect(3, -2.5, 6, 5); c.fillStyle = '#555'; c.fillRect(-10, -2, 2, 4); c.restore(); }
 // soft contact shadow (overcast light)
 function softShadow(c, x, y, w, a = .3) { const g = c.createRadialGradient(x, y, 0, x, y, w); g.addColorStop(0, `rgba(20,18,22,${a})`); g.addColorStop(1, 'rgba(20,18,22,0)'); c.save(); c.translate(x, y); c.scale(1, .18); c.translate(-x, -y); c.fillStyle = g; c.fillRect(x - w, y - w, w * 2, w * 2); c.restore(); }
@@ -209,25 +216,30 @@ function visXZ(cam, p, m = 200) { const hw = W / 2 / cam.z; return [cam.x * p - 
 // natural bare tree: recursive, irregular branches and twigs (world units, foot at x,y)
 function bareTree(c, x, y, o = {}) {
   const s = o.seed || x, t = o.t || 0, h = o.h || 900, bark = o.bark || '#4a423a', leafP = o.leaves ?? .35;
-  const br = (x0, y0, a, len, w, d) => {
-    const bend = (rnd(s + d * 7.1 + x0 * .013) - .5) * .5, mx = x0 + Math.cos(a + bend * .5) * len * .5, my = y0 + Math.sin(a + bend * .5) * len * .5;
-    const x1 = x0 + Math.cos(a + bend) * len + Math.sin(t * .7 + d) * (6 - d) * 1.2, y1 = y0 + Math.sin(a + bend) * len;
+  // every branch has a fixed id; all randomness comes from (seed, id) so the shape never changes between frames.
+  // Only a slow, small sway (wind) moves the tips.
+  const br = (x0, y0, a, len, w, d, id) => {
+    const q = s * .37 + id * 7.13, bend = (rnd(q) - .5) * .5, sway = Math.sin(t * .9 + id * .7) * .012 * (6 - d);
+    const aa = a + sway, mx = x0 + Math.cos(aa + bend * .5) * len * .5, my = y0 + Math.sin(aa + bend * .5) * len * .5;
+    const x1 = x0 + Math.cos(aa + bend) * len, y1 = y0 + Math.sin(aa + bend) * len;
     c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo(mx, my, x1, y1); c.lineCap = 'round'; c.lineWidth = w + (d > 2 ? 3 : 1.5); c.strokeStyle = OUT; c.stroke(); c.lineWidth = w; c.strokeStyle = bark; c.stroke();
     if (d > 0) {
-      const nb = d > 3 ? 2 : 2 + (rnd(s + d + x1) > .5 ? 1 : 0);
-      for (let i = 0; i < nb; i++) { const sp = (i - (nb - 1) / 2) * (.55 + rnd(s + i * 3 + y1) * .35) + (rnd(s + i + x1 * .1) - .5) * .3; br(x1, y1, a + sp, len * (.62 + rnd(s + i * 5 + d) * .22), w * .66, d - 1); }
+      const nb = d > 3 ? 2 : 2 + (rnd(q + 1.1) > .5 ? 1 : 0);
+      for (let i = 0; i < nb; i++) { const sp = (i - (nb - 1) / 2) * (.55 + rnd(q + i * 3.3) * .35) + (rnd(q + i * 1.7) - .5) * .3; br(x1, y1, aa + sp, len * (.62 + rnd(q + i * 5.1) * .22), w * .66, d - 1, id * 4 + i + 1); }
     } else {
-      for (let k = 0; k < 3; k++) { const ta = a + (rnd(s + k + x1) - .5) * 1.4; line(c, [x1, y1, x1 + Math.cos(ta) * 40, y1 + Math.sin(ta) * 40], 2.5, bark); }
-      if (rnd(s + x1 * .7 + y1) < leafP) { c.save(); c.translate(x1, y1); c.rotate(rnd(x1) * 6); ell(c, 0, 0, 16, 10); c.fillStyle = ['#b8862e', '#9a6a26', '#c8a048', '#8a5a2a'][Math.floor(rnd(y1) * 4)]; c.fill(); c.lineWidth = 1.5; c.strokeStyle = 'rgba(40,25,10,.6)'; c.stroke(); c.restore(); }
+      for (let k = 0; k < 3; k++) { const ta = aa + (rnd(q + k * 2.9) - .5) * 1.4; line(c, [x1, y1, x1 + Math.cos(ta) * 40, y1 + Math.sin(ta) * 40], 2.5, bark); }
+      if (rnd(q + 9.9) < leafP) { c.save(); c.translate(x1, y1); c.rotate(rnd(q + 4.4) * 6); ell(c, 0, 0, 16, 10); c.fillStyle = ['#b8862e', '#9a6a26', '#c8a048', '#8a5a2a'][Math.floor(rnd(q + 6.6) * 4)]; c.fill(); c.lineWidth = 1.5; c.strokeStyle = 'rgba(40,25,10,.6)'; c.stroke(); c.restore(); }
     }
   };
-  // trunk with bark texture
   const tw = o.trunk || 56;
   c.beginPath(); c.moveTo(x - tw / 2 - 6, y); c.quadraticCurveTo(x - tw / 2, y - h * .5, x - tw * .35, y - h); c.lineTo(x + tw * .35, y - h); c.quadraticCurveTo(x + tw / 2, y - h * .5, x + tw / 2 + 6, y); c.closePath(); fs(c, bark, 3);
   c.save(); c.clip(); for (let k = 0; k < 40; k++) { const by = y - rnd(s + k * 3) * h; line(c, [x - tw / 2 + rnd(s + k) * tw, by, x - tw / 2 + rnd(s + k) * tw + 4, by - 30 - rnd(k) * 60], 2.5, rnd(k + s) > .5 ? 'rgba(20,16,12,.45)' : 'rgba(200,190,170,.25)'); } c.fillStyle = 'rgba(0,0,0,.22)'; c.fillRect(x, y - h, tw, h); c.restore();
-  br(x, y - h, -Math.PI / 2 - .55, h * .45, tw * .55, 5); br(x, y - h, -Math.PI / 2 + .5, h * .48, tw * .55, 5); br(x, y - h * .92, -Math.PI / 2 + .05, h * .5, tw * .5, 5);
-  if (o.low !== false) br(x, y - h * .75, -Math.PI / 2 - 1.1, h * .3, tw * .32, 3);
+  br(x, y - h, -Math.PI / 2 - .55, h * .45, tw * .55, 5, 1); br(x, y - h, -Math.PI / 2 + .5, h * .48, tw * .55, 5, 2); br(x, y - h * .92, -Math.PI / 2 + .05, h * .5, tw * .5, 5, 3);
+  if (o.low !== false) br(x, y - h * .75, -Math.PI / 2 - 1.1, h * .3, tw * .32, 3, 4);
 }
 // NEAR LAYER: objects close to the camera — pan factor p (> 1 moves faster) and drawn sc times bigger.
 // Their ground line (y = 0 inside fn) sits on screen where world line groundY is. Good for cropped foreground occluders.
 function nearLayer(c, cam, p, sc, groundY, fn) { layerZ(c, cam, p, c => { const bx = cam.x * p, by = baseZ(cam, groundY, p); c.translate(bx, by); c.scale(sc, sc); c.translate(-bx, 0); fn(c); }); }
+
+// run fn over fixed world chunks [a, b) of width C that cover x0..x1 (keeps scattered detail anchored to the world)
+function perChunk(x0, x1, C, fn) { for (let ci = Math.floor(x0 / C); ci * C < x1; ci++) fn(ci * C, (ci + 1) * C, ci); }

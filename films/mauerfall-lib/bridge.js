@@ -120,8 +120,8 @@ function bornholmer(c, cam, t, o = {}) {
     c.fillStyle = P.ground; c.fillRect(x0, HZ, gx1 - x0, 2900);
     for (let r = 0, y = HZ; y < 2400; r++) { const h = 120 + r * 14; line(c, [x0, y, gx1, y], 3, 'rgba(40,38,36,.45)'); for (let x = Math.floor(x0 / 700) * 700 + (r % 2) * 350; x < gx1; x += 700) line(c, [x, y, x, y + h], 3, 'rgba(40,38,36,.45)'); y += h; }
     mottle(c, x0, HZ, gx1 - x0, 2900, 77, { r: 160, a: .06 }); grain(c, x0, HZ, gx1 - x0, 2900, .6, 2);
-    for (let i = 0; i < 14; i++) { c.fillStyle = 'rgba(25,22,24,.22)'; ell(c, x0 + rnd(i + 40) * (gx1 - x0), HZ + 200 + rnd(i + 41) * 1500, 90 + rnd(i) * 70, 20); c.fill(); }
-    for (let i = 0; i < 7; i++) puddle(c, x0 + rnd(i + 60) * (gx1 - x0), HZ + 150 + rnd(i + 61) * 1500, 130, 24, i, {});
+    perChunk(x0, gx1, 700, (a, b, i) => { c.fillStyle = 'rgba(25,22,24,.22)'; ell(c, a + rnd(i + 40) * 700, HZ + 200 + rnd(i + 41) * 1500, 90 + rnd(i) * 70, 20); c.fill(); });
+    perChunk(x0, gx1, 1400, (a, b, i) => puddle(c, a + rnd(i + 60) * 1400, HZ + 150 + rnd(i + 61) * 1500, 130, 24, i, {}));
     // island (raised kerb) for the booths
     c.fillStyle = '#8f8b82'; c.fillRect(-3300, -150, 2600, 260); c.fillStyle = '#b4b0a6'; c.fillRect(-3300, -170, 2600, 24); c.fillStyle = '#5f5c56'; c.fillRect(-3300, 110, 2600, 30); for (let x = -3300; x < -700; x += 200) line(c, [x, 110, x, 140], 2, '#3a3a38');
     for (const ly of [-330, 470, 1250]) for (let x = Math.floor(x0 / 600) * 600; x < gx1 - 300; x += 600) { c.fillStyle = 'rgba(240,238,228,.78)'; c.fillRect(x, ly, 300, 16); }

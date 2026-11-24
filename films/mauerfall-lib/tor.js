@@ -21,7 +21,8 @@ function gateFar(c, cx, b, sc, sun) {
   if (sun) { c.globalCompositeOperation = 'soft-light'; const g = c.createLinearGradient(-W2, 0, W2, 0); g.addColorStop(0, 'rgba(255,200,120,.6)'); g.addColorStop(1, 'rgba(255,200,120,0)'); c.fillStyle = g; c.fillRect(-W2 - 100, -6400, 2 * W2 + 200, 6400); }
   c.restore();
 }
-function graffitiWall(c, x0, x1, yF, seed = 1) {
+function graffitiWall(c, x0, x1, yF, seed = 1, chunk) {
+  if (!chunk) { perChunk(x0, x1, 2640, (a, b, ci) => graffitiWall(c, a, b, yF, seed + ci * 101, true)); return; }
   const h = 790, top = yF - h;
   c.fillStyle = '#d9d6cc'; c.fillRect(x0, top, x1 - x0, h);
   c.save(); c.beginPath(); c.rect(x0, top, x1 - x0, h); c.clip();
@@ -65,9 +66,9 @@ function torSet(c, cam, t, o = {}) {
     const [x0, x1] = visXZ(cam, 1, 400);
     // ground west of the wall: wet asphalt / sand strip, puddles reflecting the sun, litter, leaves
     c.fillStyle = '#7a7268'; c.fillRect(x0, TOR_WALL, x1 - x0, 2000); grain(c, x0, TOR_WALL, x1 - x0, 2000, .6, 2); mottle(c, x0, TOR_WALL, x1 - x0, 2000, 8, { r: 160, a: .1 });
-    for (let i = 0; i < 6; i++) puddle(c, x0 + rnd(i + 50) * (x1 - x0), TOR_WALL + 150 + rnd(i + 51) * 700, 160, 26, i, { top: 'rgba(255,230,190,.8)', bot: 'rgba(150,170,190,.7)' });
+    perChunk(x0, x1, 1500, (a, b, ci) => puddle(c, a + rnd(ci + 50) * 1500, TOR_WALL + 150 + rnd(ci + 51) * 700, 160, 26, ci, { top: 'rgba(255,230,190,.8)', bot: 'rgba(150,170,190,.7)' }));
     leaves(c, x0, x1, TOR_WALL + 20, TOR_WALL + 1200, 61, 90, { s: 1.6 });
-    for (let i = 0; i < (x1 - x0) / 300; i++) cigButt(c, x0 + rnd(i + 70) * (x1 - x0), TOR_WALL + 40 + rnd(i + 71) * 900, rnd(i));
+    litter(c, x0, x1, TOR_WALL + 40, TOR_WALL + 940, 70, 300);
     graffitiWall(c, x0, x1, TOR_WALL, 3);
     const ao = c.createLinearGradient(0, TOR_WALL, 0, TOR_WALL + 100); ao.addColorStop(0, 'rgba(20,16,12,.5)'); ao.addColorStop(1, 'rgba(20,16,12,0)'); c.fillStyle = ao; c.fillRect(x0, TOR_WALL, x1 - x0, 100);
   });

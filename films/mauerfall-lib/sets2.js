@@ -114,7 +114,7 @@ function ungarn(c, cam, t, o = {}) {
   layerZ(c, cam, .3, c => { const b = baseZ(cam, -300, .3); c.fillStyle = '#7aa05a'; c.beginPath(); c.moveTo(-6000, b); for (let x = -6000; x <= 6000; x += 300) c.lineTo(x, b - 260 - Math.sin(x * .001) * 160); c.lineTo(6000, b); c.fill(); for (let i = -20; i < 20; i++) { const x = i * 300 + rnd(i) * 100, y = b - 200 - Math.sin(x * .001) * 160; ell(c, x, y - 220, 50, 220); c.fillStyle = '#4a7a3a'; c.fill(); line(c, [x, y, x, y - 60], 10, '#5a4a30'); } });
   layerZ(c, cam, 1, c => {
     const [x0, x1] = visXZ(cam, 1, 600);
-    c.fillStyle = '#9ab868'; c.fillRect(x0, -300, x1 - x0, 1800); for (let i = 0; i < (x1 - x0) / 20; i++) line(c, [x0 + rnd(i) * (x1 - x0), -280 + rnd(i + 3) * 1500, x0 + rnd(i) * (x1 - x0) + 4, -300 + rnd(i + 3) * 1500], 3, rnd(i + 7) > .5 ? '#6a8a48' : '#b8d088');
+    c.fillStyle = '#9ab868'; c.fillRect(x0, -300, x1 - x0, 1800); perChunk(x0, x1, 200, (a, b, ci) => { for (let k = 0; k < 10; k++) { const i = ci * 10 + k, gx = a + rnd(i) * 200, gy = -280 + rnd(i + 3) * 1500; line(c, [gx, gy, gx + 4, gy - 20], 3, rnd(i + 7) > .5 ? '#6a8a48' : '#b8d088'); } });
     c.fillStyle = '#b8a888'; c.fillRect(x0, 240, x1 - x0, 260); grain(c, x0, 240, x1 - x0, 260, .6, 2);
     // fence with a cut opening (o.gap x)
     const gx = o.gapX ?? 0;
