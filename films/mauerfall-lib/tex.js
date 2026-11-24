@@ -228,3 +228,6 @@ function bareTree(c, x, y, o = {}) {
   br(x, y - h, -Math.PI / 2 - .55, h * .45, tw * .55, 5); br(x, y - h, -Math.PI / 2 + .5, h * .48, tw * .55, 5); br(x, y - h * .92, -Math.PI / 2 + .05, h * .5, tw * .5, 5);
   if (o.low !== false) br(x, y - h * .75, -Math.PI / 2 - 1.1, h * .3, tw * .32, 3);
 }
+// NEAR LAYER: objects close to the camera — pan factor p (> 1 moves faster) and drawn sc times bigger.
+// Their ground line (y = 0 inside fn) sits on screen where world line groundY is. Good for cropped foreground occluders.
+function nearLayer(c, cam, p, sc, groundY, fn) { layerZ(c, cam, p, c => { const bx = cam.x * p, by = baseZ(cam, groundY, p); c.translate(bx, by); c.scale(sc, sc); c.translate(-bx, 0); fn(c); }); }

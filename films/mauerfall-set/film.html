@@ -1796,6 +1796,9 @@ function bareTree(c, x, y, o = {}) {
   br(x, y - h, -Math.PI / 2 - .55, h * .45, tw * .55, 5); br(x, y - h, -Math.PI / 2 + .5, h * .48, tw * .55, 5); br(x, y - h * .92, -Math.PI / 2 + .05, h * .5, tw * .5, 5);
   if (o.low !== false) br(x, y - h * .75, -Math.PI / 2 - 1.1, h * .3, tw * .32, 3);
 }
+// NEAR LAYER: objects close to the camera — pan factor p (> 1 moves faster) and drawn sc times bigger.
+// Their ground line (y = 0 inside fn) sits on screen where world line groundY is. Good for cropped foreground occluders.
+function nearLayer(c, cam, p, sc, groundY, fn) { layerZ(c, cam, p, c => { const bx = cam.x * p, by = baseZ(cam, groundY, p); c.translate(bx, by); c.scale(sc, sc); c.translate(-bx, 0); fn(c); }); }
 
 // ---- mauerfall-lib/noah89.js ----
 // NOAH 1989 outfits on top of the unchanged rig (noah.js): head, hair, face, skeleton and limb lengths are NOT touched.
@@ -3278,90 +3281,84 @@ function tvPress(c, w, h, t) {
   c.fillStyle = 'rgba(255,255,255,.08)'; c.fillRect(0, (t * 40) % h, w, 10);
 }
 const sandwich = c => { c.save(); c.rotate(1.2); c.beginPath(); c.rect(-60, -30, 120, 46); fs(c, '#c9925a', 6); c.fillStyle = '#c9564a'; c.fillRect(-52, -38, 104, 14); circle(c, -20, -32, 10); c.fillStyle = '#e8a0a0'; c.fill(); c.restore(); };
+const NOAH_STREET = (c, x, y, o = {}) => { softShadow(c, x, y, 130, .4); drawNoah89(c, Object.assign({ x, y, k: .25, ink: 1.8 }, o)); };
+const GUARD = { hat: 'border', hatCol: '#6b7058', coat: '#6b7058', type: 'uniform', pants: '#5a5e4a', shoes: '#1e1c1a', hair: 'short' };
+function closeStreet(cam, t, o) {
+  const S = streetShot(cam, t, o);
+  S.screen = [c => { if (o.near) nearLayer(c, cam, o.near.p || 1.3, o.near.sc || 1.6, o.near.ground || 300, cc => o.near.fn(cc, t)); }, c => ostLight(c, cam, t, o)];
+  return S;
+}
 defineFilm({ shots: [
-  { name: 'a-street-wide', dur: 1, f(lt, T, t) {
-    return streetShot({ x: -250, y: -520, z: .45 }, 2.3, { doorOpen: .9,
-      noah: c => { softShadow(c, 108, -40, 130, .4); drawNoah89(c, { x: 108, y: -40, k: .25, ink: 1.8, arms: { l: { a: .25, b: -.1 }, r: { a: .35, b: -.5 } }, expr: { browUp: .5, look: -.6, mouth: 'soft' } }); },
-      vehicles: c => { trabi(c, -1150, { y: 640, col: '#a8bfcc', s: 1, moving: true, t: 2.3, driver: true }); tram(c, 3500, { y: 420, s: -1, t: 2.3, dest: 'Pankow', people: true }); },
-    });
+  // a) street — medium-full shot: Noah steps out of the open gate, queue woman cropped in the foreground, parked car edge
+  { name: 'a1-street-ms', dur: 1, f(lt, T, t) {
+    const cam = { x: 260, y: -275, z: 1.75 };
+    return closeStreet(cam, 2.3, { doorOpen: .9, noQueue: true,
+      noah: c => NOAH_STREET(c, 230, -40, { arms: { l: { a: .25, b: -.1 }, r: { a: .35, b: -.5 } }, expr: { browUp: .5, look: -.5, mouth: 'soft' } }),
+      near: { p: 1.3, sc: 1.55, ground: 210, fn: (c, t) => { drawFolkSide(c, Object.assign({ x: 60, y: 0, s: 1, expr: { mouth: 'soft', look: .2 } }, QUEUE[3])); trabi(c, 920, { y: 120, col: '#b3cdb6', s: -1, dirt: true, rust: true }); } } });
   } },
-  { name: 'a3-street-establishing', dur: 1, f(lt, T, t) {
-    return streetShot({ x: -250, y: -2450, z: .2 }, 2.3, { doorOpen: .9,
-      noah: c => { softShadow(c, 108, -40, 130, .4); drawNoah89(c, { x: 108, y: -40, k: .25, ink: 1.8, expr: { browUp: .5, mouth: 'soft' } }); },
-      vehicles: c => { trabi(c, -1150, { y: 640, col: '#a8bfcc', s: 1, moving: true, t: 2.3, driver: true }); wartburg(c, -4200, { y: 220, col: '#c4ad78' }); trabi(c, 3300, { y: 220, col: '#b3cdb6', s: -1 }); tram(c, 3500, { y: 420, s: -1, t: 2.3, dest: 'Pankow', people: true }); },
-    });
+  // a) street — medium close-up: curiosity, shop window + poster behind
+  { name: 'a2-street-mcu', dur: 1, f(lt, T, t) {
+    const cam = { x: -170, y: -315, z: 2.7 };
+    return closeStreet(cam, 2.6, { doorOpen: .9, noQueue: true,
+      noah: c => NOAH_STREET(c, -170, -40, { expr: { browUp: .6, look: .7, mouth: 'soft' }, tilt: -.05 }),
+      near: { p: 1.25, sc: 1.4, ground: 120, fn: (c, t) => { drawFolkSide(c, Object.assign({ x: -10, y: 0, s: -1, walk: 1.1, expr: { mouth: 'flat' } }, QUEUE[1])); } } });
   } },
-  { name: 'a2-street-noah', dur: 1, f(lt, T, t) {
-    return streetShot({ x: 260, y: -330, z: 1.3 }, 2.6, { doorOpen: .9, front: { p: 1.35, base: 250, trees: [-330], car: { x: 1060, col: '#b3cdb6', s: -1 } },
-      noah: c => { softShadow(c, 108, -40, 130, .4); drawNoah89(c, { x: 108, y: -40, k: .25, ink: 1.8, arms: { l: { a: .25, b: -.1 }, r: { a: .35, b: -.5 } }, expr: { browUp: .5, look: .6, mouth: 'soft' } }); },
-    });
-  } },
-  { name: 'b-salon', dur: 1, f(lt, T, t) {
-    const cam = { x: 260, y: -330, z: .8 };
-    return { set: (c, cm, tt) => ostFlat(c, cm, tt, { tod: 'evening' }), cam, vignette: .35,
+  // b) living room — Noah in the armchair, TV right, coffee table big in the foreground
+  { name: 'b1-salon-ms', dur: 1, f(lt, T, t) {
+    const cam = { x: 360, y: -310, z: 1.5 };
+    return { set: (c, cm, tt) => ostFlat(c, cm, tt, { tod: 'evening' }), cam, vignette: .4,
       behind: [c => {
         flatProps(c, 3.2, { tvImg: tvPress });
         sessel(c, -230, -20, { col: '#6a5a3a', part: 'back', blanket: true }); sessel(c, -230, -20, { col: '#6a5a3a', part: 'front' });
-        sessel(c, 160, -20, { col: '#7a6a3a', part: 'back' });
-        softShadow(c, 160, -20, 160, .35);
+        sessel(c, 160, -20, { col: '#7a6a3a', part: 'back' }); softShadow(c, 160, -20, 160, .35);
         drawNoah89(c, { x: 160, y: -20, k: .25, ink: 1.8, outfit: '1989-home', sit: true, seatH: 370, arms: { l: { a: .3, b: -2.5 }, r: { a: .2, b: -.6 } }, hold: { l: sandwich }, expr: { look: .8, browUp: .3, mouth: 'flat' } });
         sessel(c, 160, -20, { col: '#7a6a3a', part: 'front' });
-        coffeeTable(c, -40, 190, 3.2);
+      }],
+      screen: [c => nearLayer(c, cam, 1.2, 1.35, 150, cc => coffeeTable(cc, 120, 0, 3.2)), c => flatLight(c, cam, t)] };
+  } },
+  { name: 'b2-salon-cu', dur: 1, f(lt, T, t) {
+    const cam = { x: 260, y: -330, z: 2.6 };
+    return { set: (c, cm, tt) => ostFlat(c, cm, tt, { tod: 'evening' }), cam, vignette: .45,
+      behind: [c => {
+        flatProps(c, 3.2, { tvImg: tvPress });
+        sessel(c, 160, -20, { col: '#7a6a3a', part: 'back' });
+        drawNoah89(c, { x: 160, y: -20, k: .25, ink: 1.8, outfit: '1989-home', sit: true, seatH: 370, arms: { l: { a: .3, b: -2.2 }, r: { a: .2, b: -.6 } }, hold: { l: sandwich }, expr: { look: .9, lid: 0, browUp: 1, mouth: 'o' } });
+        sessel(c, 160, -20, { col: '#7a6a3a', part: 'front' });
+        bloom(c, 330, -330, 260, '170,200,240', .25);
       }],
       screen: [c => flatLight(c, cam, t)] };
   } },
-  { name: 'c-vehicles', dur: 1, f(lt, T, t) {
-    const cam = { x: 0, y: -60, z: .44 };
+  // c) Noah next to a Trabant (scale), tram passing behind
+  { name: 'c1-trabi-noah', dur: 1, f(lt, T, t) {
+    const cam = { x: 120, y: 470, z: 1.15 };
     return streetShot(cam, 4.5, { noQueue: true,
       vehicles: c => {
-        tram(c, 0, { y: 400, s: 1, t: 4.5, dest: 'Pankow', people: true });
-        trabi(c, -1650, { y: 760, col: '#a8bfcc', roof: '#ece8dc', s: 1, idle: true, t: 4.5 });
-        wartburg(c, -330, { y: 760, col: '#c4ad78', s: 1 });
-        lada(c, 1000, { y: 760, col: '#a8402e', s: 1 });
-        softShadow(c, 1900, 960, 130, .4);
-        drawNoah89(c, { x: 1900, y: 960, k: .25, ink: 1.8, expr: { look: -.8, browUp: .2, mouth: 'smile' } });
+        tram(c, 600, { y: 400, s: -1, t: 4.5, dest: 'Pankow', people: true });
+        trabi(c, -230, { y: 760, col: '#a8bfcc', roof: '#ece8dc', s: 1, idle: true, t: 4.5, rust: true });
+        NOAH_STREET(c, 420, 830, { arms: { l: { a: .55, b: -.35 } }, expr: { look: -.8, browUp: .2, mouth: 'smile' } });
       } });
   } },
-  { name: 'c2-trabi-close', dur: 1, f(lt, T, t) {
-    const cam = { x: -80, y: 560, z: 1.2 };
+  { name: 'c2-wartburg-lada', dur: 1, f(lt, T, t) {
+    const cam = { x: 210, y: 650, z: 1.3 };
     return streetShot(cam, 5.5, { noQueue: true,
       vehicles: c => {
-        trabi(c, -150, { y: 760, col: '#a8bfcc', roof: '#ece8dc', s: 1, idle: true, t: 5.5, driver: false });
-        softShadow(c, 470, 920, 130, .4);
-        drawNoah89(c, { x: 470, y: 920, k: .25, ink: 1.8, arms: { l: { a: .5, b: -.4 } }, expr: { look: -.9, browUp: .4, mouth: 'smile' } });
+        wartburg(c, -640, { y: 760, col: '#c4ad78', s: 1, driver: true });
+        lada(c, 1000, { y: 760, col: '#a8402e', s: -1 });
+        NOAH_STREET(c, 230, 880, { expr: { look: .8, browUp: .3, mouth: 'soft' } });
       } });
   } },
-  { name: 'd-bornholmer', dur: 1, f(lt, T, t) {
-    const cam = { x: 900, y: -760, z: .26 }, o = { tod: 'day' };
-    return { set: (c, cm, tt) => bornholmer(c, cm, tt, o), cam, vignette: .25,
-      behind: [c => {
-        bornProps(c, 6.5, o);
-        for (const [gx, gy, s] of [[-2050, -40, -1], [-900, 120, 1]]) { softShadow(c, gx, gy, 120, .35); drawFolkSide(c, { x: gx, y: gy, s, hat: 'border', hatCol: '#6b7058', coat: '#6b7058', type: 'uniform', pants: '#5a5e4a', shoes: '#1e1c1a', hair: 'short', expr: { mouth: 'flat' } }); }
-        softShadow(c, 250, 420, 130, .4); drawNoah89(c, { x: 250, y: 420, k: .25, ink: 1.8, expr: { look: .7, browUp: .4, mouth: 'flat' } });
-        bornFront(c, 6.5, o);
-      }],
-      screen: [c => bornLight(c, cam, t, o)] };
+  // d) Bornholmer — at the barrier with a guard; on the bridge under the truss
+  { name: 'd1-barrier', dur: 1, f(lt, T, t) {
+    const cam = { x: -250, y: -330, z: 1.0 }, o = { tod: 'day', cars: false };
+    return { set: (c, cm, tt) => bornholmer(c, cm, tt, o), cam, vignette: .3,
+      behind: [c => { bornProps(c, 6.5, o); NOAH_STREET(c, -380, 150, { expr: { look: -.6, browUp: .4, mouth: 'flat' } }); bornFront(c, 6.5, o); }],
+      screen: [c => nearLayer(c, cam, 1.3, 1.45, 260, cc => drawFolkSide(cc, Object.assign({ x: -760, y: 0, s: 1, expr: { mouth: 'flat' } }, GUARD))), c => bornLight(c, cam, t, o)] };
   } },
-  { name: 'd2-bornholmer-near', dur: 1, f(lt, T, t) {
-    const cam = { x: 600, y: -600, z: .5 }, o = { tod: 'day' };
-    return { set: (c, cm, tt) => bornholmer(c, cm, tt, o), cam, vignette: .25,
-      behind: [c => {
-        bornProps(c, 7.5, o);
-        softShadow(c, -900, 120, 120, .35); drawFolkSide(c, { x: -900, y: 120, s: 1, hat: 'border', hatCol: '#6b7058', coat: '#6b7058', type: 'uniform', pants: '#5a5e4a', shoes: '#1e1c1a', hair: 'short', expr: { mouth: 'flat' } });
-        softShadow(c, 250, 420, 130, .4); drawNoah89(c, { x: 250, y: 420, k: .25, ink: 1.8, expr: { look: .7, browUp: .4, mouth: 'flat' } });
-        bornFront(c, 7.5, o);
-      }],
+  { name: 'd2-bridge', dur: 1, f(lt, T, t) {
+    const cam = { x: 2600, y: -330, z: 1.25 }, o = { tod: 'day', cars: false };
+    return { set: (c, cm, tt) => bornholmer(c, cm, tt, o), cam, vignette: .3,
+      behind: [c => { bornProps(c, 7.5, o); NOAH_STREET(c, 2500, 20, { expr: { look: .5, browUp: .5, mouth: 'soft' } }); }],
       screen: [c => bornLight(c, cam, t, o)] };
-  } },
-  { name: 'e-outfit', dur: 1, f(lt, T, t) {
-    const cam = { x: 0, y: -230, z: 1.32 };
-    return { set: (c) => { c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#efe9dd'; c.fillRect(0, 0, W, H); return { base: '#efe9dd' }; }, cam, vignette: 0,
-      behind: [c => {
-        softShadow(c, -560, 0, 120, .25); drawNoah(c, { x: -560, k: .25, ink: 1.8, expr: { mouth: 'smile' } });
-        softShadow(c, -200, 0, 120, .25); drawNoah89(c, { x: -200, k: .25, ink: 1.8, expr: { mouth: 'smile' } });
-        softShadow(c, 170, 0, 120, .25); drawNoah89Side(c, { x: 170, k: .25, ink: 1.8, expr: { mouth: 'smile' } });
-        softShadow(c, 520, 0, 120, .25); drawNoah89(c, { x: 520, k: .25, ink: 1.8, outfit: '1989-home', expr: { mouth: 'soft' } });
-      }] };
   } },
 ] });
 
