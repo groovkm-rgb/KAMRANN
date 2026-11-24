@@ -6,6 +6,9 @@
 const OST_HZ = -280, OST_GATE_X = 108;
 const OST_P = {
   day: { sky: ['#b7bcbb', '#dedcd3'], fog: '205,207,200', far: '#9da3a4', rear: '#7c7670', glass: ['#b8c0c2', '#56626a'], lit: 0, lamp: 0, grade: { sx: .15, sy: 0, warm: '255,240,215', warmA: .14, cool: '40,50,60', coolA: .22 } },
+  night: { sky: ['#0b1124', '#25304e'], fog: '30,36,60', far: '#1e2438', rear: '#262632', glass: ['#3a4458', '#121824'], lit: .6, lamp: 1, night: 1, grade: { sx: .5, sy: .85, warm: '255,185,105', warmA: .3, cool: '8,12,40', coolA: .45 } },
+  westnight: { sky: ['#0c1430', '#2c3260'], fog: '40,40,80', far: '#262c48', rear: '#2e2c3a', glass: ['#46506a', '#161c2c'], lit: .85, lamp: 1, night: 1, neon: 1, grade: { sx: .5, sy: .9, warm: '255,170,120', warmA: .34, cool: '20,10,60', coolA: .35 } },
+  westday: { sky: ['#9cc0dc', '#e6e8e0'], fog: '215,222,228', far: '#a8b4bc', rear: '#8a8480', glass: ['#c8d8e0', '#5a6e7a'], lit: 0, lamp: 0, west: 1, grade: { sx: .1, sy: 0, warm: '255,230,190', warmA: .2, cool: '40,50,70', coolA: .14 } },
   dusk: { sky: ['#5d6a80', '#c7a98e'], fog: '120,120,135', far: '#5f6474', rear: '#4f4c50', glass: ['#7a8494', '#2e3440'], lit: .55, lamp: 1, grade: { sx: .5, sy: .9, warm: '255,190,120', warmA: .22, cool: '20,25,55', coolA: .32 } },
 };
 // ---------- houses ----------
@@ -16,6 +19,13 @@ const OST_HOUSES = [
   { x: 1900, w: 3900, col: '#857e74', eg: ['shop', 'shop', 'sdoor', 'gate', 'win', 'win'], shop: { name: 'Lebensmittel', col: '#5a3a2a' }, dmg: .9, seed: 41, bullets: 1, ghost: 'Kohlen · Briketts' },
   { x: 5800, w: 4200, col: '#9c907c', eg: ['win', 'gate', 'win', 'shop', 'shop', 'sdoor'], shop: { name: 'Haushaltswaren', col: '#2a3a5a' }, dmg: .5, seed: 53 },
 ];
+const WEST_HOUSES = [
+  { x: -10600, w: 4100, col: '#cdbb9a', eg: ['shop', 'shop', 'sdoor', 'gate', 'shop2', 'sdoor'], shop: { name: 'Imbiss', col: '#8a2a2a' }, shop2: { name: 'Lotto', col: '#2a4a8a' }, dmg: .08, seed: 61 },
+  { x: -6500, w: 4100, col: '#d8c8a6', eg: ['shop', 'shop', 'sdoor', 'gate', 'shop2', 'shop2'], shop: { name: 'Kiosk', col: '#2a6a3a' }, shop2: { name: 'Schuhe', col: '#5a2a6a' }, dmg: .05, seed: 67 },
+  { x: -2400, w: 4300, col: '#c9b090', eg: ['shop', 'shop', 'sdoor', 'gate', 'win', 'shop2'], shop: { name: 'Bier', col: '#3a1a1a' }, shop2: { name: 'Blumen', col: '#2a5a3a' }, dmg: .05, seed: 71, gateMain: 1, balcony: 2 },
+  { x: 1900, w: 3900, col: '#e0d0b0', eg: ['shop', 'shop', 'sdoor', 'gate', 'shop2', 'shop2'], shop: { name: 'Kaufhaus', col: '#1a3a6a' }, shop2: { name: 'Mode', col: '#6a1a3a' }, dmg: .05, seed: 73 },
+  { x: 5800, w: 4200, col: '#cfc0a0', eg: ['shop', 'shop', 'sdoor', 'gate', 'shop2', 'sdoor'], shop: { name: 'Elektro', col: '#2a2a2a' }, shop2: { name: 'Café', col: '#6a3a1a' }, dmg: .05, seed: 79 },
+];
 const EG_H = 924, OG_H = 792, WIN_W = 264, WIN_H = 462;
 function kWin(c, x, y, w, h, o) {
   // Kastenfenster: deep reveal, weathered outer sashes, transom, inner sash visible through the glass, net curtain, plant, zinc sill
@@ -24,7 +34,7 @@ function kWin(c, x, y, w, h, o) {
   const fx = x + 16, fy = y + 14, fw = w - 34, fh = h - 22, th = fh * .27;
   c.fillStyle = fr; c.fillRect(fx, fy, fw, fh);
   const panes = [[fx + 12, fy + 12, fw - 24, th - 20], [fx + 12, fy + th + 8, fw / 2 - 20, (fh - th) * .48 - 12], [fx + fw / 2 + 8, fy + th + 8, fw / 2 - 20, (fh - th) * .48 - 12], [fx + 12, fy + th + (fh - th) * .48 + 6, fw / 2 - 20, (fh - th) * .52 - 18], [fx + fw / 2 + 8, fy + th + (fh - th) * .48 + 6, fw / 2 - 20, (fh - th) * .52 - 18]];
-  const lit = P.lit && rnd(s + 2) > .45;
+  const lit = P.lit && rnd(s + 2) > (1 - P.lit * .9);
   panes.forEach((p, i) => {
     glassPane(c, p[0], p[1], p[2], p[3], { sky: P.glass, hi: lit ? .06 : .2, lit: lit ? 'rgba(255,196,110,.78)' : null, crack: o.crack && i === 3 });
     c.save(); c.beginPath(); c.rect(p[0], p[1], p[2], p[3]); c.clip();
@@ -129,7 +139,8 @@ function ostShop(c, x0, x1, b, o) {
   c.beginPath(); c.rect(x0 + 20, top - 120, x1 - x0 - 40, 96); fs(c, col, 2.5); // sign band
   c.save(); c.beginPath(); c.rect(x0 + 20, top - 120, x1 - x0 - 40, 96); c.clip(); mottle(c, x0, top - 120, x1 - x0, 96, o.seed, { r: 20, a: .12 }); streaks(c, x0 + 20, top - 120, x1 - x0 - 40, 90, o.seed, { a: .12 }); c.restore();
   const sz = Math.min(62, (x1 - x0 - 80) / (o.name.length * .52));
-  signText(c, o.name, (x0 + x1) / 2, top - 72, sz, '#f0e8d4', { shadow: 'rgba(0,0,0,.35)' });
+  if (P.neon) { const nc = ['255,80,120', '80,220,255', '255,210,80', '120,255,140'][o.seed % 4]; c.save(); c.shadowColor = `rgb(${nc})`; c.shadowBlur = 30; signText(c, o.name, (x0 + x1) / 2, top - 72, sz, `rgb(${nc})`); signText(c, o.name, (x0 + x1) / 2, top - 72, sz, '#fff8f0'); c.restore(); bloom(c, (x0 + x1) / 2, top - 72, (x1 - x0) * .6, nc, .45); }
+  else signText(c, o.name, (x0 + x1) / 2, top - 72, sz, '#f0e8d4', { shadow: 'rgba(0,0,0,.35)' });
   if (P.lamp) bloom(c, (x0 + x1) / 2, top - 72, (x1 - x0) * .5, '255,220,160', .22);
   // frame
   c.beginPath(); c.rect(x0 + 30, wy - 20, x1 - x0 - 60, wb - wy + 40); fs(c, '#3e3a34', 3);
@@ -309,7 +320,7 @@ function ostStreet(c, cam, t, o = {}) {
   c.setTransform(1, 0, 0, 1, 0, 0);
   let g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, P.sky[0]); g.addColorStop(1, P.sky[1]); c.fillStyle = g; c.fillRect(0, 0, W, H);
   // L1 sky: low cloud banks, pale sun disc behind haze
-  layerZ(c, cam, .02, c => { const b = B(.02); bloom(c, -600, b - 1400, 700, o.tod === 'dusk' ? '255,170,110' : '255,250,235', .5); for (let i = 0; i < 9; i++) { const x = -3000 + i * 800, y = b - 1700 + rnd(i + 5) * 500; c.fillStyle = o.tod === 'dusk' ? 'rgba(120,110,130,.4)' : 'rgba(170,174,172,.45)'; for (const [dx, dy, r] of [[0, 0, 160], [150, -40, 190], [320, 0, 150], [-140, 20, 120]]) { ell(c, x + dx, y + dy, r * 1.6, r * .6); c.fill(); } } });
+  layerZ(c, cam, .02, c => { const b = B(.02); if (P.night) { for (let i = 0; i < 90; i++) { circle(c, -3000 + rnd(i) * 6000, b - 2600 + rnd(i + 40) * 1400, 1.5 + rnd(i + 80) * 2); c.fillStyle = 'rgba(250,248,225,.7)'; c.fill(); } circle(c, 900, b - 2000, 60); c.fillStyle = '#f4efd2'; c.fill(); bloom(c, 900, b - 2000, 300, '200,215,255', .35); return; } bloom(c, -600, b - 1400, 700, o.tod === 'dusk' ? '255,170,110' : '255,250,235', .5); for (let i = 0; i < 9; i++) { const x = -3000 + i * 800, y = b - 1700 + rnd(i + 5) * 500; c.fillStyle = o.tod === 'dusk' ? 'rgba(120,110,130,.4)' : 'rgba(170,174,172,.45)'; for (const [dx, dy, r] of [[0, 0, 160], [150, -40, 190], [320, 0, 150], [-140, 20, 120]]) { ell(c, x + dx, y + dy, r * 1.6, r * .6); c.fill(); } } });
   // L2 far skyline: TV tower, church spire, roofs, chimney smoke
   layerZ(c, cam, .07, c => {
     const b = B(.07), col = P.far;
@@ -335,7 +346,7 @@ function ostStreet(c, cam, t, o = {}) {
   // L4 main facades
   layerZ(c, cam, 1, c => {
     const b = HZ, [x0, x1] = visXZ(cam, 1, 300);
-    for (const Hs of OST_HOUSES) if (Hs.x < x1 && Hs.x + Hs.w > x0) ostHouse(c, Hs, b, { P, t, doorOpen: o.doorOpen, smoke: true });
+    for (const Hs of (o.houses || OST_HOUSES)) if (Hs.x < x1 && Hs.x + Hs.w > x0) ostHouse(c, Hs, b, { P, t, doorOpen: o.doorOpen, smoke: !P.west && !P.neon });
   });
   // L5 pavement, kerb, cobbled road, tracks
   layerZ(c, cam, 1, c => {
@@ -348,13 +359,13 @@ function ostStreet(c, cam, t, o = {}) {
     // kerb
     c.fillStyle = '#a7a39b'; c.fillRect(x0, 90, x1 - x0, 22); c.fillStyle = '#6a6761'; c.fillRect(x0, 112, x1 - x0, 20); for (let x = Math.floor(x0 / 300) * 300; x < x1; x += 300) line(c, [x, 90, x, 132], 2, '#55524c');
     // road
-    cobbles(c, x0, x1, 132, 820, 11, { base: '#4e4a46', h0: 16, h1: 30, sheen: o.tod === 'dusk' ? .22 : .16 });
+    cobbles(c, x0, x1, 132, 820, 11, { base: '#4e4a46', h0: 16, h1: 30, sheen: P.night ? .3 : o.tod === 'dusk' ? .22 : .16 });
     // asphalt patches
     for (let i = Math.floor(x0 / 1700); i * 1700 < x1; i++) { const px = i * 1700 + rnd(i + 70) * 800, py = 200 + rnd(i + 71) * 450, pw = 300 + rnd(i + 72) * 500; c.fillStyle = '#3a3a3c'; c.beginPath(); c.moveTo(px, py); c.lineTo(px + pw, py + 10); c.lineTo(px + pw - 40, py + 90); c.lineTo(px + 30, py + 80); c.closePath(); c.fill(); c.strokeStyle = '#2a2a2a'; c.lineWidth = 3; c.stroke(); }
     // tram tracks (grooved rails with granite edging)
     for (const ry of [330, 400, 600, 690]) { c.fillStyle = '#5c5a56'; c.fillRect(x0, ry - 14, x1 - x0, 30); c.fillStyle = '#9a9ca0'; c.fillRect(x0, ry - 4, x1 - x0, 7); c.fillStyle = '#d0d4d6'; c.fillRect(x0, ry - 4, x1 - x0, 2); c.fillStyle = '#1c1b1a'; c.fillRect(x0, ry + 3, x1 - x0, 5); }
     // puddles, leaves, litter, manhole
-    for (let i = Math.floor(x0 / 900); i * 900 < x1; i++) { if (rnd(i + 80) > .55) puddle(c, i * 900 + rnd(i + 81) * 500, 170 + rnd(i + 82) * 560, 90 + rnd(i + 83) * 120, 16 + rnd(i) * 12, i, { top: o.tod === 'dusk' ? 'rgba(150,140,150,.8)' : 'rgba(205,210,210,.75)' }); }
+    for (let i = Math.floor(x0 / 900); i * 900 < x1; i++) { if (rnd(i + 80) > .55) puddle(c, i * 900 + rnd(i + 81) * 500, 170 + rnd(i + 82) * 560, 90 + rnd(i + 83) * 120, 16 + rnd(i) * 12, i, { top: P.night ? 'rgba(255,190,110,.55)' : o.tod === 'dusk' ? 'rgba(150,140,150,.8)' : 'rgba(205,210,210,.75)', bot: P.night ? 'rgba(20,24,40,.8)' : undefined }); }
     leaves(c, x0, x1, HZ + 10, 120, 21, Math.round((x1 - x0) / 60));
     leaves(c, x0, x1, 130, 800, 23, Math.round((x1 - x0) / 90), { s: 1.4 });
     for (let i = 0; i < (x1 - x0) / 400; i++) cigButt(c, x0 + rnd(i + 90) * (x1 - x0), HZ + 20 + rnd(i + 91) * 380, rnd(i));
@@ -365,6 +376,7 @@ function ostStreet(c, cam, t, o = {}) {
 // props standing on the pavement / road, drawn in world space (call from `behind`, sorted by y yourself)
 function ostProps(c, t, o = {}) {
   const P = OST_P[o.tod || 'day'], lampOn = !!P.lamp;
+  if (P.west || P.neon) { westProps(c, t, o, P); return; }
   phoneBoothOst(c, -3000, -60);
   litfass(c, 2700, 10);
   coalHeap(c, 830, -160); wheelbarrow(c, 1280, -120);
@@ -378,8 +390,9 @@ function ostProps(c, t, o = {}) {
 }
 function ostLight(c, cam, t, o = {}) {
   const P = OST_P[o.tod || 'day'];
-  layer(c, cam, 1, c => { if (o.tod !== 'dusk') { motes(c, cam.x - 1600, cam.x + 1600, cam.y - 700, cam.y + 600, t, { n: 30, color: '235,235,230', alpha: .35, speed: .015 }); mist(c, 0, '225,226,220', .12, 500); } });
+  layerZ(c, cam, 1, c => { if (!P.night && o.tod !== 'dusk') { motes(c, cam.x - 1600, cam.x + 1600, cam.y - 700, cam.y + 600, t, { n: 30, color: '235,235,230', alpha: .35, speed: .015 }); mist(c, 0, '225,226,220', .12, 500); } });
   grade(c, P.grade);
+  if (P.west || P.neon) return;
   // gentle desaturation (eastern grey)
   c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalCompositeOperation = 'saturation'; c.fillStyle = 'rgba(128,128,128,.22)'; c.fillRect(0, 0, W, H); c.restore();
 }

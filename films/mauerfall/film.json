@@ -1,0 +1,25 @@
+{
+  "title": "Was wäre, wenn du in der Nacht des Mauerfalls in Berlin gewesen wärst?",
+  "slug": "mauerfall",
+  "fps": 30,
+  "modules": [
+    "../../.claude/skills/noah-character/noah.js",
+    "../../.claude/skills/noah-character/places/light.js",
+    "../../.claude/skills/noah-character/places/animals.js",
+    "../mauerfall-lib/tex.js",
+    "../mauerfall-lib/noah89.js",
+    "../mauerfall-lib/folk.js",
+    "../mauerfall-lib/vehicles.js",
+    "../mauerfall-lib/ost.js",
+    "../mauerfall-lib/flat.js",
+    "../mauerfall-lib/presse.js",
+    "../mauerfall-lib/bridge.js",
+    "../mauerfall-lib/tor.js",
+    "../mauerfall-lib/ui.js",
+    "../mauerfall-lib/docs.js",
+    "../mauerfall-lib/sets2.js",
+    "phrases.js",
+    "kit.js",
+    "scenes.js"
+  ]
+}

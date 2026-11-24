@@ -2,3 +2,9 @@ node_modules/
 *.webm
 /snaps/
 .DS_Store
+films/mauerfall/work/qa*/
+films/mauerfall/work/parts/
+films/mauerfall/film-r*.html
+films/mauerfall/film-qa.html
+films/mauerfall/mix_raw.wav
+films/mauerfall-taslak/mix.wav

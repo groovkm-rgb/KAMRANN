@@ -3,6 +3,7 @@
 //   Layout x: checkpoint area -5200..600 (canopy, booths, barriers, tower, floodlight masts) | bridge from 900 eastwards → west.
 //   bornProps(c, t, o): booths, barriers, signs, guards area props in world space. bornLight(c, cam, t, o) in `screen`.
 const BH_P = {
+  today: { sky: ['#8ab8e0', '#e4ecf0'], fog: '215,225,235', far: '#a8b8c4', steel: '#4c5a56', steelLt: '#6c7a76', ground: '#8a8680', lamp: 0 },
   day: { sky: ['#aeb4b6', '#dcdbd3'], fog: '200,204,202', far: '#9aa1a4', steel: '#4c5552', steelLt: '#6c7672', ground: '#7d7a74', lamp: 0 },
   night: { sky: ['#0e1322', '#2a3048'], fog: '30,36,60', far: '#2a2f44', steel: '#2a302e', steelLt: '#3e4644', ground: '#3a3a40', lamp: 1 },
 };
@@ -101,7 +102,7 @@ function signalFence(c, x0, x1, y, h = 550) {
   for (let k = 0; k < 3; k++) line(c, [x0, y - h - 40 - k * 20, x1, y - h - 40 - k * 20], 2, '#3a3a38');
 }
 function bornholmer(c, cam, t, o = {}) {
-  const P = BH_P[o.tod || 'day'], HZ = -520, night = (o.tod || 'day') === 'night';
+  const P = BH_P[o.today ? 'today' : (o.tod || 'day')], HZ = -520, night = (o.tod || 'day') === 'night';
   c.setTransform(1, 0, 0, 1, 0, 0); let g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, P.sky[0]); g.addColorStop(1, P.sky[1]); c.fillStyle = g; c.fillRect(0, 0, W, H);
   // far skyline: east (left) grey roofs, west (right) brighter, taller, an advertising board; chimney smoke
   layerZ(c, cam, .12, c => {
@@ -128,6 +129,7 @@ function bornholmer(c, cam, t, o = {}) {
     c.fillStyle = 'rgba(245,242,232,.85)'; c.beginPath(); c.moveTo(-1800, 820); c.lineTo(-1500, 820); c.lineTo(-1500, 790); c.lineTo(-1400, 840); c.lineTo(-1500, 890); c.lineTo(-1500, 860); c.lineTo(-1800, 860); c.closePath(); c.fill();
     leaves(c, x0, gx1, HZ, 2300, 31, 90, { s: 1.6 });
     // back: hinterland wall, signal fence, tower, floodlight masts
+    if (o.today) { for (let x = Math.floor(x0 / 900) * 900; x < BX - 400; x += 900) { c.save(); bareTree(c, x, HZ + 40, { seed: x * .3, t, h: 900, trunk: 50, leaves: .9, bark: '#5a4a3a' }); c.restore(); } c.beginPath(); c.rect(-900, 140, 900, 60); fs(c, '#6a6a6a', 2); signText(c, '9. November 1989', -450, 170, 34, '#e8e4d8'); trussBridge(c, BX, 9000, P, t); return; }
     hinterlandWall(c, x0, -1300, HZ);
     signalFence(c, -1300, BX - 300, HZ + 20);
     borderTower(c, -2750, HZ + 10);

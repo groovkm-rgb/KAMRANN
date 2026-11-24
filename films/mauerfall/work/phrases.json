@@ -1,0 +1,3465 @@
+{
+ "duration": 676.832625,
+ "frames30": 20305,
+ "source": "silence-align (cost 28.44)",
+ "segments": [
+  [
+   0.0,
+   0.656009
+  ],
+  [
+   1.14118,
+   1.26898
+  ],
+  [
+   1.39583,
+   2.00646
+  ],
+  [
+   2.16549,
+   3.20549
+  ],
+  [
+   3.77991,
+   5.33492
+  ],
+  [
+   5.79737,
+   6.73528
+  ],
+  [
+   7.17186,
+   7.76714
+  ],
+  [
+   8.36077,
+   11.1967
+  ],
+  [
+   11.8082,
+   12.8988
+  ],
+  [
+   13.4463,
+   14.4551
+  ],
+  [
+   15.0401,
+   15.8147
+  ],
+  [
+   16.0387,
+   16.5577
+  ],
+  [
+   16.8854,
+   17.5996
+  ],
+  [
+   18.3337,
+   19.311
+  ],
+  [
+   19.7516,
+   20.5776
+  ],
+  [
+   21.1917,
+   21.8655
+  ],
+  [
+   22.3917,
+   22.9273
+  ],
+  [
+   23.5147,
+   24.818
+  ],
+  [
+   24.9576,
+   26.3396
+  ],
+  [
+   26.9768,
+   28.1494
+  ],
+  [
+   28.4176,
+   29.6588
+  ],
+  [
+   30.5817,
+   31.2927
+  ],
+  [
+   31.4357,
+   33.5438
+  ],
+  [
+   34.0505,
+   35.6254
+  ],
+  [
+   36.34,
+   36.6662
+  ],
+  [
+   37.0985,
+   37.6865
+  ],
+  [
+   38.2016,
+   40.5837
+  ],
+  [
+   41.0331,
+   42.594
+  ],
+  [
+   43.0602,
+   43.9272
+  ],
+  [
+   44.7618,
+   46.1743
+  ],
+  [
+   46.5587,
+   48.6036
+  ],
+  [
+   48.8905,
+   50.5553
+  ],
+  [
+   51.1261,
+   53.8126
+  ],
+  [
+   54.2555,
+   55.4107
+  ],
+  [
+   55.6842,
+   56.3565
+  ],
+  [
+   56.5918,
+   57.7742
+  ],
+  [
+   58.1949,
+   59.472
+  ],
+  [
+   60.0786,
+   61.5144
+  ],
+  [
+   62.1314,
+   65.0594
+  ],
+  [
+   65.6265,
+   66.6175
+  ],
+  [
+   66.8779,
+   68.0184
+  ],
+  [
+   68.5389,
+   69.149
+  ],
+  [
+   69.7009,
+   72.0718
+  ],
+  [
+   72.5932,
+   73.6141
+  ],
+  [
+   74.0919,
+   74.3543
+  ],
+  [
+   75.1372,
+   76.111
+  ],
+  [
+   76.3846,
+   77.7691
+  ],
+  [
+   78.2109,
+   79.4476
+  ],
+  [
+   79.8045,
+   81.6981
+  ],
+  [
+   81.9712,
+   83.3283
+  ],
+  [
+   83.6079,
+   85.0935
+  ],
+  [
+   85.2847,
+   87.2507
+  ],
+  [
+   87.628,
+   88.2553
+  ],
+  [
+   89.2461,
+   92.8213
+  ],
+  [
+   93.378,
+   94.8332
+  ],
+  [
+   95.1191,
+   97.1039
+  ],
+  [
+   97.4928,
+   98.2544
+  ],
+  [
+   98.475,
+   99.1929
+  ],
+  [
+   99.4445,
+   99.9033
+  ],
+  [
+   100.141,
+   101.265
+  ],
+  [
+   101.813,
+   102.731
+  ],
+  [
+   102.981,
+   103.812
+  ],
+  [
+   104.577,
+   107.92
+  ],
+  [
+   108.443,
+   109.968
+  ],
+  [
+   110.233,
+   112.075
+  ],
+  [
+   112.33,
+   113.599
+  ],
+  [
+   114.158,
+   115.283
+  ],
+  [
+   116.171,
+   117.741
+  ],
+  [
+   118.08,
+   119.661
+  ],
+  [
+   120.098,
+   121.922
+  ],
+  [
+   122.374,
+   124.367
+  ],
+  [
+   124.969,
+   127.343
+  ],
+  [
+   127.599,
+   130.383
+  ],
+  [
+   131.202,
+   132.105
+  ],
+  [
+   132.404,
+   133.674
+  ],
+  [
+   134.021,
+   134.826
+  ],
+  [
+   135.47,
+   136.188
+  ],
+  [
+   136.575,
+   137.377
+  ],
+  [
+   138.097,
+   139.038
+  ],
+  [
+   139.489,
+   141.48
+  ],
+  [
+   141.919,
+   143.936
+  ],
+  [
+   144.157,
+   147.343
+  ],
+  [
+   147.527,
+   148.515
+  ],
+  [
+   149.081,
+   151.784
+  ],
+  [
+   152.323,
+   153.953
+  ],
+  [
+   154.563,
+   155.432
+  ],
+  [
+   155.861,
+   157.144
+  ],
+  [
+   157.763,
+   159.467
+  ],
+  [
+   159.834,
+   160.56
+  ],
+  [
+   160.855,
+   163.442
+  ],
+  [
+   163.919,
+   165.884
+  ],
+  [
+   166.005,
+   166.642
+  ],
+  [
+   167.07,
+   167.6
+  ],
+  [
+   167.724,
+   168.319
+  ],
+  [
+   168.752,
+   170.748
+  ],
+  [
+   170.998,
+   171.768
+  ],
+  [
+   172.172,
+   173.594
+  ],
+  [
+   174.006,
+   175.068
+  ],
+  [
+   175.39,
+   175.964
+  ],
+  [
+   176.254,
+   177.213
+  ],
+  [
+   177.566,
+   177.789
+  ],
+  [
+   178.048,
+   178.817
+  ],
+  [
+   179.286,
+   179.854
+  ],
+  [
+   179.992,
+   180.435
+  ],
+  [
+   180.839,
+   181.663
+  ],
+  [
+   181.992,
+   183.151
+  ],
+  [
+   183.695,
+   185.163
+  ],
+  [
+   185.403,
+   186.114
+  ],
+  [
+   186.542,
+   189.108
+  ],
+  [
+   189.613,
+   191.477
+  ],
+  [
+   191.829,
+   196.362
+  ],
+  [
+   196.754,
+   197.566
+  ],
+  [
+   197.886,
+   199.452
+  ],
+  [
+   199.835,
+   200.451
+  ],
+  [
+   200.801,
+   201.609
+  ],
+  [
+   201.975,
+   204.577
+  ],
+  [
+   204.911,
+   205.413
+  ],
+  [
+   205.675,
+   208.551
+  ],
+  [
+   208.969,
+   209.818
+  ],
+  [
+   210.26,
+   210.841
+  ],
+  [
+   211.084,
+   212.148
+  ],
+  [
+   212.514,
+   214.118
+  ],
+  [
+   214.444,
+   216.073
+  ],
+  [
+   216.444,
+   217.972
+  ],
+  [
+   218.296,
+   219.858
+  ],
+  [
+   220.123,
+   220.869
+  ],
+  [
+   221.23,
+   223.352
+  ],
+  [
+   223.691,
+   224.621
+  ],
+  [
+   224.766,
+   225.534
+  ],
+  [
+   225.986,
+   227.11
+  ],
+  [
+   227.452,
+   230.034
+  ],
+  [
+   230.331,
+   231.132
+  ],
+  [
+   231.494,
+   236.373
+  ],
+  [
+   236.732,
+   238.054
+  ],
+  [
+   238.393,
+   238.828
+  ],
+  [
+   239.091,
+   242.728
+  ],
+  [
+   243.095,
+   243.974
+  ],
+  [
+   244.213,
+   245.492
+  ],
+  [
+   245.841,
+   249.569
+  ],
+  [
+   249.815,
+   251.711
+  ],
+  [
+   252.154,
+   253.035
+  ],
+  [
+   253.368,
+   254.25
+  ],
+  [
+   254.5,
+   255.453
+  ],
+  [
+   255.793,
+   257.12
+  ],
+  [
+   257.462,
+   257.933
+  ],
+  [
+   258.349,
+   259.064
+  ],
+  [
+   259.445,
+   260.209
+  ],
+  [
+   260.555,
+   260.977
+  ],
+  [
+   261.118,
+   262.347
+  ],
+  [
+   262.743,
+   263.781
+  ],
+  [
+   264.129,
+   264.763
+  ],
+  [
+   265.195,
+   265.853
+  ],
+  [
+   266.286,
+   267.137
+  ],
+  [
+   267.637,
+   268.249
+  ],
+  [
+   268.654,
+   269.536
+  ],
+  [
+   269.981,
+   271.723
+  ],
+  [
+   272.141,
+   273.434
+  ],
+  [
+   273.643,
+   278.048
+  ],
+  [
+   278.325,
+   281.13
+  ],
+  [
+   281.442,
+   283.088
+  ],
+  [
+   283.496,
+   285.181
+  ],
+  [
+   285.583,
+   286.373
+  ],
+  [
+   286.64,
+   287.34
+  ],
+  [
+   287.641,
+   288.533
+  ],
+  [
+   288.995,
+   289.855
+  ],
+  [
+   290.544,
+   291.192
+  ],
+  [
+   291.718,
+   292.596
+  ],
+  [
+   292.771,
+   294.886
+  ],
+  [
+   295.277,
+   296.558
+  ],
+  [
+   297.013,
+   299.546
+  ],
+  [
+   299.882,
+   302.329
+  ],
+  [
+   302.99,
+   303.842
+  ],
+  [
+   304.326,
+   304.572
+  ],
+  [
+   305.0,
+   306.238
+  ],
+  [
+   306.546,
+   309.446
+  ],
+  [
+   309.91,
+   311.051
+  ],
+  [
+   311.49,
+   312.322
+  ],
+  [
+   312.612,
+   313.179
+  ],
+  [
+   313.408,
+   314.113
+  ],
+  [
+   314.54,
+   315.282
+  ],
+  [
+   315.569,
+   316.54
+  ],
+  [
+   316.712,
+   317.616
+  ],
+  [
+   318.148,
+   319.113
+  ],
+  [
+   319.443,
+   321.014
+  ],
+  [
+   321.359,
+   322.628
+  ],
+  [
+   323.153,
+   325.317
+  ],
+  [
+   325.651,
+   325.806
+  ],
+  [
+   325.931,
+   327.171
+  ],
+  [
+   327.537,
+   328.776
+  ],
+  [
+   329.042,
+   330.393
+  ],
+  [
+   330.763,
+   330.857
+  ],
+  [
+   330.987,
+   332.514
+  ],
+  [
+   332.897,
+   333.957
+  ],
+  [
+   334.272,
+   335.426
+  ],
+  [
+   336.03,
+   337.362
+  ],
+  [
+   337.789,
+   338.692
+  ],
+  [
+   339.333,
+   343.316
+  ],
+  [
+   343.797,
+   344.774
+  ],
+  [
+   345.244,
+   345.371
+  ],
+  [
+   345.543,
+   346.102
+  ],
+  [
+   346.55,
+   349.088
+  ],
+  [
+   349.573,
+   350.787
+  ],
+  [
+   351.103,
+   352.805
+  ],
+  [
+   353.193,
+   356.289
+  ],
+  [
+   356.817,
+   358.871
+  ],
+  [
+   359.286,
+   361.198
+  ],
+  [
+   361.638,
+   362.99
+  ],
+  [
+   363.278,
+   364.325
+  ],
+  [
+   364.722,
+   366.398
+  ],
+  [
+   366.691,
+   367.791
+  ],
+  [
+   368.345,
+   370.913
+  ],
+  [
+   371.21,
+   372.643
+  ],
+  [
+   373.135,
+   374.741
+  ],
+  [
+   374.87,
+   376.515
+  ],
+  [
+   377.021,
+   378.083
+  ],
+  [
+   378.385,
+   379.434
+  ],
+  [
+   379.892,
+   380.863
+  ],
+  [
+   381.43,
+   382.865
+  ],
+  [
+   383.217,
+   384.093
+  ],
+  [
+   384.446,
+   385.814
+  ],
+  [
+   386.275,
+   386.918
+  ],
+  [
+   387.311,
+   387.502
+  ],
+  [
+   387.671,
+   388.373
+  ],
+  [
+   388.805,
+   389.584
+  ],
+  [
+   389.941,
+   390.745
+  ],
+  [
+   391.116,
+   391.965
+  ],
+  [
+   392.441,
+   393.419
+  ],
+  [
+   393.81,
+   395.48
+  ],
+  [
+   395.803,
+   396.911
+  ],
+  [
+   397.396,
+   398.982
+  ],
+  [
+   399.301,
+   401.072
+  ],
+  [
+   401.455,
+   401.989
+  ],
+  [
+   402.448,
+   403.515
+  ],
+  [
+   403.99,
+   405.697
+  ],
+  [
+   406.281,
+   408.787
+  ],
+  [
+   409.159,
+   409.538
+  ],
+  [
+   409.919,
+   410.586
+  ],
+  [
+   411.094,
+   412.305
+  ],
+  [
+   412.438,
+   413.376
+  ],
+  [
+   413.827,
+   414.673
+  ],
+  [
+   414.89,
+   415.567
+  ],
+  [
+   415.715,
+   417.864
+  ],
+  [
+   418.092,
+   419.899
+  ],
+  [
+   420.324,
+   421.113
+  ],
+  [
+   421.527,
+   422.605
+  ],
+  [
+   423.128,
+   423.497
+  ],
+  [
+   423.629,
+   424.05
+  ],
+  [
+   424.706,
+   425.07
+  ],
+  [
+   425.205,
+   425.413
+  ],
+  [
+   426.083,
+   427.731
+  ],
+  [
+   428.174,
+   429.009
+  ],
+  [
+   429.629,
+   431.105
+  ],
+  [
+   431.764,
+   432.183
+  ],
+  [
+   432.413,
+   433.39
+  ],
+  [
+   433.811,
+   435.185
+  ],
+  [
+   435.475,
+   436.902
+  ],
+  [
+   437.148,
+   437.618
+  ],
+  [
+   437.901,
+   438.656
+  ],
+  [
+   439.118,
+   439.862
+  ],
+  [
+   440.091,
+   442.732
+  ],
+  [
+   443.159,
+   444.227
+  ],
+  [
+   444.697,
+   446.993
+  ],
+  [
+   447.214,
+   448.242
+  ],
+  [
+   448.818,
+   449.926
+  ],
+  [
+   450.159,
+   450.634
+  ],
+  [
+   451.177,
+   451.987
+  ],
+  [
+   452.514,
+   454.469
+  ],
+  [
+   454.85,
+   455.496
+  ],
+  [
+   455.685,
+   456.424
+  ],
+  [
+   456.653,
+   458.536
+  ],
+  [
+   458.967,
+   460.564
+  ],
+  [
+   460.813,
+   462.432
+  ],
+  [
+   462.804,
+   464.781
+  ],
+  [
+   465.168,
+   465.559
+  ],
+  [
+   465.738,
+   466.207
+  ],
+  [
+   466.807,
+   468.327
+  ],
+  [
+   468.46,
+   469.051
+  ],
+  [
+   469.556,
+   470.119
+  ],
+  [
+   470.669,
+   471.0
+  ],
+  [
+   471.25,
+   472.084
+  ],
+  [
+   472.888,
+   474.136
+  ],
+  [
+   474.574,
+   475.026
+  ],
+  [
+   475.433,
+   476.628
+  ],
+  [
+   476.885,
+   478.372
+  ],
+  [
+   478.539,
+   478.994
+  ],
+  [
+   479.434,
+   480.067
+  ],
+  [
+   480.254,
+   481.773
+  ],
+  [
+   482.209,
+   483.657
+  ],
+  [
+   483.998,
+   485.195
+  ],
+  [
+   485.564,
+   486.508
+  ],
+  [
+   486.857,
+   488.348
+  ],
+  [
+   489.025,
+   490.748
+  ],
+  [
+   491.13,
+   492.982
+  ],
+  [
+   493.205,
+   493.83
+  ],
+  [
+   494.254,
+   496.819
+  ],
+  [
+   496.954,
+   497.536
+  ],
+  [
+   498.006,
+   499.081
+  ],
+  [
+   499.522,
+   500.431
+  ],
+  [
+   500.878,
+   501.179
+  ],
+  [
+   501.33,
+   502.408
+  ],
+  [
+   502.732,
+   503.612
+  ],
+  [
+   503.863,
+   505.686
+  ],
+  [
+   505.832,
+   508.43
+  ],
+  [
+   508.775,
+   509.287
+  ],
+  [
+   509.478,
+   509.973
+  ],
+  [
+   510.225,
+   513.343
+  ],
+  [
+   513.592,
+   514.81
+  ],
+  [
+   515.034,
+   516.85
+  ],
+  [
+   517.147,
+   518.375
+  ],
+  [
+   518.582,
+   520.339
+  ],
+  [
+   520.732,
+   521.749
+  ],
+  [
+   522.041,
+   524.023
+  ],
+  [
+   524.386,
+   524.954
+  ],
+  [
+   525.162,
+   528.14
+  ],
+  [
+   528.704,
+   529.566
+  ],
+  [
+   529.724,
+   530.509
+  ],
+  [
+   531.049,
+   532.653
+  ],
+  [
+   533.373,
+   535.179
+  ],
+  [
+   535.617,
+   537.491
+  ],
+  [
+   538.085,
+   538.287
+  ],
+  [
+   538.664,
+   540.5
+  ],
+  [
+   540.878,
+   542.229
+  ],
+  [
+   542.565,
+   543.121
+  ],
+  [
+   543.489,
+   543.923
+  ],
+  [
+   544.502,
+   546.977
+  ],
+  [
+   547.308,
+   548.186
+  ],
+  [
+   548.596,
+   549.472
+  ],
+  [
+   549.69,
+   551.317
+  ],
+  [
+   551.891,
+   552.357
+  ],
+  [
+   552.588,
+   553.369
+  ],
+  [
+   553.831,
+   554.925
+  ],
+  [
+   555.114,
+   558.305
+  ],
+  [
+   558.76,
+   559.856
+  ],
+  [
+   560.146,
+   561.65
+  ],
+  [
+   561.895,
+   563.041
+  ],
+  [
+   563.447,
+   565.678
+  ],
+  [
+   566.034,
+   567.555
+  ],
+  [
+   567.958,
+   569.64
+  ],
+  [
+   569.891,
+   572.47
+  ],
+  [
+   572.903,
+   573.256
+  ],
+  [
+   573.402,
+   573.806
+  ],
+  [
+   574.121,
+   574.817
+  ],
+  [
+   575.349,
+   576.619
+  ],
+  [
+   576.884,
+   578.793
+  ],
+  [
+   579.326,
+   579.563
+  ],
+  [
+   579.719,
+   581.037
+  ],
+  [
+   581.587,
+   582.551
+  ],
+  [
+   582.829,
+   584.162
+  ],
+  [
+   584.36,
+   585.594
+  ],
+  [
+   585.771,
+   587.172
+  ],
+  [
+   587.346,
+   588.231
+  ],
+  [
+   588.766,
+   590.442
+  ],
+  [
+   590.866,
+   591.828
+  ],
+  [
+   592.459,
+   593.08
+  ],
+  [
+   593.59,
+   594.2
+  ],
+  [
+   594.541,
+   594.64
+  ],
+  [
+   594.765,
+   595.426
+  ],
+  [
+   595.733,
+   597.281
+  ],
+  [
+   597.573,
+   598.754
+  ],
+  [
+   599.445,
+   601.023
+  ],
+  [
+   601.39,
+   601.526
+  ],
+  [
+   601.656,
+   602.982
+  ],
+  [
+   603.601,
+   604.415
+  ],
+  [
+   604.897,
+   605.999
+  ],
+  [
+   606.362,
+   607.115
+  ],
+  [
+   607.37,
+   608.89
+  ],
+  [
+   609.448,
+   609.846
+  ],
+  [
+   610.136,
+   611.123
+  ],
+  [
+   611.617,
+   612.434
+  ],
+  [
+   612.602,
+   612.723
+  ],
+  [
+   612.91,
+   613.432
+  ],
+  [
+   614.155,
+   618.191
+  ],
+  [
+   618.333,
+   620.378
+  ],
+  [
+   620.753,
+   622.167
+  ],
+  [
+   622.815,
+   623.305
+  ],
+  [
+   623.57,
+   625.506
+  ],
+  [
+   625.805,
+   626.435
+  ],
+  [
+   626.59,
+   628.205
+  ],
+  [
+   628.492,
+   628.749
+  ],
+  [
+   628.902,
+   630.492
+  ],
+  [
+   630.985,
+   631.789
+  ],
+  [
+   632.115,
+   633.033
+  ],
+  [
+   633.445,
+   634.366
+  ],
+  [
+   634.588,
+   635.847
+  ],
+  [
+   636.217,
+   636.929
+  ],
+  [
+   637.263,
+   638.056
+  ],
+  [
+   638.803,
+   640.29
+  ],
+  [
+   640.469,
+   642.375
+  ],
+  [
+   642.574,
+   643.842
+  ],
+  [
+   644.33,
+   644.896
+  ],
+  [
+   645.297,
+   646.918
+  ],
+  [
+   647.397,
+   648.394
+  ],
+  [
+   648.792,
+   649.375
+  ],
+  [
+   650.08,
+   653.043
+  ],
+  [
+   653.356,
+   655.613
+  ],
+  [
+   656.113,
+   656.597
+  ],
+  [
+   656.81,
+   657.316
+  ],
+  [
+   657.74,
+   658.573
+  ],
+  [
+   659.28,
+   659.571
+  ],
+  [
+   659.813,
+   660.485
+  ],
+  [
+   660.837,
+   662.295
+  ],
+  [
+   662.61,
+   664.31
+  ],
+  [
+   664.709,
+   666.506
+  ],
+  [
+   667.034,
+   668.463
+  ],
+  [
+   668.733,
+   669.448
+  ],
+  [
+   669.664,
+   670.561
+  ],
+  [
+   671.28,
+   673.272
+  ],
+  [
+   673.536,
+   675.208
+  ],
+  [
+   675.568,
+   676.613
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ein Zettel.",
+   "s": 0.0,
+   "e": 0.656
+  },
+  {
+   "text": "Ein einziger,",
+   "s": 1.141,
+   "e": 2.006
+  },
+  {
+   "text": "unscheinbarer Zettel.",
+   "s": 2.165,
+   "e": 3.205
+  },
+  {
+   "text": "Ein Saal voller Journalisten.",
+   "s": 3.78,
+   "e": 5.335
+  },
+  {
+   "text": "Grelle Scheinwerfer.",
+   "s": 5.797,
+   "e": 6.735
+  },
+  {
+   "text": "Kameras.",
+   "s": 7.172,
+   "e": 7.767
+  },
+  {
+   "text": "Und vorne am Tisch sitzt ein m\u00fcder Mann im grauen Anzug.",
+   "s": 8.361,
+   "e": 11.197
+  },
+  {
+   "text": "Er sucht in seinen Papieren.",
+   "s": 11.808,
+   "e": 12.899
+  },
+  {
+   "text": "Er findet eine Notiz.",
+   "s": 13.446,
+   "e": 14.455
+  },
+  {
+   "text": "Er liest sie vor,",
+   "s": 15.04,
+   "e": 15.815
+  },
+  {
+   "text": "stockend,",
+   "s": 16.039,
+   "e": 16.558
+  },
+  {
+   "text": "fast nebenbei.",
+   "s": 16.885,
+   "e": 17.6
+  },
+  {
+   "text": "Dann fragt ein Journalist:",
+   "s": 18.334,
+   "e": 19.311
+  },
+  {
+   "text": "Ab wann gilt das?",
+   "s": 19.752,
+   "e": 20.578
+  },
+  {
+   "text": "Der Mann bl\u00e4ttert.",
+   "s": 21.192,
+   "e": 21.866
+  },
+  {
+   "text": "Er z\u00f6gert.",
+   "s": 22.392,
+   "e": 22.927
+  },
+  {
+   "text": "Und dann sagt er einen Satz,",
+   "s": 23.515,
+   "e": 24.818
+  },
+  {
+   "text": "der in die Geschichte eingehen wird.",
+   "s": 24.958,
+   "e": 26.34
+  },
+  {
+   "text": "Ein paar Stunden sp\u00e4ter ist die Berliner Mauer offen.",
+   "s": 26.977,
+   "e": 29.659
+  },
+  {
+   "text": "Was w\u00e4re,",
+   "s": 30.582,
+   "e": 31.293
+  },
+  {
+   "text": "wenn du in dieser Nacht in Berlin gewesen w\u00e4rst?",
+   "s": 31.436,
+   "e": 33.544
+  },
+  {
+   "text": "In der Nacht, in der die Mauer fiel?",
+   "s": 34.05,
+   "e": 35.625
+  },
+  {
+   "text": "Komm mit.",
+   "s": 36.34,
+   "e": 36.666
+  },
+  {
+   "text": "Wir gehen zur\u00fcck.",
+   "s": 37.099,
+   "e": 37.687
+  },
+  {
+   "text": "Zum neunten November neunzehnhundertneunundachtzig.",
+   "s": 38.202,
+   "e": 40.584
+  },
+  {
+   "text": "Einem ganz normalen Donnerstag.",
+   "s": 41.033,
+   "e": 42.594
+  },
+  {
+   "text": "Zumindest am Morgen.",
+   "s": 43.06,
+   "e": 43.927
+  },
+  {
+   "text": "Du bist vierundzwanzig Jahre alt.",
+   "s": 44.762,
+   "e": 46.174
+  },
+  {
+   "text": "Du wohnst in Ost-Berlin, im Prenzlauer Berg,",
+   "s": 46.559,
+   "e": 48.604
+  },
+  {
+   "text": "in einer Altbauwohnung mit Kohleofen.",
+   "s": 48.891,
+   "e": 50.555
+  },
+  {
+   "text": "Im Winter schleppst du die Briketts aus dem Keller in den dritten Stock.",
+   "s": 51.126,
+   "e": 53.813
+  },
+  {
+   "text": "Du arbeitest in einem Betrieb,",
+   "s": 54.255,
+   "e": 55.411
+  },
+  {
+   "text": "du hast Freunde,",
+   "s": 55.684,
+   "e": 56.356
+  },
+  {
+   "text": "du gehst am Wochenende tanzen.",
+   "s": 56.592,
+   "e": 57.774
+  },
+  {
+   "text": "Ein ganz normales Leben.",
+   "s": 58.195,
+   "e": 59.472
+  },
+  {
+   "text": "Nur eines ist nicht normal.",
+   "s": 60.079,
+   "e": 61.514
+  },
+  {
+   "text": "Ein paar hundert Meter von deiner Wohnung entfernt steht eine Mauer.",
+   "s": 62.131,
+   "e": 65.059
+  },
+  {
+   "text": "Und hinter dieser Mauer liegt eine andere Welt.",
+   "s": 65.626,
+   "e": 68.018
+  },
+  {
+   "text": "West-Berlin.",
+   "s": 68.539,
+   "e": 69.149
+  },
+  {
+   "text": "Du kannst die H\u00e4user auf der anderen Seite fast sehen.",
+   "s": 69.701,
+   "e": 72.072
+  },
+  {
+   "text": "Aber du darfst nicht hin.",
+   "s": 72.593,
+   "e": 73.614
+  },
+  {
+   "text": "Nie.",
+   "s": 74.092,
+   "e": 74.354
+  },
+  {
+   "text": "Deine Tante wohnt dort,",
+   "s": 75.137,
+   "e": 76.111
+  },
+  {
+   "text": "keine f\u00fcnf Kilometer entfernt.",
+   "s": 76.385,
+   "e": 77.769
+  },
+  {
+   "text": "Du kennst sie nur aus Briefen.",
+   "s": 78.211,
+   "e": 79.448
+  },
+  {
+   "text": "Und aus den Paketen, die sie zu Weihnachten schickt.",
+   "s": 79.805,
+   "e": 81.698
+  },
+  {
+   "text": "Mit Kaffee, Schokolade und Seife,",
+   "s": 81.971,
+   "e": 83.328
+  },
+  {
+   "text": "die so gut riecht,",
+   "s": 83.608,
+   "e": 85.094
+  },
+  {
+   "text": "dass deine Mutter sie monatelang nicht benutzt.",
+   "s": 85.285,
+   "e": 87.251
+  },
+  {
+   "text": "Nur daran riecht.",
+   "s": 87.628,
+   "e": 88.255
+  },
+  {
+   "text": "Diese Mauer steht seit dem dreizehnten August neunzehnhunderteinundsechzig.",
+   "s": 89.246,
+   "e": 92.821
+  },
+  {
+   "text": "Sie umschlie\u00dft ganz West-Berlin,",
+   "s": 93.378,
+   "e": 94.833
+  },
+  {
+   "text": "rund hundertf\u00fcnfundf\u00fcnfzig Kilometer lang.",
+   "s": 95.119,
+   "e": 97.104
+  },
+  {
+   "text": "Mit Wacht\u00fcrmen,",
+   "s": 97.493,
+   "e": 98.254
+  },
+  {
+   "text": "Stacheldraht,",
+   "s": 98.475,
+   "e": 99.193
+  },
+  {
+   "text": "Hunden und einem Todesstreifen.",
+   "s": 99.445,
+   "e": 101.265
+  },
+  {
+   "text": "Wer versucht zu fliehen,",
+   "s": 101.813,
+   "e": 102.731
+  },
+  {
+   "text": "riskiert sein Leben.",
+   "s": 102.981,
+   "e": 103.812
+  },
+  {
+   "text": "Mindestens hundertvierzig Menschen sind an dieser Mauer ums Leben gekommen.",
+   "s": 104.577,
+   "e": 107.92
+  },
+  {
+   "text": "Der letzte, auf den geschossen wurde,",
+   "s": 108.443,
+   "e": 109.968
+  },
+  {
+   "text": "starb erst im Februar dieses Jahres,",
+   "s": 110.233,
+   "e": 112.075
+  },
+  {
+   "text": "neunzehnhundertneunundachtzig.",
+   "s": 112.33,
+   "e": 113.599
+  },
+  {
+   "text": "Er war zwanzig Jahre alt.",
+   "s": 114.158,
+   "e": 115.283
+  },
+  {
+   "text": "Du bist mit dieser Mauer aufgewachsen.",
+   "s": 116.171,
+   "e": 117.741
+  },
+  {
+   "text": "Sie war schon da, als du geboren wurdest.",
+   "s": 118.08,
+   "e": 119.661
+  },
+  {
+   "text": "F\u00fcr dich ist sie so normal wie das Wetter.",
+   "s": 120.098,
+   "e": 121.922
+  },
+  {
+   "text": "Niemand glaubt, dass sie jemals verschwindet.",
+   "s": 122.374,
+   "e": 124.367
+  },
+  {
+   "text": "Noch im Januar hat Staatschef Erich Honecker gesagt,",
+   "s": 124.969,
+   "e": 127.343
+  },
+  {
+   "text": "die Mauer werde auch in f\u00fcnfzig und in hundert Jahren noch stehen.",
+   "s": 127.599,
+   "e": 130.383
+  },
+  {
+   "text": "Aber in diesem Jahr,",
+   "s": 131.202,
+   "e": 132.105
+  },
+  {
+   "text": "neunzehnhundertneunundachtzig,",
+   "s": 132.404,
+   "e": 133.674
+  },
+  {
+   "text": "liegt etwas in der Luft.",
+   "s": 134.021,
+   "e": 134.826
+  },
+  {
+   "text": "Du sp\u00fcrst es.",
+   "s": 135.47,
+   "e": 136.188
+  },
+  {
+   "text": "Alle sp\u00fcren es.",
+   "s": 136.575,
+   "e": 137.377
+  },
+  {
+   "text": "Es f\u00e4ngt im Sommer an.",
+   "s": 138.097,
+   "e": 139.038
+  },
+  {
+   "text": "Ungarn \u00f6ffnet seine Grenze nach \u00d6sterreich.",
+   "s": 139.489,
+   "e": 141.48
+  },
+  {
+   "text": "Pl\u00f6tzlich gibt es ein Loch im Eisernen Vorhang.",
+   "s": 141.919,
+   "e": 143.936
+  },
+  {
+   "text": "Tausende Menschen aus der DDR fahren in den Urlaub nach Ungarn und kommen nie zur\u00fcck.",
+   "s": 144.157,
+   "e": 148.515
+  },
+  {
+   "text": "Auch dein Kollege von der Arbeit ist eines Tages einfach weg.",
+   "s": 149.081,
+   "e": 151.784
+  },
+  {
+   "text": "Sein Platz an der Werkbank bleibt leer.",
+   "s": 152.323,
+   "e": 153.953
+  },
+  {
+   "text": "Niemand sagt etwas.",
+   "s": 154.563,
+   "e": 155.432
+  },
+  {
+   "text": "Aber alle wissen Bescheid.",
+   "s": 155.861,
+   "e": 157.144
+  },
+  {
+   "text": "Und dann gehen die Menschen auf die Stra\u00dfe.",
+   "s": 157.763,
+   "e": 159.467
+  },
+  {
+   "text": "Erst in Leipzig,",
+   "s": 159.834,
+   "e": 160.56
+  },
+  {
+   "text": "jeden Montag, nach dem Friedensgebet in der Nikolaikirche.",
+   "s": 160.855,
+   "e": 163.442
+  },
+  {
+   "text": "Am neunten Oktober sind es mindestens siebzigtausend.",
+   "s": 163.919,
+   "e": 166.642
+  },
+  {
+   "text": "Und alle haben Angst.",
+   "s": 167.07,
+   "e": 168.319
+  },
+  {
+   "text": "Es gibt Ger\u00fcchte, dass die Polizei schie\u00dfen wird.",
+   "s": 168.752,
+   "e": 170.748
+  },
+  {
+   "text": "Dass Panzer kommen.",
+   "s": 170.998,
+   "e": 171.768
+  },
+  {
+   "text": "Aber die Menschen gehen trotzdem.",
+   "s": 172.172,
+   "e": 173.594
+  },
+  {
+   "text": "Mit Kerzen in den H\u00e4nden.",
+   "s": 174.006,
+   "e": 175.068
+  },
+  {
+   "text": "Und sie rufen:",
+   "s": 175.39,
+   "e": 175.964
+  },
+  {
+   "text": "Wir sind das Volk.",
+   "s": 176.254,
+   "e": 177.213
+  },
+  {
+   "text": "Und:",
+   "s": 177.566,
+   "e": 177.789
+  },
+  {
+   "text": "Keine Gewalt.",
+   "s": 178.048,
+   "e": 178.817
+  },
+  {
+   "text": "Und es passiert nichts.",
+   "s": 179.286,
+   "e": 180.435
+  },
+  {
+   "text": "Kein Schuss f\u00e4llt.",
+   "s": 180.839,
+   "e": 181.663
+  },
+  {
+   "text": "Die Staatsmacht schaut zu.",
+   "s": 181.992,
+   "e": 183.151
+  },
+  {
+   "text": "Und genau in diesem Moment bricht etwas.",
+   "s": 183.695,
+   "e": 186.114
+  },
+  {
+   "text": "Die Angst ist pl\u00f6tzlich weniger stark als der Mut.",
+   "s": 186.542,
+   "e": 189.108
+  },
+  {
+   "text": "Ein paar Wochen sp\u00e4ter tritt Honecker zur\u00fcck.",
+   "s": 189.613,
+   "e": 191.477
+  },
+  {
+   "text": "Am vierten November stehen in Ost-Berlin auf dem Alexanderplatz mindestens hunderttausend Menschen.",
+   "s": 191.829,
+   "e": 196.362
+  },
+  {
+   "text": "Auch du bist dabei.",
+   "s": 196.754,
+   "e": 197.566
+  },
+  {
+   "text": "Du h\u00e4ltst ein selbst gemaltes Schild hoch.",
+   "s": 197.886,
+   "e": 199.452
+  },
+  {
+   "text": "Du rufst mit.",
+   "s": 199.835,
+   "e": 200.451
+  },
+  {
+   "text": "Dein Herz klopft.",
+   "s": 200.801,
+   "e": 201.609
+  },
+  {
+   "text": "Noch vor einem Jahr h\u00e4ttest du daf\u00fcr ins Gef\u00e4ngnis kommen k\u00f6nnen.",
+   "s": 201.975,
+   "e": 204.577
+  },
+  {
+   "text": "Und jetzt,",
+   "s": 204.911,
+   "e": 205.413
+  },
+  {
+   "text": "an diesem neunten November, ist ein ganz normaler Donnerstag.",
+   "s": 205.675,
+   "e": 208.551
+  },
+  {
+   "text": "Du stehst morgens auf.",
+   "s": 208.969,
+   "e": 209.818
+  },
+  {
+   "text": "Es ist grau,",
+   "s": 210.26,
+   "e": 210.841
+  },
+  {
+   "text": "ein typischer Novembertag.",
+   "s": 211.084,
+   "e": 212.148
+  },
+  {
+   "text": "Du f\u00e4hrst mit der Stra\u00dfenbahn zur Arbeit.",
+   "s": 212.514,
+   "e": 214.118
+  },
+  {
+   "text": "Mittags stehst du in der Schlange beim B\u00e4cker.",
+   "s": 214.444,
+   "e": 216.073
+  },
+  {
+   "text": "Nach der Arbeit holst du noch Kartoffeln.",
+   "s": 216.444,
+   "e": 217.972
+  },
+  {
+   "text": "Bananen gibt es nat\u00fcrlich wieder keine.",
+   "s": 218.296,
+   "e": 219.858
+  },
+  {
+   "text": "Die gibt es fast nie.",
+   "s": 220.123,
+   "e": 220.869
+  },
+  {
+   "text": "Und am Abend sitzt du zu Hause vor dem Fernseher.",
+   "s": 221.23,
+   "e": 223.352
+  },
+  {
+   "text": "Mit einem Teller Stullen und einer Tasse Tee.",
+   "s": 223.691,
+   "e": 225.534
+  },
+  {
+   "text": "Es ist kurz vor sieben Uhr.",
+   "s": 225.986,
+   "e": 227.11
+  },
+  {
+   "text": "Im DDR-Fernsehen l\u00e4uft live eine Pressekonferenz.",
+   "s": 227.452,
+   "e": 230.034
+  },
+  {
+   "text": "Ziemlich langweilig.",
+   "s": 230.331,
+   "e": 231.132
+  },
+  {
+   "text": "Ein Politiker namens G\u00fcnter Schabowski spricht seit fast einer Stunde \u00fcber Parteibeschl\u00fcsse und Reformen.",
+   "s": 231.494,
+   "e": 236.373
+  },
+  {
+   "text": "Du willst eigentlich schon umschalten.",
+   "s": 236.732,
+   "e": 238.054
+  },
+  {
+   "text": "Und dann,",
+   "s": 238.393,
+   "e": 238.828
+  },
+  {
+   "text": "um sieben Minuten vor sieben, zieht Schabowski einen Zettel aus seinen Unterlagen.",
+   "s": 239.091,
+   "e": 242.728
+  },
+  {
+   "text": "Er liest etwas vor \u00fcber eine neue Reiseregelung.",
+   "s": 243.095,
+   "e": 245.492
+  },
+  {
+   "text": "Privatreisen ins Ausland k\u00f6nnen ohne besondere Voraussetzungen beantragt werden.",
+   "s": 245.841,
+   "e": 249.569
+  },
+  {
+   "text": "Die Genehmigungen werden kurzfristig erteilt.",
+   "s": 249.815,
+   "e": 251.711
+  },
+  {
+   "text": "Du h\u00f6rst auf zu kauen.",
+   "s": 252.154,
+   "e": 253.035
+  },
+  {
+   "text": "Ein Journalist fragt:",
+   "s": 253.368,
+   "e": 254.25
+  },
+  {
+   "text": "Wann tritt das in Kraft?",
+   "s": 254.5,
+   "e": 255.453
+  },
+  {
+   "text": "Schabowski schaut auf seinen Zettel.",
+   "s": 255.793,
+   "e": 257.12
+  },
+  {
+   "text": "Er bl\u00e4ttert.",
+   "s": 257.462,
+   "e": 257.933
+  },
+  {
+   "text": "Er wirkt verwirrt.",
+   "s": 258.349,
+   "e": 259.064
+  },
+  {
+   "text": "Und dann sagt er:",
+   "s": 259.445,
+   "e": 260.209
+  },
+  {
+   "text": "Das tritt nach meiner Kenntnis\u2026 ist das sofort,",
+   "s": 260.555,
+   "e": 263.781
+  },
+  {
+   "text": "unverz\u00fcglich.",
+   "s": 264.129,
+   "e": 264.763
+  },
+  {
+   "text": "Sofort.",
+   "s": 265.195,
+   "e": 265.853
+  },
+  {
+   "text": "Unverz\u00fcglich.",
+   "s": 266.286,
+   "e": 267.137
+  },
+  {
+   "text": "Du sitzt da.",
+   "s": 267.637,
+   "e": 268.249
+  },
+  {
+   "text": "Mit offenem Mund.",
+   "s": 268.654,
+   "e": 269.536
+  },
+  {
+   "text": "Hat er das gerade wirklich gesagt?",
+   "s": 269.981,
+   "e": 271.723
+  },
+  {
+   "text": "Was Schabowski nicht wusste:",
+   "s": 272.141,
+   "e": 273.434
+  },
+  {
+   "text": "Die neue Regelung sollte eigentlich erst am n\u00e4chsten Morgen um vier Uhr bekannt gegeben werden.",
+   "s": 273.643,
+   "e": 278.048
+  },
+  {
+   "text": "Und eigentlich sollte man daf\u00fcr erst einen Antrag stellen.",
+   "s": 278.325,
+   "e": 281.13
+  },
+  {
+   "text": "Mit Stempel und Formular, so wie immer.",
+   "s": 281.442,
+   "e": 283.088
+  },
+  {
+   "text": "Aber das stand nicht auf seinem Zettel.",
+   "s": 283.496,
+   "e": 285.181
+  },
+  {
+   "text": "Und so hat er,",
+   "s": 285.583,
+   "e": 286.373
+  },
+  {
+   "text": "aus Versehen,",
+   "s": 286.64,
+   "e": 287.34
+  },
+  {
+   "text": "die Mauer ge\u00f6ffnet.",
+   "s": 287.641,
+   "e": 288.533
+  },
+  {
+   "text": "Mit drei Worten.",
+   "s": 288.995,
+   "e": 289.855
+  },
+  {
+   "text": "Du schaltest um.",
+   "s": 290.544,
+   "e": 291.192
+  },
+  {
+   "text": "Ins Westfernsehen,",
+   "s": 291.718,
+   "e": 292.596
+  },
+  {
+   "text": "das in Ost-Berlin fast jeder heimlich schaut.",
+   "s": 292.771,
+   "e": 294.886
+  },
+  {
+   "text": "Und auch dort sprechen sie dar\u00fcber.",
+   "s": 295.277,
+   "e": 296.558
+  },
+  {
+   "text": "Sp\u00e4ter am Abend beginnen die Tagesthemen mit den Worten,",
+   "s": 297.013,
+   "e": 299.546
+  },
+  {
+   "text": "dieser neunte November sei ein historischer Tag.",
+   "s": 299.882,
+   "e": 302.329
+  },
+  {
+   "text": "Dein Telefon klingelt.",
+   "s": 302.99,
+   "e": 303.842
+  },
+  {
+   "text": "Na ja,",
+   "s": 304.326,
+   "e": 304.572
+  },
+  {
+   "text": "du hast eigentlich kein Telefon.",
+   "s": 305.0,
+   "e": 306.238
+  },
+  {
+   "text": "Auf ein Telefon wartet man in der DDR oft jahrelang.",
+   "s": 306.546,
+   "e": 309.446
+  },
+  {
+   "text": "Aber es klopft an deiner T\u00fcr.",
+   "s": 309.91,
+   "e": 311.051
+  },
+  {
+   "text": "Dein Nachbar steht da,",
+   "s": 311.49,
+   "e": 312.322
+  },
+  {
+   "text": "in Hausschuhen,",
+   "s": 312.612,
+   "e": 313.179
+  },
+  {
+   "text": "ganz aufgeregt.",
+   "s": 313.408,
+   "e": 314.113
+  },
+  {
+   "text": "Hast du das geh\u00f6rt?",
+   "s": 314.54,
+   "e": 315.282
+  },
+  {
+   "text": "Die Grenze ist offen!",
+   "s": 315.569,
+   "e": 316.54
+  },
+  {
+   "text": "Wir gehen jetzt r\u00fcber!",
+   "s": 316.712,
+   "e": 317.616
+  },
+  {
+   "text": "Du ziehst deine Jacke an.",
+   "s": 318.148,
+   "e": 319.113
+  },
+  {
+   "text": "Du steckst deinen Personalausweis ein.",
+   "s": 319.443,
+   "e": 321.014
+  },
+  {
+   "text": "Und du rennst die Treppe runter.",
+   "s": 321.359,
+   "e": 322.628
+  },
+  {
+   "text": "Drau\u00dfen auf der Stra\u00dfe ist es mittlerweile dunkel.",
+   "s": 323.153,
+   "e": 325.317
+  },
+  {
+   "text": "Aber \u00fcberall gehen Lichter an.",
+   "s": 325.651,
+   "e": 327.171
+  },
+  {
+   "text": "Fenster werden aufgerissen.",
+   "s": 327.537,
+   "e": 328.776
+  },
+  {
+   "text": "Menschen rufen sich Dinge zu.",
+   "s": 329.042,
+   "e": 330.393
+  },
+  {
+   "text": "Und alle laufen in dieselbe Richtung.",
+   "s": 330.763,
+   "e": 332.514
+  },
+  {
+   "text": "Zur Bornholmer Stra\u00dfe.",
+   "s": 332.897,
+   "e": 333.957
+  },
+  {
+   "text": "Zum n\u00e4chsten Grenz\u00fcbergang.",
+   "s": 334.272,
+   "e": 335.426
+  },
+  {
+   "text": "Am Anfang sind es nur wenige.",
+   "s": 336.03,
+   "e": 337.362
+  },
+  {
+   "text": "Viele glauben es noch nicht.",
+   "s": 337.789,
+   "e": 338.692
+  },
+  {
+   "text": "Gegen acht Uhr stehen an mehreren Grenz\u00fcberg\u00e4ngen zusammen nur ein paar Dutzend Leute.",
+   "s": 339.333,
+   "e": 343.316
+  },
+  {
+   "text": "Aber dann werden es mehr.",
+   "s": 343.797,
+   "e": 344.774
+  },
+  {
+   "text": "Und immer mehr.",
+   "s": 345.244,
+   "e": 346.102
+  },
+  {
+   "text": "Alle paar Minuten bringt die Stra\u00dfenbahn neue Menschen.",
+   "s": 346.55,
+   "e": 349.088
+  },
+  {
+   "text": "Manche kommen in Pantoffeln.",
+   "s": 349.573,
+   "e": 350.787
+  },
+  {
+   "text": "Manche im Schlafanzug unter dem Mantel.",
+   "s": 351.103,
+   "e": 352.805
+  },
+  {
+   "text": "Manche haben ihren Trabi einfach mitten auf der Stra\u00dfe stehen lassen.",
+   "s": 353.193,
+   "e": 356.289
+  },
+  {
+   "text": "Vorne am Schlagbaum stehen die Grenzsoldaten.",
+   "s": 356.817,
+   "e": 358.871
+  },
+  {
+   "text": "Und sie haben keine Ahnung, was los ist.",
+   "s": 359.286,
+   "e": 361.198
+  },
+  {
+   "text": "Niemand hat ihnen etwas gesagt.",
+   "s": 361.638,
+   "e": 362.99
+  },
+  {
+   "text": "Sie haben keinen Befehl.",
+   "s": 363.278,
+   "e": 364.325
+  },
+  {
+   "text": "Sie telefonieren mit ihren Vorgesetzten.",
+   "s": 364.722,
+   "e": 366.398
+  },
+  {
+   "text": "Aber auch die wissen nichts.",
+   "s": 366.691,
+   "e": 367.791
+  },
+  {
+   "text": "Der Mann, der hier das Kommando hat, hei\u00dft Harald J\u00e4ger.",
+   "s": 368.345,
+   "e": 370.913
+  },
+  {
+   "text": "Ein Offizier der Staatssicherheit.",
+   "s": 371.21,
+   "e": 372.643
+  },
+  {
+   "text": "Er steht zwischen seinen Leuten und einer immer gr\u00f6\u00dfer werdenden Menschenmenge.",
+   "s": 373.135,
+   "e": 376.515
+  },
+  {
+   "text": "Er soll die Leute wegschicken,",
+   "s": 377.021,
+   "e": 378.083
+  },
+  {
+   "text": "auf morgen vertr\u00f6sten.",
+   "s": 378.385,
+   "e": 379.434
+  },
+  {
+   "text": "Aber niemand geht.",
+   "s": 379.892,
+   "e": 380.863
+  },
+  {
+   "text": "Irgendwann sind es tausende.",
+   "s": 381.43,
+   "e": 382.865
+  },
+  {
+   "text": "Zehntausende.",
+   "s": 383.217,
+   "e": 384.093
+  },
+  {
+   "text": "Und dann beginnen sie zu rufen.",
+   "s": 384.446,
+   "e": 385.814
+  },
+  {
+   "text": "Erst leise.",
+   "s": 386.275,
+   "e": 386.918
+  },
+  {
+   "text": "Dann immer lauter.",
+   "s": 387.311,
+   "e": 388.373
+  },
+  {
+   "text": "Tor auf!",
+   "s": 388.805,
+   "e": 389.584
+  },
+  {
+   "text": "Tor auf!",
+   "s": 389.941,
+   "e": 390.745
+  },
+  {
+   "text": "Tor auf!",
+   "s": 391.116,
+   "e": 391.965
+  },
+  {
+   "text": "Du stehst mittendrin.",
+   "s": 392.441,
+   "e": 393.419
+  },
+  {
+   "text": "Eingequetscht zwischen fremden Menschen.",
+   "s": 393.81,
+   "e": 395.48
+  },
+  {
+   "text": "Du kannst dich kaum bewegen.",
+   "s": 395.803,
+   "e": 396.911
+  },
+  {
+   "text": "Neben dir weint eine alte Frau.",
+   "s": 397.396,
+   "e": 398.982
+  },
+  {
+   "text": "Hinter dir lacht ein junger Mann nerv\u00f6s.",
+   "s": 399.301,
+   "e": 401.072
+  },
+  {
+   "text": "Und du denkst:",
+   "s": 401.455,
+   "e": 401.989
+  },
+  {
+   "text": "Was, wenn sie jetzt schie\u00dfen?",
+   "s": 402.448,
+   "e": 403.515
+  },
+  {
+   "text": "Was, wenn das hier gleich ganz b\u00f6se endet?",
+   "s": 403.99,
+   "e": 405.697
+  },
+  {
+   "text": "Harald J\u00e4ger hat in dieser Nacht eine Entscheidung zu treffen.",
+   "s": 406.281,
+   "e": 408.787
+  },
+  {
+   "text": "Allein.",
+   "s": 409.159,
+   "e": 409.538
+  },
+  {
+   "text": "Ohne Befehl.",
+   "s": 409.919,
+   "e": 410.586
+  },
+  {
+   "text": "Wenn er das Tor zul\u00e4sst,",
+   "s": 411.094,
+   "e": 412.305
+  },
+  {
+   "text": "k\u00f6nnte es Tote geben.",
+   "s": 412.438,
+   "e": 413.376
+  },
+  {
+   "text": "Wenn er es \u00f6ffnet,",
+   "s": 413.827,
+   "e": 414.673
+  },
+  {
+   "text": "verst\u00f6\u00dft er gegen alles,",
+   "s": 414.89,
+   "e": 415.567
+  },
+  {
+   "text": "wof\u00fcr er sein Leben lang gearbeitet hat.",
+   "s": 415.715,
+   "e": 417.864
+  },
+  {
+   "text": "Um halb zw\u00f6lf in der Nacht entscheidet er sich.",
+   "s": 418.092,
+   "e": 419.899
+  },
+  {
+   "text": "Er gibt den Befehl:",
+   "s": 420.324,
+   "e": 421.113
+  },
+  {
+   "text": "Macht den Schlagbaum auf.",
+   "s": 421.527,
+   "e": 422.605
+  },
+  {
+   "text": "Und dann geht er hoch.",
+   "s": 423.128,
+   "e": 424.05
+  },
+  {
+   "text": "Der Schlagbaum.",
+   "s": 424.706,
+   "e": 425.413
+  },
+  {
+   "text": "F\u00fcr einen kurzen Moment ist es still.",
+   "s": 426.083,
+   "e": 427.731
+  },
+  {
+   "text": "Niemand bewegt sich.",
+   "s": 428.174,
+   "e": 429.009
+  },
+  {
+   "text": "Als k\u00f6nnte das alles nicht wahr sein.",
+   "s": 429.629,
+   "e": 431.105
+  },
+  {
+   "text": "Und dann laufen alle los.",
+   "s": 431.764,
+   "e": 433.39
+  },
+  {
+   "text": "Du l\u00e4ufst \u00fcber die Bornholmer Br\u00fccke.",
+   "s": 433.811,
+   "e": 435.185
+  },
+  {
+   "text": "Unter dir liegen die Bahngleise.",
+   "s": 435.475,
+   "e": 436.902
+  },
+  {
+   "text": "Vor dir:",
+   "s": 437.148,
+   "e": 437.618
+  },
+  {
+   "text": "die andere Seite.",
+   "s": 437.901,
+   "e": 438.656
+  },
+  {
+   "text": "Du l\u00e4ufst schneller.",
+   "s": 439.118,
+   "e": 439.862
+  },
+  {
+   "text": "Du drehst dich um, ob dir jemand folgt, ob dich jemand aufh\u00e4lt.",
+   "s": 440.091,
+   "e": 442.732
+  },
+  {
+   "text": "Aber niemand h\u00e4lt dich auf.",
+   "s": 443.159,
+   "e": 444.227
+  },
+  {
+   "text": "Du bist einfach nur einer von tausenden Menschen,",
+   "s": 444.697,
+   "e": 446.993
+  },
+  {
+   "text": "die \u00fcber eine Br\u00fccke laufen.",
+   "s": 447.214,
+   "e": 448.242
+  },
+  {
+   "text": "Und auf der anderen Seite stehen sie.",
+   "s": 448.818,
+   "e": 450.634
+  },
+  {
+   "text": "Die West-Berliner.",
+   "s": 451.177,
+   "e": 451.987
+  },
+  {
+   "text": "Sie haben es im Radio geh\u00f6rt und sind hergekommen.",
+   "s": 452.514,
+   "e": 454.469
+  },
+  {
+   "text": "Sie jubeln.",
+   "s": 454.85,
+   "e": 455.496
+  },
+  {
+   "text": "Sie klatschen.",
+   "s": 455.685,
+   "e": 456.424
+  },
+  {
+   "text": "Sie umarmen dich, obwohl sie dich nicht kennen.",
+   "s": 456.653,
+   "e": 458.536
+  },
+  {
+   "text": "Jemand dr\u00fcckt dir eine Flasche Sekt in die Hand.",
+   "s": 458.967,
+   "e": 460.564
+  },
+  {
+   "text": "Jemand anderes eine Tafel Schokolade.",
+   "s": 460.813,
+   "e": 462.432
+  },
+  {
+   "text": "Fremde Menschen weinen an deiner Schulter.",
+   "s": 462.804,
+   "e": 464.781
+  },
+  {
+   "text": "Und du weinst auch.",
+   "s": 465.168,
+   "e": 466.207
+  },
+  {
+   "text": "Und alle sagen immer wieder nur ein Wort.",
+   "s": 466.807,
+   "e": 469.051
+  },
+  {
+   "text": "Wahnsinn.",
+   "s": 469.556,
+   "e": 470.119
+  },
+  {
+   "text": "Das ist Wahnsinn.",
+   "s": 470.669,
+   "e": 472.084
+  },
+  {
+   "text": "Du stehst in West-Berlin.",
+   "s": 472.888,
+   "e": 474.136
+  },
+  {
+   "text": "Im Wedding.",
+   "s": 474.574,
+   "e": 475.026
+  },
+  {
+   "text": "Eine ganz normale Stra\u00dfe.",
+   "s": 475.433,
+   "e": 476.628
+  },
+  {
+   "text": "Ein paar Kneipen, ein Kiosk,",
+   "s": 476.885,
+   "e": 478.372
+  },
+  {
+   "text": "Autos.",
+   "s": 478.539,
+   "e": 478.994
+  },
+  {
+   "text": "Aber f\u00fcr dich ist es wie ein anderer Planet.",
+   "s": 479.434,
+   "e": 481.773
+  },
+  {
+   "text": "Die Stra\u00dfenlaternen sind heller.",
+   "s": 482.209,
+   "e": 483.657
+  },
+  {
+   "text": "Die Werbung leuchtet bunt.",
+   "s": 483.998,
+   "e": 485.195
+  },
+  {
+   "text": "Es riecht anders.",
+   "s": 485.564,
+   "e": 486.508
+  },
+  {
+   "text": "Sogar die Luft f\u00fchlt sich anders an.",
+   "s": 486.857,
+   "e": 488.348
+  },
+  {
+   "text": "Du gehst in die erste Kneipe, die du siehst.",
+   "s": 489.025,
+   "e": 490.748
+  },
+  {
+   "text": "Der Wirt gibt eine Runde Bier f\u00fcr alle aus.",
+   "s": 491.13,
+   "e": 492.982
+  },
+  {
+   "text": "F\u00fcr umsonst.",
+   "s": 493.205,
+   "e": 493.83
+  },
+  {
+   "text": "An diesem Abend bezahlt kaum jemand aus dem Osten f\u00fcr irgendwas.",
+   "s": 494.254,
+   "e": 497.536
+  },
+  {
+   "text": "Und dann geht es weiter.",
+   "s": 498.006,
+   "e": 499.081
+  },
+  {
+   "text": "Zum Kurf\u00fcrstendamm.",
+   "s": 499.522,
+   "e": 500.431
+  },
+  {
+   "text": "Dort ist die H\u00f6lle los.",
+   "s": 500.878,
+   "e": 502.408
+  },
+  {
+   "text": "Autos hupen.",
+   "s": 502.732,
+   "e": 503.612
+  },
+  {
+   "text": "Trabis fahren im Schritttempo durch die Menge,",
+   "s": 503.863,
+   "e": 505.686
+  },
+  {
+   "text": "und die Leute klopfen ihnen aufs Dach, als w\u00e4ren sie Rennwagen.",
+   "s": 505.832,
+   "e": 508.43
+  },
+  {
+   "text": "Musik.",
+   "s": 508.775,
+   "e": 509.287
+  },
+  {
+   "text": "Gesang.",
+   "s": 509.478,
+   "e": 509.973
+  },
+  {
+   "text": "Menschen auf Laternen, auf Telefonzellen, auf Bushaltestellen.",
+   "s": 510.225,
+   "e": 513.343
+  },
+  {
+   "text": "Und am Brandenburger Tor klettern die Menschen auf die Mauer selbst.",
+   "s": 513.592,
+   "e": 516.85
+  },
+  {
+   "text": "Genau auf die Mauer,",
+   "s": 517.147,
+   "e": 518.375
+  },
+  {
+   "text": "vor der man gestern noch Angst haben musste.",
+   "s": 518.582,
+   "e": 520.339
+  },
+  {
+   "text": "Sie stehen oben drauf,",
+   "s": 520.732,
+   "e": 521.749
+  },
+  {
+   "text": "tanzen, singen, schwenken Fahnen.",
+   "s": 522.041,
+   "e": 524.023
+  },
+  {
+   "text": "Und manche fangen schon an,",
+   "s": 524.386,
+   "e": 524.954
+  },
+  {
+   "text": "mit Hammer und Mei\u00dfel kleine St\u00fccke herauszuschlagen.",
+   "s": 525.162,
+   "e": 528.14
+  },
+  {
+   "text": "Du stehst unten und schaust nach oben.",
+   "s": 528.704,
+   "e": 530.509
+  },
+  {
+   "text": "Und du kannst es immer noch nicht glauben.",
+   "s": 531.049,
+   "e": 532.653
+  },
+  {
+   "text": "Gegen f\u00fcnf Uhr morgens gehst du nach Hause.",
+   "s": 533.373,
+   "e": 535.179
+  },
+  {
+   "text": "Zur\u00fcck \u00fcber die Br\u00fccke, nach Ost-Berlin.",
+   "s": 535.617,
+   "e": 537.491
+  },
+  {
+   "text": "Ja,",
+   "s": 538.085,
+   "e": 538.287
+  },
+  {
+   "text": "die meisten gehen in dieser Nacht wieder zur\u00fcck.",
+   "s": 538.664,
+   "e": 540.5
+  },
+  {
+   "text": "Denn sie haben ja dort ihre Familie,",
+   "s": 540.878,
+   "e": 542.229
+  },
+  {
+   "text": "ihre Wohnung,",
+   "s": 542.565,
+   "e": 543.121
+  },
+  {
+   "text": "ihr Leben.",
+   "s": 543.489,
+   "e": 543.923
+  },
+  {
+   "text": "Und viele gehen am n\u00e4chsten Morgen ganz normal zur Arbeit.",
+   "s": 544.502,
+   "e": 546.977
+  },
+  {
+   "text": "V\u00f6llig \u00fcberm\u00fcdet.",
+   "s": 547.308,
+   "e": 548.186
+  },
+  {
+   "text": "Aber mit einem L\u00e4cheln,",
+   "s": 548.596,
+   "e": 549.472
+  },
+  {
+   "text": "das den ganzen Tag nicht weggeht.",
+   "s": 549.69,
+   "e": 551.317
+  },
+  {
+   "text": "Und das war erst der Anfang.",
+   "s": 551.891,
+   "e": 553.369
+  },
+  {
+   "text": "Denn am Wochenende danach str\u00f6men etwa drei Millionen Menschen aus der DDR in den Westen.",
+   "s": 553.831,
+   "e": 558.305
+  },
+  {
+   "text": "Drei Millionen.",
+   "s": 558.76,
+   "e": 559.856
+  },
+  {
+   "text": "Die Autobahnen sind verstopft.",
+   "s": 560.146,
+   "e": 561.65
+  },
+  {
+   "text": "Die Z\u00fcge sind voll.",
+   "s": 561.895,
+   "e": 563.041
+  },
+  {
+   "text": "Und in West-Berlin bilden sich riesige Schlangen.",
+   "s": 563.447,
+   "e": 565.678
+  },
+  {
+   "text": "Vor den Banken und Sparkassen.",
+   "s": 566.034,
+   "e": 567.555
+  },
+  {
+   "text": "Denn jeder Besucher aus der DDR bekommt vom Westen ein sogenanntes Begr\u00fc\u00dfungsgeld.",
+   "s": 567.958,
+   "e": 572.47
+  },
+  {
+   "text": "Hundert D-Mark.",
+   "s": 572.903,
+   "e": 573.806
+  },
+  {
+   "text": "Bar auf die Hand.",
+   "s": 574.121,
+   "e": 574.817
+  },
+  {
+   "text": "Der Andrang ist so gro\u00df,",
+   "s": 575.349,
+   "e": 576.619
+  },
+  {
+   "text": "dass die Banken in Berlin sogar nachts \u00f6ffnen.",
+   "s": 576.884,
+   "e": 578.793
+  },
+  {
+   "text": "Und was machst du mit deinen hundert Mark?",
+   "s": 579.326,
+   "e": 581.037
+  },
+  {
+   "text": "Du kaufst Bananen.",
+   "s": 581.587,
+   "e": 582.551
+  },
+  {
+   "text": "Nat\u00fcrlich kaufst du Bananen.",
+   "s": 582.829,
+   "e": 584.162
+  },
+  {
+   "text": "Und Kaffee f\u00fcr deine Mutter.",
+   "s": 584.36,
+   "e": 585.594
+  },
+  {
+   "text": "Und eine Schallplatte,",
+   "s": 585.771,
+   "e": 587.172
+  },
+  {
+   "text": "die du dir schon immer gew\u00fcnscht hast.",
+   "s": 587.346,
+   "e": 588.231
+  },
+  {
+   "text": "Und dann stehst du vor einem Supermarkt und schaust einfach nur.",
+   "s": 588.766,
+   "e": 591.828
+  },
+  {
+   "text": "Die Regale.",
+   "s": 592.459,
+   "e": 593.08
+  },
+  {
+   "text": "Die Farben.",
+   "s": 593.59,
+   "e": 594.2
+  },
+  {
+   "text": "Die Auswahl.",
+   "s": 594.541,
+   "e": 595.426
+  },
+  {
+   "text": "Zwanzig Sorten Joghurt.",
+   "s": 595.733,
+   "e": 597.281
+  },
+  {
+   "text": "Bei euch gab es eine.",
+   "s": 597.573,
+   "e": 598.754
+  },
+  {
+   "text": "Und dann klingelst du bei deiner Tante.",
+   "s": 599.445,
+   "e": 601.023
+  },
+  {
+   "text": "Zum ersten Mal in deinem Leben.",
+   "s": 601.39,
+   "e": 602.982
+  },
+  {
+   "text": "Sie macht die T\u00fcr auf.",
+   "s": 603.601,
+   "e": 604.415
+  },
+  {
+   "text": "Und ihr steht euch gegen\u00fcber,",
+   "s": 604.897,
+   "e": 605.999
+  },
+  {
+   "text": "zwei Fremde,",
+   "s": 606.362,
+   "e": 607.115
+  },
+  {
+   "text": "die sich seit Jahren Briefe schreiben.",
+   "s": 607.37,
+   "e": 608.89
+  },
+  {
+   "text": "Und dann fallt ihr euch in die Arme.",
+   "s": 609.448,
+   "e": 611.123
+  },
+  {
+   "text": "Und keiner von euch sagt ein Wort.",
+   "s": 611.617,
+   "e": 613.432
+  },
+  {
+   "text": "Allein im November neunzehnhundertneunundachtzig reisen die Menschen aus der DDR rund achtzehn Millionen Mal in den Westen.",
+   "s": 614.155,
+   "e": 620.378
+  },
+  {
+   "text": "Achtzehn Millionen.",
+   "s": 620.753,
+   "e": 622.167
+  },
+  {
+   "text": "Die Mauer,",
+   "s": 622.815,
+   "e": 623.305
+  },
+  {
+   "text": "die achtundzwanzig Jahre lang eine Stadt,",
+   "s": 623.57,
+   "e": 625.506
+  },
+  {
+   "text": "ein Land und unz\u00e4hlige Familien getrennt hat,",
+   "s": 625.805,
+   "e": 628.205
+  },
+  {
+   "text": "ist mit einem Schlag durchl\u00e4ssig geworden.",
+   "s": 628.492,
+   "e": 630.492
+  },
+  {
+   "text": "Nicht durch Panzer.",
+   "s": 630.985,
+   "e": 631.789
+  },
+  {
+   "text": "Nicht durch einen Krieg.",
+   "s": 632.115,
+   "e": 633.033
+  },
+  {
+   "text": "Sondern durch Menschen,",
+   "s": 633.445,
+   "e": 634.366
+  },
+  {
+   "text": "die auf die Stra\u00dfe gegangen sind.",
+   "s": 634.588,
+   "e": 635.847
+  },
+  {
+   "text": "Durch Kerzen.",
+   "s": 636.217,
+   "e": 636.929
+  },
+  {
+   "text": "Und durch einen Zettel.",
+   "s": 637.263,
+   "e": 638.056
+  },
+  {
+   "text": "Weniger als ein Jahr sp\u00e4ter,",
+   "s": 638.803,
+   "e": 640.29
+  },
+  {
+   "text": "am dritten Oktober neunzehnhundertneunzig,",
+   "s": 640.469,
+   "e": 642.375
+  },
+  {
+   "text": "ist Deutschland wiedervereint.",
+   "s": 642.574,
+   "e": 643.842
+  },
+  {
+   "text": "Und die Mauer?",
+   "s": 644.33,
+   "e": 644.896
+  },
+  {
+   "text": "Von ihr ist heute kaum noch etwas \u00fcbrig.",
+   "s": 645.297,
+   "e": 646.918
+  },
+  {
+   "text": "Ein paar St\u00fccke stehen noch,",
+   "s": 647.397,
+   "e": 648.394
+  },
+  {
+   "text": "als Erinnerung.",
+   "s": 648.792,
+   "e": 649.375
+  },
+  {
+   "text": "Viele Menschen, die heute in Berlin \u00fcber die Bornholmer Br\u00fccke spazieren,",
+   "s": 650.08,
+   "e": 653.043
+  },
+  {
+   "text": "wissen gar nicht mehr, was hier in jener Nacht passiert ist.",
+   "s": 653.356,
+   "e": 655.613
+  },
+  {
+   "text": "Aber du wei\u00dft es.",
+   "s": 656.113,
+   "e": 657.316
+  },
+  {
+   "text": "Weil du dabei warst.",
+   "s": 657.74,
+   "e": 658.573
+  },
+  {
+   "text": "Also,",
+   "s": 659.28,
+   "e": 659.571
+  },
+  {
+   "text": "sag mal ehrlich.",
+   "s": 659.813,
+   "e": 660.485
+  },
+  {
+   "text": "W\u00e4rst du in dieser Nacht losgerannt?",
+   "s": 660.837,
+   "e": 662.295
+  },
+  {
+   "text": "Ohne zu wissen, ob die Soldaten schie\u00dfen?",
+   "s": 662.61,
+   "e": 664.31
+  },
+  {
+   "text": "Ohne zu wissen, ob du zur\u00fcckkommen darfst?",
+   "s": 664.709,
+   "e": 666.506
+  },
+  {
+   "text": "Oder w\u00e4rst du zu Hause geblieben,",
+   "s": 667.034,
+   "e": 668.463
+  },
+  {
+   "text": "vor dem Fernseher,",
+   "s": 668.733,
+   "e": 669.448
+  },
+  {
+   "text": "und h\u00e4ttest abgewartet?",
+   "s": 669.664,
+   "e": 670.561
+  },
+  {
+   "text": "Und wenn du jemanden kennst, der damals dabei war,",
+   "s": 671.28,
+   "e": 673.272
+  },
+  {
+   "text": "frag ihn mal, wie diese Nacht f\u00fcr ihn war.",
+   "s": 673.536,
+   "e": 675.208
+  },
+  {
+   "text": "Schreib's mir in die Kommentare.",
+   "s": 675.568,
+   "e": 676.613
+  }
+ ]
+}

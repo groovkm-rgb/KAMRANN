@@ -45,8 +45,12 @@ function graffitiWall(c, x0, x1, yF, seed = 1) {
   for (let i = 0; i < (x1 - x0) / 500; i++) { const x = x0 + rnd(seed + i * 11) * (x1 - x0), y = top + 120 + rnd(seed + i * 13) * 500; c.beginPath(); for (let k = 0; k < 9; k++) { const a = k / 9 * 6.28, r = 30 + rnd(i * 9 + k) * 30; c.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r * .8); } c.closePath(); c.fillStyle = '#8a8a84'; c.fill(); c.strokeStyle = '#4a4a46'; c.lineWidth = 3; c.stroke(); for (let k = 0; k < 6; k++) line(c, [x - 20 + k * 8, y - 10, x - 16 + k * 8, y + 16], 3, '#6a6a64'); }
 }
 function torSet(c, cam, t, o = {}) {
-  c.setTransform(1, 0, 0, 1, 0, 0);
-  let g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#8ab4d8'); g.addColorStop(.6, '#d8e2e0'); g.addColorStop(1, '#f2dcb8'); c.fillStyle = g; c.fillRect(0, 0, W, H);
+  c.setTransform(1, 0, 0, 1, 0, 0); const night = !!o.night;
+  let g = c.createLinearGradient(0, 0, 0, H); if (night) { g.addColorStop(0, '#060a1c'); g.addColorStop(1, '#2a2440'); } else { g.addColorStop(0, '#8ab4d8'); g.addColorStop(.6, '#d8e2e0'); g.addColorStop(1, '#f2dcb8'); } c.fillStyle = g; c.fillRect(0, 0, W, H);
+  if (night) { layerZ(c, cam, .03, c => { const b = baseZ(cam, TOR_WALL, .03); for (let i = 0; i < 80; i++) { circle(c, -3000 + rnd(i) * 6000, b - 2800 + rnd(i + 40) * 1600, 2); c.fillStyle = 'rgba(250,248,225,.7)'; c.fill(); } });
+    layerZ(c, cam, .25, c => { const b = baseZ(cam, TOR_WALL - 160, .25); gateFar(c, 0, b, .32, false); c.save(); c.globalCompositeOperation = 'screen'; bloom(c, 0, b - 900, 1600, '255,200,120', .55); c.restore(); for (const lx of [-1300, 1300]) { line(c, [lx, b, lx, b - 700], 10, '#2a2a2a'); circle(c, lx, b - 720, 26); fs(c, '#fff2c8', 3); bloom(c, lx, b - 720, 200, '255,220,150', .7); } });
+    layerZ(c, cam, 1, c => { const [x0, x1] = visXZ(cam, 1, 400); c.fillStyle = '#2a2830'; c.fillRect(x0, TOR_WALL, x1 - x0, 2000); grain(c, x0, TOR_WALL, x1 - x0, 2000, .5, 2); graffitiWall(c, x0, x1, TOR_WALL, 3); c.fillStyle = 'rgba(10,10,30,.45)'; c.fillRect(x0, TOR_TOP - 100, x1 - x0, 2400); for (let x = Math.floor(x0 / 1600) * 1600; x < x1; x += 1600) bloom(c, x + 800, TOR_WALL - 300, 900, '255,220,160', .35); });
+    return; }
   // sky: low sun left, soft clouds
   layerZ(c, cam, .03, c => { const b = baseZ(cam, TOR_WALL, .03); bloom(c, -2400, b - 1200, 1400, '255,220,160', .8); circle(c, -2400, b - 1200, 110); c.fillStyle = '#fff4d8'; c.fill(); for (let i = 0; i < 8; i++) { c.fillStyle = 'rgba(255,240,225,.55)'; const x = -3500 + i * 1000, y = b - 2400 + rnd(i) * 700; for (const [dx, dy, r] of [[0, 0, 140], [140, -50, 180], [300, 0, 130]]) { ell(c, x + dx, y + dy, r * 1.8, r * .5); c.fill(); } } });
   // far: trees of the Tiergarten (bare), lamps, the gate
@@ -97,6 +101,7 @@ function torCrowd(c, t, o = {}) {
   if (o.hammer !== false) { const hx = o.hammerX ?? 1250, hit = Math.max(0, Math.sin(t * 8)); drawFolkSide(c, { x: hx, y: TOR_WALL + 30, s: -1, hair: 'short', hairCol: '#4a3a30', coat: '#6a5a3a', type: 'parka', pants: '#4a6890', nearA: 1.6 + hit * .6, nearBend: -1.2, hold: cc => { line(cc, [0, 0, 0, -200], 14, '#6a4a2a'); cc.beginPath(); cc.rect(-50, -250, 100, 60); fs(cc, '#4a4a4a', 5); }, expr: { mouth: 'flat', browUp: .3 } }); if (hit > .95) { for (let k = 0; k < 6; k++) { c.fillStyle = '#c8c4b8'; c.fillRect(hx - 240 + rnd(k + Math.floor(t * 8)) * 60, TOR_WALL - 380 - rnd(k + 3) * 60, 10, 10); } bloom(c, hx - 220, TOR_WALL - 360, 60, '255,240,200', .6); } }
 }
 function torLight(c, cam, t, o = {}) {
+  if (o.night) { grade(c, { sx: .5, sy: .2, warm: '255,200,130', warmA: .3, cool: '10,10,50', coolA: .4 }); return; }
   layerZ(c, cam, 1, c => { sunRays(c, cam.x - 2200, cam.y - 1400, { n: 9, len: 5200, spread: .5, dir: .5, color: '255,226,170', alpha: .22, t }); motes(c, cam.x - 1500, cam.x + 1500, cam.y - 800, cam.y + 600, t, { n: 40, color: '255,240,210', alpha: .6 }); });
   grade(c, { sx: 0, sy: .1, warm: '255,190,110', warmA: .38, cool: '40,40,90', coolA: .14 });
 }

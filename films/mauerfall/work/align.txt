@@ -1,0 +1,365 @@
+source=silence-align (cost 28.44) duration=676.83s frames=20305
+  0.00-  0.66  f   0-  19  Ein Zettel.
+  1.14-  2.01  f  34-  60  Ein einziger,
+  2.17-  3.21  f  64-  96  unscheinbarer Zettel.
+  3.78-  5.33  f 113- 160  Ein Saal voller Journalisten.
+  5.80-  6.74  f 173- 202  Grelle Scheinwerfer.
+  7.17-  7.77  f 215- 233  Kameras.
+  8.36- 11.20  f 250- 335  Und vorne am Tisch sitzt ein müder Mann im grauen Anzug.
+ 11.81- 12.90  f 354- 386  Er sucht in seinen Papieren.
+ 13.45- 14.46  f 403- 433  Er findet eine Notiz.
+ 15.04- 15.81  f 451- 474  Er liest sie vor,
+ 16.04- 16.56  f 481- 496  stockend,
+ 16.89- 17.60  f 506- 528  fast nebenbei.
+ 18.33- 19.31  f 550- 579  Dann fragt ein Journalist:
+ 19.75- 20.58  f 592- 617  Ab wann gilt das?
+ 21.19- 21.87  f 635- 655  Der Mann blättert.
+ 22.39- 22.93  f 671- 687  Er zögert.
+ 23.52- 24.82  f 705- 744  Und dann sagt er einen Satz,
+ 24.96- 26.34  f 748- 790  der in die Geschichte eingehen wird.
+ 26.98- 29.66  f 809- 889  Ein paar Stunden später ist die Berliner Mauer offen.
+ 30.58- 31.29  f 917- 938  Was wäre,
+ 31.44- 33.54  f 943-1006  wenn du in dieser Nacht in Berlin gewesen wärst?
+ 34.05- 35.62  f1021-1068  In der Nacht, in der die Mauer fiel?
+ 36.34- 36.67  f1090-1099  Komm mit.
+ 37.10- 37.69  f1112-1130  Wir gehen zurück.
+ 38.20- 40.58  f1146-1217  Zum neunten November neunzehnhundertneunundachtzig.
+ 41.03- 42.59  f1230-1277  Einem ganz normalen Donnerstag.
+ 43.06- 43.93  f1291-1317  Zumindest am Morgen.
+ 44.76- 46.17  f1342-1385  Du bist vierundzwanzig Jahre alt.
+ 46.56- 48.60  f1396-1458  Du wohnst in Ost-Berlin, im Prenzlauer Berg,
+ 48.89- 50.55  f1466-1516  in einer Altbauwohnung mit Kohleofen.
+ 51.13- 53.81  f1533-1614  Im Winter schleppst du die Briketts aus dem Keller in den dritten Stock.
+ 54.26- 55.41  f1627-1662  Du arbeitest in einem Betrieb,
+ 55.68- 56.36  f1670-1690  du hast Freunde,
+ 56.59- 57.77  f1697-1733  du gehst am Wochenende tanzen.
+ 58.20- 59.47  f1745-1784  Ein ganz normales Leben.
+ 60.08- 61.51  f1802-1845  Nur eines ist nicht normal.
+ 62.13- 65.06  f1863-1951  Ein paar hundert Meter von deiner Wohnung entfernt steht eine Mauer.
+ 65.63- 68.02  f1968-2040  Und hinter dieser Mauer liegt eine andere Welt.
+ 68.54- 69.15  f2056-2074  West-Berlin.
+ 69.70- 72.07  f2091-2162  Du kannst die Häuser auf der anderen Seite fast sehen.
+ 72.59- 73.61  f2177-2208  Aber du darfst nicht hin.
+ 74.09- 74.35  f2222-2230  Nie.
+ 75.14- 76.11  f2254-2283  Deine Tante wohnt dort,
+ 76.39- 77.77  f2291-2333  keine fünf Kilometer entfernt.
+ 78.21- 79.45  f2346-2383  Du kennst sie nur aus Briefen.
+ 79.81- 81.70  f2394-2450  Und aus den Paketen, die sie zu Weihnachten schickt.
+ 81.97- 83.33  f2459-2499  Mit Kaffee, Schokolade und Seife,
+ 83.61- 85.09  f2508-2552  die so gut riecht,
+ 85.28- 87.25  f2558-2617  dass deine Mutter sie monatelang nicht benutzt.
+ 87.63- 88.25  f2628-2647  Nur daran riecht.
+ 89.25- 92.82  f2677-2784  Diese Mauer steht seit dem dreizehnten August neunzehnhunderteinundsechzig.
+ 93.38- 94.83  f2801-2844  Sie umschließt ganz West-Berlin,
+ 95.12- 97.10  f2853-2913  rund hundertfünfundfünfzig Kilometer lang.
+ 97.49- 98.25  f2924-2947  Mit Wachtürmen,
+ 98.47- 99.19  f2954-2975  Stacheldraht,
+ 99.44-101.27  f2983-3037  Hunden und einem Todesstreifen.
+101.81-102.73  f3054-3081  Wer versucht zu fliehen,
+102.98-103.81  f3089-3114  riskiert sein Leben.
+104.58-107.92  f3137-3237  Mindestens hundertvierzig Menschen sind an dieser Mauer ums Leben gekommen.
+108.44-109.97  f3253-3299  Der letzte, auf den geschossen wurde,
+110.23-112.08  f3306-3362  starb erst im Februar dieses Jahres,
+112.33-113.60  f3369-3407  neunzehnhundertneunundachtzig.
+114.16-115.28  f3424-3458  Er war zwanzig Jahre alt.
+116.17-117.74  f3485-3532  Du bist mit dieser Mauer aufgewachsen.
+118.08-119.66  f3542-3589  Sie war schon da, als du geboren wurdest.
+120.10-121.92  f3602-3657  Für dich ist sie so normal wie das Wetter.
+122.37-124.37  f3671-3731  Niemand glaubt, dass sie jemals verschwindet.
+124.97-127.34  f3749-3820  Noch im Januar hat Staatschef Erich Honecker gesagt,
+127.60-130.38  f3827-3911  die Mauer werde auch in fünfzig und in hundert Jahren noch stehen.
+131.20-132.10  f3936-3963  Aber in diesem Jahr,
+132.40-133.67  f3972-4010  neunzehnhundertneunundachtzig,
+134.02-134.83  f4020-4044  liegt etwas in der Luft.
+135.47-136.19  f4064-4085  Du spürst es.
+136.57-137.38  f4097-4121  Alle spüren es.
+138.10-139.04  f4142-4171  Es fängt im Sommer an.
+139.49-141.48  f4184-4244  Ungarn öffnet seine Grenze nach Österreich.
+141.92-143.94  f4257-4318  Plötzlich gibt es ein Loch im Eisernen Vorhang.
+144.16-148.51  f4324-4455  Tausende Menschen aus der DDR fahren in den Urlaub nach Ungarn und kommen nie zurück.
+149.08-151.78  f4472-4553  Auch dein Kollege von der Arbeit ist eines Tages einfach weg.
+152.32-153.95  f4569-4618  Sein Platz an der Werkbank bleibt leer.
+154.56-155.43  f4636-4662  Niemand sagt etwas.
+155.86-157.14  f4675-4714  Aber alle wissen Bescheid.
+157.76-159.47  f4732-4784  Und dann gehen die Menschen auf die Straße.
+159.83-160.56  f4795-4816  Erst in Leipzig,
+160.85-163.44  f4825-4903  jeden Montag, nach dem Friedensgebet in der Nikolaikirche.
+163.92-166.64  f4917-4999  Am neunten Oktober sind es mindestens siebzigtausend.
+167.07-168.32  f5012-5049  Und alle haben Angst.
+168.75-170.75  f5062-5122  Es gibt Gerüchte, dass die Polizei schießen wird.
+171.00-171.77  f5129-5153  Dass Panzer kommen.
+172.17-173.59  f5165-5207  Aber die Menschen gehen trotzdem.
+174.01-175.07  f5220-5252  Mit Kerzen in den Händen.
+175.39-175.96  f5261-5278  Und sie rufen:
+176.25-177.21  f5287-5316  Wir sind das Volk.
+177.57-177.79  f5326-5333  Und:
+178.05-178.82  f5341-5364  Keine Gewalt.
+179.29-180.44  f5378-5413  Und es passiert nichts.
+180.84-181.66  f5425-5449  Kein Schuss fällt.
+181.99-183.15  f5459-5494  Die Staatsmacht schaut zu.
+183.69-186.11  f5510-5583  Und genau in diesem Moment bricht etwas.
+186.54-189.11  f5596-5673  Die Angst ist plötzlich weniger stark als der Mut.
+189.61-191.48  f5688-5744  Ein paar Wochen später tritt Honecker zurück.
+191.83-196.36  f5754-5890  Am vierten November stehen in Ost-Berlin auf dem Alexanderplatz mindestens hunderttausend Menschen.
+196.75-197.57  f5902-5926  Auch du bist dabei.
+197.89-199.45  f5936-5983  Du hältst ein selbst gemaltes Schild hoch.
+199.84-200.45  f5995-6013  Du rufst mit.
+200.80-201.61  f6024-6048  Dein Herz klopft.
+201.97-204.58  f6059-6137  Noch vor einem Jahr hättest du dafür ins Gefängnis kommen können.
+204.91-205.41  f6147-6162  Und jetzt,
+205.68-208.55  f6170-6256  an diesem neunten November, ist ein ganz normaler Donnerstag.
+208.97-209.82  f6269-6294  Du stehst morgens auf.
+210.26-210.84  f6307-6325  Es ist grau,
+211.08-212.15  f6332-6364  ein typischer Novembertag.
+212.51-214.12  f6375-6423  Du fährst mit der Straßenbahn zur Arbeit.
+214.44-216.07  f6433-6482  Mittags stehst du in der Schlange beim Bäcker.
+216.44-217.97  f6493-6539  Nach der Arbeit holst du noch Kartoffeln.
+218.30-219.86  f6548-6595  Bananen gibt es natürlich wieder keine.
+220.12-220.87  f6603-6626  Die gibt es fast nie.
+221.23-223.35  f6636-6700  Und am Abend sitzt du zu Hause vor dem Fernseher.
+223.69-225.53  f6710-6766  Mit einem Teller Stullen und einer Tasse Tee.
+225.99-227.11  f6779-6813  Es ist kurz vor sieben Uhr.
+227.45-230.03  f6823-6901  Im DDR-Fernsehen läuft live eine Pressekonferenz.
+230.33-231.13  f6909-6933  Ziemlich langweilig.
+231.49-236.37  f6944-7091  Ein Politiker namens Günter Schabowski spricht seit fast einer Stunde über Parteibeschlüsse und Reformen.
+236.73-238.05  f7101-7141  Du willst eigentlich schon umschalten.
+238.39-238.83  f7151-7164  Und dann,
+239.09-242.73  f7172-7281  um sieben Minuten vor sieben, zieht Schabowski einen Zettel aus seinen Unterlagen.
+243.09-245.49  f7292-7364  Er liest etwas vor über eine neue Reiseregelung.
+245.84-249.57  f7375-7487  Privatreisen ins Ausland können ohne besondere Voraussetzungen beantragt werden.
+249.81-251.71  f7494-7551  Die Genehmigungen werden kurzfristig erteilt.
+252.15-253.03  f7564-7591  Du hörst auf zu kauen.
+253.37-254.25  f7601-7627  Ein Journalist fragt:
+254.50-255.45  f7635-7663  Wann tritt das in Kraft?
+255.79-257.12  f7673-7713  Schabowski schaut auf seinen Zettel.
+257.46-257.93  f7723-7737  Er blättert.
+258.35-259.06  f7750-7771  Er wirkt verwirrt.
+259.44-260.21  f7783-7806  Und dann sagt er:
+260.56-263.78  f7816-7913  Das tritt nach meiner Kenntnis… ist das sofort,
+264.13-264.76  f7923-7942  unverzüglich.
+265.19-265.85  f7955-7975  Sofort.
+266.29-267.14  f7988-8014  Unverzüglich.
+267.64-268.25  f8029-8047  Du sitzt da.
+268.65-269.54  f8059-8086  Mit offenem Mund.
+269.98-271.72  f8099-8151  Hat er das gerade wirklich gesagt?
+272.14-273.43  f8164-8203  Was Schabowski nicht wusste:
+273.64-278.05  f8209-8341  Die neue Regelung sollte eigentlich erst am nächsten Morgen um vier Uhr bekannt gegeben werden.
+278.32-281.13  f8349-8433  Und eigentlich sollte man dafür erst einen Antrag stellen.
+281.44-283.09  f8443-8492  Mit Stempel und Formular, so wie immer.
+283.50-285.18  f8504-8555  Aber das stand nicht auf seinem Zettel.
+285.58-286.37  f8567-8591  Und so hat er,
+286.64-287.34  f8599-8620  aus Versehen,
+287.64-288.53  f8629-8655  die Mauer geöffnet.
+289.00-289.86  f8669-8695  Mit drei Worten.
+290.54-291.19  f8716-8735  Du schaltest um.
+291.72-292.60  f8751-8777  Ins Westfernsehen,
+292.77-294.89  f8783-8846  das in Ost-Berlin fast jeder heimlich schaut.
+295.28-296.56  f8858-8896  Und auch dort sprechen sie darüber.
+297.01-299.55  f8910-8986  Später am Abend beginnen die Tagesthemen mit den Worten,
+299.88-302.33  f8996-9069  dieser neunte November sei ein historischer Tag.
+302.99-303.84  f9089-9115  Dein Telefon klingelt.
+304.33-304.57  f9129-9137  Na ja,
+305.00-306.24  f9150-9187  du hast eigentlich kein Telefon.
+306.55-309.45  f9196-9283  Auf ein Telefon wartet man in der DDR oft jahrelang.
+309.91-311.05  f9297-9331  Aber es klopft an deiner Tür.
+311.49-312.32  f9344-9369  Dein Nachbar steht da,
+312.61-313.18  f9378-9395  in Hausschuhen,
+313.41-314.11  f9402-9423  ganz aufgeregt.
+314.54-315.28  f9436-9458  Hast du das gehört?
+315.57-316.54  f9467-9496  Die Grenze ist offen!
+316.71-317.62  f9501-9528  Wir gehen jetzt rüber!
+318.15-319.11  f9544-9573  Du ziehst deine Jacke an.
+319.44-321.01  f9583-9630  Du steckst deinen Personalausweis ein.
+321.36-322.63  f9640-9678  Und du rennst die Treppe runter.
+323.15-325.32  f9694-9759  Draußen auf der Straße ist es mittlerweile dunkel.
+325.65-327.17  f9769-9815  Aber überall gehen Lichter an.
+327.54-328.78  f9826-9863  Fenster werden aufgerissen.
+329.04-330.39  f9871-9911  Menschen rufen sich Dinge zu.
+330.76-332.51  f9922-9975  Und alle laufen in dieselbe Richtung.
+332.90-333.96  f9986-10018  Zur Bornholmer Straße.
+334.27-335.43  f10028-10062  Zum nächsten Grenzübergang.
+336.03-337.36  f10080-10120  Am Anfang sind es nur wenige.
+337.79-338.69  f10133-10160  Viele glauben es noch nicht.
+339.33-343.32  f10179-10299  Gegen acht Uhr stehen an mehreren Grenzübergängen zusammen nur ein paar Dutzend Leute.
+343.80-344.77  f10313-10343  Aber dann werden es mehr.
+345.24-346.10  f10357-10383  Und immer mehr.
+346.55-349.09  f10396-10472  Alle paar Minuten bringt die Straßenbahn neue Menschen.
+349.57-350.79  f10487-10523  Manche kommen in Pantoffeln.
+351.10-352.81  f10533-10584  Manche im Schlafanzug unter dem Mantel.
+353.19-356.29  f10595-10688  Manche haben ihren Trabi einfach mitten auf der Straße stehen lassen.
+356.82-358.87  f10704-10766  Vorne am Schlagbaum stehen die Grenzsoldaten.
+359.29-361.20  f10778-10835  Und sie haben keine Ahnung, was los ist.
+361.64-362.99  f10849-10889  Niemand hat ihnen etwas gesagt.
+363.28-364.32  f10898-10929  Sie haben keinen Befehl.
+364.72-366.40  f10941-10991  Sie telefonieren mit ihren Vorgesetzten.
+366.69-367.79  f11000-11033  Aber auch die wissen nichts.
+368.35-370.91  f11050-11127  Der Mann, der hier das Kommando hat, heißt Harald Jäger.
+371.21-372.64  f11136-11179  Ein Offizier der Staatssicherheit.
+373.13-376.51  f11194-11295  Er steht zwischen seinen Leuten und einer immer größer werdenden Menschenmenge.
+377.02-378.08  f11310-11342  Er soll die Leute wegschicken,
+378.38-379.43  f11351-11383  auf morgen vertrösten.
+379.89-380.86  f11396-11425  Aber niemand geht.
+381.43-382.87  f11442-11485  Irgendwann sind es tausende.
+383.22-384.09  f11496-11522  Zehntausende.
+384.45-385.81  f11533-11574  Und dann beginnen sie zu rufen.
+386.27-386.92  f11588-11607  Erst leise.
+387.31-388.37  f11619-11651  Dann immer lauter.
+388.81-389.58  f11664-11687  Tor auf!
+389.94-390.75  f11698-11722  Tor auf!
+391.12-391.96  f11733-11758  Tor auf!
+392.44-393.42  f11773-11802  Du stehst mittendrin.
+393.81-395.48  f11814-11864  Eingequetscht zwischen fremden Menschen.
+395.80-396.91  f11874-11907  Du kannst dich kaum bewegen.
+397.40-398.98  f11921-11969  Neben dir weint eine alte Frau.
+399.30-401.07  f11979-12032  Hinter dir lacht ein junger Mann nervös.
+401.45-401.99  f12043-12059  Und du denkst:
+402.45-403.51  f12073-12105  Was, wenn sie jetzt schießen?
+403.99-405.70  f12119-12170  Was, wenn das hier gleich ganz böse endet?
+406.28-408.79  f12188-12263  Harald Jäger hat in dieser Nacht eine Entscheidung zu treffen.
+409.16-409.54  f12274-12286  Allein.
+409.92-410.59  f12297-12317  Ohne Befehl.
+411.09-412.31  f12332-12369  Wenn er das Tor zulässt,
+412.44-413.38  f12373-12401  könnte es Tote geben.
+413.83-414.67  f12414-12440  Wenn er es öffnet,
+414.89-415.57  f12446-12467  verstößt er gegen alles,
+415.71-417.86  f12471-12535  wofür er sein Leben lang gearbeitet hat.
+418.09-419.90  f12542-12596  Um halb zwölf in der Nacht entscheidet er sich.
+420.32-421.11  f12609-12633  Er gibt den Befehl:
+421.53-422.61  f12645-12678  Macht den Schlagbaum auf.
+423.13-424.05  f12693-12721  Und dann geht er hoch.
+424.71-425.41  f12741-12762  Der Schlagbaum.
+426.08-427.73  f12782-12831  Für einen kurzen Moment ist es still.
+428.17-429.01  f12845-12870  Niemand bewegt sich.
+429.63-431.11  f12888-12933  Als könnte das alles nicht wahr sein.
+431.76-433.39  f12952-13001  Und dann laufen alle los.
+433.81-435.19  f13014-13055  Du läufst über die Bornholmer Brücke.
+435.48-436.90  f13064-13107  Unter dir liegen die Bahngleise.
+437.15-437.62  f13114-13128  Vor dir:
+437.90-438.66  f13137-13159  die andere Seite.
+439.12-439.86  f13173-13195  Du läufst schneller.
+440.09-442.73  f13202-13281  Du drehst dich um, ob dir jemand folgt, ob dich jemand aufhält.
+443.16-444.23  f13294-13326  Aber niemand hält dich auf.
+444.70-446.99  f13340-13409  Du bist einfach nur einer von tausenden Menschen,
+447.21-448.24  f13416-13447  die über eine Brücke laufen.
+448.82-450.63  f13464-13519  Und auf der anderen Seite stehen sie.
+451.18-451.99  f13535-13559  Die West-Berliner.
+452.51-454.47  f13575-13634  Sie haben es im Radio gehört und sind hergekommen.
+454.85-455.50  f13645-13664  Sie jubeln.
+455.69-456.42  f13670-13692  Sie klatschen.
+456.65-458.54  f13699-13756  Sie umarmen dich, obwohl sie dich nicht kennen.
+458.97-460.56  f13769-13816  Jemand drückt dir eine Flasche Sekt in die Hand.
+460.81-462.43  f13824-13872  Jemand anderes eine Tafel Schokolade.
+462.80-464.78  f13884-13943  Fremde Menschen weinen an deiner Schulter.
+465.17-466.21  f13955-13986  Und du weinst auch.
+466.81-469.05  f14004-14071  Und alle sagen immer wieder nur ein Wort.
+469.56-470.12  f14086-14103  Wahnsinn.
+470.67-472.08  f14120-14162  Das ist Wahnsinn.
+472.89-474.14  f14186-14224  Du stehst in West-Berlin.
+474.57-475.03  f14237-14250  Im Wedding.
+475.43-476.63  f14262-14298  Eine ganz normale Straße.
+476.88-478.37  f14306-14351  Ein paar Kneipen, ein Kiosk,
+478.54-478.99  f14356-14369  Autos.
+479.43-481.77  f14383-14453  Aber für dich ist es wie ein anderer Planet.
+482.21-483.66  f14466-14509  Die Straßenlaternen sind heller.
+484.00-485.19  f14519-14555  Die Werbung leuchtet bunt.
+485.56-486.51  f14566-14595  Es riecht anders.
+486.86-488.35  f14605-14650  Sogar die Luft fühlt sich anders an.
+489.02-490.75  f14670-14722  Du gehst in die erste Kneipe, die du siehst.
+491.13-492.98  f14733-14789  Der Wirt gibt eine Runde Bier für alle aus.
+493.20-493.83  f14796-14814  Für umsonst.
+494.25-497.54  f14827-14926  An diesem Abend bezahlt kaum jemand aus dem Osten für irgendwas.
+498.01-499.08  f14940-14972  Und dann geht es weiter.
+499.52-500.43  f14985-15012  Zum Kurfürstendamm.
+500.88-502.41  f15026-15072  Dort ist die Hölle los.
+502.73-503.61  f15081-15108  Autos hupen.
+503.86-505.69  f15115-15170  Trabis fahren im Schritttempo durch die Menge,
+505.83-508.43  f15174-15252  und die Leute klopfen ihnen aufs Dach, als wären sie Rennwagen.
+508.77-509.29  f15263-15278  Musik.
+509.48-509.97  f15284-15299  Gesang.
+510.23-513.34  f15306-15400  Menschen auf Laternen, auf Telefonzellen, auf Bushaltestellen.
+513.59-516.85  f15407-15505  Und am Brandenburger Tor klettern die Menschen auf die Mauer selbst.
+517.15-518.38  f15514-15551  Genau auf die Mauer,
+518.58-520.34  f15557-15610  vor der man gestern noch Angst haben musste.
+520.73-521.75  f15621-15652  Sie stehen oben drauf,
+522.04-524.02  f15661-15720  tanzen, singen, schwenken Fahnen.
+524.39-524.95  f15731-15748  Und manche fangen schon an,
+525.16-528.14  f15754-15844  mit Hammer und Meißel kleine Stücke herauszuschlagen.
+528.70-530.51  f15861-15915  Du stehst unten und schaust nach oben.
+531.05-532.65  f15931-15979  Und du kannst es immer noch nicht glauben.
+533.37-535.18  f16001-16055  Gegen fünf Uhr morgens gehst du nach Hause.
+535.62-537.49  f16068-16124  Zurück über die Brücke, nach Ost-Berlin.
+538.09-538.29  f16142-16148  Ja,
+538.66-540.50  f16159-16215  die meisten gehen in dieser Nacht wieder zurück.
+540.88-542.23  f16226-16266  Denn sie haben ja dort ihre Familie,
+542.57-543.12  f16276-16293  ihre Wohnung,
+543.49-543.92  f16304-16317  ihr Leben.
+544.50-546.98  f16335-16409  Und viele gehen am nächsten Morgen ganz normal zur Arbeit.
+547.31-548.19  f16419-16445  Völlig übermüdet.
+548.60-549.47  f16457-16484  Aber mit einem Lächeln,
+549.69-551.32  f16490-16539  das den ganzen Tag nicht weggeht.
+551.89-553.37  f16556-16601  Und das war erst der Anfang.
+553.83-558.30  f16614-16749  Denn am Wochenende danach strömen etwa drei Millionen Menschen aus der DDR in den Westen.
+558.76-559.86  f16762-16795  Drei Millionen.
+560.15-561.65  f16804-16849  Die Autobahnen sind verstopft.
+561.89-563.04  f16856-16891  Die Züge sind voll.
+563.45-565.68  f16903-16970  Und in West-Berlin bilden sich riesige Schlangen.
+566.03-567.55  f16981-17026  Vor den Banken und Sparkassen.
+567.96-572.47  f17038-17174  Denn jeder Besucher aus der DDR bekommt vom Westen ein sogenanntes Begrüßungsgeld.
+572.90-573.81  f17187-17214  Hundert D-Mark.
+574.12-574.82  f17223-17244  Bar auf die Hand.
+575.35-576.62  f17260-17298  Der Andrang ist so groß,
+576.88-578.79  f17306-17363  dass die Banken in Berlin sogar nachts öffnen.
+579.33-581.04  f17379-17431  Und was machst du mit deinen hundert Mark?
+581.59-582.55  f17447-17476  Du kaufst Bananen.
+582.83-584.16  f17484-17524  Natürlich kaufst du Bananen.
+584.36-585.59  f17530-17567  Und Kaffee für deine Mutter.
+585.77-587.17  f17573-17615  Und eine Schallplatte,
+587.35-588.23  f17620-17646  die du dir schon immer gewünscht hast.
+588.77-591.83  f17662-17754  Und dann stehst du vor einem Supermarkt und schaust einfach nur.
+592.46-593.08  f17773-17792  Die Regale.
+593.59-594.20  f17807-17826  Die Farben.
+594.54-595.43  f17836-17862  Die Auswahl.
+595.73-597.28  f17871-17918  Zwanzig Sorten Joghurt.
+597.57-598.75  f17927-17962  Bei euch gab es eine.
+599.45-601.02  f17983-18030  Und dann klingelst du bei deiner Tante.
+601.39-602.98  f18041-18089  Zum ersten Mal in deinem Leben.
+603.60-604.41  f18108-18132  Sie macht die Tür auf.
+604.90-606.00  f18146-18179  Und ihr steht euch gegenüber,
+606.36-607.12  f18190-18213  zwei Fremde,
+607.37-608.89  f18221-18266  die sich seit Jahren Briefe schreiben.
+609.45-611.12  f18283-18333  Und dann fallt ihr euch in die Arme.
+611.62-613.43  f18348-18402  Und keiner von euch sagt ein Wort.
+614.15-620.38  f18424-18611  Allein im November neunzehnhundertneunundachtzig reisen die Menschen aus der DDR rund achtzehn Millionen Mal in den Westen.
+620.75-622.17  f18622-18665  Achtzehn Millionen.
+622.82-623.30  f18684-18699  Die Mauer,
+623.57-625.51  f18707-18765  die achtundzwanzig Jahre lang eine Stadt,
+625.80-628.21  f18774-18846  ein Land und unzählige Familien getrennt hat,
+628.49-630.49  f18854-18914  ist mit einem Schlag durchlässig geworden.
+630.99-631.79  f18929-18953  Nicht durch Panzer.
+632.12-633.03  f18963-18990  Nicht durch einen Krieg.
+633.45-634.37  f19003-19030  Sondern durch Menschen,
+634.59-635.85  f19037-19075  die auf die Straße gegangen sind.
+636.22-636.93  f19086-19107  Durch Kerzen.
+637.26-638.06  f19117-19141  Und durch einen Zettel.
+638.80-640.29  f19164-19208  Weniger als ein Jahr später,
+640.47-642.38  f19214-19271  am dritten Oktober neunzehnhundertneunzig,
+642.57-643.84  f19277-19315  ist Deutschland wiedervereint.
+644.33-644.90  f19329-19346  Und die Mauer?
+645.30-646.92  f19358-19407  Von ihr ist heute kaum noch etwas übrig.
+647.40-648.39  f19421-19451  Ein paar Stücke stehen noch,
+648.79-649.38  f19463-19481  als Erinnerung.
+650.08-653.04  f19502-19591  Viele Menschen, die heute in Berlin über die Bornholmer Brücke spazieren,
+653.36-655.61  f19600-19668  wissen gar nicht mehr, was hier in jener Nacht passiert ist.
+656.11-657.32  f19683-19719  Aber du weißt es.
+657.74-658.57  f19732-19757  Weil du dabei warst.
+659.28-659.57  f19778-19787  Also,
+659.81-660.49  f19794-19814  sag mal ehrlich.
+660.84-662.29  f19825-19868  Wärst du in dieser Nacht losgerannt?
+662.61-664.31  f19878-19929  Ohne zu wissen, ob die Soldaten schießen?
+664.71-666.51  f19941-19995  Ohne zu wissen, ob du zurückkommen darfst?
+667.03-668.46  f20011-20053  Oder wärst du zu Hause geblieben,
+668.73-669.45  f20061-20083  vor dem Fernseher,
+669.66-670.56  f20089-20116  und hättest abgewartet?
+671.28-673.27  f20138-20198  Und wenn du jemanden kennst, der damals dabei war,
+673.54-675.21  f20206-20256  frag ihn mal, wie diese Nacht für ihn war.
+675.57-676.61  f20267-20298  Schreib's mir in die Kommentare.
