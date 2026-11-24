@@ -1,0 +1,259 @@
+{
+ "dur": 20.0,
+ "voiceFadeOut": 0.35,
+ "events": [
+  {
+   "t": 0,
+   "type": "murmur",
+   "dur": 9.4,
+   "gain": -4,
+   "fadeout": 1.0
+  },
+  {
+   "t": 8.4,
+   "type": "murmur",
+   "dur": 3.4,
+   "gain": -26
+  },
+  {
+   "t": 0,
+   "type": "hum",
+   "dur": 11.81,
+   "gain": -24,
+   "fadeout": 0.2
+  },
+  {
+   "t": 0.35,
+   "type": "shutter",
+   "gain": -9
+  },
+  {
+   "t": 0.95,
+   "type": "shutter",
+   "gain": -6
+  },
+  {
+   "t": 1.55,
+   "type": "shutter",
+   "gain": -9
+  },
+  {
+   "t": 2.3,
+   "type": "shutter",
+   "gain": -6
+  },
+  {
+   "t": 2.95,
+   "type": "shutter",
+   "gain": -9
+  },
+  {
+   "t": 4.2,
+   "type": "shutter",
+   "gain": -6
+  },
+  {
+   "t": 4.95,
+   "type": "shutter",
+   "gain": -9
+  },
+  {
+   "t": 6.3,
+   "type": "shutter",
+   "gain": -6
+  },
+  {
+   "t": 7.65,
+   "type": "shutter",
+   "gain": -9
+  },
+  {
+   "t": 3.9,
+   "type": "paper",
+   "dur": 0.5,
+   "gain": -8
+  },
+  {
+   "t": 4.5,
+   "type": "paper",
+   "dur": 0.6,
+   "gain": -9
+  },
+  {
+   "t": 5.2,
+   "type": "paper",
+   "dur": 0.4,
+   "gain": -10
+  },
+  {
+   "t": 6.35,
+   "type": "paper",
+   "dur": 0.35,
+   "gain": -6
+  },
+  {
+   "t": 7.22,
+   "type": "paper",
+   "dur": 0.45,
+   "gain": -5
+  },
+  {
+   "t": 5.95,
+   "type": "pen",
+   "dur": 1.05,
+   "gain": -8
+  },
+  {
+   "t": 7.4,
+   "type": "blip",
+   "gain": -12
+  },
+  {
+   "t": 7.4,
+   "type": "tick",
+   "tock": null,
+   "gain": -8
+  },
+  {
+   "t": 7.9,
+   "type": "tick",
+   "tock": true,
+   "gain": -8
+  },
+  {
+   "t": 8.4,
+   "type": "tick",
+   "tock": null,
+   "gain": -8
+  },
+  {
+   "t": 8.9,
+   "type": "tick",
+   "tock": true,
+   "gain": -4
+  },
+  {
+   "t": 9.4,
+   "type": "tick",
+   "tock": null,
+   "gain": -4
+  },
+  {
+   "t": 9.9,
+   "type": "tick",
+   "tock": true,
+   "gain": -4
+  },
+  {
+   "t": 10.4,
+   "type": "tick",
+   "tock": null,
+   "gain": -4
+  },
+  {
+   "t": 10.9,
+   "type": "tick",
+   "tock": true,
+   "gain": -4
+  },
+  {
+   "t": 11.4,
+   "type": "tick",
+   "tock": null,
+   "gain": -4
+  },
+  {
+   "t": 11.55,
+   "type": "whoosh",
+   "dur": 0.45,
+   "gain": -6
+  },
+  {
+   "t": 11.81,
+   "type": "cheer",
+   "dur": 8.0,
+   "gain": -3,
+   "swell": [
+    0.2,
+    1,
+    0.8,
+    0.7,
+    0.8,
+    1,
+    0.55,
+    0.5,
+    0.3
+   ],
+   "fadeout": 0.4
+  },
+  {
+   "t": 11.81,
+   "type": "birds",
+   "dur": 8.0,
+   "gain": -14
+  },
+  {
+   "t": 13.25,
+   "type": "pop",
+   "gain": -8
+  },
+  {
+   "t": 12.3,
+   "type": "clink",
+   "gain": -20
+  },
+  {
+   "t": 12.95,
+   "type": "clink",
+   "gain": -20
+  },
+  {
+   "t": 14.6,
+   "type": "clink",
+   "gain": -20
+  },
+  {
+   "t": 15.9,
+   "type": "clink",
+   "gain": -20
+  },
+  {
+   "t": 18.8,
+   "type": "clink",
+   "gain": -20
+  },
+  {
+   "t": 16.98,
+   "type": "clink",
+   "gain": -4
+  },
+  {
+   "t": 17.18,
+   "type": "clink",
+   "gain": -4
+  },
+  {
+   "t": 17.38,
+   "type": "clink",
+   "gain": -4
+  },
+  {
+   "t": 15.25,
+   "type": "marker",
+   "dur": 1.2,
+   "gain": -6
+  },
+  {
+   "t": 11.81,
+   "type": "music",
+   "dur": 8.2,
+   "gain": 0,
+   "fadeout": 0.6
+  },
+  {
+   "t": 19.75,
+   "type": "tvoff",
+   "gain": -3
+  }
+ ]
+}
