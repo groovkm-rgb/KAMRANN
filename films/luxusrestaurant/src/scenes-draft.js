@@ -38,10 +38,10 @@ NOAH_FONTS_READY.then(() => defineFilm({
       const NX = -70, TX = 150, TW = 360, ty = -128 - 22 * .45;
       // glass path (world): held at waist, carried to the table, set down at 1.55 s, hand withdraws
       const carry = ease(seg(lt, .25, 1.5)), withdraw = ease(seg(lt, 1.75, 2.5));
-      const gx = lerp(NX + 48, TX - 120, carry), gy = lerp(-118, ty + 2, carry) - bump(lt, .25, 1.5) * 24;
+      const gx = lerp(NX + 48, TX - 58, carry), gy = lerp(-118, ty + 2, carry) - bump(lt, .25, 1.5) * 24;
       const set = lt > 1.5;
       // hand target in rig units (relative to Noah origin)
-      const hx = set ? lerp(TX - 120 - 8, NX + 40, withdraw) : gx - 8, hy = set ? lerp(ty - 30, -120, withdraw) : gy - 30;
+      const hx = set ? lerp(TX - 58 - 8, NX + 40, withdraw) : gx - 8, hy = set ? lerp(ty - 30, -120, withdraw) : gy - 30;
       const ik = noahIK(1, (hx - NX) / NK, hy / NK - 50);
       const noah = noahP(t, { x: NX, arms: { r: { a: ik.a, b: ik.b, hand: -.4 }, l: { a: .1, b: -.12 } }, expr: { mouth: 'soft', look: lt < 2.4 ? .9 : 0, lid: lt < 2.4 ? .2 : 0 }, tilt: lt < 2.4 ? .06 : 0 });
       const items = (c, top) => { tableDressing(c, TW, top, t, { menu: true, glint: .5 }); clayBreadBasket(c, -118, top + 2, .52, t); clayDessert(c, 92, top + 4, .5); };
