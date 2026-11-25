@@ -1,0 +1,311 @@
+sentences 310 pauses 401 sec/syl 0.1726
+   0.00    3.84 p0   Dieses kleine Heft ist mehr wert als zweihundertzwanzigtausend Euro.
+   4.36    5.22 p1   Du weißt es nur noch nicht.
+   5.72    7.22 p2   Im Moment liegt es in einer Schublade.
+   7.72   13.30 p2   Und du bist gerade dabei, ein Luxusrestaurant aufzumachen, deine ganze
+  13.90   16.34 p3   Erst wenn du ganz unten bist, holst du es wieder raus.
+  16.83   20.77 p4   Aber bis dahin musst du erst mal lernen, wie brutal Gastro in Deutschl
+  21.20   22.79 p5   Zwölf Jahre lang bist du Kellner.
+  23.09   24.31 p5   Du kennst die Gastro von hinten.
+  24.65   30.63 p5   Du weißt, wie man einen Wein empfiehlt, wie man einen nervigen Gast wi
+  31.20   32.42 p5   Und seit Jahren denkst du dir:
+  32.77   35.15 p5   Wenn das mein Laden wäre, würd ich’s besser machen.
+  35.73   36.88 p6   Dann stirbt deine Oma.
+  37.29   39.27 p7   Sie hinterlässt dir siebzigtausend Euro.
+  39.72   41.17 p7   Und eben dieses Heft.
+  41.66   45.76 p7   Klein, abgegriffen, voll mit ihren Rezepten, alles mit der Hand geschr
+  46.25   47.78 p7   Das Geld fühlt sich riesig an.
+  48.24   50.32 p7   Das Heft legst du in die Schublade und vergisst es.
+  50.79   52.59 p8   Siebzigtausend Euro klingen nach viel.
+  53.02   55.47 p8   Für ein richtiges Restaurant ist das aber nur der Anfang.
+  55.99   57.14 p8   Also gehst du zur Bank.
+  57.55   59.89 p8   Und da erfährst du was, was die meisten gar nicht wissen:
+  60.36   65.30 p8   Es gibt einen Förderkredit vom Staat, den ERP-Gründerkredit StartGeld 
+  65.71   67.91 p8   Bis zu zweihunderttausend Euro für Gründer.
+  68.33   68.92 p8   Und das Beste:
+  69.27   73.44 p8   Die Bank trägt nur zwanzig Prozent vom Risiko, achtzig Prozent übernim
+  73.91   76.71 p8   Nur deswegen sagt eine Bank bei einem Restaurant überhaupt ja.
+  77.14   77.85 p8   Denn ehrlich gesagt:
+  78.17   81.51 p8   Gastronomie ist für Banken so ungefähr das Gegenteil von sicher.
+  82.01   83.15 p9   Du schreibst einen Businessplan.
+  83.48   87.10 p9   Der Berater guckt dich an, als hättest du ihm gerade erzählt, dass du 
+  87.54   89.27 p9   Aber nach sechs Wochen kommt die Zusage.
+  89.68   91.28 p9   Hundertfünfzigtausend Euro.
+  91.71   92.63 p10  Plus Omas Geld.
+  93.01   95.61 p10  Du hast jetzt zweihundertzwanzigtausend Euro.
+  95.97   98.07 p11  So viel Kohle hattest du noch nie in deinem Leben.
+  98.52  100.12 p11  Und sie wird kein Jahr halten.
+ 100.49  102.02 p12  Du findest den perfekten Laden.
+ 102.35  107.94 p12  Altbau, hohe Decken, große Fenster, hundertsechzig Quadratmeter, vorhe
+ 108.37  110.16 p12  Miete: fünftausend Euro im Monat.
+ 110.67  111.02 p12  Kalt.
+ 111.50  112.72 p12  Dazu kommen Nebenkosten.
+ 112.99  116.89 p13  Und bevor du überhaupt den Schlüssel kriegst, will der Vermieter drei 
+ 117.28  118.67 p13  Fünfzehntausend Euro weg.
+ 119.00  120.85 p13  Du hast noch keinen einzigen Teller gekauft.
+ 121.36  123.19 p14  Dann kommt der Vormieter um die Ecke und sagt:
+ 123.48  125.09 p14  „Die Küche und die Möbel kannst du übernehmen.
+ 125.34  125.85 p14  Ablöse: fünfundvierzigtausend.“
+ 126.05  126.95 p14  Ablöse heißt:
+ 127.49  130.83 p14  Du zahlst ihm Geld für sein altes Zeug.
+ 131.24  132.86 p14  Und weil du den Laden unbedingt willst, sagst du ja.
+ 133.05  133.59 p15  Zwei Wochen später merkst du:
+ 134.09  135.33 p15  Die Hälfte von dem Zeug ist Schrott.
+ 135.65  141.68 p15  Der Herd ist von 2009, die Kühlzelle macht Geräusche wie ein alter Tra
+ 142.08  144.87 p15  Für ein Luxusrestaurant brauchst du eine richtige Profiküche.
+ 145.23  149.52 p15  Kombidämpfer, Induktionsherd, neue Kühlzelle, Abzugshaube, Spülmaschin
+ 149.86  151.15 p15  Siebzigtausend Euro.
+ 151.45  152.16 p16  Und es geht weiter.
+ 152.54  155.98 p16  Umbau, Licht, Tische, Stühle, Design: fünfzigtausend.
+ 156.33  159.40 p16  Geschirr, Gläser, Besteck, Kassensystem: zwölftausend.
+ 159.79  162.43 p16  Die erste Ladung Lebensmittel und Wein: fünfzehntausend.
+ 162.79  165.44 p16  Steuerberater, Anwalt, Gebühren: fünftausend.
+ 165.80  168.39 p16  Fotos, Website, Werbung: noch mal fünftausend.
+ 168.80  171.80 p17  Rechnen wir zusammen: zweihundertsiebzehntausend Euro.
+ 172.19  175.91 p18  Von zweihundertzwanzigtausend bleiben dir genau dreitausend Euro übrig
+ 176.33  179.26 p18  Und dein Restaurant hat noch keinen einzigen Gast gesehen.
+ 179.60  182.11 p19  Und jetzt kommt der Teil, den man in keinem Kochfilm sieht.
+ 182.46  183.79 p19  Willkommen in Deutschland.
+ 184.16  187.35 p20  Weil du Alkohol ausschenken willst, brauchst du eine Gaststättenerlaub
+ 187.59  189.09 p20  Aber die kriegst du nicht einfach so.
+ 189.53  192.99 p20  Erst musst du zur IHK, zur sogenannten Gaststättenunterrichtung.
+ 193.37  198.64 p20  Vier Stunden auf einem Stuhl, hundert Euro, und da lernst du unter and
+ 198.99  200.59 p20  Dann stellst du den Antrag beim Amt.
+ 200.88  205.86 p20  Je nach Aufwand kostet der zwischen hundert und tausendfünfhundert Eur
+ 206.18  211.03 p20  Führungszeugnis, Nachweis vom Finanzamt, Formulare, Formulare, Formula
+ 211.36  215.79 p21  Jeder Mitarbeiter, der mit Essen zu tun hat, braucht eine Belehrung na
+ 216.09  218.49 p21  Die Feuerwehr will Fluchtwege und Notbeleuchtung sehen.
+ 218.82  222.11 p21  Die Lebensmittelkontrolle kann jederzeit unangemeldet vor der Tür steh
+ 222.44  225.02 p21  Und wenn du Musik laufen lassen willst, meldet sich die GEMA.
+ 225.28  230.26 p21  Die will auch für Hintergrundmusik Geld sehen, je nach Größe vom Laden
+ 230.67  231.57 p22  Du wolltest kochen.
+ 231.85  233.40 p22  Stattdessen sammelst du Stempel.
+ 233.76  234.94 p23  Und dann das Team.
+ 235.33  236.82 p23  Ohne Leute kein Restaurant.
+ 237.18  241.10 p23  Der Mindestlohn liegt 2026 bei dreizehn Euro neunzig die Stunde.
+ 241.42  245.14 p23  Bei Vollzeit sind das ungefähr zweitausendvierhundert Euro brutto im M
+ 245.55  248.09 p23  Aber einen guten Küchenchef kriegst du dafür nie im Leben.
+ 248.50  252.48 p23  Die Gastro sucht überall verzweifelt Leute, und wer gut ist, weiß das.
+ 252.81  258.35 p24  Du stellst ein: einen Küchenchef, einen Sous-Chef, einen Koch, einen S
+ 258.63  261.89 p24  Zusammen kommst du auf etwa einundzwanzigtausend Euro brutto im Monat.
+ 262.21  263.39 p24  Aber das ist noch nicht alles.
+ 263.79  266.39 p24  Als Arbeitgeber zahlst du noch Sozialabgaben obendrauf, grob gesagt zw
+ 266.74  268.19 p24  Macht ungefähr fünfundzwanzigtausend Euro.
+ 268.56  270.67 p24  Jeden Monat.
+ 271.02  271.95 p24  Nur fürs Personal.
+ 272.25  278.58 p25  Lass uns mal kurz ehrlich rechnen, was dich dein Laden im Monat kostet
+ 279.06  281.93 p26  Miete mit Nebenkosten: rund sechstausendzweihundert.
+ 282.37  284.10 p26  Personal: fünfundzwanzigtausend.
+ 284.52  289.13 p26  Strom und Gas: zweitausendfünfhundert, denn so eine Profiküche frisst 
+ 289.57  291.56 p26  Die Kreditrate: etwa sechzehnhundert.
+ 291.98  296.92 p26  Versicherungen, Steuerberater, Kassensoftware, GEMA, Reparaturen: noch
+ 297.33  299.35 p27  Macht siebenunddreißigtausend Euro.
+ 299.70  300.43 p27  Jeden Monat.
+ 300.78  301.14 p27  Fix.
+ 301.59  302.58 p28  Dazu kommt die Ware.
+ 302.98  307.42 p28  In der Gastro rechnet man grob damit, dass etwa dreißig Prozent vom Um
+ 307.83  308.59 p28  Heißt im Klartext:
+ 308.91  314.11 p28  Damit du überhaupt bei null rauskommst, musst du ungefähr dreiundfünfz
+ 314.41  314.76 p28  Netto.
+ 315.33  317.24 p29  Du hast sechsundzwanzig Abende im Monat offen.
+ 317.56  319.63 p29  Das sind rund zweitausend Euro pro Abend.
+ 320.00  323.24 p29  Jeder Gast lässt bei dir im Schnitt fünfundsechzig Euro da, ohne Steue
+ 323.66  323.97 p30  Heißt:
+ 324.28  327.26 p30  Du brauchst jeden Abend mindestens einunddreißig Gäste.
+ 327.57  328.55 p30  Bei vierzig Plätzen.
+ 328.88  329.32 p30  Jeden.
+ 329.69  330.27 p30  Einzelnen.
+ 330.53  330.91 p30  Abend.
+ 331.30  333.20 p30  Und dann hast du noch keinen Cent verdient.
+ 333.67  335.98 p31  Und jetzt schauen wir uns mal einen einzigen Teller an.
+ 336.38  338.35 p31  Dein Hauptgang kostet achtunddreißig Euro.
+ 338.79  339.72 p32  Gute Nachricht zuerst:
+ 339.97  345.89 p32  Seit dem ersten Januar 2026 gelten auf Speisen im Restaurant wieder nu
+ 346.24  347.38 p32  Und das jetzt dauerhaft.
+ 347.76  349.80 p32  Getränke bleiben allerdings bei neunzehn Prozent.
+ 350.27  354.42 p32  Von deinen achtunddreißig Euro gehen also knapp zweieinhalb Euro direk
+ 354.90  357.32 p33  Dann die Zutaten: ungefähr zehn Euro sechzig.
+ 357.80  361.27 p33  Das Personal, das den Teller kocht und an den Tisch bringt: knapp zwöl
+ 361.71  365.63 p33  Und Miete, Strom, Kredit und der ganze Rest: noch mal rund zwölf Euro.
+ 366.08  367.00 p34  Und was bleibt dir am Ende?
+ 367.47  368.90 p34  Ungefähr ein Euro.
+ 369.38  370.27 p35  Ein Euro.
+ 370.61  371.61 p35  Von achtunddreißig.
+ 372.14  372.92 p35  Das ist kein Witz.
+ 373.25  376.60 p35  Viele Restaurants in Deutschland machen am Ende nur ein bis drei Proze
+ 377.01  380.25 p35  Deswegen ist dein Kellner auch so scharf drauf, dir noch eine Flasche 
+ 380.66  383.92 p35  An Getränken verdient ein Restaurant nämlich oft deutlich mehr als am 
+ 384.42  384.86 p36  Aber gut.
+ 385.18  388.60 p36  Du hast einen Plan, du hast ein Team, du hast einen wunderschönen Lade
+ 389.05  389.59 p36  Die Eröffnung.
+ 390.04  391.60 p37  Die erste Woche ist der Hammer.
+ 391.88  392.75 p37  Jeder Tisch voll.
+ 393.04  396.55 p37  Freunde, Familie, Leute von Instagram, deine alten Kollegen.
+ 396.89  399.54 p37  Du stehst um zwei Uhr nachts in der leeren Küche und denkst dir:
+ 399.88  400.87 p37  Ich hab’s geschafft.
+ 401.40  402.13 p38  Kleines Problem:
+ 402.48  404.46 p38  Die Hälfte von diesen Leuten hat gar nicht bezahlt.
+ 404.80  405.57 p38  Ist ja Familie.
+ 406.03  407.96 p39  Und in der dritten Woche wird’s plötzlich ruhig.
+ 408.52  409.95 p39  Dienstag: sechs Gäste.
+ 410.43  411.44 p39  Mittwoch: neun.
+ 411.99  413.06 p39  Donnerstag: elf.
+ 413.42  414.70 p39  Niemand kennt deinen Laden.
+ 415.04  416.96 p39  Dein Menü kostet fünfundneunzig Euro.
+ 417.31  423.54 p39  Und in deiner Stadt gibt es schon zwanzig andere Restaurants mit weiße
+ 424.01  425.53 p40  Dann kommt die erste Google-Bewertung.
+ 425.93  426.54 p40  Zwei Sterne.
+ 427.06  429.81 p40  „Teuer, kleine Portionen, der Kellner war nervös.“
+ 430.20  431.62 p40  Der Kellner warst übrigens du.
+ 432.08  435.23 p41  Am Ende vom ersten Monat machst du zweiundzwanzigtausend Euro Umsatz.
+ 435.51  437.71 p41  Deine Kosten liegen bei über vierzigtausend.
+ 438.07  439.87 p41  Minus einundzwanzigtausend Euro.
+ 440.26  441.52 p41  In einem einzigen Monat.
+ 441.92  443.60 p42  Du hast ja nur noch dreitausend auf dem Konto.
+ 443.94  448.60 p42  Also gehst du wieder zur Bank und kriegst einen Kontokorrentkredit, da
+ 448.98  449.95 p42  Dreißigtausend Euro.
+ 450.31  451.75 p42  Mit richtig fiesen Zinsen.
+ 452.18  454.01 p42  Im zweiten Monat: wieder minus.
+ 454.35  455.30 p42  Du verkaufst dein Auto.
+ 455.56  459.80 p42  Deine Mutter leiht dir fünftausend Euro und sagt kein Wort, aber du si
+ 460.16  463.71 p43  Und dann, an einem Samstag mitten im Service, kündigt dein Küchenchef.
+ 464.16  465.47 p43  Er hat ein besseres Angebot bekommen.
+ 465.92  469.11 p43  Er zieht die Schürze aus, sagt „Tut mir leid, Chef“ und geht.
+ 469.62  471.67 p44  Weißt du, was du in dieser Zeit nachts googelst?
+ 472.10  472.91 p44  Gastro-Pleiten.
+ 473.31  475.09 p44  Und die Zahlen machen dir richtig Angst.
+ 475.45  480.38 p44  2025 haben in Deutschland fast dreitausend Gastronomiebetriebe Insolve
+ 480.69  482.68 p44  So viele wie seit 2011 nicht mehr.
+ 483.03  491.93 p44  Und in den Jahren 2024 und 2025 zusammen haben rund vierundzwanzigtaus
+ 492.33  493.06 p45  Und du denkst dir:
+ 493.43  494.20 p45  Ich bin der Nächste.
+ 494.57  496.75 p45  Ich bin bald nur noch eine Zahl in so einer Statistik.
+ 497.11  498.97 p46  Und dann kommt dieser eine Freitag.
+ 499.37  500.42 p47  23 Uhr 12.
+ 500.94  503.87 p47  Für ein Restaurant ist das die wichtigste Stunde der ganzen Woche.
+ 504.25  505.37 p47  Jetzt müsste es laut sein.
+ 505.76  510.64 p47  Gläser klirren, Teller fliegen, in der Küche schreit jemand „Tisch sie
+ 511.04  511.41 p48  Bei dir?
+ 511.88  512.51 p48  Totenstille.
+ 512.97  513.74 p49  Vierzig Plätze.
+ 514.13  515.35 p49  Besetzt ist einer.
+ 515.77  518.95 p49  Und der Typ da hinten hat den ganzen Abend nur ein Leitungswasser getr
+ 519.36  520.81 p49  Jetzt steht er auf und geht.
+ 521.21  521.89 p49  Ohne Trinkgeld.
+ 522.27  523.14 p50  Du schaust auf dein Handy.
+ 523.56  524.12 p50  Banking-App.
+ 524.49  526.43 p50  Minus achtunddreißigtausend Euro.
+ 526.81  527.32 p51  Ganz unten.
+ 527.74  528.62 p51  Tiefer geht’s nicht mehr.
+ 529.00  530.28 p52  Du sitzt allein in deiner Küche.
+ 530.66  533.46 p52  Und dir fällt auf, dass du den ganzen Tag nichts gegessen hast.
+ 533.86  535.36 p52  Du hast keinen Bock auf dein eigenes Menü.
+ 535.74  536.65 p52  Du machst die Schublade auf.
+ 537.18  537.88 p53  Und da liegt es.
+ 538.27  538.91 p53  Omas Heft.
+ 539.30  539.98 p54  Seite vierzehn.
+ 540.35  541.09 p54  Rinderrouladen.
+ 541.44  542.76 p54  Mit Rotkohl und Klößen.
+ 543.18  546.06 p54  Mit Omas Soße, an der sie immer drei Stunden gestanden hat.
+ 546.49  546.97 p55  Du kochst.
+ 547.37  548.58 p55  Einfach so, für dich.
+ 549.05  549.66 p55  Um Mitternacht.
+ 549.91  552.35 p56  Dein Spüler Lukas ist noch da, er wischt gerade den Boden.
+ 552.70  553.90 p56  Du stellst ihm auch einen Teller hin.
+ 554.33  554.77 p56  Er isst.
+ 555.18  556.32 p56  Er sagt erst mal gar nichts.
+ 556.74  557.99 p56  Dann guckt er dich an und sagt:
+ 558.45  558.87 p57  „Alter.
+ 559.30  560.70 p57  Warum steht das nicht auf deiner Karte?“
+ 561.09  562.86 p58  Und in dem Moment macht es klick.
+ 563.35  565.24 p59  Du hast versucht, wie alle anderen zu sein.
+ 565.59  569.26 p59  Noch ein schickes Menü, noch ein Schäumchen, noch ein Laden, den keine
+ 569.58  574.49 p59  Aber niemand in der ganzen Stadt macht Omas Roulade so gut, dass man d
+ 574.91  576.19 p60  Also änderst du alles.
+ 576.47  577.39 p60  Und zwar sofort.
+ 577.72  580.14 p61  Die Karte schrumpft von vierzehn Gerichten auf sechs.
+ 580.43  584.61 p61  Weniger Gerichte heißt weniger Ware, die du wegschmeißen musst, und de
+ 585.00  588.19 p61  Dein Sous-Chef wird der neue Küchenchef, und er ist überglücklich.
+ 588.60  593.58 p61  Du machst einen Mittagstisch für sechzehn Euro, denn die Miete läuft s
+ 593.95  595.48 p61  Und dein Hauptgericht heißt ab jetzt:
+ 595.82  596.69 p61  „Omas Roulade.
+ 597.04  598.90 p61  Rezept von 1962.“
+ 599.34  602.17 p62  Lukas filmt mit seinem Handy, wie die Roulade aufgeschnitten wird.
+ 602.48  604.07 p62  Die Soße läuft langsam drüber.
+ 604.42  605.18 p62  Dazu ein Satz:
+ 605.59  608.06 p62  „Das Rezept meiner Oma hat mein Restaurant gerettet.“
+ 608.43  610.20 p63  Er lädt das Video am Samstagabend hoch.
+ 610.64  613.07 p64  Am Sonntag hat es zweihunderttausend Aufrufe.
+ 613.43  616.14 p64  Am Montag sind es zwei Komma drei Millionen.
+ 616.56  618.66 p64  Und dein Telefon hört nicht mehr auf zu klingeln.
+ 619.00  622.00 p64  Über vierhundert Reservierungsanfragen in drei Tagen.
+ 622.36  624.31 p65  Das Problem ist jetzt nicht mehr, Gäste zu finden.
+ 624.56  626.60 p65  Das Problem ist, Platz für sie zu haben.
+ 626.95  630.09 p65  Du machst zwei Durchgänge pro Abend, um sechs und um halb neun.
+ 630.53  633.24 p65  Statt einunddreißig Gästen kommen jetzt sechzig bis siebzig.
+ 633.67  634.99 p65  Du stellst zwei Leute mehr ein.
+ 635.29  636.43 p65  Es gibt eine Warteliste.
+ 636.82  642.02 p66  Sechs Monate nach dem schlimmsten Abend deines Lebens machst du knapp 
+ 642.40  647.30 p66  Ware, Personal, Miete, Kredit, alles abgezogen, bleiben dir knapp zehn
+ 647.68  648.35 p66  Vor Steuern.
+ 648.80  650.99 p66  Zum ersten Mal steht da kein Minus.
+ 651.39  653.35 p66  Den Dispo zahlst du in vier Monaten zurück.
+ 653.75  655.82 p66  Und deine Mutter kriegt ihre fünftausend Euro wieder.
+ 656.15  656.62 p66  Mit Blumen.
+ 657.05  660.02 p67  Und dann passiert eines Abends etwas, das dir erst gar nicht auffällt.
+ 660.54  661.87 p68  Eine Frau kommt allein.
+ 662.38  664.66 p68  Ganz normale Reservierung, ganz normaler Name.
+ 665.10  666.53 p68  Sie bestellt das komplette Menü.
+ 667.10  667.95 p68  Und sie stellt Fragen.
+ 668.35  669.05 p68  Viele Fragen.
+ 669.47  670.79 p68  Wie lange wird das Fleisch geschmort?
+ 671.08  672.08 p68  Woher kommt der Rotkohl?
+ 672.41  673.34 p68  Warum diese Soße?
+ 673.83  676.46 p68  Sie bezahlt, gibt ein normales Trinkgeld und geht.
+ 676.93  678.57 p69  Vier Monate später kommt ein Mann.
+ 679.00  679.60 p69  Wieder allein.
+ 680.00  681.19 p69  Wieder das komplette Menü.
+ 681.59  682.77 p69  Wieder diese Fragen.
+ 683.20  684.11 p70  Was du nicht weißt:
+ 684.37  686.55 p70  So arbeiten die Inspektoren vom Guide Michelin.
+ 686.82  691.04 p70  Sie reservieren unter einem Decknamen, sie essen ganz normal und zahle
+ 691.38  692.57 p70  Niemand weiß, wer sie sind.
+ 693.04  698.38 p70  Und ein Stern wird nie nach einem einzigen Besuch vergeben, sondern er
+ 698.95  701.98 p70  In ganz Deutschland sind nur rund zwei Dutzend dieser Tester unterwegs
+ 702.46  703.61 p71  Im Juni kommt ein Brief.
+ 704.13  707.08 p71  Eine Einladung nach Frankfurt, zur Verleihung der Michelin-Sterne.
+ 707.66  711.67 p72  Du sitzt da, in einem geliehenen Anzug, zwischen den besten Köchen des
+ 712.17  713.03 p72  Deine Hände schwitzen.
+ 713.50  714.14 p72  Und du denkst dir:
+ 714.78  717.36 p72  Ich bin hier eigentlich nur ein Kellner mit dem Kochbuch seiner Oma.
+ 717.79  719.50 p73  Und dann wird dein Name aufgerufen.
+ 720.05  720.66 p74  Ein Stern.
+ 721.26  722.07 p75  Nur zur Einordnung:
+ 722.44  727.72 p75  2026 gibt es in ganz Deutschland zweihundertneunundsiebzig Restaurants
+ 728.23  730.50 p75  Und jetzt ist eins davon deins.
+ 731.03  731.25 p76  So.
+ 731.78  733.33 p76  Jetzt mal ehrlich, ohne Filmmusik.
+ 733.79  735.91 p77  Die meisten Geschichten in der Gastro enden nicht so.
+ 736.28  738.20 p77  Die meisten enden mit einem Zettel an der Tür:
+ 738.58  739.96 p77  „Wir sagen Danke für die schöne Zeit.“
+ 740.47  741.76 p77  Restaurants sind brutal.
+ 742.22  745.60 p77  Achtzehn-Stunden-Tage, kaum Urlaub, ein Euro Gewinn pro Teller.
+ 746.01  748.76 p77  Und ein einziger schlechter Monat kann alles kaputt machen.
+ 749.27  751.59 p78  Aber das, was dich gerettet hat, war nicht das Geld.
+ 751.98  754.99 p78  Es war nicht der Kredit, nicht die teure Küche und nicht das Design.
+ 755.58  756.82 p79  Es war dieses kleine Heft.
+ 757.44  760.11 p80  Mehr wert als zweihundertzwanzigtausend Euro.
+ 760.70  762.37 p80  Am Anfang wusstest du es nur noch nicht.
+ 762.90  763.41 p81  Freitag.
+ 763.83  764.91 p81  23 Uhr 12.
+ 765.38  766.80 p82  In deinem Restaurant ist es laut.
+ 767.09  769.89 p82  Gläser klirren, Teller fliegen, und in der Küche schreit jemand:
+ 770.15  772.11 p82  „Tisch sieben, zwei Mal Omas Roulade!“
+ 772.51  772.88 p83  Und du?
+ 773.47  774.00 p83  Du lächelst.
+ 774.52  775.21 p84  Jetzt sag du mal:
+ 775.57  777.38 p84  Was würdest du mit siebzigtausend Euro machen?
+ 777.75  780.40 p84  Ein Restaurant aufmachen, oder das Geld lieber einfach behalten?
+ 780.79  781.77 p84  Schreib’s in die Kommentare.
+ 782.17  785.43 p84  Und abonnier den Kanal, damit du das nächste „Was wäre, wenn“ nicht ve
+ 785.79  786.57 p84  Bis zum nächsten Mal.

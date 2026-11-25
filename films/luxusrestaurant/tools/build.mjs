@@ -9,9 +9,9 @@ const TOON = process.env.TOON || join(SYNC, 'toon-shorts/assets/engine');
 const NOAHS = process.env.NOAHS || join(SYNC, 'noah-character');
 const scenes = process.argv[2] || 'scenes.js', out = process.argv[3] || 'film.html';
 const files = [join(TOON, 'toon.js'), join(TOON, 'sets.js'), join(NOAHS, 'noah.js'),
-  join(NOAHS, 'places/light.js'), join(NOAHS, 'places/stone-age.js'), join(NOAHS, 'places/forest.js'), join(NOAHS, 'places/city.js'),
+  join(NOAHS, 'places/light.js'), join(NOAHS, 'places/stone-age.js'), join(NOAHS, 'places/forest.js'), join(NOAHS, 'places/city.js'), join(NOAHS, 'places/office.js'),
   join(NOAHS, 'places/fonts.js'), join(NOAHS, 'places/overlays.js'),
-  ...['src/outfits.js', 'src/clay.js', 'src/restaurant.js', 'src/places2.js', 'src/people.js', 'src/draw.js', 'src/screens.js', 'src/' + scenes].map(f => join(HERE, f)).filter(existsSync)];
+  ...['src/outfits.js', 'src/clay.js', 'src/restaurant.js', 'src/places2.js', 'src/places3.js', 'src/places4.js', 'src/people.js', 'src/draw.js', 'src/screens.js', 'src/timing.js', ...scenes.split(',').map(f => 'src/' + f)].map(f => join(HERE, f)).filter(existsSync)];
 const FILM = { title: 'Was wäre, wenn du ein Luxusrestaurant eröffnest?', slug: 'luxusrestaurant', fps: 30 };
 let js = `const FILM = ${JSON.stringify(FILM)};\n` + files.map(p => `// ---- ${p.split('/').slice(-2).join('/')} ----\n` + readFileSync(p, 'utf8')).join('\n');
 js = js.replace('const W = 1080, H = 1920', 'const W = 1920, H = 1080');

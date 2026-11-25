@@ -183,5 +183,123 @@ def render(spec_path):
     print(json.dumps({'speech_rms_db': round(sp_rms, 1), 'music_rms_during_speech_db': round(rms_db(mus[speaking, 0]), 1),
                       'music_rms_in_gaps_db': round(rms_db(mus[~speaking, 0]) if (~speaking).any() else -99, 1), 'peak': round(float(peak), 3)}))
 
+
+# ======================= more effects for the full film =======================
+def _burst(d, lo, hi, tau): t = tt(d); return bp(rng.standard_normal(len(t)), lo, hi) * np.exp(-t / tau)
+def sfx_rain(d=3): t = tt(d); y = lp(rng.standard_normal(len(t)), 3000) * .5; k = rng.integers(0, len(t), int(d * 40)); y[k] += rng.uniform(-1, 1, len(k)) * 2; y = hp(y, 300); return norm(y * np.minimum(1, t / .5) * np.minimum(1, (d - t) / .5))
+def sfx_page(): t = tt(.45); y = bp(rng.standard_normal(len(t)), 1200, 7000) * np.sin(np.pi * t / .45) ** 2 * (1 + .6 * np.sin(2 * np.pi * 22 * t)); return norm(y)
+def sfx_keys():
+    y = np.zeros(int(.6 * SR))
+    for i in range(7):
+        at = rng.uniform(0, .4); x = sum(np.sin(2 * np.pi * f * tt(.25)) * np.exp(-tt(.25) / .05) for f in rng.uniform(3000, 7000, 3)); k = int(at * SR); y[k:k + len(x)] += x[:len(y) - k] * rng.uniform(.4, 1)
+    return norm(y)
+def sfx_clap1(): return norm(_burst(.12, 700, 3500, .02))
+def sfx_rattle(d=6):
+    t = tt(d); y = (np.sin(2 * np.pi * 52 * t) + .5 * np.sign(np.sin(2 * np.pi * 104 * t)) * .3) * (1 + .5 * np.sin(2 * np.pi * 9 * t))
+    y += bp(rng.standard_normal(len(t)), 200, 1600) * (np.sin(2 * np.pi * 13 * t) > .3) * .6
+    return norm(lp(y, 2500) * np.minimum(1, t / .3) * np.minimum(1, (d - t) / .4))
+def sfx_hiss(d=3): t = tt(d); return norm(hp(rng.standard_normal(len(t)), 3000) * np.sin(np.pi * t / d) * (1 + .3 * np.sin(2 * np.pi * 3 * t)))
+def sfx_hammer(): t = tt(.4); return norm(np.sin(2 * np.pi * 180 * t) * np.exp(-t / .05) + _burst(.4, 1500, 6000, .01) * .8)
+def sfx_flash(): t = tt(.5); y = _burst(.5, 2000, 8000, .008); y += np.sin(2 * np.pi * (3000 + 4000 * t) * t) * np.exp(-t / .15) * .15; return norm(y)
+def sfx_ding(f=1568): t = tt(1.6); return norm(sum(a * np.sin(2 * np.pi * f * m * t) * np.exp(-t / d) for m, a, d in ((1, 1, .9), (2.01, .4, .5), (3.02, .2, .3))) * np.minimum(1, t / .002))
+def sfx_jingle():
+    y = np.zeros(int(1.4 * SR))
+    for i, m in enumerate((72, 76, 79, 84)): x = piano(m, .25, 1); k = int(i * .18 * SR); y[k:k + len(x)] += x[:len(y) - k]
+    return norm(y)
+def sfx_coin(): y = np.zeros(int(.9 * SR)); x = sfx_ding(2637) * .8; y[:len(x[:len(y)])] += x[:len(y)]; x2 = sfx_ding(3520) * .6; k = int(.09 * SR); y[k:] += x2[:len(y) - k]; return norm(y)
+def sfx_pour(d=2): t = tt(d); m = 1 + .8 * np.sin(2 * np.pi * (9 + 4 * np.sin(2 * np.pi * .7 * t)) * t); return norm(bp(rng.standard_normal(len(t)), 300, 1400) * m * np.sin(np.pi * t / d) ** .5)
+def sfx_crowd(d=6):
+    t = tt(d); y = np.zeros_like(t)
+    for f in (300, 450, 700, 1000): y += bp(rng.standard_normal(len(t)), f * .8, f * 1.25) * (1 + .7 * np.sin(2 * np.pi * rng.uniform(1.5, 4) * t + rng.uniform(0, 6)))
+    for i in range(int(d * 2)):
+        k = int(rng.uniform(0, d - .3) * SR); x = np.sin(2 * np.pi * rng.uniform(250, 420) * tt(.25) * (1 + .3 * tt(.25))) * np.sin(np.pi * tt(.25) / .25) * .8; y[k:k + len(x)] += x
+    return norm(y * np.minimum(1, t / .8) * np.minimum(1, (d - t) / .8))
+def sfx_buzz(): t = tt(.9); env = ((t % .45) < .3).astype(float); return norm(np.sign(np.sin(2 * np.pi * 150 * t)) * .5 * env * lp(np.ones_like(t), 50) + bp(rng.standard_normal(len(t)), 100, 400) * env * .3)
+def sfx_carstart(): t = tt(1.6); f = 40 + 30 * np.minimum(1, t / .8); y = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * .5 + lp(rng.standard_normal(len(t)), 400) * .5; return norm(lp(y, 900) * np.minimum(1, t / .2) * np.minimum(1, (1.6 - t) / .5))
+def sfx_door(): y = np.zeros(int(.8 * SR)); x = sfx_thunk() * .9; y[:len(x[:len(y)])] += x[:len(y)]; c = _burst(.05, 2000, 6000, .006); k = int(.2 * SR); y[k:k + len(c)] += c * .6; return norm(y)
+def sfx_typing(d=1.5):
+    y = np.zeros(int(d * SR)); tm = 0
+    while tm < d - .05: x = _burst(.03, 1500, 6000, .004) * rng.uniform(.5, 1); k = int(tm * SR); y[k:k + len(x)] += x; tm += rng.uniform(.06, .16)
+    return norm(y)
+def sfx_wind(d=3): t = tt(d); return norm(lp(rng.standard_normal(len(t)), 500) * (1 + .6 * np.sin(2 * np.pi * .4 * t)) * np.sin(np.pi * t / d))
+def sfx_shout():  # order bell at the pass: two dings
+    y = np.zeros(int(1.6 * SR)); x = sfx_ding(2093); y[:len(x[:len(y)])] += x[:len(y)]; k = int(.22 * SR); y[k:] += x[:len(y) - k] * .9; return norm(y)
+def sfx_chair(): t = tt(.6); y = bp(rng.standard_normal(len(t)), 250, 1200) * (1 + np.sign(np.sin(2 * np.pi * 34 * t))) * np.sin(np.pi * t / .6); return norm(y)
+def sfx_sizzle(d=3):
+    t = tt(d); y = hp(rng.standard_normal(len(t)), 2500) * .5; k = rng.integers(0, len(t) - 400, int(d * 60))
+    for i in k: y[i:i + 300] += rng.uniform(-1, 1) * np.exp(-np.arange(300) / 40)
+    return norm(y * np.minimum(1, t / .3) * np.minimum(1, (d - t) / .4))
+def sfx_mop(d=2.5): t = tt(d); return norm(bp(rng.standard_normal(len(t)), 300, 2500) * (np.sin(2 * np.pi * .9 * t) ** 2))
+def sfx_chew(d=2.5): t = tt(d); return norm(lp(rng.standard_normal(len(t)), 300) * (np.sin(2 * np.pi * 2.2 * t) > .6))
+def sfx_knife(): t = tt(.5); return norm(bp(rng.standard_normal(len(t)), 2500, 8000) * np.sin(np.pi * t / .5) + np.sin(2 * np.pi * 4200 * t) * np.exp(-t / .2) * .2)
+def sfx_ring(): t = tt(1.0); return norm((np.sin(2 * np.pi * 440 * t) + np.sin(2 * np.pi * 480 * t)) * (np.sin(2 * np.pi * 20 * t) > 0) * np.minimum(1, (1 - t) / .05))
+def sfx_cheer(d=1.6): y = sfx_crowd(d) * .6; t = tt(d); y += bp(rng.standard_normal(len(t)), 900, 3000) * np.sin(np.pi * t / d) * .7; return norm(y)
+def sfx_heart(): y = np.zeros(int(.5 * SR)); x = np.sin(2 * np.pi * 55 * tt(.15)) * np.exp(-tt(.15) / .05); y[:len(x)] += x; k = int(.16 * SR); y[k:k + len(x)] += x * .7; return norm(y)
+def sfx_applause(d=8):
+    y = np.zeros(int(d * SR)); n = int(d * 90)
+    for i in range(n): x = sfx_clap1() * rng.uniform(.3, 1); k = int(rng.uniform(0, d - .15) * SR); y[k:k + len(x)] += x
+    t = tt(d); return norm(y * np.minimum(1, t / .4) * np.minimum(1, (d - t) / 1.5))
+def sfx_scratch(): t = tt(.5); f = 600 * (1 + np.sin(2 * np.pi * 4 * t)); return norm(bp(rng.standard_normal(len(t)), 300, 2500) * np.sin(np.pi * t / .5) + np.sin(2 * np.pi * np.cumsum(f) / SR) * .3 * np.exp(-t / .3))
+def sfx_street(d=10):
+    t = tt(d); y = lp(rng.standard_normal(len(t)), 600) * .4
+    for i in range(int(d / 4)): w = sfx_whoosh(2.2, 120, 900) * .7; k = int(rng.uniform(0, d - 2.3) * SR); y[k:k + len(w)] += w
+    return norm(y * np.minimum(1, t / .8) * np.minimum(1, (d - t) / .8))
+SFX.update({'rain': sfx_rain, 'page': sfx_page, 'keys': sfx_keys, 'clap1': sfx_clap1, 'rattle': sfx_rattle, 'hiss': sfx_hiss, 'hammer': sfx_hammer, 'flash': sfx_flash, 'ding': sfx_ding, 'jingle': sfx_jingle,
+            'coin': sfx_coin, 'pour': sfx_pour, 'crowd': sfx_crowd, 'buzz': sfx_buzz, 'carstart': sfx_carstart, 'door': sfx_door, 'typing': sfx_typing, 'wind': sfx_wind, 'shout': sfx_shout, 'chair': sfx_chair,
+            'sizzle': sfx_sizzle, 'mop': sfx_mop, 'chew': sfx_chew, 'knife': sfx_knife, 'ring': sfx_ring, 'cheer': sfx_cheer, 'heart': sfx_heart, 'applause': sfx_applause, 'scratch': sfx_scratch, 'street': sfx_street})
+
+# mood -> music section parameters (D minor home key; the emotional curve of the story)
+MOOD = {
+  'curious': dict(bar=3.4, chords=[[50,57,64,65],[46,53,62,65],[48,55,64,67],[45,52,61,64]], motif=[[0,74,.5,.35],[1,77,.5,.3],[2,76,1,.3],[3,72,1,.25]], bright=.4),
+  'light':   dict(bar=3.0, chords=[[53,60,64,69],[46,53,62,65],[48,55,64,67],[50,57,62,65]], motif=[[0,72,.5,.3],[.5,76,.5,.28],[1,79,1,.3],[2.5,77,1,.25]], bright=.55),
+  'warm':    dict(bar=3.2, chords=[[48,55,64,67],[45,52,60,64],[41,53,57,64],[43,55,59,62]], motif=[[0,76,.5,.3],[1,79,.5,.28],[2,77,.5,.26],[3,74,1,.24]], bright=.5),
+  'memory':  dict(bar=3.6, chords=[[53,60,65,69],[50,57,62,65],[46,53,58,62],[48,55,60,64]], motif=[[0,84,.5,.22],[.5,81,.5,.2],[1,77,.5,.2],[2,79,1,.2],[3,76,1,.18]], bright=.35),
+  'hope':    dict(bar=3.0, chords=[[43,55,59,62],[50,57,62,66],[52,59,64,67],[48,55,60,64]], motif=[[0,74,.5,.3],[1,78,.5,.3],[2,79,1,.3],[3,81,1,.28]], bright=.6),
+  'triumph': dict(bar=2.8, chords=[[50,57,62,66],[45,57,61,64],[47,54,59,62],[43,55,59,62]], motif=[[0,78,.5,.34],[.5,81,.5,.32],[1,86,1,.34],[2.5,83,1,.3]], bright=.75, gain_db=1),
+  'dark':    dict(bar=2.9, chords=[[38,50,53,57],[34,46,50,53]], bright=.25, gain_db=-2),
+  'dark2':   dict(bar=3.4, chords=[[45,52,57,60],[41,48,53,57],[40,47,52,55]], motif=[[0,57,1,.25],[2,53,1,.2]], bright=.2, gain_db=-2),
+  'tension': dict(bar=1.8, chords=[[38,50,57,62],[43,50,55,58],[45,52,57,61]], pulse=8, bright=.45),
+  'tension2':dict(bar=1.6, chords=[[40,52,55,59],[36,48,55,60],[47,51,54,59]], pulse=8, bright=.45),
+  'swell':   dict(bar=1.3, chords=[[38,50,57,62,65,69]], motif=[[0,74,1,.45],[0,81,1,.35]], bright=.8, gain_db=3),
+  'bureau':  dict(bar=2.4, chords=[[48,55,60,64],[43,50,55,59],[45,52,57,60],[41,48,53,57]], pulse=6, motif=[[0,72,.25,.25],[1,71,.25,.22],[2,72,.25,.25],[3,76,.25,.22]], bright=.5),
+  'mystery': dict(bar=3.0, chords=[[40,47,52,58],[41,48,53,59],[40,47,52,55]], pulse=4, motif=[[0,64,.5,.22],[1.5,70,.5,.2],[3,67,1,.2]], bright=.3),
+  'outro':   dict(bar=3.2, chords=[[41,53,57,60],[48,55,60,64],[50,57,62,65],[46,53,58,62]], motif=[[0,72,.5,.28],[1,76,.5,.26],[2,77,1,.26]], bright=.5),
+}
+def build_music_moods(total, moods, fade=.8):
+    buf = np.zeros((int(total * SR) + SR * 4, 2))
+    for m in moods:
+        if m['kind'] == 'silence' or m['kind'] not in MOOD: continue
+        s = dict(MOOD[m['kind']]); s['t0'] = 0; s['t1'] = m['t1'] - m['t0']
+        sec = build_music(s['t1'] + 2, [s])[: int((s['t1'] + 1.6) * SR)]
+        n = len(sec); env = np.ones(n); fi = int(fade * SR); fo = int(1.4 * SR)
+        env[:fi] = np.linspace(0, 1, fi); cut = int(s['t1'] * SR); env[cut:] = np.exp(-np.arange(n - cut) / (.35 * SR))
+        sec *= env[:, None]; i = int(m['t0'] * SR); buf[i:i + n] += sec[: len(buf) - i]
+    return buf
+
+def render_full(spec_path):
+    S = json.load(open(spec_path)); C = json.load(open(S['cues'])); total = C['duration']
+    sp = decode(S['speech']); sp = np.concatenate([sp, np.zeros(max(0, int(total * SR) - len(sp)))])[: int(total * SR)]
+    act = speech_env(sp); speaking = act > 10 ** (-45 / 20); sp_rms = rms_db(sp[speaking])
+    mus = build_music_moods(total, C['moods'])[: len(sp)]
+    m_rms = rms_db(mus[np.abs(mus[:, 0]) > 1e-5, 0]); duck = S.get('duck_db', 6)
+    base = db(sp_rms - S.get('music_below_db', 24) - m_rms + duck)
+    sm = np.convolve(speaking.astype(float), np.ones(int(.25 * SR)) / int(.25 * SR), mode='same')
+    gain = base * db(-duck * np.clip(sm * 1.4, 0, 1))
+    t = np.arange(len(sp)) / SR
+    for a in S.get('automation', []): gain = gain * db(np.interp(t, a['t'], a['db']))
+    mus = mus * gain[:, None]
+    fx = np.zeros_like(mus)
+    for c in C['cues']:
+        try: x = SFX[c['fx']](**c.get('args', {}))
+        except Exception as e: print('cue fail', c, e); continue
+        g = db(sp_rms + 3 + c.get('db', -14) + S.get('fx_offset_db', 0)); n = c.get('n', 1)
+        for i in range(n): add(fx, x * (c.get('decay', 1) ** i), c['t'] + (c.get('every') or 0) * i, g, c.get('pan', 0))
+    bed = mus + fx; mix = np.stack([sp, sp], 1) + bed; peak = float(np.max(np.abs(mix)))
+    if peak > .98: bed *= .98 / peak; mix = np.stack([sp, sp], 1) + bed; print('bed scaled for headroom')
+    out = S['out']
+    subprocess.run(['ffmpeg', '-y', '-v', 'error', '-f', 'f64le', '-ar', str(SR), '-ac', '2', '-i', '-', '-c:a', 'pcm_s24le', out], input=mix.astype(np.float64).tobytes(), check=True)
+    subprocess.run(['ffmpeg', '-y', '-v', 'error', '-f', 'f64le', '-ar', str(SR), '-ac', '2', '-i', '-', '-c:a', 'pcm_s24le', out.replace('.wav', '_bed.wav')], input=bed.astype(np.float64).tobytes(), check=True)
+    print(json.dumps({'speech_rms_db': round(sp_rms, 1), 'music_rms_during_speech_db': round(rms_db(mus[speaking & (np.abs(mus[:, 0]) > 1e-5), 0]), 1), 'fx_peak_db': round(20 * np.log10(np.max(np.abs(fx)) + 1e-9), 1), 'speech_peak_db': round(20 * np.log10(np.max(np.abs(sp))), 1), 'peak': round(peak, 3), 'samples': len(sp)}))
+
 if __name__ == '__main__':
-    render(sys.argv[1])
+    (render_full if 'full' in sys.argv[1] else render)(sys.argv[1])
