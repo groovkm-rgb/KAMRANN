@@ -167,7 +167,7 @@ function pressHallB(c, cam, t, o = {}) {
     ell(c, 760, top - 6, 30, 9); fs(c, '#8a8a90', 3);
     // microphone cluster in front of the spokesman
     const mics = [['#3a3a40', -150, .95, -.25], ['#c23a2a', -95, 1.15, -.12], ['#2a4a8a', -40, 1.25, -.04], ['#e8e4d8', 20, 1.2, .05], ['#3a3a40', 80, 1.1, .14], ['#d8a020', 140, .95, .24], ['#2a2a2e', 190, .85, .3]];
-    for (const [col, x, h, a] of mics) standMic(c, x, top - 4, .9, col, h * .9, a);
+    for (const [col, x, h, a] of mics) standMic(c, x * 1.25, top - 4, .62, col, h * .32, a * .6);
     line(c, [-170, top + 2, 220, top + 2], 8, '#1a1a1c');
     // TV lights' hot spot on the table front
     bloom(c, 0, top - 200, 700, '255,250,235', .25);
