@@ -5,3 +5,5 @@ node_modules/
 films/*/film.html
 films/*/film-169.html
 films/*/video_stumm.mp4
+films/kartell/*.mp4
+films/kartell/stills/

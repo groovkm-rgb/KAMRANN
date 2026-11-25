@@ -1,0 +1,7 @@
+{ "title": "Kartell", "slug": "kartell", "fps": 30,
+  "modules": ["../../.claude/skills/noah-character/noah.js",
+    "../../.claude/skills/noah-character/places/light.js",
+    "../../.claude/skills/noah-character/places/fonts.js",
+    "../../.claude/skills/noah-character/places/overlays.js",
+    "lib/outfits.js", "lib/places.js", "lib/cars.js", "lib/dossier.js", "lib/decor.js", "lib/shots01.js",
+    "lib/people.js", "lib/sets2.js", "lib/inserts.js", "data.js", "scenes.js"] }

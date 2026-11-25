@@ -81,6 +81,87 @@ def fx_vibrate(d):
     t = T(d); gate = (np.sin(t * 6) > -.2).astype(float); x = (np.sin(2 * np.pi * 165 * t) + .5 * np.sign(np.sin(2 * np.pi * 165 * t))) * gate; x = lpf(x, 2000); return norm(x) * env(len(t), .01, .05)
 def fx_snap(d):
     t = T(d); x = np.zeros(len(t)); n = int(.06 * SR); tt = np.arange(n) / SR; x[:n] = (bpf(noise(n), 1500, 9000) * 1.5 + np.sin(2 * np.pi * 2400 * tt)) * np.exp(-tt * 90); return norm(x)
+
+def _hit(n, lo, hi, dec): return bpf(noise(n), lo, hi) * np.exp(-np.arange(n) / SR * dec)
+def fx_type(d):  # typewriter keys + occasional carriage bell
+    t = T(d); x = np.zeros(len(t)); k = 0.0
+    while k < d - .05:
+        p = int(k * SR); n = 900; x[p:p + n] += _hit(n, 1500, 6000, 260)[:len(x[p:p + n])] * rng.uniform(.6, 1); k += rng.uniform(.07, .16)
+    return norm(x)
+def fx_thump(d):
+    t = T(d); x = np.zeros(len(t)); n = min(len(t), int(.25 * SR)); tt = np.arange(n) / SR; x[:n] = (np.sin(2 * np.pi * 70 * tt) + .5 * bpf(noise(n), 100, 900)) * np.exp(-tt * 20); return norm(x)
+def fx_beep(d, f=1800, per=1.1):
+    t = T(d); x = np.zeros(len(t))
+    for k in range(int(d / per) + 1):
+        p = int(k * per * SR); n = int(.18 * SR)
+        if p + n < len(x): x[p:p + n] += np.sin(2 * np.pi * f * np.arange(n) / SR) * env(n, .005, .02)
+    return norm(x)
+def fx_forklift(d): return norm(fx_beep(d, 2200, .7) + .4 * fx_hum(d, 90))
+def fx_drip(d): return norm(sum(np.roll(np.pad(_hit(1500, 900, 3000, 80), (0, max(0, len(T(d)) - 1500)))[:len(T(d))], int(k * .9 * SR)) for k in range(int(d / .9) + 1)))
+def fx_crane(d):
+    t = T(d); x = .5 * lpf(noise(len(t)), 200) + .3 * np.sin(2 * np.pi * 55 * t)
+    for k in range(3):
+        p = int(rng.uniform(0, max(1, len(t) - 20000))); n = 20000; tt = np.arange(n) / SR; x[p:p + n] += (np.sin(2 * np.pi * 310 * tt) + np.sin(2 * np.pi * 457 * tt)) * np.exp(-tt * 6) * .6
+    return norm(x) * env(len(t), .2, .3)
+def fx_clubbass(d):
+    t = T(d); x = np.zeros(len(t))
+    for k in range(int(d * 2.03)):
+        p = int(k / 2.03 * SR); n = int(.25 * SR); tt = np.arange(n) / SR
+        if p + n < len(x): x[p:p + n] += np.sin(2 * np.pi * (55 + 60 * np.exp(-tt * 30)) * tt) * np.exp(-tt * 9)
+    return norm(lpf(x, 160) + .1 * lpf(noise(len(t)), 400)) * env(len(t), .1, .2)
+def fx_crowd(d):
+    t = T(d); x = bpf(noise(len(t)), 250, 1800) * (.7 + .3 * np.sin(2 * np.pi * .7 * t) * np.sin(2 * np.pi * 2.3 * t)); return norm(x) * env(len(t), .2, .3)
+def fx_sewing(d):
+    t = T(d); x = np.zeros(len(t)); rate = 18
+    for k in range(int(d * rate)):
+        p = int(k / rate * SR); n = 500
+        if p + n < len(x): x[p:p + n] += _hit(n, 800, 5000, 300)
+    return norm(x + .3 * np.sin(2 * np.pi * 100 * t) * (np.sin(2 * np.pi * .5 * t) > 0)) * env(len(t), .05, .1)
+def fx_glass(d):
+    t = T(d); x = np.zeros(len(t)); x[:int(.05 * SR)] += _hit(int(.05 * SR), 2000, 12000, 40) * 2
+    for k in range(40):
+        p = int(rng.uniform(0, min(len(t), int(.9 * SR)) - 2000)); n = 1500; tt = np.arange(n) / SR; x[p:p + n] += np.sin(2 * np.pi * rng.uniform(3000, 7000) * tt) * np.exp(-tt * 90) * rng.uniform(.2, .6)
+    return norm(x)
+def fx_slam(d):
+    t = T(d); x = np.zeros(len(t)); n = min(len(t), int(.6 * SR)); tt = np.arange(n) / SR; x[:n] = (np.sin(2 * np.pi * 60 * tt) * 1.2 + bpf(noise(n), 80, 2000)) * np.exp(-tt * 9); return norm(x)
+def fx_thud(d): return fx_thump(d)
+def fx_siren(d):
+    t = T(d); f = 650 + 250 * np.sin(2 * np.pi * .4 * t); x = np.sin(2 * np.pi * np.cumsum(f) / SR); return norm(lpf(x, 1500)) * env(len(t), .5, .5)
+def fx_boots(d):
+    t = T(d); x = np.zeros(len(t))
+    for k in range(int(d * 5)):
+        p = int((k / 5 + rng.uniform(0, .05)) * SR); n = 3000
+        if p + n < len(x): x[p:p + n] += _hit(n, 80, 1500, 40) + .4 * _hit(n, 2000, 6000, 120)
+    return norm(x)
+def fx_break(d):
+    t = T(d); x = np.zeros(len(t))
+    for k, a in ((0, 1), (.45, 1.3)):
+        p = int(k * SR); n = int(.5 * SR); tt = np.arange(n) / SR
+        if p + n < len(x): x[p:p + n] += (np.sin(2 * np.pi * 50 * tt) + bpf(noise(n), 60, 5000)) * np.exp(-tt * 10) * a
+    return norm(x)
+def fx_cuff(d):
+    t = T(d); x = np.zeros(len(t))
+    for k in range(6):
+        p = int((.05 + k * .035) * SR); n = 900; tt = np.arange(n) / SR
+        if p + n < len(x): x[p:p + n] += (np.sin(2 * np.pi * 4200 * tt) + _hit(n, 3000, 9000, 200)) * np.exp(-tt * 160)
+    return norm(x)
+def fx_wind(d):
+    t = T(d); x = lpf(noise(len(t)), 500) * (.6 + .4 * np.sin(2 * np.pi * .13 * t)); return norm(x) * env(len(t), .5, .5)
+def fx_radio(d):
+    t = T(d); x = bpf(noise(len(t)), 800, 3500) * (np.sin(2 * np.pi * 1.3 * t) > .3); return norm(x) * env(len(t), .05, .1)
+def fx_piano(d, notes=(57, 60, 64, 62, 57, 55, 57), step=1.6):
+    t = T(d); x = np.zeros(len(t))
+    for k in range(int(d / step) + 1):
+        f = 440 * 2 ** ((notes[k % len(notes)] - 69) / 12); p = int(k * step * SR); n = min(len(t) - p, int(3.5 * SR))
+        if n <= 0: break
+        tt = np.arange(n) / SR; x[p:p + n] += (np.sin(2 * np.pi * f * tt) + .4 * np.sin(4 * np.pi * f * tt) + .15 * np.sin(6 * np.pi * f * tt)) * np.exp(-tt * 1.4) * (1 - np.exp(-tt * 200))
+    return norm(x)
+def fx_note(d): return fx_piano(d, notes=(57,), step=99)
+def fx_lighter(d):
+    t = T(d); x = np.zeros(len(t)); n = int(.04 * SR); x[:n] = _hit(n, 2000, 8000, 60); m = min(len(t) - n, int(.8 * SR)); x[n:n + m] += .3 * bpf(noise(m), 300, 2500) * np.exp(-np.arange(m) / SR * 3); return norm(x)
+def fx_tape_rip(d):
+    t = T(d); x = bpf(noise(len(t)), 1500, 7000) * (np.abs(np.sin(2 * np.pi * 30 * t)) > .3) * np.sin(np.pi * t / d); return norm(x)
+
 FX = {k[3:]: v for k, v in globals().items() if k.startswith('fx_')}
 # ---------- music: dark drone + slow bass pulses (no beat) ----------
 def music(d):
@@ -103,7 +184,7 @@ if __name__ == '__main__':
     fxbus = np.zeros(N)
     for cu in json.load(open(cues_json)):
         if cu['fx'] == 'music': continue
-        x = FX[cu['fx']](cu['d']); p = int(cu['t'] * SR); x = x[:max(0, N - p)]
+        x = FX['counter'](cu['d'], cu['r'], cu['r'] * 1.3) if cu['fx'] == 'counter' and 'r' in cu else FX[cu['fx']](cu['d']); p = int(cu['t'] * SR); x = x[:max(0, N - p)]
         fxbus[p:p + len(x)] += x * vr * 10 ** (cu.get('g', -6) / 20) / max(rms(x), 1e-6) * .35
     fxbus *= 1 - .684 * np.clip(duck, 0, 1)  # -10 dB under speech
     mus = np.zeros(N)

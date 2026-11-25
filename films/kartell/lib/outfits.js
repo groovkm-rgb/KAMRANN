@@ -173,7 +173,7 @@ function drawNoahK(c, p = {}) {
   const outfit = p.outfit || 'boss', o = OUTFIT[outfit], k = p.k ?? .25, e = Object.assign({}, p.expr || {});
   const arms = Object.assign({}, NOAH.ARMS, p.arms || {});
   c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k);
-  kLegs(c, o, outfit);
+  if (!p._noLegs) kLegs(c, o, outfit);
   c.save(); c.translate(0, p.bob || 0);
   // neck
   c.beginPath(); c.rect(-46, -1000, 92, 62); c.fillStyle = NOAH.skin; c.fill(); nLine(c, [-46, -1000, -46, -948], 10, NOAH.out); nLine(c, [46, -1000, 46, -948], 10, NOAH.out);
