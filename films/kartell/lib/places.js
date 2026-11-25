@@ -35,6 +35,22 @@ function oliveTree(c, x, y, h, seed = 0, ink = 2) {
   for (let i = 0; i < 40; i++) { const bx = x + (rnd(seed + i + 200) - .5) * h * .8, by = y - h * .72 + (rnd(seed + i + 240) - .5) * h * .4; line(c, [bx, by, bx + 10, by - 4], 3, 'rgba(230,240,220,.6)'); }
 }
 function cypress(c, x, y, h, col = '#3d5a3a') { c.beginPath(); c.moveTo(x, y - h); c.quadraticCurveTo(x + h * .13, y - h * .5, x + h * .07, y); c.lineTo(x - h * .07, y); c.quadraticCurveTo(x - h * .13, y - h * .5, x, y - h); fs(c, col, 1.5, 'rgba(20,30,20,.4)'); c.fillStyle = 'rgba(0,0,0,.15)'; c.beginPath(); c.moveTo(x, y - h); c.quadraticCurveTo(x + h * .13, y - h * .5, x + h * .07, y); c.lineTo(x, y); c.fill(); }
+function umbrellaPine(c, x, y, h, seed = 0) {
+  line(c, [x, y, x + h * .04, y - h * .6, x - h * .05, y - h * .75], h * .04, '#6b5444'); line(c, [x + h * .03, y - h * .55, x + h * .22, y - h * .74], h * .025, '#6b5444');
+  for (let i = 0; i < 9; i++) { const bx = x + (i - 4) * h * .09 + rnd(seed + i) * 20, by = y - h * .8 - Math.sin(i / 8 * Math.PI) * h * .1; c.beginPath(); c.ellipse(bx, by, h * .13, h * .07, 0, 0, Math.PI * 2); c.fillStyle = i % 2 ? '#476442' : '#56744d'; c.fill(); }
+  c.fillStyle = 'rgba(255,255,220,.12)'; c.beginPath(); c.ellipse(x - h * .1, y - h * .9, h * .25, h * .04, 0, 0, Math.PI * 2); c.fill();
+}
+function palmTree(c, x, y, h, seed = 0) {
+  const tx = x + h * .08, ty = y - h; c.beginPath(); c.moveTo(x - h * .03, y); c.quadraticCurveTo(x + h * .02, y - h * .5, tx - h * .015, ty); c.lineTo(tx + h * .015, ty); c.quadraticCurveTo(x + h * .06, y - h * .5, x + h * .03, y); c.closePath(); fs(c, '#8a7458', 1.5, 'rgba(40,30,20,.5)');
+  for (let k = 0; k < 14; k++) line(c, [x - h * .02 + k * h * .006, y - k * h * .07, x + h * .035 + k * h * .006, y - k * h * .07 - 6], 3, 'rgba(60,45,30,.5)');
+  for (let i = 0; i < 9; i++) { const a = -Math.PI + i / 8 * Math.PI + Math.sin(t0p(seed) + i) * .02, L = h * (.32 + rnd(seed + i) * .1), ex = tx + Math.cos(a) * L, ey = ty + Math.sin(a) * L * .55 + L * .25;
+    c.beginPath(); c.moveTo(tx, ty); c.quadraticCurveTo((tx + ex) / 2, ty - L * .2, ex, ey); c.lineWidth = 4; c.strokeStyle = '#4c6a3c'; c.stroke();
+    for (let k = 1; k < 9; k++) { const q = k / 9, px = tx + (ex - tx) * q, py = ty + (ey - ty) * q - Math.sin(q * Math.PI) * L * .1; line(c, [px, py, px + Math.cos(a + 1.4) * 40, py + 34], 5, i % 2 ? '#5d8048' : '#6f9254'); line(c, [px, py, px + Math.cos(a - 1.4) * 40, py + 34], 5, '#557a42'); } }
+}
+const t0p = s => (s % 7) * .3;
+function lavender(c, x, y, w, seed = 0) { for (let i = 0; i < w / 9; i++) { const bx = x + i * 9 + rnd(seed + i) * 6, h = 50 + rnd(seed + i + 7) * 40; line(c, [bx, y, bx + (rnd(i + seed) - .5) * 14, y - h], 2.5, '#7d9470'); c.fillStyle = i % 3 ? '#8a6fc0' : '#9d84d0'; c.beginPath(); c.ellipse(bx + (rnd(i + seed) - .5) * 14, y - h - 8, 4, 12, 0, 0, Math.PI * 2); c.fill(); } }
+function boxBall(c, x, y, r) { c.beginPath(); c.arc(x, y - r, r, 0, Math.PI * 2); fs(c, '#4f7a3e', 2, 'rgba(30,50,20,.6)'); c.fillStyle = 'rgba(255,255,220,.18)'; c.beginPath(); c.arc(x - r * .3, y - r * 1.3, r * .5, 0, Math.PI * 2); c.fill(); for (let i = 0; i < 12; i++) { c.fillStyle = 'rgba(30,60,25,.35)'; c.beginPath(); c.arc(x + (rnd(i + x) - .5) * r * 1.5, y - r + (rnd(i + x + 3) - .5) * r * 1.4, 4, 0, Math.PI * 2); c.fill(); } }
+function agave(c, x, y, s = 1) { for (let i = 0; i < 9; i++) { const a = -Math.PI / 2 + (i - 4) * .3; c.beginPath(); c.moveTo(x - 10 * s, y); c.quadraticCurveTo(x + Math.cos(a) * 60 * s, y + Math.sin(a) * 60 * s, x + Math.cos(a) * 110 * s, y + Math.sin(a) * 100 * s); c.quadraticCurveTo(x + Math.cos(a) * 50 * s + 14, y + Math.sin(a) * 50 * s, x + 10 * s, y); fs(c, i % 2 ? '#7fa6a0' : '#94b8b0', 1.5, 'rgba(40,70,60,.6)'); } }
 function bougainvillea(c, x, y, w, h, seed) { // dense mound of leaves on the coping with magenta bracts trailing down the wall
   for (let i = 0; i < 26; i++) { const bx = x + rnd(seed + i + 7) * w, by = y + rnd(seed + i + 70) * 60; c.beginPath(); c.ellipse(bx, by, 60, 38, 0, 0, Math.PI * 2); fs(c, i % 2 ? '#4f7a3e' : '#5f8a48', 1.5, 'rgba(30,50,20,.5)'); }
   for (let i = 0; i < 260; i++) { const bx = x + rnd(seed + i) * w, by = y - 20 + Math.pow(rnd(seed + i + 50), 2.2) * h * (1 - Math.abs(bx - x - w / 2) / w); c.beginPath(); c.ellipse(bx, by, 7 + rnd(i + seed) * 6, 6, rnd(i) * 3, 0, Math.PI * 2); c.fillStyle = ['#c8287a', '#e04a94', '#a81f66', '#d63a88'][i % 4]; c.fill(); } }
@@ -45,14 +61,35 @@ function villaSet(c, cam, t, o = {}) {
   c.setTransform(1, 0, 0, 1, 0, 0); let g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#3f8fd6'); g.addColorStop(.75, '#bfe0f2'); c.fillStyle = g; c.fillRect(0, 0, W, H);
   // far: sun glare + thin clouds
   layer(c, cam, .03, c => { const b = B(.03); bloom(c, 1500, b - 2300, 1100, '255,250,225', .55); for (let i = 0; i < 5; i++) { const x = -2600 + i * 1250 + rnd(i + 5) * 300, y = b - 1700 + rnd(i + 9) * 300; c.fillStyle = 'rgba(255,255,255,.55)'; for (const [dx, dy, r] of [[0, 0, 70], [90, -20, 95], [200, 5, 60], [-80, 10, 50]]) { c.beginPath(); c.ellipse(x + dx, y + dy, r * 1.8, r * .6, 0, 0, Math.PI * 2); c.fill(); } } });
-  // far hills with cypress dots and a village
-  layer(c, cam, .1, c => { const b = B(.1); c.fillStyle = '#9db7c4'; c.beginPath(); c.moveTo(-5000, b); for (let x = -5000; x <= 5000; x += 200) c.lineTo(x, b - 260 - Math.sin(x * .0011) * 160 - Math.sin(x * .0037 + 1) * 60); c.lineTo(5000, b); c.fill();
-    for (let i = 0; i < 40; i++) { const x = -4000 + i * 200 + rnd(i) * 90; c.fillStyle = '#86a2ae'; c.beginPath(); c.ellipse(x, b - 120 - rnd(i + 3) * 80, 9, 34, 0, 0, Math.PI * 2); c.fill(); }
-    for (let i = 0; i < 14; i++) { const x = 600 + i * 60 + rnd(i + 30) * 30, y = b - 200 + rnd(i + 40) * 40; c.fillStyle = '#d6dadf'; c.fillRect(x, y, 44, 30); c.fillStyle = '#c49a86'; c.beginPath(); c.moveTo(x - 4, y); c.lineTo(x + 22, y - 16); c.lineTo(x + 48, y); c.fill(); } });
-  haze(c, '215,232,242', .28);
-  layer(c, cam, .28, c => { const b = B(.28); c.fillStyle = '#8aa486'; c.beginPath(); c.moveTo(-5000, b); for (let x = -5000; x <= 5000; x += 160) c.lineTo(x, b - 120 - Math.sin(x * .0016 + 2) * 70); c.lineTo(5000, b); c.fill();
-    for (let i = 0; i < 70; i++) { const x = -4200 + i * 120 + rnd(i + 70) * 60, y = b - 40 - rnd(i + 90) * 110; c.fillStyle = i % 7 === 0 ? '#4a6a48' : '#9fb093'; c.beginPath(); c.ellipse(x, y, 34, 22, 0, 0, Math.PI * 2); c.fill(); if (i % 7 === 0) { c.beginPath(); c.ellipse(x, y - 50, 10, 60, 0, 0, Math.PI * 2); c.fill(); } } });
-  haze(c, '225,238,245', .16);
+  // mountains, sea band with boats, coastal hill town, olive terraces, neighbour villa, umbrella pines
+  layer(c, cam, .05, c => { const b = B(.05); c.fillStyle = '#a9bfd0'; c.beginPath(); c.moveTo(-6000, b - 300); for (let x = -6000; x <= 6000; x += 150) c.lineTo(x, b - 520 - Math.abs(Math.sin(x * .0009)) * 320 - Math.sin(x * .0041) * 60); c.lineTo(6000, b - 300); c.fill();
+    const sg = c.createLinearGradient(0, b - 330, 0, b); sg.addColorStop(0, '#5f9cc4'); sg.addColorStop(1, '#7fb6d4'); c.fillStyle = sg; c.fillRect(-6000, b - 330, 12000, 340);
+    for (let i = 0; i < 60; i++) { const x = -4000 + rnd(i + 60) * 8000, y = b - 300 + rnd(i + 61) * 280, a = .3 + .7 * Math.max(0, Math.sin(t * 3 + i)); c.fillStyle = `rgba(255,255,255,${a * .7})`; c.fillRect(x, y, 26 + rnd(i) * 30, 3); }
+    for (const [bx, by, sc] of [[-1700, b - 240, 1], [900, b - 180, 1.3], [2600, b - 270, .8]]) { c.fillStyle = '#f4f4f0'; c.beginPath(); c.moveTo(bx - 40 * sc, by); c.lineTo(bx + 40 * sc, by); c.lineTo(bx + 30 * sc, by + 12 * sc); c.lineTo(bx - 30 * sc, by + 12 * sc); c.fill(); c.beginPath(); c.moveTo(bx, by - 70 * sc); c.lineTo(bx, by - 4); c.lineTo(bx + 34 * sc, by - 6); c.fill(); }
+    c.fillStyle = '#e8eaea'; c.fillRect(-3200, b - 205, 260, 26); c.fillRect(-3160, b - 225, 120, 22); // ferry far away
+  });
+  haze(c, '215,232,242', .22);
+  layer(c, cam, .14, c => { const b = B(.14);
+    c.fillStyle = '#a3b59a'; c.beginPath(); c.moveTo(-6000, b); for (let x = -6000; x <= 6000; x += 140) c.lineTo(x, b - 200 - Math.max(0, Math.sin(x * .0012 - .6)) * 300 - Math.sin(x * .005) * 30); c.lineTo(6000, b); c.fill();
+    for (let i = 0; i < 90; i++) { const x = -3200 + rnd(i + 3) * 1700 + 3000 * (i % 2), base = b - 200 - Math.max(0, Math.sin(x * .0012 - .6)) * 300; const y = base + 30 + rnd(i + 9) * 160; c.fillStyle = ['#f2ede4', '#ece2d2', '#f6f2ea', '#e3d6c2'][i % 4]; c.fillRect(x, y - 34, 50 + rnd(i) * 30, 34); c.fillStyle = i % 3 ? '#c0705a' : '#b5634e'; c.beginPath(); c.moveTo(x - 5, y - 34); c.lineTo(x + 30, y - 52); c.lineTo(x + 60 + rnd(i) * 30, y - 34); c.fill(); c.fillStyle = 'rgba(60,70,90,.45)'; c.fillRect(x + 10, y - 24, 8, 10); c.fillRect(x + 28, y - 24, 8, 10); }
+    const tx = 3150, ty = b - 330; c.fillStyle = '#ede5d6'; c.fillRect(tx, ty - 170, 46, 170); c.fillStyle = '#b5634e'; c.beginPath(); c.moveTo(tx - 8, ty - 170); c.lineTo(tx + 23, ty - 220); c.lineTo(tx + 54, ty - 170); c.fill(); c.fillStyle = 'rgba(60,70,90,.5)'; c.fillRect(tx + 16, ty - 150, 14, 24); // bell tower
+    for (let i = 0; i < 40; i++) { const x = -5000 + i * 260 + rnd(i + 40) * 80; c.fillStyle = '#7d9474'; c.beginPath(); c.ellipse(x, b - 90 - rnd(i + 41) * 110, 10, 40, 0, 0, Math.PI * 2); c.fill(); }
+  });
+  haze(c, '220,236,244', .18);
+  layer(c, cam, .3, c => { const b = B(.3);
+    c.fillStyle = '#93a985'; c.beginPath(); c.moveTo(-6000, b); for (let x = -6000; x <= 6000; x += 160) c.lineTo(x, b - 170 - Math.sin(x * .0016 + 2) * 80); c.lineTo(6000, b); c.fill();
+    for (let r = 0; r < 4; r++) { c.strokeStyle = 'rgba(150,135,110,.55)'; c.lineWidth = 5; c.beginPath(); for (let x = -6000; x <= 6000; x += 160) { const y = b - 30 - r * 42 - Math.sin(x * .0016 + 2) * 80 * (r / 4); x === -6000 ? c.moveTo(x, y) : c.lineTo(x, y); } c.stroke(); } // stone terraces
+    for (let i = 0; i < 120; i++) { const r = i % 4, x = -5000 + Math.floor(i / 4) * 330 + r * 80 + rnd(i) * 40, y = b - 40 - r * 42 - Math.sin(x * .0016 + 2) * 80 * (r / 4); c.fillStyle = ['#8fa286', '#a6b79c', '#7f9478'][i % 3]; c.beginPath(); c.ellipse(x, y - 14, 30, 20, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#6a5a48'; c.fillRect(x - 2, y - 4, 4, 8); }
+    // neighbour villa with terracotta roof + its own camera mast, behind hedges
+    const nx = -3300, ny = b - 210; c.beginPath(); c.rect(nx, ny - 320, 900, 320); fs(c, '#efe6d6', 2); c.fillStyle = '#b8644e'; c.beginPath(); c.moveTo(nx - 40, ny - 320); c.lineTo(nx + 450, ny - 450); c.lineTo(nx + 940, ny - 320); c.closePath(); c.fill();
+    for (let i = 0; i < 5; i++) { c.fillStyle = '#5a6a74'; c.fillRect(nx + 60 + i * 170, ny - 250, 70, 100); c.fillStyle = '#4f7a55'; c.fillRect(nx + 54 + i * 170, ny - 250, 10, 100); c.fillRect(nx + 126 + i * 170, ny - 250, 10, 100); }
+    c.fillStyle = '#5d7d52'; for (let i = 0; i < 14; i++) { c.beginPath(); c.ellipse(nx - 200 + i * 90, ny + 10, 70, 50, 0, 0, Math.PI * 2); c.fill(); }
+    for (const [px, h] of [[-1200, 520], [1700, 600], [3400, 480]]) umbrellaPine(c, px, b - 100, h, px);
+  });
+  haze(c, '225,238,245', .12);
+  // closer row: palms + umbrella pines + a street lamp beyond the wall
+  layer(c, cam, .45, c => { const b = B(.45); for (const [px, h] of [[-2900, 900], [-400, 1000], [2500, 940], [4200, 880]]) palmTree(c, px, b - 200, h, px); for (const px of [-1700, 1200, 3300]) umbrellaPine(c, px, b - 160, 700, px + 3); });
+  if (o.view) { villaViewNear(c, cam, t, o, B, HZ); return { base: '#a8764a' }; }
   // boundary wall with gate, pillar camera, bougainvillea; olive trees + cypress behind it
   layer(c, cam, .6, c => { const b = B(.6); const top = b - 2.6 * KM;
     for (let i = 0; i < 6; i++) cypress(c, -2600 + i * 1150 + rnd(i + 3) * 200, top + 60, 1100 + rnd(i) * 300, '#456447');
@@ -72,6 +109,17 @@ function villaSet(c, cam, t, o = {}) {
     kRect(c, gx - 70, top + 260, 56, 80, '#2a2c30', 2); circle(c, gx - 42, top + 290, 10); c.fillStyle = '#8fa0b0'; c.fill(); // intercom
     bougainvillea(c, -800, top - 40, 700, 420, 3); bougainvillea(c, -2250, top - 50, 520, 480, 7); bougainvillea(c, -3600, top - 50, 900, 320, 9);
     kRect(c, gx - 60, top + 80, 40, 60, '#2a2c30', 2); bloom(c, gx - 40, top + 110, 60, '255,240,200', .25); // wall lamp
+    // stone cladding on the gate pillars
+    for (const px of [gx - 80, gx + gw]) { c.save(); c.beginPath(); c.rect(px, top - 70, 80, b - top + 110); c.clip(); for (let r = 0; r < 20; r++) for (let k = 0; k < 2; k++) { c.beginPath(); c.rect(px + k * 40 - (r % 2) * 20, top - 70 + r * 34, 40, 34); fs(c, ['#d8ccb6', '#cfc1a8', '#e2d7c2'][(r + k) % 3], 1.5, 'rgba(120,100,80,.5)'); } c.restore(); }
+    // sign + mailbox + gate motor
+    kRect(c, gx - 400, top + 140, 230, 120, '#f4f1ea', 2.5); c.save(); c.font = '800 26px Inter'; c.fillStyle = '#c8202a'; c.textAlign = 'center'; c.fillText('PRIVAT', gx - 285, top + 180); c.font = '700 22px Inter'; c.fillStyle = '#26282b'; c.fillText('VIDEOÜBERWACHT', gx - 285, top + 215); c.restore(); domeCam(c, gx - 285, top + 228, t);
+    kRect(c, gx - 260, top + 330, 120, 150, '#3a3c40', 2.5); kRect(c, gx - 245, top + 360, 90, 10, '#1d1e20', 1);
+    kRect(c, gx + 40, b - 120, 130, 120, '#5a5d62', 2.5); circle(c, gx + 105, b - 60, 12); c.fillStyle = Math.sin(t * 2) > 0 ? '#ffb030' : '#6a4a20'; c.fill();
+    // gravel strip and planting along the wall foot
+    c.fillStyle = '#d8d0c0'; c.fillRect(-4200, b - 10, 8400, 50); kSpecks(c, -4200, b - 8, 8400, 46, 77, 500, 'rgba(120,110,95,.4)', 4);
+    for (const [x0, w] of [[-4100, 900], [-1050, 600], [-650, 3400]]) { lavender(c, x0, b + 10, w, x0); }
+    for (const x of [-3000, -2700, -700, -350, 1400, 2200]) boxBall(c, x, b + 20, 70);
+    agave(c, -2450, b + 20, 1.1); agave(c, 900, b + 20, 1);
   });
   // the villa (white cubic, cantilevered upper floor)
   layer(c, cam, .85, c => { const b = B(.85) + 4; villaHouse(c, b, t, o); });
@@ -87,8 +135,40 @@ function villaSet(c, cam, t, o = {}) {
     // pool coping (travertine) + water
     kRect(c, -6000, 60, 12000, 40, '#e9e1cf', 2.5); for (let k = -30; k < 30; k++) line(c, [k * 240, 60, k * 240, 100], 2, 'rgba(120,100,70,.4)');
     poolWater(c, cam, t, o);
+    // mosaic band under the coping, pool ladder, underwater lights, floating leaves
+    c.save(); c.beginPath(); c.rect(-6000, 100, 12000, 36); c.clip(); for (let k = -300; k < 300; k++) { c.fillStyle = ['#2e7f9a', '#3a94ae', '#246b84'][((k % 3) + 3) % 3]; c.fillRect(k * 20, 102, 18, 16); c.fillRect(k * 20 + 10, 120, 18, 16); } c.restore();
+    for (const lx of [-2200, -200, 1800]) { bloom(c, lx, 330, 170, '210,255,250', .4); ell(c, lx, 300, 26, 12); fs(c, '#e8fbff', 2); }
+    const ladX = o.ladderX ?? 300; for (const d of [0, 110]) { c.beginPath(); c.moveTo(ladX + d, 380); c.lineTo(ladX + d, 40); c.quadraticCurveTo(ladX + d, -60, ladX + d - 90, -60); c.lineTo(ladX + d - 90, -10); c.lineWidth = 16; c.strokeStyle = OUT; c.stroke(); c.lineWidth = 9; c.strokeStyle = '#d9dde2'; c.stroke(); }
+    for (let k = 0; k < 3; k++) kRect(c, ladX - 6, 180 + k * 70, 122, 14, '#c8ccd2', 2);
+    for (let i = 0; i < 6; i++) { const lx = -2500 + rnd(i + 900) * 5000 + Math.sin(t * .3 + i) * 30, ly = 170 + rnd(i + 901) * 400; c.save(); c.translate(lx, ly); c.rotate(rnd(i) * 3); c.beginPath(); c.ellipse(0, 0, 26, 8, 0, 0, Math.PI * 2); fs(c, '#7a8c5a', 1.5); c.restore(); }
   });
   return { base: '#2aa0b8' };
+}
+// pool side facing the valley: infinity edge, glass balustrade posts, camera pole, deck with props
+function villaViewNear(c, cam, t, o, B, HZ) {
+  layer(c, cam, .72, c => { const b = B(.72);
+    // garden slope below the terrace: hedges, olive tops, lights
+    c.fillStyle = '#7f9a6c'; c.fillRect(-9000, b - 90, 18000, 200);
+    for (let i = 0; i < 40; i++) { const x = -5000 + i * 260 + rnd(i + 3) * 60; c.beginPath(); c.ellipse(x, b - 90, 130, 70, 0, Math.PI, 0); fs(c, i % 2 ? '#5f7f4e' : '#6e8d5a', 1.5, 'rgba(30,50,20,.4)'); }
+    for (const x of [-2600, -400, 1900, 3800]) oliveTree(c, x, b - 40, 520, x, 1.5);
+  });
+  layer(c, cam, .9, c => { const b = B(.9);
+    // infinity pool: water strip whose far edge meets the view
+    const top = b - 120, g = c.createLinearGradient(0, top, 0, b); g.addColorStop(0, '#8fd0e0'); g.addColorStop(1, '#2f9fb8'); c.fillStyle = g; c.fillRect(-9000, top, 18000, 120);
+    c.save(); c.globalCompositeOperation = 'screen'; for (let j = 0; j < 5; j++) { c.beginPath(); for (let x = -4000; x <= 4000; x += 60) { const y = top + 18 + j * 22 + Math.sin(x * .007 + t * 1.4 + j) * 5; x === -4000 ? c.moveTo(x, y) : c.lineTo(x, y); } c.lineWidth = 2.5; c.strokeStyle = 'rgba(230,255,255,.35)'; c.stroke(); } c.restore();
+    for (let i = 0; i < 40; i++) { const x = cam.x * .9 - 2000 + rnd(i + 70) * 4000, a = Math.max(0, Math.sin(t * 4 + i * 1.3)); if (a > .6) { c.fillStyle = `rgba(255,255,240,${a})`; star(c, x, top + 10 + rnd(i) * 100, 8, 4, .25); c.fill(); } }
+    line(c, [-9000, top, 9000, top], 4, 'rgba(240,250,255,.9)'); c.fillStyle = '#e9e1cf'; c.fillRect(-9000, b, 18000, 40);
+    // stainless camera pole with two cameras
+    const px = o.poleX ?? -900; line(c, [px, b + 10, px, b - 640], 22); line(c, [px, b + 10, px, b - 640], 12, '#c8ccd2'); secCam(c, px + 6, b - 600, 1, t, 1.3); secCam(c, px - 6, b - 470, -1, t + 1.3, 1.3);
+    // white planter boxes with lavender at the pool edge
+    for (const x of o.planters || [1300, 2600]) { kRect(c, x - 220, b - 140, 440, 140, '#ece6da', 3); lavender(c, x - 200, b - 138, 400, x); }
+  });
+  layer(c, cam, 1, c => {
+    c.fillStyle = '#a8764a'; c.fillRect(-9000, HZ, 18000, 2000);
+    for (let r = 0; r < 14; r++) { const y = HZ + r * 46; line(c, [-9000, y, 9000, y], 2.5, 'rgba(70,40,20,.45)'); for (let k = -40; k < 40; k++) { const x = k * 300 + (r % 3) * 100; line(c, [x, y, x, y + 46], 2, 'rgba(70,40,20,.3)'); } }
+    c.save(); c.globalAlpha = .18; for (let i = 0; i < 80; i++) { const x = -3000 + rnd(i + 3) * 6000, y = HZ + rnd(i + 7) * 600; line(c, [x, y + 10, x + 120 + rnd(i) * 200, y + 10], 2, '#5a3a1e'); } c.restore();
+    villaProps(c, t, o);
+  });
 }
 function villaHouse(c, b, t, o) {
   const g0 = b - 3.3 * KM, g1 = g0 - 3.2 * KM; // ground floor top, upper floor top
@@ -118,12 +198,27 @@ function villaHouse(c, b, t, o) {
   // soffit (shadow under cantilever)
   c.fillStyle = 'rgba(40,45,80,.35)'; c.fillRect(-1100, g0 + 40, 3200, 180);
   domeCam(c, 300, g0 + 40, t); domeCam(c, 1500, g0 + 40, t + 3);
+  // long concrete planter with grasses + lavender along the glass front
+  kRect(c, gx0 - 30, b - 130, gw + 60, 130, '#cfc8ba', 3); c.fillStyle = 'rgba(0,0,0,.1)'; c.fillRect(gx0 - 30, b - 30, gw + 60, 30);
+  for (let i = 0; i < gw / 18; i++) { const x = gx0 + i * 18, h = 90 + rnd(i + 5) * 70; c.beginPath(); c.moveTo(x, b - 128); c.quadraticCurveTo(x + 10, b - 128 - h * .6, x + 24 * (rnd(i) - .3), b - 128 - h); c.lineWidth = 3; c.strokeStyle = i % 3 ? '#9aa86a' : '#b8b07a'; c.stroke(); }
+  lavender(c, gx0 + 40, b - 128, gw * .35, 5); lavender(c, gx0 + gw * .62, b - 128, gw * .33, 9);
+  // travertine cladding on the solid ground-floor wall to the right of the glass
+  c.save(); c.beginPath(); c.rect(gx0 + gw + 20, g0 + 40, 1300 - gx0 - gw, b - g0 - 40); c.clip(); for (let r = 0; r < 16; r++) for (let k = 0; k < 6; k++) { c.beginPath(); c.rect(gx0 + gw + 20 + k * 110 - (r % 2) * 55, g0 + 40 + r * 52, 110, 52); fs(c, ['#e6dccb', '#ddd1bc', '#ebe3d4'][(r + k) % 3], 1.2, 'rgba(150,130,100,.5)'); } c.restore();
+  // outdoor shower on the travertine wall
+  line(c, [1180, b, 1180, g0 + 120, 1110, g0 + 120], 9, '#b8bcc2'); ell(c, 1100, g0 + 132, 34, 10); fs(c, '#c8ccd2', 2);
   // linear wall lights
   for (const x of [-1250, -450, 350, 1150]) { kRect(c, x, g0 + 46, 140, 10, '#cfcac0', 1.5); }
+  // second floor balcony on the right with its own closed curtains + plant pots
+  kRect(c, 1720, g1 + 120, 340, g0 - g1 - 140, '#4d5a62', 3); for (let i = 0; i < 12; i++) { c.fillStyle = i % 2 ? '#d9d4ca' : '#c8c2b6'; c.fillRect(1730 + i * 27, g1 + 130, 28, g0 - g1 - 160); }
+  c.fillStyle = 'rgba(190,225,245,.3)'; c.fillRect(1720, g1 + 120, 340, g0 - g1 - 140);
   // roof parapet + glass balustrade terrace on the roof
   kRect(c, -1120, g1 - 30, 3240, 34, '#ece8de', 3);
   c.fillStyle = 'rgba(200,230,245,.4)'; c.fillRect(-1100, g1 - 260, 3200, 230); line(c, [-1100, g1 - 260, 2100, g1 - 260], 6, '#9aa4aa');
   for (let i = 0; i <= 16; i++) line(c, [-1100 + i * 200, g1 - 260, -1100 + i * 200, g1 - 30], 3, 'rgba(150,170,180,.6)');
+  // roof garden behind the glass: grasses in planters, a folded parasol, an antenna mast
+  for (let i = 0; i < 6; i++) { const px = -950 + i * 520; kRect(c, px, g1 - 120, 260, 90, '#d0c8b8', 2); for (let k = 0; k < 14; k++) { const x = px + 10 + k * 18; line(c, [x, g1 - 118, x + (rnd(k + i) - .5) * 30, g1 - 200 - rnd(k + i * 3) * 60], 3, k % 2 ? '#8ea05c' : '#a8b06c'); } }
+  line(c, [1500, g1 - 30, 1500, g1 - 420], 8, '#9aa0a6'); c.beginPath(); c.moveTo(1440, g1 - 420); c.lineTo(1560, g1 - 420); c.lineTo(1520, g1 - 250); c.lineTo(1480, g1 - 250); c.closePath(); fs(c, '#efe9dc', 2.5);
+  line(c, [1900, g1 - 30, 1900, g1 - 360], 4, '#8a9096'); for (let k = 0; k < 4; k++) line(c, [1860 + k * 6, g1 - 300 + k * 18, 1940 - k * 6, g1 - 300 + k * 18], 3, '#8a9096');
   // corner security camera
   secCam(c, 2100, g0 + 10, 1, t + 1, 1.15); secCam(c, -1700, g0 + 120, -1, t + 2, 1.1);
   // garage wing: three closed sectional doors
@@ -144,6 +239,13 @@ function villaProps(c, t, o) {
   c.beginPath(); c.roundRect(lx - 330, -200, 470, 56, 20); fs(c, '#f4f1ea', 3); c.fillStyle = 'rgba(0,0,0,.08)'; c.fillRect(lx - 320, -160, 450, 14);
   c.save(); c.translate(lx + 150, -150); c.rotate(-.75); kRect(c, 0, -40, 340, 40, '#a06a3c', 3); c.beginPath(); c.roundRect(10, -96, 320, 58, 20); fs(c, '#f4f1ea', 3); c.restore();
   c.beginPath(); c.roundRect(lx - 120, -238, 150, 40, 12); fs(c, '#e7e2d6', 2.5); line(c, [lx - 110, -220, lx + 20, -220], 3, '#8fb0c8');
+  // closed parasol, deck lanterns, lemon tree pot, basket with rolled towels
+  const ps = o.parasolX ?? 1350; kRect(c, ps - 70, -30, 140, 30, '#3a3c40', 2); line(c, [ps, -30, ps, -760], 12); line(c, [ps, -30, ps, -760], 6, '#d8d4cc'); c.beginPath(); c.moveTo(ps, -780); c.quadraticCurveTo(ps - 70, -560, ps - 30, -320); c.lineTo(ps + 30, -320); c.quadraticCurveTo(ps + 70, -560, ps, -780); fs(c, '#efe8da', 3); line(c, [ps - 30, -560, ps + 30, -560], 4, '#c8bfae');
+  for (const lx of o.lanterns || [-1500, 450, 2350]) { kRect(c, lx - 40, -170, 80, 160, '#2a2c30', 3); kRect(c, lx - 28, -150, 56, 110, '#f4e8c8', 2); line(c, [lx - 30, -190, lx, -230, lx + 30, -190], 5); }
+  const lm = o.lemonX ?? -2000; c.beginPath(); c.moveTo(lm - 90, -200); c.lineTo(lm + 90, -200); c.lineTo(lm + 70, -4); c.lineTo(lm - 70, -4); c.closePath(); fs(c, '#b86a48', 3); kRect(c, lm - 100, -215, 200, 20, '#c8785a', 2); line(c, [lm, -210, lm, -420], 10, '#6b5444');
+  for (let i = 0; i < 14; i++) { const a = i / 14 * Math.PI * 2, bx = lm + Math.cos(a) * 110 * rnd(i + 5), by = -520 + Math.sin(a) * 90 * rnd(i + 6); c.beginPath(); c.ellipse(bx, by, 60, 40, 0, 0, Math.PI * 2); fs(c, i % 2 ? '#4f7a3e' : '#5f8a48', 1.5, 'rgba(30,50,20,.6)'); }
+  for (let i = 0; i < 7; i++) { circle(c, lm - 90 + rnd(i + 30) * 180, -560 + rnd(i + 31) * 150, 14); fs(c, '#f2d23a', 2); }
+  const bk = o.basketX ?? 2700; c.beginPath(); c.moveTo(bk - 90, -150); c.lineTo(bk + 90, -150); c.lineTo(bk + 70, -4); c.lineTo(bk - 70, -4); c.closePath(); fs(c, '#c8a46a', 3); for (let k = 0; k < 5; k++) line(c, [bk - 84 + k * 4, -130 + k * 26, bk + 84 - k * 4, -130 + k * 26], 2, 'rgba(90,60,30,.5)'); for (let k = 0; k < 3; k++) { circle(c, bk - 50 + k * 50, -160, 32); fs(c, ['#f4f1ea', '#d9e6ee', '#f4f1ea'][k], 2.5); }
   // outdoor table: half-eaten lunch + tablet with the camera feed
   const tx = o.tableX ?? 1750; kRect(c, tx - 260, -360, 520, 30, '#9c6a40', 3); for (const d of [-220, 200]) kRect(c, tx + d, -330, 22, 330, '#7a5030', 2);
   ell(c, tx - 120, -368, 90, 16); fs(c, '#fbfaf6', 2.5); ell(c, tx - 130, -374, 50, 10); fs(c, '#c8954a', 0); circle(c, tx - 100, -376, 14); fs(c, '#d8483a', 1.5); line(c, [tx - 40, -372, tx + 20, -390], 4, '#b8bcc4'); // plate, fork

@@ -4,16 +4,16 @@ const still = (name, f) => SHOTS.push({ name, dur: 1, f });
 const blankSet = col => (c) => { c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = col; c.fillRect(0, 0, W, H); return { base: col }; };
 const NOAH_CUP = { l: { a: .1, b: -.12 }, r: { a: .16, b: -2.45 } };
 // a1: villa wide, noon
-still('a1 villa wide', (lt, T, t) => { const v = { x: 300, y: -1080, z: .4 };
+still('a1 villa wide', (lt, T, t) => { const v = { x: 300, y: -1180, z: .38 };
   return { set: villaSet, setOpts: {}, cam: v, vignette: .18,
     behind: [c => castShadow(c, -350, 120, { len: .4, alpha: .3 })],
     front: [c => drawNoahK(c, { x: -350, y: 0, k: .25, ink: 1.8, outfit: 'boss', arms: NOAH_CUP, expr: KX.paranoid, holdFront: (c, gl, gr) => kCup(c, gr, 1, t) })],
     screen: [c => villaLight(c, v, t), c => villaFront(c, v, t, { side: -1 })] }; });
-// a2: villa, Noah with coffee, eyes on the gate
-still('a2 villa noah', (lt, T, t) => { const v = { x: -2250, y: -330, z: 1.3 };
-  return { set: villaSet, setOpts: { potX: -3150, loungerX: -700 }, cam: v, vignette: .2,
-    behind: [c => castShadow(c, -2080, 120, { len: .4, alpha: .32 })],
-    front: [c => drawNoahK(c, { x: -2080, y: 0, k: .25, ink: 1.8, outfit: 'boss', arms: NOAH_CUP, expr: KX.paranoid, holdFront: (c, gl, gr) => kCup(c, gr, 1, t + .3) })],
+// a2: infinity pool side facing the valley: Noah with coffee, eyes to the side, camera pole behind him
+still('a2 villa noah', (lt, T, t) => { const v = { x: 150, y: -330, z: 1.3 };
+  return { set: villaSet, setOpts: { view: true, potX: -2400, loungerX: 860, tableX: 2900, lemonX: -560, lanterns: [-720], parasolX: 2350, basketX: -3200, poleX: -300, planters: [700, 2000] }, cam: v, vignette: .2,
+    behind: [c => castShadow(c, 120, 120, { len: .4, alpha: .32 })],
+    front: [c => drawNoahK(c, { x: 120, y: 0, k: .25, ink: 1.8, outfit: 'boss', arms: NOAH_CUP, expr: KX.paranoid, holdFront: (c, gl, gr) => kCup(c, gr, 1, t + .3) })],
     screen: [c => villaLight(c, v, t), c => villaFront(c, v, t, { side: 1 })] }; });
 // b: warehouse, Noah carries a box, tired
 still('b lager', (lt, T, t) => { const v = { x: -120, y: -470, z: 1.0 };
