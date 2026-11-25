@@ -1,5 +1,5 @@
 """Sound for "Die Mauer fiel aus Versehen": procedural SFX + low music under the user's voice-over.
-   python3 mix_audio.py <vo.mp3> <out_dir>     -> out_dir/mix_raw.wav (+ stems)
+   python3 mix_audio.py <vo_processed.wav> <out_dir>   (vo: see render notes; compressed + limited voice)     -> out_dir/mix_raw.wav (+ stems)
    v2: crowds are breathy voices shaped by smoothly moving vowel formants (STFT) + reverb; hits duck ~3 dB, beds ~8 dB
    under the voice; light music ~15 LU under the voice. Final -14 LUFS / -1.5 dBTP with ffmpeg."""
 import sys, subprocess, json, numpy as np
@@ -155,6 +155,7 @@ def reverb(x, rt=.8, wet=.35, pre=.012, seed=0, bright=4000):
     dry = np.stack([x, x], 1) if x.ndim == 1 else x
     return dry * (1 - wet) + out * wet
 def crowd(d, nv=24, f0=(100, 260), excite=.5, seed=1, breath=.55, syll=(.12, .3), rt=.9, wet=.35, roar=.5):
+    breath *= .6; roar *= .3
     """Walla: many breathy voices talking/shouting over each other + a soft noise roar; stereo, reverberant."""
     r = np.random.default_rng(seed); n = int(d * SR); out = np.zeros((n, 2)); m = n // HOP + 4
     for v in range(nv):
@@ -172,7 +173,7 @@ def crowd(d, nv=24, f0=(100, 260), excite=.5, seed=1, breath=.55, syll=(.12, .3)
         out[:, 0] += y * (1 - max(0, pan)) * r.uniform(.5, 1); out[:, 1] += y * (1 + min(0, pan)) * r.uniform(.5, 1)
     out /= (np.sqrt(np.mean(out ** 2)) + 1e-9)
     rr = lp(bp(noise(n), 250, 2200), 2500); rr *= (1 + .4 * lp(noise(n), 1.5) * 30); out += np.stack([rr, np.roll(rr, 900)], 1) / (np.sqrt(np.mean(rr ** 2)) + 1e-9) * roar
-    out = reverb(out, rt, wet, seed=seed)
+    out = reverb(lp(out, 3000, 4), rt, wet, seed=seed, bright=2500)
     fade = np.minimum(1, T(n) / .25) * np.minimum(1, (d - T(n)) / .3)
     return out * fade[:, None] / (np.sqrt(np.mean(out ** 2)) + 1e-9) * .1
 def chant(times, nv=40, seed=5):
@@ -194,9 +195,9 @@ def chant(times, nv=40, seed=5):
 def ambience(d, kind, seed=0):
     n = int(d * SR)
     if kind == 'hall':  # room tone + ventilation + distant camera motors
-        x = lp(noise(n), 500) * .4 + bp(noise(n), 2000, 6000) * .04 + np.sin(2 * np.pi * 120 * T(n)) * .01
+        x = lp(noise(n), 400, 4) * .4
     else:               # outdoor night: wind + far traffic rumble
-        x = lp(noise(n), 300) * .6 * (1 + .5 * lp(noise(n), .5) * 40) + bp(noise(n), 800, 3000) * .03
+        x = lp(noise(n), 300, 4) * .6 * (1 + .5 * lp(noise(n), .5) * 40)
     x = reverb(x, .6, .2, seed=seed); return x * (np.minimum(1, T(n) / .1) * np.minimum(1, (d - T(n)) / .1))[:, None]
 
 # ---------------- v2: SFX, split into hits (short, clear) and beds (crowds, ambience) ----------------
@@ -306,19 +307,24 @@ for t0, ch_, top in warm:
     for s in range(6): add(music, t0 + .95 + s * BEAT / 2, pluck(note_hz(ch_[1 + s % 3]) * 2, .6, .5), .12, (-1) ** s * .4)
 music *= np.clip((DUR - T(N)) / .35, 0, 1)[:, None]
 
-# ---------------- v2: levels + ducking ----------------
-vo = load(vo_path)
-win = int(.03 * SR); e = np.sqrt(np.convolve(vo ** 2, np.ones(win) / win, 'same')); act = (e > .02).astype(float)
-k_a, k_r = 1 - np.exp(-1 / (.02 * SR)), 1 - np.exp(-1 / (.25 * SR)); g = np.zeros(N); s_ = 0.0
+# ---------------- v3: levels + ducking (voice first) ----------------
+vo = load(vo_path)   # already compressed/limited by the caller (ffmpeg), mono
+win = int(.03 * SR); e = np.sqrt(np.convolve(vo ** 2, np.ones(win) / win, 'same')); act = (e > .02 * (np.max(np.abs(vo)) / .35)).astype(float)
+k_a, k_r = 1 - np.exp(-1 / (.02 * SR)), 1 - np.exp(-1 / (.3 * SR)); g = np.zeros(N); s_ = 0.0
 for i in range(0, N, 48):
     tgt = act[i]; s_ += (tgt - s_) * (1 - (1 - (k_a if tgt > s_ else k_r)) ** 48); g[i:i + 48] = s_
 duck = lambda db: (1 - (1 - 10 ** (-db / 20)) * g)[:, None]
+def tame(x, top):
+    # keep everything that is not the voice out of the voice's presence band and free of hiss
+    y = np.stack([lp(x[:, c], top, 4) for c in range(2)], 1)
+    return y - .5 * np.stack([bp(y[:, c], 1200, 4200, 2) for c in range(2)], 1)
+hits, beds, music = tame(hits, 7000), tame(beds, 3200), tame(music, 6000)
 for nm, x in [('vo', vo), ('hits_raw', hits), ('beds_raw', beds), ('mus_raw', music)]: save(f'{out}/stem_{nm}.wav', x)
 L = {nm: lufs(f'{out}/stem_{nm}.wav') for nm in ['vo', 'hits_raw', 'beds_raw', 'mus_raw']}
-hits_f = hits * 10 ** ((L['vo'] - 1 - L['hits_raw']) / 20) * duck(3)
-beds_f = beds * 10 ** ((L['vo'] - 5 - L['beds_raw']) / 20) * duck(8)
-mus_f = music * 10 ** ((L['vo'] - 13 - L['mus_raw']) / 20) * duck(4)
+hits_f = hits * 10 ** ((L['vo'] - 8 - L['hits_raw']) / 20) * duck(6)
+beds_f = beds * 10 ** ((L['vo'] - 14 - L['beds_raw']) / 20) * duck(8)
+mus_f = music * 10 ** ((L['vo'] - 17 - L['mus_raw']) / 20) * duck(5)
 for nm, x in [('hits', hits_f), ('beds', beds_f), ('mus', mus_f)]: save(f'{out}/stem_{nm}.wav', x)
 mix = np.stack([vo, vo], 1) + hits_f + beds_f + mus_f
 save(f'{out}/mix_raw.wav', mix)
-print(json.dumps({**L, **{k: lufs(f'{out}/stem_{k}.wav') for k in ['hits', 'beds', 'mus']}, 'mix': lufs(f'{out}/mix_raw.wav'), 'peak': float(np.max(np.abs(mix)))}))
+print(json.dumps({**L, **{k: lufs(f'{out}/stem_{k}.wav') for k in ['hits', 'beds', 'mus']}, 'mix': lufs(f'{out}/mix_raw.wav'), 'peak_db': float(20 * np.log10(np.max(np.abs(mix))))}))
