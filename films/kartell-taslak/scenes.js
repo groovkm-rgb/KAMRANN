@@ -17,13 +17,13 @@ shot('02 garage', 1.35, (lt, T, t) => { const v = { x: -60 + lt * 60, y: -470, z
 // 3  4.35–6.95  counting machine riffles notes, untouched coffee, tapping fingers
 shot('03 geldzaehler', 2.6, (lt, T, t) => ({ set: blank('#2c2c31'), vignette: .35, screen: [c => moneyCounterShot(c, lt, t)] }));
 // 4  6.95–10.95  bedroom: unused bed, curtains closed, Noah peeks through the gap; pen note
-shot('04 schlafzimmer', 4.0, (lt, T, t) => { const v = { x: 150 - lt * 25, y: -420, z: 1.05 + lt * .02 };
-  return { set: bedroomSet, setOpts: { gapX: 640, bedX: -1500 }, cam: v, vignette: .35,
-    front: [c => drawNoahK(c, { x: 420, y: 0, k: .25, ink: 1.8, outfit: 'boss', expr: { ...KX.paranoid, look: .9, bags: .8 }, arms: { r: { a: .3, b: -.4 } } })],
-    screen: [c => bedroomLight(c, v, t), c => markerText(c, '3 Jahre kein Schlaf', 140, 180, 70, clamp((lt - 1.4) / 1.4), { rot: -.04 }),
-      c => markerLine(c, [140, 205, 680, 195], clamp((lt - 2.8) / .5), { w: 6 })] }; });
+shot('04 schlafzimmer', 4.0, (lt, T, t) => { const v = { x: 60 + lt * 25, y: -420, z: .95 + lt * .025 };
+  return { set: bedroomSet, setOpts: { gapX: 900, bedX: -500 }, cam: v, vignette: .35,
+    front: [c => drawNoahK(c, { x: 560, y: 0, k: .25, ink: 1.8, outfit: 'boss', expr: { ...KX.paranoid, look: .9, bags: .8 } })],
+    screen: [c => bedroomLight(c, v, t), c => markerText(c, '3 Jahre kein Schlaf', 90, 150, 66, clamp((lt - 1.4) / 1.4), { rot: -.04 }),
+      c => markerLine(c, [90, 175, 600, 165], clamp((lt - 2.8) / .5), { w: 6 })] }; });
 // 5  10.95–12.30  eye ECU: CCTV monitor reflected in the pupil
-shot('05 auge', 1.35, (lt, T, t) => ({ set: blank('#f2f1ee'), vignette: 0, screen: [c => eyeShot(c, lt, t)] }));
+shot('05 gesicht', 1.35, (lt, T, t) => ({ set: blank('#1c1f26'), vignette: 0, screen: [c => faceShot(c, lt, t)] }));
 // 6  12.30–13.80  CCTV: a car slows down outside
 shot('06 kamera', 1.5, (lt, T, t) => ({ set: blank('#888'), vignette: 0, screen: [c => cctvShot(c, lt, t)] }));
 // 7  13.80–14.80  hand squeezes the cup
