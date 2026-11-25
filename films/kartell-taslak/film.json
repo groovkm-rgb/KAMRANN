@@ -1,0 +1,11 @@
+{ "title": "Kartell Taslak", "slug": "kartell-taslak", "fps": 30,
+  "modules": ["../../.claude/skills/noah-character/noah.js",
+    "../../.claude/skills/noah-character/places/light.js",
+    "../../.claude/skills/noah-character/places/fonts.js",
+    "../../.claude/skills/noah-character/places/overlays.js",
+    "../kartell/lib/outfits.js",
+    "../kartell/lib/places.js",
+    "../kartell/lib/cars.js",
+    "../kartell/lib/dossier.js",
+    "../kartell/lib/shots01.js",
+    "scenes.js"] }
