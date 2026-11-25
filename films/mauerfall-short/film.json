@@ -1,0 +1,6 @@
+{
+  "title": "Die Mauer fiel aus Versehen",
+  "slug": "mauerfall-short",
+  "fps": 30,
+  "modules": ["lib/noah.js", "lib/light.js", "lib/fonts.js", "parka.js", "cast.js", "marker.js", "press.js", "border.js", "scenes.js"]
+}
