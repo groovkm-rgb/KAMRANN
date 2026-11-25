@@ -89,3 +89,5 @@ function openBook(c, x, y, w, h, t, o = {}) {
   c.beginPath(); c.moveTo(w * .015, -h / 2); c.lineTo(w * .02, h / 2 + 60 * scale); c.lineTo(w * .035, h / 2 + 40 * scale); c.lineTo(w * .05, h / 2 + 64 * scale); c.lineTo(w * .045, -h / 2); c.closePath(); c.fillStyle = '#c9a24a'; c.fill();
   c.restore();
 }
+
+const S3WALK = (t, o) => [{ who: PEOPLE.guest(3), x: -6 + (t % 30) * 1.2, z: -2.5, p: Object.assign({ expr: { mouth: 'smile' } }, walkLegs(t, 7)) }, { who: PEOPLE.guest(14), x: 26 - (t % 30) * 1.1, z: -1.7, p: walkLegs(t + 1, 7) }, { who: PEOPLE.guest(22), x: -14 + (t % 40) * .9, z: -3.0, p: walkLegs(t + 2, 6) }];

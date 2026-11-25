@@ -47,24 +47,21 @@ shot(16.75, 'E Kosten + Titel', (lt, T, t) => {
     screen: [c => salonLight(c, cam, t, { tod: 'night', noMotes: true }), c => screenDim(c, .25 * seg(lt, .3, .8)),
       c => costPanel(c, t, { t0: 16.95, t1: 99, x: 110, y: 110, w: 930, rowH: 72, title: 'KOSTEN PRO MONAT', icon: 'table', color: HUD.accent, rows, times: [17.2, 17.62, 18.04, 18.46, 18.88], tSum: 19.25, tCircle: 19.8 }),
       c => { if (t > 20.42) { screenDim(c, .35 * clamp((t - 20.42) / .2)); titleStamp(c, t, 20.45, ['WAS WÄRE, WENN DU EIN', 'LUXUSRESTAURANT ERÖFFNEST?'], { x: W / 2, y: H / 2 + 10, size: 84 }); } }],
-    shake: t > 20.57 && t < 21 ? 16 * Math.exp(-(t - 20.57) * 9) : 0, vignette: .45 };
+    shake: t > 20.57 && t < 21 ? 16 * Math.exp(-(t - 20.57) * 9) : 0, vignette: .45, fade: seg(t, 21.3, 21.6) * .6 };
 });
 // ---------------- 1. KELLNER (21.2 – 35.6) ----------------
-mood(22.3, 35.6, 'warm');
-cue(22.3, 'whoosh', -16, { d: .5 }); cue(22.5, 'room', -30, { d: 13 }); cue(26.3, 'clink', -16); cue(28.8, 'stamp', -22);
-shot(22.35, '1a Kellner im vollen Laden', (lt, T, t) => {
-  const cam = camPush(lt, T, { x: -300, y: -250, z: 1.12 }, { x: -120, y: -235, z: 1.3 }), nx = lerp(-560, -60, ease(clamp(lt / T))), wl = walkLegs(t, 8);
-  const noah = noahP(t, { x: nx, legs: wl.legs, bob: wl.bob, arms: { r: arm(1.25, -1.75, .2), l: arm(.18, -.15) }, expr: { mouth: 'smile', look: .4 } });
-  const guests = (c, tx, i) => { for (const [dx, s] of [[-90, 1], [90, -1]]) drawPerson(c, P(PEOPLE.guest((Math.abs(Math.round(tx / 37)) * 5 + (dx > 0 ? 3 : 0)) % 41), t, { x: tx + dx, sit: true, seatH: 250, seed: i * 3 + dx, expr: talkMouth(t + i, 0, 999) || {}, arms: { l: arm(.4, -1.1), r: arm(.4, -1.1) } })); };
-  return { set: salon, setOpts: { tod: 'evening', midGuests: guests, row2Guests: (c, tx) => guests(c, tx, tx / 100) }, cam,
-    front: [c => { noahW(c, noah); const [hx, hy] = noahHandWorld(noah, 1); tray(c, hx, hy - 10, 1.05, t); }],
-    screen: [c => salonLight(c, cam, t, { tod: 'evening', noMotes: true }), c => hudBadge(c, t, { t0: 22.6, t1: 25.5, x: 360, y: 120, text: '12 Jahre Kellner', color: HUD.blue })], vignette: .35 };
+mood(21.8, 35.6, 'warm');
+cue(21.55, 'whoosh', -16, { d: .5 }); cue(21.7, 'crowd', -26, { d: 3 }); cue(22.5, 'room', -30, { d: 13 }); cue(26.3, 'clink', -16); cue(28.8, 'stamp', -22);
+shot(21.6, '1a Kellner im vollen Laden', (lt, T, t) => {
+  const cam3 = r3move(lt / T, { x0: -6, x1: -3.5, z0: -14, z1: -12.5, y0: 2.3, y1: 2.0, lx0: 1, lx1: 0 }), nx = lerp(-3.5, -1, lt / T);
+  const noah = r3person(nx, -7.2, c2 => { const p = noahP(t, { x: 0, legs: walkLegs(t, 8).legs, bob: walkLegs(t, 8).bob, arms: { r: arm(1.25, -1.75, .2), l: arm(.18, -.15) }, expr: { mouth: 'smile', look: .4 } }); drawNoahDressed(c2, p); const [hx, hy] = noahHandWorld(p, 1); tray(c2, hx, hy - 10, 1.05, t); });
+  return { set: room3d, setOpts: { cam3, tod: 'evening', tables: 'full', extra: [noah] }, cam: { x: 0, y: 0, z: 1 }, screen: [c => room3dLight(c, cam3, t, { tod: 'evening' }), c => hudBadge(c, t, { t0: 21.8, t1: 24.4, x: 360, y: 120, text: '12 Jahre Kellner', color: HUD.blue })], vignette: .35 };
 });
 shot(at(7), '1b Gastro von hinten', (lt, T, t) => {
   const g = gegen(lt, T, { x0: 120, camDx: 70, z: 3.4, side: 'l', dir: -1, y: -265 });
   const noah = noahP(t, { x: g.x, outfit: 'waiter', expr: { mouth: 'smirk', look: .5 }, arms: RELAX });
   return { set: proKitchen, setOpts: { tod: 'service' }, cam: g.cam, behind: [c => { heatLamp(c, g.x + 40, -430, t, true); heatLamp(c, g.x + 260, -430, t, true); }, c => { personW(c, P(PEOPLE.cook, t, { x: g.x + 200, expr: { mouth: 'flat', look: -.5 }, arms: { l: arm(.5, -1.2), r: arm(.6, -1.3) } }), false); }], front: [c => noahW(c, noah, false)],
-    screen: [c => kitchenLight(c, g.cam, t, { steamy: true })], vignette: .35 };
+    screen: [c => kitchenLight(c, g.cam, t, { steamy: true }), c => hudBadge(c, t, { t0: 21.8, t1: 24.4, x: 360, y: 120, text: '12 Jahre Kellner', color: HUD.blue })], vignette: .35 };
 });
 shot(at(8), '1c Wein empfehlen', (lt, T, t) => {
   const cam = camPush(lt, T, { x: 40, y: -190, z: 2.1 }, { x: 70, y: -200, z: 2.3 }), NX = -150;
@@ -129,9 +126,10 @@ mood(50.7, 60.2, 'curious'); mood(60.2, 82.0, 'light'); mood(82.0, 91.5, 'warm')
 cue(ST[17], 'room', -32, { d: 5 }); cue(ST[21] + .4, 'pop', -16); cue(ST[22] + .2, 'counter', -22, { d: 1 }); cue(ST[24] + .3, 'scribble', -17, { d: 1.6 }); cue(ST[27] + .3, 'whoosh', -18, { d: .5 });
 cue(ST[29] + 1.1, 'scribble', -18, { d: 1.1 }); cue(ST[30] + .2, 'page', -14); cue(ST[31], 'stamp', -10); cue(ST[33] + .2, 'register', -12); cue(ST[35] + .3, 'tick', -18, { f: 2600 }, { every: .25, n: 6 });
 shot(at(17), '3a Unterwegs zur Bank', (lt, T, t) => {
-  const nx = lerp(-700, 300, lt / T), cam = { x: nx + 220, y: -300, z: lerp(1.3, 1.38, lt / T) };
-  return { set: city, setOpts: { tod: 'golden' }, cam, front: [c => noahWalkSide(c, t, nx, { outfit: 'classic', expr: { mouth: 'soft', look: .3 } })],
-    screen: [c => cityLight(c, cam, t, { tod: 'golden' }), c => hudCard(c, t, { t0: ST[17] + .2, t1: ST[19] - .3, corner: 'tr', w: 560, h: 250, title: 'BUDGET', icon: 'calc', color: HUD.green,
+  const nx = lerp(-34, -24, lt / T), cam3 = { x: nx - 6, y: 1.7, z: -9.5, f: 1250, look: [nx + 2, 1.5, -1.8] };
+  const noah = { x: nx, z: -2.2, draw: (c, cam) => bb3(c, cam, nx, -2.2, c2 => { castShadow(c2, 0, 110, { alpha: .25 }); drawNoahSide(c2, { x: 0, k: .25, ink: 1.8, walk: t * 8, outfit: 'classic', expr: { mouth: 'soft', look: .3 } }); }) };
+  return { set: street3d, setOpts: { cam3, tod: 'golden', hilde: { state: 'empty' }, walkers: S3WALK(t), extra: [noah] }, cam: { x: 0, y: 0, z: 1 },
+    screen: [c => street3dLight(c, cam3, t, { tod: 'golden', motes: true }), c => hudCard(c, t, { t0: ST[17] + .2, t1: ST[19] - .3, corner: 'tr', w: 560, h: 250, title: 'BUDGET', icon: 'calc', color: HUD.green,
       draw: (c, k, l, w, h) => { hudText(c, 'Erbe', 0, 30, 24, HUD.muted); hudText(c, '70.000 €', 0, 92, 60, HUD.ink); const need = seg(l, 1.6, 2.6); c.fillStyle = HUD.line; rrect(c, 0, 118, w, 22, 11); c.fill(); c.fillStyle = HUD.green; rrect(c, 0, 118, w * .32, 22, 11); c.fill(); if (need > 0) { c.save(); c.globalAlpha = need; hudText(c, 'Restaurant: ein Vielfaches davon', 0, 172, 22, '#d0302a'); c.restore(); handArrow(c, w * .34, 129, w - 8, 129, need, { t, col: '#d0302a', w: 5, shadow: false, head: 14 }); } } })], vignette: .3 };
 });
 function bankScene(t, cam, o = {}) {
@@ -196,10 +194,14 @@ shot(at(34), '3i Kein Jahr halten', (lt, T, t) => {
 });
 // ---------------- 4. DER LADEN (100.4 – 168.7) ----------------
 mood(100.4, 112.9, 'light'); mood(112.9, 133.0, 'curious'); mood(133.0, 151.4, 'tension'); mood(151.4, 168.7, 'tension');
-cue(ST[36] + .1, 'creak', -16, { d: 1.4 }); [0, .9, 1.8, 3.0].forEach((d, i) => cue(ST[37] + d, 'pop', -18)); cue(ST[38] + .2, 'register', -14); cue(ST[39], 'stamp', -16); cue(ST[41] + .4, 'keys', -14); cue(ST[42], 'whoosh', -14, { d: .6, lo: 200, hi: 2400, rev: true });
+cue(ST[36] - .1, 'street', -24, { d: 2.2 }); cue(ST[37] + .1, 'creak', -16, { d: 1.4 }); [0, .9, 1.8, 3.0].forEach((d, i) => cue(ST[37] + d, 'pop', -18)); cue(ST[38] + .2, 'register', -14); cue(ST[39], 'stamp', -16); cue(ST[41] + .4, 'keys', -14); cue(ST[42], 'whoosh', -14, { d: .6, lo: 200, hi: 2400, rev: true });
 cue(ST[45], 'pop', -18); cue(ST[46], 'register', -13); cue(ST[48] + .3, 'scribble', -18, { d: 1 }); cue(ST[49] + .8, 'clap1', -18); cue(ST[51], 'rattle', -16, { d: 7.5 }); cue(ST[52], 'hiss', -22, { d: 3 });
 [0, .8, 1.7, 2.5, 3.3].forEach(d => cue(ST[54] + d, 'pop', -17)); cue(ST[55], 'register', -12);
-shot(at(36), '4a Der perfekte Laden', (lt, T, t) => {
+shot(at(36), '4a0 Zu vermieten (außen)', (lt, T, t) => {
+  const cam3 = s3move(lt / T, { a0: .8, a1: .25, d0: 20, d1: 14, f0: 1050, f1: 1250, y0: 2.4, y1: 1.7, ly0: 6.5, ly1: 3.6 }), hilde = { state: 'empty' }, nx = lerp(20, 12, lt / T);
+  return { set: street3d, setOpts: { cam3, tod: 'day', hilde, walkers: S3WALK(t), extra: [{ z: -1.9, x: nx, draw: c => bb3(c, s3cam(cam3), nx, -1.9, c2 => drawNoahSide(c2, { x: 0, k: .25, ink: 1.8, s: -1, walk: t * 7, outfit: 'classic', expr: { mouth: 'smile', browUp: .4 } })) }] }, cam: { x: 0, y: 0, z: 1 }, screen: [c => street3dLight(c, cam3, t, { tod: 'day', hilde })], vignette: .25 };
+});
+shot(at(37), '4a Der perfekte Laden', (lt, T, t) => {
   const cam = camPush(lt, T, { x: -300, y: -330, z: 1.0 }, { x: -60, y: -300, z: 1.25 }), nx = lerp(-900, -200, ease(seg(lt, 0, 4.5)));
   const walking = lt < 4.5, wl = walkLegs(t, 7);
   const noah = noahP(t, { x: nx, outfit: 'classic', legs: walking ? wl.legs : null, bob: walking ? wl.bob : undefined, expr: { mouth: lt > 2 ? 'o' : 'smile', browUp: .7, look: -.2 }, arms: { l: arm(.25, -.2), r: arm(.25, -.2) } });

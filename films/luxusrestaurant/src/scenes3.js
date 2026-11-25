@@ -5,8 +5,9 @@ cue(ST[181] + .2, 'wind', -26, { d: 3.5 }); cue(ST[182] + .1, 'tick', -16, { f: 
 cue(ST[187] + .1, 'whoosh', -18, { d: .5, rev: true }); cue(ST[187] + .3, 'tick', -24, { f: 2900 }, { every: 1, n: 8, pan: -.5 }); cue(ST[191] + .2, 'chair', -18); cue(ST[192] + .1, 'door', -16);
 cue(ST[193] + .2, 'buzz', -16); cue(ST[195] + .1, 'thunk', -10); cue(ST[201] + .1, 'creak', -10, { d: 1.3 }); cue(ST[203], 'thunk', -18); cue(ST[204] + .1, 'page', -12); cue(ST[208] + .3, 'sizzle', -20, { d: 3.4 }); cue(ST[211] + .2, 'mop', -24, { d: 2.5 }); cue(ST[212] + .4, 'clink', -16); cue(ST[213] + .1, 'chew', -22, { d: 2.5 }); cue(ST[218] + .1, 'ding', -14);
 shot(at(181), '13a Freitag 23:12', (lt, T, t) => {
-  const cam = camPush(lt, T, { x: 0, y: -760, z: .78 }, { x: 0, y: -620, z: .95 });
-  return { set: hildeExterior, setOpts: { tod: 'night', guests: 1, lit: .5 }, cam, screen: [c => cityLight(c, cam, t, { tod: 'night' }), c => { if (t > ST[182] - .2) { inkVeil(c, 1220, 120, 560, 380, .4); const k = seg(t, ST[182] - .2, ST[182] + .3); c.save(); c.globalAlpha = k; c.fillStyle = '#111'; rrect(c, 1290, 200, 420, 180, 24); c.fill(); c.font = hudFont(130); c.fillStyle = '#ff4a3a'; c.textAlign = 'center'; c.fillText('23:12', 1500, 338); bloom(c, 1500, 290, 280, '255,60,40', .3); hudText(c, 'Freitag', 1500, 440, 40, '#fff', 'center'); c.restore(); } }], vignette: .45 };
+  const cam3 = s3move(lt / T, { a0: .85, a1: .1, d0: 24, d1: 17, f0: 1000, f1: 1200, y0: 2.6, y1: 1.7, ly0: 7, ly1: 4.4 }), hilde = { guests: 1, lit: .45 };
+  return { set: street3d, setOpts: { cam3, tod: 'night', hilde, cars: [[-52, '#e8dcc0'], [41, '#c8ccd2']], traffic: false, walkers: [{ who: PEOPLE.guest(14), x: 30 - lt * 1.1, z: -2.2, p: walkLegs(t, 6) }] }, cam: { x: 0, y: 0, z: 1 },
+    screen: [c => street3dLight(c, cam3, t, { tod: 'night', hilde }), c => { if (t > ST[182] - .2) { inkVeil(c, 1220, 120, 560, 380, .4); const k = seg(t, ST[182] - .2, ST[182] + .3); c.save(); c.globalAlpha = k; c.fillStyle = '#111'; rrect(c, 1290, 200, 420, 180, 24); c.fill(); c.font = hudFont(130); c.fillStyle = '#ff4a3a'; c.textAlign = 'center'; c.fillText('23:12', 1500, 338); bloom(c, 1500, 290, 280, '255,60,40', .3); hudText(c, 'Freitag', 1500, 440, 40, '#fff', 'center'); c.restore(); } }], vignette: .45 };
 });
 shot(at(184), '13b So müsste es sein', (lt, T, t) => {
   const cam = camPush(lt, T, { x: 0, y: -300, z: 1.3 }, { x: 80, y: -300, z: 1.45 });
@@ -16,11 +17,11 @@ shot(at(184), '13b So müsste es sein', (lt, T, t) => {
     screen: [c => kitchenLight(c, cam, t, { steamy: true }), c => { c.save(); c.globalCompositeOperation = 'saturation'; c.fillStyle = 'rgba(128,128,128,.45)'; c.fillRect(0, 0, W, H); c.restore(); c.lineWidth = 14; c.strokeStyle = 'rgba(255,255,255,.75)'; c.setLineDash([30, 20]); c.strokeRect(30, 30, W - 60, H - 60); c.setLineDash([]); }], vignette: .4 };
 });
 shot(at(186), '13c Totenstille', (lt, T, t) => {
-  const cam = camPush(lt, T, { x: -200, y: -300, z: 1.05 }, { x: -150, y: -295, z: 1.2 }), leave = seg(t, ST[191] + .2, ST[193] - .1);
-  const one = (c, tx, i) => { if (i === 3) { const p = P(PEOPLE.guest(14), t, { x: leave > 0 ? lerp(tx + 90, tx + 1400, leave) : tx + 90, sit: leave <= 0, seatH: 250, legs: leave > 0 ? walkLegs(t, 7).legs : null, expr: { mouth: 'flat', look: .5 }, arms: { l: arm(.4, -1.1), r: arm(.4, -1.1) } }); drawPerson(c, p); } };
-  const noah = noahP(t, { x: -560, expr: { mouth: 'flat', worry: .5, look: .8, lid: .2 }, arms: { l: arm(.35, -1.3), r: arm(.35, -1.3) } });
-  return { set: salon, setOpts: { tod: 'night', midGuests: one, candles: true }, cam, front: [c => noahW(c, noah)],
-    screen: [c => salonLight(c, cam, t, { tod: 'night' }), c => { if (t > ST[188]) { inkVeil(c, 1150, 640, 720, 380, .5); chairGrid(c, 1230, 690, 10, 4, 1, 1, { s: 52, col: '#d0302a' }); hudText(c, '1 / 40', 1510, 960, 46, '#fff', 'center'); } }, c => hudBadge(c, t, { t0: ST[190] + .4, t1: ST[191] + 1, x: 1240, y: 140, text: 'nur Leitungswasser', color: '#2f6fb0' }), c => hudBadge(c, t, { t0: ST[192] + .1, t1: ST[193] - .1, x: 1240, y: 220, text: 'Trinkgeld: 0 €', color: '#d0302a' })], vignette: .55 };
+  const cam3 = r3move(lt / T, { x0: -6, x1: -4, z0: -15.5, z1: -14, y0: 2.8, y1: 2.4, lx0: 2, lx1: 3, ly0: 1.2, ly1: 1.1 }), leave = seg(t, ST[191] + .2, ST[193] - .1);
+  const gx = 8.4, gz = -8.8, guest = leave > 0 ? [r3person(lerp(gx, 11, leave), gz + .6, c2 => personW(c2, P(PEOPLE.guest(14), t, { x: 0, legs: walkLegs(t, 7).legs, expr: { mouth: 'flat', look: .5 } })))] : [];
+  const noah = r3person(-3, -8, c2 => noahW(c2, noahP(t, { x: 0, expr: { mouth: 'flat', worry: .5, look: .8, lid: .2 }, arms: { l: arm(.35, -1.3), r: arm(.35, -1.3) } })));
+  return { set: room3d, setOpts: { cam3, tod: 'night', candles: true, tables: i => (i === 11 && leave <= 0) ? 1 : 0, extra: [noah, ...guest] }, cam: { x: 0, y: 0, z: 1 },
+    screen: [c => room3dLight(c, cam3, t, { tod: 'night' }), c => { if (t > ST[188]) { inkVeil(c, 1150, 640, 720, 380, .5); chairGrid(c, 1230, 690, 10, 4, 1, 1, { s: 52, col: '#d0302a' }); hudText(c, '1 / 40', 1510, 960, 46, '#fff', 'center'); } }, c => hudBadge(c, t, { t0: ST[190] + .4, t1: ST[191] + 1, x: 1240, y: 140, text: 'nur Leitungswasser', color: '#2f6fb0' }), c => hudBadge(c, t, { t0: ST[192] + .1, t1: ST[193] - .1, x: 1240, y: 220, text: 'Trinkgeld: 0 €', color: '#d0302a' })], vignette: .55 };
 });
 shot(at(193), '13d Banking-App', (lt, T, t) => {
   const g = gegen(lt, T, { x0: -320, camDx: 50, z: 3.3, side: 'l', dir: -1, y: -255 }), hit = t > ST[195];
@@ -90,7 +91,7 @@ shot(at(219), '13m Wie alle anderen', (lt, T, t) => {
 mood(574.8, 599.2, 'light'); mood(599.2, 622.2, 'hope'); mood(622.2, 636.7, 'triumph');
 for (let i = 0; i < 8; i++) cue(ST[224] + .2 + i * .25, 'scribble', -20, { d: .2, speed: 9 }); cue(ST[226] + 1.2, 'cheer', -20, { d: 1.6 }); cue(ST[227] + .4, 'pop', -16); cue(ST[229] + .1, 'stamp', -12);
 cue(ST[231] + .4, 'knife', -18); cue(ST[232] + .2, 'pour', -22, { d: 1.6 }); cue(ST[233] + .4, 'typing', -20, { d: 2.2 }); cue(ST[235] + .8, 'whoosh', -16, { d: .5 }); cue(ST[235] + 1.4, 'ding', -16);
-cue(ST[236] + .3, 'counter', -20, { d: 1.6 }); cue(ST[237] + .3, 'counter', -18, { d: 1.6 }); cue(ST[238] + .1, 'ring', -16, null, { every: .9, n: 5 }); cue(ST[239] + .4, 'buzz', -18, null, { every: .5, n: 4 }); cue(ST[242], 'crowd', -20, { d: 14 }); cue(ST[242] + .3, 'pop', -17); cue(ST[243] + .3, 'tick', -24, { f: 3000 }, { every: .06, n: 34 }); cue(ST[245] + .2, 'scribble', -19, { d: 1 });
+cue(ST[236] + .3, 'counter', -20, { d: 1.6 }); cue(ST[237] + .3, 'counter', -18, { d: 1.6 }); cue(ST[238] + .1, 'ring', -16, null, { every: .9, n: 5 }); cue(ST[239] + .4, 'buzz', -18, null, { every: .5, n: 4 }); cue(ST[242], 'crowd', -20, { d: 14 }); cue(ST[244] - .1, 'street', -24, { d: 3 }); cue(ST[242] + .3, 'pop', -17); cue(ST[243] + .3, 'tick', -24, { f: 3000 }, { every: .06, n: 34 }); cue(ST[245] + .2, 'scribble', -19, { d: 1 });
 const MENU14 = ['Amuse-Bouche', 'Gelbflossen-Thun', 'Jakobsmuschel', 'Erbsen-Schaum', 'Rote Bete Tatar', 'Kalbsbries', 'Hummer-Bisque', 'Wachtel', 'Steinbutt', 'Lamm-Rücken', 'Rinderfilet', 'Käse-Auswahl', 'Mango-Schaum', 'Schokoladen-Kugel'];
 shot(at(222), '14a Die Karte schrumpft', (lt, T, t) => {
   const keep = { 1: 1, 5: 1, 8: 1, 10: 1, 11: 1, 13: 1 };
@@ -108,8 +109,8 @@ shot(at(225), '14b Neue Küche', (lt, T, t) => {
     c => hudBadge(c, t, { t0: ST[226] + .9, t1: ST[227] - .1, x: 1300, y: 150, text: 'neuer Küchenchef', color: HUD.accent })], vignette: .3 };
 });
 shot(at(227), '14c Mittagstisch', (lt, T, t) => {
-  const cam = camPush(lt, T, { x: -420, y: -520, z: .95 }, { x: -700, y: -300, z: 1.9 });
-  return { set: hildeExterior, setOpts: { tod: 'day', board: ['MITTAGSTISCH', '16 €', 'Mo – Fr · 12 – 15 Uhr'], lit: .3 }, cam, screen: [c => cityLight(c, cam, t, { tod: 'day' }), c => hudBadge(c, t, { t0: ST[227] + 2.5, t1: ST[228] - .1, x: 1350, y: 150, text: 'Miete läuft sowieso', color: '#8a5a3a' })], vignette: .3 };
+  const cam3 = s3move(lt / T, { a0: -.75, a1: -.25, d0: 20, d1: 8.5, tx: 5, f0: 1050, f1: 1300, y0: 2.4, y1: 1.5, ly0: 6, ly1: 1.9 }), hilde = { guests: 6, board: ['MITTAGSTISCH', '16 €', 'Mo – Fr · 12 – 15 Uhr'] };
+  return { set: street3d, setOpts: { cam3, tod: 'day', hilde, walkers: S3WALK(t) }, cam: { x: 0, y: 0, z: 1 }, screen: [c => street3dLight(c, cam3, t, { tod: 'day', hilde }), c => hudBadge(c, t, { t0: ST[227] + 2.5, t1: ST[228] - .1, x: 1450, y: 150, text: 'Miete läuft sowieso', color: '#8a5a3a' })], vignette: .25 };
 });
 shot(at(228), '14d Omas Roulade auf der Karte', (lt, T, t) => {
   return { set: 'blank', setOpts: { color: '#3a2418' }, cam: { x: 0, y: 0, z: 1 }, screen: [c => { c.fillStyle = '#4a3020'; c.fillRect(0, 0, W, H); for (let i = 0; i < 30; i++) line(c, [0, i * 40, W, i * 40 + 18], 4, 'rgba(20,10,0,.25)'); c.save(); c.translate(W / 2, H / 2); const s = 1 + lt * .03; c.scale(s, s); c.translate(-W / 2, -H / 2);
@@ -143,12 +144,16 @@ shot(at(238), '14h Telefon klingelt', (lt, T, t) => {
       c => hudCard(c, t, { t0: ST[239] + .3, t1: ST[240] - .1, corner: 'tl', w: 600, h: 240, title: 'RESERVIERUNGEN', icon: 'people', color: HUD.green, draw: (c, k, l) => { hudCounter(c, 0, 400, seg(l, .1, 1.2), 0, 82, 70, { fmt: v => (v > 399 ? 'über ' : '') + fmtNum(Math.round(v)) }); hudText(c, 'Anfragen in 3 Tagen', 0, 130, 28, HUD.muted); } })], vignette: .3 };
 });
 shot(at(240), '14i Voll', (lt, T, t) => {
-  const cam = camPush(lt, T, { x: -300, y: -290, z: 1.0 }, { x: 200, y: -280, z: 1.2 }, k => k), nx = lerp(-500, 400, lt / T), wl = walkLegs(t, 9);
-  const noah = noahP(t, { x: nx, legs: wl.legs, bob: wl.bob, expr: { mouth: 'grin', look: .3 }, arms: { r: arm(1.25, -1.75, .2), l: arm(.18, -.15) } });
-  return { set: salon, setOpts: { tod: 'evening', midGuests: fullGuests(t), row2Guests: (c, tx) => fullGuests(t)(c, tx, tx / 300) }, cam, front: [c => { noahW(c, noah); const [hx, hy] = noahHandWorld(noah, 1); tray(c, hx, hy - 10, 1.05, t); }, c => { for (let i = 0; i < 5; i++) personW(c, P(PEOPLE.guest(i + 30), t, { x: 1500 + i * 120, expr: { mouth: 'soft', look: -.6 } })); }],
-    screen: [c => salonLight(c, cam, t, { tod: 'evening', noMotes: true }), c => hudCard(c, t, { t0: ST[242] + .1, t1: ST[244] + .2, corner: 'tl', w: 560, h: 250, title: 'ZWEI DURCHGÄNGE', icon: 'clock', color: HUD.accent, draw: (c) => { hudText(c, '18:00', 0, 90, 76, HUD.ink); hudText(c, '20:30', 270, 90, 76, HUD.ink); hudText(c, 'jeden Abend', 0, 150, 28, HUD.muted); } }),
-      c => { if (t > ST[243]) { inkVeil(c, 1120, 560, 760, 480, .45); const k = seg(t, ST[243] + .3, ST[243] + 2.4); hudText(c, fmtNum(Math.round(lerp(31, 65, k))) + ' Gäste', 1500, 640, 64, '#ffd36a', 'center'); barChart(c, 1240, 680, 520, 250, [{ label: 'vorher', v: 31, col: '#8a8e94' }, { label: 'jetzt', v: 31 + 34 * k, col: HUD.green, text: '60–70' }], 1, { size: 24 }); } },
-      c => hudBadge(c, t, { t0: ST[244] + .1, t1: ST[245] + 1.1, x: 960, y: 1000, text: '+ 2 neue Leute · Warteliste', color: HUD.blue, size: 30 })], vignette: .3 };
+  const cam3 = r3move(lt / T, { x0: -7, x1: -2, z0: -15.5, z1: -12, y0: 2.6, y1: 2.0, lx0: 2, lx1: 0 }), nx = lerp(-3, 2.5, lt / T);
+  const noah = r3person(nx, -7.0, c2 => { const p = noahP(t, { x: 0, legs: walkLegs(t, 9).legs, bob: walkLegs(t, 9).bob, expr: { mouth: 'grin', look: .3 }, arms: { r: arm(1.25, -1.75, .2), l: arm(.18, -.15) } }); drawNoahDressed(c2, p); const [hx, hy] = noahHandWorld(p, 1); tray(c2, hx, hy - 10, 1.05, t); });
+  const waiting = [0, 1, 2, 3].map(i => r3person(9.6 - i * .2, -14.2 + i * .75, c2 => personW(c2, P(PEOPLE.guest(i + 30), t, { x: 0, expr: { mouth: 'soft', look: -.6 } }))));
+  return { set: room3d, setOpts: { cam3, tod: 'evening', tables: 'full', extra: [noah, ...waiting] }, cam: { x: 0, y: 0, z: 1 },
+    screen: [c => room3dLight(c, cam3, t, { tod: 'evening' }), c => hudCard(c, t, { t0: ST[242] + .1, t1: ST[244] + .2, corner: 'tl', w: 560, h: 250, title: 'ZWEI DURCHGÄNGE', icon: 'clock', color: HUD.accent, draw: (c) => { hudText(c, '18:00', 0, 90, 76, HUD.ink); hudText(c, '20:30', 270, 90, 76, HUD.ink); hudText(c, 'jeden Abend', 0, 150, 28, HUD.muted); } }),
+      c => { if (t > ST[243]) { inkVeil(c, 1120, 560, 760, 480, .45); const k = seg(t, ST[243] + .3, ST[243] + 2.4); hudText(c, fmtNum(Math.round(lerp(31, 65, k))) + ' Gäste', 1500, 640, 64, '#ffd36a', 'center'); barChart(c, 1240, 680, 520, 250, [{ label: 'vorher', v: 31, col: '#8a8e94' }, { label: 'jetzt', v: 31 + 34 * k, col: HUD.green, text: '60–70' }], 1, { size: 24 }); } }], vignette: .3 };
+});
+shot(at(244), '14j Warteliste (außen)', (lt, T, t) => {
+  const cam3 = s3move(lt / T, { a0: .7, a1: .2, d0: 18, d1: 13, f0: 1100, f1: 1250, y0: 2.2, y1: 1.7, ly0: 5, ly1: 3.4 }), hilde = { guests: 12, queue: 11, lit: 1 };
+  return { set: street3d, setOpts: { cam3, tod: 'evening', hilde, walkers: S3WALK(t) }, cam: { x: 0, y: 0, z: 1 }, screen: [c => street3dLight(c, cam3, t, { tod: 'evening', hilde }), c => hudBadge(c, t, { t0: ST[244] + .2, x: 960, y: 140, text: '+ 2 neue Leute · Warteliste', color: HUD.blue, size: 30 })], vignette: .3 };
 });
 // ---------------- 15. SECHS MONATE SPÄTER (636.7 – 657.0) ----------------
 mood(636.7, 657.0, 'triumph');
@@ -187,10 +192,11 @@ function inspectorShot(lt, T, t, who, qTimes, o = {}) {
 }
 function notebookSmall(c, x, y) { c.save(); c.translate(x, y); c.beginPath(); c.moveTo(-26, 0); c.lineTo(26, 0); c.lineTo(22, -10); c.lineTo(-22, -10); c.closePath(); fs(c, '#2a2a30', 1.5); line(c, [-18, -6, 14, -6], 1, '#fff'); c.restore(); }
 shot(at(253), '16a Eine Frau allein', (lt, T, t) => {
-  const cam = camPush(lt, T, { x: 150, y: -300, z: 1.1 }, { x: 250, y: -280, z: 1.35 }), ent = seg(t, ST[254], ST[254] + 2.4), wl = walkLegs(t, 7);
-  const insp = P(PEOPLE.inspectorW, t, { x: lerp(-900, 180, ent), legs: ent < 1 && ent > 0 ? wl.legs : null, expr: { mouth: 'soft', look: .2 }, arms: RELAX });
-  return { set: salon, setOpts: { tod: 'evening', midGuests: fullGuests(t, false) }, cam, front: [c => personW(c, insp), c => { c.save(); c.translate(700, 0); line(c, [0, 0, 0, -300], 8, '#3a2418'); c.beginPath(); c.rect(-120, -320, 240, 40); fs(c, '#4a2c1c', 3); c.save(); c.translate(0, -322); c.rotate(-.04); c.beginPath(); c.rect(-100, -12, 200, 12); fs(c, '#7a2a20', 2); c.beginPath(); c.rect(-90, -120, 180, 108); fs(c, '#fbf6e8', 2); ['Müller 4P', 'Weber 1P', 'Schmidt 2P', 'Klein 3P'].forEach((s, i) => { c.font = hudFont(12); c.fillStyle = i === 1 ? '#a0302a' : '#24305e'; c.textAlign = 'left'; c.fillText(s + '  19:30', -80, -100 + i * 22); }); if (t > ST[255] + .4) handCircle(c, -30, -84, 70, 14, seg(t, ST[255] + .4, ST[255] + .9), { t, w: 3, shadow: false }); c.restore(); c.restore(); }],
-    screen: [c => salonLight(c, cam, t, { tod: 'evening', noMotes: true }), c => grade(c, { sx: .8, sy: .3, cool: '20,20,60', coolA: .3 }), c => hudBadge(c, t, { t0: ST[256] + .2, t1: ST[257] - .1, x: 1400, y: 150, text: 'komplettes Menü', color: '#5a4a7a' })], vignette: .45 };
+  const cam3 = r3move(lt / T, { x0: -4, x1: -1.5, z0: -15.5, z1: -14, y0: 2.2, y1: 1.9, lx0: 6, lx1: 5, ly0: 1.3, ly1: 1.2 }), ent = seg(t, ST[254], ST[254] + 3.2);
+  const insp = r3person(lerp(10, 5.6, ent), lerp(-14, -9.7, ent), c2 => personW(c2, P(PEOPLE.inspectorW, t, { x: 0, legs: ent > 0 && ent < 1 ? walkLegs(t, 7).legs : null, expr: { mouth: 'soft', look: -.3 }, arms: RELAX })));
+  const stand = r3person(9.2, -13.6, c2 => { line(c2, [0, 0, 0, -300], 8, '#3a2418'); c2.beginPath(); c2.rect(-120, -320, 240, 40); fs(c2, '#4a2c1c', 3); c2.save(); c2.translate(0, -322); c2.rotate(-.04); c2.beginPath(); c2.rect(-100, -12, 200, 12); fs(c2, '#7a2a20', 2); c2.beginPath(); c2.rect(-90, -120, 180, 108); fs(c2, '#fbf6e8', 2); ['Müller 4P', 'Weber 1P', 'Schmidt 2P', 'Klein 3P'].forEach((s, i) => { c2.font = hudFont(12); c2.fillStyle = i === 1 ? '#a0302a' : '#24305e'; c2.textAlign = 'left'; c2.fillText(s + '  19:30', -80, -100 + i * 22); }); c2.restore(); });
+  return { set: room3d, setOpts: { cam3, tod: 'evening', tables: i => i === 10 ? 0 : 2, talk: true, extra: [insp, stand] }, cam: { x: 0, y: 0, z: 1 },
+    screen: [c => room3dLight(c, cam3, t, { tod: 'evening' }), c => grade(c, { sx: .8, sy: .3, cool: '20,20,60', coolA: .3 }), c => hudBadge(c, t, { t0: ST[255] + .3, t1: ST[256] - .1, x: 1400, y: 150, text: 'Weber · 1 Person · 19:30', color: '#5a4a7a' }), c => hudBadge(c, t, { t0: ST[256] + .2, t1: ST[257] - .1, x: 1400, y: 150, text: 'komplettes Menü', color: '#5a4a7a' })], vignette: .45 };
 });
 shot(at(257), '16b Fragen', (lt, T, t) => inspectorShot(lt, T, t, PEOPLE.inspectorW, [ST[259], ST[260], ST[261]], { screen: [c => hudBadge(c, t, { t0: ST[262] + .2, t1: ST[263] - .2, x: 1400, y: 150, text: 'zahlt · normales Trinkgeld', color: '#5a4a7a' })] }));
 shot(at(263), '16c Vier Monate später', (lt, T, t) => inspectorShot(lt, T, t, PEOPLE.inspectorM, [ST[266], ST[266] + .8], { screen: [c => { const k = seg(t, ST[263], ST[263] + 1.2); if (t < ST[264] + .5) { c.save(); c.globalAlpha = 1 - seg(t, ST[264], ST[264] + .5); inkVeil(c, 660, 280, 600, 520, .7); for (let i = 0; i < 4; i++) { const flip = clamp(k * 4 - i); c.save(); c.translate(960, 560); c.scale(1, 1 - flip * .9); c.translate(0, -flip * 40); c.fillStyle = '#fbf6ea'; rrect(c, -150, -170, 300, 300, 14); c.fill(); c.fillStyle = '#d0302a'; c.fillRect(-150, -170, 300, 70); hudText(c, ['Juli', 'August', 'September', 'Oktober'][Math.min(3, i + (flip >= 1 ? 1 : 0))], 0, -120, 36, '#fff', 'center'); hudText(c, '+' + (i + 1), 0, 40, 110, HUD.ink, 'center'); c.restore(); } c.restore(); } }] }));
@@ -231,13 +237,15 @@ cue(ST[284] + .05, 'scratch', -18); cue(ST[286] + .2, 'street', -26, { d: 15 });
 [0, 1.5, 3.0, 4.3].forEach(d => cue(ST[292] + 1.2 + d, 'scribble', -18, { d: .4 })); cue(ST[294] + .1, 'creak', -14, { d: 1 }); cue(ST[295] + .2, 'scribble', -18, { d: 1.2 }); cue(ST[295] + 1.3, 'thunk', -14);
 cue(ST[297], 'tick', -16, { f: 2200 }); cue(ST[299] - .1, 'crowd', -16, { d: 9 }); cue(ST[300] + .2, 'clink', -14, null, { every: .4, n: 6 }); cue(ST[301] + .1, 'shout', -16); cue(ST[305] + .3, 'pop', -16); cue(ST[306] + .3, 'pop', -16); cue(ST[307] + .2, 'pop', -14); cue(ST[308] + .3, 'ding', -12);
 shot(at(284), '18a Ohne Filmmusik', (lt, T, t) => {
-  const g = gegen(lt, T, { x0: 600, camDx: 50, z: 3.2, side: 'r', y: -262 });
-  return { set: city, setOpts: { tod: 'day' }, cam: g.cam, behind: [c => noahW(c, noahP(t, { x: g.x, outfit: 'classic', expr: { mouth: 'flat', look: -.3, browUp: .2 } }), false)], screen: [c => cityLight(c, g.cam, t, { tod: 'day' }), c => grade(c, { sx: .5, sy: .2, warm: '240,240,250', warmA: .1, cool: '60,70,90', coolA: .3 })], vignette: .35 };
+  const cam3 = { x: lerp(-27, -25.5, lt / T), y: 1.65, z: -9.5, f: lerp(1900, 2100, lt / T), look: [-25.2, 1.45, -2.4] };
+  const noah = r3person(-25.2, -2.4, c2 => noahW(c2, noahP(t, { x: 0, outfit: 'classic', expr: { mouth: 'flat', look: -.3, browUp: .2 } })));
+  return { set: street3d, setOpts: { cam3, tod: 'day', hilde: { closed: true }, walkers: [], extra: [noah], traffic: false }, cam: { x: 0, y: 0, z: 1 }, screen: [c => street3dLight(c, cam3, t, { tod: 'day' }), c => grade(c, { sx: .5, sy: .2, warm: '240,240,250', warmA: .1, cool: '60,70,90', coolA: .3 })], vignette: .35 };
 });
 shot(at(286), '18b Wir sagen Danke', (lt, T, t) => {
-  const cam = camPush(lt, T, { x: -1500, y: -380, z: 1.15 }, { x: 1300, y: -380, z: 1.2 }, k => k), nx = cam.x - 240;
-  return { set: closedStreet, cam, front: [c => noahWalkSide(c, t, nx, { outfit: 'classic', walk: t * 7, expr: { mouth: 'flat', look: .2 } })],
-    screen: [c => cityLight(c, cam, t, { tod: 'day' }), c => grade(c, { sx: .5, sy: .1, warm: '235,235,245', warmA: .1, cool: '60,70,90', coolA: .35 }),
+  const nx = lerp(-60, -38, lt / T), cam3 = { x: nx - 4, y: 1.7, z: -10, f: 1150, look: [nx + 4, 2.2, 0] };
+  const noah = { x: nx, z: -2.4, draw: (c, cam) => bb3(c, cam, nx, -2.4, c2 => { castShadow(c2, 0, 110, { alpha: .25 }); drawNoahSide(c2, { x: 0, k: .25, ink: 1.8, walk: t * 7, outfit: 'classic', expr: { mouth: 'flat', look: .2 } }); }) };
+  return { set: street3d, setOpts: { cam3, tod: 'day', hilde: { closed: true }, walkers: [], extra: [noah], traffic: false }, cam: { x: 0, y: 0, z: 1 },
+    screen: [c => street3dLight(c, cam3, t, { tod: 'day' }), c => grade(c, { sx: .5, sy: .1, warm: '235,235,245', warmA: .1, cool: '60,70,90', coolA: .35 }),
       c => iconRow(c, t, [{ t0: ST[290] + .3, icon: 'clock', title: '18-Stunden-Tage', lines: [''], col: '#5a4a4a' }, { t0: ST[290] + 1.5, icon: 'person', title: 'kaum Urlaub', lines: [''], col: '#5a4a4a' }, { t0: ST[290] + 2.7, icon: 'euro', title: '1 € Gewinn / Teller', lines: [''], col: '#d0302a' }], 60, 50, { t1: ST[292] - .1, w: 380, h: 100, cols: 3, gap: 30 }),
       c => { if (t > ST[291]) hudBadge(c, t, { t0: ST[291] + .3, t1: ST[292] - .1, x: 960, y: 980, text: 'ein schlechter Monat kann alles kaputt machen', color: '#d0302a', size: 28 }); }], vignette: .4 };
 });
@@ -251,8 +259,9 @@ shot(at(295), '18d Die Waage', (lt, T, t) => {
   return { set: drawerSet, setOpts: { open }, cam, screen: [c => drawerLight(c, cam, t), c => { inkVeil(c, 1080, 180, 720, 700, .55); handScale(c, 1440, 840, 1.25, dk, tilt, t); }], vignette: .6 };
 });
 shot(at(297), '18e Freitag 23:12 – laut', (lt, T, t) => {
-  const cam = camPush(lt, T, { x: 0, y: -760, z: .78 }, { x: 0, y: -620, z: .95 });
-  return { set: hildeExterior, setOpts: { tod: 'night', guests: 4, lit: 1, star: true }, cam, screen: [c => cityLight(c, cam, t, { tod: 'night' }), c => { if (t > ST[298] - .2) { inkVeil(c, 1220, 120, 560, 380, .4); const k = seg(t, ST[298] - .2, ST[298] + .3); c.save(); c.globalAlpha = k; c.fillStyle = '#111'; rrect(c, 1290, 200, 420, 180, 24); c.fill(); c.font = hudFont(130); c.fillStyle = '#3ae07a'; c.textAlign = 'center'; c.fillText('23:12', 1500, 338); bloom(c, 1500, 290, 280, '60,255,120', .25); hudText(c, 'Freitag', 1500, 440, 40, '#fff', 'center'); c.restore(); } }], vignette: .35 };
+  const cam3 = s3move(lt / T, { a0: -.9, a1: -.08, d0: 25, d1: 17, f0: 1000, f1: 1200, y0: 3, y1: 1.7, ly0: 8, ly1: 4.4 }), hilde = { guests: 10, star: true, queue: 7 };
+  return { set: street3d, setOpts: { cam3, tod: 'night', hilde, walkers: S3WALK(t) }, cam: { x: 0, y: 0, z: 1 },
+    screen: [c => street3dLight(c, cam3, t, { tod: 'night', hilde }), c => { if (t > ST[298] - .2) { inkVeil(c, 1220, 120, 560, 380, .4); const k = seg(t, ST[298] - .2, ST[298] + .3); c.save(); c.globalAlpha = k; c.fillStyle = '#111'; rrect(c, 1290, 200, 420, 180, 24); c.fill(); c.font = hudFont(130); c.fillStyle = '#3ae07a'; c.textAlign = 'center'; c.fillText('23:12', 1500, 338); bloom(c, 1500, 290, 280, '60,255,120', .25); hudText(c, 'Freitag', 1500, 440, 40, '#fff', 'center'); c.restore(); } }], vignette: .35 };
 });
 shot(at(299), '18f Tisch sieben', (lt, T, t) => {
   const cam = camPush(lt, T, { x: 0, y: -300, z: 1.3 }, { x: 80, y: -300, z: 1.5 });
