@@ -3,3 +3,6 @@ film-169.html
 stills/
 audio/*.wav
 *.mp4
+audio/*.wav
+audio/full_cues.json
+test.html
