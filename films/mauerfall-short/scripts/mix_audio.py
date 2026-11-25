@@ -1,6 +1,7 @@
 """Sound for "Die Mauer fiel aus Versehen": procedural SFX + low music under the user's voice-over.
    python3 mix_audio.py <vo.mp3> <out_dir>     -> out_dir/mix_raw.wav (+ stems)
-   Music sits >= 26 dB under the speech; SFX duck by ~10 dB while the voice speaks. Final -14 LUFS is done with ffmpeg loudnorm."""
+   v2: crowds are breathy voices shaped by smoothly moving vowel formants (STFT) + reverb; hits duck ~3 dB, beds ~8 dB
+   under the voice; light music ~15 LU under the voice. Final -14 LUFS / -1.5 dBTP with ffmpeg."""
 import sys, subprocess, json, numpy as np
 from scipy import signal
 
@@ -31,6 +32,7 @@ def add(buf, t, x, g=1.0, pan=0.0):
     i = int(t * SR)
     if i >= N or i + len(x) <= 0: return
     x = x[max(0, -i):]; i = max(0, i); x = x[:N - i]
+    if x.ndim == 2: buf[i:i + len(x)] += x * g; return
     buf[i:i + len(x), 0] += x * g * (1 - max(0, pan)); buf[i:i + len(x), 1] += x * g * (1 + min(0, pan))
 def norm(x): return x / (np.max(np.abs(x)) + 1e-9)
 
@@ -126,84 +128,197 @@ def whoosh(d=.45, up=True):
 def rumble(d):
     n = int(d * SR); return lp(noise(n), 120) * 2.5 * np.minimum(1, T(n) / .5) * np.minimum(1, (d - T(n)) / .5)
 
-# ---------------- build SFX stem ----------------
-sfx = np.zeros((N, 2))
-FL = [(.04, -.4), (.95, .3), (1.65, -.1), (2.9, .4), (3.75, -.3), (4.6, .2), (7.0, -.4), (8.35, .4), (9.2, -.2), (10.4, .2), (16.2, -.3), (17.0, .3), (17.9, -.1), (21.62, 0)]
-for t, pan in FL: add(sfx, t - .1, flash(), .55, pan); add(sfx, t + .03, shutter(), .5, -pan)
-add(sfx, 0.0, whoosh(.5), .5)                                   # camera rush
-for t0, t1, g in [(0, 2.3, .5), (3.7, 5.4, .45), (11.7, 18.4, .4), (25.4, 27.2, .45), (43.7, DUR, .45)]:   # press hall murmur + camera motors
-    add(sfx, t0, voice_babble(t1 - t0, 10, (90, 200), 2000, 3.5, seed=int(t0 * 10)) * np.minimum(1, T(int((t1 - t0) * SR)) / .2), g)
-add(sfx, 2.3, voice_babble(1.4, 18, (150, 320), 3500, 5, seed=5), 1.4)       # wall: cheering
-for i in range(5): add(sfx, 2.45 + i * .22, hammer(), .6, .3)
-add(sfx, 5.4, np.sin(2 * np.pi * 15600 * T(int(1.5 * SR))) * .015 + lp(noise(int(1.5 * SR)), 200) * .05, 1)   # CRT whine/hum
-for i in range(3): add(sfx, 5.5 + i * .5, tick(i % 2 == 0), .5)
-add(sfx, 7.35, paper(.5), .8, -.1); add(sfx, 8.1, paper(.6), .9); add(sfx, 9.7, paper(.5), .6)
-add(sfx, 14.0, paper(.25) * .5 + lp(noise(int(.25 * SR)), 800) * .1, .5, .3)   # hand/coat rustle
-for i in range(5): add(sfx, 16.25 + i * .2, paper(.22), .9, (-1) ** i * .2)       # leafing through papers
-for i in range(3): add(sfx, 17.6 + i * .25, paper(.15), .5)
-k = 0; tt_ = 18.45
-while tt_ < 19.66: add(sfx, tt_, tick(k % 2 == 0), 1.0); tt_ += .4; k += 1   # clock ticks, stop at "sofort"
-for i in range(2): add(sfx, 20.0 + i * .85, heartbeat(), 1.0)
-add(sfx, 21.62, lp(noise(int(.25 * SR)), 1500) * expdec(int(.25 * SR), .05), .6)   # freeze "photo" thump
-add(sfx, 23.0, paper(.3), .6)
-for t in [3.85, 5.5, 15.12, 19.72, 23.15, 23.75, 33.3, 34.3, 38.3, 40.52]: add(sfx, t, marker(.42), .9)
-for i in range(6): add(sfx, 27.25 + i * .15, step(1.2), .9, .2)                   # stairs
-for i in range(8): add(sfx, 28.15 + i * .13, step(.8), .6, -.2)                   # running on the street
-add(sfx, 27.2, voice_babble(3.3, 16, (110, 260), 2600, 4.5, seed=11), 1.2)      # street + crowd murmur
-add(sfx, 28.8, rumble(1.6) * .4 + voice_babble(1.6, 20, (100, 240), 2000, 4, seed=12) * .9, 1)
-add(sfx, 30.4, voice_babble(1.9, 24, (140, 300), 3200, 5, seed=13), 1.5)        # agitated crowd
-for t, w in [(30.45, 'tor'), (30.78, 'auf'), (31.85, 'tor'), (32.15, 'auf')]: add(sfx, t, chant_word(w, seed=int(t * 10)), .55)
-add(sfx, 32.3, dial(), .9, .1)
-add(sfx, 32.3, voice_babble(1.9, 14, (120, 280), 1200, 5, seed=14), .7)          # muffled crowd through the window
-add(sfx, 34.2, voice_babble(.9, 14, (120, 260), 2000, 4, seed=15), .6)
-add(sfx, 34.33, tick(True), 1.2); add(sfx, 34.35, lp(noise(int(.05 * SR)), 900) * expdec(int(.05 * SR), .01), .8)  # minute hand jump
-add(sfx, 35.1, voice_babble(.4, 14, (120, 260), 2000, 4, seed=16) * np.linspace(1, .4, int(.4 * SR)), .6)
-add(sfx, 35.1, heartbeat(), 1.0)
-add(sfx, 35.5, creak(1.95), .8, -.3); add(sfx, 37.45, clunk(), .9, -.3)
-# 37.5 – 38.25: one second of near silence
-add(sfx, 38.25, voice_babble(1.3, 26, (150, 330), 3600, 6, seed=17), 1.6)          # release: crowd roar
-for i in range(10): add(sfx, 38.3 + i * .12, step(.9), .7, (-1) ** i * .3)        # running feet
-for i in range(12): add(sfx, 38.35 + i * .1 + rng.uniform(0, .05), step(.5), .5, rng.uniform(-.6, .6))
-add(sfx, 39.5, applause(2.3), .9); add(sfx, 39.5, voice_babble(4.2, 22, (150, 320), 3500, 6, seed=18), 1.1)
-add(sfx, 39.62, cork(), 1.0, -.3)
-add(sfx, 41.7, whoosh(.3, False), .4); add(sfx, 43.65, whoosh(.4, True), .5)
-add(sfx, 43.7, flash(), .5); add(sfx, 43.75, shutter(), .5)
 
-# ---------------- music ----------------
-mus = np.zeros(N); tt = T(N)
-drone_end = 37.45
-d_env = np.clip(tt / 1.5, 0, 1) * np.clip((drone_end - tt) / .08, 0, 1) * (1 + .6 * np.clip((tt - 30) / 7.4, 0, 1))
-drone = (np.sin(2 * np.pi * 55 * tt) + .7 * np.sin(2 * np.pi * 55.4 * tt) + .5 * np.sin(2 * np.pi * 82.4 * tt + .5 * np.sin(2 * np.pi * .2 * tt)) + .25 * np.sin(2 * np.pi * 110.3 * tt))
-drone *= (.7 + .3 * np.sin(2 * np.pi * .13 * tt)); drone += lp(noise(N), 300) * .4
-mus += drone * d_env
-# slow moment: drop the drone a little under "sofort", swell before the barrier
-mus *= 1 - .4 * np.clip(1 - np.abs(tt - 20) / 1.5, 0, 1)
+# ---------------- v2: crowds ----------------
+VOW = {'a': (750, 1250), 'e': (450, 1900), 'i': (320, 2200), 'o': (470, 820), 'u': (330, 760), 'ae': (650, 1700), 'schwa': (520, 1450)}
+NPS, HOP = 1024, 256
+FREQ = np.fft.rfftfreq(NPS, 1 / SR)
+def shape_voice(exc, f1, f2, amp):
+    """exc: excitation; f1,f2,amp: per-STFT-frame arrays. Smooth time-varying formant filter (no clicks)."""
+    _, _, X = signal.stft(exc, SR, nperseg=NPS, noverlap=NPS - HOP)
+    m = X.shape[1]; f1 = np.interp(np.arange(m), np.linspace(0, m - 1, len(f1)), f1); f2 = np.interp(np.arange(m), np.linspace(0, m - 1, len(f2)), f2)
+    amp = np.interp(np.arange(m), np.linspace(0, m - 1, len(amp)), amp)
+    F = FREQ[:, None]
+    env = np.exp(-((F - f1) / 110) ** 2) + .7 * np.exp(-((F - f2) / 160) ** 2) + .25 * np.exp(-((F - 2700) / 300) ** 2) + .04
+    env *= 1 / (1 + (F / 3500) ** 2)
+    _, y = signal.istft(X * env * amp, SR, nperseg=NPS, noverlap=NPS - HOP)
+    return y[:len(exc)] if len(y) >= len(exc) else np.pad(y, (0, len(exc) - len(y)))
+def glottal(n, f0, r, jitter=.03):
+    tt = T(n); f = f0 * (1 + jitter * lp(r.standard_normal(n), 6) * 8 + .015 * np.sin(2 * np.pi * r.uniform(4, 6) * tt))
+    ph = np.cumsum(f / SR) % 1; return lp(2 * ph - 1, 1400, 1)
+def reverb(x, rt=.8, wet=.35, pre=.012, seed=0, bright=4000):
+    r = np.random.default_rng(seed); n = int(rt * SR); out = np.zeros((len(x), 2))
+    mono = x if x.ndim == 1 else x.mean(1)
+    for ch in range(2):
+        ir = lp(r.standard_normal(n), bright) * np.exp(-6.9 * T(n) / rt); ir = np.concatenate([np.zeros(int(pre * SR)), ir]); ir /= np.sqrt(np.sum(ir ** 2))
+        out[:, ch] = signal.fftconvolve(mono, ir)[:len(x)]
+    dry = np.stack([x, x], 1) if x.ndim == 1 else x
+    return dry * (1 - wet) + out * wet
+def crowd(d, nv=24, f0=(100, 260), excite=.5, seed=1, breath=.55, syll=(.12, .3), rt=.9, wet=.35, roar=.5):
+    """Walla: many breathy voices talking/shouting over each other + a soft noise roar; stereo, reverberant."""
+    r = np.random.default_rng(seed); n = int(d * SR); out = np.zeros((n, 2)); m = n // HOP + 4
+    for v in range(nv):
+        fv = r.uniform(*f0) * (1 + .25 * excite); exc = (1 - breath) * glottal(n, fv, r) + breath * r.standard_normal(n) * .35
+        f1 = np.zeros(m); f2 = np.zeros(m); amp = np.zeros(m); k = int(r.uniform(0, .5) * SR / HOP)
+        vk = r.choice(list(VOW)); 
+        while k < m:
+            L = int(r.uniform(*syll) * SR / HOP); nk = r.choice(list(VOW)); a0, b0 = VOW[vk]; a1, b1 = VOW[nk]
+            seg_ = np.linspace(0, 1, max(L, 2)); e = min(m, k + L)
+            f1[k:e] = (a0 + (a1 - a0) * seg_)[:e - k] * (1 + .15 * excite); f2[k:e] = (b0 + (b1 - b0) * seg_)[:e - k]
+            amp[k:e] = (np.sin(np.pi * seg_) ** .8)[:e - k] * r.uniform(.5, 1); vk = nk; k = e
+            if r.random() < .25: k += int(r.uniform(.1, .5) * SR / HOP)   # pauses between phrases
+        f1[f1 == 0] = 500; f2[f2 == 0] = 1500
+        y = shape_voice(exc, f1, f2, amp); pan = r.uniform(-.8, .8)
+        out[:, 0] += y * (1 - max(0, pan)) * r.uniform(.5, 1); out[:, 1] += y * (1 + min(0, pan)) * r.uniform(.5, 1)
+    out /= (np.sqrt(np.mean(out ** 2)) + 1e-9)
+    rr = lp(bp(noise(n), 250, 2200), 2500); rr *= (1 + .4 * lp(noise(n), 1.5) * 30); out += np.stack([rr, np.roll(rr, 900)], 1) / (np.sqrt(np.mean(rr ** 2)) + 1e-9) * roar
+    out = reverb(out, rt, wet, seed=seed)
+    fade = np.minimum(1, T(n) / .25) * np.minimum(1, (d - T(n)) / .3)
+    return out * fade[:, None] / (np.sqrt(np.mean(out ** 2)) + 1e-9) * .1
+def chant(times, nv=40, seed=5):
+    """'Tor auf!' shouted by a crowd: synchronised syllables (o, then a->u) with onset jitter; times = start of each 'Tor'."""
+    r = np.random.default_rng(seed); t0, t1 = min(times) - .1, max(times) + .9; n = int((t1 - t0) * SR); m = n // HOP + 4; out = np.zeros((n, 2))
+    for v in range(nv):
+        fv = r.uniform(170, 330); exc = .55 * glottal(n, fv, r, .02) + .45 * r.standard_normal(n) * .35
+        f1 = np.full(m, 500.); f2 = np.full(m, 1400.); amp = np.zeros(m)
+        for ts in times:
+            j = r.uniform(-.04, .06); a = int((ts - t0 + j) * SR / HOP); L1 = int(.26 * SR / HOP); g2 = int(.06 * SR / HOP); L2 = int(.38 * SR / HOP)
+            f1[a:a + L1] = 480; f2[a:a + L1] = 830; amp[a:a + L1] = np.sin(np.linspace(.15, np.pi, L1)) ** .5
+            b = a + L1 + g2; s2 = np.linspace(0, 1, L2); f1[b:b + L2] = 780 - 430 * s2; f2[b:b + L2] = 1250 - 480 * s2; amp[b:b + L2] = (np.sin(np.linspace(.2, np.pi, L2)) ** .5) * 1.1
+        y = shape_voice(exc, f1, f2, amp); pan = r.uniform(-.9, .9)
+        out[:, 0] += y * (1 - max(0, pan)); out[:, 1] += y * (1 + min(0, pan))
+        for ts in times:  # the 't' of "Tor"
+            c = hp(noise(int(.025 * SR)), 2500) * expdec(int(.025 * SR), .006) * .25; i = int((ts - t0 + r.uniform(-.03, .03)) * SR); out[i:i + len(c)] += c[:, None]
+    out = reverb(out, 1.4, .4, seed=seed)
+    return t0, out / (np.max(np.abs(out)) + 1e-9)
+def ambience(d, kind, seed=0):
+    n = int(d * SR)
+    if kind == 'hall':  # room tone + ventilation + distant camera motors
+        x = lp(noise(n), 500) * .4 + bp(noise(n), 2000, 6000) * .04 + np.sin(2 * np.pi * 120 * T(n)) * .01
+    else:               # outdoor night: wind + far traffic rumble
+        x = lp(noise(n), 300) * .6 * (1 + .5 * lp(noise(n), .5) * 40) + bp(noise(n), 800, 3000) * .03
+    x = reverb(x, .6, .2, seed=seed); return x * (np.minimum(1, T(n) / .1) * np.minimum(1, (d - T(n)) / .1))[:, None]
+
+# ---------------- v2: SFX, split into hits (short, clear) and beds (crowds, ambience) ----------------
+hits = np.zeros((N, 2)); beds = np.zeros((N, 2))
+CUTS = [2.3, 3.7, 5.4, 6.9, 9.6, 11.7, 13.8, 15.9, 18.4, 21.6, 23.0, 25.4, 27.2, 28.8, 30.4, 31.2, 32.3, 34.2, 35.1, 38.3, 39.5, 40.4, 41.7, 43.7]
+for i, c in enumerate(CUTS):
+    if c in (19.7, 37.45, 38.3): continue
+    add(hits, c - .18, whoosh(.32, i % 2 == 0), .35, (-1) ** i * .4)
+FL = [(.04, -.4), (.95, .3), (1.65, -.1), (2.9, .4), (3.75, -.3), (4.6, .2), (7.0, -.4), (8.35, .4), (9.2, -.2), (10.4, .2), (16.2, -.3), (17.0, .3), (17.9, -.1), (21.62, 0), (43.7, 0), (44.6, .3), (45.3, -.3)]
+for t, pan in FL: add(hits, t - .1, flash(), .8, pan); add(hits, t + .03, shutter(), .9, -pan)
+for t in [.5, 1.3, 2.0, 12.2, 13.2, 26.0, 44.2]: add(hits, t, shutter(), .5, rng.uniform(-.7, .7))      # extra shutters in the hall
+add(hits, 0.0, whoosh(.55), .8)                                                                    # camera rush into Noah
+for t0, t1 in [(0, 2.3), (3.7, 5.4), (11.7, 15.9), (25.4, 27.2), (43.7, DUR)]:
+    add(beds, t0, ambience(t1 - t0, 'hall', int(t0)), .6); add(beds, t0, crowd(t1 - t0, 16, (95, 220), .1, seed=int(t0 * 10), breath=.7, rt=1.1, wet=.45, roar=.2), .55)
+for t0, t1 in [(6.9, 11.7), (15.9, 18.4), (21.6, 23.0)]:
+    add(beds, t0, ambience(t1 - t0, 'hall', int(t0)), .6); add(beds, t0, crowd(t1 - t0, 12, (95, 220), .05, seed=int(t0 * 10), breath=.8, rt=1.1, wet=.5, roar=.1), .35)
+add(beds, 2.3, crowd(1.45, 30, (130, 300), 1, seed=5, breath=.45, syll=(.1, .22), rt=.7, wet=.25, roar=.6), 1.3)   # wall: cheering
+for i in range(6): add(hits, 2.4 + i * .222, hammer(), .8, .3)
+add(hits, 5.38, bp(noise(int(.12 * SR)), 800, 6000) * expdec(int(.12 * SR), .05) * .6, 1)              # TV switch-on static
+add(beds, 5.4, np.sin(2 * np.pi * 15600 * T(int(1.5 * SR))) * .01 + lp(noise(int(1.5 * SR)), 200) * .06, 1)
+for i in range(3): add(hits, 5.5 + i * .5, tick(i % 2 == 0), .7)
+add(hits, 7.3, lp(noise(int(.4 * SR)), 900) * np.sin(np.pi * T(int(.4 * SR)) / .4) * .25, 1)            # hand into jacket
+add(hits, 8.05, paper(.6), 1.2); add(hits, 9.7, paper(.5), .9); add(hits, 10.9, paper(.35), .8)
+add(hits, 13.95, lp(noise(int(.3 * SR)), 1200) * np.sin(np.pi * T(int(.3 * SR)) / .3) * .3, 1, .3)       # arm raised (coat rustle)
+for i in range(6): add(hits, 16.2 + i * .19, paper(.2), 1.1, (-1) ** i * .25)                            # leafing
+for i in range(3): add(hits, 17.55 + i * .26, paper(.16), .7)
+k = 0; tt_ = 18.45
+while tt_ < 19.66: add(hits, tt_, tick(k % 2 == 0), 1.2); tt_ += .4; k += 1                              # clock, stops at "sofort"
+add(hits, 19.68, lp(noise(int(.6 * SR)), 120) * expdec(int(.6 * SR), .15) * 1.5, 1)                     # low impact
+for i in range(2): add(hits, 20.05 + i * .8, heartbeat(), 1.3)
+add(hits, 21.6, lp(noise(int(.25 * SR)), 1500) * expdec(int(.25 * SR), .05), .9)                       # freeze
+add(hits, 23.0, paper(.3), .8)
+for t in [3.85, 5.5, 15.12, 19.72, 23.15, 23.75, 33.3, 34.3, 38.3, 40.52]: add(hits, t, marker(.42), 1.3)
+add(hits, 27.2, lp(noise(int(.15 * SR)), 900) * expdec(int(.15 * SR), .03), 1)                        # door
+for i in range(6): add(hits, 27.28 + i * .15, step(1.2), 1.1, .2)                                      # stairs
+for i in range(9): add(hits, 28.1 + i * .13, step(.8), .8, -.2)
+for i in range(4): add(hits, 27.4 + i * .3, lp(noise(int(.08 * SR)), 2500) * expdec(int(.08 * SR), .02) * .5, .7, rng.uniform(-.8, .8))   # windows opening
+add(beds, 27.2, ambience(3.2, 'out', 3), .8); add(beds, 27.2, crowd(3.2, 26, (110, 260), .5, seed=11, rt=1.2, wet=.4, roar=.4), 1.0)
+for i in range(14): add(hits, 28.85 + i * .11 + rng.uniform(0, .04), step(.45), .6, rng.uniform(-.7, .7))  # many feet from above
+add(beds, 30.4, ambience(1.9, 'out', 4), .8); add(beds, 30.4, crowd(1.9, 34, (130, 300), .9, seed=13, breath=.45, rt=1.3, wet=.4, roar=.6), 1.0)
+ct0, ch = chant([30.42, 31.84]); add(beds, ct0, ch, .55)                                               # "Tor auf!" (VO says it at 31.28)
+add(hits, 32.3, dial(), 1.4, .1)
+add(beds, 32.3, lp(crowd(1.9, 24, (130, 300), .8, seed=14, rt=.6, wet=.2), 900), .9)                  # crowd muffled by the window
+add(beds, 34.2, ambience(3.3, 'out', 5), .8); add(beds, 34.2, crowd(3.3, 30, (120, 280), .6, seed=15, rt=1.3, wet=.45, roar=.5) * np.concatenate([np.ones(int(1.3 * SR)), np.linspace(1, .25, int(2.0 * SR))])[:, None][:int(3.3 * SR)], .9)
+add(hits, 34.33, tick(True), 1.5); add(hits, 34.35, lp(noise(int(.05 * SR)), 900) * expdec(int(.05 * SR), .01), 1.0)
+add(hits, 35.1, heartbeat(), 1.4); add(hits, 36.2, heartbeat(), 1.0)
+add(hits, 35.5, creak(1.95), .9, -.3); add(hits, 37.45, clunk(), 1.2, -.3)
+# 37.5 – 38.25: one second of silence
+add(beds, 38.25, crowd(1.3, 40, (150, 330), 1, seed=17, breath=.4, syll=(.1, .2), rt=1.3, wet=.35, roar=.8), 1.5)   # release: roar
+for i in range(10): add(hits, 38.3 + i * .115, step(1.0), 1.0, (-1) ** i * .3)
+for i in range(14): add(hits, 38.35 + i * .085 + rng.uniform(0, .04), step(.5), .6, rng.uniform(-.7, .7))
+add(beds, 39.5, crowd(4.2, 36, (150, 320), 1, seed=18, breath=.45, syll=(.1, .22), rt=1.0, wet=.3, roar=.6), 1.0)
+add(hits, 39.5, applause(2.6, 110), 1.3); add(hits, 39.62, cork(), 1.6, -.3)
+for i in range(4): add(hits, 40.4 + i * .5, applause(.4, 60), .5)
+
+# ---------------- v2: light music ----------------
+BEAT = 60 / 96
+def note_hz(nm):
+    names = {'C': 0, 'C#': 1, 'D': 2, 'D#': 3, 'E': 4, 'F': 5, 'F#': 6, 'G': 7, 'G#': 8, 'A': 9, 'A#': 10, 'B': 11}
+    return 440 * 2 ** ((names[nm[:-1]] + 12 * (int(nm[-1]) + 1) - 69) / 12)
+def pluck(f, d=.9, bright=.5, g=.996):
+    n = int(d * SR); L = max(2, int(SR / f)); x = np.zeros(n); burst = lp(noise(L), 1500 + 5000 * bright); x[:L] = burst
+    a = np.zeros(L + 2); a[0] = 1; a[L] = -g * .5; a[L + 1] = -g * .5
+    y = signal.lfilter([1], a, x); return y / (np.max(np.abs(y)) + 1e-9) * expdec(n, d * .5)
+def pad(freqs, d, cutoff=1100):
+    n = int(d * SR); tt = T(n); y = np.zeros(n)
+    for f in freqs:
+        for det in (-.004, 0, .005): y += 2 * ((np.cumsum(np.full(n, f * (1 + det))) / SR) % 1) - 1
+    y = lp(y, cutoff, 2); return y * np.minimum(1, tt / .6) * np.minimum(1, (d - tt) / .6)
+def kick():
+    n = int(.35 * SR); tt = T(n); return np.sin(2 * np.pi * (50 * tt + 90 * (1 - np.exp(-tt * 30)) / 30)) * expdec(n, .12)
+music = np.zeros((N, 2))
+tense = [('A2', 'C4', 'E4', 'A4'), ('F2', 'A3', 'C4', 'F4'), ('C3', 'E4', 'G4', 'C5'), ('E2', 'G#3', 'B3', 'E4')]
+bar = 4 * BEAT; t = 0.0; ci = 0
+while t < 37.45:
+    ch_ = tense[ci % 4]; d = min(bar + .6, 37.45 - t + .05)
+    if d > .3: add(music, t, pad([note_hz(x) for x in ch_[:3]], d) * .18, 1, 0)
+    for s in range(8):  # eighth-note pluck arpeggio
+        ts = t + s * BEAT / 2
+        if ts >= 37.45: break
+        quiet = 18.4 <= ts < 21.6 or 5.4 <= ts < 6.9
+        if quiet: continue
+        f = note_hz(ch_[[1, 2, 3, 2, 1, 2, 3, 2][s]]) * (2 if ts > 27 else 1)
+        add(music, ts, pluck(f, .7, .35 + .4 * (ts > 27)), .22 if ts < 27 else .3, (-1) ** s * .35)
+    if t >= 27.0:
+        for b in range(4):
+            ts = t + b * BEAT
+            if ts < 37.4: add(music, ts, kick(), .55 + .3 * (ts > 34), 0)
+    t += bar; ci += 1
+# slow moment: music drops away under "sofort" (19.7) and comes back at 21.6
+tt = T(N); env = np.ones(N); env -= .75 * np.clip((tt - 18.4) / .5, 0, 1) * np.clip((21.6 - tt) / .3, 0, 1); env[(tt >= 19.68) & (tt < 21.0)] = 0
+env *= np.clip((21.0 - tt) / 1, 0, 1) * 0 + 1; env[(tt >= 21.0) & (tt < 21.6)] = np.linspace(0, 1, int(.6 * SR) + 1)[:np.sum((tt >= 21.0) & (tt < 21.6))]
+# riser before the barrier, hard stop at 37.45
+n_r = int((37.45 - 34.2) * SR); tr = T(n_r); riser = bp(noise(n_r), 300, 5000) * (tr / tr[-1]) ** 2 * .12 + np.sin(2 * np.pi * (110 * tr + 60 * tr ** 2)) * (tr / tr[-1]) ** 2 * .06
+add(music, 34.2, riser, 1)
+music *= env[:, None]; music[int(37.45 * SR):int(38.28 * SR)] = 0
 def piano_note(f, d, a=1.0):
     n = int(d * SR); t_ = T(n); y = np.zeros(n)
     for h in range(1, 8): fh = f * h * (1 + .0004 * h * h); y += np.sin(2 * np.pi * fh * t_) * (1 / h ** 1.3) * expdec(n, 1.6 / h ** .6)
     y += lp(noise(n), 3000) * expdec(n, .004) * .2
     return y * np.minimum(1, t_ / .004) * a
-chords = [(38.3, [261.6, 329.6, 392.0], 523.3), (40.2, [246.9, 293.7, 392.0], 587.3), (42.1, [220.0, 261.6, 329.6], 659.3), (44.0, [174.6, 220.0, 261.6], 523.3)]
-for t0, notes, top in chords:
-    for i, f in enumerate([notes[0] / 2] + notes): pn = piano_note(f, 3.0, .5 if i else .7); j = int((t0 + i * .05) * SR); mus[j:j + len(pn)] += pn[:max(0, N - j)]
-    pn = piano_note(top, 2.5, .45); j = int((t0 + .55) * SR); mus[j:j + len(pn)] += pn[:max(0, N - j)]
-mus *= np.clip((DUR - tt) / .4, 0, 1)
+warm = [(38.3, ['C3', 'E4', 'G4', 'C5'], 'E5'), (40.2, ['G2', 'D4', 'G4', 'B4'], 'D5'), (42.1, ['A2', 'C4', 'E4', 'A4'], 'C5'), (44.0, ['F2', 'A3', 'C4', 'F4'], 'A4')]
+for t0, ch_, top in warm:
+    for i, nm in enumerate(ch_): add(music, t0 + i * .04, piano_note(note_hz(nm), 3.2, .5 if i else .7), .5, (i - 1.5) * .2)
+    add(music, t0 + .6, piano_note(note_hz(top), 2.6, .5), .5, .2)
+    add(music, t0, pad([note_hz(x) for x in ch_[1:]], 2.2, 1600) * .14, 1)
+    for s in range(6): add(music, t0 + .95 + s * BEAT / 2, pluck(note_hz(ch_[1 + s % 3]) * 2, .6, .5), .12, (-1) ** s * .4)
+music *= np.clip((DUR - T(N)) / .35, 0, 1)[:, None]
 
-# ---------------- levels + ducking ----------------
+# ---------------- v2: levels + ducking ----------------
 vo = load(vo_path)
-win = int(.03 * SR); e = np.sqrt(np.convolve(vo ** 2, np.ones(win) / win, 'same'))
-act = (e > .02).astype(float)
-# attack 20 ms, release 250 ms
+win = int(.03 * SR); e = np.sqrt(np.convolve(vo ** 2, np.ones(win) / win, 'same')); act = (e > .02).astype(float)
 k_a, k_r = 1 - np.exp(-1 / (.02 * SR)), 1 - np.exp(-1 / (.25 * SR)); g = np.zeros(N); s_ = 0.0
 for i in range(0, N, 48):
     tgt = act[i]; s_ += (tgt - s_) * (1 - (1 - (k_a if tgt > s_ else k_r)) ** 48); g[i:i + 48] = s_
-duck = 1 - (1 - 10 ** (-10 / 20)) * g          # -10 dB while speaking
-save(f'{out}/stem_vo.wav', vo); save(f'{out}/stem_sfx_raw.wav', sfx); save(f'{out}/stem_mus_raw.wav', mus)
-L_vo, L_sfx, L_mus = lufs(f'{out}/stem_vo.wav'), lufs(f'{out}/stem_sfx_raw.wav'), lufs(f'{out}/stem_mus_raw.wav')
-g_sfx = 10 ** ((L_vo - 4 - L_sfx) / 20)          # SFX bed sits ~4 LU under the voice before ducking
-g_mus = 10 ** ((L_vo - 28.5 - L_mus) / 20)       # music ~27 LU under the voice (measured)
-sfx_f = sfx * g_sfx * duck[:, None]; mus_f = mus * g_mus
-save(f'{out}/stem_sfx.wav', sfx_f); save(f'{out}/stem_mus.wav', mus_f)
-mix = np.stack([vo, vo], 1) + sfx_f + mus_f[:, None]
+duck = lambda db: (1 - (1 - 10 ** (-db / 20)) * g)[:, None]
+for nm, x in [('vo', vo), ('hits_raw', hits), ('beds_raw', beds), ('mus_raw', music)]: save(f'{out}/stem_{nm}.wav', x)
+L = {nm: lufs(f'{out}/stem_{nm}.wav') for nm in ['vo', 'hits_raw', 'beds_raw', 'mus_raw']}
+hits_f = hits * 10 ** ((L['vo'] - 1 - L['hits_raw']) / 20) * duck(3)
+beds_f = beds * 10 ** ((L['vo'] - 5 - L['beds_raw']) / 20) * duck(8)
+mus_f = music * 10 ** ((L['vo'] - 13 - L['mus_raw']) / 20) * duck(4)
+for nm, x in [('hits', hits_f), ('beds', beds_f), ('mus', mus_f)]: save(f'{out}/stem_{nm}.wav', x)
+mix = np.stack([vo, vo], 1) + hits_f + beds_f + mus_f
 save(f'{out}/mix_raw.wav', mix)
-print(json.dumps({'L_vo': L_vo, 'L_sfx_raw': L_sfx, 'L_mus_raw': L_mus, 'L_sfx': lufs(f'{out}/stem_sfx.wav'), 'L_mus': lufs(f'{out}/stem_mus.wav'), 'L_mix': lufs(f'{out}/mix_raw.wav')}))
+print(json.dumps({**L, **{k: lufs(f'{out}/stem_{k}.wav') for k in ['hits', 'beds', 'mus']}, 'mix': lufs(f'{out}/mix_raw.wav'), 'peak': float(np.max(np.abs(mix)))}))
