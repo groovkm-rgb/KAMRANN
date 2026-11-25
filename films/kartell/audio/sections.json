@@ -1,0 +1,98 @@
+[
+ {
+  "name": "01 Giriş",
+  "s": 0.0,
+  "e": 39.82,
+  "first": "Du hast alles."
+ },
+ {
+  "name": "02 Depo ve ilk karton",
+  "s": 39.82,
+  "e": 69.15,
+  "first": "Du bist zweiundzwanzig."
+ },
+ {
+  "name": "03 Kaçak sigara gerçeği",
+  "s": 69.15,
+  "e": 133.33,
+  "first": "Aber schauen wir uns mal an, wie groß dieses „harmlose“ Geschäft wirklich ist."
+ },
+ {
+  "name": "04 Sahte ürünler",
+  "s": 133.33,
+  "e": 196.88,
+  "first": "Und dann kommt die zweite Idee."
+ },
+ {
+  "name": "05 Yükseliş",
+  "s": 196.88,
+  "e": 220.13,
+  "first": "Aber du siehst nur, dass die Kunden Schlange stehen."
+ },
+ {
+  "name": "06 Kapıdaki adam",
+  "s": 220.13,
+  "e": 253.38,
+  "first": "Eines Tages steht ein Mann vor deinem Lager."
+ },
+ {
+  "name": "07 İlk ölümden sonra",
+  "s": 253.38,
+  "e": 263.76,
+  "first": "Du redest dir ein, dass das nicht deine Schuld ist."
+ },
+ {
+  "name": "08 Teklif",
+  "s": 263.76,
+  "e": 279.37,
+  "first": "Und dann kommt das Angebot, auf das alles hinausläuft."
+ },
+ {
+  "name": "09 Kurbanlar",
+  "s": 279.37,
+  "e": 312.78,
+  "first": "Denn mit Drogen verdient man ein Vielfaches."
+ },
+ {
+  "name": "10 Paranoya",
+  "s": 312.78,
+  "e": 375.28,
+  "first": "Und jetzt, wo du ganz oben angekommen bist, schauen wir uns mal an, wie dein Leben wirklich aussieht."
+ },
+ {
+  "name": "11 Escobar",
+  "s": 375.28,
+  "e": 433.56,
+  "first": "Vielleicht denkst du jetzt:"
+ },
+ {
+  "name": "12 El Chapo",
+  "s": 433.56,
+  "e": 471.43,
+  "first": "Oder Joaquín Guzmán, genannt El Chapo."
+ },
+ {
+  "name": "13 Sıradakiler",
+  "s": 471.43,
+  "e": 501.81,
+  "first": "Und das sind die, die es angeblich geschafft haben."
+ },
+ {
+  "name": "14 Baskın",
+  "s": 501.81,
+  "e": 541.94,
+  "first": "Und jetzt zurück zu dir."
+ },
+ {
+  "name": "15 Hücre",
+  "s": 541.94,
+  "e": 565.75,
+  "first": "Später, in deiner Zelle, rechnest du nach."
+ },
+ {
+  "name": "16 Final",
+  "s": 565.75,
+  "e": 599.41,
+  "first": "Weißt du, das Gefährliche an diesem Weg ist nicht der große Schritt."
+ }
+]
