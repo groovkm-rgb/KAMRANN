@@ -7,5 +7,6 @@
     "../kartell/lib/places.js",
     "../kartell/lib/cars.js",
     "../kartell/lib/dossier.js",
+    "../kartell/lib/decor.js",
     "../kartell/lib/shots01.js",
     "scenes.js"] }

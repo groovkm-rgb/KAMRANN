@@ -23,6 +23,9 @@ function garageSet(c, cam, t, o = {}) {
     kRect(c, 760, b - 240, 70, 200, '#c8201e', 2.5); kRect(c, 772, b - 276, 46, 36, '#2a2a2e', 2);
     secCam(c, 1150, b - 640, -1, t, 1);
     for (let i = 0; i < 3; i++) kRect(c, -260 + i * 130, b - 120, 110, 120, '#3a3c40', 2); // tyre stack covers
+    kRect(c, -760, b - 640, 300, 200, '#c8b89a', 2); for (let q = 0; q < 40; q++) { circle(c, -745 + (q % 10) * 30, b - 625 + Math.floor(q / 10) * 45, 3); c.fillStyle = '#8a7a5a'; c.fill(); } line(c, [-720, b - 620, -700, b - 520], 6, '#c8302a'); line(c, [-660, b - 620, -660, b - 500], 6, '#3a3c40'); line(c, [-600, b - 620, -620, b - 530], 8, '#e8c23a'); circle(c, -540, b - 580, 30); fs(c, null, 5, '#2f6fb0');
+    framedArt(c, 560, b - 650, 260, 180, 'lines', 2, '#18191c'); analogClock(c, 980, b - 600, 40, t);
+    kRect(c, 1300, b - 520, 400, 12, '#7a7e84', 2); for (let i = 0; i < 4; i++) kRect(c, 1310 + i * 95, b - 600, 80, 80, '#c9a06a', 1.5, 'rgba(60,40,20,.7)'); kRect(c, 1300, b - 300, 400, 12, '#7a7e84', 2); for (let i = 0; i < 3; i++) kRect(c, 1320 + i * 120, b - 400, 100, 100, ['#2f6fb0', '#e8c23a', '#3a3c40'][i], 1.5);
     c.fillStyle = 'rgba(0,0,0,.06)'; c.fillRect(-8000, b - 40, 16000, 40);
   });
   layer(c, cam, 1, c => { const g = c.createLinearGradient(0, HZ, 0, HZ + 1200); g.addColorStop(0, '#9fa2a6'); g.addColorStop(1, '#6f7276'); c.fillStyle = g; c.fillRect(-9000, HZ, 18000, 3000);
@@ -85,6 +88,7 @@ function mirrorShot(c, lt, t) {
 // ---------- phone face down, vibrating on marble ----------
 function phoneShot(c, lt, t) {
   c.setTransform(1, 0, 0, 1, 0, 0); marbleBG(c, 0, 0, W, H, '#e4e2de', 11); bloom(c, 1500, 100, 900, '255,240,210', .3);
+  keysBowl(c, 380, 300, 2); sunglasses(c, 1500, 220, 2); waterGlass(c, 1650, 900, 2.4); bookStackFlat(c, 420, 980, 2, 2, 2.4); line(c, [1350, 760, 1560, 720], 10, '#2a4ab0');
   const vib = (Math.sin(t * 80) * 4) * (Math.sin(lt * 6) > -.2 ? 1 : 0);
   c.save(); c.translate(960 + vib, 560); c.rotate(.12 + vib * .002); c.fillStyle = 'rgba(0,0,0,.25)'; c.beginPath(); c.roundRect(-190, -370, 400, 760, 60); c.fill();
   c.beginPath(); c.roundRect(-200, -380, 400, 760, 60); fs(c, '#1e2026', 6); c.beginPath(); c.roundRect(-150, -330, 150, 190, 40); fs(c, '#2c2f36', 4); for (const [x, y] of [[-110, -290], [-40, -290], [-110, -200]]) { circle(c, x, y, 26); fs(c, '#0e1014', 4); }
@@ -92,46 +96,48 @@ function phoneShot(c, lt, t) {
   if (Math.sin(lt * 6) > -.2) for (const s of [-1, 1]) for (let k = 0; k < 3; k++) { c.beginPath(); c.arc(960 + s * (260 + k * 40), 560, 60 + k * 40, s > 0 ? -.5 : Math.PI - .5, s > 0 ? .5 : Math.PI + .5); c.lineWidth = 6; c.strokeStyle = `rgba(40,40,50,${.35 - k * .1})`; c.stroke(); }
   c.font = '700 54px Inter'; c.fillStyle = 'rgba(30,30,40,.0)'; c.fillText('', 0, 0);
 }
-// ---------- bedroom: bed seen from its foot, marble wall, closed curtains with a slice of noon light ----------
+// ---------- bedroom (real scale): lamps on in a darkened room at noon, bed never slept in ----------
 function bedroomSet(c, cam, t, o = {}) {
-  const HZ = -300, B = p => layerBase(cam, HZ, p);
-  c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#6d6a66'; c.fillRect(0, 0, W, H);
-  layer(c, cam, .8, c => { const b = B(.8), top = b - 3.2 * KM, gx = o.gapX ?? 900, bx = o.bedX ?? -500;
-    c.fillStyle = '#cbc6be'; c.fillRect(-6000, top - 400, 12000, b - top + 400); // plaster
-    c.fillStyle = 'rgba(255,255,255,.08)'; c.fillRect(-6000, top - 400, 12000, 60); line(c, [-6000, top - 340, 6000, top - 340], 4, '#b8b2a8'); // ceiling cove
-    marbleBG(c, bx - 520, top + 40, 1040, b - top - 40, '#55585e', 21); kRect(c, bx - 520, top + 40, 1040, b - top - 40, null, 3); // marble slab behind the bed
-    // abstract canvas
-    kRect(c, -2050, top + 260, 420, 300, '#efebe3', 3); c.fillStyle = '#9a8a76'; c.fillRect(-2010, top + 300, 160, 220); c.fillStyle = '#c8b89c'; c.fillRect(-1830, top + 380, 160, 140); line(c, [-2010, top + 470, -1690, top + 330], 6, '#4a4440');
-    // wardrobe
-    kRect(c, -3100, top + 40, 820, b - top - 40, '#e8e3da', 3); for (let k = 1; k < 4; k++) line(c, [-3100 + k * 205, top + 40, -3100 + k * 205, b], 3, '#c8c2b8'); for (let k = 0; k < 4; k++) kRect(c, -3010 + k * 205, top + 520, 8, 120, '#9a948a', 1);
-    // smoke detector + AC vent
-    circle(c, -800, top - 300, 26); fs(c, '#f4f2ee', 2); kRect(c, 1500, top - 260, 380, 60, '#e8e4dc', 2); for (let k = 0; k < 10; k++) line(c, [1510 + k * 36, top - 250, 1510 + k * 36, top - 210], 3, '#b8b2a8');
-    // curtains (closed) with a gap where noon light comes through
-    for (let i = 0; i < 40; i++) { const x = gx - 1000 + i * 52 + (i >= 20 ? 26 : 0); c.fillStyle = i % 2 ? '#8f8678' : '#7f776a'; c.fillRect(x, top - 300, 54, b - top + 300); c.fillStyle = 'rgba(0,0,0,.12)'; c.fillRect(x + 40, top - 300, 14, b - top + 300); }
-    c.fillStyle = '#fff6dc'; c.fillRect(gx + 40, top - 300, 26, b - top + 300); bloom(c, gx + 53, top + 300, 340, '255,240,200', .55);
-    kRect(c, gx - 1040, top - 330, 2140, 30, '#3a3632', 2);
-    c.save(); c.translate(bx, b); c.scale(.5, .5); c.translate(-bx, -b); // furniture drawn at 2x, real size: bed ~2,2 m wide
-    // nightstands + lamps (off)
-    for (const s of [-1, 1]) { const nx = bx + s * 760; kRect(c, nx - 170, b - 300, 340, 300, '#3e352e', 3); kRect(c, nx - 150, b - 200, 300, 10, '#2a2420', 1); kRect(c, nx - 20, b - 18, 40, 18, '#2a2420', 0);
-      line(c, [nx, b - 300, nx, b - 520], 6); c.beginPath(); c.moveTo(nx - 80, b - 520); c.lineTo(nx + 80, b - 520); c.lineTo(nx + 60, b - 640); c.lineTo(nx - 60, b - 640); c.closePath(); fs(c, '#e9e2d2', 2.5); }
-    kRect(c, bx + 640, b - 318, 120, 18, '#f8f6ee', 2); line(c, [bx + 650, b - 322, bx + 750, b - 330], 4, '#2a4ab0'); // notepad + pen on the right nightstand
-    kRect(c, bx - 860, b - 324, 70, 24, '#2b2b30', 1.5); // phone charger, no phone
-    // bed from its foot: tall upholstered headboard, pillows, tight duvet (never slept in), folded throw
-    c.beginPath(); c.roundRect(bx - 520, b - 900, 1040, 640, 24); fs(c, '#8a8076', 3); for (let k = 1; k < 9; k++) line(c, [bx - 520 + k * 115, b - 890, bx - 520 + k * 115, b - 270], 3, 'rgba(0,0,0,.18)');
-    for (let i = 0; i < 4; i++) { c.beginPath(); c.roundRect(bx - 470 + i * 235, b - 520 - (i % 3 ? 0 : 10), 220, 160, 50); fs(c, i === 1 || i === 2 ? '#f4f2ee' : '#dcd6cc', 3); }
-    c.beginPath(); c.moveTo(bx - 500, b - 380); c.lineTo(bx + 500, b - 380); c.lineTo(bx + 560, b - 250); c.lineTo(bx - 560, b - 250); c.closePath(); fs(c, '#f2f0ec', 3); // duvet top, perfectly flat
-    c.beginPath(); c.rect(bx - 560, b - 250, 1120, 190); fs(c, '#ebe8e2', 3); line(c, [bx - 560, b - 236, bx + 560, b - 236], 3, 'rgba(0,0,0,.08)'); // duvet front
-    c.beginPath(); c.moveTo(bx - 530, b - 300); c.lineTo(bx + 530, b - 300); c.lineTo(bx + 545, b - 250); c.lineTo(bx - 545, b - 250); c.closePath(); fs(c, '#5a5f6a', 2.5); // folded throw
-    kRect(c, bx - 560, b - 60, 1120, 60, '#3e352e', 3); // base
-    // bench at the foot + rug
-    c.fillStyle = '#9a948c'; c.fillRect(bx - 900, b - 6, 1800, 30); for (let k = 0; k < 18; k++) line(c, [bx - 880 + k * 100, b - 4, bx - 840 + k * 100, b + 22], 3, 'rgba(60,55,50,.3)');
-    c.restore();
+  const HZ = -260, B = p => layerBase(cam, HZ, p);
+  c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#4a4642'; c.fillRect(0, 0, W, H);
+  layer(c, cam, .85, c => { const b = B(.85), top = b - 2.9 * KM, gx = o.gapX ?? 560, bx = o.bedX ?? -260;
+    c.fillStyle = '#b9b0a4'; c.fillRect(-4000, top - 300, 8000, b - top + 300); wallPanels(c, -2000, 2000, top, b);
+    c.fillStyle = '#d8cfc2'; c.fillRect(-4000, top - 300, 8000, 40); c.save(); c.globalCompositeOperation = 'screen'; c.fillStyle = 'rgba(255,200,130,.25)'; c.fillRect(-4000, top - 260, 8000, 24); c.restore(); // warm cove LED
+    // pendant light from the ceiling (off) + smoke detector
+    line(c, [-800, top - 300, -800, top - 60], 3, '#2a2418'); c.beginPath(); c.arc(-800, top - 30, 40, Math.PI, 0); fs(c, '#2a2418', 2); circle(c, 300, top - 270, 12); fs(c, '#f4f2ee', 1.5);
+    // dark marble feature wall behind the bed, framed art, sconces
+    marbleBG(c, bx - 330, top + 20, 660, b - top - 20, '#4a4d54', 21); kRect(c, bx - 330, top + 20, 660, b - top - 20, null, 2);
+    framedArt(c, bx - 170, top + 70, 340, 190, 'sea', 3, '#b8954a');
+    sconce(c, bx - 250, top + 250, .9, true); sconce(c, bx + 250, top + 250, .9, true);
+    // left: shelf with books, a framed landscape, a ceramic vase
+    kRect(c, -1150, top + 120, 360, 14, '#3e352e', 2); books(c, -1140, top + 120, 7, 2, .9); vaseFlowers(c, -870, top + 120, .6, 5);
+    kRect(c, -1150, top + 300, 360, 14, '#3e352e', 2); bookStackFlat(c, -1060, top + 300, 3, 1, .9); framedArt(c, -960, top + 196, 150, 104, 'landscape', 7, '#2a2420');
+    analogClock(c, -680, top + 140, 34, t);
+    // headboard, bed, pillows, throw — real size (bed 2,0 m wide)
+    c.beginPath(); c.roundRect(bx - 250, b - 300, 500, 200, 14); fs(c, '#8a7e72', 2.5); for (let k = 1; k < 8; k++) line(c, [bx - 250 + k * 62, b - 295, bx - 250 + k * 62, b - 105], 2, 'rgba(0,0,0,.18)');
+    for (let i = 0; i < 4; i++) { c.beginPath(); c.roundRect(bx - 225 + i * 113, b - 175 - (i % 3 ? 0 : 6), 104, 70, 22); fs(c, i === 1 || i === 2 ? '#f4f2ee' : '#c9bfb0', 2); }
+    c.beginPath(); c.roundRect(bx - 60, b - 150, 120, 46, 14); fs(c, '#8a5a42', 2); // accent cushion
+    c.beginPath(); c.moveTo(bx - 240, b - 110); c.lineTo(bx + 240, b - 110); c.lineTo(bx + 262, b - 62); c.lineTo(bx - 262, b - 62); c.closePath(); fs(c, '#f2f0ec', 2.5);
+    c.beginPath(); c.rect(bx - 262, b - 62, 524, 46); fs(c, '#ebe8e2', 2.5); c.beginPath(); c.moveTo(bx - 250, b - 84); c.lineTo(bx + 250, b - 84); c.lineTo(bx + 258, b - 62); c.lineTo(bx - 258, b - 62); c.closePath(); fs(c, '#5a5f6a', 2);
+    kRect(c, bx - 262, b - 16, 524, 16, '#3e352e', 2);
+    // nightstands with lamps ON, books, water glass, notepad + pen, charger without a phone
+    for (const sd of [-1, 1]) { const nx = bx + sd * 340; kRect(c, nx - 70, b - 120, 140, 120, '#3e352e', 2.5); kRect(c, nx - 60, b - 76, 120, 5, '#2a2420', 1); circle(c, nx, b - 50, 4); c.fillStyle = '#b8954a'; c.fill(); warmLamp(c, nx + sd * 20, b - 120, .55, true, t + sd); }
+    bookStackFlat(c, bx - 370, b - 120, 2, 3, .5); waterGlass(c, bx - 300, b - 120, .6);
+    kRect(c, bx + 290, b - 126, 50, 6, '#f8f6ee', 1); line(c, [bx + 294, b - 128, bx + 336, b - 131], 2, '#2a4ab0');
+    // right: closed curtains with a gap of noon light, armchair, floor lamp, monstera
+    for (let i = 0; i < 24; i++) { const x = gx - 420 + i * 40 + (i >= 12 ? 14 : 0); c.fillStyle = i % 2 ? '#7a7060' : '#6c6354'; c.fillRect(x, top - 280, 42, b - top + 280); c.fillStyle = 'rgba(0,0,0,.15)'; c.fillRect(x + 30, top - 280, 12, b - top + 280); }
+    c.fillStyle = '#fff6dc'; c.fillRect(gx + 60, top - 280, 14, b - top + 280); bloom(c, gx + 67, top + 200, 220, '255,240,200', .6);
+    kRect(c, gx - 440, top - 300, 1000, 16, '#2a2622', 1.5);
+    armchair(c, gx + 260, b, .62, '#9a8670'); floorLamp(c, gx + 420, b, .7, true); monstera(c, gx - 330, b, .5, 4);
   });
-  layer(c, cam, 1, c => { marbleBG(c, -9000, HZ, 18000, 2000, '#8e8a86', 9); c.fillStyle = 'rgba(0,0,0,.12)'; c.fillRect(-9000, HZ, 18000, 60);
-    const bx = (o.bedX ?? -500) * .9; c.fillStyle = 'rgba(60,56,52,.35)'; c.beginPath(); c.ellipse(bx + 200, HZ + 140, 900, 120, 0, 0, Math.PI * 2); c.fill(); // rug
-    const cx = (o.gapX ?? 900) * .95; c.save(); c.globalCompositeOperation = 'screen'; c.fillStyle = 'rgba(255,240,200,.5)'; c.beginPath(); c.moveTo(cx - 10, HZ); c.lineTo(cx + 30, HZ); c.lineTo(cx + 900, 900); c.lineTo(cx + 600, 900); c.closePath(); c.fill(); c.restore(); });
-  return { base: '#8e8a86' };
+  layer(c, cam, 1, c => { // herringbone oak floor + patterned rug + slippers
+    c.fillStyle = '#6e5440'; c.fillRect(-9000, HZ, 18000, 2000);
+    for (let r = 0; r < 16; r++) for (let k = -60; k < 60; k++) { const x = k * 70 + (r % 2) * 35, y = HZ + r * 26; c.save(); c.translate(x, y); c.rotate(r % 2 ? .5 : -.5); c.fillStyle = (k + r) % 3 ? 'rgba(0,0,0,.08)' : 'rgba(255,220,180,.05)'; c.fillRect(-30, -6, 60, 12); c.restore(); }
+    rugPattern(c, (o.bedX ?? -260) * .85, HZ + 120, 1100, 200, '#58504a', 3); slippers(c, (o.bedX ?? -260) * .85 - 140, HZ + 70, .9);
+    const cx = (o.gapX ?? 560) * .9; c.save(); c.globalCompositeOperation = 'screen'; c.fillStyle = 'rgba(255,240,200,.45)'; c.beginPath(); c.moveTo(cx + 40, HZ); c.lineTo(cx + 60, HZ); c.lineTo(cx + 700, 900); c.lineTo(cx + 520, 900); c.closePath(); c.fill(); c.restore(); });
+  return { base: '#6e5440' };
 }
+function bedroomLight(c, cam, t) { layer(c, cam, 1, c => motes(c, cam.x + 300, cam.x + 1100, cam.y - 600, cam.y + 300, t, { n: 34, alpha: .7, color: '255,240,210' })); grade(c, { sx: .3, sy: .6, warm: '255,190,110', warmA: .3, cool: '20,25,50', coolA: .4 }); }
 // ---------- banknote counter on a dark desk (front view, faceless notes, no hands) ----------
 function bill(c, x, y, w, h, col = '#a7b497') { c.beginPath(); c.rect(x, y, w, h); fs(c, col, 1.5, 'rgba(50,60,40,.8)'); c.strokeStyle = 'rgba(60,75,50,.5)'; c.lineWidth = 2; c.strokeRect(x + 6, y + 4, w - 12, h - 8); }
 function bundle(c, x, y, w = 300, n = 16) { for (let i = 0; i < n; i++) { c.beginPath(); c.rect(x, y - i * 6, w, 6); fs(c, i % 2 ? '#a7b497' : '#9caa8c', 1, 'rgba(50,60,40,.6)'); } kRect(c, x + w * .4, y - n * 6 + 6, w * .2, n * 6, '#e9dcbc', 1.5); }
@@ -140,6 +146,9 @@ function moneyCounterShot(c, lt, t) {
   // walnut panel wall + closed blinds with slivers of noon light
   c.fillStyle = '#3a2a20'; c.fillRect(0, 0, W, 620); for (let i = 0; i < 12; i++) { c.fillStyle = i % 2 ? 'rgba(0,0,0,.15)' : 'rgba(255,220,180,.04)'; c.fillRect(i * 170, 0, 160, 620); line(c, [i * 170, 0, i * 170, 620], 3, '#24190f'); }
   kRect(c, 1240, 60, 560, 440, '#1e1a16', 3); for (let k = 0; k < 22; k++) { c.fillStyle = k % 2 ? '#d8cdb8' : '#c4b8a0'; c.fillRect(1250, 70 + k * 19.5, 540, 15); c.fillStyle = 'rgba(255,246,220,.8)'; c.fillRect(1250, 85 + k * 19.5, 540, 3); }
+  kRect(c, 40, 40, 440, 560, '#2a1e16', 3); for (let r = 0; r < 4; r++) { kRect(c, 50, 170 + r * 140, 420, 12, '#4a3626', 1.5); books(c, 70, 168 + r * 140, 6 + r % 3, r * 3 + 1, 1.1); if (r === 1) vaseFlowers(c, 400, 308, .7, 6); if (r === 3) bookStackFlat(c, 380, 588, 3, 2, .9); }
+  framedArt(c, 560, 120, 380, 260, 'landscape', 5, '#b8954a'); sconce(c, 750, 440, 1, true);
+  monstera(c, 1860, 640, .9, 8);
   const z = 1 + lt * .035; c.save(); c.translate(W / 2, H * .6); c.scale(z, z); c.translate(-W / 2, -H * .6);
   // desk
   const dg = c.createLinearGradient(0, 600, 0, H); dg.addColorStop(0, '#5a4030'); dg.addColorStop(1, '#2e2018'); c.fillStyle = dg; c.fillRect(-200, 600, W + 400, 600); for (let i = 0; i < 10; i++) line(c, [-200, 640 + i * 46 + Math.sin(i) * 8, W + 200, 650 + i * 46], 2, 'rgba(0,0,0,.18)');
@@ -148,6 +157,7 @@ function moneyCounterShot(c, lt, t) {
   // bundles: neat pyramid on the left, one loose stack
   for (let r = 0; r < 3; r++) for (let k = 0; k < 3 - r; k++) bundle(c, 120 + k * 230 + r * 115, 860 - r * 100, 210, 16);
   bundle(c, 1560, 880, 220, 12); kRect(c, 1580, 760, 60, 8, '#b85a3a', 0);
+  warmLamp(c, 1480, 640, 1.6, true, t); kCup(c, { wx: 1760, wy: 660 }, 0, t); sunglasses(c, 300, 960, 1.3);
   // machine body
   const mx = 960, my = 880;
   c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.ellipse(mx, my + 10, 380, 40, 0, 0, Math.PI * 2); c.fill();
@@ -169,6 +179,8 @@ function moneyCounterShot(c, lt, t) {
 // ---------- close-up: Noah's face lit by the monitor wall, feeds reflected in his pupils ----------
 function faceShot(c, lt, t) {
   c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#1c1f26'; c.fillRect(0, 0, W, H);
+  kRect(c, 80, 80, 520, 620, '#121318', 3); for (let k = 0; k < 26; k++) { c.fillStyle = k % 2 ? '#2a2c34' : '#22242b'; c.fillRect(90, 90 + k * 23, 500, 18); c.fillStyle = 'rgba(255,240,210,.35)'; c.fillRect(90, 106 + k * 23, 500, 2); }
+  monstera(c, 260, 1080, 1.2, 2); warmLamp(c, 660, 900, 1.4, true, t);
   // monitor wall on the right
   for (let r = 0; r < 3; r++) for (let k = 0; k < 2; k++) { const x = 1420 + k * 260, y = 120 + r * 250; kRect(c, x, y, 240, 220, '#0b0c0f', 4); c.fillStyle = ['#6f7a86', '#808a8e', '#6a7480', '#86909a', '#757f88', '#7c8690'][r * 2 + k]; c.fillRect(x + 12, y + 12, 216, 196); for (let q = 0; q < 6; q++) { c.fillStyle = 'rgba(0,0,0,.12)'; c.fillRect(x + 12, y + 12 + q * 33, 216, 14); } }
   c.fillStyle = 'rgba(255,255,255,.7)'; c.fillRect(1440 + ((lt * 60) % 180), 300, 22, 12);
@@ -183,7 +195,11 @@ function faceShot(c, lt, t) {
 // ---------- coffee cup trembling on its saucer (no hands) ----------
 function cupShot(c, lt, t) {
   c.setTransform(1, 0, 0, 1, 0, 0); const g = c.createLinearGradient(0, 0, W, 0); g.addColorStop(0, '#dfe7ec'); g.addColorStop(1, '#a9b6bf'); c.fillStyle = g; c.fillRect(0, 0, W, 640);
-  for (let i = 0; i < 6; i++) { c.fillStyle = 'rgba(255,255,255,.3)'; c.fillRect(150 + i * 320, 0, 130, 640); line(c, [150 + i * 320, 0, 150 + i * 320, 640], 6, '#4a4440'); }
+  c.fillStyle = '#9cc8e4'; c.fillRect(0, 0, W, 640); c.fillStyle = '#9fb59a'; c.fillRect(0, 380, W, 260); for (let i = 0; i < 8; i++) { c.fillStyle = '#3f6a8a'; } c.fillStyle = '#5f9cc4'; c.fillRect(0, 360, W, 30);
+  for (let i = 0; i < 7; i++) oliveTree(c, 80 + i * 300, 560, 360, i * 9, 1.5); for (let i = 0; i < 3; i++) cypress(c, 260 + i * 640, 560, 420, '#3d5a3a');
+  c.fillStyle = '#e9e1cf'; c.fillRect(0, 560, W, 80);
+  for (let i = 0; i < 6; i++) { c.fillStyle = 'rgba(255,255,255,.18)'; c.beginPath(); c.moveTo(150 + i * 320, 0); c.lineTo(230 + i * 320, 0); c.lineTo(130 + i * 320, 640); c.lineTo(50 + i * 320, 640); c.fill(); line(c, [i * 320, 0, i * 320, 640], 14, '#3a3632'); }
+  line(c, [0, 8, W, 8], 16, '#3a3632');
   marbleBG(c, 0, 640, W, 440, '#ece9e4', 17); line(c, [0, 640, W, 640], 4, '#a8a4a0');
   const sh = Math.sin(t * 55) * 2.5 * clamp(lt / .3);
   c.fillStyle = 'rgba(0,0,0,.2)'; c.beginPath(); c.ellipse(960, 880, 330, 50, 0, 0, Math.PI * 2); c.fill();
@@ -196,12 +212,17 @@ function cupShot(c, lt, t) {
   for (let r = 1; r <= 4; r++) { const rr = ((lt * 2.5 + r / 4) % 1); c.beginPath(); c.ellipse(0, -378, 150 * rr, 30 * rr, 0, 0, Math.PI * 2); c.lineWidth = 3; c.strokeStyle = `rgba(210,170,130,${.7 * (1 - rr)})`; c.stroke(); }
   c.restore();
   bloom(c, 600, 200, 900, '255,250,235', .3);
+  vaseFlowers(c, 1600, 900, 1.6, 2); bookStackFlat(c, 380, 960, 3, 1, 2.2); keysBowl(c, 1480, 1010, 1.4);
 }
 // ---------- smart lock on a heavy door: bolt slides, LED goes red (no hands) ----------
 function lockShot(c, lt, t) {
   c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#2f2a27'; c.fillRect(0, 0, W, H);
   for (let i = 0; i < 30; i++) { c.fillStyle = i % 2 ? 'rgba(0,0,0,.08)' : 'rgba(255,220,180,.05)'; c.fillRect(i * 70, 0, 34, H); }
-  c.fillStyle = '#ece8e0'; c.fillRect(1380, 0, 540, H); line(c, [1380, 0, 1380, H], 8, '#1a1716'); bloom(c, 1600, 300, 700, '255,240,210', .25);
+  c.fillStyle = '#ece8e0'; c.fillRect(1380, 0, 540, H); line(c, [1380, 0, 1380, H], 8, '#1a1716');
+  c.beginPath(); c.arc(1660, 330, 150, 0, Math.PI * 2); fs(c, '#b8954a', 5); c.beginPath(); c.arc(1660, 330, 132, 0, Math.PI * 2); const mg = c.createLinearGradient(1530, 200, 1790, 460); mg.addColorStop(0, '#d8e2e6'); mg.addColorStop(1, '#8a969c'); c.fillStyle = mg; c.fill(); // round mirror
+  kRect(c, 1460, 700, 460, 30, '#3e352e', 3); kRect(c, 1480, 730, 20, 350, '#3e352e', 2); kRect(c, 1880, 730, 20, 350, '#3e352e', 2); keysBowl(c, 1560, 700, 1.3); vaseFlowers(c, 1800, 700, 1.1, 3); sconce(c, 1450 + 40, 260, 1.2, true);
+  for (let i = 0; i < 3; i++) { circle(c, 300 + i * 150, 140, 14); fs(c, '#b8954a', 2); } c.beginPath(); c.moveTo(430, 150); c.quadraticCurveTo(520, 300, 480, 620); c.lineTo(360, 620); c.quadraticCurveTo(360, 300, 430, 150); fs(c, '#2b2a2e', 3); // coat on a hook
+  kRect(c, 120, 820, 120, 260, '#3a3c40', 3); for (let k = 0; k < 2; k++) line(c, [150 + k * 50, 820, 140 + k * 60, 560], 8, k ? '#1e3a5a' : '#2a2a2e'); // umbrella stand
   const k = easeOut(clamp((lt - .25) / .3)), red = lt > .5;
   c.beginPath(); c.roundRect(760, 200, 360, 680, 40); fs(c, '#1d1f24', 5); c.beginPath(); c.roundRect(790, 230, 300, 300, 24); fs(c, '#121317', 3);
   for (let r = 0; r < 4; r++) for (let q = 0; q < 3; q++) { circle(c, 860 + q * 80, 290 + r * 60, 18); fs(c, '#2a2d33', 2); }
@@ -213,6 +234,7 @@ function lockShot(c, lt, t) {
 // ---------- SIM card: tray ejected, card cracks in two on the marble (no hands) ----------
 function simShot(c, lt, t) {
   c.setTransform(1, 0, 0, 1, 0, 0); marbleBG(c, 0, 0, W, H, '#2e2f34', 23); bloom(c, 900, 300, 900, '255,236,200', .3);
+  keysBowl(c, 260, 250, 2); sunglasses(c, 420, 920, 2); waterGlass(c, 1780, 960, 2.4);
   c.save(); c.translate(1320, 600); c.rotate(-.1); c.beginPath(); c.roundRect(-220, -420, 440, 860, 60); fs(c, '#16181c', 6); c.beginPath(); c.roundRect(-200, -400, 400, 820, 50); fs(c, '#0c0d10', 2); c.restore();
   c.save(); c.translate(1080, 520); c.rotate(-.1); kRect(c, -260, -24, 260, 48, '#a8aaae', 3); circle(c, -30, 0, 10); fs(c, '#6a6c70', 2); c.restore(); // ejected tray
   const snap = clamp((lt - .55) / .15), bend = clamp(lt / .55);
@@ -224,4 +246,4 @@ function simShot(c, lt, t) {
   }
   if (snap > 0 && snap < 1) for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; line(c, [640 + Math.cos(a) * 80 * snap, 620 + Math.sin(a) * 80 * snap, 640 + Math.cos(a) * 170 * snap, 620 + Math.sin(a) * 170 * snap], 5, 'rgba(255,255,255,.7)'); }
 }
-function bedroomLight(c, cam, t) { layer(c, cam, 1, c => motes(c, cam.x + 300, cam.x + 1100, cam.y - 600, cam.y + 300, t, { n: 34, alpha: .7, color: '255,240,210' })); grade(c, { sx: .8, sy: .4, warm: '255,230,190', warmA: .3, cool: '20,25,50', coolA: .45 }); }
+

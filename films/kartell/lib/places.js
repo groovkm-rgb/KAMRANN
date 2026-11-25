@@ -180,6 +180,9 @@ function villaHouse(c, b, t, o) {
   c.save(); c.beginPath(); c.rect(gx0, g0 + 60, gw, b - g0 - 60); c.clip();
   for (let i = 0; i < 60; i++) { const x = gx0 + i * gw / 60; c.fillStyle = i % 2 ? '#d9d4ca' : '#c8c2b6'; c.fillRect(x, g0 + 60, gw / 60 + 1, b - g0); } // curtain folds
   c.fillStyle = 'rgba(0,0,0,.18)'; c.fillRect(gx0, g0 + 60, gw, 50);
+  // warm interior lamps glowing through the sheer curtains + reflected olive trees
+  for (const lx of [gx0 + 300, gx0 + 1300, gx0 + 2200]) { bloom(c, lx, b - 380, 260, '255,200,120', .35); c.fillStyle = 'rgba(80,60,40,.25)'; c.fillRect(lx - 60, b - 260, 120, 200); }
+  for (let i = 0; i < 6; i++) { const rx = gx0 + 200 + i * 430; c.fillStyle = 'rgba(110,130,100,.22)'; for (let k = 0; k < 5; k++) { c.beginPath(); c.ellipse(rx + (k - 2) * 60, g0 + 220 + Math.sin(k + i) * 30, 80, 50, 0, 0, Math.PI * 2); c.fill(); } }
   // sky reflections on glass
   c.fillStyle = 'rgba(190,225,245,.35)'; c.fillRect(gx0, g0 + 60, gw, b - g0);
   c.fillStyle = 'rgba(255,255,255,.35)'; for (let i = 0; i < 5; i++) { const x = gx0 + i * pw + pw * .2; c.beginPath(); c.moveTo(x, g0 + 60); c.lineTo(x + 90, g0 + 60); c.lineTo(x - 60, b); c.lineTo(x - 150, b); c.fill(); }
