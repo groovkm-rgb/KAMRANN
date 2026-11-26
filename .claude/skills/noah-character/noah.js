@@ -1,0 +1,372 @@
+// NOAH: the user's character, coded from the reference sheet (reference.jpg).
+// Units: 1 unit = 1/4 px of the reference sheet. Origin = between the feet, y up is negative.
+// Standing height 1527 units. Measured from the FRONT figure; do not "restyle" these numbers.
+// Usage (world space, toon-shorts engine or any canvas):
+//   drawNoah(c, { x, y, k: .5, arms, expr, tilt, bob })   full body, front view
+//   drawNoahHead(c, x, y, k, expr, tilt)                 head only (x,y = head centre)
+//   drawNoahHand(c, x, y, k, ang)                         loose hand (e.g. on a blanket)
+const NOAH = {
+  out: '#211c1a', skin: '#ffffff', shade: '#dedad6', hair: '#564c46', hairDark: '#2f2926', hairLight: '#857a73',
+  eye: '#231d1b', brow: '#6c625b', shirt: '#2a2624', letters: '#ddd8cf', pants: '#5a4e48', stripe: '#8e837c',
+  shoe: '#3e332e', watch: '#b39b62', tongue: '#c9585e', mouthIn: '#5a2026',
+  W: 13,                 // outline width (units)
+  HEAD: { y: -1240, r: 262 },
+  SHOULDER: { x: 150, y: -915 }, UPPER: 215, FORE: 205, ARM_W: 68,
+  HEM: -510,
+  // relaxed arms (angle from straight down, +outward), as in the reference front view
+  ARMS: { l: { a: .13, b: -.08 }, r: { a: .13, b: -.08 } },
+};
+const nLine = (c, pts, w, col) => { c.beginPath(); c.moveTo(pts[0], pts[1]); for (let i = 2; i < pts.length; i += 2) c.lineTo(pts[i], pts[i + 1]); c.lineWidth = w; c.strokeStyle = col; c.lineCap = 'round'; c.lineJoin = 'round'; c.stroke(); };
+const nFill = (c, fill, w = NOAH.W) => { if (fill) { c.fillStyle = fill; c.fill(); } if (w) { c.lineWidth = w; c.strokeStyle = NOAH.out; c.lineJoin = 'round'; c.stroke(); } };
+
+function noahHairBack(c) {
+  // hair ends that peek out under the head on both sides (behind head and neck)
+  for (const s of [-1, 1]) {
+    c.beginPath(); c.moveTo(s * 205, -1150);
+    c.lineTo(s * 196, -1010); c.lineTo(s * 182, -968); c.lineTo(s * 168, -1000); c.lineTo(s * 152, -955); c.lineTo(s * 136, -995); c.lineTo(s * 118, -962);
+    c.lineTo(s * 96, -1040); c.lineTo(s * 60, -1150); c.closePath(); nFill(c, NOAH.hair, NOAH.W * .6);
+  }
+}
+function noahFace(c, e) {
+  const H = NOAH.HEAD, cy = H.y;
+  // eyes
+  for (const s of [-1, 1]) {
+    const ex = s * 92, ey = cy + 25;
+    if (e.eyes === 'closed') { c.beginPath(); c.moveTo(ex - 26, ey - 4); c.quadraticCurveTo(ex, ey + 20, ex + 26, ey - 4); c.lineWidth = 9; c.strokeStyle = NOAH.eye; c.lineCap = 'round'; c.stroke(); }
+    else {
+      const lid = e.lid || 0;
+      c.save(); c.beginPath(); c.rect(ex - 40, ey - 40 + lid * 70, 80, 90); c.clip();
+      c.beginPath(); c.ellipse(ex + (e.look || 0) * 6, ey, 23, 34, 0, 0, Math.PI * 2); c.fillStyle = NOAH.eye; c.fill(); c.restore();
+      if (lid > .05) nLine(c, [ex - 25, ey - 34 + lid * 68, ex + 25, ey - 34 + lid * 68], 7, NOAH.eye);
+    }
+  }
+  // brows (thin, slightly arched)
+  const bu = (e.browUp || 0) * 18;
+  for (const s of [-1, 1]) { c.beginPath(); c.moveTo(s * 140, cy - 22 - bu); c.quadraticCurveTo(s * 95, cy - 46 - bu, s * 52, cy - 36 - bu); c.lineWidth = 14; c.strokeStyle = NOAH.brow; c.lineCap = 'round'; c.stroke(); }
+  // optional primitive look: full scruffy beard + moustache (expr.beard), drawn before the mouth
+  if (e.beard) noahBeard(c, cy, e);
+  // mouth
+  const my = cy + 148, m = e.mouth || 'smile';
+  if (m === 'smile') { c.beginPath(); c.moveTo(-62, my - 6); c.quadraticCurveTo(0, my + 22, 64, my - 6); c.lineWidth = 9; c.strokeStyle = NOAH.out; c.lineCap = 'round'; c.stroke(); }
+  else if (m === 'soft') { c.beginPath(); c.moveTo(-30, my); c.quadraticCurveTo(0, my + 10, 30, my); c.lineWidth = 8; c.strokeStyle = NOAH.out; c.stroke(); }
+  else if (m === 'flat') nLine(c, [-34, my + 2, 34, my + 2], 8, NOAH.out);
+  else if (m === 'o' || m === 'yawn') {
+    const o = m === 'yawn' ? (e.open ?? 1) : .4, rw = 26 + 12 * o, rh = 14 + 46 * o;
+    c.beginPath(); c.ellipse(0, my + 6, rw, rh, 0, 0, Math.PI * 2); c.fillStyle = NOAH.mouthIn; c.fill();
+    c.save(); c.clip(); c.beginPath(); c.ellipse(0, my + 6 + rh * .75, rw * .8, rh * .5, 0, 0, Math.PI * 2); c.fillStyle = NOAH.tongue; c.fill(); c.restore();
+    c.beginPath(); c.ellipse(0, my + 6, rw, rh, 0, 0, Math.PI * 2); c.lineWidth = 8; c.strokeStyle = NOAH.out; c.stroke();
+  }
+  if (e._moustache) { noahMoustache(c, cy); e._moustache = false; }
+}
+function noahHeadLocal(c, e = {}) {
+  const H = NOAH.HEAD, cy = H.y, R = H.r;
+  // skull + chin shade
+  c.save(); c.beginPath(); c.arc(0, cy, R, 0, Math.PI * 2); c.fillStyle = NOAH.shade; c.fill(); c.clip();
+  c.beginPath(); c.arc(-4, cy - 34, R - 4, 0, Math.PI * 2); c.fillStyle = NOAH.skin; c.fill(); c.restore();
+  c.beginPath(); c.arc(0, cy, R, 0, Math.PI * 2); nFill(c, null);
+  // hair cap: swept-back pompadour; hairline arches high in the middle, temples come down to eye level
+  const hairline = (dir) => {
+    // dir 1: right side -> centre -> left side; used for both fill and the outline
+    c.bezierCurveTo(R - 8, cy - 60, R - 22, cy - 140, 190, cy - 165); c.bezierCurveTo(140, cy - 192, 70, cy - 145, 0, cy - 145);
+    c.bezierCurveTo(-70, cy - 145, -140, cy - 192, -190, cy - 165); c.bezierCurveTo(-R + 22, cy - 140, -R + 8, cy - 60, -R + 6, cy - 8);
+  };
+  c.beginPath(); c.moveTo(-R + 6, cy - 8);
+  c.bezierCurveTo(-R - 16, cy - 170, -175, cy - 300, 0, cy - 290);
+  c.bezierCurveTo(175, cy - 300, R + 16, cy - 170, R - 6, cy - 8);
+  hairline(1); c.closePath(); nFill(c, NOAH.hair, NOAH.W * .8);
+  // strands sweep from the hairline up and back towards the crown
+  c.save(); c.clip();
+  // strands fan outward like ( ) as they sweep back, as on the reference
+  for (const i of [-4.2, -2.9, -1.6, -.5, .6, 1.7, 3, 4.3]) {
+    const x0 = i * 40, y0 = cy - 145 - Math.abs(i) * 14 + i * i * 2.2, sg = Math.sign(i);
+    c.beginPath(); c.moveTo(x0, y0 + 8); c.quadraticCurveTo(x0 * 1.05 + sg * 10, cy - 250, x0 * 1.5 + sg * 30, cy - 300);
+    c.lineWidth = Math.abs(i) > 2 ? 5 : 4; c.strokeStyle = Math.round(Math.abs(i)) % 2 ? NOAH.hairDark : NOAH.hairLight; c.lineCap = 'round'; c.stroke();
+  }
+  for (const s of [-1, 1]) for (let j = 0; j < 3; j++) { c.beginPath(); c.moveTo(s * (R - 14 - j * 10), cy - 10 - j * 12); c.quadraticCurveTo(s * (R - 20 - j * 12), cy - 110, s * (R - 70 - j * 18), cy - 190); c.lineWidth = 4; c.strokeStyle = j === 1 ? NOAH.hairLight : NOAH.hairDark; c.stroke(); }
+  c.restore();
+  c.beginPath(); c.moveTo(R - 6, cy - 8); hairline(1); c.lineWidth = NOAH.W * .8; c.strokeStyle = NOAH.out; c.lineCap = 'round'; c.stroke();
+  if (e.wild) noahWildHair(c, cy, R);
+  noahFace(c, e);
+}
+function noahLetters(c, x, y, sc = 1) {
+  // the hand-lettered name on the shirt, as strokes (font-free, deterministic)
+  c.save(); c.translate(x, y); c.scale(sc, sc); c.translate(-92, 0);
+  const st = () => { c.lineWidth = 8; c.strokeStyle = NOAH.letters; c.lineCap = 'round'; c.lineJoin = 'round'; c.stroke(); };
+  c.beginPath(); c.moveTo(2, 0); c.lineTo(0, -68); c.lineTo(40, -2); c.lineTo(42, -70); st();
+  c.beginPath(); c.ellipse(72, -22, 17, 22, 0, 0, Math.PI * 2); st();
+  c.beginPath(); c.ellipse(116, -22, 17, 22, 0, 0, Math.PI * 2); st(); c.beginPath(); c.moveTo(134, -42); c.lineTo(134, 0); st();
+  c.beginPath(); c.moveTo(152, -76); c.lineTo(152, 0); c.moveTo(152, -26); c.quadraticCurveTo(168, -52, 184, -30); c.lineTo(184, 0); st();
+  c.restore();
+}
+function noahHandLocal(c, ang) {
+  // open, relaxed cartoon hand at the origin pointing along ang (0 = down)
+  c.save(); c.rotate(ang);
+  c.beginPath(); c.moveTo(-34, -6); c.quadraticCurveTo(-44, 50, -26, 92); c.quadraticCurveTo(-14, 104, -6, 86); c.lineTo(-4, 100); c.quadraticCurveTo(8, 112, 16, 94);
+  c.lineTo(20, 98); c.quadraticCurveTo(32, 104, 34, 84); c.quadraticCurveTo(44, 40, 34, -6); c.closePath(); nFill(c, NOAH.skin, NOAH.W * .8);
+  nLine(c, [-6, 86, -8, 60], 5, NOAH.out); nLine(c, [16, 94, 14, 62], 5, NOAH.out);
+  // thumb
+  c.beginPath(); c.moveTo(-32, 20); c.quadraticCurveTo(-62, 44, -52, 66); c.quadraticCurveTo(-40, 72, -30, 52); nFill(c, NOAH.skin, NOAH.W * .7);
+  c.restore();
+}
+function noahArm(c, side, spec, watch, sleeve = true) {
+  const S = NOAH.SHOULDER, sx = side * S.x, sy = S.y;
+  const a = spec.a, b = spec.b ?? 0, a2 = a + b;
+  const ex = sx + side * Math.sin(a) * NOAH.UPPER, ey = sy + Math.cos(a) * NOAH.UPPER;
+  const wx = ex + side * Math.sin(a2) * NOAH.FORE, wy = ey + Math.cos(a2) * NOAH.FORE;
+  nLine(c, [sx, sy, ex, ey, wx, wy], NOAH.ARM_W + NOAH.W * 2, NOAH.out);
+  nLine(c, [sx, sy, ex, ey, wx, wy], NOAH.ARM_W, NOAH.skin);
+  // short t-shirt sleeve in the arm's frame (u = along the arm, o = outward)
+  const ux = side * Math.sin(a), uy = Math.cos(a), ox = side * Math.cos(a), oy = -Math.sin(a) * 1;
+  const P = (u, o) => [sx + ux * u + ox * o, sy + uy * u + oy * o * side * side];
+  if (sleeve) {
+  const pts = [P(-28, -48), P(-26, 18), P(150, 66), P(166, -28)];
+  c.beginPath(); c.moveTo(...pts[0]); c.quadraticCurveTo(...P(-40, -10), ...pts[1]); c.quadraticCurveTo(...P(60, 52), ...pts[2]); c.lineTo(...pts[3]); c.closePath(); nFill(c, NOAH.shirt); }
+  if (watch) {
+    const k = .82, cx = ex + (wx - ex) * k, cy = ey + (wy - ey) * k, fx = side * Math.sin(a2), fy = Math.cos(a2);
+    nLine(c, [cx - fy * 40, cy + fx * 40, cx + fy * 40, cy - fx * 40], 22, NOAH.out); nLine(c, [cx - fy * 36, cy + fx * 36, cx + fy * 36, cy - fx * 36], 13, NOAH.watch);
+    c.beginPath(); c.arc(cx + fy * 34 * side, cy - fx * 34 * side, 18, 0, Math.PI * 2); nFill(c, NOAH.watch, 8);
+  }
+  c.save(); c.translate(wx, wy); noahHandLocal(c, -side * a2 + (spec.hand || 0)); c.restore();
+}
+function noahLegs(c, p) {
+  const top = NOAH.HEM - 10;
+  for (const s of [-1, 1]) {
+    const lift = (p.legs && p.legs[s < 0 ? 0 : 1]) || 0;
+    c.beginPath(); c.moveTo(s * 4, top); c.lineTo(s * 116, top); c.lineTo(s * 108, -95 - lift); c.lineTo(s * 14, -95 - lift); c.closePath(); nFill(c, NOAH.pants);
+    c.save(); c.clip(); for (let i = 0; i < 4; i++) { const x = s * (30 + i * 24); nLine(c, [x, top, x * .97, -90], 3, NOAH.stripe); } c.restore();
+    c.beginPath(); c.moveTo(s * 20, -98 - lift); c.lineTo(s * 108, -98 - lift); c.quadraticCurveTo(s * 190, -66 - lift, s * 196, -16 - lift); c.quadraticCurveTo(s * 190, 4 - lift, s * 140, 2 - lift); c.lineTo(s * 30, 2 - lift); c.quadraticCurveTo(s * 10, -40 - lift, s * 20, -98 - lift); nFill(c, NOAH.shoe);
+  }
+}
+function noahTorso(c) {
+  c.beginPath(); c.moveTo(-58, -952); c.lineTo(-150, -942); c.quadraticCurveTo(-140, -820, -128, -760); c.lineTo(-122, NOAH.HEM); c.lineTo(126, NOAH.HEM);
+  c.lineTo(132, -760); c.quadraticCurveTo(144, -820, 155, -942); c.lineTo(58, -952); c.quadraticCurveTo(0, -915, -58, -952); c.closePath(); nFill(c, NOAH.shirt);
+  noahLetters(c, 4, -760, 1);
+}
+// ---- outfits (body clothes only; head, hair, face never change) ----
+const NOAH_FUR = { fur: '#b8773c', furDark: '#7d4a22', furLight: '#d9a066', wrap: '#8a5a32' };
+function noahTunic(c) {
+  // stone-age fur tunic over the left shoulder, jagged hem; right shoulder bare
+  c.beginPath(); c.moveTo(-58, -952); c.lineTo(-150, -942); c.quadraticCurveTo(-140, -820, -128, -760); c.lineTo(-122, NOAH.HEM + 20); c.lineTo(126, NOAH.HEM + 20);
+  c.lineTo(132, -760); c.quadraticCurveTo(144, -820, 155, -942); c.lineTo(58, -952); c.quadraticCurveTo(0, -915, -58, -952); c.closePath(); nFill(c, NOAH.skin);
+  c.beginPath(); c.moveTo(-138, -800); c.quadraticCurveTo(0, -860, 70, -955); c.lineTo(165, -945); c.quadraticCurveTo(150, -820, 142, -760);
+  const hem = NOAH.HEM + 70; c.lineTo(146, hem - 10);
+  for (let i = 0; i <= 8; i++) { const x = 146 - i * 37; c.lineTo(x - 18, hem + (i % 2 ? 34 : 6)); }
+  c.lineTo(-140, hem - 10); c.lineTo(-136, -760); c.closePath(); nFill(c, NOAH_FUR.fur);
+  c.save(); c.clip();
+  for (let i = 0; i < 16; i++) { const x = -120 + ((i * 53) % 260), y = -820 + ((i * 97) % 330); c.beginPath(); c.ellipse(x, y, 16 + (i % 3) * 5, 11, i, 0, Math.PI * 2); c.fillStyle = NOAH_FUR.furDark; c.fill(); }
+  for (let i = 0; i < 12; i++) { const x = -110 + ((i * 71) % 250), y = -780 + ((i * 61) % 300); nLine(c, [x, y, x + 10, y + 26], 4, NOAH_FUR.furLight); }
+  c.restore();
+  // rope belt
+  nLine(c, [-128, NOAH.HEM - 40, 132, NOAH.HEM - 46], 22, NOAH.out); nLine(c, [-128, NOAH.HEM - 40, 132, NOAH.HEM - 46], 12, '#c9a46a');
+}
+function noahLegsSitting(c, p, bare) {
+  // front view, seated on something seatH units high: knees towards the camera, shins straight down
+  const seat = -(p.seatH ?? 250), kneeY = seat - 40;
+  for (const s of [-1, 1]) {
+    const kx = s * 150, fx = s * 120;
+    if (bare) {
+      nLine(c, [kx, kneeY, fx, -70], 96 + NOAH.W * 2, NOAH.out); nLine(c, [kx, kneeY, fx, -70], 96, NOAH.skin);
+      c.beginPath(); c.moveTo(s * 10, kneeY - 90); c.lineTo(s * 150, kneeY - 75); c.lineTo(s * 205, kneeY + 5); c.lineTo(s * 95, kneeY + 30); c.lineTo(s * 10, kneeY - 10); c.closePath(); nFill(c, NOAH.skin);
+      c.beginPath(); c.ellipse(kx, kneeY + 5, 64, 54, 0, 0, Math.PI * 2); nFill(c, NOAH.skin);
+      // fur foot wraps
+      c.beginPath(); c.moveTo(fx - 62, -120); c.lineTo(fx + 62, -120); c.quadraticCurveTo(fx + 85, -20, fx + 70, 4); c.lineTo(fx - 70, 4); c.quadraticCurveTo(fx - 85, -20, fx - 62, -120); nFill(c, NOAH_FUR.wrap);
+      nLine(c, [fx - 60, -85, fx + 60, -95], 7, NOAH_FUR.furDark);
+    } else {
+      nLine(c, [kx, kneeY, fx, -80], 110 + NOAH.W * 2, NOAH.out); nLine(c, [kx, kneeY, fx, -80], 110, NOAH.pants);
+      c.beginPath(); c.ellipse(kx, kneeY + 5, 72, 56, 0, 0, Math.PI * 2); nFill(c, NOAH.pants);
+      c.beginPath(); c.ellipse(fx, -40, 80, 44, 0, 0, Math.PI * 2); nFill(c, NOAH.shoe);
+    }
+  }
+}
+function drawNoah(c, p = {}) {
+  if (p.ink && !p._inked) { const W0 = NOAH.W; NOAH.W = W0 * p.ink; try { return drawNoah(c, Object.assign({}, p, { _inked: 1 })); } finally { NOAH.W = W0; } }
+  if (p.outfit === 'caveman' || p.sit) return drawNoahOutfit(c, p);
+  const k = p.k ?? .5, arms = Object.assign({}, NOAH.ARMS, p.arms || {}), e = p.expr || {};
+  c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k);
+  if (p.lean) c.rotate(p.lean);
+  noahLegs(c, p);
+  c.save(); c.translate(0, p.bob || 0);
+  noahTorso(c);
+  // neck
+  c.beginPath(); c.rect(-46, -1000, 92, 62); c.fillStyle = NOAH.skin; c.fill(); nLine(c, [-46, -1000, -46, -948], 10, NOAH.out); nLine(c, [46, -1000, 46, -948], 10, NOAH.out);
+  c.beginPath(); c.moveTo(-58, -952); c.quadraticCurveTo(0, -915, 58, -952); c.lineWidth = 10; c.strokeStyle = NOAH.out; c.stroke();
+  const armsUp = arms.l.a > 1.6 || arms.r.a > 1.6;
+  const drawArms = () => { noahArm(c, -1, arms.l, false); noahArm(c, 1, arms.r, true); };
+  if (!armsUp) drawArms();
+  c.save(); c.translate(0, NOAH.HEAD.y + 260); c.rotate(p.tilt || 0); c.translate(0, -(NOAH.HEAD.y + 260));
+  noahHairBack(c); noahHeadLocal(c, e); c.restore();
+  if (armsUp) drawArms();
+  c.restore(); c.restore();
+}
+function drawNoahHead(c, x, y, k = .5, e = {}, tilt = 0) {
+  c.save(); c.translate(x, y); c.rotate(tilt); c.scale(k, k); c.translate(0, -NOAH.HEAD.y); noahHairBack(c); noahHeadLocal(c, e); c.restore();
+}
+function drawNoahHand(c, x, y, k = .5, ang = 0) { c.save(); c.translate(x, y); c.scale(k, k); noahHandLocal(c, ang); c.restore(); }
+
+// Full body with an outfit and/or seated. outfit: 'classic' (default) | 'caveman'. sit: true, seatH (units, default 250).
+function drawNoahOutfit(c, p) {
+  const k = p.k ?? .5, arms = Object.assign({}, NOAH.ARMS, p.arms || {}), e = p.expr || {};
+  const cave = p.outfit === 'caveman', dy = p.sit ? (-(p.seatH ?? 250)) - (NOAH.HEM + 40) - 60 : 0;
+  c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k);
+  if (p.sit) noahLegsSitting(c, p, cave);
+  c.save(); c.translate(0, dy + (p.bob || 0));
+  if (!p.sit) { if (cave) { for (const s of [-1, 1]) { nLine(c, [s * 60, NOAH.HEM, s * 62, -90], 96 + NOAH.W * 2, NOAH.out); nLine(c, [s * 60, NOAH.HEM, s * 62, -90], 96, NOAH.skin); } } else noahLegs(c, p); }
+  if (cave) noahTunic(c); else noahTorso(c);
+  c.beginPath(); c.rect(-46, -1000, 92, 62); c.fillStyle = NOAH.skin; c.fill(); nLine(c, [-46, -1000, -46, -948], 10, NOAH.out); nLine(c, [46, -1000, 46, -948], 10, NOAH.out);
+  if (!cave) { c.beginPath(); c.moveTo(-58, -952); c.quadraticCurveTo(0, -915, 58, -952); c.lineWidth = 10; c.strokeStyle = NOAH.out; c.stroke(); }
+  const armsUp = arms.l.a > 1.6 || arms.r.a > 1.6;
+  const drawArms = () => { noahArm(c, -1, arms.l, false, !cave); noahArm(c, 1, arms.r, !cave, !cave); };
+  if (!armsUp) drawArms();
+  c.save(); c.translate(0, NOAH.HEAD.y + 260); c.rotate(p.tilt || 0); c.translate(0, -(NOAH.HEAD.y + 260));
+  noahHairBack(c); noahHeadLocal(c, e); c.restore();
+  if (armsUp) drawArms();
+  c.restore(); c.restore();
+}
+
+// ======================= SIDE PROFILE (measured from the sheet's SIDE figure) =======================
+// drawNoahSide(c, { x, y, k, s: 1 | -1 (facing right / left), walk: phase rad | null, expr, outfit, armSwing, tilt, bob })
+const NOAH_SIDE = { HX: -10, HY: -1240, R: 255, HIP: [5, -520], THIGH: 215, SHIN: 215, SHOULDER: [-45, -915], LEG_W: 118 };
+function noahSideHead(c, e = {}) {
+  const S = NOAH_SIDE, cx = S.HX, cy = S.HY, R = S.R;
+  // back hair hanging behind the neck
+  c.beginPath(); c.moveTo(-60, -1300); c.lineTo(-255, -1250); c.lineTo(-248, -1090); c.lineTo(-232, -1010); c.lineTo(-212, -962); c.lineTo(-192, -1008); c.lineTo(-170, -952);
+  c.lineTo(-146, -1000); c.lineTo(-120, -962); c.lineTo(-92, -1030); c.lineTo(-60, -1150); c.closePath(); nFill(c, NOAH.hair, NOAH.W * .7);
+  // skull + chin shade
+  c.save(); c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fillStyle = NOAH.shade; c.fill(); c.clip();
+  c.beginPath(); c.arc(cx - 4, cy - 34, R - 4, 0, Math.PI * 2); c.fillStyle = NOAH.skin; c.fill(); c.restore();
+  c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); nFill(c, null);
+  // swept-back hair covering the back half of the head, curl at the front top
+  const cap = () => {
+    c.beginPath(); c.moveTo(212, -1388);
+    c.quadraticCurveTo(246, -1440, 205, -1482);
+    c.bezierCurveTo(120, -1548, -120, -1545, -218, -1432);
+    c.bezierCurveTo(-280, -1340, -272, -1180, -242, -1068);
+    c.lineTo(-218, -1028); c.lineTo(-198, -1060); c.lineTo(-174, -1018); c.lineTo(-152, -1058); c.lineTo(-130, -1026); c.lineTo(-112, -1070);
+    c.bezierCurveTo(-95, -1105, -30, -1140, 2, -1215);
+    c.bezierCurveTo(30, -1255, 10, -1290, 22, -1330);
+    c.quadraticCurveTo(28, -1385, 70, -1392);
+    c.quadraticCurveTo(140, -1400, 212, -1388); c.closePath();
+  };
+  cap(); nFill(c, NOAH.hair, NOAH.W * .8);
+  c.save(); cap(); c.clip();
+  for (let i = 0; i < 7; i++) {
+    const sx = 205 - i * 30, sy = -1400 - i * 14;
+    c.beginPath(); c.moveTo(sx, sy); c.bezierCurveTo(sx - 110, sy - 70 + i * 4, -150 - i * 8, sy - 20 + i * 10, -232 + i * 5, -1300 + i * 40);
+    c.lineWidth = i % 2 ? 6 : 4; c.strokeStyle = i % 2 ? NOAH.hairDark : NOAH.hairLight; c.lineCap = 'round'; c.stroke();
+  }
+  c.restore();
+  // face (both eyes visible, as on the sheet)
+  for (const [ex, sc] of [[122, .95], [216, .78]]) {
+    const ey = -1212;
+    if (e.eyes === 'closed') { c.beginPath(); c.moveTo(ex - 22, ey - 4); c.quadraticCurveTo(ex, ey + 18, ex + 22, ey - 4); c.lineWidth = 9; c.strokeStyle = NOAH.eye; c.lineCap = 'round'; c.stroke(); }
+    else {
+      const lid = e.lid || 0;
+      c.save(); c.beginPath(); c.rect(ex - 40, ey - 40 + lid * 70, 80, 90); c.clip();
+      c.beginPath(); c.ellipse(ex + (e.look || 0) * 5, ey, 21 * sc, 32, 0, 0, Math.PI * 2); c.fillStyle = NOAH.eye; c.fill(); c.restore();
+      if (lid > .05) nLine(c, [ex - 22, ey - 34 + lid * 68, ex + 22, ey - 34 + lid * 68], 7, NOAH.eye);
+    }
+  }
+  const bu = (e.browUp || 0) * 16;
+  c.beginPath(); c.moveTo(88, -1272 - bu); c.quadraticCurveTo(122, -1290 - bu, 155, -1276 - bu); c.lineWidth = 13; c.strokeStyle = NOAH.brow; c.lineCap = 'round'; c.stroke();
+  c.beginPath(); c.moveTo(200, -1280 - bu); c.quadraticCurveTo(222, -1292 - bu, 238, -1278 - bu); c.stroke();
+  const m = e.mouth || 'smile';
+  if (m === 'smile') { c.beginPath(); c.moveTo(92, -1098); c.quadraticCurveTo(140, -1078, 186, -1100); c.lineWidth = 9; c.strokeStyle = NOAH.out; c.stroke(); }
+  else if (m === 'soft' || m === 'flat') nLine(c, [110, -1092, 165, -1092], 8, NOAH.out);
+  else { const o = m === 'yawn' ? (e.open ?? 1) : .4; c.beginPath(); c.ellipse(145, -1088, 16 + 8 * o, 10 + 36 * o, 0, 0, Math.PI * 2); c.fillStyle = NOAH.mouthIn; c.fill(); c.lineWidth = 7; c.strokeStyle = NOAH.out; c.stroke(); }
+}
+function noahSideLeg(c, th, bend, far, cave) {
+  const S = NOAH_SIDE, [hx, hy] = S.HIP;
+  const kx = hx + Math.sin(th) * S.THIGH, ky = hy + Math.cos(th) * S.THIGH;
+  const t2 = th - bend, ax = kx + Math.sin(t2) * S.SHIN, ay = ky + Math.cos(t2) * S.SHIN;
+  const col = cave ? (far ? '#e6e2de' : NOAH.skin) : (far ? shadeHex(NOAH.pants, -.18) : NOAH.pants);
+  const w = cave ? 92 : S.LEG_W;
+  nLine(c, [hx, hy, kx, ky, ax, ay], w + NOAH.W * 2, NOAH.out); nLine(c, [hx, hy, kx, ky, ax, ay], w, col);
+  if (!cave) { c.save(); c.globalAlpha = .55; for (const o of [-24, 0, 24]) nLine(c, [hx + o, hy, kx + o, ky, ax + o, ay], 3, NOAH.stripe); c.restore(); }
+  // shoe / foot wrap, kept roughly level
+  c.save(); c.translate(ax, ay - 10); c.rotate(Math.max(-.35, Math.min(.35, t2 * .5)));
+  c.beginPath(); c.moveTo(-58, -4); c.lineTo(-60, 72); c.lineTo(122, 74); c.quadraticCurveTo(150, 62, 134, 34); c.quadraticCurveTo(95, 6, 36, -6); c.closePath();
+  nFill(c, cave ? NOAH_FUR.wrap : (far ? shadeHex(NOAH.shoe, -.2) : NOAH.shoe), NOAH.W * .9);
+  c.restore();
+}
+function noahSideArm(c, th, bend, far, cave) {
+  const [sx, sy] = NOAH_SIDE.SHOULDER;
+  const ex = sx + Math.sin(th) * NOAH.UPPER, ey = sy + Math.cos(th) * NOAH.UPPER;
+  const t2 = th + bend, wx = ex + Math.sin(t2) * NOAH.FORE, wy = ey + Math.cos(t2) * NOAH.FORE;
+  const skin = far ? '#e8e4e0' : NOAH.skin;
+  nLine(c, [sx, sy, ex, ey, wx, wy], NOAH.ARM_W + NOAH.W * 2, NOAH.out); nLine(c, [sx, sy, ex, ey, wx, wy], NOAH.ARM_W, skin);
+  if (!cave) { // sleeve
+    c.save(); c.translate(sx, sy); c.rotate(-th);
+    c.beginPath(); c.moveTo(-58, -50); c.quadraticCurveTo(0, -78, 60, -45); c.lineTo(66, 165); c.lineTo(-66, 170); c.closePath(); nFill(c, far ? shadeHex(NOAH.shirt, .08) : NOAH.shirt);
+    c.restore();
+  }
+  c.save(); c.translate(wx, wy); c.scale(.92, 1); noahHandLocal(c, -t2); c.restore();
+}
+function shadeHex(hex, k) { const n = parseInt(hex.slice(1), 16); const f = v => Math.max(0, Math.min(255, Math.round(k < 0 ? v * (1 + k) : v + (255 - v) * k))); return '#' + [n >> 16, (n >> 8) & 255, n & 255].map(f).map(v => v.toString(16).padStart(2, '0')).join(''); }
+function noahSideTorso(c, cave, s = 1) {
+  if (cave) {
+    c.beginPath(); c.moveTo(-60, -968); c.lineTo(-108, -945); c.lineTo(-112, -520); for (let i = 0; i <= 6; i++) c.lineTo(-112 + i * 36, -470 + (i % 2 ? 30 : 0)); c.lineTo(104, -520); c.lineTo(100, -935); c.lineTo(40, -968); c.closePath(); nFill(c, NOAH_FUR.fur);
+    c.save(); c.clip(); for (let i = 0; i < 9; i++) { c.beginPath(); c.ellipse(-80 + (i * 47) % 170, -900 + (i * 83) % 380, 15, 10, i, 0, Math.PI * 2); c.fillStyle = NOAH_FUR.furDark; c.fill(); } c.restore();
+    nLine(c, [-112, -560, 104, -566], 22, NOAH.out); nLine(c, [-112, -560, 104, -566], 12, '#c9a46a');
+    return;
+  }
+  c.beginPath(); c.moveTo(-60, -968); c.quadraticCurveTo(-100, -960, -108, -940); c.lineTo(-112, -515); c.lineTo(104, -515); c.lineTo(100, -930); c.quadraticCurveTo(80, -960, 40, -968); c.quadraticCurveTo(-10, -948, -60, -968); c.closePath(); nFill(c, NOAH.shirt);
+  // the lettering wraps around: only "N" and a bit of "o" show on the side
+  c.save(); c.beginPath(); c.rect(-112, -980, 216, 470); c.clip();
+  if (s < 0) { c.scale(-1, 1); noahLetters(c, -126, -760, .95); } else noahLetters(c, 140, -760, .95);
+  c.restore();
+}
+function drawNoahSide(c, p = {}) {
+  if (p.ink && !p._inked) { const W0 = NOAH.W; NOAH.W = W0 * p.ink; try { return drawNoahSide(c, Object.assign({}, p, { _inked: 1 })); } finally { NOAH.W = W0; } }
+  const k = p.k ?? .5, e = p.expr || {}, cave = p.outfit === 'caveman';
+  const ph = p.walk, walking = ph !== null && ph !== undefined;
+  const sw = walking ? Math.sin(ph) : 0, lift = walking ? Math.max(0, Math.cos(ph)) : 0, lift2 = walking ? Math.max(0, -Math.cos(ph)) : 0;
+  const bob = (walking ? -Math.abs(Math.cos(ph)) * 12 : 0) + (p.bob || 0);
+  const aSw = p.armSwing ?? .38;
+  c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (p.s || 1), k);
+  c.save(); c.translate(0, bob);
+  // far side limbs first
+  noahSideArm(c, walking ? aSw * sw : .05, walking ? .12 + .1 * Math.max(0, sw) : -.05, true, cave);
+  noahSideLeg(c, walking ? -.42 * sw : -.03, walking ? .7 * lift2 : 0, true, cave);
+  noahSideLeg(c, walking ? .42 * sw : .03, walking ? .7 * lift : 0, false, cave);
+  noahSideTorso(c, cave, p.s || 1);
+  c.beginPath(); c.rect(-28, -1000, 72, 50); c.fillStyle = NOAH.skin; c.fill(); nLine(c, [-28, -1000, -28, -958], 9, NOAH.out); nLine(c, [44, -1000, 44, -958], 9, NOAH.out);
+  c.save(); c.translate(0, -980); c.rotate(p.tilt || 0); c.translate(0, 980); noahSideHead(c, e); c.restore();
+  noahSideArm(c, walking ? -aSw * sw : .02, walking ? .12 + .1 * Math.max(0, -sw) : -.05, false, cave);
+  c.restore(); c.restore();
+}
+
+// ---- primitive look add-ons (stone-age films). They sit ON TOP of the unchanged head; never reshape the head. ----
+function noahBeard(c, cy, e) {
+  const col = NOAH.hair, my = cy + 148;
+  c.beginPath(); c.moveTo(-246, cy - 24);
+  c.bezierCurveTo(-250, cy + 120, -215, cy + 230, -150, cy + 290);
+  const tips = [[-120, cy + 335], [-95, cy + 300], [-62, cy + 352], [-35, cy + 312], [0, cy + 368], [35, cy + 312], [62, cy + 352], [95, cy + 300], [120, cy + 335]];
+  for (const [x, y] of tips) c.lineTo(x, y);
+  c.lineTo(150, cy + 290); c.bezierCurveTo(215, cy + 230, 250, cy + 120, 246, cy - 24);
+  c.lineTo(230, cy - 24); c.bezierCurveTo(212, cy + 95, 175, cy + 150, 105, cy + 148);
+  c.quadraticCurveTo(0, cy + 128, -105, cy + 148); c.bezierCurveTo(-175, cy + 150, -212, cy + 95, -230, cy - 24); c.closePath();
+  c.fillStyle = col; c.fill(); c.lineWidth = NOAH.W * .75; c.strokeStyle = NOAH.out; c.lineJoin = 'round'; c.stroke();
+  c.save(); c.clip();
+  for (let i = 0; i < 16; i++) { const x = -190 + i * 25, y0 = cy + 150 + Math.abs(i - 7.5) * -6; c.beginPath(); c.moveTo(x, y0); c.quadraticCurveTo(x + 8, y0 + 70, x + (i - 7.5) * 3, y0 + 150); c.lineWidth = 4; c.strokeStyle = i % 2 ? NOAH.hairDark : NOAH.hairLight; c.stroke(); }
+  c.restore();
+  // lips patch so the mouth stays readable, then a droopy moustache over it
+  const open = (e.mouth === 'yawn' || e.mouth === 'o');
+  c.beginPath(); c.ellipse(0, my + 8, open ? 58 : 46, open ? 66 : 20, 0, 0, Math.PI * 2); c.fillStyle = NOAH.skin; c.fill(); c.lineWidth = 5; c.strokeStyle = NOAH.out; c.stroke();
+  e._moustache = true;
+}
+function noahMoustache(c, cy) {
+  const my = cy + 148;
+  c.beginPath(); c.moveTo(-100, my + 6); c.quadraticCurveTo(-70, my - 46, 0, my - 30); c.quadraticCurveTo(70, my - 46, 100, my + 6); c.quadraticCurveTo(60, my - 12, 0, my - 4); c.quadraticCurveTo(-60, my - 12, -100, my + 6); c.closePath();
+  c.fillStyle = NOAH.hair; c.fill(); c.lineWidth = 6; c.strokeStyle = NOAH.out; c.stroke();
+}
+function noahWildHair(c, cy, R) {
+  // a few unkempt curled locks escaping the (unchanged) swept-back cap
+  const locks = [[-190, -215, -2.3, 1], [-90, -275, -1.95, 1], [30, -290, -1.3, -1], [150, -245, -1.0, -1], [-245, -40, -2.9, 1], [245, -40, -.25, -1]];
+  for (const [x, y, a, s] of locks) {
+    const L = 58, ex = x + Math.cos(a) * L, ey = cy + y + Math.sin(a) * L, nx = -Math.sin(a), ny = Math.cos(a);
+    c.beginPath(); c.moveTo(x + nx * 20, cy + y + ny * 20);
+    c.quadraticCurveTo(x + Math.cos(a) * L * .5 + nx * 26 * s, cy + y + Math.sin(a) * L * .5 + ny * 26 * s, ex + nx * 14 * s, ey + ny * 14 * s);
+    c.quadraticCurveTo(x + Math.cos(a) * L * .45, cy + y + Math.sin(a) * L * .45, x - nx * 20, cy + y - ny * 20); c.closePath();
+    c.fillStyle = NOAH.hair; c.fill(); c.lineWidth = NOAH.W * .55; c.strokeStyle = NOAH.out; c.lineJoin = 'round'; c.stroke();
+  }
+}
