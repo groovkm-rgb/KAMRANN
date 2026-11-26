@@ -1,0 +1,7 @@
+film.html
+stills/
+*.mp4
+*.wav
+*.mp3
+segs.txt
+seg_*.mp4
