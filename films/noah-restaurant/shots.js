@@ -255,19 +255,21 @@ shot(20.90, 22.55, (c, lt, t) => {
 // =============== 10  Noah raises the note, it becomes the 100 € card (22.55 – 25.10) ===============
 const SPLIT = [{ s: 'Waren', v: 30, col: '#e0a43a' }, { s: 'Personal', v: 33, col: '#d9433a' }, { s: 'Miete', v: 12, col: '#2f6fb0' }, { s: 'Energie', v: 5, col: '#8a5ab0' }, { s: 'Steuern', v: 15, col: '#7d7064' }, { s: 'Gewinn', v: 5, col: '#3d8a4f' }];
 function hundredCard(c, t, o) {
+  if (o.alpha != null) { c.save(); c.globalAlpha = o.alpha; }
   card(c, t - o.base, { cx: o.cx ?? 520, y: o.y, w: o.w, h: o.h, t0: 0, tilt: -.02 }, (c, w, h) => {
     txt(c, '100 €', w / 2, 120, 110, CARD.green);
-    const bx = 60, bw = 170, by = 170, bh = h - 210, sp = ease(seg(t, 24.15, 24.6)) * 12;
+    const bx = 60, bw = 170, by = 170, bh = h - 250, sp = ease(seg(t, 24.15, 24.6)) * 12;
     let y = by, ly = 0;
     SPLIT.forEach((s, i) => {
       const hh = bh * s.v / 100 - 0, fly = o.fly ? seg(t, o.fly[i] ?? 99, (o.fly[i] ?? 99) + .45) : 0; const dy = i * sp;
       c.save(); c.translate(fly * (i % 2 ? 900 : -900) * easeIn(fly), -fly * 700 * easeIn(fly)); c.rotate(fly * (i % 2 ? 1 : -1)); c.globalAlpha = 1 - fly * .6;
       if (i === 5 && o.gone) c.globalAlpha *= 1 - o.gone;
       c.beginPath(); c.rect(bx, y + dy, bw, hh); fs(c, s.col, 5);
-      if (sp > 2) { const cyy = Math.max(y + dy + hh / 2 + 14, ly + 44); ly = cyy; line(c, [bx + bw + 6, y + dy + hh / 2, bx + bw + 24, cyy - 12], 3, '#aaa'); txt(c, s.s, bx + bw + 30, cyy, i === 5 ? 44 : 38, i === 5 ? CARD.green : CARD.ink, 'left'); txt(c, s.v + ' €', w - 34, cyy, 38, i === 5 ? CARD.green : CARD.muted, 'right'); }
+      if (sp > 2) { const cyy = Math.max(y + dy + hh / 2 + 14, ly + 42); ly = cyy; line(c, [bx + bw + 6, y + dy + hh / 2, bx + bw + 24, cyy - 12], 3, '#aaa'); txt(c, s.s, bx + bw + 30, cyy, i === 5 ? 44 : 38, i === 5 ? CARD.green : CARD.ink, 'left'); txt(c, s.v + ' €', w - 34, cyy, 38, i === 5 ? CARD.green : CARD.muted, 'right'); }
       c.restore(); y += hh;
     });
   });
+  if (o.alpha != null) c.restore();
 }
 shot(22.55, 25.10, (c, lt, t) => {
   const up = ease(seg(lt, .1, .6)), k = ease(seg(t, 23.2, 23.8)), zz = lerp(1.15, 1.3, k) + lt * .02, cam = { x: lerp(-20, 30, k), y: lerp(-150, 14 - 580 / zz, k), z: zz, r: lerp(-.01, .015, k) };
@@ -287,7 +289,7 @@ shot(25.10, 26.65, (c, lt, t) => {
   const land = seg(t, 25.95, 26.2);
   noahAt(c, cam, P, LREST, 1, x => { const hl = noahHand(P, -1); if (land >= 1) { coin(x, hl[0] - 18, hl[1] - 42, 24, t * 8); coin(x, hl[0] + 22, hl[1] - 36, 20, t * 6 + 1); coin(x, hl[0] + 4, hl[1] - 58, 18, t * 7 + 2); } });
   m5Light(c, cam, t, { sx: .5, sy: .45 });
-  hundredCard(c, t, { base: 23.4 - 2, y: 680 - k * 1000, w: 640, h: 640, fly: [25.2, 25.35, 25.5, 25.65, 25.8, 99], gone: land });
+  hundredCard(c, t, { base: 23.4 - 2, y: 680 - k * 1000, alpha: 1 - k, w: 640, h: 640, fly: [25.2, 25.35, 25.5, 25.65, 25.8, 99], gone: land });
   // the Gewinn chunk falls into the palm (screen space via camera)
   if (land > 0 && land < 1) { const [hx, hy] = toScreen(cam, 1, noahHand(P, -1)[0], noahHand(P, -1)[1] - 40); c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.translate(lerp(330, hx, easeIn(land)), lerp(900, hy, easeIn(land))); c.rotate(land * 3); c.fillStyle = CARD.green; c.fillRect(-40, -12, 80, 24); c.strokeStyle = OUT; c.lineWidth = 4; c.strokeRect(-40, -12, 80, 24); c.restore(); }
 });

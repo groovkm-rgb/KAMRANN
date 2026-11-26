@@ -4,7 +4,7 @@ function cardEnv(lt, t0, t1) { const a = clamp((lt - t0) / .35), b = t1 == null 
 // o: { cx, y, w, h, tilt, t0, t1, shake }; draw(c, w, h) in card-local coords (0,0 = top-left)
 function card(c, lt, o, draw) {
   const e = cardEnv(lt, o.t0 ?? 0, o.t1); if (e.a <= 0) return;
-  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = e.a;
+  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha *= e.a;
   const sh = o.shake || 0;
   c.translate(o.cx + (rnd(Math.floor(lt * 60)) - .5) * sh, o.y + o.h / 2 + (rnd(Math.floor(lt * 60) + 3) - .5) * sh); c.rotate((o.tilt ?? -.02) + (1 - e.s) * .1); c.scale(e.s * (o.sx || 1), e.s * (o.sy || 1)); c.translate(-o.w / 2, -o.h / 2);
   // shadow
