@@ -159,7 +159,7 @@ S(band(noise(.06), 3000, 10000) * env(T(.06), .001, .04, 3), 1.20, .35); S(band(
 bell(1.36, 3400, .18, .25)                                     # "schnipp"
 S(band(noise(.5), 200, 8000) * env(T(.5), .002, .25, 3), 1.40, .5); thud(1.40, .5, 60)  # confetti pop
 for j in range(30): click(1.45 + rng.uniform(0, .8), .08, 3000, 10000)
-applause(1.45, 2.6, .22)
+# applause removed (user request)
 buzz(1.38, .5, 120, .08, True); S(sweep(80, 240, .35, 'saw') * env(T(.35), .02, .35, 1) * .05, 1.42)  # neon "vizz"
 for tb in (.3, 2.4, 3.2): chirp(tb, .06)
 paper_flutter(2.6, 1.8, .14); slap(4.40, .6)
