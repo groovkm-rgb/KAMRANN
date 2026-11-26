@@ -91,3 +91,4 @@ function openBook(c, x, y, w, h, t, o = {}) {
 }
 
 const S3WALK = (t, o) => [{ who: PEOPLE.guest(3), x: -6 + (t % 30) * 1.2, z: -2.5, p: Object.assign({ expr: { mouth: 'smile' } }, walkLegs(t, 7)) }, { who: PEOPLE.guest(14), x: 26 - (t % 30) * 1.1, z: -1.7, p: walkLegs(t + 1, 7) }, { who: PEOPLE.guest(22), x: -14 + (t % 40) * .9, z: -3.0, p: walkLegs(t + 2, 6) }];
+const fullGuests = (t, talk = true) => (c, tx, i) => { for (const dx of [-90, 90]) drawPerson(c, P(PEOPLE.guest((Math.abs(Math.round(tx / 37)) * 5 + (dx > 0 ? 3 : 0)) % 41), t, { x: tx + dx, sit: true, seatH: 250, seed: i * 3 + dx, expr: talk ? (talkMouth(t + i + dx, 0, 999) || { mouth: 'smile' }) : { mouth: 'smile' }, arms: { l: arm(.4, -1.1), r: Math.sin(i + dx) > .5 ? arm(1.1, -1.7) : arm(.4, -1.1) } })); };
