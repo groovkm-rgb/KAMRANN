@@ -272,7 +272,7 @@ function door3D(S, x, z0, nx, t, handle) {
   texQuad(S, makeTex('doorglass', 120, 300, (c, w2, h2) => { const g = c.createLinearGradient(0, 0, w2, h2); g.addColorStop(0, '#d6e0e6'); g.addColorStop(1, '#9fb0bc'); c.fillStyle = g; c.fillRect(0, 0, w2, h2); for (let i = 0; i < 20; i++) line(c, [0, i * 18, w2, i * 18 - 40], 1, 'rgba(255,255,255,.35)'); c.strokeStyle = '#555'; c.lineWidth = 10; c.strokeRect(0, 0, w2, h2); }), [[x - .04, 1.85, z0 + .3], [x - .04, 1.85, z0 + .05], [x - .04, 1.15, z0 + .05], [x - .04, 1.15, z0 + .3]], { nx: 1, ny: 2, n: [-1, 0, 0], bias: -.05, lit: false });
   // handle (lever) — rotates down by `handle` (0..1)
   const hz = z0 + .88, hy = 1.05; const p0 = [x - .07, hy, hz];
-  push(S, Math.hypot(...V.sub(S.cam.pos, p0)) - .1, c => {
+  push(S, Math.hypot(...V.sub(S.cam.pos, p0)) - .6, c => {
     const a = proj(S.cam, p0), ang = handle * .7, b = proj(S.cam, [x - .07, hy - Math.sin(ang) * .14, hz - Math.cos(ang) * .14]);
     const pl = proj(S.cam, [x - .035, hy + .08, hz]), pl2 = proj(S.cam, [x - .035, hy - .18, hz]);
     if (pl && pl2) line(c, [pl[0], pl[1], pl2[0], pl2[1]], Math.max(2, S.cam.f * .035 / pl[2]), '#9aa0a8');
@@ -321,6 +321,10 @@ function corridorScene(S, c, t, o = {}) {
   fc([[0, R.h, 0], [R.w, R.h, 0], [R.w, R.h, R.d], [0, R.h, R.d]], '#eeeae2', [0, -1, 0], { grad: [0, .2] });
   fc([[0, 0, 0], [0, R.h, 0], [0, R.h, R.d], [0, 0, R.d]], '#e9e1cf', [1, 0, 0], { grad: [.05, .15] });
   fc([[R.w, 0, R.d], [R.w, R.h, R.d], [R.w, R.h, 0], [R.w, 0, 0]], '#e9e1cf', [-1, 0, 0], { grad: [.05, .15] });
+  // near end (z = 0): wall with the doorway to the stairwell
+  fc([[R.w, 0, 0], [R.w, R.h, 0], [0, R.h, 0], [0, 0, 0]], '#dcd4c2', [0, 0, 1]);
+  { const sp = projPoly(S.cam, [[2.4, 2.4, .01], [1.0, 2.4, .01], [1.0, 0, .01], [2.4, 0, .01]]); if (sp) { pathPoly(c, sp); c.fillStyle = '#20232c'; c.fill(); c.lineWidth = 3; c.strokeStyle = '#7d838c'; c.stroke(); } }
+  drawTexQuad(S, c, makeTex('trsign', 500, 120, (cc, w, h) => { cc.fillStyle = '#1f4f7a'; cc.fillRect(0, 0, w, h); txt(cc, 'Treppenhaus', w / 2, 84, 62, '#fff', 'center'); }), [[2.4, 2.8, .02], [1.0, 2.8, .02], [1.0, 2.5, .02], [2.4, 2.5, .02]], { nx: 1, ny: 1 }, [0, 0, 1]);
   // far end: window wall, bright
   fc([[0, 0, R.d], [0, R.h, R.d], [R.w, R.h, R.d], [R.w, 0, R.d]], '#dcd4c2', [0, 0, -1]);
   texQuad(S, texSchoolyard(), [[.5, 2.6, R.d - .01], [2.9, 2.6, R.d - .01], [2.9, .9, R.d - .01], [.5, .9, R.d - .01]], { now: c, nx: 2, ny: 2, lit: false, alpha: o.windowA ?? 1 });
@@ -392,6 +396,28 @@ function officeFrame(c, t, cam, o = {}) {
   push(S, depthOf(S, [2.55, 1.0, 2.15]) - .2, cc => { const a = proj(cam, [2.55, .88, 2.2]), b = proj(cam, [2.55, 1.12, 2.25]), m = proj(cam, [2.6, 1.22, 2.05]); if (a && b && m) { cc.beginPath(); cc.moveTo(a[0], a[1]); cc.quadraticCurveTo(b[0], b[1], m[0], m[1]); cc.lineWidth = Math.max(2, cam.f * .012 / a[2]); cc.strokeStyle = '#2a2a2a'; cc.stroke(); circle(cc, m[0], m[1], Math.max(4, cam.f * .03 / m[2])); fs(cc, '#3a3a3a', 2); } });
   solid(S, 3.3, .8, 2.1, .3, .05, .22, '#f4f4f4', { bias: -.1 }); solid(S, 1.75, .8, 2.3, .25, .12, .18, '#2a2a2a', { bias: -.1 }); plant3D(S, 4.4, 0, 4.3, 1.4);
   texQuad(S, makeTex('slsign', 500, 140, (cc, w, h) => { cc.fillStyle = '#1f4f7a'; cc.fillRect(0, 0, w, h); txt(cc, 'Schulleitung', w / 2, 92, 60, '#fff', 'center'); }), [[R.w - .01, 2.6, 1.2], [R.w - .01, 2.6, .3], [R.w - .01, 2.35, .3], [R.w - .01, 2.35, 1.2]], { now: c, nx: 1, ny: 1, n: [-1, 0, 0] });
+  if (o.cast) o.cast(S, t);
+  flush(S, c);
+  return S;
+}
+
+// ======================= TREPPENHAUS (stairwell): shaft x 0..4.4, z 0..6, floors every 3.5 m =======================
+function stairwellFrame(c, t, cam, o = {}) {
+  const S = scene(cam, Object.assign({ dir: V.norm([.3, .7, -.5]), col: [230, 225, 220], amb: .55, ambCol: [120, 135, 190], ink: 1.2, inkA: .55 }, o.light || {}));
+  const fc = (P, col, n, oo = {}) => drawFace(S, c, P, col, n, Object.assign({ ink: 0 }, oo)), Hh = 11;
+  fc([[0, 0, 6], [4.4, 0, 6], [4.4, 0, 0], [0, 0, 0]], '#bdb6aa', [0, 1, 0]);
+  fc([[0, 0, 0], [0, Hh, 0], [0, Hh, 6], [0, 0, 6]], '#e2dccd', [1, 0, 0], { grad: [.05, .2] }); fc([[4.4, 0, 6], [4.4, Hh, 6], [4.4, Hh, 0], [4.4, 0, 0]], '#e2dccd', [-1, 0, 0], { grad: [.05, .2] });
+  fc([[0, 0, 6], [0, Hh, 6], [4.4, Hh, 6], [4.4, 0, 6]], '#d8d2c2', [0, 0, -1], { grad: [.05, .2] }); fc([[4.4, 0, 0], [4.4, Hh, 0], [0, Hh, 0], [0, 0, 0]], '#d8d2c2', [0, 0, 1]);
+  for (let f = 0; f < 3; f++) { const y = f * 3.5;
+    // landing at the far end, two flights along x
+    if (f > 0) solid(S, 0, y - .15, 4.2, 4.4, .15, 1.8, '#a9a294');
+    const up = (x0, z0, z1, ya, dir) => { for (let i = 0; i < 11; i++) solid(S, x0, ya + i * .16, dir > 0 ? z0 + i * .3 : z1 - (i + 1) * .3, 1.9, .16, .3, '#b8b1a3', { ink: .6, cols: { top: '#cfc8b8' } }); };
+    if (f < 2) { up(0, .6, 3.9, y, 1); up(2.5, .6, 3.9, y + 1.75, -1); solid(S, 0, y + 1.6, 3.9, 4.4, .15, 1.6, '#a9a294'); }
+    const a = proj(cam, [2.2, y + 1.0, .6]), b = proj(cam, [2.2, y + 2.75, 3.9]); if (a && b) push(S, depthOf(S, [2.2, y + 1.8, 2.2]) - .3, cc => line(cc, [a[0], a[1], b[0], b[1]], Math.max(2, cam.f * .03 / a[2]), '#c8463c'));
+    texQuad(S, makeTex('floor' + f, 300, 160, (cc, w, h) => { cc.fillStyle = '#1f4f7a'; cc.fillRect(0, 0, w, h); txt(cc, ['EG', '1. OG', '2. OG'][f], w / 2, 110, 84, '#fff', 'center'); }), [[4.39, y + 2.5, 1.2], [4.39, y + 2.5, .4], [4.39, y + 2.0, .4], [4.39, y + 2.0, 1.2]], { nx: 1, ny: 1, n: [-1, 0, 0] });
+    texQuad(S, texSchoolyard(), [[.5, y + 3.0, 5.99], [2.0, y + 3.0, 5.99], [2.0, y + 2.0, 5.99], [.5, y + 2.0, 5.99]], { nx: 1, ny: 1, lit: false, alpha: .8 });
+  }
+  if (o.alarm) { const p = proj(cam, [4.3, 6.2, 2.5]); solid(S, 4.25, 6.0, 2.4, .15, .2, .2, '#d0281e', { emit: true }); if (p) glow(c, p[0], p[1], cam.f * 2 / p[2], '255,40,30', .8 * Math.pow(Math.max(0, Math.sin((t * 1.6) % 1 * Math.PI)), 2)); }
   if (o.cast) o.cast(S, t);
   flush(S, c);
   return S;
