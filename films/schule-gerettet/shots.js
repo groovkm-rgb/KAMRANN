@@ -33,7 +33,7 @@ function classCast(o = {}) {
     sit('s1', CAST.student1, {}); sit('s2', CAST.student2, {}); sit('s3', CAST.student3, {}); sit('s4', CAST.student1, { mouth: 'soft' }); sit('s5', CAST.student2, {}); sit('s6', CAST.student3, {}); sit('s7', CAST.student2, {});
     sit('lea', CAST.lea, ex.lea || { mouth: 'soft', look: -.5 });
     actor(S, seatPos('jonas'), (c, k) => back ? drawPerson(c, CAST.jonas, { k, sit: true, seatH: SEAT_H, back: true, ink: 1.6, tilt: .25 }) : drawPerson(c, CAST.jonas, { k, sit: true, seatH: SEAT_H, ink: 1.6, tilt: .3, expr: ex.jonas || { eyes: 'closed', mouth: 'o' }, arms: { l: { a: .4, b: -1.3 }, r: { a: .4, b: -1.3 } } }), { sit: true, bias: -.05 });
-    actor(S, seatPos('noah'), (c, k) => back ? drawNoahBack(c, { k, sit: true, seatH: SEAT_H, ink: 1.8 }) : drawNoah(c, { k, sit: true, seatH: SEAT_H, ink: 1.8, tilt: -.12, expr: ex.noah || { lid: .45, mouth: 'flat', look: .5 }, arms: { l: { a: .3, b: -1.25 }, r: { a: .9, b: -2.3 } } }), { sit: true, bias: -.05 });
+    actor(S, seatPos('noah'), (c, k) => back ? drawNoahBack(c, { k, sit: true, seatH: SEAT_H, ink: 1.8 }) : drawNoah(c, { k, sit: true, seatH: SEAT_H, ink: 1.8, tilt: -.12, expr: ex.noah || { lid: .45, mouth: 'flat', look: .5 }, arms: { l: { a: .35, b: -1.2 }, r: { a: .35, b: -1.2 } } }), { sit: true, bias: -.05 });
     if (o.teacher !== false) actor(S, o.teacherPos || [3.2, 0, 7.35], (c, k) => drawPerson(c, CAST.becker, Object.assign({ k, ink: 1.6 }, o.teacherPose || { back: true, arms: { r: { a: 2.6, b: .2 }, l: { a: .1, b: -.2 } } })), {});
   };
 }

@@ -1,81 +1,22 @@
-// ======================= SHOT LIST: DRAFT 0 – 20.8 s (Bölüm 1, giriş) =======================
-// word times (words.json): "Stell dir vor" 0.0 · "Dienstag" 2.09 · "Dritte Stunde" 2.99 · "Mathe" 3.98 · "Draußen" 4.82 ·
-// "und drinnen tickt die Uhr" 6.06 · "dass du schwören" 8.24 · "rückwärts" 9.87 · "Und dann" 10.78 · "um 10:17 Uhr" 11.54 ·
-// "geht ein Alarm los" 12.87 · "Kein Feueralarm" 14.23 · "Ein anderer" 15.47 · "Einer, den du…" 16.51 · "kennst" 18.69 · "In den nächsten" 19.48
-const DURATION = 20.8;
-const SHOTS = [];
-function shot(t0, t1, draw) { SHOTS.push({ t0, t1, draw }); }
-const shake = (t, a) => [noise1(t * 9, 1) * a, noise1(t * 9, 2) * a];
-function camShake(o, t, a) { const s = shake(t, a); return Object.assign({}, o, { ox: (o.ox || 0) + s[0], oy: (o.oy || 0) + s[1] }); }
-function flashWhite(c, k, col = '255,255,255') { if (k <= 0) return; c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = `rgba(${col},${k})`; c.fillRect(0, 0, W, H); c.restore(); }
-function fadeBlack(c, k) { if (k <= 0) return; c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = `rgba(0,0,0,${k})`; c.fillRect(0, 0, W, H); c.restore(); }
-
-// small German HUD sticker (time readouts, labels)
-function hudTag(c, t, t0, x, y, text, o = {}) {
-  const a = clamp((t - t0) / .25), s = a < 1 ? easeBack(a) : 1; if (a <= 0) return;
-  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = Math.min(1, a * 2) * (o.alpha ?? 1); c.translate(x, y); c.rotate(o.tilt ?? -.02); c.scale(s, s);
-  c.font = FONT(o.size || 46); const w = c.measureText(text).width + 60, h = (o.size || 46) * 1.55;
-  c.shadowColor = 'rgba(0,0,0,.4)'; c.shadowBlur = 24; c.shadowOffsetY = 10; c.fillStyle = '#fff'; rrect(c, -w / 2 - 8, -h / 2 - 8, w + 16, h + 16, 18); c.fill(); c.shadowColor = 'transparent';
-  c.lineWidth = 4; c.strokeStyle = OUT; c.stroke(); c.fillStyle = o.bg || '#fbf6ea'; rrect(c, -w / 2, -h / 2, w, h, 12); c.fill();
-  if (o.bar) { c.fillStyle = o.bar; rrect(c, -w / 2, -h / 2, 16, h, 8); c.fill(); }
-  txt(c, text, 0, (o.size || 46) * .36, o.size || 46, o.col || OUT, 'center'); c.restore();
-}
-// digital-style time readout used with the clock close-ups
-function hudClock(c, t, t0, x, y, str, o = {}) { hudTag(c, t, t0, x, y, str, Object.assign({ size: 64, bar: '#d02a22' }, o)); }
-
-// ---------------- reusable shot bodies ----------------
-// ECU of the wall clock: face nearly fills the frame, slight perspective, glass glint. time: [h, m, s]
-function clockECU(c, lt, tm, o = {}) {
-  c.fillStyle = '#ece3d2'; c.fillRect(0, 0, W, H);
-  // wall plaster detail + soft window light
-  for (let i = 0; i < 60; i++) { c.fillStyle = `rgba(120,100,80,${.03 + rnd(i) * .04})`; c.fillRect(rnd(i + 1) * W, rnd(i + 2) * H, 3, 3); }
-  const g = c.createLinearGradient(0, 0, W, H); g.addColorStop(0, 'rgba(255,220,160,.35)'); g.addColorStop(1, 'rgba(40,40,90,.25)'); c.fillStyle = g; c.fillRect(0, 0, W, H);
-  const z = o.zoom || 1, r = 640 * z, cx = W / 2 + (o.dx || 0), cy = H / 2 + 60 + (o.dy || 0);
-  c.save(); c.translate(cx, cy); c.transform(1, -.04, .06, 1, 0, 0); c.rotate(o.rot || 0);
-  // casing depth (3D rim)
-  c.beginPath(); c.arc(24, 30, r * 1.05, 0, TAU); c.fillStyle = 'rgba(20,15,30,.35)'; c.fill();
-  c.beginPath(); c.arc(0, 0, r * 1.04, 0, TAU); const rg = c.createLinearGradient(-r, -r, r, r); rg.addColorStop(0, '#5a5a62'); rg.addColorStop(.5, '#202024'); rg.addColorStop(1, '#0c0c0e'); c.fillStyle = rg; c.fill();
-  drawClockFace(c, 0, 0, r, tm[0], tm[1], tm[2]);
-  c.restore();
-  if (o.red) { c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = `rgba(255,60,50,${o.red})`; c.fillRect(0, 0, W, H); c.restore(); }
-}
-// seated Noah in the classroom, camera in front: used for the vertigo (dolly zoom) shock
-function noahVertigo(c, lt, k, o = {}) {
-  // k: 0..1 progress. camera dollies in while the field of view widens -> Noah grows, room rushes away
-  const head = [4.25, 1.22, 2.6], d = lerp(o.d0 ?? 3.2, o.d1 ?? .62, easeOut(k)), fov = lerp(o.f0 ?? 24, o.f1 ?? 50, easeOut(k));
-  const pos = [head[0] - .3 * d / 3, head[1] + .05, head[2] + d];
-  const cam = lookAt(pos, [head[0], head[1] - .05, head[2]], camShake({ fov }, lt, o.shake ?? 6));
-  const ex = o.expr || { browUp: 1, mouth: 'gasp', open: .8, eyeScale: 1.15, shine: 1 };
-  classroomFrame(c, lt, cam, { sunA: o.sunA ?? 1, clock: [10, 17, 0], cast: (S) => {
-    actor(S, seatPos('noah'), (cc, kk) => drawNoah(cc, { k: kk, sit: true, seatH: SEAT_H, ink: 1.8, expr: ex, arms: { l: { a: .35, b: -1.2 }, r: { a: .35, b: -1.2 } } }), { sit: true, bias: -.05, lit: o.lit });
-    actor(S, seatPos('jonas'), (cc, kk) => drawPerson(cc, CAST.jonas, { k: kk, sit: true, seatH: SEAT_H, ink: 1.6, expr: { browUp: 1, mouth: 'o', eyeScale: 1.1 } }), { sit: true, bias: -.05, lit: o.lit });
-    actor(S, seatPos('s2'), (cc, kk) => drawPerson(cc, CAST.student2, { k: kk, sit: true, seatH: SEAT_H, ink: 1.6, expr: { browUp: 1, mouth: 'o' } }), { sit: true, bias: -.05, lit: o.lit });
-    actor(S, seatPos('s5'), (cc, kk) => drawPerson(cc, CAST.student2, { k: kk, sit: true, seatH: SEAT_H, ink: 1.6, expr: { browUp: .6, mouth: 'flat' } }), { sit: true, bias: -.05, lit: o.lit });
-  } });
-}
-function redBurst(c, k, pulse) {
-  c.save(); c.setTransform(1, 0, 0, 1, 0, 0);
-  c.globalCompositeOperation = 'multiply'; c.fillStyle = `rgba(60,70,140,${.55 * k})`; c.fillRect(0, 0, W, H);
-  c.globalCompositeOperation = 'screen'; const g = c.createRadialGradient(W * .85, H * .1, 0, W * .85, H * .1, W * 1.1); g.addColorStop(0, `rgba(255,40,30,${.85 * pulse})`); g.addColorStop(1, `rgba(255,0,0,${.12 * pulse})`); c.fillStyle = g; c.fillRect(0, 0, W, H);
-  c.restore();
-}
-
 // ---------------- the shots ----------------
-// 0.00–0.55 black, two ticks
-shot(0, .55, (c, lt) => { c.fillStyle = '#000'; c.fillRect(0, 0, W, H); });
-// 0.55–1.60 COLD OPEN: ECU clock, second hand 57 -> 60, minute jumps 16 -> 17
-shot(.55, 1.6, (c, lt, t) => {
-  const sec = 57 + Math.min(3, Math.floor(lt / .33)), ss = sec >= 60 ? 0 : sec, mm = sec >= 60 ? 17 : 16;
-  const jump = sec >= 60 ? Math.max(0, 1 - (lt - .99) / .08) : 0;
-  clockECU(c, lt, [10, mm, ss], { zoom: 1.12 + lt * .08, rot: jump * .01 });
-  hudClock(c, t, .7, W - 330, 140, sec >= 60 ? '10:17:00' : `10:16:${String(sec).padStart(2, '0')}`);
-  vignette(c, .5);
-});
-// 1.60–2.95 COLD OPEN: red alarm bursts, dolly zoom on Noah (shocked)
-shot(1.6, 2.95, (c, lt, t) => {
-  const k = seg(lt, 0, 1.25), pulse = Math.pow(Math.max(0, Math.sin(lt * 1.6 * Math.PI * 2 + 1.2)), 2);
-  noahVertigo(c, lt, k, { sunA: .2, shake: 5 + 6 * (1 - k) });
-  redBurst(c, 1, .4 + .6 * pulse); flashWhite(c, (1 - seg(lt, 0, .12)) * .9, '255,80,60'); vignette(c, .55);
+// 0.00–2.95 OPENING: one continuous move from the front corner of Raum 204 straight into Noah's face.
+// Sunny and calm first; at 1.62 the red alarm light bursts and the last stretch turns into a dolly zoom (vertigo).
+shot(0, 2.95, (c, lt, t) => {
+  const tA = 1.62, a = lt < tA ? 0 : seg(lt, tA, 2.95), fly = easeIO(seg(lt, 0, tA + .1));
+  const head = [4.25, 1.22, 2.6];
+  const start = [1.2, 2.7, 7.6], mid = [3.1, 1.5, 4.6];
+  let pos = V.lerp(start, mid, fly), fov = 56, target = V.lerp([4.6, .9, 3.0], head, fly);
+  if (lt >= tA) { const d = lerp(2.0, .72, easeOut(a)); pos = [head[0] - .6 * d, head[1] + .06, head[2] + .8 * d]; fov = lerp(30, 54, easeOut(a)); target = [head[0], head[1] - .04, head[2]]; }
+  else { // blend the flight end onto the vertigo start so the cut is seamless
+    const d0 = 2.0, endPos = [head[0] - .6 * d0, head[1] + .06, head[2] + .8 * d0], u = easeIO(seg(lt, .9, tA)); pos = V.lerp(pos, endPos, u); fov = lerp(56, 30, u); target = V.lerp(target, head, u);
+  }
+  const cam = lookAt(pos, target, camShake({ fov, roll: lt < tA ? Math.sin(lt * 2) * .02 : 0 }, t, lt < tA ? .8 : 5 + 7 * (1 - a)));
+  const shock = lt >= tA, ex = shock ? { browUp: 1, mouth: 'gasp', open: .8, eyeScale: 1.15, shine: 1 } : { lid: .45, mouth: 'flat', look: .4 };
+  classroomFrame(c, t, cam, { sunA: shock ? .25 : 1, clock: shock ? [10, 17, 0] : [10, 16, 58], cast: (S) => {
+    classCast({ teacherPos: [3.0, 0, 7.3], teacherPose: { back: true, arms: { r: { a: 2.6, b: .2 }, l: { a: .1, b: -.2 } } }, expr: { noah: ex, jonas: shock ? { browUp: 1, mouth: 'o', eyeScale: 1.1 } : undefined } })(S, t);
+  } });
+  if (shock) { const pulse = Math.pow(Math.max(0, Math.sin(a * 1.6 * Math.PI * 2 + 1.2)), 2); redBurst(c, 1, .4 + .6 * pulse); flashWhite(c, (1 - seg(lt, tA, tA + .12)) * .9, '255,80,60'); vignette(c, .55); }
+  else { gradeScreen(c, { sx: .05, sy: .1, warmA: .3, coolA: .2 }); vignette(c, .35); }
 });
 // 2.95–3.98 "Dritte Stunde." wide classroom, golden morning, slow crane down + push in
 shot(2.95, 3.98, (c, lt, t) => {
@@ -197,13 +138,58 @@ shot(18.24, 19.48, (c, lt, t) => {
   alarmGrade(c, t, 1, { bx: lerp(-200, W + 200, seg(lt, 0, 1.24)), by: H * .3, br: 900 }); letterbox(c, 1, 150); vignette(c, .6);
 });
 // 19.48–20.80 "In den nächsten zwanzig Minuten…" — bird's-eye on room 204, red pulse, timer 20:00 starts
-shot(19.48, 20.8, (c, lt, t) => {
+shot(19.48, 21.87, (c, lt, t) => {
   const cam = makeCam({ pos: [4.4, 9.5 - lt * .8, 3.6], yaw: 0, pitch: -1.5, roll: .05 + lt * .03, fov: 60 });
   classroomFrame(c, t, cam, { sun: false, clock: [10, 17, 30], light: { amb: .55, ambCol: [100, 110, 170] }, cast: classCast({ expr: { noah: { browUp: 1, mouth: 'o' }, lea: { brow: 'worried', mouth: 'wobbly' }, jonas: { browUp: 1, mouth: 'o' } }, teacherPos: [8.3, 0, 6.9], teacherPose: { expr: { brow: 'worried', mouth: 'flat' } } }) });
   alarmGrade(c, t, 1, { bx: W * .8, by: H * .2, br: 1500 }); vignette(c, .6);
   const remain = 20 * 60 - Math.floor(Math.max(0, lt - .4) * 1);
   hudClock(c, t, 19.6, W / 2, H / 2, `${String(Math.floor(remain / 60)).padStart(2, '0')}:${String(remain % 60).padStart(2, '0')}`, { size: 120, bar: '#d02a22' });
   hudTag(c, t, 19.9, W / 2, H / 2 + 150, 'Minuten', { size: 44, tilt: .02 });
-  fadeBlack(c, seg(lt, 1.05, 1.32));
 });
-function OVERLAY(c, t) { grain(c, t, .03); }
+
+// 21.87–23.95 "…die dein Leben verändert." — Noah 3/4 in the red light; behind him the green Notausgang sign (foreshadowing)
+shot(21.87, 23.95, (c, lt, t) => {
+  const k = easeIO(seg(lt, 0, 2.08)), cam = lookAt([lerp(3.35, 3.55, k), 1.3, lerp(3.75, 3.45, k)], [4.0, 1.18, 2.0], camShake({ fov: lerp(40, 32, k) }, t, 1.5));
+  classroomFrame(c, t, cam, { sun: false, clock: [10, 17, 30], light: { amb: .55, ambCol: [110, 120, 180] }, cast: S => {
+    actor(S, seatPos('noah'), (cc, kk) => drawNoah34(cc, { k: kk, turn: -1, sit: true, seatH: SEAT_H, ink: 1.8, expr: { brow: 'worried', browUp: .3, mouth: 'flat', look: -.8 }, arms: { l: { a: .35, b: -1.2 }, r: { a: .35, b: -1.2 } } }), { sit: true, bias: -.05, lit: { rim: '255,80,70', rimA: .7 } });
+  } });
+  const ep = proj(cam, [.02, 2.4, .8]); if (ep) glow(c, ep[0], ep[1], 260, '40,220,120', .35);
+  alarmGrade(c, t, 1, { bx: W * .95, by: 120, br: 1400 }); vignette(c, .55);
+});
+// 23.95–26.95 "Und das Leben von fünfhundert anderen Menschen gleich mit." — the whole school from the yard, alarm beacon, counter 500
+shot(23.95, 26.95, (c, lt, t) => {
+  const k = easeIO(seg(lt, 0, 3)), cam = lookAt([lerp(-9, -3, k), lerp(2.0, 3.0, k), -25], [0, 6.0, 0], { fov: 56 });
+  exteriorFrame(c, t, cam, { tod: 'alarm', alarm: 1, clock: [10, 17, 40] });
+  const bp = proj(cam, [4, 9.4, -.4]); alarmGrade(c, t, .55, bp ? { bx: bp[0], by: bp[1], br: 700 } : {}); vignette(c, .45);
+  const n = Math.round(500 * easeOut(seg(t, 24.6, 25.9)));
+  hudTag(c, t, 24.6, W - 330, 170, `${n} Menschen`, { size: 60, bar: '#d02a22' });
+});
+// 26.95–30.45 "Das hier ist die Geschichte von Noah. Aber eigentlich ist es deine." — Noah alone in the yard, looks at us
+shot(26.95, 30.45, (c, lt, t) => {
+  const k = easeIO(seg(lt, 0, 3.5)), cam = lookAt([lerp(-3.4, -3.0, k), 1.15, lerp(-19.5, -17.4, k)], [-3.0, 1.0, -14], { fov: 40 });
+  exteriorFrame(c, t, cam, { tod: 'morning', clock: [10, 16, 0], cast: S => {
+    const look = t > 29.5 ? 0 : .3;
+    actor(S, [-3.0, 0, -14], (cc, kk) => drawNoah(cc, { k: kk, ink: 1.8, expr: { mouth: t > 29.5 ? 'soft' : 'smile', look, shine: t > 29.5 ? 1 : 0, browUp: t > 29.5 ? .3 : 0 } }), {});
+  } });
+  gradeScreen(c, { sx: .1, sy: 0, warmA: .3, coolA: .18 }); vignette(c, .4);
+  hudTag(c, t, 28.55, 560, 300, 'Noah', { size: 64, bar: '#2f6fb0', tilt: -.05 });
+  hudTag(c, t, 30.0, 1360, 300, '… und du?', { size: 54, bar: '#e0663a', tilt: .04 });
+});
+// 30.45–35.40 title card "WAS WÄRE, WENN…" over the school at the moment of the alarm
+shot(30.45, 35.4, (c, lt, t) => {
+  const cam = lookAt([0, 1.4, -42 + lt * .5], [0, 6, 0], { fov: 50 });
+  exteriorFrame(c, t, cam, { tod: 'alarm', alarm: 1, clock: [10, 17, 50] });
+  c.save(); c.globalCompositeOperation = 'multiply'; c.fillStyle = 'rgba(25,25,55,.72)'; c.fillRect(0, 0, W, H); c.restore();
+  const bp = proj(cam, [4, 9.4, -.4]); alarmGrade(c, t, .6, bp ? { bx: bp[0], by: bp[1], br: 600 } : {});
+  titleCard(c, t, 30.6, 'WAS WÄRE, WENN…', 'du deine Schule gerettet hättest?', 32.1);
+  letterbox(c, 1, 110); vignette(c, .6);
+});
+// 35.40–36.95 "Fangen wir von vorne an." — rewind: the clock races backwards to 6:45 with tape-rewind stripes
+shot(35.4, 36.95, (c, lt, t) => {
+  const u = easeIO(seg(lt, 0, 1.4)), total = lerp(10 * 60 + 17, 6 * 60 + 45, u), hh = Math.floor(total / 60), mm = Math.floor(total % 60), ss = (total * 60) % 60;
+  clockECU(c, lt, [hh, mm, ss], { zoom: 1.05 });
+  c.save(); for (let i = 0; i < 9; i++) { const y = ((i * 137 + lt * 2400) % (H + 200)) - 100; c.fillStyle = `rgba(255,255,255,${.12 + rnd(i) * .2})`; c.fillRect(0, y, W, 6 + rnd(i + 3) * 14); } c.restore();
+  hudTag(c, t, 35.45, 260, 140, '◀◀', { size: 60, bar: '#2f6fb0' });
+  hudClock(c, t, 35.45, W - 300, 140, `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')} Uhr`);
+  flashWhite(c, seg(lt, 1.25, 1.55));
+});
