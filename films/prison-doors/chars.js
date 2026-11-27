@@ -492,14 +492,14 @@ CELL_PROPS = (c, q, t, detail, sh) => {
   }
   if (q.n === 64 && detail > 0) {
     // chalk tallies and numbers on the back wall
-    onPlane(c, [X(G.CD - 3), y + 520, za + 30], [0, 0, 1], [0, -1, 0], (c) => {
+    onPlane(c, [X(G.CD - 3), y + 520, s > 0 ? zb - 20 : za + 20], [0, 0, -s], [0, -1, 0], (c) => {
       c.strokeStyle = 'rgba(240,240,232,.8)'; c.lineWidth = 3; c.lineCap = 'round';
       for (let g = 0; g < 3; g++) for (let i = 0; i < 5; i++) { c.beginPath(); if (i < 4) { c.moveTo(10 + g * 60 + i * 10, 10); c.lineTo(12 + g * 60 + i * 10, 48); } else { c.moveTo(4 + g * 60, 40); c.lineTo(50 + g * 60, 16); } c.stroke(); }
-      c.fillStyle = 'rgba(240,240,232,.78)'; c.font = `700 30px ${FONT}`; c.fillText('1 2 3 …', 10, 100); c.fillText('?', 150, 150);
+      c.fillStyle = 'rgba(240,240,232,.78)'; c.font = `700 30px ${FONT}`; 
       // the pairs Noah writes (CHALK.n lines)
       const lines = ['1 × 64', '2 × 32', '4 × 16', '8 × 8'];
-      for (let i = 0; i < CHALK.n; i++) { c.font = `700 ${i === 3 ? 44 : 36}px ${FONT}`; c.fillStyle = i === 3 ? 'rgba(255,236,170,.95)' : 'rgba(245,245,238,.88)'; c.fillText(lines[i], 200, 190 + i * 56); }
-      if (CHALK.cur != null) { const ln = lines[CHALK.cur], k = CHALK.k; c.font = `700 ${CHALK.cur === 3 ? 44 : 36}px ${FONT}`; c.fillStyle = 'rgba(245,245,238,.88)'; c.fillText(ln.slice(0, Math.ceil(ln.length * k)), 200, 190 + CHALK.cur * 56); }
+      for (let i = 0; i < CHALK.n; i++) { c.font = `700 ${i === 3 ? 44 : 36}px ${FONT}`; c.fillStyle = i === 3 ? 'rgba(255,236,170,.95)' : 'rgba(245,245,238,.88)'; c.fillText(lines[i], 10, 120 + i * 52); }
+      if (CHALK.cur != null) { const ln = lines[CHALK.cur], k = CHALK.k; c.font = `700 ${CHALK.cur === 3 ? 44 : 36}px ${FONT}`; c.fillStyle = 'rgba(245,245,238,.88)'; c.fillText(ln.slice(0, Math.ceil(ln.length * k)), 10, 120 + CHALK.cur * 52); }
     });
     // small table with the candle near the sink side
     box(c, X(G.CD - 200), X(G.CD - 70), y + 260, y + 290, za + 130, za + 230, [120, 84, 52], sh);

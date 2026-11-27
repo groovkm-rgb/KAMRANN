@@ -6,7 +6,7 @@ async function page(b) { const p = await b.newPage({ viewport: { width: 1080, he
   await p.goto(url); await p.waitForFunction(() => window.__ready, null, { timeout: 60000 }); p._errs = errs; return p; }
 const grab = (p, t, fmt) => p.evaluate(([t, fmt]) => { window.__film.renderAt(t); return document.getElementById('film').toDataURL(fmt, .93).split(',')[1]; }, [t, fmt]);
 (async () => {
-  const [mode, ...rest] = process.argv.slice(2); const b = await chromium.launch({ args: ['--disable-gpu-vsync'] });
+  const [mode, ...rest] = process.argv.slice(2); const b = await chromium.launch({ args: ['--disable-gpu', '--disable-accelerated-2d-canvas'] });
   if (mode === 'stills') { const p = await page(b); fs.mkdirSync(path.join(dir, 'stills'), { recursive: true });
     for (const t of rest) { const t0 = Date.now(); fs.writeFileSync(path.join(dir, 'stills', `t_${t}.png`), Buffer.from(await grab(p, +t, 'image/png'), 'base64')); process.stdout.write(`${t}:${Date.now() - t0}ms `); }
     console.log(); if (p._errs.length) console.log('ERRORS', p._errs.slice(0, 5)); }

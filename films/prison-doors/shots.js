@@ -1,6 +1,6 @@
 // SHOTS: timeline, cameras, light per shot, lit characters, brass info cards, transitions, renderAt(t).
 const DUR = 44.93;
-const mkOff = () => { const cv = document.createElement('canvas'); cv.width = W; cv.height = H; return cv.getContext('2d'); };
+const mkOff = () => { const cv = document.createElement('canvas'); cv.width = W; cv.height = H; return cv.getContext('2d', { willReadFrequently: true }); };
 const OA = mkOff(), OB = mkOff(), OC = mkOff(), ON = mkOff(), OF = mkOff(), OX = mkOff();
 
 // ---------- lit character compositing: tint by local light, bar shadows, rim light, depth-of-field blur ----------
@@ -12,7 +12,7 @@ function litChar(c, x, y, z, bb, fn, o = {}) {
   x0 = Math.max(0, x0); y0 = Math.max(0, y0); x1 = Math.min(W, x1); y1 = Math.min(H, y1);
   const w = x1 - x0, h = y1 - y0; if (w < 3 || h < 3) return p;
   const A = OA, B = OB;
-  A.clearRect(0, 0, w + 2, h + 2); A.save(); A.translate(p[0] - x0, p[1] - y0); A.scale(s, s); fn(A, s); A.restore();
+  A.clearRect(0, 0, w + 60, h + 60); A.save(); A.beginPath(); A.rect(0, 0, w, h); A.clip(); A.translate(p[0] - x0, p[1] - y0); A.scale(s, s); fn(A, s); A.restore();
   // tint
   let l = o.light || lightAt(x, y + (o.chest ?? 250), z); if (o.add) l = [l[0] + o.add[0], l[1] + o.add[1], l[2] + o.add[2]];
   const g = (o.gain ?? 1.35) * .8, mn = (o.min ?? .26) * .85, m = [0, 1, 2].map(i => clamp(mn + l[i] * g, 0, 1));
@@ -30,9 +30,9 @@ function litChar(c, x, y, z, bb, fn, o = {}) {
   let rim = false;
   if (o.rim) {
     const r = o.rim, C = OC; B.clearRect(0, 0, w + 2, h + 2); B.drawImage(A.canvas, 0, 0, w, h, 0, 0, w, h);
-    C.clearRect(0, 0, w + 40, h + 40); C.drawImage(B.canvas, 0, 0, w, h, 0, 0, w, h);
+    C.clearRect(0, 0, w + 60, h + 60); C.save(); C.beginPath(); C.rect(0, 0, w, h); C.clip(); C.drawImage(B.canvas, 0, 0, w, h, 0, 0, w, h);
     C.globalCompositeOperation = 'destination-out'; C.drawImage(B.canvas, 0, 0, w, h, r.dx * s * 4, r.dy * s * 4, w, h);
-    C.globalCompositeOperation = 'source-in'; C.fillStyle = `rgb(${r.col})`; C.fillRect(0, 0, w, h); C.globalCompositeOperation = 'source-over'; rim = true;
+    C.globalCompositeOperation = 'source-in'; C.fillStyle = `rgb(${r.col})`; C.fillRect(0, 0, w, h); C.globalCompositeOperation = 'source-over'; C.restore(); rim = true;
   }
   c.save(); if (o.blur > .3) c.filter = `blur(${o.blur.toFixed(1)}px)`; c.globalAlpha = o.alpha ?? 1;
   c.drawImage(A.canvas, 0, 0, w, h, x0, y0, w, h);
@@ -160,7 +160,7 @@ function brass(c, x, y, w, h, a, glowA = 0) {
 function gtext(c, s, x, y, size, col = '#ffe9b8', glowA = .6, align = 'center') {
   c.save(); c.font = `700 ${size}px ${FONT}`; c.textAlign = align; c.textBaseline = 'middle';
   c.shadowColor = `rgba(255,190,90,${glowA})`; c.shadowBlur = size * .45; c.fillStyle = col; c.fillText(s, x, y); c.restore();
-  c.save(); c.font = `700 ${size}px ${FONT}`; return c.measureText(s).width;
+  c.save(); c.font = `700 ${size}px ${FONT}`; const mw = c.measureText(s).width; c.restore(); return mw;
 }
 const cardEnv = (t, t0, t1, fi = .35, fo = .3) => Math.min(ease((t - t0) / fi), t1 == null ? 1 : ease((t1 - t) / fo));
 function roundCard(c, t, a) {
@@ -214,10 +214,10 @@ const shot = (t0, t1, tr, fn) => SHOTS.push({ t0, t1, tr, fn });
 // S1+S2 HOOK: crane down from the roof, diagonal slide into the corridor, dolly-in to cell 64 (Noah behind the bars)
 shot(0, 2.25, 'cut', (c, t) => {
   const u = ease5(seg(t, 0, 2.25) * .9 + .1 * seg(t, 0, 2.25) ** 2);
-  camKeys([[0, -150, 3150, -700, .12, -.62], [.38, 100, 2350, 2300, .2, -.45], [.68, 420, 1300, 4300, .75, -.12], [.88, 760, 1110, 5200, 1.35, -.03], [1, 845, 1090, 5360, HP, -.02]], u);
+  camKeys([[0, -150, 3150, -700, .12, -.62], [.38, 100, 2350, 2300, .2, -.45], [.68, 420, 1300, 4300, .75, -.12], [.88, 760, 1110, 5210, 1.35, -.03], [1, 845, 1080, 5378, HP, -.02]], u);
   buildLamps(t); RIM = { dx: -1.2, dy: -.7, col: '170,205,255', a: .9 }; KEY = { col: '255,190,110', a: .18, dir: -1 };
   NST.expr = { mouth: 'soft', browUp: .5, look: 0 };
-  drawWorld(c, t, { motes: [t, 0, 1800, 3600, 1800, 2800, 3000, 120] });
+  drawWorld(c, t, { motes: [t, 0, 1800, 3600, 1800, 2800, 3000, 120], focus: { n: 64, inBlur: 0, faceBlur: 3 * ease(seg(t, 1.5, 2.2)) } });
   return { temp: -.55, vig: .5 };
 });
 // S3 lateral track along the closed doors (ground floor right, left -> right)
@@ -233,7 +233,7 @@ shot(2.25, 3.65, 'dis', (c, t) => {
 shot(3.65, 6.05, 'dis', (c, t) => {
   const u = seg(t, 3.65, 6.05);
   camKeys([[0, 900, 830, 3500, 0, .14], [1, 900, 860, 3950, 0, .1]], ease(u));
-  const gz = lerp(6250, 5050, u), ph = t * 5.2;
+  const gz = lerp(6250, 4650, u), ph = t * 5.2;
   buildLamps(t, { wall: .7, extra: [lanternLamp(900, 760, gz)] }); RIM = { dx: -1, dy: -.6, col: '170,205,255', a: .8 };
   LT.fogFar = 6000;
   drawWorld(c, t, { actors: [guardActor(900, 760, gz, { view: 'front', walk: ph, t, sag: .3 })], motes: [t, 900, 1000, gz - 300, 500, 500, 600, 50] });
@@ -242,7 +242,7 @@ shot(3.65, 6.05, 'dis', (c, t) => {
 // S5 Runde 1: lateral tracking with the guard; doors open like dominoes
 shot(6.05, 8.05, 'dis', (c, t) => {
   const u = seg(t, 6.05, 8.05), gz = lerp(5650, 4250, u);
-  camKeys([[0, 260, 1060, 5550, HP, -.02], [1, 260, 1060, 4200, HP, -.02]], u);
+  camKeys([[0, 230, 1090, 5550, HP, -.3], [1, 230, 1090, 4200, HP, -.3]], u);
   buildLamps(t, { extra: [lanternLamp(880, 760, gz)] }); RIM = { dx: -1, dy: -.6, col: '170,205,255', a: .8 };
   for (const q of CELLS) if (q.f === 1 && q.side === 1) CH.peek[q.n] = clamp((DOOR[q.n] - .3) * 2, 0, 1);
   drawWorld(c, t, { actors: [guardActor(880, 760, gz, { view: 'side', walk: t * 6.5, t, s: 1, sag: .35 })] });
@@ -297,7 +297,7 @@ shot(15.62, 17.75, 'dis', (c, t) => {
 // S10 dolly-in to plate 64, it glows on "vierundsechzig", rack focus to Noah gripping the bars
 shot(17.75, 21.05, 'dis', (c, t) => {
   const u = seg(t, 17.75, 20.4);
-  camKeys([[0, 420, 1470, 5360, HP, -.32], [1, 845, 1430, 5360, HP, -.47]], ease5(u));
+  camKeys([[0, 300, 1460, 5378, HP, -.2, 850], [1, 700, 1430, 5378, HP, -.28, 850]], ease5(u));
   for (let n = 1; n <= 100; n++) DOOR[n] = 0;
   buildLamps(t); RIM = { dx: -1.2, dy: -.8, col: '170,205,255', a: 1 };
   PLATEGLOW = ease(seg(t, 18.98, 19.35)) * (1 - .4 * seg(t, 20.2, 21));
@@ -309,13 +309,13 @@ shot(17.75, 21.05, 'dis', (c, t) => {
 // S11 think: almost dark, one spot on Noah (stool, chin, counting fingers), slow half orbit, hourglass + countdown
 shot(21.05, 23.0, 'cut', (c, t) => {
   const u = seg(t, 21.05, 23.0), a = lerp(-.5, .5, ease(u)), R = 600, cx = 1300, cz = 5360, yaw = HP + a;
-  CAM.x = cx - Math.sin(yaw) * R; CAM.z = cz - Math.cos(yaw) * R; CAM.y = 1000; CAM.yaw = yaw; CAM.pitch = -.06;
+  CAM.x = cx - Math.sin(yaw) * R; CAM.z = cz - Math.cos(yaw) * R; CAM.y = 1060; CAM.yaw = yaw; CAM.pitch = -.2;
   for (let n = 1; n <= 100; n++) DOOR[n] = 0;
   LT.amb = [.03, .035, .05]; LT.fog = [4, 6, 10]; NOAH_CANDLE = .25;
   buildLamps(t, { wall: .05, hang: .05, extra: [{ x: 1300, y: 1480, z: 5360, i: 2.2, r: 380, c: [1, .9, .7] }] });
   NST.pose = 'sit'; NST.x = 250; NST.expr = { mouth: 'flat', browUp: .25, look: .6 }; NST.tilt = .05;
   RIM = { dx: 1.2, dy: -1, col: '255,230,190', a: 1 }; KEY = null;
-  drawWorld(c, t, { beams: .02 });
+  drawWorld(c, t, { beams: .02, focus: { n: 64, inBlur: 0, faceBlur: 4 } });
   // the spot cone
   const top = P(1300, 1480, 5360), bot = P(1300, 760, 5360);
   if (top && bot) { c.save(); c.globalCompositeOperation = 'lighter'; const g = c.createLinearGradient(0, top[1], 0, bot[1]); g.addColorStop(0, 'rgba(255,235,200,.28)'); g.addColorStop(1, 'rgba(255,235,200,.06)'); c.fillStyle = g; c.beginPath(); c.moveTo(top[0] - 20 * top[2], top[1]); c.lineTo(top[0] + 20 * top[2], top[1]); c.lineTo(bot[0] + 170 * bot[2], bot[1]); c.lineTo(bot[0] - 170 * bot[2], bot[1]); c.closePath(); c.fill();
@@ -324,7 +324,7 @@ shot(21.05, 23.0, 'cut', (c, t) => {
   // card: hourglass + "Denk nach!" + 5..1
   const ca = cardEnv(t, 21.15, 22.95, .3, .2);
   if (ca > 0) {
-    const cx = 470, y = 1170, w = 560, h = 330; c.save(); c.globalAlpha = ca; brass(c, cx - w / 2, y, w, h, 1, .3);
+    const cx = 470, y = 1260, w = 520, h = 320; c.save(); c.globalAlpha = ca; brass(c, cx - w / 2, y, w, h, 1, .3);
     gtext(c, 'Denk nach!', cx, y + 62, 58, '#ffe9b8', .7);
     hourglass(c, cx - 130, y + 210, .8, seg(t, 21.2, 22.95));
     const nmb = clamp(5 - Math.floor((t - 21.2) / .35), 1, 5), kk = ease(((t - 21.2) % .35) / .12);
@@ -337,7 +337,7 @@ shot(21.05, 23.0, 'cut', (c, t) => {
 const MARK_T = [23.35, 23.7, 24.05, 24.4, 24.75, 25.1, 25.45];
 shot(23.0, 25.95, 'cut', (c, t) => {
   const u = seg(t, 23.0, 25.95);
-  camKeys([[0, 600, 1200, 5440, HP + .08, -.17], [1, 690, 1180, 5410, HP + .06, -.16]], ease(u));
+  camKeys([[0, 600, 1200, 5400, HP + .04, -.27], [1, 680, 1180, 5390, HP + .03, -.26]], ease(u));
   for (let n = 1; n <= 100; n++) DOOR[n] = 0;
   const lightK = ease(seg(t, 23.0, 23.6));
   LT.amb = [lerp(.05, .2, lightK), lerp(.06, .22, lightK), lerp(.08, .26, lightK)];
@@ -354,34 +354,34 @@ shot(23.0, 25.95, 'cut', (c, t) => {
 // S13 pairs of divisors: card + Noah writes the same pairs on the wall
 const PAIR_T = [26.4, 28.95, 29.85];
 function pairsCard(c, t, a, eight) {
-  if (a <= 0) return; const cx = 470, y = 1080, w = 600, h = 430;
+  if (a <= 0) return; const cx = 470, y = 1290, w = 500, h = 320;
   c.save(); c.globalAlpha = a; brass(c, cx - w / 2, y, w, h, 1, .15 + eight * .5);
   const rows = [['1', '64'], ['2', '32'], ['4', '16']];
   rows.forEach(([l, r], i) => {
-    const k = ease((t - PAIR_T[i]) / .35); if (k <= 0) return; const yy = y + 70 + i * 92, lock = ease((t - PAIR_T[i] - .25) / .15);
+    const k = ease((t - PAIR_T[i]) / .35); if (k <= 0) return; const yy = y + 50 + i * 70, lock = ease((t - PAIR_T[i] - .25) / .15);
     c.save(); c.globalAlpha = a * k;
     const off = (1 - k) * 120;
-    for (const [s, v] of [[-1, l], [1, r]]) { const tx = cx + s * (110 + off); c.fillStyle = 'rgba(255,220,150,.10)'; rrect(c, tx - 70, yy - 38, 140, 76, 12); c.fill(); c.lineWidth = 2.5; c.strokeStyle = `rgba(255,214,140,${.4 + lock * .5})`; c.stroke(); gtext(c, v, tx, yy + 3, 56, '#ffeec8', .5); }
+    for (const [s, v] of [[-1, l], [1, r]]) { const tx = cx + s * (100 + off); c.fillStyle = 'rgba(255,220,150,.10)'; rrect(c, tx - 64, yy - 30, 128, 60, 12); c.fill(); c.lineWidth = 2.5; c.strokeStyle = `rgba(255,214,140,${.4 + lock * .5})`; c.stroke(); gtext(c, v, tx, yy + 3, 46, '#ffeec8', .5); }
     gtext(c, '×', cx, yy + 2, 50, `rgba(255,214,140,${lock})`, .6);
     c.restore();
   });
   // the lonely 8 x 8
   if (eight > 0) {
-    const yy = y + 70 + 3 * 92 + 22;
+    const yy = y + 50 + 3 * 70 + 18;
     c.save(); c.globalAlpha = a * ease(eight * 3); c.globalCompositeOperation = 'lighter';
     const g = c.createRadialGradient(cx, yy, 10, cx, yy, 260); g.addColorStop(0, `rgba(255,214,130,${.45 * eight})`); g.addColorStop(1, 'rgba(255,214,130,0)'); c.fillStyle = g; c.fillRect(cx - 300, yy - 200, 600, 400); c.restore();
     c.save(); c.globalAlpha = a * ease(eight * 3); const sc = 1 + .08 * Math.sin(Math.min(1, eight) * Math.PI);
-    c.translate(cx, yy); c.scale(sc, sc); c.fillStyle = 'rgba(255,220,150,.22)'; rrect(c, -150, -46, 300, 92, 16); c.fill(); c.lineWidth = 3.5; c.strokeStyle = '#ffe2a0'; c.stroke();
-    gtext(c, '8 × 8', 0, 4, 70, '#fffbe8', 1); c.restore();
+    c.translate(cx, yy); c.scale(sc, sc); c.fillStyle = 'rgba(255,220,150,.22)'; rrect(c, -130, -36, 260, 72, 16); c.fill(); c.lineWidth = 3.5; c.strokeStyle = '#ffe2a0'; c.stroke();
+    gtext(c, '8 × 8', 0, 4, 58, '#fffbe8', 1); c.restore();
   }
   c.restore();
 }
 const chalkShot = (t0, t1, tr) => shot(t0, t1, tr, (c, t) => {
   const u = seg(t, 25.95, 33.4);
-  camKeys([[0, 860, 1170, 5150, HP + .3, -.12], [.6, 880, 1160, 5180, HP + .26, -.11], [1, 930, 1120, 5230, HP + .2, -.08]], ease(u));
+  camKeys([[0, 800, 1230, 5380, HP, -.16, 1050], [.6, 840, 1220, 5370, HP, -.15, 1100], [.72, 850, 1215, 5365, HP, -.14, 1150], [1, 880, 1200, 5350, HP, -.13, 1350]], ease(u));
   for (let n = 1; n <= 100; n++) DOOR[n] = 0;
   buildLamps(t, { wall: 1.1, extra: [{ x: 900, y: 1300, z: 5200, i: .8, r: 500, c: [1, .72, .4] }] });
-  NST.x = 360; NST.z = -80; RIM = { dx: 1.1, dy: -.8, col: '255,214,160', a: .9 }; KEY = { col: '255,200,120', a: .22, dir: 1 };
+  NST.x = 330; NST.z = -60; RIM = { dx: 1.1, dy: -.8, col: '255,214,160', a: .9 }; KEY = { col: '255,200,120', a: .22, dir: 1 };
   // writing: chalk lines appear right after each card pair
   const W8 = 31.5;
   CHALK.n = PAIR_T.filter(v => t > v + .9).length; const cur = PAIR_T.findIndex(v => t > v + .1 && t <= v + .9);
@@ -395,7 +395,7 @@ const chalkShot = (t0, t1, tr) => shot(t0, t1, tr, (c, t) => {
   if (wow > 0) { NST.expr.lid = 0; }
   drawWorld(c, t, { focus: { n: 64, inBlur: 0, faceBlur: 5 } });
   // falling chalk
-  if (drop && t < 32.3) { const k = seg(t, 31.75, 32.15), p = P(C64.x + 180, 760 + lerp(330, 6, k * k), 5300); if (p) { c.save(); c.translate(p[0], p[1]); c.rotate(k * 6); c.fillStyle = '#f4f2ea'; c.fillRect(-7 * p[2] * 2, -3 * p[2] * 2, 14 * p[2] * 2, 6 * p[2] * 2); c.restore(); } }
+  if (drop && t < 32.3) { const k = seg(t, 31.75, 32.15), p = P(C64.x + 300, 760 + lerp(330, 6, k * k), 5320); if (p) { c.save(); c.translate(p[0], p[1]); c.rotate(k * 6); c.fillStyle = '#f4f2ea'; c.fillRect(-7 * p[2] * 2, -3 * p[2] * 2, 14 * p[2] * 2, 6 * p[2] * 2); c.restore(); } }
   const eight = ease(seg(t, 31.3, 31.75));
   pairsCard(c, t, cardEnv(t, 26.2, 33.35, .35, .3), eight);
   return { temp: lerp(-.15, .25, u), vig: .55 + eight * .1 };
@@ -405,7 +405,7 @@ chalkShot(25.95, 28.7, 'dis'); chalkShot(28.7, 30.9, 'cut'); chalkShot(30.9, 33.
 const CNT_T = [33.65, 33.98, 34.31, 34.64, 34.97, 35.3, 35.63];
 shot(33.4, 36.47, 'dis', (c, t) => {
   const u = seg(t, 33.4, 36.47);
-  camKeys([[0, 700, 1170, 5420, HP + .06, -.14], [1, 760, 1140, 5390, HP + .04, -.11]], ease(u));
+  camKeys([[0, 690, 1180, 5390, HP + .03, -.26], [1, 740, 1160, 5385, HP + .02, -.24]], ease(u));
   for (let n = 1; n <= 100; n++) DOOR[n] = 0;
   const cnt = CNT_T.filter(v => t >= v).length; MARKS.n = 7; MARKS.a = 1; MARKS.hi = cnt - 1;
   let st = 0; CNT_T.forEach((v, i) => { const k = ease((t - v) / .14); if (k > 0) st = i % 2 === 0 ? lerp(st, 1, k) : lerp(st, 0, k); });
@@ -448,7 +448,7 @@ shot(36.47, 40.05, 'dis', (c, t) => {
 // S17 ten of a hundred: start on bald 37 (closed, shoulders drop) next to 36 (gold), pull back to the whole block
 shot(40.05, 42.62, 'dis', (c, t) => {
   const u = seg(t, 40.05, 42.62);
-  camKeys([[0, -360, 1870, 1180, -HP, -.08, 1000], [.3, -280, 1880, 900, -HP + .25, -.06, 980], [1, 0, 1650, -2300, 0, .0, 860]], ease5(u));
+  camKeys([[0, -360, 2120, 1180, -HP, -.1, 1000], [.3, -280, 2080, 900, -HP + .25, -.08, 980], [1, 0, 1650, -2300, 0, .0, 860]], ease5(u));
   LT.dawn = 1; LT.amb = [.3, .27, .24]; LT.fog = [70, 58, 50];
   buildLamps(t, { wall: .8, hang: .9 });
   for (let n = 1; n <= 100; n++) { DOOR[n] = 0; if (isSq(n)) { DOOR[n] = n === 64 ? .42 : 1; DOORGLOW[n] = 1; if (n !== 64) { CH.out[n] = 1; CH.cheer[n] = 1; } } }
@@ -461,8 +461,8 @@ shot(40.05, 42.62, 'dis', (c, t) => {
 });
 // S18 "und du bist einer davon": the door opens, Noah jumps, the guard nods, Noah runs out; crane up and back
 shot(42.62, DUR, 'dis', (c, t) => {
-  const u = seg(t, 43.75, DUR);
-  camKeys([[0, 820, 1090, 5320, HP + .05, -.03], [.35, 520, 1350, 4900, HP - .25, -.12], [1, -100, 2450, 3300, .55, -.33, 900]], ease5(u));
+  const u = seg(t, 42.62, DUR);
+  camKeys([[0, 780, 1100, 5330, HP + .05, -.04], [.45, 845, 1085, 5365, HP + .02, -.02], [.62, 640, 1230, 5000, HP - .3, -.12], [1, 250, 1650, 4150, .5, -.22, 900]], u < .45 ? ease(u / .45) * .45 : .45 + ease5((u - .45) / .55) * .55);
   LT.dawn = 1; LT.amb = [.32, .28, .24]; LT.fog = [80, 64, 52];
   for (let n = 1; n <= 100; n++) { DOOR[n] = 0; if (isSq(n)) { DOOR[n] = 1; DOORGLOW[n] = 1; if (n !== 64) { CH.out[n] = 1; CH.cheer[n] = 1; } } }
   const open = ease(seg(t, 43.62, 44.15)); DOOR[64] = lerp(.42, 1, open); DOORGLOW[64] = 1;
@@ -493,7 +493,7 @@ function finalGrade(c, g) {
 function renderShot(c, i, t) { resetState(t); c.save(); const g = SHOTS[i].fn(c, t) || {}; c.restore(); finalGrade(c, g); }
 const DISS = 8 / FPS;
 function renderAt(t) {
-  const c = document.getElementById('film').getContext('2d');
+  const c = document.getElementById('film').getContext('2d', { willReadFrequently: true });
   let i = SHOTS.findIndex(s => t >= s.t0 && t < s.t1); if (i < 0) i = SHOTS.length - 1;
   const S = SHOTS[i];
   if (S.tr === 'dis' && i > 0 && t < S.t0 + DISS) {

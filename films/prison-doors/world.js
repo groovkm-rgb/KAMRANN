@@ -335,7 +335,7 @@ function drawFacade(c, q, t, detail) {
   if (q.n === 64 && MARKS.n > 0) {
     const vals = [1, 2, 4, 8, 16, 32, 64];
     for (let i = 0; i < MARKS.n; i++) {
-      const zz = za + 24 + i * ((zb - za - 48) / 6), yy = y0 + G.DH + 30, p = P(x - s * 14, yy, zz); if (!p) continue;
+      const zz = zb - 24 - i * ((zb - za - 48) / 6), yy = y0 + 150, p = P(x - s * 14, yy, zz); if (!p) continue;
       const hi = MARKS.hi === i ? 1 : 0, a = MARKS.a * (i < MARKS.n - 1 ? 1 : MARKS.last ?? 1);
       glow(c, p[0], p[1], (60 + hi * 70) * p[2], hi ? '255,220,140' : '255,190,110', (.6 + hi * .4) * a);
       c.save(); c.globalAlpha = a; c.beginPath(); c.arc(p[0], p[1], 13 * p[2], 0, 7); c.fillStyle = hi ? '#fff6d8' : '#ffd27e'; c.fill();
