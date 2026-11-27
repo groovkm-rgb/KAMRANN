@@ -3,7 +3,7 @@
 //   node render.cjs mp4 out.mp4 [t0 t1] [--jobs 4]
 const { chromium } = require('playwright'); const fs = require('fs'); const path = require('path'); const { spawn, execFileSync } = require('child_process');
 const SK = '/root/.claude/skills/synced/4717a1bd-cd09-4f93-a969-d1bc2c78004d_a8063d07-bcae-413f-ba45-94fa5cab70af/noah-character';
-const MODS = [SK + '/noah.js', SK + '/places/fonts.js', 'engine3d.js', 'people.js', 'school.js', 'exterior.js', 'shots.js', 'film.js', 'home.js', 'gym.js', 's01.js', 's02.js', 's03.js', 's04.js', 's05.js', 's06.js', 's07.js', 's08.js', 's09.js', 'main.js'];
+const MODS = [SK + '/noah.js', SK + '/places/fonts.js', 'engine3d.js', 'people.js', 'school.js', 'exterior.js', 'shots.js', 'film.js', 'home.js', 'gym.js', 'extra.js', 's01.js', 's02.js', 's03.js', 's04.js', 's05.js', 's06.js', 's07.js', 's08.js', 's09.js', 's10.js', 's11.js', 's12.js', 'main.js'];
 function build() {
   const js = MODS.map(f => `// ---- ${path.basename(f)} ----\n` + fs.readFileSync(path.resolve(__dirname, f), 'utf8')).join('\n');
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head><body><canvas id="film" width="1920" height="1080"></canvas><script>${js}</script></body></html>`;

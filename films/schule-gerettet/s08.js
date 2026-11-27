@@ -44,7 +44,7 @@ shot(369.45, 373.6, (c, lt, t) => {
   if (t > 372.87) hudTag(c, t, 372.9, 360, 150, 'egal!', { size: 54, bar: '#3d8a4f' });
 });
 // 374.20–383.64 the fake announcement — Noah speaks, the announcement card; cut to the plan with sound rings at 379
-shot(374.2, 379.0, (c, lt, t) => {
+shot(373.6, 379.0, (c, lt, t) => {
   noahAtMic(c, t, { onAir: true, level: true, talk: true });
   speakerCard(c, t, 374.1, 383.6, [['„Achtung, Achtung.', 374.2], ['Hier spricht die Schulleitung.', 375.39], ['Alle Schülerinnen und Schüler', 376.95], ['gehen sofort in die Turnhalle.', 378.46]], { title: 'DURCHSAGE', y: 70, x: W - 1000 });
 });

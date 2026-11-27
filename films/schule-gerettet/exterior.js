@@ -118,10 +118,12 @@ function tree3D(S, x, z, s, t) {
 }
 function fence3D(S) {
   for (let x = -40; x <= 40; x += 2.5) solid(S, x, 0, -45, .06, 1.6, .06, '#4a5a4a', { ink: .4 });
-  texQuad(S, makeTex('fence', 512, 128, (c, w, h) => { c.clearRect(0, 0, w, h); for (let i = -20; i < 60; i++) { line(c, [i * 12, 0, i * 12 + 60, h], 1.5, 'rgba(70,90,70,.8)'); line(c, [i * 12, h, i * 12 + 60, 0], 1.5, 'rgba(70,90,70,.8)'); } }), [[-40, 1.6, -45], [40, 1.6, -45], [40, 0, -45], [-40, 0, -45]], { nx: 8, ny: 1, lit: false, two: true, bias: .3 });
+  texQuad(S, makeTex('fence', 512, 128, (c, w, h) => { c.clearRect(0, 0, w, h); for (let i = -20; i < 60; i++) { line(c, [i * 12, 0, i * 12 + 60, h], 1.5, 'rgba(70,90,70,.8)'); line(c, [i * 12, h, i * 12 + 60, 0], 1.5, 'rgba(70,90,70,.8)'); } }), [[-40, 1.6, -45], [-1.8, 1.6, -45], [-1.8, 0, -45], [-40, 0, -45]], { nx: 4, ny: 1, lit: false, two: true, bias: .3 });
+  texQuad(S, TEX.fence, [[1.8, 1.6, -45], [40, 1.6, -45], [40, 0, -45], [1.8, 0, -45]], { nx: 4, ny: 1, lit: false, two: true, bias: .3 });
   // gate (open) at the yard entrance
   solid(S, -1.8, 0, -45.1, .12, 2.0, .12, '#4a5a4a'); solid(S, 1.8, 0, -45.1, .12, 2.0, .12, '#4a5a4a');
-  texQuad(S, makeTex('gatesign', 600, 160, (c, w, h) => { c.fillStyle = '#1f4f7a'; c.fillRect(0, 0, w, h); txt(c, 'Lindenhof-Schule', w / 2, 102, 60, '#fff', 'center'); }), [[-1.8, 2.5, -45.1], [1.9, 2.5, -45.1], [1.9, 2.0, -45.1], [-1.8, 2.0, -45.1]], { nx: 1, ny: 1, two: true, bias: .2 });
+  texQuad(S, makeTex('gatesign', 600, 160, (c, w, h) => { c.fillStyle = '#1f4f7a'; c.fillRect(0, 0, w, h); txt(c, 'Lindenhof-Schule', w / 2, 102, 60, '#fff', 'center'); }), [[-1.8, 2.5, -45.1], [1.9, 2.5, -45.1], [1.9, 2.0, -45.1], [-1.8, 2.0, -45.1]], { nx: 1, ny: 1, bias: .2 });
+  texQuad(S, TEX.gatesign, [[1.9, 2.5, -45.08], [-1.8, 2.5, -45.08], [-1.8, 2.0, -45.08], [1.9, 2.0, -45.08]], { nx: 1, ny: 1, bias: .2 });
 }
 function gymBuilding(S, c, t, o = {}) {
   const G = EXT.gym;
