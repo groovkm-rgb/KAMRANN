@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Zelle 64</title>
+<style>html,body{margin:0;background:#000}#film{display:block}</style></head>
+<body><canvas id="film" width="1080" height="1920"></canvas>
+<script>/* window.FILM_W = 1920; window.FILM_H = 1080;  (uncomment for a 16:9 film, and set the canvas size) */</script>
+<script src="../../noah.js"></script><script src="../../places/fonts.js"></script>
+<script src="../../places/prison3d/world.js"></script><script src="../../places/prison3d/cast.js"></script><script src="shots.js"></script>
+<script>NOAH_FONTS_READY.then(()=>{window.__ready=true; const q=new URLSearchParams(location.search); if(!q.get('render')){let t0=performance.now();(function loop(){renderAt(((performance.now()-t0)/1000)%DUR); requestAnimationFrame(loop)})()}});</script>
+</body></html>
