@@ -4,7 +4,7 @@ const TIMING = /*JSON*/{
   "duration": 28.4,
   "vo_offset": 0.6, "gap_at": 21.8, "gap": 0.48, "vo_cut": 26.62,
   "shots": { "s1": 0, "s2": 3.1, "crack": 7.55, "s3": 8.55, "s4": 14.5, "s5": 23.1, "rewind": 25.62, "day": 27.5 },
-  "type_text": "TAG 30 · 03:00 UHR", "type_start": 0.62, "type_step": 0.085,
+  "type_lines": ["TAG 30", "03:00 UHR"], "type_start": 0.62, "type_step": 0.085, "type_gap": 0.35,
   "knack": 7.62,
   "torch_flicker": [[17.02, 17.12], [17.3, 17.44]], "torch_dim": 17.6,
   "look_up": 18.3, "tilt": [18.7, 21.0],

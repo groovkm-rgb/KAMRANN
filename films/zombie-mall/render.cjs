@@ -10,7 +10,7 @@ const { chromium } = require('playwright'); const fs = require('fs'); const path
   const cfg = JSON.parse(fs.readFileSync(path.join(dir, 'film.json'), 'utf8'));
   const js = cfg.modules.map(m => fs.readFileSync(path.join(dir, m), 'utf8')).join('\n;\n') + '\n;\n' + fs.readFileSync(path.join(dir, process.env.SCENE || 'scene.js'), 'utf8');
   const html = path.join(dir, '_film.html');
-  fs.writeFileSync(html, `<!doctype html><meta charset="utf-8"><body style="margin:0;background:#000"><canvas id="film" width="1920" height="1080"></canvas><script>${js}\nconst ctx = document.getElementById('film').getContext('2d'); window.__ready = Promise.all([window.NOAH_FONTS_READY || 0, window.MONO_READY || 0]).then(() => 1);</script>`);
+  fs.writeFileSync(html, `<!doctype html><meta charset="utf-8"><body style="margin:0;background:#000"><canvas id="film" width="1920" height="1080"></canvas><script>${js}\nconst ctx = document.getElementById('film').getContext('2d'); window.__ready = Promise.all([window.NOAH_FONTS_READY || 0, window.MONO_READY || 0, typeof TITLE_FONTS_READY !== 'undefined' ? TITLE_FONTS_READY : 0]).then(() => 1);</script>`);
   const b = await chromium.launch(); const errs = [];
   const page = async () => { const p = await b.newPage({ viewport: { width: 1920, height: 1080 } }); p.on('pageerror', e => errs.push(e.message)); await p.goto('file://' + html); await p.evaluate(() => window.__ready); return p; };
   const grab = (p, t, fmt) => p.evaluate(([t, fmt]) => { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, 1920, 1080); renderFrame(ctx, t); return document.getElementById('film').toDataURL(fmt, .93).split(',')[1]; }, [t, fmt]);

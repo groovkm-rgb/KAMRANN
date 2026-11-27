@@ -1,6 +1,6 @@
 // "30 Tage im Einkaufszentrum" — intro (Tag 30 → Tag 1). 16:9, 1920x1080, 30 fps. All on-screen text German.
 // Shot times come from timings.js (measured from the voice-over MP3).
-const T = TIMING, SH = T.shots;
+const T = TIMING, SH = T.shots; let REWINDING = false;
 const ez = t => t * t * (3 - 2 * t), ez2 = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, eIn = t => t * t * t;
 const seg = (t, a, b) => clamp((t - a) / (b - a));
 // world y that lands on screen y Y for parallax layer p, given cam (inverse of layer())
@@ -25,7 +25,7 @@ const HORDE = ZOMBIES.concat(Array.from({ length: 24 }, (_, i) => {
 function vignette(c, a = .55) { c.save(); c.setTransform(1, 0, 0, 1, 0, 0); const g = c.createRadialGradient(W / 2, H / 2, H * .35, W / 2, H / 2, H * 1.05); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(0,0,4,${a})`); c.fillStyle = g; c.fillRect(0, 0, W, H); c.restore(); }
 function grain(c, t, a = .05) { c.save(); c.setTransform(1, 0, 0, 1, 0, 0); const f = Math.floor(t * 30); for (let i = 0; i < 500; i++) { const v = rnd(f * 7.13 + i) > .5 ? 255 : 0; c.fillStyle = `rgba(${v},${v},${v},${a})`; c.fillRect(rnd(f + i * 3.1) * W, rnd(f * 1.7 + i * 5.3) * H, 2, 2); } c.restore(); }
 function coldGrade(c, a = 1) { c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalCompositeOperation = 'soft-light'; c.fillStyle = `rgba(40,70,150,${.35 * a})`; c.fillRect(0, 0, W, H); c.restore(); }
-function typewriter(c, t) {
+function typewriterOLD(c, t) {
   const s = T.type_text, n = Math.floor((t - T.type_start) / T.type_step) + 1, shown = s.slice(0, clamp(n, 0, s.length)); if (t < T.type_start) return;
   const fade = 1 - seg(t, SH.s2 - .35, SH.s2 - .05);
   c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = fade; c.font = mono(58); c.textBaseline = 'alphabetic';
@@ -35,49 +35,38 @@ function typewriter(c, t) {
   c.restore();
 }
 
-// ================= SHOT 1: crane down from the moon onto the mall (0 – 3.1) =================
-const CAM1 = { x: 30, y: -350, z: 1.06 };
+// ================= SHOT 1: crane down from the moon onto the mall (0 – 3.1), 3D set =================
+const SKYPTS = Array.from({ length: 220 }, (_, i) => [(rnd(i + 3) - .5) * 3400, 60 + rnd(i + 70) * 1500, -1400]);
+const CLOUDS = [[-520, 300, -900, 700], [-80, 420, -900, 820], [380, 280, -900, 640], [-900, 520, -900, 760], [700, 600, -900, 700], [100, 760, -900, 900]];
+function sky3D(c, t, o = {}) {
+  nightSky(c, t, o.cols || {});
+  const P = MALL3D.proj;
+  for (let i = 0; i < SKYPTS.length; i++) { const q = P(...SKYPTS[i]); if (!q.front) continue; const a = .35 + .55 * Math.abs(Math.sin(t * (.5 + rnd(i) * 2) + i)), r = 1 + rnd(i + 600) * 2.4; c.fillStyle = `rgba(220,230,255,${a})`; c.fillRect(q.x - r / 2, q.y - r / 2, r, r); }
+  const m = P(-170, 330, -760); if (m.front) moon(c, m.x, m.y, 62);
+  CLOUDS.forEach(([x, y, z, w], i) => { const q = P(x + t * 6, y, z); if (q.front) cloud(c, q.x, q.y, w, '#121b38', 'rgba(140,165,225,.32)', i * 7 + 3); });
+  const hz = P(0, 0, -2600); if (hz.front) { skyline(c, -400 + (hz.x - W / 2), W + 400 + (hz.x - W / 2), hz.y + 2, t, { col: '#0b1122', lit: .06, tall: .5, fires: [[-120 + (hz.x - W / 2), 160, .8], [W + 60 + (hz.x - W / 2), 120, .7]] }); fogBand(c, -200, W + 200, hz.y - 10, 120, .25, t, NIGHT.fog, 10); }
+}
 function shot1(c, t) {
-  const k = ez2(seg(t, 0, 3.0)), cam = { x: lerp(-80, 30, k), y: lerp(-2300, -350, k), z: lerp(1.0, 1.06, k) };
-  nightSky(c, t);
-  layer(c, cam, .04, c => stars(c, -1300, 1300, -800, 300, t, 160));
-  layer(c, cam, .12, c => { moon(c, -330, -470, 70); });
-  layer(c, cam, .2, c => { for (let i = 0; i < 5; i++) cloud(c, -1100 + i * 560 + t * 22, -620 + (i % 2) * 120 - i * 18, 520 + rnd(i) * 300, '#131c38', 'rgba(140,165,225,.3)', i * 7); });
-  layer(c, cam, .35, c => { const b = wy(610, .35, CAM1); skyline(c, -1400, 1400, b, t, { col: '#0b1122', lit: .07, fires: [[-980, 330, 1], [1020, 210, .8]] }); fogBand(c, -1400, 1400, b - 40, 140, .22, t); });
-  // mall
-  layer(c, cam, .7, c => {
-    const base = -71, h = 470;
-    mallFacade(c, -760, 760, base, h, t);
-    const lvl = neonSign(c, 0, base - h - 40, 118, t);
-    // zombies shuffling at the entrance (tiny silhouettes, all different)
-    for (let i = 0; i < 9; i++) { const Z = HORDE[i], dir = i % 3 === 0 ? -1 : 1, x = -300 + i * 75 + dir * t * 18; drawZombieSide(c, Z, { x, y: base + 4 + (i % 2) * 8, k: .07, s: dir, walk: t * 3 + i * 1.7, t, dim: .78, glow: .9 }); }
-    bloom(c, 0, base - h - 80, 900, '255,50,110', .1 * lvl);
-  });
-  layer(c, cam, .85, c => { asphalt(c, -2000, 2000, -120, 1400, t); parkLines(c, -1300, 1300, -60, 14, 160); fogBand(c, -1600, 1600, -40, 120, .2, t, NIGHT.fog, 30); });
-  layer(c, cam, .9, c => {
-    lampPost(c, -980, -10, 950, .55 + .1 * Math.sin(t * 13) * Math.sin(t * 7)); lampPost(c, 560, -16, 900, 0);
-    // a few zombies crossing the lot
-    for (let i = 0; i < 3; i++) { const Z = HORDE[9 + i], dir = i === 1 ? -1 : 1; drawZombieSide(c, Z, { x: [-520, 260, 900][i] + dir * t * 22, y: -24 + i * 6, k: .11, s: dir, walk: t * 3.4 + i * 2.3, t, dim: .72 }); }
-    nightCar(c, 150, -10, { sc: .55, color: '#3a4458', dark: .6 });
-    nightCar(c, 820, 0, { sc: .55, color: '#5a3a3a', s: -1, dark: .6 });
-    nightCar(c, -640, 6, { sc: .58, color: '#2f4a5a', dark: .5, haz: hazOn(t) });
-  });
-  layer(c, cam, 1, c => {
-    const pl = 95;
-    puddle(c, -120, pl, 420, 40, c => { c.fillStyle = 'rgba(255,70,130,.5)'; c.fillRect(-500, pl - 30, 760, 26); bloom(c, -120, pl, 300, '255,60,120', .5); }, { a: .8 });
-    puddle(c, -650, pl + 30, 240, 26, c => { if (hazOn(t)) bloom(c, -650, pl + 30, 200, NIGHT.haz, .8); });
-    litter(c, -1100, 1100, 60, t, 3, 22, { depth: 60 });
-  });
-  layer(c, cam, 1.15, c => plasticBag(c, -900 + t * 300, 40 - Math.sin(t * 2) * 60 - t * 30, t, 1.1));
-  layer(c, cam, 1.3, c => {
-    const g = wy(1080, 1.3, CAM1) + 10;
-    shopCart(c, 700, g - 30, .8, { rot: -.45, flip: 1 });
-    litter(c, -1000, 300, g - 40, t, 9, 7, { s: 1.3, depth: 30 });
-    c.fillStyle = '#05070c'; c.beginPath(); c.moveTo(-1400, g + 40); c.quadraticCurveTo(-1000, g - 40, -700, g - 10); c.lineTo(-640, g + 200); c.lineTo(-1400, g + 200); c.fill(); // dark kerb in front
-  });
-  layer(c, cam, 1, c => { fogBand(c, -1400, 1400, 0, 160, .16, t, NIGHT.fog, 40); dust(c, -1000, 1000, -700, 100, t, 30); });
-  coldGrade(c); vignette(c, .6);
-  typewriter(c, t);
+  const k = ez2(seg(t, 0, 3.0));
+  const cam = { pos: [lerp(-6, 4, k), lerp(34, 2.4, k), lerp(56, 42, k)], look: [lerp(-16, -1, k), lerp(64, 10.5, k), lerp(-12, 0, k)], fov: 46 };
+  const r = MALL3D.night(t, cam), P = MALL3D.proj;
+  sky3D(c, t);
+  c.drawImage(r.bg, 0, 0);
+  // zombies (2D, all different) placed in the 3D lot: under the canopy and crossing between the cars
+  const Zs = [];
+  for (let i = 0; i < 30; i++) { const dir = rnd(i + 5) > .5 ? -1 : 1; Zs.push({ Z: HORDE[i], x: -12.5 + (i % 15) * 1.75 + (rnd(i) - .5) * .8 + dir * t * .25, z: 1.8 + Math.floor(i / 15) * 1.4 + rnd(i + 2) * 1.0, dir, ph: i * 1.7 }); }
+  for (let i = 0; i < 7; i++) { const dir = i % 2 ? -1 : 1; Zs.push({ Z: HORDE[30 + i], x: [-20, -12, -3, 6, 15, 22, -8][i] + dir * t * .4, z: [17, 21, 19, 22, 18, 21, 26][i], dir, ph: i * 2.3 }); }
+  const drawZ = o => { const q = P(o.x, 0, o.z); if (!q.front) return; c.save(); c.fillStyle = 'rgba(0,0,0,.35)'; c.beginPath(); c.ellipse(q.x, q.y, .5 * q.ppm, .12 * q.ppm, 0, 0, Math.PI * 2); c.fill(); c.restore(); drawZombieSide(c, o.Z, { x: q.x, y: q.y, k: kAt(q.ppm), s: o.dir, walk: t * 3 + o.ph, t, dim: .62, glow: 1 }); };
+  Zs.sort((a, b) => a.z - b.z); Zs.filter(o => o.z < 10).forEach(drawZ); c.drawImage(r.mid, 0, 0); Zs.filter(o => o.z >= 10).forEach(drawZ);
+  c.drawImage(r.fg, 0, 0);
+  // light: neon spill, hazard flash, lamp cones (2D blooms at projected points)
+  const sg = P(0, 23.4, 0); if (sg.front) { bloom(c, sg.x, sg.y, sg.ppm * 22, '255,50,120', .28 * r.lvl); }
+  if (hazOn(t)) for (const [hx, hz] of [[13, 29.2], [9, 30.8]]) { const q = P(hx, .8, hz); if (q.front) { bloom(c, q.x, q.y, q.ppm * 5, NIGHT.haz, .7); bloom(c, q.x, q.y, q.ppm * 1.2, '255,230,170', .9); } }
+  for (const [lx, lz] of [[-16.6, 12], [17.4, 26]]) { const q = P(lx, 7.8, lz); if (q.front) bloom(c, q.x, q.y, q.ppm * 6, '200,215,255', .45); }
+  { const e = P(7, 5.2, -.8); if (e.front) bloom(c, e.x, e.y, e.ppm * 5, '40,255,140', .25); }
+  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); fogBand(c, -200, W + 200, P(0, 0, 8).y, 90, .14, t, NIGHT.fog, 30); if (t > 1.9) plasticBag(c, 1250 + (t - 1.9) * 620, 930 - (t - 1.9) * 180 - Math.sin(t * 3) * 40, t, 1.4); dust(c, 0, W, 0, H, t, 40); c.restore();
+  coldGrade(c, .7); vignette(c, .6);
+  if (!REWINDING) titleOpen(c, t);
 }
 
 // ================= SHOT 2: inside, low angle at the glass doors (3.1 – 7.55) =================
@@ -244,52 +233,24 @@ function shot5(c, t) {
   noahClose(c, t, cam, { expr: { mouth: 'flat', browUp: .25, look: 0 } });
 }
 
-// ================= DAY 1: bright, crowded mall (target of the rewind) =================
-const DAY_SHOPS = [['SCHUHE', '#e05a3a', 'shoe'], ['ELEKTRO', '#2f7fd0', 'tv'], ['SPIELWAREN', '#e8b030', 'toy'], ['SPORT', '#3aa060', 'ball'], ['MODE', '#c04a8a', 'shirt']];
-function shopFront(c, x, base, w, h, name, col, kind, t) {
-  c.fillStyle = '#f4efe6'; c.fillRect(x - w / 2, base - h, w, h); c.lineWidth = 8; c.strokeStyle = '#3a3230'; c.strokeRect(x - w / 2, base - h, w, h);
-  c.fillStyle = col; c.fillRect(x - w / 2, base - h, w, 90); c.strokeRect(x - w / 2, base - h, w, 90);
-  c.font = sans(58); c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#fff'; c.fillText(name, x, base - h + 47);
-  const gx = x - w / 2 + 30, gw = w - 60, gy = base - h + 115, gh = h - 130;
-  c.fillStyle = '#bfe0f0'; c.fillRect(gx, gy, gw, gh); c.strokeRect(gx, gy, gw, gh);
-  c.fillStyle = 'rgba(255,255,255,.5)'; c.beginPath(); c.moveTo(gx + gw * .1, gy); c.lineTo(gx + gw * .25, gy); c.lineTo(gx + gw * .05, gy + gh); c.lineTo(gx - gw * .05, gy + gh); c.fill();
-  // window display
-  for (let i = 0; i < 4; i++) { const px = gx + 60 + i * (gw - 120) / 3, py = gy + gh - 40;
-    if (kind === 'shoe') { c.beginPath(); c.ellipse(px, py, 50, 22, 0, 0, Math.PI * 2); c.fillStyle = ['#d23a3a', '#2a2a2a', '#f2f2f2', '#3a6ad0'][i]; c.fill(); c.stroke(); }
-    else if (kind === 'tv') { c.fillStyle = '#1a1a22'; c.fillRect(px - 60, py - 110, 120, 80); c.fillStyle = ['#5ab0ff', '#ffb05a', '#7aff9a', '#ff7ab0'][i]; c.fillRect(px - 50, py - 100, 100, 60); c.strokeRect(px - 60, py - 110, 120, 80); }
-    else if (kind === 'toy') { circle(c, px, py - 30, 34); c.fillStyle = ['#ff6a6a', '#6ac0ff', '#ffd84a', '#9a6aff'][i]; c.fill(); c.stroke(); }
-    else if (kind === 'ball') { circle(c, px, py - 24, 30); c.fillStyle = '#fff'; c.fill(); c.stroke(); line(c, [px - 30, py - 24, px + 30, py - 24], 4, '#3a3230'); }
-    else { c.fillStyle = ['#e85a8a', '#5a8ae8', '#e8c85a', '#5ae8a8'][i]; c.beginPath(); c.moveTo(px - 40, py - 120); c.lineTo(px + 40, py - 120); c.lineTo(px + 50, py); c.lineTo(px - 50, py); c.closePath(); c.fill(); c.stroke(); } }
-}
+// ================= DAY 1: bright, crowded mall atrium (3D set + 2D people) =================
+const DAY_CROWD = (() => {
+  const L = [['amara', -3.2, 9, 1, 1.0], ['kofi', 2.4, 8.2, -1, 1.2], ['zara', -.8, 4.5, 1, .9], ['baba', 4.6, 6, -1, .35], ['tunde', -4.8, 2, 1, 1.1], ['sade', 1.4, 1, -1, 1.0], ['malik', -2.4, 11.5, 1, 1.6], ['ayo', 3.6, 11, -1, 1.3], ['grace', -5.2, -3, 1, .7], ['nia', -4.4, -3.3, 1, .7], ['imani', 2.8, -2, -1, .9], ['jamal', .2, -6, 1, .8]];
+  const ex = Array.from({ length: 10 }, (_, i) => { const r = j => rnd(i * 17 + j + 900); const fem = r(1) > .5; return [makePerson({ T: 1450 + r(2) * 200, head: .92 + r(3) * .1, bw: .85 + r(4) * .4, hips: fem ? 1.15 : 1, hair: ['afro', 'bun', 'buzz', 'fade', 'long', 'braids', 'locs', 'cap', 'ponytail', 'grey'][i], hairCol: i === 9 ? '#b8b0a6' : '#1a1210', hatCol: ['#d84a3a', '#3a6ad0', '#e8b030'][i % 3], top: ['tshirt', 'shirt', 'jacket', 'hoodie', 'sweater', 'coat', 'dress', 'tank', 'tshirt', 'shirt'][i], topCol: ['#e86a4a', '#5ab0e0', '#7ac07a', '#e8c84a', '#c07ad0', '#4a7ad0', '#e85a8a', '#40b0a0', '#f0a040', '#a0a0d0'][i], bottom: fem && r(5) > .5 ? 'skirt' : (r(6) > .5 ? 'jeans' : 'pants'), botCol: ['#3a4a6a', '#5a4a3a', '#2a2a36', '#6a5a7a'][i % 4], bag: r(7) > .6 ? '#b5643a' : null, glasses: r(8) > .75 }), (r(9) - .5) * 9, -9 - r(10) * 14, r(11) > .5 ? 1 : -1, .6 + r(12) * .7]; });
+  return L.map(([n, x, z, d, v]) => [CAST[n], x, z, d, v]).concat(ex);
+})();
 function dayMall(c, t) {
-  const cam = { x: lerp(-40, 40, seg(t, SH.day, T.duration)), y: -380, z: .96 };
-  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#fff4dc'); g.addColorStop(1, '#f6e2c2'); c.fillStyle = g; c.fillRect(0, 0, W, H); c.restore();
-  // upper gallery with railing, skylight
-  layer(c, cam, .55, c => {
-    const b = wy(470, .55, cam);
-    c.fillStyle = '#e9dcc8'; c.fillRect(-2000, b - 900, 4000, 900);
-    c.fillStyle = '#cfe6f2'; for (let i = -6; i < 7; i++) { c.beginPath(); c.moveTo(i * 300 - 120, b - 900); c.lineTo(i * 300 + 120, b - 900); c.lineTo(i * 300 + 90, b - 700); c.lineTo(i * 300 - 90, b - 700); c.fill(); }
-    for (let i = 0; i < 5; i++) shopFront(c, -1400 + i * 700, b - 40, 560, 440, ['BÜCHER', 'CAFÉ', 'OPTIKER', 'BLUMEN', 'HANDY'][i], ['#7a5a3a', '#a0603a', '#3a6a8a', '#5a9a4a', '#6a4aa0'][i], ['toy', 'shoe', 'tv', 'ball', 'tv'][i], t);
-    c.fillStyle = '#ddd0bc'; c.fillRect(-2000, b - 40, 4000, 60); c.fillStyle = 'rgba(190,230,255,.55)'; c.fillRect(-2000, b + 20, 4000, 90); c.strokeStyle = '#9a8e80'; c.lineWidth = 6; c.strokeRect(-2000, b + 20, 4000, 90);
-    sunRays(c, -300, b - 900, { n: 8, len: 2000, spread: .5, dir: Math.PI / 2 + .15, color: '255,240,200', alpha: .2, t });
-  });
-  layer(c, cam, .8, c => {
-    const b = wy(800, .8, cam);
-    c.fillStyle = '#efe4d2'; c.fillRect(-2200, b - 560, 4400, 600);
-    DAY_SHOPS.forEach(([n, col, kind], i) => shopFront(c, -1500 + i * 760, b, 620, 520, n, col, kind, t));
-    // hanging sale banner
-    c.fillStyle = '#d83a3a'; c.fillRect(-380, b - 760, 760, 120); c.font = sans(70); c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#fff'; c.fillText('SALE −30 %', 0, b - 700);
-    line(c, [-360, b - 760, -360, b - 900], 4, '#6a5a50'); line(c, [360, b - 760, 360, b - 900], 4, '#6a5a50');
-  });
-  // floor + crowd (everybody different)
-  layer(c, cam, 1, c => {
-    const g = c.createLinearGradient(0, -150, 0, 600); g.addColorStop(0, '#e6d8c0'); g.addColorStop(1, '#d4c2a4'); c.fillStyle = g; c.fillRect(-2200, -150, 4400, 900);
-    c.strokeStyle = 'rgba(120,100,80,.18)'; c.lineWidth = 3; for (let i = -12; i < 13; i++) { c.beginPath(); c.moveTo(i * 180, -150); c.lineTo(i * 280, 700); c.stroke(); }
-    const crowd = [['amara', -900, -90, 1], ['kofi', -560, -40, -1], ['zara', -260, -110, 1], ['baba', 60, -70, -1], ['tunde', 380, -30, 1], ['sade', 700, -100, -1], ['malik', 1000, -50, 1], ['ayo', -1150, 10, 1], ['grace', 230, 40, -1], ['nia', 520, 30, 1], ['imani', -420, 50, 1], ['jamal', 860, 50, -1]];
-    crowd.sort((a, b) => a[2] - b[2]).forEach(([n, x, y, s], i) => { c.save(); c.translate(0, y); castShadow(c, x + 10, 150, { alpha: .18, len: .8 }); drawPersonSide(c, CAST[n], { x: x + s * (t - SH.day) * 90, y: 0, k: .22, s, walk: t * 8 + i * 1.3, expr: { mouth: 'smile' } }); c.restore(); });
-    for (const px of [-1300, 1300]) { c.fillStyle = '#b87a4a'; c.fillRect(px - 70, -140, 140, 140); for (let i = 0; i < 7; i++) { c.beginPath(); c.ellipse(px + (i - 3) * 28, -220 - (i % 2) * 40, 26, 80, (i - 3) * .3, 0, Math.PI * 2); c.fillStyle = i % 2 ? '#4a9a4a' : '#3a8a3a'; c.fill(); } }
-  });
-  grade(c, { sx: .4, sy: 0, warm: '255,200,130', warmA: .35, cool: '120,80,40', coolA: .1 });
+  const u = seg(t, SH.day - 1, T.duration);
+  const cam = { pos: [lerp(-1.4, -.8, u), 1.9, lerp(18.5, 17.2, u)], look: [.4, 4.2, -20], fov: 52 };
+  const r = MALL3D.day(t, cam), P = MALL3D.proj;
+  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = '#f6ead6'; c.fillRect(0, 0, W, H); c.restore();
+  c.drawImage(r.bg, 0, 0);
+  const ppl = DAY_CROWD.map(([Pp, x, z, d, v], i) => ({ Pp, x: x + d * v * (t - SH.day + 1), z, d, v, i })).sort((a, b) => a.z - b.z);
+  for (const o of ppl) { const q = P(o.x, 0, o.z); if (!q.front) continue; c.save(); c.fillStyle = 'rgba(60,40,20,.22)'; c.beginPath(); c.ellipse(q.x + q.ppm * .3, q.y, .45 * q.ppm, .1 * q.ppm, 0, 0, Math.PI * 2); c.fill(); c.restore();
+    drawPersonSide(c, o.Pp, { x: q.x, y: q.y, k: kAt(q.ppm), s: o.d, walk: t * 8 * Math.max(.5, o.v) + o.i * 1.3, expr: { mouth: 'smile' }, ink: 1.8 }); }
+  const sk = P(-3, 16, -6); sunRays(c, sk.x, sk.y, { n: 9, len: 2200, spread: .55, dir: Math.PI / 2 + .25, color: '255,240,200', alpha: .16, t });
+  motes(c, 0, W, 0, H, t, { n: 40, color: '255,240,210', alpha: .5 });
+  grade(c, { sx: .35, sy: 0, warm: '255,200,130', warmA: .3, cool: '120,80,40', coolA: .08 });
 }
 
 // ================= REWIND (VHS) =================
@@ -305,7 +266,7 @@ function rewind(c, t) {
   let src = KF[0][1]; for (let i = 1; i < KF.length; i++) if (q <= KF[i][0]) { src = lerp(KF[i - 1][1], KF[i][1], (q - KF[i - 1][0]) / (KF[i][0] - KF[i - 1][0])); break; }
   if (p < frz) src = SH.rewind - .01;
   const o = offscreen(), oc = o.getContext('2d'); oc.setTransform(1, 0, 0, 1, 0, 0); oc.globalAlpha = 1; oc.globalCompositeOperation = 'source-over'; oc.clearRect(0, 0, W, H);
-  if (p < .9) renderShot(oc, src); else dayMall(oc, SH.day);
+  REWINDING = true; if (p < .9) renderShot(oc, src); else dayMall(oc, SH.day); REWINDING = false;
   // VHS: horizontal slice jitter, chroma fringes, tracking bars, warm wash at the end
   const f = Math.floor(t * 30), amp = p < frz ? 6 : 30 + 30 * q;
   c.fillStyle = '#000'; c.fillRect(0, 0, W, H);
@@ -318,17 +279,10 @@ function rewind(c, t) {
   if (p > .82) { c.fillStyle = `rgba(255,248,230,${Math.sin(seg(p, .82, 1) * Math.PI) * .85})`; c.fillRect(0, 0, W, H); }
   // OSD + counter
   const day = Math.max(1, Math.round(30 - 29 * Math.pow(q, .9)));
-  c.save(); c.font = mono(54); c.textBaseline = 'top'; c.fillStyle = '#f2f2f2'; c.shadowColor = 'rgba(0,0,0,.8)'; c.shadowBlur = 0; c.shadowOffsetX = 4; c.shadowOffsetY = 4;
-  if (Math.floor(t * 4) % 2 === 0 || p < frz) c.fillText(p < frz ? '❚❚ PAUSE' : '◀◀ ZURÜCKSPULEN', 90, 80);
-  c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = mono(150); c.fillText(`TAG ${String(day).padStart(2, '0')}`, W / 2, H / 2);
-  c.restore();
+  vhsOSD(c, t, { pause: p < frz, day, clock: 3 * 3600 * (1 - q) });
 }
 function dayTitle(c, t) {
-  dayMall(c, t);
-  const a = seg(t, SH.day, SH.day + .25), s = lerp(1.12, 1, ez(a));
-  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.translate(W / 2, H * .3); c.scale(s, s); c.globalAlpha = a; c.font = sans(260); c.textAlign = 'center'; c.textBaseline = 'middle';
-  c.fillStyle = 'rgba(30,18,8,.35)'; c.beginPath(); c.roundRect(-430, -170, 860, 330, 40); c.fill(); c.lineWidth = 26; c.strokeStyle = 'rgba(40,24,10,.85)'; c.lineJoin = 'round'; c.strokeText('TAG 1', 0, 0); c.fillStyle = '#fff8ec'; c.fillText('TAG 1', 0, 0); c.restore();
-  // leftover tape wobble for a few frames
+  dayMall(c, t); titleDay(c, t, SH.day);
   const w = 1 - seg(t, SH.day, SH.day + .3); if (w > 0) { c.save(); c.setTransform(1, 0, 0, 1, 0, 0); for (let y = 0; y < H; y += 4) { c.fillStyle = `rgba(0,0,0,${.1 * w})`; c.fillRect(0, y, W, 2); } c.fillStyle = `rgba(255,248,230,${.5 * w})`; c.fillRect(0, 0, W, H); c.restore(); }
 }
 
