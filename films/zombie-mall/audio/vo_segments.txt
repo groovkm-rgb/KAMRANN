@@ -1,0 +1,240 @@
+[0.00-2.12]  Tag 30, drei Uhr nachts.
+[2.68-5.80]  Unten an den Glastüren drücken 300 Zombies gegen das Glas.
+[6.42-7.48]  Und das Glas knackt.
+[8.06-10.14]  Du stehst auf dem Dach eines Einkaufszentrums.
+[10.34-13.60]  Neben dir vier Menschen, die du vor einem Monat noch nie gesehen hast.
+[14.06-16.86]  In deiner Hand eine Taschenlampe, deren Batterie gleich leer ist.
+[17.20-20.34]  Und irgendwo da draußen ein Hubschrauber, der versprochen hat, zu kommen.
+[20.94-21.54]  Wenn er kommt.
+[22.12-24.06]  Aber wie bist du überhaupt hier gelandet?
+[24.66-25.92]  Gehen wir 30 Tage zurück.
+[26.70-28.86]  Tag 1, Samstag kurz nach 10.
+[29.38-31.42]  Eigentlich willst du nur neue Schuhe.
+[31.74-34.30]  Das Einkaufszentrum ist voll, irgendwo heult ein Kind.
+[34.68-37.72]  Und aus den Lautsprechern läuft zum fünften Mal derselbe Song.
+[38.26-42.76]  Du stehst gerade an der Kasse, als im Elektro-Laden gegenüber alle Fernseher gleichzeitig piep
+[43.24-46.16]  Eilmeldung, Bilder aus der Innenstadt, Menschen, die rennen.
+[46.44-49.38]  Und Menschen, die... irgendwie falsch rennen.
+[49.94-51.64]  Ein paar Sekunden ist es tot und still.
+[52.08-54.54]  Dann vibriert jedes Handy im Laden auf einmal.
+[55.22-57.38]  Warnung, bleiben sie in geschlossenen Räumen.
+[57.38-59.58]  Und dann bricht Panik aus.
+[59.94-61.16]  Alle stürmen zu den Ausgängen.
+[61.40-61.78]  Du auch.
+[62.16-64.52]  Aber am Haupteingang siehst du ihn zum ersten Mal.
+[65.00-67.70]  Draußen auf dem Parkplatz taumelt ein Mann zwischen den Autos.
+[68.04-69.62]  Seine Bewegungen sind ruckartig.
+[69.84-70.80]  Sein Kopf hängt schief.
+[71.16-72.64]  Und er ist nicht allein.
+[73.24-76.50]  Ein großer Typ im Orangenpulli packt dich am Arm, zieht dich zurück
+[76.50-78.40]  und haut auf einen roten Knopf an der Wand.
+[78.80-80.82]  Mit lautem Rattern fahren die Rollgitter runter.
+[81.14-82.16]  Draußen schreie.
+[82.40-83.92]  Drinnen plötzlich stille.
+[84.44-87.40]  Als sich alles beruhigt, merkst du, ihr seid nur noch zu fünft.
+[87.90-90.46]  Der Typ im Pulli heißt Jamal und fragt als Erstes,
+[90.46-91.48]  wo es hier was zu essen gibt.
+[91.94-93.94]  Grace ist Krankenschwester, schon älter
+[93.94-96.80]  und putzt Seelen ruhig ihre Brille, als wäre nichts passiert.
+[97.28-100.24]  Imani fotografiert bereits den Lageplan an der Infotafel ab.
+[100.72-103.82]  Und dann ist da noch Nia, ein kleines Mädchen mit lila Rucksack,
+[103.96-105.56]  das im Gedränge seine Mama verloren hat.
+[106.08-108.10]  Fünf Fremde, ein Einkaufszentrum
+[108.10-110.30]  und draußen das Ende der Welt.
+[110.86-114.04]  Und jetzt kommt der Teil, über den in Filmen nie jemand spricht.
+[114.52-116.70]  Die ersten Tage sind richtig genial.
+[117.20-119.96]  Stell dir vor, das ganze Einkaufszentrum gehört dir.
+[120.46-124.04]  Frühstück im Food court, Pizza, Burger und Eis, alles auf einmal.
+[124.42-125.80]  Keine Kasse, keine Schlange.
+[126.20-128.40]  Du schläfst im Möbelhaus auf einem Boxspringbett,
+[128.48-129.92]  das mehr kostet als ein Auto.
+[130.38-133.78]  Abends zockt ihr im Elektro-Laden auf dem größten Fernseher, den es gibt.
+[134.20-137.06]  Nia baut sich im Spielzeugladen eine Burg aus Kuscheltieren
+[137.06-140.60]  und Jamal probiert im Sportgeschäft jede einzelne Jacke an.
+[140.90-143.56]  Für ein paar Tage vergisst du fast, was draußen los ist.
+[144.02-146.46]  Fast, denn nachts hörst du sie.
+[147.00-149.30]  Dieses leise Kratzen an den Gittern.
+[149.30-151.12]  Und jeden Morgen sind es ein paar mehr.
+[151.86-154.62]  Tag 6, um 14.12 Uhr geht das Licht aus.
+[155.06-156.56]  Nicht nur bei euch, überall.
+[157.20-159.66]  Die Rolltreppen bleiben stehen, die Musik verstummt
+[159.66-161.10]  und zum ersten Mal hörst du,
+[161.34-163.46]  wie still so ein riesiges Gebäude sein kann.
+[163.98-166.30]  Das eigentliche Problem merkst du erst am nächsten Morgen.
+[166.30-168.72]  Die Kühltruhen im Supermarkt laufen nicht mehr.
+[169.08-171.60]  Fleisch, Fisch, Milch, das ganze Eis,
+[171.98-174.86]  alles womit ihr so großzügig wart, fängt an zu stinken.
+[175.46-177.94]  Und aus dem Wasserhahn kommt nur noch eine braune Brühe.
+[178.38-179.90]  Imani setzt sich hin und rechnet.
+[180.38-183.14]  Konserven, Nudeln, Reis und Müsgieriegel
+[183.14-185.54]  reichen für fünf Leute noch 18 Tage.
+[186.06-187.92]  Das Wasser in Flaschen nur noch neun.
+[188.30-190.90]  Und genau in diesem Moment wird aus dem Paradies
+[190.90-192.12]  ein Überlebenskampf.
+[192.52-194.82]  Im Keller findet Imani einen Notstromgenerator.
+[194.82-198.30]  Nach zwei Stunden Fluchen und ziemlich viel Öl an den Händen
+[198.30-199.02]  springt er an.
+[199.52-200.82]  Aber der Diesel hält nicht ewig.
+[201.16-202.64]  Also gibt es ab jetzt Regeln.
+[203.12-204.90]  Strom nur zwei Stunden am Abend.
+[205.26-207.94]  Drei kleine Portionen am Tag für jeden gleich viel.
+[208.38-209.78]  Keiner geht allein ins Lager.
+[210.12-212.98]  Und keiner, wirklich keiner, macht nachts Lärm.
+[213.32-215.00]  Jamal findet die Regeln bescheuert.
+[215.32-216.14]  Und das sagt er auch.
+[216.60-217.12]  Ziemlich laut.
+[217.74-218.12]  Tag elf.
+[218.50-220.96]  Dir wird klar, wenn ihr hier länger durchhalten wollt,
+[221.30-221.98]  reicht Glück nicht.
+[222.34-223.36]  Ihr braucht eine Basis.
+[223.36-226.74]  Im Gartencenter findet ihr Planen, Eimer und Regenton.
+[227.10-228.72]  Damit baut ihr auf dem Dach ein System,
+[228.94-230.56]  das jeden Tropfen Regen auffängt.
+[231.00-232.64]  Daneben stellt ihr Blumenkästen auf
+[232.64-234.20]  und säht alles, was schnell wächst.
+[234.52-236.24]  Radieschen, Kresse, Salat.
+[236.58-239.34]  Im Erdgeschoss schiebt ihr Regale und Schränke vor die Glastüren.
+[239.66-242.10]  Die Rolltreppen blockiert ihr mit Sofas aus dem Möbelhaus.
+[242.54-245.80]  Nach fünf Tagen sieht das Einkaufszentrum komplett anders aus.
+[246.24-247.80]  Das Erdgeschoss ist Sperrzone.
+[248.22-249.58]  Der erste Stock ist euer Lager.
+[249.94-251.22]  Im zweiten Stock wohnt ihr.
+[251.54-252.88]  Und das Dach ist eure Farm.
+[252.88-255.96]  Am Tag 15 kommen die ersten Radieschen aus der Erde.
+[256.40-258.30]  Nia gibt jedem Einzelnen einen Namen.
+[258.70-261.58]  Zum ersten Mal seit Langem lachen alle fünf gleichzeitig.
+[262.20-264.58]  Aber die größte Gefahr kommt nicht immer von draußen.
+[265.24-265.70]  Tag 17.
+[266.28-267.00]  Mitten in der Nacht.
+[267.44-268.64]  Du hörst ein Rascheln im Lager.
+[269.14-271.00]  Mit der Taschenlampe in der Hand schleichst du hin.
+[271.50-272.68]  Und da steht Jamal.
+[273.08-274.68]  Mit einem Rucksack voller Konserven.
+[275.08-276.32]  Essen für vier Tage.
+[276.74-277.46]  Es gibt Streit.
+[277.78-278.68]  Richtig Streit.
+[279.00-281.62]  Jamal brüllt, dass er doppelt so groß ist wie alle anderen
+[281.62-283.84]  und von diesen Miniportionen nicht satt wird.
+[284.22-285.60]  Imani will ihn rauswerfen.
+[285.82-286.92]  Grace stellt sich dazwischen.
+[287.48-289.22]  Und am Ende schauen alle dich an.
+[289.78-291.62]  Du weißt, was rauswerfen da draußen bedeutet.
+[292.04-293.16]  Also sagst du, nein.
+[293.74-295.16]  Niemand wird den Zombies überlassen.
+[295.80-297.72]  Aber ab jetzt hat das Lager ein Schloss.
+[298.08-299.56]  Und den Schlüssel trägt Grace.
+[300.26-302.46]  Zwei Tage später wacht Nia nicht richtig auf.
+[302.90-303.46]  Sie glüht.
+[303.88-306.32]  Das Fieberthermometer zeigt 39,8.
+[306.86-308.68]  Grace schaut sich die Wunder an ihren Knie an,
+[308.68-311.42]  die sie sich auf dem Dach geholt hat und wird ganz still.
+[312.10-312.82]  Eine Entzündung.
+[313.36-315.02]  Ohne Antibiotika wird es gefährlich.
+[315.44-317.74]  Und Antibiotika gibt es nur an einem Ort.
+[318.18-318.86]  In der Apotheke.
+[319.40-321.36]  Und die liegt nicht im Einkaufszentrum,
+[321.64-323.48]  sondern auf der anderen Seite vom Parkplatz.
+[323.94-325.22]  80 Meter entfernt.
+[325.78-327.20]  Mitten durch die Zombies.
+[328.02-328.74]  Tag 21.
+[329.32-330.20]  4 Uhr morgens.
+[330.80-332.70]  Ihr wisst inzwischen, dass die Zombies vor allem
+[332.70-334.30]  auf Licht und Geräusche reagieren.
+[334.70-336.20]  Also keine Taschenlampe.
+[336.72-337.30]  Kein Wort.
+[337.30-339.36]  Jamal meldet sich als Erster.
+[339.84-341.74]  Ich hab noch was gut zu machen, sagt er.
+[342.36-344.04]  Ihr schleicht über die Laderampe nach draußen.
+[344.46-346.14]  Geduckt von Auto zu Auto.
+[346.82-347.90]  Überall dieser Geruch.
+[348.34-350.08]  Überall dieses leise Stöhnen.
+[350.60-353.20]  Einmal steht ein Zombie keine 2 Meter neben dir.
+[353.66-354.42]  Du hältst die Luft an.
+[354.94-355.56]  Er dreht sich weg.
+[356.16-357.76]  Die Tür der Apotheke ist eingeschlagen,
+[358.18-359.42]  aber drin ist es ruhig.
+[359.82-362.36]  Du findest die Antibiotika, Fiebersaft, Verbände.
+[362.84-363.76]  Alles in den Rucksack.
+[364.22-365.70]  Geschafft, denkst du.
+[365.70-368.70]  Auf dem Rückweg stößt Jamal mit dem Knie gegen ein Auto.
+[369.14-370.44]  Eine Sekunde passiert nichts.
+[371.00-372.56]  Dann geht die Alarmanlage los.
+[373.00-375.12]  Jeder Kopf auf dem Parkplatz dreht sich zu euch.
+[375.52-376.06]  Ihr rennt.
+[376.38-378.62]  Hinter dir das Schlurfen von dutzenden Füßen.
+[378.96-381.18]  Kurz vor der Laderampe packt eine Hand da in Rucksack
+[381.18-382.22]  und reißt dich nach hinten.
+[382.56-384.06]  Jamal zieht dich mit einem Ruck los,
+[384.42-386.12]  schubst dich durch die Tür und knallt sie zu.
+[386.50-388.54]  Ihr sitzt auf dem Boden, schnauft wie verrückt
+[388.54-391.26]  und plötzlich fangt ihr beide an zu lachen.
+[391.74-393.04]  Über den Diebstahl im Lager
+[393.04-394.96]  redet ab diesem Tag keiner mehr.
+[394.96-398.22]  Zwei Tage später sitzt Nia wieder auf ihrem Feldbett
+[398.22-399.16]  und will Radieschen.
+[399.54-401.64]  Und Imani hat in der Zwischenzeit etwas gebaut.
+[402.12-403.96]  Aus Teilen aus dem Elektroladen, einer Autobatterie
+[404.64-406.02]  und einer Antenne auf dem Dach
+[406.02-407.26]  ist ein Funkgerät geworden.
+[407.82-409.60]  Jeden Abend sucht sie die Frequenzen ab.
+[410.06-411.84]  Rauschen. Nur Rauschen.
+[412.40-413.54]  Bis zum Tag 24.
+[414.28-415.90]  Mitten im Rauschen eine Stimme.
+[416.44-416.98]  Militär.
+[417.46-419.36]  Sie wiederholt immer denselben Satz.
+[419.70-421.22]  Evakuierung in sechs Tagen.
+[421.58-423.50]  Überlebende markiert eure Dächer.
+[423.50-427.16]  Noch in derselben Nacht holt ihr jede Dose Farbe aus dem Basteladen
+[427.16-429.70]  und malt fünf riesige Buchstaben aufs Dach.
+[430.02-432.76]  Hilfe. Aber ihr habt einen Fehler gemacht.
+[433.04-434.36]  Der Generator. Das Licht.
+[434.80-436.38]  Das Ganze hin und her auf dem Dach.
+[436.82-438.14]  Die Zombies haben es mitbekommen.
+[438.72-441.20]  Am Tag 20 standen vielleicht 40 vor den Türen.
+[441.64-443.58]  Am Tag 27 sind es 300.
+[444.28-446.20]  Am Tag 28 ist der Diesel leer.
+[446.70-449.54]  Am Tag 29 öffnet ihr die letzte Konservendose.
+[450.04-451.64]  Und dann ist Tag 30.
+[451.64-452.96]  Drei Uhr nachts.
+[453.38-454.48]  Ein Knall im Erdgeschoss.
+[454.90-456.08]  Die erste Glastür gibt nach.
+[456.46-458.44]  Dann die zweite. Die Regale kippen um
+[458.44-460.10]  und sie strömen ins Einkaufszentrum.
+[460.56-462.28]  Ihr rennt die Treppe hoch, raus aufs Dach
+[462.28-464.12]  und schiebt das letzte Regal vor die Tür.
+[464.68-465.92]  Von unten hemmert es dagegen.
+[466.40-468.12]  Immer lauter. Immer schneller.
+[468.98-470.22]  Und da stehst du jetzt.
+[470.66-472.74]  Genau da wo alles angefangen hat.
+[473.28-474.30]  Die Taschenlampe flackert.
+[474.74-475.76]  Der Himmel ist leer.
+[476.46-477.22]  3 Uhr 40.
+[478.30-478.94]  Nichts.
+[479.12-479.82]  3 Uhr 50.
+[480.42-481.52]  Die Tür bekommt eine Delle.
+[482.16-483.36]  Nia greift nach deiner Hand.
+[483.90-485.12]  Und dann hörst du es.
+[485.66-486.50]  Erst ganz leise.
+[487.00-488.16]  Dann immer lauter.
+[488.80-489.40]  Rotoren.
+[489.90-491.70]  Ein Scheinwerfer schneidet durch die Dunkelheit
+[491.70-494.18]  und bleibt auf 5 riesigen Buchstaben stehen.
+[494.82-495.92]  Der Hubschrauber setzt auf.
+[496.38-497.04]  Grace zuerst.
+[497.46-499.82]  Dann Nia. Dann Imani. Dann Jamal.
+[500.36-501.60]  Du steigst als letzter ein
+[501.60-504.20]  und genau in dem Moment fliegt hinter dir die Tür auf.
+[504.64-505.58]  Der Hubschrauber hebt ab.
+[506.04-508.36]  Unter dir wird das Einkaufszentrum immer kleiner.
+[508.90-510.92]  Ein Gebäude, das 30 Tage lang
+[510.92-511.88]  dein Gefängnis war.
+[512.32-514.54]  Und irgendwie auch dein Zuhause.
+[515.20-515.96]  30 Tage.
+[516.58-517.38]  5 Überlebende.
+[518.00-518.76]  Null Verluste.
+[519.50-520.62]  Und jetzt bist du dran.
+[521.32-523.96]  Was hättest du dir als erstes aus dem Einkaufszentrum geholt?
+[524.36-525.20]  Schreib es in die Kommentare.
+[525.90-527.84]  Aber eine Frage lässt mich nicht los.
+[528.52-529.40]  Was wäre passiert,
+[529.40-531.36]  wenn der Hubschrauber nicht gekommen wäre?

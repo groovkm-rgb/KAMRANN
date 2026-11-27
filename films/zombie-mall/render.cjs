@@ -16,9 +16,9 @@ const { chromium } = require('playwright'); const fs = require('fs'); const path
   const grab = (p, t, fmt) => p.evaluate(([t, fmt]) => { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, 1920, 1080); renderFrame(ctx, t); return document.getElementById('film').toDataURL(fmt, .93).split(',')[1]; }, [t, fmt]);
   if (times.length) { const p = await page(); fs.mkdirSync(path.join(dir, 'stills'), { recursive: true }); for (const t of times) fs.writeFileSync(path.join(dir, 'stills', `t_${t}.png`), Buffer.from(await grab(p, +t, 'image/png'), 'base64')); }
   if (out) {
-    const FPS = 30, N = Math.round(cfg.duration * FPS), fd = path.join(dir, '_frames'); fs.rmSync(fd, { recursive: true, force: true }); fs.mkdirSync(fd);
-    let next = 0, done = 0;
-    await Promise.all(Array.from({ length: jobs }, async () => { const p = await page(); while (next < N) { const f = next++; fs.writeFileSync(path.join(fd, `f${String(f).padStart(5, '0')}.jpg`), Buffer.from(await grab(p, f / FPS, 'image/jpeg'), 'base64')); if (++done % 60 === 0) console.log(`${done}/${N}`); } }));
+    const FPS = 30, F0 = Math.round(+(opt('--from') || 0) * FPS), N = Math.round(+(opt('--to') || cfg.duration) * FPS), fd = path.join(dir, '_frames'); fs.rmSync(fd, { recursive: true, force: true }); fs.mkdirSync(fd);
+    let next = F0, done = 0;
+    await Promise.all(Array.from({ length: jobs }, async () => { const p = await page(); while (next < N) { const f = next++; fs.writeFileSync(path.join(fd, `f${String(f - F0).padStart(5, '0')}.jpg`), Buffer.from(await grab(p, f / FPS, 'image/jpeg'), 'base64')); if (++done % 300 === 0) console.log(`${done}/${N - F0}`); } }));
     const a = ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(fd, 'f%05d.jpg')];
     if (audio) a.push('-i', path.resolve(audio), '-c:a', 'aac', '-b:a', '256k', '-shortest'); else a.push('-an');
     a.push('-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-r', String(FPS), '-movflags', '+faststart', path.resolve(out));

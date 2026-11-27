@@ -99,6 +99,7 @@ function puddle(c, x, y, w, h, drawRefl, o = {}) {
 }
 // ---------- mall exterior + neon ----------
 function neonState(i, t) {
+  if (t < -50) return 0;
   // letters 0..14 of EINKAUFSZENTRUM. 4..7 (AUFS) are dead. 8..14 (ZENTRUM) flicker on the shared glitch list; others buzz rarely.
   if (i >= 4 && i <= 7) return 0;
   const gl = TIMING.neon_glitch.some(([a, b]) => t >= a && t < b);

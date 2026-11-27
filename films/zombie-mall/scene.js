@@ -289,7 +289,8 @@ function dayTitle(c, t) {
 function renderFrame(c, t) {
   if (t < SH.rewind) renderShot(c, t);
   else if (t < SH.day) rewind(c, t);
-  else dayTitle(c, t);
+  else if (t < SH.day + .9 || typeof mainShot === 'undefined') dayTitle(c, t);
+  else mainShot(c, t);
   // music-free silent beat: nothing special visually, just the empty sky
   grain(c, t, t >= SH.day ? .02 : .045);
   const fin = seg(t, 0, .35); if (fin < 1) { c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = `rgba(0,0,0,${1 - fin})`; c.fillRect(0, 0, W, H); c.restore(); }

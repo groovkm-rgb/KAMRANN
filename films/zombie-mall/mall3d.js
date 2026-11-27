@@ -82,7 +82,7 @@ const MALL3D = (() => {
   }
   function buildNight() {
     const sc = new TH.Scene(); sc.fog = new TH.FogExp2(0x0a1022, .011); const g = new TH.Group(); sc.add(g);
-    sc.add(new TH.HemisphereLight(0x3a4a80, 0x0a0c14, .55));
+    const hemiL = new TH.HemisphereLight(0x3a4a80, 0x0a0c14, .55); sc.add(hemiL);
     const moonL = new TH.DirectionalLight(0x8aa4ff, .55); moonL.position.set(-40, 60, 40); sc.add(moonL);
     const concrete = noiseTex('#2a3142', ['#101420', '#3a4256', '#1a1f2c'], 400, 512, 512, [6, 2], (c, w, h) => { c.strokeStyle = 'rgba(8,10,16,.55)'; c.lineWidth = 3; for (let x = 0; x <= w; x += 128) { c.beginPath(); c.moveTo(x, 0); c.lineTo(x, h); c.stroke(); } for (let y = 0; y <= h; y += 128) { c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke(); } for (let i = 0; i < 26; i++) { const x = rnd(i + 5) * w; const gg = c.createLinearGradient(0, rnd(i) * h, 0, h); gg.addColorStop(0, 'rgba(6,8,12,.35)'); gg.addColorStop(1, 'rgba(6,8,12,0)'); c.fillStyle = gg; c.fillRect(x, rnd(i) * h * .5, 6 + rnd(i + 2) * 14, h); } });
     const wall = mat('#ffffff', { map: concrete });
@@ -114,7 +114,7 @@ const MALL3D = (() => {
     for (let i = 0; i < 5; i++) box(g, 3, 1.6, 2.4, '#262c3a', -38 + i * 17, 16.4, -10 - rnd(i) * 10, { ink: .06 });
     cyl(g, .08, .08, 8, '#3a4252', 6, 25.5, -12, { ink: .03 });
     // ---- neon sign (canvas texture, redrawn on flicker) ----
-    const sign = canvasTex(2048, 300, () => {}); N = { sign, sc };
+    const sign = canvasTex(2048, 300, () => {}); N = { sign, sc, hemiL, moonL };
     box(g, 30, 3.6, .6, '#0a0c12', 0, 23.4, 1.2, { ink: .08 }); for (const x of [-10, 0, 10]) box(g, .3, 2.6, .3, '#10131c', x, 21.8, 1.2, { ink: .03 });
     plane(g, 29.4, 3.0, mat('#fff', { basic: 1, map: sign }), 0, 23.4, 1.52);
     N.neonL = new TH.PointLight(0xff3a7a, 6, 34, 1.6); N.neonL.position.set(0, 22, 7); sc.add(N.neonL);
@@ -162,11 +162,12 @@ const MALL3D = (() => {
       x += ws[i] + sp; }
     c.restore(); return lvl / NEON_TXT.length;
   }
-  function night(t, cam) {
+  function night(t, cam, o = {}) {
     renderer(); if (!N) buildNight(); setCam(cam);
-    const sg = N.sign.userData, lvl = drawNeon(sg.c, sg.cv.width, sg.cv.height, t); N.sign.needsUpdate = true; N.neonL.intensity = 6 * lvl;
-    const hz = hazOn(t); N.hazCar.userData.haz.forEach(m => m.visible = hz); N.hazL.intensity = hz ? 3.5 : 0;
-    N.lamps[0].intensity = 2.2 * (.75 + .25 * Math.sin(t * 13) * Math.sin(t * 7.3));
+    N.sc.fog.color.setHex(o.day ? 0xc8d4e0 : 0x0a1022); N.sc.fog.density = o.day ? .006 : .011; N.hemiL.intensity = o.day ? 1.2 : .55; N.hemiL.color.setHex(o.day ? 0xdfe8ff : 0x3a4a80); N.moonL.intensity = o.day ? 1.1 : .55; N.moonL.color.setHex(o.day ? 0xfff2dc : 0x8aa4ff);
+    const sg = N.sign.userData, lvl = o.day ? (drawNeon(sg.c, sg.cv.width, sg.cv.height, -99), 0) : drawNeon(sg.c, sg.cv.width, sg.cv.height, t); N.sign.needsUpdate = true; N.neonL.intensity = 6 * lvl;
+    const hz = !o.day && !o.noHaz && hazOn(t); N.hazCar.userData.haz.forEach(m => m.visible = hz); N.hazL.intensity = hz ? 3.5 : 0;
+    N.lamps[0].intensity = o.day ? 0 : 2.2 * (.75 + .25 * Math.sin(t * 13) * Math.sin(t * 7.3)); N.lamps[1].intensity = o.day ? 0 : 2.2;
     N.puddles.forEach((m, i) => { m.emissive = col(i === 2 ? '#ff8a20' : '#ff3a7a'); m.emissiveIntensity = i === 2 ? (hz ? .35 : 0) : .25 * lvl; });
     return { bg: copy(draw(N.sc, [0]), 'nbg'), mid: copy(draw(N.sc, [2]), 'nmid'), fg: copy(draw(N.sc, [1]), 'nfg'), lvl };
   }
@@ -178,7 +179,7 @@ const MALL3D = (() => {
     const sh = new TH.Group(); sh.position.set(gx, y, z); sh.rotation.y = ry; g.add(sh);
     // recessed shop: lit back wall, shelves, jambs, fascia; transparent window
     const tint = '#' + new TH.Color(sc[0]).lerp(new TH.Color('#fff6e8'), .72).getHexString();
-    box(sh, w, 4.6, .3, mat(tint, { em: tint, emi: .12 }), 0, 2.3, -2.2, { ink: .03 });
+    const bw = box(sh, w, 4.6, .3, mat(tint, { em: tint, emi: .12 }), 0, 2.3, -2.2, { ink: .03 }); LITW.push(bw.material);
     plane(sh, w, 2.2, mat('#d8c8b0'), 0, .02, -1.1, { rx: -Math.PI / 2 });
     const goods = ['#d84a3a', '#3a7ad0', '#e8b030', '#4aa860', '#a04ac0', '#f08a3a', '#2a2a30', '#f2f2f2'];
     for (let k = 0; k < 3; k++) { box(sh, w * .78, .08, .55, '#8a6a4a', 0, .9 + k * .8, -1.8, { ink: .02 }); for (let j = 0; j < 7; j++) box(sh, .36, .42, .3, goods[(j * 3 + k + name.length) % 8], -w * .34 + j * w * .113, 1.15 + k * .8, -1.8, { ink: .015 }); }
@@ -189,14 +190,14 @@ const MALL3D = (() => {
     box(sh, w - .6, .12, .14, '#c8bca8', 0, .06, -.05, { ink: .02 });
     const s = box(sh, w * .82, .9, .3, sc[0], 0, 3.95, .15, { ink: .04 }); plane(sh, w * .8, .85, mat('#fff', { basic: 1, map: signTex(name, sc[0], sc[1], { w: 1024, h: 200, font: 'FOswald', size: 140 }) }), 0, 3.95, .31);
     for (let i = 0; i < 4; i++) { const px = -w / 2 + .9 + i * (w - 1.8) / 3; // window display
-      if (disp === 'tv') { box(sh, 1.0, .65, .12, '#15161c', px, 1.5, -.6, { ink: .02 }); plane(sh, .9, .55, mat(['#5ab0ff', '#ffb05a', '#7aff9a', '#ff7ab0'][i], { basic: 1 }), px, 1.5, -.53); box(sh, .9, .7, .4, '#d8ccb8', px, .35, -.6, { ink: .02 }); }
+      if (disp === 'tv') { box(sh, 1.0, .65, .12, '#15161c', px, 1.5, -.6, { ink: .02 }); TVW.push(plane(sh, .9, .55, mat(['#5ab0ff', '#ffb05a', '#7aff9a', '#ff7ab0'][i], { basic: 1 }), px, 1.5, -.53).material); box(sh, .9, .7, .4, '#d8ccb8', px, .35, -.6, { ink: .02 }); }
       else if (disp === 'shoe') { box(sh, .8, .8, .5, '#e8e2d8', px, .4, -.6, { ink: .02 }); box(sh, .34, .18, .16, ['#d23a3a', '#222', '#f2f2f2', '#3a6ad0'][i], px, .9, -.6, { ink: .02 }); }
       else if (disp === 'toy') { const b = new TH.Mesh(new TH.SphereGeometry(.22, 14, 10), mat(['#ff6a6a', '#6ac0ff', '#ffd84a', '#9a6aff'][i])); b.position.set(px, .95, -.6); sh.add(b); box(sh, .6, .7, .5, '#e8e2d8', px, .35, -.6, { ink: .02 }); }
       else { cyl(sh, .18, .26, 1.4, ['#e85a8a', '#5a8ae8', '#e8c85a', '#5ae8a8'][i], px, .8, -.7, { ink: .02 }); const hd = new TH.Mesh(new TH.SphereGeometry(.14, 12, 8), mat('#e8e0d4')); hd.position.set(px, 1.65, -.7); sh.add(hd); } }
   }
   function buildDay() {
     const sc = new TH.Scene(); sc.fog = new TH.Fog(0xf3e6d0, 40, 120); const g = new TH.Group(); sc.add(g);
-    sc.add(new TH.HemisphereLight(0xfff4e0, 0xb09a80, .75));
+    const hemi = new TH.HemisphereLight(0xfff4e0, 0xb09a80, .75); sc.add(hemi); const LIT = [], TVS = [];
     const sun = new TH.DirectionalLight(0xfff0d0, 1.25); sun.position.set(-12, 40, 10); sun.target.position.set(0, 0, -20); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -30, right: 30, top: 40, bottom: -40, near: 1, far: 120 }); sun.shadow.bias = -.0008; sc.add(sun); sc.add(sun.target);
     const tile = canvasTex(512, 512, (c, w, h) => { for (let i = 0; i < 8; i++) for (let j = 0; j < 8; j++) { c.fillStyle = (i + j) % 2 ? '#e8dcc6' : '#d9c9ac'; c.fillRect(i * 64, j * 64, 64, 64); } c.strokeStyle = 'rgba(120,100,80,.25)'; c.lineWidth = 2; for (let i = 0; i <= 8; i++) { c.beginPath(); c.moveTo(i * 64, 0); c.lineTo(i * 64, h); c.stroke(); c.beginPath(); c.moveTo(0, i * 64); c.lineTo(w, i * 64); c.stroke(); } }, { rep: [6, 30] });
     plane(g, 24, 120, mat('#fff', { phong: 1, shin: 90, spec: '#5a5040', map: tile }), 0, 0, -40, { rx: -Math.PI / 2 });
@@ -224,9 +225,18 @@ const MALL3D = (() => {
     const esc = new TH.Group(); esc.position.set(4.8, 0, -16); g.add(esc);
     const inc = Math.atan2(5.4, 9); const ramp = box(esc, 1.3, .4, 10.6, '#cfd4da', 0, 2.75, 0, { ink: .05, cast: true }); ramp.rotation.x = inc;
     for (const s of [-1, 1]) { const side = box(esc, .1, 1.0, 10.6, mat('#bfe4f2', { op: .5 }), s * .7, 3.3, 0, { ink: 0 }); side.rotation.x = inc; const rail = box(esc, .14, .14, 10.8, '#2a2a30', s * .7, 3.85, 0, { ink: .02 }); rail.rotation.x = inc; }
-    D = { sc, g }; return D;
+    D = { sc, g, sun, hemi, LIT: LITW.splice(0), TVS: TVW.splice(0), tvCols: null }; return D;
   }
-  function day(t, cam) { renderer(); if (!D) buildDay(); setCam(cam); return { bg: copy(draw(D.sc, [0]), 'dbg') }; }
+  const LITW = [], TVW = [];
+  const MOODS = { day: [1.25, .75, 0xf3e6d0, .12, 0xfff4e0], dark: [.12, .32, 0x3a3e4a, 0, 0x8090b0], night: [0, .14, 0x0a0e1a, 0, 0x6070a0], dusk: [.5, .5, 0xd8a070, .06, 0xffc890] };
+  const ALERT = canvasTex(256, 160, (c, w, h) => { c.fillStyle = '#b81818'; c.fillRect(0, 0, w, h); c.fillStyle = '#fff'; c.font = '700 40px FOswald'; c.textAlign = 'center'; c.fillText('EILMELDUNG', w / 2, h / 2 + 14); });
+  function day(t, cam, o = {}) {
+    renderer(); if (!D) buildDay(); setCam(cam);
+    const m = MOODS[o.mood || 'day']; D.sun.intensity = m[0]; D.hemi.intensity = m[1]; D.sc.fog.color.setHex(m[2]); D.hemi.color.setHex(m[4]);
+    D.LIT.forEach(mt => mt.emissiveIntensity = m[3]);
+    const al = o.alert && Math.floor(t * 3) % 2 === 0; D.TVS.forEach(mt => { mt.map = o.alert ? ALERT : null; mt.color.set(o.alert ? (al ? '#ffffff' : '#ff8080') : (o.mood === 'dark' || o.mood === 'night' ? '#111318' : mt.userData.c0 || (mt.userData.c0 = '#' + mt.color.getHexString()))); mt.needsUpdate = true; });
+    return { bg: copy(draw(D.sc, [0]), 'dbg') };
+  }
   // keep separate 2D copies of each pass (the GL canvas is reused)
   const COPIES = {};
   function copy(src, key) { let cv = COPIES[key]; if (!cv) { cv = COPIES[key] = document.createElement('canvas'); cv.width = W; cv.height = H; } const c = cv.getContext('2d'); c.clearRect(0, 0, W, H); c.drawImage(src, 0, 0); return cv; }
