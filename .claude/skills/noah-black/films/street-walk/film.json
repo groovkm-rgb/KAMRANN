@@ -1,0 +1,1 @@
+{ "duration": 10, "modules": ["noah.js", "people.js", "places/light.js", "places/stone-age.js", "places/forest.js", "places/city.js"] }
