@@ -6,6 +6,10 @@ function actor(S, pos, draw, o = {}) {
   billboard(S, pos, (c, sc, sp) => {
     const k = sc * KID_H / RIG_H * (o.scale || 1), Ls = o.lightDir || lightScreen(S);
     const hpx = sc * 1.9 * (o.scale || 1), bounds = [sp[0] - hpx * .5, sp[1] - hpx, sp[0] + hpx * .5, sp[1] + 10];
+    if (hpx < 170 && !o.forceLit) { // small/distant figure: draw directly with a simple contact shadow (much faster)
+      if (!o.sit && o.shadow !== false) { c.save(); c.fillStyle = 'rgba(15,18,40,.3)'; c.beginPath(); c.ellipse(0, 0, sc * .32, sc * .08, 0, 0, TAU); c.fill(); c.restore(); }
+      c.save(); if (o.alpha != null) c.globalAlpha = o.alpha; draw(c, k); c.restore(); return;
+    }
     const B = drawLit(c, cc => draw(cc, k), Object.assign({ light: Ls, bounds, feetY: o.sit ? null : sp[1], defer: true, rimInset: 13 * 1.6 * k, rimW: Math.max(2, 18 * k), rimA: .4 }, o.lit || {}));
     if (o.shadow !== false && !o.sit) castFromBuf(c, B, sp[1], Object.assign({ skew: -Ls[0] * 1.6, squash: .2, alpha: .28, cx: sp[0], cw: sc * .35, blur: 5 }, o.shadowOpt || {}));
     c.save(); c.setTransform(1, 0, 0, 1, 0, 0); if (o.alpha != null) c.globalAlpha = o.alpha; c.drawImage(B.cv, 0, 0); c.restore();
