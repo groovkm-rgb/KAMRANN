@@ -58,8 +58,8 @@ const STILLS = {
   corridorAlarm(c) {
     const t = 2.1, cam = lookAt([1.75, 1.5, 2.0], [1.4, 1.2, 22], { fov: 56 });
     const S = scene(cam, { dir: V.norm([.2, .8, -.5]), col: [200, 210, 255], amb: .5, ambCol: [90, 110, 170], ink: 1.2, inkA: .55 });
-    corridorScene(S, c, t, { alarm: 1, flicker: i => i === 3 ? 0 : i === 5 ? .3 : .75, windowGlow: '180,200,255' }); flush(S, c);
-    alarmGrade(c, t, 1); vignette(c, .55);
+    corridorScene(S, c, t, { alarm: 1, dim: .4, flicker: i => i === 3 ? 0 : i === 5 ? .3 : .75, windowGlow: '180,200,255' }); flush(S, c);
+    const bp = proj(cam, [.14, 2.4, 10]); alarmGrade(c, t, 1, bp ? { bx: bp[0], by: bp[1] } : {}); vignette(c, .55);
   },
   cast(c) {
     // character line-up on a neutral studio floor with key + rim light
@@ -83,28 +83,24 @@ const STILLS = {
     txt(c, 'Noah – Ausdrücke', W / 2, 160, 56, '#3a332c', 'center');
   },
   attacker(c) {
-    // dark corridor, backlit: silhouette turnaround (front / side / back) — never a face, no weapon
-    const cam = lookAt([1.7, 1.45, 3.0], [1.7, 1.3, 20], { fov: 50 });
-    const S = scene(cam, { dir: V.norm([0, .6, .8]), col: [160, 180, 255], amb: .42, ambCol: [70, 80, 130], ink: 1.2, inkA: .6 });
-    corridorScene(S, c, 3, { alarm: 1, flicker: i => i > 2 ? .2 : .6, windowGlow: '170,190,255' });
-    const fig = (x, z, view, s) => actor(S, [x, 0, z], (cc, k) => drawAttacker(cc, { k, view, s }), { scale: 1.12, lit: { rim: '170,200,255', rimA: .95, shadeA: .5, light: [0, -1], warmA: 0 }, shadowOpt: { skew: 0, squash: .35, alpha: .5 } });
-    fig(.9, 9.5, 'front'); fig(1.75, 9.6, 'side', 1); fig(2.6, 9.5, 'back');
-    flush(S, c); alarmGrade(c, 3, .8); vignette(c, .6);
+    // dark corridor, backlit from the window end: turnaround (front / side / back). Never a face, no weapon.
+    const cam = lookAt([1.7, 1.35, 4.2], [1.7, 1.25, 20], { fov: 46 });
+    const S = scene(cam, { dir: V.norm([0, .5, .85]), col: [150, 170, 240], amb: .4, ambCol: [60, 70, 120], ink: 1.2, inkA: .6 });
+    corridorScene(S, c, 3, { alarm: 1, dim: .45, flicker: i => i > 2 ? .15 : .5, windowGlow: '170,190,255' });
+    const fig = (x, z, view, s, ex) => actor(S, [x, 0, z], (cc, k) => drawAttacker(cc, Object.assign({ k, view, s }, ex || {})), { scale: 1.0, lit: { rim: '175,205,255', rimA: .9, rimW: 5, rimInset: 3, shadeA: .45, light: [0, -1], warmA: 0, rimMode: 'source-over' }, shadowOpt: { skew: 0, squash: .5, alpha: .55 } });
+    fig(.85, 9.5, 'front'); fig(1.75, 9.5, 'side', 1, { walk: .9 }); fig(2.6, 9.5, 'back');
+    flush(S, c); const bp = proj(cam, [.14, 2.4, 10]); alarmGrade(c, 3, .8, bp ? { bx: bp[0], by: bp[1] } : {}); vignette(c, .6);
   },
 };
-function alarmGrade(c, t, k) {
-  // red strobe + cold blue shadows
-  const ph = (t * 1.6) % 1, pulse = Math.pow(Math.max(0, Math.sin(ph * Math.PI)), 2) * k;
+function alarmGrade(c, t, k, o = {}) {
+  // cold blue shadows + red strobe (from a beacon point if given)
+  const ph = (t * 1.6 + (o.phase || 0)) % 1, pulse = Math.pow(Math.max(0, Math.sin(ph * Math.PI)), 2) * k;
   c.save(); c.setTransform(1, 0, 0, 1, 0, 0);
-  c.globalCompositeOperation = 'multiply'; c.fillStyle = `rgba(70,90,160,${.55 * k})`; c.fillRect(0, 0, W, H);
-  c.globalCompositeOperation = 'screen'; c.fillStyle = `rgba(255,30,25,${.32 * pulse})`; c.fillRect(0, 0, W, H);
+  c.globalCompositeOperation = 'multiply'; c.fillStyle = `rgba(52,66,130,${.62 * k})`; c.fillRect(0, 0, W, H);
+  c.globalCompositeOperation = 'screen';
+  if (o.bx != null) { const g = c.createRadialGradient(o.bx, o.by, 0, o.bx, o.by, o.br || 900); g.addColorStop(0, `rgba(255,40,30,${.75 * pulse})`); g.addColorStop(.4, `rgba(220,20,20,${.3 * pulse})`); g.addColorStop(1, 'rgba(200,0,0,0)'); c.fillStyle = g; c.fillRect(0, 0, W, H); }
+  c.fillStyle = `rgba(255,20,20,${.16 * pulse})`; c.fillRect(0, 0, W, H);
   c.globalCompositeOperation = 'source-over'; c.restore();
   return pulse;
 }
 
-// ======================= SHOT LIST (draft 0 – 20.8 s) =======================
-const DURATION = 20.8;
-const SHOTS = [];
-function shot(t0, t1, draw) { SHOTS.push({ t0, t1, draw }); }
-shot(0, 20.8, (c, lt, t) => { c.fillStyle = '#123'; c.fillRect(0, 0, W, H); });
-STILLS.dbg = c => { c.fillStyle = '#888'; c.fillRect(0, 0, W, H); drawNoah(c, { x: 300, y: 900, k: .45, ink: 1.8 }); drawLit(c, cc => drawNoah(cc, { x: 800, y: 900, k: .45, ink: 1.8 }), { rimA: 0, bounds: [600, 100, 1000, 950] }); drawLit(c, cc => drawNoah(cc, { x: 1300, y: 900, k: .45, ink: 1.8 }), { bounds: [1100, 100, 1500, 950] }); };

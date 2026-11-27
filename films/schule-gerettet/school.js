@@ -316,6 +316,7 @@ function corridorScene(S, c, t, o = {}) {
   const R = COR, alarm = o.alarm || 0, flick = o.flicker || (() => 1);
   // floor terrazzo, walls, ceiling
   texQuad(S, texTerrazzo(), [[0, 0, R.d], [R.w, 0, R.d], [R.w, 0, 0], [0, 0, 0]], { now: c, nx: 2, ny: 16, n: [0, 1, 0], extra: .05 });
+  if (o.dim) { const sp = projPoly(S.cam, [[0, 0, R.d], [R.w, 0, R.d], [R.w, 0, 0], [0, 0, 0]]); if (sp) { pathPoly(c, sp); c.fillStyle = `rgba(14,18,40,${o.dim})`; c.fill(); } }
   const fc = (pts, col, n, oo = {}) => drawFace(S, c, pts, col, n, Object.assign({ ink: 0 }, oo));
   fc([[0, R.h, 0], [R.w, R.h, 0], [R.w, R.h, R.d], [0, R.h, R.d]], '#eeeae2', [0, -1, 0], { grad: [0, .2] });
   fc([[0, 0, 0], [0, R.h, 0], [0, R.h, R.d], [0, 0, R.d]], '#e9e1cf', [1, 0, 0], { grad: [.05, .15] });
@@ -343,7 +344,7 @@ function corridorScene(S, c, t, o = {}) {
     const sp = projPoly(S.cam, [[1.2, R.h - .02, z], [2.2, R.h - .02, z], [2.2, R.h - .02, z + 1.2], [1.2, R.h - .02, z + 1.2]]);
     if (sp) { pathPoly(c, sp); c.fillStyle = col; c.fill(); c.lineWidth = 1.5; c.strokeStyle = 'rgba(0,0,0,.35)'; c.stroke(); const p = proj(S.cam, [1.7, R.h - .05, z + .6]); if (p && on > .1) glow(c, p[0], p[1], S.cam.f * 1.4 / p[2], '255,250,225', .35 * on); }
     // floor reflection of each lamp (glossy floor)
-    const rp = proj(S.cam, [1.7, 0, z + .6]); if (rp && on > .1) { c.save(); c.globalCompositeOperation = 'screen'; const r = S.cam.f * .9 / rp[2]; const g = c.createRadialGradient(rp[0], rp[1], 0, rp[0], rp[1], r); g.addColorStop(0, `rgba(255,250,230,${.28 * on})`); g.addColorStop(1, 'rgba(255,250,230,0)'); c.fillStyle = g; c.beginPath(); c.ellipse(rp[0], rp[1], r * .45, r * .9, 0, 0, TAU); c.fill(); c.restore(); }
+    const rp = proj(S.cam, [1.7, 0, z + .6]); if (rp && on > .1 && !o.noRefl) { c.save(); c.globalCompositeOperation = 'screen'; const r = S.cam.f * .9 / rp[2]; const g = c.createRadialGradient(rp[0], rp[1], 0, rp[0], rp[1], r); g.addColorStop(0, `rgba(255,250,230,${.28 * on})`); g.addColorStop(1, 'rgba(255,250,230,0)'); c.fillStyle = g; c.beginPath(); c.ellipse(rp[0], rp[1], r * .45, r * .9, 0, 0, TAU); c.fill(); c.restore(); }
   }
   // fire extinguisher + red alarm beacon + exit sign
   push(S, depthOf(S, [3.3, 1, 15.4]), cc => {});

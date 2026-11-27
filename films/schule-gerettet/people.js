@@ -154,7 +154,7 @@ function personHead(c, P, e = {}, back = false) {
   if (back) personHairBack(c, P); else hs.front(c, P, back);
 }
 function personHairBack(c, P) {
-  const cy = -1240, R = 262, st = P.hairStyle, len = st === 'long' ? 520 : st === 'bob' ? 170 : st === 'crew' ? 40 : 90;
+  const cy = -1240, R = 262, st = P.hairStyle, len = st === 'long' ? 520 : st === 'bob' ? 170 : st === 'crew' ? 150 : 140;
   c.beginPath(); c.moveTo(-R - (st === 'bob' ? 30 : 4), cy - 10);
   if (st === 'messy') { const tf = [[-280, cy - 120], [-236, cy - 205], [-262, cy - 260], [-170, cy - 270], [-150, cy - 330], [-70, cy - 300], [-30, cy - 360], [30, cy - 300], [100, cy - 350], [130, cy - 280], [215, cy - 300], [210, cy - 220], [285, cy - 200], [252, cy - 110]]; for (const p of tf) c.lineTo(p[0], p[1]); }
   else { c.bezierCurveTo(-R - 30, cy - 200, -175, cy - 305, 0, cy - 298); c.bezierCurveTo(175, cy - 305, R + 30, cy - 200, R + (st === 'bob' ? 30 : 4), cy - 10); }
@@ -240,7 +240,7 @@ function drawNoah34(c, p = {}) {
   c.save(); c.translate(0, p.sit ? (-(p.seatH ?? 250)) - (NOAH.HEM + 40) - 60 : 0); c.translate(0, p.bob || 0);
   const far = Object.assign({}, arms.r); noahArm(c, 1, { a: far.a * .7, b: far.b, hand: far.hand }, false);
   c.beginPath(); c.moveTo(-40, -952); c.lineTo(-150, -942); c.quadraticCurveTo(-140, -820, -128, -760); c.lineTo(-122, NOAH.HEM); c.lineTo(116, NOAH.HEM); c.lineTo(122, -760); c.quadraticCurveTo(132, -820, 140, -942); c.lineTo(70, -952); c.quadraticCurveTo(15, -915, -40, -952); c.closePath(); nFill(c, NOAH.shirt);
-  c.save(); c.beginPath(); c.rect(-128, -980, 250, 480); c.clip(); c.translate(36, 0); c.scale(.86, 1); noahLetters(c, 4, -760, 1); c.restore();
+  c.save(); c.beginPath(); c.rect(-128, -980, 250, 480); c.clip(); c.translate(36, 0); c.scale(.86, 1); if (s < 0) { c.translate(4, 0); c.scale(-1, 1); c.translate(-4, 0); } noahLetters(c, 4, -760, 1); c.restore();
   c.beginPath(); c.rect(-30, -1000, 92, 62); c.fillStyle = NOAH.skin; c.fill(); nLine(c, [-30, -1000, -30, -948], 10, NOAH.out); nLine(c, [62, -1000, 62, -948], 10, NOAH.out);
   c.beginPath(); c.moveTo(-40, -952); c.quadraticCurveTo(15, -915, 70, -952); c.lineWidth = 10; c.strokeStyle = NOAH.out; c.stroke();
   const armsUp = arms.l.a > 1.6; if (!armsUp) noahArm(c, -1, arms.l, true);
@@ -271,59 +271,91 @@ function noahHead34(c, e, s) {
 // ---------- the attacker: never a clear face, no weapon. Mostly silhouette with cool rim light ----------
 // view: 'front' | 'back' | 'side' (s = ±1); rim: 0..1 rim light strength; dark: 0..1 crush to silhouette
 function drawAttacker(c, p = {}) {
-  const k = (p.k ?? .25) * 1.18, view = p.view || 'front', s = p.s || 1, wk = p.walk, walking = wk != null;
-  const J = '#16171c', J2 = '#22242b', J3 = '#2c2f38', SEAM = 'rgba(120,130,150,.35)', O = '#07070a';
-  c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (view === 'side' ? s : 1), k);
-  const lw = 12, fl = (fill) => { c.fillStyle = fill; c.fill(); c.lineWidth = lw; c.strokeStyle = O; c.lineJoin = 'round'; c.stroke(); };
-  const sw = walking ? Math.sin(wk) : 0;
-  // legs: cargo trousers + heavy boots
-  const leg = (dx, th, far) => {
-    c.save(); c.translate(dx, -560); c.rotate(th);
-    c.beginPath(); c.moveTo(-70, 0); c.lineTo(70, 0); c.lineTo(62, 470); c.lineTo(-62, 470); c.closePath(); fl(far ? '#1d2027' : '#262a33');
-    c.beginPath(); c.rect(view === 'side' ? 0 : (dx < 0 ? -74 : 20), 150, 56, 90); fl('#2e323c'); nLine(c, [view === 'side' ? 6 : (dx < 0 ? -70 : 24), 168, view === 'side' ? 50 : (dx < 0 ? -22 : 72), 168], 4, SEAM);
-    nLine(c, [0, 20, 0, 460], 3, SEAM); for (let i = 0; i < 4; i++) nLine(c, [-50, 300 + i * 28, 40, 290 + i * 28], 3, 'rgba(0,0,0,.4)');
-    c.beginPath(); if (view === 'side') { c.moveTo(-72, 440); c.lineTo(-74, 560); c.lineTo(150, 562); c.quadraticCurveTo(170, 520, 120, 480); c.lineTo(66, 440); } else { c.moveTo(-80, 440); c.lineTo(80, 440); c.lineTo(92, 560); c.lineTo(-92, 560); } c.closePath(); fl('#101114');
-    c.fillStyle = '#2b2b2b'; c.fillRect(-90, 540, view === 'side' ? 250 : 182, 22); for (let i = 0; i < 4; i++) nLine(c, [-50 + i * 30, 460, -30 + i * 30, 470], 4, '#3a3d46');
+  // adult in a padded black hooded jacket, black balaclava (no visible eyes), black gloves, dark cargo trousers, heavy boots.
+  // view: 'front' | 'back' | 'side' (s = ±1, facing right/left); walk: phase; headTurn: rad. Never a face, never a weapon.
+  const k = (p.k ?? .25) * 1.2, view = p.view || 'front', s = p.s || 1, wk = p.walk, walking = wk != null, sw = walking ? Math.sin(wk) : 0;
+  const JK = p.jk || '#1b1c22', JK2 = '#23252d', TR = '#262932', BT = '#0f1013', GL = '#121216', O = '#060609', SEAM = 'rgba(150,160,185,.28)';
+  c.save(); c.translate(p.x || 0, p.y || 0); c.scale(k * (view === 'side' ? s : 1), k); c.translate(0, walking ? -Math.abs(Math.cos(wk)) * 14 : 0);
+  const LW = 13, F = (fill, w = LW) => { c.fillStyle = fill; c.fill(); if (w) { c.lineWidth = w; c.strokeStyle = O; c.lineJoin = 'round'; c.stroke(); } };
+  const boot = (x, far, side) => {
+    c.beginPath();
+    if (side) { c.moveTo(x - 62, -150); c.lineTo(x + 58, -150); c.quadraticCurveTo(x + 70, -80, x + 150, -60); c.quadraticCurveTo(x + 185, -40, x + 175, 0); c.lineTo(x - 78, 0); c.quadraticCurveTo(x - 82, -80, x - 62, -150); }
+    else { c.moveTo(x - 70, -150); c.lineTo(x + 70, -150); c.quadraticCurveTo(x + 105, -50, x + 100, 0); c.lineTo(x - 100, 0); c.quadraticCurveTo(x - 105, -50, x - 70, -150); }
+    c.closePath(); F(far ? '#0b0b0e' : BT);
+    c.fillStyle = '#2a2a2e'; c.fillRect(x - (side ? 80 : 100), -24, side ? 258 : 200, 24); for (let i = 0; i < 3; i++) line(c, [x - 40, -128 + i * 26, x + 36, -122 + i * 26], 4, '#34363e');
+  };
+  const legF = (x, far) => { // front/back view leg, slightly tapered, with cargo pocket
+    c.save(); c.translate(0, -140); c.scale(1, 1.44); c.translate(0, 140);
+    c.beginPath(); c.moveTo(x - 92, -640); c.lineTo(x + 92, -640); c.quadraticCurveTo(x + 96, -380, x + 72, -140); c.lineTo(x - 72, -140); c.quadraticCurveTo(x - 96, -380, x - 92, -640); c.closePath(); F(far ? '#1e2028' : TR);
+    const px = x + (x < 0 ? -40 : 40); c.beginPath(); rrect(c, px - 46, -470, 92, 120, 10); F('#2c303a', 6); line(c, [px - 42, -448, px + 42, -448], 5, SEAM);
+    line(c, [x, -620, x - 4, -160], 3, SEAM); for (let i = 0; i < 3; i++) line(c, [x - 60, -250 + i * 30, x + 50, -262 + i * 30], 4, 'rgba(0,0,0,.5)');
     c.restore();
   };
-  if (view === 'side') { leg(0, walking ? -.35 * sw : -.05, true); leg(0, walking ? .35 * sw : .05, false); }
-  else { leg(-75, 0, false); leg(75, 0, false); }
-  // padded hooded jacket
+  const legS = (th, bend, far) => { // side view leg with knee
+    const hx = 0, hy = -840, kx = hx + Math.sin(th) * 355, ky = hy + Math.cos(th) * 355, t2 = th - bend, ax = kx + Math.sin(t2) * 355, ay = ky + Math.cos(t2) * 355;
+    nLine(c, [hx, hy, kx, ky, ax, ay - 20], 160 + LW * 2, O); nLine(c, [hx, hy, kx, ky, ax, ay - 20], 160, far ? '#1e2028' : TR);
+    if (!far) { c.save(); c.translate((hx + kx) / 2, (hy + ky) / 2); c.rotate(-th); c.beginPath(); rrect(c, -30, -40, 70, 100, 10); F('#2c303a', 6); c.restore(); }
+    c.save(); c.translate(ax, ay + 130 - 150); boot(0, far, true); c.restore();
+  };
+  // ---- legs ----
+  if (view === 'side') { legS(walking ? -.4 * sw : -.04, walking ? .6 * Math.max(0, -Math.cos(wk)) : 0, true); legS(walking ? .4 * sw : .04, walking ? .6 * Math.max(0, Math.cos(wk)) : 0, false); }
+  else { legF(-82, false); legF(82, false); boot(-84, false); boot(84, false); }
+  c.translate(0, -215); // upper body sits on the longer legs
+  // ---- arms (behind body in side view: far arm) ----
+  const arm = (side, a, b, far) => {
+    const sx = view === 'side' ? -10 : side * 205, sy = -1060, ex = sx + side * Math.sin(a) * 270, ey = sy + Math.cos(a) * 270, a2 = a + (b || 0), wx = ex + side * Math.sin(a2) * 250, wy = ey + Math.cos(a2) * 250;
+    nLine(c, [sx, sy, ex, ey, wx, wy], 150 + LW * 2, O); nLine(c, [sx, sy, ex, ey, wx, wy], 150, far ? '#14151a' : JK2);
+    for (let i = 1; i < 4; i++) { const u = i / 4, qx = sx + (ex - sx) * u * 2 > ex ? ex + (wx - ex) * (u * 2 - 1) : sx + (ex - sx) * u * 2, qy = sy + (ey - sy) * u * 2 > ey ? ey + (wy - ey) * (u * 2 - 1) : sy + (ey - sy) * u * 2; }
+    for (let i = 1; i <= 4; i++) { const u = i / 5, px = u < .5 ? sx + (ex - sx) * u * 2 : ex + (wx - ex) * (u * 2 - 1), py = u < .5 ? sy + (ey - sy) * u * 2 : ey + (wy - ey) * (u * 2 - 1); line(c, [px - 60, py - 8, px + 60, py + 8], 5, SEAM); }
+    nLine(c, [ex + (wx - ex) * .86, ey + (wy - ey) * .86, wx, wy], 160, '#2a2c34'); // elastic cuff
+    c.save(); c.translate(wx, wy); c.rotate(-side * a2); c.scale(1.45, 1.45);
+    c.beginPath(); c.moveTo(-34, -6); c.quadraticCurveTo(-46, 50, -28, 92); c.quadraticCurveTo(0, 112, 26, 94); c.quadraticCurveTo(44, 50, 34, -6); c.closePath(); F(GL, 9);
+    c.beginPath(); c.moveTo(-30, 20); c.quadraticCurveTo(-62, 44, -52, 66); c.quadraticCurveTo(-40, 72, -30, 52); F(GL, 8); line(c, [-8, 70, -10, 96], 4, '#2c2d33'); line(c, [10, 70, 10, 98], 4, '#2c2d33');
+    c.restore();
+  };
+  if (view === 'side') arm(1, walking ? -.32 * sw : .06, .18, true);
+  else if (view === 'back') { arm(-1, .12 + (p.armL || 0), .1); arm(1, .12 + (p.armR || 0), .1); }
+  // ---- padded jacket ----
   c.beginPath();
-  if (view === 'side') { c.moveTo(-150, -1060); c.quadraticCurveTo(-200, -800, -170, -470); c.lineTo(150, -470); c.quadraticCurveTo(170, -800, 120, -1060); c.closePath(); }
-  else { c.moveTo(-200, -1070); c.quadraticCurveTo(-245, -800, -215, -450); c.lineTo(215, -450); c.quadraticCurveTo(245, -800, 200, -1070); c.quadraticCurveTo(0, -1110, -200, -1070); c.closePath(); }
-  fl(J);
+  if (view === 'side') { c.moveTo(-150, -1110); c.quadraticCurveTo(-215, -900, -190, -560); c.lineTo(165, -560); c.quadraticCurveTo(190, -900, 120, -1110); c.quadraticCurveTo(-10, -1150, -150, -1110); }
+  else { c.moveTo(-235, -1020); c.quadraticCurveTo(-250, -1110, -150, -1125); c.quadraticCurveTo(0, -1150, 150, -1125); c.quadraticCurveTo(250, -1110, 235, -1020); c.quadraticCurveTo(255, -800, 228, -560); c.quadraticCurveTo(0, -540, -228, -560); c.quadraticCurveTo(-255, -800, -235, -1020); }
+  c.closePath(); F(JK);
   c.save(); c.clip();
-  for (let i = 0; i < 6; i++) { const y = -1000 + i * 92; c.beginPath(); c.moveTo(-260, y); c.quadraticCurveTo(0, y + 26, 260, y); c.lineWidth = 5; c.strokeStyle = SEAM; c.stroke(); c.beginPath(); c.moveTo(-260, y + 40); c.quadraticCurveTo(0, y + 66, 260, y + 40); c.lineWidth = 16; c.strokeStyle = 'rgba(255,255,255,.035)'; c.stroke(); }
-  if (view === 'front') { nLine(c, [0, -1080, 0, -450], 9, '#3b3f4a'); for (let y = -1060; y < -460; y += 16) nLine(c, [-7, y, 7, y], 3, '#555a66'); c.beginPath(); c.rect(-14, -1010, 28, 46); fl('#5a5f6a'); for (const sx of [-1, 1]) { c.beginPath(); c.rect(sx * 60 - 50 + (sx > 0 ? 0 : 0), -640, 100, 120); fl(J2); nLine(c, [sx * 60 - 46, -630, sx * 60 + 46, -630], 4, SEAM); } }
-  if (view === 'back') { nLine(c, [0, -1060, 0, -470], 4, SEAM); }
-  c.fillStyle = J3; c.fillRect(-260, -500, 520, 50); // elastic hem
-  for (let i = 0; i < 8; i++) nLine(c, [-200 + rnd(i) * 400, -900 + rnd(i + 9) * 380, -170 + rnd(i) * 400, -860 + rnd(i + 9) * 380], 4, 'rgba(0,0,0,.45)');
+  for (let i = 0; i < 6; i++) { const y = -1060 + i * 88; c.beginPath(); c.moveTo(-280, y); c.quadraticCurveTo(0, y + 22, 280, y); c.lineWidth = 5; c.strokeStyle = SEAM; c.stroke(); const g = c.createLinearGradient(0, y, 0, y + 88); g.addColorStop(0, 'rgba(255,255,255,.05)'); g.addColorStop(.5, 'rgba(255,255,255,0)'); g.addColorStop(1, 'rgba(0,0,0,.35)'); c.fillStyle = g; c.fillRect(-280, y, 560, 88); }
+  if (view === 'front') {
+    line(c, [0, -1130, 0, -560], 12, '#30333c'); for (let y = -1110; y < -570; y += 15) line(c, [-8, y, 8, y], 3, '#5a5f6b');
+    c.beginPath(); rrect(c, -15, -1080, 30, 50, 6); F('#6a6f7a', 5);
+    for (const sx of [-1, 1]) { c.beginPath(); c.moveTo(sx * 40, -760); c.lineTo(sx * 190, -770); c.lineTo(sx * 200, -620); c.lineTo(sx * 45, -610); c.closePath(); F('#202229', 6); line(c, [sx * 60, -748, sx * 180, -755], 5, SEAM); }
+  }
+  if (view === 'side') { c.beginPath(); c.moveTo(-60, -760); c.lineTo(120, -770); c.lineTo(125, -620); c.lineTo(-55, -612); c.closePath(); F('#202229', 6); }
+  if (view === 'back') line(c, [0, -1110, 0, -570], 4, SEAM);
+  c.fillStyle = '#2a2c34'; c.fillRect(-280, -600, 560, 44);
+  for (let i = 0; i < 10; i++) { const x = -190 + rnd(i + 3) * 380, y = -1000 + rnd(i + 9) * 380; line(c, [x, y, x + 40, y + 22], 4, 'rgba(0,0,0,.5)'); }
   c.restore();
-  // arms in thick sleeves, gloves
-  const arm = (side, a, far) => {
-    c.save(); c.translate(view === 'side' ? -10 : side * 190, -1010); c.rotate(-side * a);
-    c.beginPath(); c.moveTo(-62, 0); c.quadraticCurveTo(-82, 260, -60, 470); c.lineTo(60, 470); c.quadraticCurveTo(74, 240, 62, 0); c.closePath(); fl(far ? '#121318' : J2);
-    for (let i = 0; i < 4; i++) nLine(c, [-55, 120 + i * 90, 55, 128 + i * 90], 4, SEAM);
-    c.fillStyle = J3; c.fillRect(-62, 440, 124, 34);
-    c.beginPath(); c.ellipse(0, 540, 58, 74, 0, 0, Math.PI * 2); fl('#0c0c0f'); nLine(c, [-30, 500, -34, 590], 4, '#2a2c33'); nLine(c, [0, 500, 0, 600], 4, '#2a2c33'); nLine(c, [30, 500, 32, 590], 4, '#2a2c33');
-    c.restore();
-  };
-  if (view === 'side') arm(1, walking ? -.3 * sw : .05, true);
-  else { arm(-1, .06 + (p.armL || 0), false); arm(1, .06 + (p.armR || 0), false); }
-  // hood + balaclava (no face: eye band is a deep shadow slit, no eyes drawn)
-  c.save(); c.translate(view === 'side' ? 10 : 0, 0); c.rotate(p.headTurn || 0);
-  c.beginPath(); c.moveTo(-235, -1050); c.bezierCurveTo(-300, -1300, -190, -1560, 0, -1570); c.bezierCurveTo(190, -1560, 300, -1300, 235, -1050); c.quadraticCurveTo(0, -1000, -235, -1050); c.closePath(); fl('#131419');
-  if (view !== 'back') {
-    c.beginPath(); c.moveTo(-170, -1080); c.bezierCurveTo(-210, -1280, -140, -1460, 0, -1465); c.bezierCurveTo(140, -1460, 210, -1280, 170, -1080); c.quadraticCurveTo(0, -1040, -170, -1080); c.closePath(); c.fillStyle = '#060608'; c.fill();
-    if (view === 'side') { c.save(); c.beginPath(); c.ellipse(120, -1280, 120, 190, 0, 0, Math.PI * 2); c.fillStyle = '#0d0e12'; c.fill(); c.restore(); }
-    // knit texture of the balaclava + the eye slit as a darker band (never eyes)
-    c.save(); c.beginPath(); c.moveTo(-150, -1090); c.bezierCurveTo(-185, -1270, -120, -1420, 0, -1425); c.bezierCurveTo(120, -1420, 185, -1270, 150, -1090); c.closePath(); c.fillStyle = '#101115'; c.fill(); c.clip();
-    for (let x = -150; x <= 150; x += 18) nLine(c, [x, -1430, x, -1080], 3, 'rgba(255,255,255,.035)');
-    c.beginPath(); rrect(c, -120, -1330, 240, 70, 35); c.fillStyle = '#020203'; c.fill(); c.restore();
-  } else { c.save(); c.clip(); for (let i = 0; i < 5; i++) nLine(c, [-200 + i * 100, -1540, -230 + i * 115, -1060], 4, SEAM); c.restore(); }
+  if (view === 'front') { arm(-1, .1 + (p.armL || 0), .08); arm(1, .1 + (p.armR || 0), .08); }
+  // ---- hood + balaclava ----
+  c.save(); c.translate(view === 'side' ? 15 : 0, 0); c.translate(0, -1140); c.rotate(p.headTurn || 0); c.translate(0, 1140);
+  const hc = -1330;
+  if (view === 'side') {
+    c.beginPath(); c.moveTo(-170, -1110); c.bezierCurveTo(-300, -1300, -220, -1600, 20, -1610); c.bezierCurveTo(190, -1610, 270, -1460, 245, -1320); c.quadraticCurveTo(215, -1200, 150, -1120); c.quadraticCurveTo(0, -1080, -170, -1110); c.closePath(); F('#15161b');
+    // opening: dark profile of the masked head, deep shadow
+    c.beginPath(); c.moveTo(150, -1135); c.quadraticCurveTo(235, -1240, 215, -1360); c.quadraticCurveTo(190, -1470, 120, -1500); c.quadraticCurveTo(90, -1330, 110, -1150); c.closePath(); F('#08080a', 7);
+    line(c, [-120, -1500, -200, -1250], 5, SEAM); line(c, [-40, -1560, -150, -1180], 5, SEAM);
+  } else {
+    c.beginPath(); c.moveTo(-215, -1100); c.bezierCurveTo(-320, -1280, -250, -1610, 0, -1620); c.bezierCurveTo(250, -1610, 320, -1280, 215, -1100); c.quadraticCurveTo(0, -1060, -215, -1100); c.closePath(); F('#15161b');
+    if (view === 'front') {
+      // hood rim (thick fabric edge) and the deep opening
+      c.beginPath(); c.moveTo(-160, -1120); c.bezierCurveTo(-225, -1290, -170, -1520, 0, -1525); c.bezierCurveTo(170, -1520, 225, -1290, 160, -1120); c.quadraticCurveTo(0, -1090, -160, -1120); c.closePath(); F('#08080a', 9);
+      c.save(); c.clip();
+      const g = c.createRadialGradient(0, hc, 20, 0, hc, 220); g.addColorStop(0, '#111216'); g.addColorStop(1, '#040405'); c.fillStyle = g; c.fillRect(-240, -1540, 480, 440);
+      for (let x = -160; x <= 160; x += 16) line(c, [x, -1520, x, -1110], 3, 'rgba(255,255,255,.025)'); // knit ribs
+      c.beginPath(); rrect(c, -125, hc - 70, 250, 74, 37); c.fillStyle = '#000'; c.fill(); // eye opening = pure shadow
+      c.restore();
+      line(c, [-150, -1150, -205, -1320], 6, SEAM); line(c, [150, -1150, 205, -1320], 6, SEAM);
+    } else { c.save(); c.clip(); for (let i = 0; i < 6; i++) line(c, [-220 + i * 88, -1600, -240 + i * 96, -1100], 5, SEAM); line(c, [0, -1620, 0, -1100], 6, 'rgba(0,0,0,.6)'); c.restore(); }
+  }
   c.restore();
-  if (view === 'side') arm(1, walking ? .3 * sw : -.05, false);
+  if (view === 'side') arm(1, walking ? .32 * sw : -.04, .2, false);
   c.restore();
 }
 
