@@ -22,6 +22,8 @@ def lpf(x, hz):  # FFT low-pass (fast)
     X = np.fft.rfft(x); f = np.fft.rfftfreq(len(x), 1 / SR); X[f > hz] *= 0; return np.fft.irfft(X, len(x))
 def bpf(x, lo, hi):
     X = np.fft.rfft(x); f = np.fft.rfftfreq(len(x), 1 / SR); X[(f < lo) | (f > hi)] = 0; return np.fft.irfft(X, len(x))
+def movavg(x, n):
+    c = np.cumsum(np.concatenate([np.zeros(n // 2 + 1), x, np.full(n // 2, x[-1])])); return (c[n:] - c[:-n])[:len(x)] / n
 def noise(d): return rng.standard_normal(int(d * SR))
 def norm(x, g=1.): m = np.max(np.abs(x)) or 1; return x / m * g
 
@@ -117,9 +119,9 @@ def main():
     # music: dark drone ~ -24 dB under everything, cut for the silent beat (and wherever MUSIC_CUT says), duck at day
     mus = drone(D) * 10 ** (-24 / 20); tt = t_(D); gate = np.ones(N)
     for a, b in [tuple(TM['silence'])] + globals().get('MUSIC_CUT', []): gate[int(a * SR):int(b * SR)] = 0
-    gate = np.convolve(gate, np.ones(2205) / 2205, 'same'); mix += (mus * gate)[:, None]
+    gate = movavg(gate, 2205); mix += (mus * gate)[:, None]
     # silent beat: everything but VO down
-    sil = 1 - .9 * ((tt >= TM['silence'][0]) & (tt < TM['silence'][1])); sil = np.convolve(sil, np.ones(4410) / 4410, 'same'); mix *= sil[:, None]
+    sil = 1 - .9 * ((tt >= TM['silence'][0]) & (tt < TM['silence'][1])); sil = movavg(sil, 4410); mix *= sil[:, None]
     # VO: offset + inserted gap, cut before the next section if the film is shorter
     raw = subprocess.run(['ffmpeg', '-loglevel', 'error', '-i', mp3, '-f', 'f32le', '-ac', '1', '-ar', str(SR), '-'], capture_output=True).stdout
     vo = np.frombuffer(raw, np.float32).astype(float); g0 = int(TM['gap_at'] * SR)
@@ -128,7 +130,7 @@ def main():
     if cut: b = b * np.concatenate([np.ones(max(0, len(b) - 1323)), np.linspace(1, 0, min(1323, len(b)))])
     voT = np.concatenate([np.zeros(int(TM['vo_offset'] * SR)), a, np.zeros(int(TM['gap'] * SR)), b])[:N]
     # duck SFX/music under the VO
-    envv = np.convolve(np.abs(np.pad(voT, (0, N - len(voT)))), np.ones(4410) / 4410, 'same'); duck = 1 - .45 * np.clip(envv / (envv.max() * .25 + 1e-9), 0, 1)
+    envv = movavg(np.abs(np.pad(voT, (0, max(0, N - len(voT))))), 4410); duck = 1 - .45 * np.clip(envv / (envv.max() * .25 + 1e-9), 0, 1)
     mix *= duck[:, None]; mix[:len(voT)] += voT[:, None] * 1.0
     mix /= max(1, np.max(np.abs(mix)) / .97)
     import wave

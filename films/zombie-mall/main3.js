@@ -72,7 +72,7 @@ function pharmacy(c, t, lt) {
   if (t > V(364.9)) bigText(c, '…DENKST DU.', 1320, 450, 90, '#ff9a8a', pop(t, V(364.9)));
   c.restore(); coldGrade(c, .5); vignette(c, .55);
 }
-const ZZ = (n, x0, z0, dz = 3) => Array.from({ length: n }, (_, i) => ({ w: 'z' + (14 + i), x: x0 + (i % 6) * 4.6 + rnd(i) * 2, z: z0 + Math.floor(i / 6) * dz + rnd(i + 3) * 2, s: rnd(i + 7) > .5 ? 1 : -1, v: .25, dim: .55 }));
+const ZZ = (n, x0, z0, dz = 3) => Array.from({ length: n }, (_, i) => ({ w: 'z' + ((14 + i) % 40), x: x0 + (i % 6) * 4.6 + rnd(i) * 2, z: z0 + Math.floor(i / 6) * dz + rnd(i + 3) * 2, s: rnd(i + 7) > .5 ? 1 : -1, v: .25, dim: .55 }));
 const LOTN = (o) => Object.assign({ c0: [-2, 1.2, 36], c1: [2, 1.2, 35.5], l0: [0, 1, 20], fov: 48 }, o);
 const SECTION5 = [
   [262.2, 'card', { bg: ['#1a1010', '#060404'], draw: (c, t, lt) => { bigText(c, 'DIE GRÖSSTE GEFAHR', W / 2, 440, 150, '#f6f0e6', pop(lt, .2)); bigText(c, 'KOMMT NICHT IMMER VON DRAUSSEN.', W / 2, 640, 96, '#ff9a4a', pop(lt, 1.2)); } }],
