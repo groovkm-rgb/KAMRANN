@@ -48,7 +48,7 @@ function card(c, t, lt, p) {
   const bg = p.bg || ['#141a2a', '#070a12']; c.save(); c.setTransform(1, 0, 0, 1, 0, 0);
   const g = c.createRadialGradient(W / 2, H / 2, 100, W / 2, H / 2, 1100); g.addColorStop(0, bg[0]); g.addColorStop(1, bg[1]); c.fillStyle = g; c.fillRect(0, 0, W, H);
   c.strokeStyle = 'rgba(255,255,255,.04)'; c.lineWidth = 2; for (let x = 0; x < W; x += 60) { c.beginPath(); c.moveTo(x, 0); c.lineTo(x, H); c.stroke(); } for (let y = 0; y < H; y += 60) { c.beginPath(); c.moveTo(0, y); c.lineTo(W, y); c.stroke(); }
-  if (p.title) { const a = ez(clamp(lt / .35)); c.globalAlpha = a; c.font = '600 46px FOswald'; c.textAlign = 'center'; c.fillStyle = p.accent || '#ff9a4a'; spaced(c, p.title, W / 2 + 6, 150, 12); c.globalAlpha = 1; }
+  if (p.title) { const a = ez(clamp(lt / .35)); c.globalAlpha = a; c.font = '600 46px FOswald'; c.textAlign = 'center'; c.fillStyle = p.accent || '#ff9a4a'; spaced(c, p.title, W / 2 + 6, 150, 12); c.globalAlpha = 1; c.textAlign = 'left'; }
   if (p.draw) p.draw(c, t, lt);
   c.restore(); grain(c, t, .03);
 }

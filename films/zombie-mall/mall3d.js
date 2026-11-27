@@ -131,7 +131,7 @@ const MALL3D = (() => {
     plane(g, 100, 4, mat('#1e2330'), 0, .02, 1.6, { rx: -Math.PI / 2 }); box(g, 100, .18, .35, '#3a4050', 0, .09, 3.6, { ink: .03 }); // sidewalk + kerb
     // puddles: glossy and tinted by the neon + hazard
     N.puddles = [];
-    for (const [px, pz, rx, rz, tint] of [[-3, 13, 3.2, 1.3, '#4a1430'], [9, 22, 2.2, .9, '#2a1a30'], [-14, 25, 2.6, 1.1, '#3a2410'], [4, 36, 3.5, 1.4, '#3a1028']]) { const m = mat(tint, { phong: 1, shin: 200, spec: '#ffffff' }); const p = new TH.Mesh(new TH.CircleGeometry(1, 28), m); p.scale.set(rx, rz, 1); p.rotation.x = -Math.PI / 2; p.position.set(px, .03, pz); g.add(p); N.puddles.push(m); }
+    for (const [px, pz, rx, rz, tint] of [[-3, 13, 3.2, 1.3, '#4a1430'], [9, 22, 2.2, .9, '#2a1a30'], [-14, 25, 2.6, 1.1, '#3a2410'], [4, 26, 3.5, 1.4, '#3a1028']]) { const m = mat(tint, { phong: 1, shin: 200, spec: '#ffffff' }); const p = new TH.Mesh(new TH.CircleGeometry(1, 28), m); p.scale.set(rx, rz, 1); p.rotation.x = -Math.PI / 2; p.position.set(px, .03, pz); g.add(p); N.puddles.push(m); }
     // islands with dead shrubs, bollards, bins, trolley shelter
     for (const [ix, iz] of [[-22, 18], [22, 18], [-22, 32], [22, 32]]) { box(g, 3, .3, 8, '#2a2f38', ix, .15, iz, { ink: .03 }); for (let k = 0; k < 3; k++) { const b = new TH.Mesh(new TH.IcosahedronGeometry(.7, 0), mat('#232a1e')); b.position.set(ix + (k - 1) * .6, .8, iz - 2 + k * 2); g.add(b); } }
     for (let i = 0; i < 9; i++) cyl(g, .12, .12, .9, '#c8a030', -16 + i * 4, .45, 4.2, { ink: .03 });
