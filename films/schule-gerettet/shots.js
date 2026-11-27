@@ -9,7 +9,7 @@ function actor(S, pos, draw, o = {}) {
     const B = drawLit(c, cc => draw(cc, k), Object.assign({ light: Ls, bounds, feetY: o.sit ? null : sp[1], defer: true, rimInset: 13 * 1.6 * k, rimW: Math.max(2, 18 * k), rimA: .4 }, o.lit || {}));
     if (o.shadow !== false && !o.sit) castFromBuf(c, B, sp[1], Object.assign({ skew: -Ls[0] * 1.6, squash: .2, alpha: .28, cx: sp[0], cw: sc * .35, blur: 5 }, o.shadowOpt || {}));
     c.save(); c.setTransform(1, 0, 0, 1, 0, 0); if (o.alpha != null) c.globalAlpha = o.alpha; c.drawImage(B.cv, 0, 0); c.restore();
-  }, { bias: o.bias || 0 });
+  }, { bias: o.bias || 0, depthY: o.depthY ?? (o.sit ? .8 : .95) * (o.scale || 1) });
 }
 const SEAT_H = Math.round(.46 * RIG_H / KID_H);
 const seatPos = (name, dz = 0) => [SEATS[name][0], 0, SEATS[name][1] + dz];

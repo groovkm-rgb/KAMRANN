@@ -200,7 +200,8 @@ function quadX(z0, y0, z1, y1, x, facePlus = true) { return facePlus ? [[x, y1, 
 function billboard(S, p, draw, o = {}) {
   const q = toCam(S.cam, p); if (q[2] <= S.cam.near) return;
   const sp = projC(S.cam, q), sc = S.cam.f / q[2];
-  push(S, Math.hypot(...V.sub(S.cam.pos, p)) + (o.bias || 0), c => { c.save(); c.translate(sp[0], sp[1]); draw(c, sc, sp); c.restore(); });
+  const dp = o.depthY ? [p[0], p[1] + o.depthY, p[2]] : p;
+  push(S, Math.hypot(...V.sub(S.cam.pos, dp)) + (o.bias || 0), c => { c.save(); c.translate(sp[0], sp[1]); draw(c, sc, sp); c.restore(); });
 }
 
 // ---------- screen effects ----------

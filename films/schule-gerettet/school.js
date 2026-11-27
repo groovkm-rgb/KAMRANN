@@ -142,7 +142,7 @@ function drawClockFace(c, x, y, r, hh, mm, ss, o = {}) {
 const ROOM = { w: 9, d: 8, h: 3.2, windows: [[1.6, 3.1], [3.5, 5.0], [5.4, 6.9]], sill: .95, wtop: 2.7 };
 const SUN_MORNING = { dir: V.norm([-.78, .42, .38]), col: [255, 228, 182], amb: .7, ambCol: [178, 190, 228], ink: 1.3, inkA: .5 };
 // desk rows (double desks): [x, z] of desk centres; seat z = desk z - .55 (students face +z)
-const DESKS = []; for (let r = 0; r < 4; r++) for (let col = 0; col < 3; col++) DESKS.push([2.0 + col * 2.6, 5.6 - r * 1.45]);
+const DESKS = []; for (let r = 0; r < 4; r++) for (let col = 0; col < 3; col++) DESKS.push([1.98 + col * 2.6, 6.1 - r * 1.45]);
 const SEATS = { noah: [4.25, 2.6], jonas: [4.95, 2.6], lea: [4.25, 4.05], s1: [1.65, 4.05], s2: [2.35, 2.6], s3: [7.25, 4.05], s4: [6.9, 2.6], s5: [1.65, 1.15], s6: [7.6, 5.5], s7: [2.35, 5.5] };
 
 function classroomShell(S, t, o = {}) {
@@ -189,12 +189,12 @@ function classroomWallDecor(S, t, o = {}) {
 // props that need sorting
 function classroomProps(S, t, o = {}) {
   const R = ROOM;
-  // board frame + tray (boxes)
-  solid(S, 2.35, .9, R.d - .12, 4.3, .05, .12, '#b9bec6', { ink: 1 }); // tray
-  solid(S, 2.35, 2.25, R.d - .06, 4.3, .05, .06, '#c9ced6'); solid(S, 2.35, .95, R.d - .06, .05, 1.3, .06, '#c9ced6'); solid(S, 6.6, .95, R.d - .06, .05, 1.3, .06, '#c9ced6');
-  solid(S, 3.0, .95, R.d - .11, .22, .07, .07, '#f2d64a', { bias: -.01 }); // sponge
-  solid(S, 3.4, .95, R.d - .11, .16, .06, .08, '#e8e4da', { bias: -.01, post: c => { } }); // chalk box
-  for (let i = 0; i < 3; i++) solid(S, 4.0 + i * .12, .95, R.d - .1, .08, .012, .012, ['#fff', '#ffd84a', '#ff8fa8'][i], { bias: -.02, ink: 0 });
+  // board frame + tray (boxes) — wall-mounted: sorted behind everything standing in the room
+  solid(S, 2.35, .9, R.d - .12, 4.3, .05, .12, '#b9bec6', { ink: 1, bias: 1.2 }); // tray
+  solid(S, 2.35, 2.25, R.d - .06, 4.3, .05, .06, '#c9ced6', { bias: 1.2 }); solid(S, 2.35, .95, R.d - .06, .05, 1.3, .06, '#c9ced6', { bias: 1.2 }); solid(S, 6.6, .95, R.d - .06, .05, 1.3, .06, '#c9ced6', { bias: 1.2 });
+  solid(S, 3.0, .95, R.d - .11, .22, .07, .07, '#f2d64a', { bias: 1.1 }); // sponge
+  solid(S, 3.4, .95, R.d - .11, .16, .06, .08, '#e8e4da', { bias: 1.1 }); // chalk box
+  for (let i = 0; i < 3; i++) solid(S, 4.0 + i * .12, .95, R.d - .1, .08, .012, .012, ['#fff', '#ffd84a', '#ff8fa8'][i], { bias: 1.1, ink: 0 });
   // speaker box (Lautsprecher) top right of the front wall
   solid(S, 7.9, 2.65, R.d - .2, .45, .32, .2, '#e8e2d4', { post: c => { const p = proj(S.cam, [8.12, 2.81, R.d - .21]); if (p) { const r = S.cam.f * .11 / p[2]; for (let i = -3; i <= 3; i++) line(c, [p[0] - r * .9, p[1] + i * r * .22, p[0] + r * .9, p[1] + i * r * .22], Math.max(1, r * .07), 'rgba(40,40,40,.6)'); } } });
   // teacher desk (Pult) front-left near the windows
@@ -220,7 +220,7 @@ function classroomProps(S, t, o = {}) {
   // ceiling lamps
   for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) solid(S, 2.3 + j * 3.2, R.h - .1, 1.6 + i * 2.4, 1.3, .08, .3, o.lampsOn === false ? '#cfcfcf' : '#fffdf2', { emit: o.lampsOn !== false, ink: .8 });
   // desks, chairs, things on the desks, backpacks
-  DESKS.forEach(([x, z], i) => desk3D(S, x, z, i, t, o));
+  DESKS.forEach(([x, z], i) => { const m = o.deskMove ? o.deskMove(i, x, z) : null; desk3D(S, m ? m[0] : x, m ? m[1] : z, i, t, o); });
 }
 function plant3D(S, x, y, z, s = 1) {
   cylinder(S, x, y, z, .11 * s, .18 * s, '#c8714a', { seg: 10 });
@@ -254,12 +254,12 @@ function desk3D(S, x, z, i, t, o) {
     if (rnd(k + 7) > .35) solid(S, cx + s * .28 - .14, 0, cz - .05, .28, .36, .18, ['#e05a4a', '#2f6fb0', '#3aa05a', '#f2a53a', '#8a5ab0', '#444'][k % 6], { cols: { top: '#2a2a2a' } });
     // things on the desk in front of each seat
     const tx = x + s * .33, tz = z - .1;
-    solid(S, tx - .14, top + .035, tz - .1, .28, .012, .2, ['#ffffff', '#f2efe6'][k % 2], { bias: -.1, ink: .6 }); // notebook
-    solid(S, tx + .02, top + .047, tz - .09, .11, .006, .17, ['#3a7ad2', '#e05a4a', '#3aa05a'][k % 3], { bias: -.11, ink: 0 });
-    solid(S, tx - .16, top + .035, tz + .14, .16, .008, .01, '#f2c230', { bias: -.12, ink: 0, ry: rnd(k) - .5 }); // pencil
-    solid(S, tx + .17, top + .035, tz + .12, .04, .02, .025, '#f4c2c8', { bias: -.12, ink: .5 }); // eraser
-    if (rnd(k + 11) > .5) cylinder(S, tx + .2, top + .035, tz - .02, .03, .2, ['#7fc6ff', '#a0e0a0', '#ffb0c0'][k % 3], { seg: 8, bias: -.13, shine: .7, capCol: '#333' });
-    if (rnd(k + 17) > .55) solid(S, tx - .05, top + .035, tz + .03, .18, .05, .06, ['#2a2a2a', '#d24a8a', '#3a8ad2'][k % 3], { bias: -.12 }); // pencil case
+    solid(S, tx - .14, top + .035, tz - .1, .28, .012, .2, ['#ffffff', '#f2efe6'][k % 2], { bias: -.02, ink: .6 }); // notebook
+    solid(S, tx + .02, top + .047, tz - .09, .11, .006, .17, ['#3a7ad2', '#e05a4a', '#3aa05a'][k % 3], { bias: -.02, ink: 0 });
+    solid(S, tx - .16, top + .035, tz + .14, .16, .008, .01, '#f2c230', { bias: -.02, ink: 0, ry: rnd(k) - .5 }); // pencil
+    solid(S, tx + .17, top + .035, tz + .12, .04, .02, .025, '#f4c2c8', { bias: -.02, ink: .5 }); // eraser
+    if (rnd(k + 11) > .5) cylinder(S, tx + .2, top + .035, tz - .02, .03, .2, ['#7fc6ff', '#a0e0a0', '#ffb0c0'][k % 3], { seg: 8, bias: -.02, shine: .7, capCol: '#333' });
+    if (rnd(k + 17) > .55) solid(S, tx - .05, top + .035, tz + .03, .18, .05, .06, ['#2a2a2a', '#d24a8a', '#3a8ad2'][k % 3], { bias: -.02 }); // pencil case
   }
 }
 function door3D(S, x, z0, nx, t, handle) {
@@ -368,4 +368,31 @@ function corridorDoor(S, c, wx, z, n) {
   // number plate
   const N = left ? [[x + .01, 2.32, z + .25], [x + .01, 2.32, z + .75], [x + .01, 2.14, z + .75], [x + .01, 2.14, z + .25]] : [[x - .01, 2.32, z + .75], [x - .01, 2.32, z + .25], [x - .01, 2.14, z + .25], [x - .01, 2.14, z + .75]];
   drawTexQuad(S, c, texDoorNum(n), N, { nx: 1, ny: 1 }, nn);
+}
+
+// ======================= SCHULLEITUNG (principal's office) with the PA console =======================
+function officeFrame(c, t, cam, o = {}) {
+  const S = scene(cam, Object.assign({ dir: V.norm([-.7, .5, -.3]), col: [255, 236, 200], amb: .66, ambCol: [170, 182, 220], ink: 1.2, inkA: .5 }, o.light || {}));
+  const R = { w: 5, d: 5, h: 2.9 }, fc = (P, col, n, oo = {}) => drawFace(S, c, P, col, n, Object.assign({ ink: 0 }, oo));
+  fc([[0, 0, R.d], [R.w, 0, R.d], [R.w, 0, 0], [0, 0, 0]], '#8a6a52', [0, 1, 0], { after: cc => { for (let i = 0; i < 18; i++) { const a = proj(cam, [0, .001, i * .3]), b = proj(cam, [R.w, .001, i * .3]); if (a && b) line(cc, [a[0], a[1], b[0], b[1]], 1.2, 'rgba(40,25,15,.3)'); } } });
+  fc([[0, R.h, 0], [R.w, R.h, 0], [R.w, R.h, R.d], [0, R.h, R.d]], '#f2efe8', [0, -1, 0], { extra: .15 });
+  fc([[0, 0, R.d], [0, R.h, R.d], [R.w, R.h, R.d], [R.w, 0, R.d]], '#d8e0d6', [0, 0, -1], { grad: [.05, .15] });
+  fc([[0, 0, 0], [0, R.h, 0], [0, R.h, R.d], [0, 0, R.d]], '#d0d8ce', [1, 0, 0], { grad: [.05, .15] });
+  fc([[R.w, 0, 0], [R.w, R.h, 0], [0, R.h, 0], [0, 0, 0]], '#d8e0d6', [0, 0, 1], { grad: [.05, .15] });
+  fc([[R.w, 0, R.d], [R.w, R.h, R.d], [R.w, R.h, 0], [R.w, 0, 0]], '#d0d8ce', [-1, 0, 0], { grad: [.05, .15] });
+  // window (left wall) with yard view
+  texQuad(S, texSchoolyard(), [[.01, 2.3, 1.2], [.01, 2.3, 3.6], [.01, .95, 3.6], [.01, .95, 1.2]], { now: c, nx: 2, ny: 1, lit: false, two: true });
+  { const p = proj(cam, [0, 1.6, 2.4]); if (p) glow(c, p[0], p[1], cam.f * 1.6 / p[2], '255,240,205', .35); }
+  // shelves with folders, framed certificate, the door sign
+  solid(S, 1.0, 0, R.d - .45, 2.6, 2.2, .45, '#b08a62'); for (let r = 0; r < 4; r++) { solid(S, 1.05, .1 + r * .52, R.d - .43, 2.5, .03, .4, '#9a744e'); for (let i = 0; i < 14; i++) solid(S, 1.1 + i * .17, .13 + r * .52, R.d - .38, .14, .36, .32, ['#c8463c', '#3a5a8a', '#e2a93b', '#4a7a3a', '#7a4fa0'][(i + r) % 5], { bias: -.05, ink: .5 }); }
+  texQuad(S, makeTex('urkwall', 400, 300, (cc, w, h) => { cc.fillStyle = '#fbf6ea'; cc.fillRect(0, 0, w, h); cc.strokeStyle = '#b8913e'; cc.lineWidth = 16; cc.strokeRect(0, 0, w, h); txt(cc, 'Schule ohne Rassismus', w / 2, 120, 30, '#2a2a33', 'center'); txt(cc, 'Schule mit Courage', w / 2, 170, 30, '#2a2a33', 'center'); }), [[R.w - .01, 2.2, 3.4], [R.w - .01, 2.2, 2.6], [R.w - .01, 1.6, 2.6], [R.w - .01, 1.6, 3.4]], { now: c, nx: 1, ny: 1, n: [-1, 0, 0] });
+  // desk + PA console (Durchsageanlage) with gooseneck microphone, phone, papers, plant
+  solid(S, 1.6, .74, 1.8, 2.2, .06, 1.0, '#c99a68', { gloss: .15 }); solid(S, 1.65, 0, 1.85, .6, .74, .9, '#a87a50'); solid(S, 3.15, 0, 1.85, .6, .74, .9, '#a87a50');
+  solid(S, 2.2, .8, 2.0, .7, .08, .4, '#3a3f4a', { bias: -.1, post: cc => { for (let i = 0; i < 6; i++) { const p = proj(cam, [2.28 + i * .1, .885, 2.12]); if (p) { circle(cc, p[0], p[1], Math.max(2, cam.f * .012 / p[2])); cc.fillStyle = i === 0 && o.onAir ? '#ff3a2a' : ['#5ab04a', '#f2c230', '#9aa0a8'][i % 3]; cc.fill(); if (i === 0 && o.onAir) glow(cc, p[0], p[1], 30, '255,40,30', .8); } } } });
+  push(S, depthOf(S, [2.55, 1.0, 2.15]) - .2, cc => { const a = proj(cam, [2.55, .88, 2.2]), b = proj(cam, [2.55, 1.12, 2.25]), m = proj(cam, [2.6, 1.22, 2.05]); if (a && b && m) { cc.beginPath(); cc.moveTo(a[0], a[1]); cc.quadraticCurveTo(b[0], b[1], m[0], m[1]); cc.lineWidth = Math.max(2, cam.f * .012 / a[2]); cc.strokeStyle = '#2a2a2a'; cc.stroke(); circle(cc, m[0], m[1], Math.max(4, cam.f * .03 / m[2])); fs(cc, '#3a3a3a', 2); } });
+  solid(S, 3.3, .8, 2.1, .3, .05, .22, '#f4f4f4', { bias: -.1 }); solid(S, 1.75, .8, 2.3, .25, .12, .18, '#2a2a2a', { bias: -.1 }); plant3D(S, 4.4, 0, 4.3, 1.4);
+  texQuad(S, makeTex('slsign', 500, 140, (cc, w, h) => { cc.fillStyle = '#1f4f7a'; cc.fillRect(0, 0, w, h); txt(cc, 'Schulleitung', w / 2, 92, 60, '#fff', 'center'); }), [[R.w - .01, 2.6, 1.2], [R.w - .01, 2.6, .3], [R.w - .01, 2.35, .3], [R.w - .01, 2.35, 1.2]], { now: c, nx: 1, ny: 1, n: [-1, 0, 0] });
+  if (o.cast) o.cast(S, t);
+  flush(S, c);
+  return S;
 }

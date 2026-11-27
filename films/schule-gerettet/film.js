@@ -10,18 +10,38 @@ function camShake(o, t, a) { const s = shake(t, a); return Object.assign({}, o, 
 function flashWhite(c, k, col = '255,255,255') { if (k <= 0) return; c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = `rgba(${col},${k})`; c.fillRect(0, 0, W, H); c.restore(); }
 function fadeBlack(c, k) { if (k <= 0) return; c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = `rgba(0,0,0,${k})`; c.fillRect(0, 0, W, H); c.restore(); }
 
-// small German HUD sticker (time readouts, labels)
+// on-screen labels: a strip of masking tape slapped onto the frame, text written on it with a marker (left-to-right reveal)
 function hudTag(c, t, t0, x, y, text, o = {}) {
-  const a = clamp((t - t0) / .25), s = a < 1 ? easeBack(a) : 1; if (a <= 0) return;
-  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = Math.min(1, a * 2) * (o.alpha ?? 1); c.translate(x, y); c.rotate(o.tilt ?? -.02); c.scale(s, s);
-  c.font = FONT(o.size || 46); const w = c.measureText(text).width + 60, h = (o.size || 46) * 1.55;
-  c.shadowColor = 'rgba(0,0,0,.4)'; c.shadowBlur = 24; c.shadowOffsetY = 10; c.fillStyle = '#fff'; rrect(c, -w / 2 - 8, -h / 2 - 8, w + 16, h + 16, 18); c.fill(); c.shadowColor = 'transparent';
-  c.lineWidth = 4; c.strokeStyle = OUT; c.stroke(); c.fillStyle = o.bg || '#fbf6ea'; rrect(c, -w / 2, -h / 2, w, h, 12); c.fill();
-  if (o.bar) { c.fillStyle = o.bar; rrect(c, -w / 2, -h / 2, 16, h, 8); c.fill(); }
-  txt(c, text, 0, (o.size || 46) * .36, o.size || 46, o.col || OUT, 'center'); c.restore();
+  const a = clamp((t - t0) / .22); if (a <= 0) return;
+  const size = o.size || 46, seed = text.length * 7 + Math.round(x);
+  c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.font = FONT(size);
+  const tw = c.measureText(text).width, w = tw + size * 1.4, h = size * 1.5;
+  const slap = a < 1 ? 1 + (1 - easeOut(a)) * .25 : 1, rot = (o.tilt ?? (rnd(seed) - .5) * .08) + (1 - easeOut(a)) * .08;
+  c.globalAlpha = Math.min(1, a * 3) * (o.alpha ?? 1); c.translate(x, y); c.rotate(rot); c.scale(slap, slap);
+  // tape body with torn ends
+  const tape = () => { c.beginPath(); c.moveTo(-w / 2, -h / 2); for (let i = 0; i <= 10; i++) c.lineTo(-w / 2 + i * w / 10, -h / 2 + (i % 2 ? 2 : 0)); for (let i = 0; i <= 6; i++) c.lineTo(w / 2 + (i % 2 ? 7 : -1) - rnd(seed + i) * 4, -h / 2 + i * h / 6); for (let i = 10; i >= 0; i--) c.lineTo(-w / 2 + i * w / 10, h / 2 - (i % 2 ? 2 : 0)); for (let i = 6; i >= 0; i--) c.lineTo(-w / 2 - (i % 2 ? 7 : -1) + rnd(seed + i + 9) * 4, -h / 2 + i * h / 6); c.closePath(); };
+  c.shadowColor = 'rgba(0,0,0,.35)'; c.shadowBlur = 14; c.shadowOffsetX = 4; c.shadowOffsetY = 8; tape(); c.fillStyle = o.tape || 'rgba(236,222,184,.96)'; c.fill(); c.shadowColor = 'transparent';
+  c.save(); tape(); c.clip(); for (let i = 0; i < 18; i++) { c.fillStyle = `rgba(255,255,255,${.05 + rnd(seed + i * 3) * .08})`; c.fillRect(-w / 2, -h / 2 + rnd(seed + i) * h, w, 1.5 + rnd(i) * 2); } const g = c.createLinearGradient(0, -h / 2, 0, h / 2); g.addColorStop(0, 'rgba(255,255,255,.25)'); g.addColorStop(1, 'rgba(120,90,40,.15)'); c.fillStyle = g; c.fillRect(-w / 2 - 10, -h / 2, w + 20, h); c.restore();
+  // marker text, revealed as if written
+  const wr = clamp((t - t0 - .1) / Math.max(.25, text.length * .035));
+  c.save(); c.beginPath(); c.rect(-tw / 2 - 4, -h, (tw + 8) * wr, h * 2); c.clip();
+  c.translate(0, size * .34); c.transform(1, 0, -.12, 1, 0, 0); c.fillStyle = o.col || '#1c1a20'; c.textAlign = 'center'; c.fillText(text, 0, 0);
+  if (o.bar) { c.beginPath(); c.moveTo(-tw / 2, size * .22); c.quadraticCurveTo(0, size * .32, tw / 2, size * .18); c.lineWidth = size * .12; c.strokeStyle = o.bar; c.lineCap = 'round'; c.globalAlpha *= .85; c.stroke(); }
+  c.restore(); c.restore();
 }
-// digital-style time readout used with the clock close-ups
-function hudClock(c, t, t0, x, y, str, o = {}) { hudTag(c, t, t0, x, y, str, Object.assign({ size: 64, bar: '#d02a22' }, o)); }
+// time readouts: a small red LED clock display
+function hudClock(c, t, t0, x, y, str, o = {}) {
+  const a = clamp((t - t0) / .25); if (a <= 0) return;
+  const size = o.size || 64; c.save(); c.setTransform(1, 0, 0, 1, 0, 0); c.font = `700 ${size}px "Courier New", ${FONT(size).split('px ')[1]}`;
+  const tw = c.measureText(str).width, w = tw + size * .9, h = size * 1.45;
+  c.globalAlpha = a; c.translate(x, y); c.scale(.9 + .1 * easeOut(a), .9 + .1 * easeOut(a));
+  c.shadowColor = 'rgba(0,0,0,.5)'; c.shadowBlur = 20; c.shadowOffsetY = 8; rrect(c, -w / 2 - 10, -h / 2 - 10, w + 20, h + 20, 22); c.fillStyle = '#2b2d33'; c.fill(); c.shadowColor = 'transparent';
+  rrect(c, -w / 2, -h / 2, w, h, 14); const g = c.createLinearGradient(0, -h / 2, 0, h / 2); g.addColorStop(0, '#120708'); g.addColorStop(1, '#250c0c'); c.fillStyle = g; c.fill();
+  c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = 'rgba(255,60,40,.12)'; c.fillText(str.replace(/[0-9]/g, '8'), 0, 4);
+  const blink = (t * 2) % 1 < .5 ? 1 : .75; c.shadowColor = '#ff2a1a'; c.shadowBlur = 18; c.fillStyle = `rgba(255,70,50,${blink})`; c.fillText(str, 0, 4); c.shadowBlur = 0;
+  c.fillStyle = 'rgba(255,255,255,.08)'; rrect(c, -w / 2 + 6, -h / 2 + 6, w - 12, h * .38, 10); c.fill();
+  c.restore();
+}
 
 // ---------------- reusable shot bodies ----------------
 // ECU of the wall clock: face nearly fills the frame, slight perspective, glass glint. time: [h, m, s]

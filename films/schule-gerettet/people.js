@@ -181,7 +181,7 @@ function drawPerson(c, P, p = {}) {
     const drawArms = () => { personArm(c, -1, arms.l, P); personArm(c, 1, arms.r, P); };
     if (p.back) {
       personTorso(c, Object.assign({}, P, { kind: P.kind === 'cardigan' ? 'plain' : P.kind === 'hoodie' ? 'plain' : P.kind })); if (P.kind === 'hoodie') { c.beginPath(); c.moveTo(-120, -950); c.quadraticCurveTo(0, -760, 120, -950); c.closePath(); nFill(c, shade(P.top, -.12)); }
-      if (!armsUp) drawArms();
+      if (!armsUp && !p.sit) drawArms(); // seated from behind: forearms rest on the desk in front, hidden by the body
       c.save(); c.translate(0, NOAH.HEAD.y + 260); c.rotate(p.tilt || 0); c.translate(0, -(NOAH.HEAD.y + 260)); personHead(c, P, e, true); c.restore();
       if (armsUp) drawArms();
     } else {
@@ -219,7 +219,7 @@ function drawNoahBack(c, p = {}) {
   // plain back of the black t-shirt
   c.beginPath(); c.moveTo(-58, -952); c.lineTo(-150, -942); c.quadraticCurveTo(-140, -820, -128, -760); c.lineTo(-122, NOAH.HEM); c.lineTo(126, NOAH.HEM); c.lineTo(132, -760); c.quadraticCurveTo(144, -820, 155, -942); c.lineTo(58, -952); c.closePath(); nFill(c, NOAH.shirt);
   nLine(c, [0, -900, 0, -600], 4, 'rgba(255,255,255,.06)');
-  noahArm(c, 1, arms.l, false); noahArm(c, -1, arms.r, true);
+  if (!p.sit) { noahArm(c, 1, arms.l, false); noahArm(c, -1, arms.r, true); }
   c.save(); c.translate(0, NOAH.HEAD.y + 260); c.rotate(p.tilt || 0); c.translate(0, -(NOAH.HEAD.y + 260));
   const cy = NOAH.HEAD.y, R = NOAH.HEAD.r;
   c.beginPath(); c.arc(0, cy, R, 0, Math.PI * 2); nFill(c, NOAH.skin);

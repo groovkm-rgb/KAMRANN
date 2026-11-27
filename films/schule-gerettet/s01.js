@@ -31,7 +31,7 @@ shot(3.98, 4.82, (c, lt, t) => {
   const k = seg(lt, 0, .84), cam = lookAt([lerp(5.6, 5.3, k), 1.55, 5.55], [3.9, 1.5, 8], { fov: 48 });
   classroomFrame(c, t, cam, { clock: [10, 12, 40], cast: S => {
     const wr = Math.sin(lt * 14) * .08;
-    actor(S, [3.35, 0, 7.45], (cc, kk) => drawPerson(cc, CAST.becker, { k: kk, ink: 1.6, back: true, arms: { r: { a: 2.55 + wr, b: .25 }, l: { a: .12, b: -.3 } } }), { lit: { rimA: .45 } });
+    actor(S, [3.35, 0, 7.3], (cc, kk) => drawPerson(cc, CAST.becker, { k: kk, ink: 1.6, back: true, arms: { r: { a: 2.55 + wr, b: .25 }, l: { a: .12, b: -.3 } } }), { lit: { rimA: .45 } });
   } });
   gradeScreen(c, { sx: 0, sy: .2, warmA: .3, coolA: .2 }); vignette(c, .35);
   hudTag(c, t, 4.0, W - 220, 150, 'Mathe', { size: 54, bar: '#2f6fb0' });
