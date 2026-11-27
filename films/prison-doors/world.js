@@ -18,7 +18,7 @@ G.ZS = -2600;                               // entrance vestibule (no cells) beh
 // cell n (1..100) -> { side, floor, slot, z0 (start of cell), zc, yf, open-door pocket dir }
 function cellInfo(n) {
   const f = 3 - Math.floor((n - 1) / 25), i = (n - 1) % 25;
-  const side = i < 13 ? -1 : 1, slot = i < 13 ? 12 - i : 24 - i; // numbers grow towards the hall entrance on both sides
+  const side = i < 13 ? -1 : 1, slot = i < 13 ? (f % 2 ? i : 12 - i) : 24 - i; // snake numbering (the guard's U-shaped walk)
   const z0 = G.Z0 + slot * G.CW;
   return { n, side, f, slot, z0, zc: z0 + G.CW / 2, yf: f * G.FH, x: side * G.HW };
 }
@@ -69,7 +69,7 @@ function onPlane(c, o, u, v, fn, size = 100) {
 function billboard(c, x, y, z, fn) { const p = P(x, y, z); if (!p) return null; c.save(); c.translate(p[0], p[1]); c.scale(p[2], p[2]); fn(c, p[2]); c.restore(); return p; }
 
 // ---------- light / colour ----------
-const LT = { amb: [.2, .24, .32], lamps: [], fog: [18, 26, 38], fogNear: 1800, fogFar: 9000, fogMax: .55, warm: 0, dawn: 0, t: 0 };
+const LT = { amb: [.1, .13, .19], lamps: [], fog: [18, 26, 38], fogNear: 1800, fogFar: 9000, fogMax: .55, warm: 0, dawn: 0, t: 0 };
 function lightAt(x, y, z, nrm) {
   let r = LT.amb[0], g = LT.amb[1], b = LT.amb[2];
   for (const L of LT.lamps) {
@@ -80,8 +80,10 @@ function lightAt(x, y, z, nrm) {
   }
   return [r, g, b];
 }
+const tone = v => v / (1 + .55 * v);
 function shade(base, x, y, z, nrm, extra) {
   const l = lightAt(x, y, z, nrm); if (extra) { l[0] += extra[0]; l[1] += extra[1]; l[2] += extra[2]; }
+  l[0] = tone(l[0]); l[1] = tone(l[1]); l[2] = tone(l[2]);
   let r = base[0] * l[0], g = base[1] * l[1], b = base[2] * l[2];
   const q = toCam(x, y, z), f = clamp((q[2] - LT.fogNear) / (LT.fogFar - LT.fogNear), 0, 1) * LT.fogMax;
   r = lerp(r, LT.fog[0], f); g = lerp(g, LT.fog[1], f); b = lerp(b, LT.fog[2], f);
@@ -114,7 +116,7 @@ function drawCeiling(c, t) {
   fillPoly(c, [[-hw, y, G.ZS], [hw, y, G.ZS], [hw, y, G.L], [-hw, y, G.L]], shade(MAT.ceilC, 0, y, G.L * .4, [0, -1, 0]));
   // skylights between trusses
   for (let z = G.ZS + 260; z < G.L - 300; z += 880) {
-    const r = fillPoly(c, [[-420, y - 2, z], [420, y - 2, z], [420, y - 2, z + 560], [-420, y - 2, z + 560]], LT.dawn > .5 ? `rgb(${lerp(70, 240, LT.dawn)},${lerp(90, 200, LT.dawn)},${lerp(130, 150, LT.dawn)})` : `rgb(${60 + LT.dawn * 160},${88 + LT.dawn * 110},${130 + LT.dawn * 20})`);
+    const r = fillPoly(c, [[-420, y - 2, z], [420, y - 2, z], [420, y - 2, z + 560], [-420, y - 2, z + 560]], LT.dawn > .5 ? `rgb(${lerp(70, 240, LT.dawn)},${lerp(90, 200, LT.dawn)},${lerp(130, 150, LT.dawn)})` : `rgb(${40 + LT.dawn * 180},${60 + LT.dawn * 130},${95 + LT.dawn * 50})`);
     if (r) for (let k = 1; k < 4; k++) { line3(c, [-420 + k * 210, y - 3, z], [-420 + k * 210, y - 3, z + 560], 10, 'rgba(30,34,44,.9)'); }
     if (r) line3(c, [-420, y - 3, z + 280], [420, y - 3, z + 280], 10, 'rgba(30,34,44,.9)');
   }
@@ -132,12 +134,20 @@ function drawUpperWalls(c, t) {
     const x = s * G.HW, y0 = 4 * G.FH, y1 = G.CEIL;
     fillPoly(c, [[x, y0, G.ZS], [x, y1, G.ZS], [x, y1, G.L], [x, y0, G.L]], shade(MAT.stoneDark, x, y0 + 200, 2000, [-s, 0, 0]));
     for (let z = G.ZS + 280; z < G.L - 200; z += 880) {
-      const sky = LT.dawn > 0 ? `rgb(${lerp(110, 255, LT.dawn)},${lerp(150, 214, LT.dawn)},${lerp(205, 150, LT.dawn)})` : 'rgb(110,150,205)';
+      const sky = `rgb(${lerp(70, 255, LT.dawn) | 0},${lerp(100, 214, LT.dawn) | 0},${lerp(150, 150, LT.dawn) | 0})`;
       const pts = [[x, y0 + 80, z], [x, y0 + 80, z + 300]]; for (let i = 0; i <= 8; i++) { const a = i / 8 * Math.PI; pts.push([x, y0 + 360 + Math.sin(a) * 150, z + 150 + Math.cos(a) * 150]); }
       const r = fillPoly(c, pts, sky);
       if (r) { line3(c, [x, y0 + 80, z + 150], [x, y0 + 510, z + 150], 12, '#232833'); line3(c, [x, y0 + 250, z], [x, y0 + 250, z + 300], 12, '#232833'); line3(c, [x, y0 + 400, z + 10], [x, y0 + 400, z + 290], 10, '#232833'); }
-      glow3(c, x, y0 + 300, z + 150, 420, LT.dawn > .4 ? '255,200,120' : '150,190,255', .32 + LT.dawn * .25);
+      glow3(c, x, y0 + 300, z + 150, 380, LT.dawn > .4 ? '255,200,120' : '150,190,255', .16 + LT.dawn * .2);
     }
+  }
+}
+function drawPlainWalls(c, t) {
+  for (const s of [-1, 1]) for (const [za, zb] of [[G.ZS, G.Z0], [G.Z0 + G.NL * G.CW, G.L]]) for (let f = 0; f < 4; f++) {
+    const x = s * G.HW, y0 = f * G.FH, y1 = y0 + G.FH;
+    for (let z = za; z < zb; z += 440) { const z2 = Math.min(zb, z + 440); fillPoly(c, [[x, y0, z], [x, y0, z2], [x, y1, z2], [x, y1, z]], shade(MAT.stoneDark, x, y0 + 400, (z + z2) / 2, [-s, 0, 0])); }
+    // tall blind arches on the plain wall
+    for (let z = za + 220; z < zb - 200; z += 880) { const pts = [[x - s * 2, y0 + 40, z - 150], [x - s * 2, y0 + 40, z + 150]]; for (let i = 0; i <= 8; i++) { const a = i / 8 * Math.PI; pts.push([x - s * 2, y0 + 460 + Math.sin(a) * 150, z + Math.cos(a) * 150]); } fillPoly(c, pts, shade([70, 76, 88], x, y0 + 300, z, [-s, 0, 0])); }
   }
 }
 function drawFloor(c, t) {
@@ -152,7 +162,7 @@ function drawFloor(c, t) {
   for (let x = -hw; x <= hw; x += 220) line3(c, [x, 0, G.ZS], [x, 0, G.L], 3, 'rgba(40,44,54,.8)');
   c.restore();
   // polished reflections of the hanging lamps + gate light on the floor
-  for (const L of LT.lamps) if (L.refl) { const p = P(L.x, 0, L.z); if (p) { c.save(); c.translate(p[0], p[1]); c.scale(1, .32); glow(c, 0, 0, 380 * p[2], L.cs || '255,190,110', .35 * L.i); c.restore(); } }
+  for (const L of LT.lamps) if (L.refl) { const p = P(L.x, 0, L.z); if (p) { c.save(); c.translate(p[0], p[1]); c.scale(1, .32); glow(c, 0, 0, 320 * p[2], L.cs || '255,190,110', .22 * L.i); c.restore(); } }
 }
 function drawEndWall(c, t, o = {}) {
   const z = G.L, hw = G.HW, y1 = G.CEIL, gw = 300, gh = 720;
@@ -193,7 +203,7 @@ function drawEndWall(c, t, o = {}) {
   }
   // light leaking from the gate (cracks when closed, flood when open)
   const leak = clamp(.25 + go * 1.2 + LT.dawn * .4, 0, 1.4);
-  glow3(c, 0, 280, z - 20, 900, '255,196,110', .45 * leak);
+  glow3(c, 0, 280, z - 20, 800, '255,196,110', .3 * leak);
   // arch frame + "Ausgang" sign
   const arch = []; for (let i = 0; i <= 12; i++) { const a = Math.PI - i / 12 * Math.PI; arch.push([Math.cos(a) * (gw + 40), gh - 300 + Math.sin(a) * 340, z - 2]); }
   for (let i = 0; i < 12; i++) line3(c, arch[i], arch[i + 1], 44, shade(MAT.stoneDark, 0, gh, z - 100));
@@ -216,11 +226,11 @@ function drawEndWall(c, t, o = {}) {
   // big arched window high up
   const wy = 3 * G.FH + 520;
   const wpts = [[-520, wy, z - 3], [520, wy, z - 3]]; for (let i = 0; i <= 12; i++) { const a = i / 12 * Math.PI; wpts.push([Math.cos(a) * 520, wy + 420 + Math.sin(a) * 520, z - 3]); }
-  const sky = LT.dawn > 0 ? `rgb(${lerp(100, 255, LT.dawn)},${lerp(140, 205, LT.dawn)},${lerp(200, 140, LT.dawn)})` : 'rgb(100,140,200)';
+  const sky = `rgb(${lerp(64, 255, LT.dawn) | 0},${lerp(96, 205, LT.dawn) | 0},${lerp(146, 140, LT.dawn) | 0})`;
   if (fillPoly(c, wpts, sky)) {
     for (let i = -3; i <= 3; i++) line3(c, [i * 150, wy, z - 4], [i * 150, wy + 420 + Math.sqrt(Math.max(0, 520 * 520 - i * 150 * i * 150)), z - 4], 12, '#20242e');
     for (const yy of [wy + 160, wy + 340, wy + 520, wy + 700]) { const hx = yy > wy + 420 ? Math.sqrt(Math.max(0, 520 * 520 - (yy - wy - 420) ** 2)) : 520; line3(c, [-hx, yy, z - 4], [hx, yy, z - 4], 12, '#20242e'); }
-    glow3(c, 0, wy + 400, z - 20, 1100, LT.dawn > .4 ? '255,200,120' : '140,180,255', .3 + LT.dawn * .3);
+    glow3(c, 0, wy + 400, z - 20, 900, LT.dawn > .4 ? '255,200,120' : '140,180,255', .15 + LT.dawn * .25);
   }
   // iron stairs zig-zagging up the end wall (left / right halves)
   const flights = [[-1, 0], [1, 1], [-1, 2]];
@@ -261,6 +271,7 @@ function drawCell(c, q, t, detail) {
 }
 let CELL_LIGHT = () => [0, 0, 0], CELL_PROPS = () => {};
 function mixShade(base, l, x, y, z) {
+  l = [tone(l[0]), tone(l[1]), tone(l[2])];
   let r = base[0] * l[0], g = base[1] * l[1], b = base[2] * l[2];
   const f = fogF(x, y, z); r = lerp(r, LT.fog[0], f); g = lerp(g, LT.fog[1], f); b = lerp(b, LT.fog[2], f);
   return `rgb(${Math.min(255, r) | 0},${Math.min(255, g) | 0},${Math.min(255, b) | 0})`;
@@ -318,7 +329,6 @@ function drawFacade(c, q, t, detail) {
         if (g > 0) { c.save(); c.globalCompositeOperation = 'lighter'; c.globalAlpha = g * .5; c.fillStyle = '#ffd890'; rrect(c, 0, 0, pw, ph, 8); c.fill(); c.restore(); }
       });
       if (isN && PLATEGLOW > 0) glow(c, pp[0], pp[1], 300 * pp[2], '255,210,120', .65 * PLATEGLOW);
-      else glow(c, pp[0], pp[1], 90 * pp[2], '255,200,120', .08 * (1 - DOORSHADE[q.n]));
     }
   }
   // divisor marks on door 64 (small glowing studs with the round numbers)
@@ -371,7 +381,7 @@ function lampSprite(c, x, y, z, t, swing, on = 1) {
 }
 // volumetric beams (moon / dawn) from the clerestory windows of the right wall, slanting down-left
 function drawBeams(c, t, o = {}) {
-  const a = o.a ?? .14, col = LT.dawn > .4 ? '255,214,150' : '170,200,255';
+  const a = (o.a ?? .14) * .55, col = LT.dawn > .4 ? '255,214,150' : '170,200,255';
   c.save(); c.globalCompositeOperation = 'lighter';
   for (let z = G.ZS + 280; z < G.L - 200; z += 880) for (const side of (o.sides || [1])) {
     const x0 = side * G.HW, y0 = 4 * G.FH + 300, dx = -side * 2500, dy = -3300;
@@ -398,13 +408,13 @@ function motes3(c, t, cx, cy, cz, rx, ry, rz, n, col = '220,230,255', a = .7) {
 // ---------- lamp list (also light sources) ----------
 function buildLamps(t, o = {}) {
   LT.lamps = [];
-  const wi = o.wall ?? 1.0, hi = o.hang ?? 1.3;
+  const wi = (o.wall ?? 1.0) * .5, hi = (o.hang ?? 1.0) * .75;
   for (let z = -1900; z < G.L; z += 1400) {
     const sw = Math.sin(t * 1.1 + z) * 40;
-    LT.lamps.push({ x: sw * .3, y: 2 * G.FH + 300 + (z % 2800 ? 0 : 400), z, i: hi, r: 1300, c: [1.0, .66, .34], hang: true, sw, refl: true });
+    LT.lamps.push({ x: sw * .3, y: 2 * G.FH + 300 + (z % 2800 ? 0 : 400), z, i: hi, r: 1100, c: [1.0, .7, .42], hang: true, sw, refl: true });
   }
   for (const s of [-1, 1]) for (let f = 0; f < 4; f++) for (let j = 0; j <= 13; j += 2) {
-    LT.lamps.push({ x: s * (G.HW - 60), y: f * G.FH + G.DH + 210, z: G.Z0 + j * G.CW, i: wi, r: 520, c: [1.0, .7, .38], wall: true, s });
+    LT.lamps.push({ x: s * (G.HW - 60), y: f * G.FH + G.DH + 210, z: G.Z0 + j * G.CW, i: wi, r: 380, c: [1.0, .74, .46], wall: true, s });
   }
   if (o.extra) LT.lamps.push(...o.extra);
 }
@@ -413,14 +423,14 @@ function drawHangingLamps(c, t) {
     if (L.hang) {
       line3(c, [0, G.CEIL - 380, L.z], [L.x, L.y + 60, L.z], 3, '#1a1c22');
       lampSprite(c, L.x, L.y, L.z, t, 0, 1);
-      glow3(c, L.x, L.y, L.z, 520, '255,190,110', .55 * L.i);
-      glow3(c, L.x, L.y, L.z, 120, '255,230,170', .8);
+      glow3(c, L.x, L.y, L.z, 420, '255,180,100', .3 * L.i);
+      glow3(c, L.x, L.y, L.z, 90, '255,230,170', .55);
     } else if (L.wall) {
       const p = P(L.x, L.y, L.z); if (!p) continue;
       // bracket + small caged bulb
       line3(c, [L.s * G.HW, L.y + 40, L.z], [L.x, L.y + 40, L.z], 5, '#1e2028');
-      billboard(c, L.x, L.y, L.z, (c) => { c.fillStyle = 'rgba(255,214,150,.95)'; c.beginPath(); c.arc(0, -16, 14, 0, 7); c.fill(); c.lineWidth = 3.5; c.strokeStyle = '#1e2028'; c.stroke(); c.beginPath(); c.moveTo(-14, -16); c.lineTo(14, -16); c.moveTo(0, -30); c.lineTo(0, -2); c.stroke(); });
-      glow(c, p[0], p[1] - 16 * p[2], 260 * p[2] * (1 - fogF(L.x, L.y, L.z) * .5), '255,180,100', .38 * L.i);
+      billboard(c, L.x, L.y, L.z, (c) => { c.fillStyle = '#ffd98e'; c.beginPath(); c.ellipse(0, -14, 11, 14, 0, 0, 7); c.fill(); c.lineWidth = 2.5; c.strokeStyle = '#1e2028'; c.beginPath(); c.ellipse(0, -14, 13, 16, 0, 0, 7); c.stroke(); c.beginPath(); c.moveTo(-9, -27); c.lineTo(-9, -1); c.moveTo(9, -27); c.lineTo(9, -1); c.stroke(); c.fillStyle = '#23252c'; c.beginPath(); c.moveTo(-22, -26); c.lineTo(22, -26); c.lineTo(10, -38); c.lineTo(-10, -38); c.closePath(); c.fill(); });
+      glow(c, p[0], p[1] - 16 * p[2], 180 * p[2] * (1 - fogF(L.x, L.y, L.z) * .5), '255,170,90', .3 * L.i);
     }
   }
 }

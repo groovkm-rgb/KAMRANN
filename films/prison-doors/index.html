@@ -1,0 +1,7 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Zelle 64</title>
+<style>html,body{margin:0;background:#000}#film{width:1080px;height:1920px;display:block}</style></head>
+<body><canvas id="film" width="1080" height="1920"></canvas>
+<script src="lib/noah.js"></script><script src="lib/fonts.js"></script>
+<script src="world.js"></script><script src="chars.js"></script><script src="shots.js"></script>
+<script>NOAH_FONTS_READY.then(()=>{window.__ready=true; const q=new URLSearchParams(location.search); if(!q.get('render')){let t0=performance.now();(function loop(){const t=((performance.now()-t0)/1000)%DUR; renderAt(t); requestAnimationFrame(loop)})()}});</script>
+</body></html>
